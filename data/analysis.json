@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-05T05:51:44.614Z",
+  "generatedAt": "2026-09-05T05:53:17.691Z",
   "totals": {
-    "authoritative": 827,
-    "active30": 827,
+    "authoritative": 841,
+    "active30": 841,
     "active30Pct": 100,
-    "ageGate1": 826,
+    "ageGate1": 840,
     "ageGate1Pct": 99.9,
     "byMonth": {
-      "2026-08": 788,
+      "2026-08": 801,
       "2026-02": 4,
       "2026-07": 13,
       "2026-04": 1,
@@ -15,29 +15,29 @@
       "2026-01": 3,
       "2026-06": 7,
       "2026-05": 3,
-      "2026-09": 4
+      "2026-09": 5
     }
   },
   "distribution": {
     "publish": {
-      "published": 454,
-      "unpublished": 373,
-      "stale": 113
+      "published": 460,
+      "unpublished": 381,
+      "stale": 117
     },
     "docs": {
-      "readme": 816,
-      "zh": 331,
-      "both": 321,
-      "none": 11,
-      "zhFile": null
+      "readme": 830,
+      "zhFile": 100,
+      "zh": 341,
+      "both": 331,
+      "none": 11
     },
     "lib": {
-      "index": 376,
-      "client": 337,
-      "both": 300
+      "index": 384,
+      "client": 344,
+      "both": 306
     },
-    "publishPct": 54.9,
-    "zhPct": 38.8
+    "publishPct": 54.7,
+    "zhPct": 39.4
   },
   "npmStaleTop": [
     {
@@ -104,23 +104,23 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 815
+      "count": 829
     },
     {
       "topic": "deepseek-harness",
-      "count": 648
+      "count": 658
     },
     {
       "topic": "dsh",
-      "count": 485
+      "count": 497
     },
     {
       "topic": "deepseek",
-      "count": 190
+      "count": 191
     },
     {
       "topic": "dsh-plugins",
-      "count": 118
+      "count": 125
     },
     {
       "topic": "cordis",
@@ -144,11 +144,11 @@
     },
     {
       "topic": "llm",
-      "count": 47
+      "count": 48
     },
     {
-      "topic": "claude-code",
-      "count": 44
+      "topic": "dsh-plugin-market",
+      "count": 47
     }
   ],
   "medianStars": 16,
@@ -213,5 +213,11 @@
       "published": false,
       "zh": false
     }
-  ]
+  ],
+  "deep": {
+    "targets": 8,
+    "readonlyClean": 1,
+    "withWrites": 7,
+    "sanitized": 5
+  }
 }

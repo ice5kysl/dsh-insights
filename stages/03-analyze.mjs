@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 3 — aggregate analysis over the authoritative set.
+ * Stage 3 — aggregate analysis over the authoritative set (+ deep sampling).
  *
  * Outputs:
  *   data/analysis.json — machine-readable aggregates
@@ -21,11 +21,24 @@ function readRows(f) {
 
 function pct(n, d) { return d === 0 ? 0 : Math.round((n / d) * 1000) / 10 }
 
+function readDeep() {
+  try {
+    const rows = readFileSync(join(ROOT, 'data', 'deep.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
+    if (!rows.length) return null
+    return {
+      targets: rows.length,
+      readonlyClean: rows.filter((r) => r.verdict === 'readonly-clean' || r.verdict === 'no-render-no-writes').length,
+      withWrites: rows.filter((r) => (r.writeCount || 0) > 0).length,
+      sanitized: rows.filter((r) => r.sanitized).length,
+    }
+  } catch { return null }
+}
+
 function analyze(rows) {
   const n = rows.length
   const byMonth = {}
   const publish = { published: 0, unpublished: 0, stale: 0 }
-  const docs = { readme: 0, zh: 0, both: 0, none: 0 }
+  const docs = { readme: 0, zhFile: 0, zh: 0, both: 0, none: 0 }
   const lib = { index: 0, client: 0, both: 0 }
   const topics = {}
   const stars = []
@@ -50,7 +63,7 @@ function analyze(rows) {
   }
   stars.sort((a, b) => b - a)
   const topStars = rows.slice().sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 10)
-    .map((r) => ({ repo: r.full_name, stars: r.stars, published: Boolean(r.npm?.published), zh: Boolean(r.docs?.readmeZh || r.docs?.zhSignal) }))
+    .map((r) => ({ repo: r.full_name, stars: r.stars, published: Boolean(r.npm?.published), zh: Boolean(r.metrics?.hasZhDocs) }))
   const active = rows.filter((r) => r.metrics?.active30).length
   const ageOk = rows.filter((r) => r.metrics?.ageGate1).length
   const staleTop = rows
@@ -71,6 +84,7 @@ function analyze(rows) {
     topTopics: Object.entries(topics).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([t, c]) => ({ topic: t, count: c })),
     medianStars: n ? stars[Math.floor(n / 2)] : 0,
     topByStars: topStars,
+    deep: readDeep(),
   }
 }
 
@@ -78,7 +92,7 @@ function render(a) {
   const L = []
   L.push('# dsh 插件生态快照分析报告')
   L.push('')
-  L.push(`> 权威集 ${a.totals.authoritative} 个插件 · 生成于 ${a.generatedAt.slice(0, 10)} · 由 dsh-plugin-insights 管线生成`)
+  L.push(`> 权威集 ${a.totals.authoritative} 个插件 · 生成于 ${(a.generatedAt || '').slice(0, 10)} · 由 dsh-plugin-insights 管线生成`)
   L.push('')
   L.push('## 总览')
   L.push(`- 权威集规模：**${a.totals.authoritative}**`)
@@ -87,7 +101,7 @@ function render(a) {
   L.push('')
   L.push('## 发布与文档')
   L.push(`- npm 已发布 ${a.distribution.publish.published} / 未发布 ${a.distribution.publish.unpublished} / 已发布但版本滞后 ${a.distribution.publish.stale}`)
-  L.push(`- 有 README ${a.distribution.docs.readme} · 中英双语/中文 ${a.distribution.docs.zh} · 双文档 ${a.distribution.docs.both} · 无文档 ${a.distribution.docs.none}`)
+  L.push(`- 有 README ${a.distribution.docs.readme} · 中英双语/中文 ${a.distribution.docs.zh} · 中文 README 文件 ${a.distribution.docs.zhFile} · 无 README ${a.distribution.docs.none}`)
   L.push(`- lib/index.js ${a.distribution.lib.index} · lib/client.js ${a.distribution.lib.client} · 双产物 ${a.distribution.lib.both}`)
   L.push('')
   L.push('## 月度新增（按仓库创建）')
@@ -101,6 +115,18 @@ function render(a) {
   L.push('|---|---|---|---|')
   for (const t of a.topByStars) L.push(`| ${t.repo} | ${t.stars} | ${t.published ? '✅' : '—'} | ${t.zh ? '✅' : '—'} |`)
   L.push('')
+  if (a.npmStaleTop.length) {
+    L.push('## npm 版本滞后榜（仓库新于发布）')
+    L.push('| repo | ★ | 仓库版本 → npm |')
+    L.push('|---|---|---|')
+    for (const t of a.npmStaleTop) L.push(`| ${t.repo} | ${t.stars} | ${t.repoVersion} → ${t.npmLatest} |`)
+    L.push('')
+  }
+  if (a.deep) {
+    L.push('## 深检抽样（写面 / 消毒）')
+    L.push(`- 抽样 ${a.deep.targets} 个：只读/无写面 ${a.deep.readonlyClean} · 检出写面 ${a.deep.withWrites} · 渲染带消毒 ${a.deep.sanitized}`)
+    L.push('')
+  }
   return L.join('\n') + '\n'
 }
 
