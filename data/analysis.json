@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-05T07:07:06.230Z",
+  "generatedAt": "2026-09-05T07:27:53.576Z",
   "totals": {
-    "authoritative": 1850,
-    "active30": 1850,
+    "authoritative": 1999,
+    "active30": 1999,
     "active30Pct": 100,
-    "ageGate1": 1845,
+    "ageGate1": 1994,
     "ageGate1Pct": 99.7,
     "byMonth": {
-      "2026-08": 1741,
+      "2026-08": 1886,
       "2026-02": 4,
       "2026-07": 27,
       "2026-04": 5,
@@ -15,7 +15,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 13,
-      "2026-09": 31,
+      "2026-09": 35,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -23,24 +23,24 @@
   },
   "distribution": {
     "publish": {
-      "published": 897,
-      "unpublished": 953,
-      "stale": 224
+      "published": 982,
+      "unpublished": 1017,
+      "stale": 250
     },
     "docs": {
-      "readme": 1839,
-      "zhFile": 188,
-      "zh": 710,
-      "both": 700,
-      "none": 11
+      "readme": 1986,
+      "zhFile": 199,
+      "zh": 756,
+      "both": 746,
+      "none": 13
     },
     "lib": {
-      "index": 862,
-      "client": 715,
-      "both": 635
+      "index": 910,
+      "client": 750,
+      "both": 667
     },
-    "publishPct": 48.5,
-    "zhPct": 37.8
+    "publishPct": 49.1,
+    "zhPct": 37.3
   },
   "npmStaleTop": [
     {
@@ -48,6 +48,12 @@
       "stars": 1167,
       "repoVersion": "2.9.6",
       "npmLatest": "0.1.0"
+    },
+    {
+      "repo": "Anionex/dsh-vision-toolkit",
+      "stars": 853,
+      "repoVersion": "0.1.42",
+      "npmLatest": "0.1.40"
     },
     {
       "repo": "sandbaseai/sandbase-harness",
@@ -96,65 +102,59 @@
       "stars": 181,
       "repoVersion": "0.23.0",
       "npmLatest": "0.24.0"
-    },
-    {
-      "repo": "kingOfSoySauce/dsh-liang-skin",
-      "stars": 162,
-      "repoVersion": "0.1.7",
-      "npmLatest": "0.1.6"
     }
   ],
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 1770
+      "count": 1917
     },
     {
       "topic": "deepseek-harness",
-      "count": 1270
+      "count": 1363
     },
     {
       "topic": "dsh",
-      "count": 935
+      "count": 979
     },
     {
       "topic": "deepseek",
-      "count": 321
+      "count": 344
     },
     {
       "topic": "cordis",
-      "count": 245
+      "count": 258
     },
     {
       "topic": "dsh-plugins",
-      "count": 241
+      "count": 248
     },
     {
       "topic": "plugin",
-      "count": 169
+      "count": 173
     },
     {
       "topic": "cordis-plugin",
-      "count": 132
+      "count": 133
+    },
+    {
+      "topic": "typescript",
+      "count": 119
     },
     {
       "topic": "dsh-bundle",
       "count": 111
     },
     {
-      "topic": "typescript",
-      "count": 110
-    },
-    {
       "topic": "dsh-plugin-market",
-      "count": 96
+      "count": 99
     },
     {
-      "topic": "ai-agents",
-      "count": 93
+      "topic": "ai-agent",
+      "count": 97
     }
   ],
-  "medianStars": 6,
+  "medianStars": 5,
   "topByStars": [
     {
       "repo": "yjh051108/dsh-routing-suite",
@@ -188,12 +188,6 @@
     },
     {
       "repo": "ccch1mneyyy/dsh-TUI",
-      "stars": 2838,
-      "published": false,
-      "zh": false
-    },
-    {
-      "repo": "ccch1mneyyy/dsh-TUI",
       "stars": 2837,
       "published": false,
       "zh": true
@@ -215,128 +209,12 @@
       "stars": 1286,
       "published": true,
       "zh": true
-    }
-  ],
-  "health": {
-    "generatedAt": "2026-09-05T07:07:06.228Z",
-    "ruleVersion": "health-v2",
-    "total": 1850,
-    "grades": {
-      "A": 913,
-      "B": 926,
-      "C": 11,
-      "D": 0
-    },
-    "avg": 87.2,
-    "median": 85,
-    "topDeductions": [
-      {
-        "code": "manifest.no-client-export",
-        "count": 1315,
-        "pct": 71.1
-      },
-      {
-        "code": "docs.zh-missing",
-        "count": 1139,
-        "pct": 61.6
-      },
-      {
-        "code": "npm.unpublished",
-        "count": 953,
-        "pct": 51.5
-      },
-      {
-        "code": "manifest.not-lib-main",
-        "count": 826,
-        "pct": 44.6
-      },
-      {
-        "code": "npm.version-drift",
-        "count": 224,
-        "pct": 12.1
-      },
-      {
-        "code": "repo.no-license",
-        "count": 149,
-        "pct": 8.1
-      },
-      {
-        "code": "manifest.no-files-whitelist",
-        "count": 81,
-        "pct": 4.4
-      },
-      {
-        "code": "repo.no-dsh-topic",
-        "count": 38,
-        "pct": 2.1
-      },
-      {
-        "code": "activity.too-young",
-        "count": 3,
-        "pct": 0.2
-      }
-    ]
-  },
-  "topByHealth": [
-    {
-      "repo": "omdsh-dev/DSH-better-sidebar",
-      "stars": 3339,
-      "score": 100,
-      "grade": "A"
     },
     {
-      "repo": "omdsh-dev/dsh-mnemon",
-      "stars": 331,
-      "score": 100,
-      "grade": "A"
-    },
-    {
-      "repo": "shanliuling/dsh-image-gen",
-      "stars": 314,
-      "score": 100,
-      "grade": "A"
-    },
-    {
-      "repo": "RevolutionLA/dsh-dream-skin",
-      "stars": 142,
-      "score": 100,
-      "grade": "A"
-    },
-    {
-      "repo": "pengyue-polaron/deepseek-harness-genui",
-      "stars": 107,
-      "score": 100,
-      "grade": "A"
-    },
-    {
-      "repo": "mexiaosqwq/dsh-web-mobile",
-      "stars": 78,
-      "score": 100,
-      "grade": "A"
-    },
-    {
-      "repo": "anweat/dsh-web-search-pro",
-      "stars": 61,
-      "score": 100,
-      "grade": "A"
-    },
-    {
-      "repo": "a179-sanae/dsh-auto-collapse",
-      "stars": 53,
-      "score": 100,
-      "grade": "A"
-    },
-    {
-      "repo": "SiriLee/dsh-rewind",
-      "stars": 37,
-      "score": 100,
-      "grade": "A"
-    },
-    {
-      "repo": "jjxjjjjiik-bot/dsh-chat-timeline",
-      "stars": 32,
-      "score": 100,
-      "grade": "A"
+      "repo": "superdesigndev/treg",
+      "stars": 1190,
+      "published": false,
+      "zh": false
     }
   ],
   "deep": {
@@ -344,5 +222,66 @@
     "readonlyClean": 1,
     "withWrites": 7,
     "sanitized": 5
-  }
+  },
+  "quality": {
+    "grades": {
+      "A": 44,
+      "B": 785,
+      "C": 1126,
+      "D": 44
+    },
+    "avgScore": 68.8,
+    "gradePct": 41.5
+  },
+  "categories": [
+    {
+      "category": "其它",
+      "count": 486
+    },
+    {
+      "category": "模型 / 代理",
+      "count": 226
+    },
+    {
+      "category": "文件浏览 / 预览",
+      "count": 210
+    },
+    {
+      "category": "会话管理",
+      "count": 206
+    },
+    {
+      "category": "状态 / 监控 / 用量",
+      "count": 170
+    },
+    {
+      "category": "搜索 / 命令面板",
+      "count": 142
+    },
+    {
+      "category": "工具 / 效率",
+      "count": 139
+    },
+    {
+      "category": "侧栏 / 工作区",
+      "count": 136
+    },
+    {
+      "category": "消息 / 协作集成",
+      "count": 79
+    },
+    {
+      "category": "主题 / 视觉美化",
+      "count": 76
+    },
+    {
+      "category": "开发 / 数据",
+      "count": 69
+    },
+    {
+      "category": "记忆 / 知识",
+      "count": 60
+    }
+  ],
+  "enrichCount": 1999
 }

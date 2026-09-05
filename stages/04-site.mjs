@@ -21,6 +21,16 @@ function main() {
   const plugins = readFileSync(join(ROOT, 'data', 'plugins.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
   let a = {}
   try { a = JSON.parse(readFileSync(join(ROOT, 'data', 'analysis.json'), 'utf8')) } catch { /* ok */ }
+  let enrich = []
+  try { enrich = JSON.parse(readFileSync(join(ROOT, 'data', 'enrich.json'), 'utf8')) } catch { /* ok */ }
+  const enMap = new Map(enrich.map((x) => [x.full_name, x]))
+  const byStars = plugins.slice().sort((x, y) => (y.stars || 0) - (x.stars || 0))
+  const peersOf = (full) => {
+    const cat = enMap.get(full)?.category
+    if (!cat) return []
+    return byStars.filter((o) => o.full_name !== full && enMap.get(o.full_name)?.category === cat).slice(0, 5)
+      .map((o) => ({ repo: o.full_name, url: o.html_url, stars: o.stars }))
+  }
   const t = a.totals || {}
   const d = a.distribution || {}
   const pub = d.publish || {}
@@ -34,6 +44,7 @@ function main() {
     r.npm?.published ? (r.npm.latest || '✓') : '', r.metrics?.hasZhDocs ? 1 : 0,
     r.files?.libIndex && r.files?.libClient ? 1 : 0, r.metrics?.active30 ? 1 : 0,
     (r.description || '').slice(0, 110),
+    enMap.get(r.full_name)?.grade || '',
   ])
   const dataJson = JSON.stringify(rows).replace(/</g, '\\u003c')
 
@@ -74,6 +85,17 @@ function main() {
     `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num">★ ${s2.stars}</td><td class="ok">${s2.published ? 'npm ✓' : '—'}</td><td class="ok">${s2.zh ? '中/双语 ✓' : '—'}</td></tr>`).join('')
 
   const kpi = (v, l, sub = '') => `<div class="kpi"><div class="kpi-v">${v}</div><div class="kpi-l">${l}</div>${sub ? `<div class="kpi-s">${sub}</div>` : ''}</div>`
+
+
+  const gCol = { A: '#0e9f6e', B: '#2d66f7', C: '#d97706', D: '#dc2626' }
+  const gMax = Math.max(1, ...Object.keys(gCol).map((k) => a.quality?.grades?.[k] || 0))
+  const gradesHtml = Object.keys(gCol).map((k) => {
+    const c = a.quality?.grades?.[k] || 0
+    return '<div class="hbar"><span class="hbar-l">' + k + '</span><div class="hbar-t"><div class="hbar-f" style="width:' + Math.max(2, Math.round((c / gMax) * 100)) + '%;background:' + gCol[k] + '"></div></div><span class="hbar-v">' + c + '</span></div>'
+  }).join('')
+  const catsMax = Math.max(1, ...(a.categories || []).map((x) => x.count))
+  const catsHtml = (a.categories || []).slice(0, 8).map((x) =>
+    '<div class="hbar"><span class="hbar-l" title="' + esc(x.category) + '">' + esc(x.category) + '</span><div class="hbar-t"><div class="hbar-f" style="width:' + Math.max(2, Math.round((x.count / catsMax) * 100)) + '%"></div></div><span class="hbar-v">' + x.count + '</span></div>').join('')
 
   const date = (a.generatedAt || '').slice(0, 10)
 
@@ -177,6 +199,14 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
 .linkrow a{border:1px solid #c7d2fe;background:#f5f7ff;color:#2d66f7;border-radius:8px;padding:5px 11px;font-size:12px}
 .loading{color:var(--mut);font-size:12px}
 @media(prefers-color-scheme:dark){.dd-kpi{background:#16213a}.chipset span{background:#1b2a55;color:#93b4ff}.linkrow a{background:#16213a;border-color:#3b55a8}}
+.g{display:inline-block;min-width:20px;text-align:center;font-weight:800;border-radius:6px;padding:1px 6px;font-size:11.5px;background:#eef2ff;color:#2d66f7}
+.peer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+.peer .num{color:var(--mut);font-size:11.5px}
+.qual{display:flex;align-items:center;gap:12px}
+.qual .big{font-size:34px;font-weight:800;line-height:1}
+.qualbar{height:8px;border-radius:6px;background:#eef1f6;margin-top:10px;overflow:hidden}
+.qualbar i{display:block;height:100%;background:linear-gradient(90deg,#2d66f7,#0e9f6e)}
+@media(prefers-color-scheme:dark){.g{background:#1b2a55;color:#93b4ff}.qualbar{background:#1c2a44}}
 </style>
 </head>
 <body>
@@ -199,6 +229,7 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
     ${kpi(doc.none ?? 0, '无 README', '建议补充基本文档')}
     ${kpi(lib.both ?? 0, 'host+client 双产物', `index ${lib.index} · client ${lib.client}`)}
     ${kpi((t.active30Pct ?? 0) + '%', '近 30 天活跃', '生态活跃信号')}
+    ${kpi(a.quality?.avgScore ?? '—', '平均质量分', `A+B ${a.quality?.gradePct ?? 0}%`)}
   </div>
 
   <div class="grid" id="charts">
@@ -232,6 +263,14 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
       <table><thead><tr><th>仓库</th><th style="text-align:right">★</th><th style="text-align:right">仓库 → npm</th></tr></thead><tbody>${staleRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
     <div class="panel span-6">
+      <h2>质量分级（启发式评分）</h2><p class="sub">平均分 ${a.quality?.avgScore ?? 0} · A+B ${a.quality?.gradePct ?? 0}%</p>
+      ${gradesHtml}
+    </div>
+    <div class="panel span-6">
+      <h2>功能分类（启发式）</h2><p class="sub">按名称/描述归类 · Top 8</p>
+      ${catsHtml}
+    </div>
+    <div class="panel span-6">
       <h2>Star 榜 Top 10</h2><p class="sub">社区关注度最高的权威插件</p>
       <table><thead><tr><th>仓库</th><th style="text-align:right">★</th><th>npm</th><th>中/双语</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
@@ -248,7 +287,7 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
       <div style="overflow:auto;max-height:560px">
       <table class="ptable">
         <thead><tr>
-          <th data-k="0">仓库</th><th data-k="2" class="num">★</th><th data-k="3">创建</th><th data-k="4">npm</th><th data-k="5">中/双语</th><th data-k="6">双产物</th><th data-k="7">活跃</th><th>描述</th>
+          <th data-k="0">仓库</th><th data-k="2" class="num">★</th><th data-k="3">创建</th><th data-k="4">npm</th><th data-k="5">中/双语</th><th data-k="6">双产物</th><th data-k="7">活跃</th><th>质量</th><th>描述</th>
         </tr></thead>
         <tbody id="tb"></tbody>
       </table></div>
@@ -290,7 +329,7 @@ function draw(){
   const list=filtered(),pages=Math.ceil(list.length/PAGE)||1;
   page=Math.min(page,pages-1);
   const seg=list.slice(page*PAGE,(page+1)*PAGE);
-  $('#tb').innerHTML=seg.map(r=>'<tr data-repo="'+e(r[0])+'" data-url="'+e(r[1])+'"><td><a href="'+e(r[1])+'" target="_blank">'+e(r[0])+'</a></td><td class="num">'+r[2]+'</td><td>'+r[3]+'</td><td>'+(r[4]?'<span class="ok">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td>'+(r[5]?'✓':'')+'</td><td>'+(r[6]?'✓':'')+'</td><td>'+(r[7]?'✓':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="8" class="dim">无匹配</td></tr>';
+  $('#tb').innerHTML=seg.map(r=>'<tr data-repo="'+e(r[0])+'" data-url="'+e(r[1])+'"><td><a href="'+e(r[1])+'" target="_blank">'+e(r[0])+'</a></td><td class="num">'+r[2]+'</td><td>'+r[3]+'</td><td>'+(r[4]?'<span class="ok">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td>'+(r[5]?'✓':'')+'</td><td>'+(r[6]?'✓':'')+'</td><td>'+(r[7]?'✓':'')+'</td><td>'+(r[9]?'<span class="g">'+e(r[9])+'</span>':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="9" class="dim">无匹配</td></tr>';
   $('#info').textContent='第 '+(page+1)+'/'+pages+' 页 · 共 '+list.length+' 条';
   $('#prev').disabled=page===0;$('#next').disabled=page>=pages-1;
 }
@@ -342,7 +381,8 @@ function openDrawer(repo){
       +'<div class="dd-kpis">'+ddK('★',d.stars)+ddK('fork',d.forks)+ddK('仓库年龄',Math.round(d.ageDays)+' 天')+'</div>'
       +'<div class="dd-sec"><h3>npm</h3>'+npmHtml+'</div>'
       +flags
-      +'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
+      +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='A'?'#0e9f6e':d.grade==='B'?'#2d66f7':d.grade==='C'?'#d97706':'#dc2626')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div></div>'
+  +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3>'+(d.peers&&d.peers.length?'<div>'+d.peers.map(function(p){return '<div class="peer"><a href="'+escA(p.url)+'" target="_blank">'+escA(p.repo)+'</a><span class="num">★ '+p.stars+'</span></div>'}).join('')+'</div>':'<div class="dim">暂无同类</div>')+'</div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
       +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
     loadHist(repo,d);
   })
@@ -381,6 +421,10 @@ draw();
     },
     ageDays: r.metrics?.ageDays ?? 0,
     active30: Boolean(r.metrics?.active30),
+    score: enMap.get(r.full_name)?.score ?? null,
+    grade: enMap.get(r.full_name)?.grade ?? null,
+    category: enMap.get(r.full_name)?.category || null,
+    peers: peersOf(r.full_name),
     npm: r.npm || { pub: false },
   }))
   writeFileSync(join(ROOT, 'site', 'plugins-detail.json'), JSON.stringify(detail))
