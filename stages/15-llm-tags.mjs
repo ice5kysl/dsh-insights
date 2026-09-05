@@ -75,7 +75,7 @@ async function callLLM(rows) {
   return j.choices?.[0]?.message?.content || ''
 }
 
-function main() {
+async function main() {
   if (process.argv.includes('--dry-run')) {
     const doc = readJson(SRC)
     console.log(`[llm] dry-run: ${doc?.plugins?.length || 0} plugins available · env: model=${model} base=${base} key=${key ? 'set' : 'MISSING'} max=${maxRows}`)
