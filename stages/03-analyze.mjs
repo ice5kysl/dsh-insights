@@ -94,6 +94,7 @@ function quality(r) {
 function analyze(rows) {
   const n = rows.length
   const byMonth = {}
+  const byWeek = {}
   const publish = { published: 0, unpublished: 0, stale: 0 }
   const docs = { readme: 0, zhFile: 0, zh: 0, both: 0, none: 0 }
   const lib = { index: 0, client: 0, both: 0 }
@@ -109,6 +110,16 @@ function analyze(rows) {
   for (const r of rows) {
     const m = (r.created_at || '').slice(0, 7)
     byMonth[m] = (byMonth[m] || 0) + 1
+    if (r.created_at) {
+      const dt = new Date(r.created_at)
+      if (!Number.isNaN(dt.getTime())) {
+        const day = dt.getDay() // 0=Sun
+        const monday = new Date(dt.getTime() - ((day + 6) % 7) * 86400000)
+        const pad = (n) => String(n).padStart(2, '0')
+        const wk = monday.getFullYear() + '-' + pad(monday.getMonth() + 1) + '-' + pad(monday.getDate())
+        byWeek[wk] = (byWeek[wk] || 0) + 1
+      }
+    }
     if (r.npm?.published) {
       publish.published++
       if (r.version && r.npm.latest && r.npm.latest !== r.version) publish.stale++
@@ -158,6 +169,7 @@ function analyze(rows) {
       active30: active, active30Pct: pct(active, n),
       ageGate1: ageOk, ageGate1Pct: pct(ageOk, n),
       byMonth,
+      byWeek,
     },
     distribution: { publish, docs, lib, publishPct: pct(publish.published, n), zhPct: pct(docs.both, n) },
     npmStaleTop: staleTop,

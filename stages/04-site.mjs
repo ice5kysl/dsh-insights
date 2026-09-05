@@ -93,6 +93,12 @@ function main() {
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
     '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num g g-' + esc(e.grade) + '">' + esc(e.grade) + '</td><td class="num">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('') || ''
 
+
+  const wkArr = Object.entries(t.byWeek || {}).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)).slice(-18)
+  const wkMax = Math.max(1, ...wkArr.map(([, c]) => c))
+  const weeksHtml = wkArr.map(([k, c]) =>
+    '<div class="mbar"><span class="mbar-l">' + k.slice(5) + '</span><div class="mbar-t"><div class="mbar-f" style="width:' + Math.max(2, Math.round((c / wkMax) * 100)) + '%"></div></div><span class="mbar-v">' + c + '</span></div>').join('')
+
   const date = (a.generatedAt || '').slice(0, 10)
 
   const html = `<!doctype html>
@@ -231,8 +237,8 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
 
   <div class="grid" id="charts">
     <div class="panel span-7">
-      <h2>权威集月度新增</h2><p class="sub">按仓库创建时间 · 最近 12 个月</p>
-      ${monthBars || '<div class="dim">数据积累中…</div>'}
+      <h2>权威集新增（按周）</h2><p class="sub">按仓库创建时间的周一归属 · 最近 ${wkArr.length} 周 · 标签为周起始日期</p>
+      ${weeksHtml || '<div class="dim">数据积累中…</div>'}
     </div>
     <div class="panel span-5">
       <h2>npm 发布分布</h2><p class="sub">已发布 vs 未发布</p>
