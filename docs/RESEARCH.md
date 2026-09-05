@@ -77,6 +77,9 @@
 - 2026-09-05 [V]：**权威列表主动让位**——awesome-dsh-plugin org（★14,501）README 原话 *"This list doesn't rank plugins or judge their quality, and we don't want to."*；其内部最强信号仅是周级 decay 扫描（gone/archived/dormant/unbundled flag）。→ "质量评估层"空缺进一步坐实，且头部玩家不会来抢。
 - 2026-09-05 [V]：**全量抓取分片方案验证**——`topic:dsh-plugin` 实时 13,596；按 created 分窗：≤2026-07-31 373 / 2026-08 12,699 / ≥09-01 524；**单日峰值 2026-08-15 = 1,581 > 1000 上限**，需日内时间分片（实测 `created:2026-08-15T00:00:00..2026-08-15T12:00:00` = 868，子日精度可用）。实现：`lib/api.mjs` `ghSearchAll()` 递归 created 窗拆分，叶窗 ≤1000 全取。
 - 2026-09-05：**校准集上线**——data/seeds.json 15 条（正例 9：ice5kysl×2 / joejojoking（抢注克隆亦过门禁）/ omdsh / MichengAI / 0xsline / dsh-market / routing-suite / dsh-find-plugin；反例 6：deepseek-harness / open-design / ruflo（no-dsh-bundle）、dsh-find-plugins（no-package.json）、已归档×2）；`npm run regress` 15/15 通过（live validateOne 复验）。
+- 2026-09-05：**健康分 health-v1 上线**——11 条纯客观规则、warn−5/fail−20、逐条证据、缺失不扣分、星数不进分；`data/scored.jsonl` + `data/health.json` + `data/insights.json`（agent 契约）+ 站点徽章列 + analyze/report 健康区块 + query CLI 过滤器 + `bin/badge.mjs` 徽章渲染。首个采样：valid 1,244 → A645/B594/C5，平均 87.5。
+- 2026-09-05：**采样洞察（生态质量证据）**——70.4% 插件缺 `exports["./client"]`、58.2% 无中文文档、48.6% 未发布 npm（analyze 实测）。
+- 2026-09-05：**M2 提案文档 v1 就绪**（docs/M2-INTEGRATION.md）：给 awesome-dsh-plugin org / dsh-market 的集成提案——选项 A 卡片 health 字段/sidecar、选项 B 收录门槛 health≥B；join key=owner/name；边界声明（不排名/非审计/全开源）。待发出与回复记录。
 
 ## 来源
 
