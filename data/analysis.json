@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-05T07:27:53.576Z",
+  "generatedAt": "2026-09-05T08:32:50.811Z",
   "totals": {
-    "authoritative": 1999,
-    "active30": 1999,
+    "authoritative": 2113,
+    "active30": 2113,
     "active30Pct": 100,
-    "ageGate1": 1994,
-    "ageGate1Pct": 99.7,
+    "ageGate1": 2108,
+    "ageGate1Pct": 99.8,
     "byMonth": {
-      "2026-08": 1886,
+      "2026-08": 1991,
       "2026-02": 4,
       "2026-07": 27,
       "2026-04": 5,
@@ -15,7 +15,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 13,
-      "2026-09": 35,
+      "2026-09": 44,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -23,24 +23,24 @@
   },
   "distribution": {
     "publish": {
-      "published": 982,
-      "unpublished": 1017,
-      "stale": 250
+      "published": 1050,
+      "unpublished": 1063,
+      "stale": 253
     },
     "docs": {
-      "readme": 1986,
-      "zhFile": 199,
-      "zh": 756,
-      "both": 746,
+      "readme": 2100,
+      "zhFile": 211,
+      "zh": 793,
+      "both": 783,
       "none": 13
     },
     "lib": {
-      "index": 910,
-      "client": 750,
-      "both": 667
+      "index": 967,
+      "client": 800,
+      "both": 709
     },
-    "publishPct": 49.1,
-    "zhPct": 37.3
+    "publishPct": 49.7,
+    "zhPct": 37.1
   },
   "npmStaleTop": [
     {
@@ -48,12 +48,6 @@
       "stars": 1167,
       "repoVersion": "2.9.6",
       "npmLatest": "0.1.0"
-    },
-    {
-      "repo": "Anionex/dsh-vision-toolkit",
-      "stars": 853,
-      "repoVersion": "0.1.42",
-      "npmLatest": "0.1.40"
     },
     {
       "repo": "sandbaseai/sandbase-harness",
@@ -102,44 +96,50 @@
       "stars": 181,
       "repoVersion": "0.23.0",
       "npmLatest": "0.24.0"
+    },
+    {
+      "repo": "kingOfSoySauce/dsh-liang-skin",
+      "stars": 162,
+      "repoVersion": "0.1.7",
+      "npmLatest": "0.1.6"
     }
   ],
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 1917
+      "count": 2029
     },
     {
       "topic": "deepseek-harness",
-      "count": 1363
+      "count": 1446
     },
     {
       "topic": "dsh",
-      "count": 979
+      "count": 1033
     },
     {
       "topic": "deepseek",
-      "count": 344
+      "count": 356
     },
     {
       "topic": "cordis",
-      "count": 258
+      "count": 270
     },
     {
       "topic": "dsh-plugins",
-      "count": 248
+      "count": 256
     },
     {
       "topic": "plugin",
-      "count": 173
+      "count": 181
     },
     {
       "topic": "cordis-plugin",
-      "count": 133
+      "count": 132
     },
     {
       "topic": "typescript",
-      "count": 119
+      "count": 122
     },
     {
       "topic": "dsh-bundle",
@@ -147,14 +147,14 @@
     },
     {
       "topic": "dsh-plugin-market",
-      "count": 99
+      "count": 103
     },
     {
       "topic": "ai-agent",
-      "count": 97
+      "count": 99
     }
   ],
-  "medianStars": 5,
+  "medianStars": 4,
   "topByStars": [
     {
       "repo": "yjh051108/dsh-routing-suite",
@@ -225,63 +225,63 @@
   },
   "quality": {
     "grades": {
-      "A": 44,
-      "B": 785,
-      "C": 1126,
-      "D": 44
+      "A": 47,
+      "B": 827,
+      "C": 1191,
+      "D": 48
     },
     "avgScore": 68.8,
-    "gradePct": 41.5
+    "gradePct": 41.4
   },
   "categories": [
     {
       "category": "其它",
-      "count": 486
+      "count": 519
     },
     {
       "category": "模型 / 代理",
-      "count": 226
+      "count": 241
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 210
+      "count": 220
     },
     {
       "category": "会话管理",
-      "count": 206
+      "count": 217
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 170
+      "count": 177
     },
     {
       "category": "搜索 / 命令面板",
-      "count": 142
+      "count": 149
     },
     {
       "category": "工具 / 效率",
-      "count": 139
+      "count": 147
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 136
-    },
-    {
-      "category": "消息 / 协作集成",
-      "count": 79
+      "count": 145
     },
     {
       "category": "主题 / 视觉美化",
-      "count": 76
+      "count": 83
+    },
+    {
+      "category": "消息 / 协作集成",
+      "count": 82
     },
     {
       "category": "开发 / 数据",
-      "count": 69
+      "count": 71
     },
     {
       "category": "记忆 / 知识",
-      "count": 60
+      "count": 62
     }
   ],
-  "enrichCount": 1999
+  "enrichCount": 2113
 }
