@@ -8,12 +8,12 @@
 
 范围与交付：
 
-- [ ] **分片全量抓取**：发现层改为多 qualifier 分片，覆盖 `dsh-plugin` topic 全量 **13,592**（规避 GitHub 1000/查询封顶；当前原型仅 3,125，口径修正，见 RESEARCH.md §口径）。
-- [ ] **校准集**：把已知真/假插件编入 `seeds`（ice5kysl 两个插件、joejojoking 抢注、DshMarketPlace 已裁 failed/not-a-layer 样本等），每轮跑批回归。
-- [ ] **数据契约 v0**：定稿 `data/plugins.jsonl` 行结构（现字段 + `updatedAt`/`evidence` 雏形）；对齐 awesome 目录 plugins.json 的 join key（`owner/name`）。
+- [x] **分片全量抓取**：发现层改为多 qualifier 分片，覆盖 `dsh-plugin` topic 全量 **13,592**（规避 GitHub 1000/查询封顶；当前原型仅 3,125，口径修正，见 RESEARCH.md §口径）。*2026-09-05 实测：全量抓得 13,583（实时 total 13,600，差 17 ≈ 0.1%），9.5 分钟，`data/candidates-all.jsonl` 共 14,394 候选。*
+- [x] **校准集**：把已知真/假插件编入 `seeds`（ice5kysl 两个插件、joejojoking 抢注、DshMarketPlace 已裁 failed/not-a-layer 样本等），每轮跑批回归。*data/seeds.json 15 条（正 9 反 6），`npm run regress` 15/15 通过。*
+- [~] **数据契约 v0**：定稿 `data/plugins.jsonl` 行结构（现字段 + `updatedAt`/`evidence` 雏形）；对齐 awesome 目录 plugins.json 的 join key（`owner/name`）。*join key 已天然对齐（full_name）；score 字段 M1 引入。*
 - [ ] **开放快照**：首个全量权威集快照入库并提交；README 写清复现命令（含 GITHUB_TOKEN 用法）。
-- [ ] **LICENSE 定稿**（MIT，代码与数据同款；O1 决策）；CI 每日刷新模板激活条件写明（需要 token + 远端）。
-- [ ] 文档收口：VISION/ROADMAP/PRODUCT-PLAN/RESEARCH 已入库（本次）。
+- [~] **LICENSE 定稿**（MIT，代码与数据同款；O1 决策）；CI 每日刷新模板激活条件写明（需要 token + 远端）。*LICENSE 已入库；CI 激活待远端建立（用户决策中）。*
+- [x] 文档收口：VISION/ROADMAP/PRODUCT-PLAN/RESEARCH 已入库（本次）。
 
 **退出标准**：一条命令从零跑出全量权威集快照；seeds 回归通过；README 可在陌生机器复现。
 
