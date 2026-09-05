@@ -245,6 +245,7 @@ body{margin-left:0}
 .score li{margin:3px 0;font-size:12px;display:flex;justify-content:space-between;gap:10px}
 .score b{color:var(--brand);font-variant-numeric:tabular-nums}
 
+</style>
 </head>
 <body>
 <div class="topbar"><div class="wrap">
