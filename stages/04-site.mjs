@@ -149,6 +149,34 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
   .chip.on{background:#1b2a55;border-color:#3b55a8}
   .mbar-t,.hbar-t{background:#1c2a44}
 }
+
+.scrim{position:fixed;inset:0;background:rgba(9,14,32,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:var(--card);z-index:41;transform:translateX(102%);transition:transform .24s ease;box-shadow:-12px 0 40px rgba(9,14,32,.3);overflow:auto;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dd-head{position:sticky;top:0;background:linear-gradient(135deg,#15215e,#2d66f7);color:#fff;padding:16px 18px 12px}
+.dd-title{font-size:15px;font-weight:700;word-break:break-all;padding-right:28px}
+.dd-close{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.18);border:none;color:#fff;width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:14px}
+.dd-body{padding:14px 18px 36px}
+.dd-sec{margin-top:18px}
+.dd-sec h3{margin:0 0 8px;font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.dd-desc{font-size:13px}
+.dd-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.dd-kpi{background:#f2f5fb;border:1px solid var(--line);border-radius:10px;padding:8px 10px;text-align:center}
+.dd-kpi b{display:block;font-size:16px}
+.dd-kpi span{font-size:10.5px;color:var(--mut)}
+.chipset{display:flex;flex-wrap:wrap;gap:6px}
+.chipset span{background:#eef2ff;color:#2d66f7;border-radius:999px;padding:2px 9px;font-size:11.5px}
+.flag{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:8px;padding:3px 8px;font-size:12px;margin:0 6px 6px 0}
+.flag b{color:#0e9f6e}
+.dd-table{width:100%;font-size:12.5px;border-collapse:collapse}
+.dd-table td{padding:4px 0;border-bottom:1px solid var(--line)}
+.dd-table td:last-child{text-align:right;color:var(--mut)}
+.ptable tbody tr{cursor:pointer}
+.linkrow{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.linkrow a{border:1px solid #c7d2fe;background:#f5f7ff;color:#2d66f7;border-radius:8px;padding:5px 11px;font-size:12px}
+.loading{color:var(--mut);font-size:12px}
+@media(prefers-color-scheme:dark){.dd-kpi{background:#16213a}.chipset span{background:#1b2a55;color:#93b4ff}.linkrow a{background:#16213a;border-color:#3b55a8}}
 </style>
 </head>
 <body>
@@ -233,6 +261,12 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
     </div>
   </div>
 
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="dd-head"><div class="dd-title" id="dd-title"></div><button class="dd-close" id="dd-close" title="关闭">✕</button></div>
+  <div class="dd-body" id="dd-body"></div>
+</aside>
   <footer>
     <span>由 <a href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">dsh-plugin-insights</a> 管线自动生成 · ${date}</span>
     <span>零依赖 · GitHub API + npm · 启发式评估，非安全审计</span>
@@ -256,7 +290,7 @@ function draw(){
   const list=filtered(),pages=Math.ceil(list.length/PAGE)||1;
   page=Math.min(page,pages-1);
   const seg=list.slice(page*PAGE,(page+1)*PAGE);
-  $('#tb').innerHTML=seg.map(r=>'<tr><td><a href="'+e(r[1])+'" target="_blank">'+e(r[0])+'</a></td><td class="num">'+r[2]+'</td><td>'+r[3]+'</td><td>'+(r[4]?'<span class="ok">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td>'+(r[5]?'✓':'')+'</td><td>'+(r[6]?'✓':'')+'</td><td>'+(r[7]?'✓':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="8" class="dim">无匹配</td></tr>';
+  $('#tb').innerHTML=seg.map(r=>'<tr data-repo="'+e(r[0])+'" data-url="'+e(r[1])+'"><td><a href="'+e(r[1])+'" target="_blank">'+e(r[0])+'</a></td><td class="num">'+r[2]+'</td><td>'+r[3]+'</td><td>'+(r[4]?'<span class="ok">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td>'+(r[5]?'✓':'')+'</td><td>'+(r[6]?'✓':'')+'</td><td>'+(r[7]?'✓':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="8" class="dim">无匹配</td></tr>';
   $('#info').textContent='第 '+(page+1)+'/'+pages+' 页 · 共 '+list.length+' 条';
   $('#prev').disabled=page===0;$('#next').disabled=page>=pages-1;
 }
@@ -269,13 +303,88 @@ document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
 }));
 document.querySelectorAll('.ptable th[data-k]').forEach(th=>th.addEventListener('click',()=>{const k=+th.dataset.k;if(sort===k)desc=!desc;else{sort=k;desc=false}page=0;draw()}));
 $('#prev').onclick=()=>{page--;draw()};$('#next').onclick=()=>{page++;draw()};
+
+// ---- plugin detail drawer ----
+function escA(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var detCache=null;
+function detMap(){ if(!detCache){ detCache=fetch('plugins-detail.json').then(function(r){return r.ok?r.json():[]}).then(function(arr){var m={};arr.forEach(function(d){m[d.full_name]=d});return m}).catch(function(){return {}}) } return detCache }
+function ddK(l,v){return '<div class="dd-kpi"><b>'+escA(v)+'</b><span>'+l+'</span></div>'}
+function ddRow(k,v){return '<tr><td>'+k+'</td><td>'+v+'</td></tr>'}
+function ddFlag(ok,l){return '<span class="flag"'+(ok?'':' style="opacity:.42"')+'><b>'+(ok?'✓':'·')+'</b> '+escA(l)+'</span>'}
+function loadHist(repo,d){
+  var h=$('#dd-hist'); if(!h) return;
+  if(d.pkgName){
+    fetch('https://registry.npmjs.org/'+encodeURIComponent(d.pkgName).replace(/%40/g,'@')).then(function(r){return r.ok?r.json():null}).then(function(doc){
+      if(!doc||!doc.time){h.innerHTML='<div class="dim">无 npm 版本历史</div>';return}
+      var vs=[];for(var k in doc.time){if(/^\d/.test(k))vs.push({v:k,t:(doc.time[k]||'').slice(0,10)})}
+      vs.sort(function(a,b){return a.t<b.t?-1:a.t>b.t?1:0}).reverse();
+      h.innerHTML='<table class="dd-table">'+vs.slice(0,8).map(function(x){return ddRow('<span class="warn">'+escA(x.v)+'</span>',escA(x.t))}).join('')+'</table>'+(vs.length>8?'<div class="dim" style="font-size:11px;margin-top:4px">共 '+vs.length+' 个版本 · 最早 '+escA(vs[vs.length-1].t)+'</div>':'')
+    }).catch(function(){h.innerHTML='<div class="dim">版本历史不可用</div>'})
+  } else {
+    fetch('https://api.github.com/repos/'+encodeURIComponent(repo)+'/releases?per_page=6').then(function(r){return r.ok?r.json():null}).then(function(rel){
+      if(!rel||!rel.length){h.innerHTML='<div class="dim">无 GitHub Release（或未发布 / 接口限流）</div>';return}
+      h.innerHTML='<table class="dd-table">'+rel.map(function(x){return ddRow(escA(x.tag_name||x.name),(x.published_at||'').slice(0,10))}).join('')+'</table>'
+    }).catch(function(){h.innerHTML='<div class="dim">Release 历史不可用</div>'})
+  }
+}
+function openDrawer(repo){
+  $('#dd-title').textContent=repo;
+  var b=$('#dd-body');b.innerHTML='<div class="loading">加载详情…</div>';
+  $('#drawer').classList.add('on');$('#scrim').classList.add('on');document.body.style.overflow='hidden';
+  detMap().then(function(m){
+    var d=m[repo]; if(!d){b.innerHTML='<div class="dd-sec"><h3>详情</h3><div class="dd-desc">暂无本地详情（可能晚于当前快照）。</div></div>';return}
+    var flags='<div class="dd-sec"><h3>清单与构建产物</h3>'+ddFlag(d.files.rd,'README')+ddFlag(d.files.zh,'中文 README')+ddFlag(d.files.lic,'LICENSE')+ddFlag(d.files.cp,'cordis.patch.yml')+ddFlag(d.files.idx,'lib/index.js')+ddFlag(d.files.cli,'lib/client.js')+(d.hasClientExport?ddFlag(true,'exports["./client"]'):'')+'</div>'
+    var npmHtml=d.npm&&d.npm.pub
+      ? '<table class="dd-table">'+ddRow('latest','<span class="ok">'+escA(d.npm.latest)+'</span>')+ddRow('发布版本数',d.npm.versions)+ddRow('最近发布',escA((d.npm.latestTime||'').slice(0,10)||'—'))+'</table>'+(d.version&&d.npm.latest&&d.npm.latest!==d.version?'<div class="warn" style="font-size:12px;margin-top:6px">⚠ 版本滞后：仓库 '+escA(d.version)+' vs npm '+escA(d.npm.latest)+'</div>':'')
+      : '<div class="dim">未发布到 npm</div>'
+    b.innerHTML=''
+      +'<div class="dd-sec"><h3>描述</h3><div class="dd-desc">'+escA(d.desc||'—')+'</div>'+(d.topics&&d.topics.length?'<div class="chipset" style="margin-top:10px">'+d.topics.map(function(t){return '<span>'+escA(t)+'</span>'}).join('')+'</div>':'')+'</div>'
+      +'<div class="dd-kpis">'+ddK('★',d.stars)+ddK('fork',d.forks)+ddK('仓库年龄',Math.round(d.ageDays)+' 天')+'</div>'
+      +'<div class="dd-sec"><h3>npm</h3>'+npmHtml+'</div>'
+      +flags
+      +'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
+      +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
+    loadHist(repo,d);
+  })
+}
+function closeDrawer(){$('#drawer').classList.remove('on');$('#scrim').classList.remove('on');document.body.style.overflow=''}
+$('#dd-close').onclick=closeDrawer;$('#scrim').onclick=closeDrawer;
+document.addEventListener('keydown',function(ev){if(ev.key==='Escape')closeDrawer()});
+$('#tb').addEventListener('click',function(ev){ if(ev.target.closest('a'))return; var tr=ev.target.closest('tr[data-repo]'); if(tr)openDrawer(tr.getAttribute('data-repo')) });
+
 draw();
 </script>
 </body>
 </html>`
   mkdirSync(join(ROOT, 'site'), { recursive: true })
   writeFileSync(OUT, html)
-  console.log(`[site] ${plugins.length} rows → site/index.html (${(html.length / 1024).toFixed(0)} KB)`)
+  // ---- per-plugin detail file for the drawer (keeps index.html light) ----
+  const detail = plugins.map((r) => ({
+    full_name: r.full_name,
+    url: r.html_url || '',
+    stars: r.stars || 0,
+    forks: r.forks || 0,
+    created: r.created_at || '',
+    pushed: r.pushed_at || '',
+    branch: r.default_branch || '',
+    source: r.source || '',
+    license: r.license || null,
+    topics: r.topics || [],
+    desc: (r.description || '').slice(0, 600),
+    pkgName: r.pkgName || null,
+    version: r.version || null,
+    dshPlatform: r.eval?.dshPlatform || null,
+    hasClientExport: Boolean(r.eval?.hasClientExport),
+    files: {
+      cp: Boolean(r.files?.cordisPatch), idx: Boolean(r.files?.libIndex), cli: Boolean(r.files?.libClient),
+      rd: Boolean(r.files?.readme), zh: Boolean(r.files?.readmeZh), lic: Boolean(r.files?.license),
+    },
+    ageDays: r.metrics?.ageDays ?? 0,
+    active30: Boolean(r.metrics?.active30),
+    npm: r.npm || { pub: false },
+  }))
+  writeFileSync(join(ROOT, 'site', 'plugins-detail.json'), JSON.stringify(detail))
+  console.log(`[site] ${plugins.length} rows → site/index.html (${(html.length / 1024).toFixed(0)} KB) + plugins-detail.json (${(JSON.stringify(detail).length / 1024).toFixed(0)} KB)`)
 }
 
 main()
