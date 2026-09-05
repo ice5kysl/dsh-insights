@@ -53,6 +53,11 @@ function analyze(rows) {
     .map((r) => ({ repo: r.full_name, stars: r.stars, published: Boolean(r.npm?.published), zh: Boolean(r.docs?.readmeZh || r.docs?.zhSignal) }))
   const active = rows.filter((r) => r.metrics?.active30).length
   const ageOk = rows.filter((r) => r.metrics?.ageGate1).length
+  const staleTop = rows
+    .filter((r) => r.npm?.published && r.version && r.npm.latest && r.npm.latest !== r.version)
+    .sort((a, b) => (b.stars || 0) - (a.stars || 0))
+    .slice(0, 10)
+    .map((r) => ({ repo: r.full_name, stars: r.stars, repoVersion: r.version, npmLatest: r.npm.latest }))
   return {
     generatedAt: new Date().toISOString(),
     totals: {
@@ -61,7 +66,8 @@ function analyze(rows) {
       ageGate1: ageOk, ageGate1Pct: pct(ageOk, n),
       byMonth,
     },
-    distribution: { publish, docs, lib },
+    distribution: { publish, docs, lib, publishPct: pct(publish.published, n), zhPct: pct(docs.both, n) },
+    npmStaleTop: staleTop,
     topTopics: Object.entries(topics).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([t, c]) => ({ topic: t, count: c })),
     medianStars: n ? stars[Math.floor(n / 2)] : 0,
     topByStars: topStars,

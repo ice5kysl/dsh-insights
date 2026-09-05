@@ -135,7 +135,33 @@ async function main() {
   const lines = readFileSync(CAND, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
   const repos = lines.filter((c) => c.kind === 'repo' && c.id && !done.has(c.id))
   let processed = 0, valid = 0, transient = 0
-  for (const c of repos) {
+  const conc = Math.max(1, CONCURRENCY)
+  const queue = repos.slice()
+  async function worker() {
+    while (queue.length) {
+      const c = queue.shift()
+      if (!c) break
+      if (LIMIT && processed >= LIMIT) break
+      processed++
+      try {
+        const res = await validateOne(c)
+        const row = res.record || { owner: c.owner, repo: c.name, source: c.source || null }
+        if (res.ok) {
+          appendFileSync(PLUGINS, JSON.stringify({ valid: true, checkedAt: new Date().toISOString(), ...row }) + "\n")
+          valid++
+        } else {
+          appendFileSync(INVALID, JSON.stringify({ valid: false, reason: res.reason, checkedAt: new Date().toISOString(), ...row }) + "\n")
+        }
+        appendFileSync(STATE, c.id + "\n")
+        done.add(c.id)
+      } catch (e) {
+        transient++
+        console.error(`[validate] transient ${c.id}: ${e?.message}`)
+        if (transient % 10 === 0) await sleep(5000)
+      }
+    }
+  }
+  await Promise.all(Array.from({ length: conc }, worker))
     if (LIMIT && processed >= LIMIT) break
     processed++
     try {
