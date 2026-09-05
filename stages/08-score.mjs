@@ -4,6 +4,7 @@
  *
  * M1: turns every validated plugin row into an explainable 0–100 health score
  * with an A–D grade, per-dimension breakdown and evidence for every deduction.
+ * Module-exported so downstream stages (09 JSON export, site) reuse it.
  *
  * Design rules (see docs/schema.md §health):
  *   - purely objective signals; no community ratings, no star-based scoring.
@@ -21,16 +22,17 @@
 
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { pathToFileURL } from 'node:url'
 
 const ROOT = join(import.meta.dirname, '..')
-const SRC = process.argv[2] || join(ROOT, 'data', 'plugins.jsonl')
+const SRC = join(ROOT, 'data', 'plugins.jsonl')
 const OUT = join(ROOT, 'data', 'scored.jsonl')
 const SUMMARY = join(ROOT, 'data', 'health.json')
 
-const RULE_VERSION = 'health-v1'
+export const RULE_VERSION = 'health-v1'
 
 /** Deduction book: code → { sev: 'warn'|'fail', label } */
-const RULES = {
+export const RULES = {
   // manifest shape
   'manifest.no-client-export': { sev: 'warn', label: 'exports["./client"] 缺失（Web 客户端入口）' },
   'manifest.not-lib-main': { sev: 'warn', label: 'main 不是 lib/index.js（产物布局非常规）' },
@@ -49,7 +51,7 @@ const RULES = {
   'activity.dormant': { sev: 'warn', label: '超 30 天无提交（维护停滞风险）' },
 }
 
-function scoreOne(r) {
+export function scoreOne(r) {
   const drops = []
   const missing = []
   const add = (code, evidence) => {
@@ -98,7 +100,7 @@ function scoreOne(r) {
   // repo hygiene
   if (files) {
     if (files.license === false) warn('repo.no-license', { licenseFile: false })
-  } else if (!missing.includes('files')) missing.push('files')
+  }
   if (Array.isArray(r.topics) && r.topics.length > 0 && !r.topics.includes('dsh-plugin')) {
     warn('repo.no-dsh-topic', { topics: r.topics.slice(0, 6) })
   } else if (!Array.isArray(r.topics)) missing.push('topics')
@@ -139,31 +141,39 @@ function readRows(f) {
   return rows
 }
 
-const rows = readRows(SRC)
-const out = []
-for (const r of rows) out.push({ ...r, health: scoreOne(r) })
-
-const grades = { A: 0, B: 0, C: 0, D: 0 }
-let sum = 0
-const dropCounter = {}
-for (const r of out) {
-  grades[r.health.grade]++
-  sum += r.health.score
-  for (const d of r.health.drops) dropCounter[d.code] = (dropCounter[d.code] ?? 0) + 1
+export function scoreAll(rows) {
+  const out = rows.map((r) => ({ ...r, health: scoreOne(r) }))
+  const grades = { A: 0, B: 0, C: 0, D: 0 }
+  let sum = 0
+  const dropCounter = {}
+  for (const r of out) {
+    grades[r.health.grade]++
+    sum += r.health.score
+    for (const d of r.health.drops) dropCounter[d.code] = (dropCounter[d.code] ?? 0) + 1
+  }
+  const sorted = [...out].sort((a, b) => b.health.score - a.health.score)
+  const median = sorted.length ? sorted[Math.floor(sorted.length / 2)].health.score : 0
+  const summary = {
+    generatedAt: new Date().toISOString(),
+    ruleVersion: RULE_VERSION,
+    total: out.length,
+    grades,
+    avg: rows.length ? Math.round((sum / rows.length) * 10) / 10 : 0,
+    median,
+    topDeductions: Object.entries(dropCounter).sort((a, b) => b[1] - a[1]).slice(0, 10)
+      .map(([code, count]) => ({ code, count, pct: Math.round((count / Math.max(1, rows.length)) * 1000) / 10 })),
+  }
+  return { out, summary }
 }
-const sorted = [...out].sort((a, b) => b.health.score - a.health.score)
-const median = sorted.length ? sorted[Math.floor(sorted.length / 2)].health.score : 0
 
-writeFileSync(OUT, out.map((r) => JSON.stringify(r)).join('\n') + '\n')
-writeFileSync(SUMMARY, JSON.stringify({
-  generatedAt: new Date().toISOString(),
-  ruleVersion: RULE_VERSION,
-  total: out.length,
-  grades,
-  avg: rows.length ? Math.round((sum / rows.length) * 10) / 10 : 0,
-  median,
-  topDeductions: Object.entries(dropCounter).sort((a, b) => b[1] - a[1]).slice(0, 10)
-    .map(([code, count]) => ({ code, count, pct: Math.round((count / Math.max(1, rows.length)) * 1000) / 10 })),
-}, null, 2) + '\n')
+function main() {
+  const rows = readRows(SRC)
+  const { out, summary } = scoreAll(rows)
+  writeFileSync(OUT, out.map((r) => JSON.stringify(r)).join('\n') + '\n')
+  writeFileSync(SUMMARY, JSON.stringify(summary, null, 2) + '\n')
+  console.log(`[score] ${out.length} rows · ${JSON.stringify(summary.grades)} · avg ${summary.avg} · median ${summary.median} · rule ${RULE_VERSION}`)
+}
 
-console.log(`[score] ${out.length} rows · ${JSON.stringify(grades)} · avg ${(sum / Math.max(1, rows.length)).toFixed(1)} · median ${median} · rule ${RULE_VERSION}`)
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main()
+}
