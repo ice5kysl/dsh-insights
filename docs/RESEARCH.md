@@ -80,6 +80,9 @@
 - 2026-09-05：**健康分 health-v1 上线**——11 条纯客观规则、warn−5/fail−20、逐条证据、缺失不扣分、星数不进分；`data/scored.jsonl` + `data/health.json` + `data/insights.json`（agent 契约）+ 站点徽章列 + analyze/report 健康区块 + query CLI 过滤器 + `bin/badge.mjs` 徽章渲染。首个采样：valid 1,244 → A645/B594/C5，平均 87.5。
 - 2026-09-05：**采样洞察（生态质量证据）**——70.4% 插件缺 `exports["./client"]`、58.2% 无中文文档、48.6% 未发布 npm（analyze 实测）。
 - 2026-09-05：**M2 提案文档 v1 就绪**（docs/M2-INTEGRATION.md）：给 awesome-dsh-plugin org / dsh-market 的集成提案——选项 A 卡片 health 字段/sidecar、选项 B 收录门槛 health≥B；join key=owner/name；边界声明（不排名/非审计/全开源）。待发出与回复记录。
+- 2026-09-05 [BUG+修复]：npmDoc 对 scoped 包名双重编码（`encodeURIComponent('%40scope/name')` → 404）——**所有 `@scope/...` 插件被系统性误判 npm.unpublished**（当时 358 行 published 全 false；健康分 npm.unpublished 误扣、compat engines 漏采、官方 @deepseek-ai/dsh 发行轴为空）。修复：`NPM/${name.replace(/^@/,'%40')}`（lib/api.mjs + 11-enrich-compat）。已修行的修正交给 `bin/backfill-npm.mjs`（原子重写 + done.ids 并发守卫，快照时执行）。
+- 2026-09-05：**发布全链路就绪**——docs/RELEASE-CHECKLIST.md（Phase 0–5）+ `.github/workflows/pages.yml`（Pages 部署 site+瘦身数据+llms.txt）+ 仓库根 `llms.txt`（agent 落地页）。
+- 2026-09-05：**M3 地基**——stages/11-enrich-compat.mjs → `data/compat.json`（npm 已发布插件的 engines.dsh/dsh peers + 官方 dsh 发行轴；启发式兼容信号，非运行测试；repo-only 插件无此信号）。首跑（修复前）646 探测、432 声明 engines/peers。
 
 ## 来源
 
