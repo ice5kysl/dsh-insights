@@ -1,16 +1,16 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 841 个插件 · 生成于 2026-09-05 · 由 dsh-plugin-insights 管线生成
+> 权威集 1244 个插件 · 生成于 2026-09-05 · 由 dsh-plugin-insights 管线生成
 
 ## 总览
-- 权威集规模：**841**
-- 近 30 天活跃：841（100%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：840（99.9%）
+- 权威集规模：**1244**
+- 近 30 天活跃：1244（100%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：1240（99.7%）
 
 ## 发布与文档
-- npm 已发布 460 / 未发布 381 / 已发布但版本滞后 117
-- 有 README 830 · 中英双语/中文 341 · 中文 README 文件 100 · 无 README 11
-- lib/index.js 384 · lib/client.js 344 · 双产物 306
+- npm 已发布 640 / 未发布 604 / 已发布但版本滞后 168
+- 有 README 1233 · 中英双语/中文 516 · 中文 README 文件 137 · 无 README 11
+- lib/index.js 581 · lib/client.js 509 · 双产物 449
 
 ## 月度新增（按仓库创建）
 - 2026-01：3
@@ -19,23 +19,23 @@
 - 2026-04：1
 - 2026-05：3
 - 2026-06：7
-- 2026-07：13
-- 2026-08：801
-- 2026-09：5
+- 2026-07：14
+- 2026-08：1189
+- 2026-09：19
 
 ## Top topics
-- `dsh-plugin` × 829
-- `deepseek-harness` × 658
-- `dsh` × 497
-- `deepseek` × 191
-- `dsh-plugins` × 125
-- `cordis` × 106
-- `plugin` × 95
-- `ai-agent` × 59
-- `typescript` × 55
-- `ai-agents` × 53
-- `llm` × 48
-- `dsh-plugin-market` × 47
+- `dsh-plugin` × 1189
+- `deepseek-harness` × 940
+- `dsh` × 688
+- `deepseek` × 243
+- `dsh-plugins` × 198
+- `cordis` × 190
+- `cordis-plugin` × 132
+- `plugin` × 128
+- `dsh-bundle` × 111
+- `dsh-plugin-market` × 82
+- `typescript` × 78
+- `ai-agents` × 69
 
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |

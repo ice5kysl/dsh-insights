@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-09-05T06:14:41.899Z",
+  "ruleVersion": "health-v1",
+  "total": 1244,
+  "grades": {
+    "A": 645,
+    "B": 594,
+    "C": 5,
+    "D": 0
+  },
+  "avg": 87.5,
+  "median": 90,
+  "topDeductions": [
+    {
+      "code": "manifest.no-client-export",
+      "count": 874,
+      "pct": 70.3
+    },
+    {
+      "code": "docs.zh-missing",
+      "count": 727,
+      "pct": 58.4
+    },
+    {
+      "code": "npm.unpublished",
+      "count": 604,
+      "pct": 48.6
+    },
+    {
+      "code": "manifest.not-lib-main",
+      "count": 545,
+      "pct": 43.8
+    },
+    {
+      "code": "npm.version-drift",
+      "count": 168,
+      "pct": 13.5
+    },
+    {
+      "code": "repo.no-license",
+      "count": 92,
+      "pct": 7.4
+    },
+    {
+      "code": "manifest.no-files-whitelist",
+      "count": 49,
+      "pct": 3.9
+    },
+    {
+      "code": "repo.no-dsh-topic",
+      "count": 35,
+      "pct": 2.8
+    },
+    {
+      "code": "activity.too-young",
+      "count": 4,
+      "pct": 0.3
+    }
+  ]
+}
