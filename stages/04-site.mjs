@@ -11,7 +11,7 @@
 
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { scoreAll } from './08-score.mjs'
+import { scoreAll, RULES } from './08-score.mjs'
 
 const ROOT = join(import.meta.dirname, '..')
 
@@ -34,12 +34,15 @@ function main() {
   const gradeColor = { A: '#15803d', B: '#2d66f7', C: '#b45309', D: '#b91c1c' }
   const rows = plugins.map((r) => {
     const h = healthBy.get(r.full_name)
+    const ev = (v) => (v == null ? null : JSON.stringify(v).slice(0, 90))
     return {
       repo: r.full_name,
       url: r.html_url,
       stars: r.stars || 0,
       score: h?.score ?? null,
       grade: h?.grade ?? null,
+      drops: h ? h.drops.map((d) => ({ code: d.code, ev: ev(d.evidence) })) : [],
+      missing: h?.missing ?? [],
       desc: (r.description || '').slice(0, 120),
       npm: r.npm?.published ? `✅ ${r.npm.latest}` : '—',
       zh: (r.files?.readmeZh || r.metrics?.hasZhDocs) ? '✅' : '—',
@@ -49,6 +52,7 @@ function main() {
     }
   }).sort((a, b) => (b.score ?? -1) - (a.score ?? -1) || (b.stars - a.stars))
   const dataJson = JSON.stringify(rows).replace(/</g, '\\u003c')
+  const rulesJson = JSON.stringify(RULES)
 
   const months = Object.entries(analysis.totals?.byMonth || {}).sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).slice(-10)
   const maxMonth = Math.max(1, ...months.map(([, c]) => c))
@@ -104,13 +108,22 @@ footer{margin-top:40px;color:var(--mut);font-size:12px}
 ${monthsHtml}
 <h2>插件列表（按健康分排序，可搜索）</h2>
 <input id="q" placeholder="过滤：名称 / 描述 / 评级…">
+<div id="det" style="display:none;border:1px solid var(--line);border-radius:10px;padding:12px;margin:8px 0;background:#f8fafc"></div>
 <table><thead><tr><th>健康</th><th>repo</th><th>★</th><th>npm</th><th>中文/双语</th><th>lib 双产物</th><th>近30天活跃</th><th>描述</th><th>创建</th></tr></thead><tbody id="tb"></tbody></table>
 <script>
 const ROWS=${dataJson};
+const RULES_LBL=${rulesJson};
 const GC=${JSON.stringify(gradeColor)};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function chip(r){return r.grade?('<span class="chip" style="background:'+GC[r.grade]+'" title="'+r.score+'/100">'+r.grade+'</span>'+r.score):'<span style="color:var(--mut)">—</span>'}
-function fmt(r){return '<tr><td>'+chip(r)+'</td><td><a href="'+esc(r.url)+'" target="_blank">'+esc(r.repo)+'</a></td><td>'+r.stars+'</td><td>'+esc(r.npm)+'</td><td>'+r.zh+'</td><td>'+r.lib+'</td><td>'+r.active+'</td><td class="d">'+esc(r.desc)+'</td><td>'+r.created+'</td></tr>'}
+function dropHtml(d){const rl=RULES_LBL[d.code]||{};return '<div style="margin:2px 0"><b>'+esc(d.code)+'</b> — '+esc(rl.label||'')+(d.ev?' <code style="color:var(--mut)">'+esc(d.ev)+'</code>':'')+'</div>'}
+function show(i){const r=ROWS[i];const el=document.getElementById('det');if(!r){el.style.display='none';return}let h='<b>'+esc(r.repo)+'</b> '+chip(r)+' <a href="'+esc(r.url)+'" target="_blank" style="float:right">GitHub ↗</a>';
+h+='<div style="margin-top:6px;color:var(--mut);font-size:13px">'+esc(r.desc)+'</div>';
+h+='<div style="margin-top:8px">'+(r.drops.length?r.drops.map(dropHtml).join(''):'<span style="color:#15803d">✅ 无扣分项</span>')+'</div>';
+if(r.missing.length)h+='<div style="margin-top:6px;color:var(--mut);font-size:12px">数据缺失（未扣分）: '+r.missing.map(esc).join(', ')+'</div>';
+h+='<div style="margin-top:8px;font-size:12px;color:var(--mut)">客观启发式信号 · 非安全审计 · 规则见 docs/schema.md §health</div>';
+el.innerHTML=h;el.style.display='block';}
+function fmt(r,i){return '<tr onclick="show('+i+')" style="cursor:pointer" title="点开看扣分原因"><td>'+chip(r)+'</td><td><a href="'+esc(r.url)+'" target="_blank" onclick="event.stopPropagation()">'+esc(r.repo)+'</a></td><td>'+r.stars+'</td><td>'+esc(r.npm)+'</td><td>'+r.zh+'</td><td>'+r.lib+'</td><td>'+r.active+'</td><td class="d">'+esc(r.desc)+'</td><td>'+r.created+'</td></tr>'}
 function draw(q=''){const t=q.toLowerCase();const rows=ROWS.filter(r=>!t||(r.repo+' '+r.desc+' '+(r.grade||'')).toLowerCase().includes(t));document.getElementById('tb').innerHTML=rows.slice(0,500).map(fmt).join('')||'<tr><td colspan=9 style="color:var(--mut)">无匹配</td></tr>';}
 document.getElementById('q').addEventListener('input',e=>draw(e.target.value));draw();
 </script>
