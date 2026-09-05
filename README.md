@@ -31,7 +31,7 @@ Resumable: `data/state/done.ids` keeps progress; re-running continues where it s
 
 | file | what |
 |---|---|
-| `data/candidates.jsonl` | raw candidates from every source |
+| `data/candidates-all.jsonl` | raw candidates from every source (`topic:dsh-plugin` **full crawl** via created-window sharding + supplementary topics/curated/npm) |
 | `data/plugins.jsonl` | **authoritative set** (valid plugins + evaluation fields) |
 | `data/invalid.jsonl` | rejected candidates bucketed by reason |
 | `data/analysis.json` / `data/report.md` | aggregates + human report |

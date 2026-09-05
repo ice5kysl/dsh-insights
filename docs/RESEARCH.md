@@ -73,6 +73,10 @@
 - 2026-09-05：产品形态定为"质量评估数据层"，沿用 dsh-plugin-insights 仓库与命名（用户决策）。
 - 2026-09-05：差异化=全量客观健康分+透明规则+快照历史+agent 可读+诚实非审计边界。
 - 2026-09-05：O1 数据许可暂定 MIT 同款；O3 与 DshMarketPlace 关系待定（记录其 verdict 口径可借鉴）。
+- 2026-09-05 [V]：**官方姿态坐实**——deepseek-harness README 无任何市场/目录推荐；根目录无 ROADMAP；docs 树无 marketplace 相关页；CONTRIBUTING 明言"仍早期、暂不接受外部 PR（团队小，仅监控 Discussions）"；插件分发完全外包社区。官方抓手仅：`dsh-plugin` topic 打标 + 作者向文档 + Discussions/Discord。
+- 2026-09-05 [V]：**权威列表主动让位**——awesome-dsh-plugin org（★14,501）README 原话 *"This list doesn't rank plugins or judge their quality, and we don't want to."*；其内部最强信号仅是周级 decay 扫描（gone/archived/dormant/unbundled flag）。→ "质量评估层"空缺进一步坐实，且头部玩家不会来抢。
+- 2026-09-05 [V]：**全量抓取分片方案验证**——`topic:dsh-plugin` 实时 13,596；按 created 分窗：≤2026-07-31 373 / 2026-08 12,699 / ≥09-01 524；**单日峰值 2026-08-15 = 1,581 > 1000 上限**，需日内时间分片（实测 `created:2026-08-15T00:00:00..2026-08-15T12:00:00` = 868，子日精度可用）。实现：`lib/api.mjs` `ghSearchAll()` 递归 created 窗拆分，叶窗 ≤1000 全取。
+- 2026-09-05：**校准集上线**——data/seeds.json 15 条（正例 9：ice5kysl×2 / joejojoking（抢注克隆亦过门禁）/ omdsh / MichengAI / 0xsline / dsh-market / routing-suite / dsh-find-plugin；反例 6：deepseek-harness / open-design / ruflo（no-dsh-bundle）、dsh-find-plugins（no-package.json）、已归档×2）；`npm run regress` 15/15 通过（live validateOne 复验）。
 
 ## 来源
 

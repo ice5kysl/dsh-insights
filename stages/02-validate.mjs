@@ -21,7 +21,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, appendFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { ghApi, ghContents, npmDoc, sleep } from '../lib/api.mjs'
+import { ghApi, ghContents, npmDoc, sleep, lastRemaining } from '../lib/api.mjs'
 
 const ROOT = join(import.meta.dirname, '..')
 const CAND = process.argv[2] || join(ROOT, 'data', 'candidates-all.jsonl')
@@ -30,6 +30,7 @@ const INVALID = join(ROOT, 'data', 'invalid.jsonl')
 const STATE = join(ROOT, 'data', 'state', 'done.ids')
 const LIMIT = Number(process.env.LIMIT || 0)
 const CONCURRENCY = Number(process.env.CONCURRENCY || 1)
+const BUDGET_FLOOR = Number(process.env.BUDGET_FLOOR || 250)
 
 mkdirSync(join(ROOT, 'data', 'state'), { recursive: true })
 
@@ -170,6 +171,11 @@ async function main() {
       const c = queue.shift()
       if (!c) break
       if (LIMIT && processed >= LIMIT) break
+      if (lastRemaining >= 0 && lastRemaining < BUDGET_FLOOR) {
+        console.error(`[validate] budget floor ${BUDGET_FLOOR} reached (remaining ${lastRemaining}); stopping cleanly — rerun later to resume`)
+        queue.length = 0
+        break
+      }
       processed++
       try {
         const res = await validateOne(c)
