@@ -1,0 +1,17 @@
+[
+  { "owner": "ice5kysl", "repo": "dsh-workspace-kit", "topics": ["dsh-plugin"], "note": "我们的插件（正例）", "expect": { "valid": true } },
+  { "owner": "ice5kysl", "repo": "dsh-file-explorer-kit", "topics": ["dsh-plugin"], "note": "我们的插件（正例）", "expect": { "valid": true } },
+  { "owner": "joejojoking-cloud", "repo": "dsh-file-explorer", "topics": ["dsh-plugin"], "note": "npm 抢注者的仓库（clone 亦过 manifest 门禁，快照实测 valid）", "expect": { "valid": true } },
+  { "owner": "omdsh-dev", "repo": "DSH-better-sidebar", "topics": ["dsh-plugin"], "note": "生态基座插件", "expect": { "valid": true } },
+  { "owner": "MichengAI", "repo": "dsh-codex-ui", "topics": ["dsh-plugin"], "note": "Codex 风格整包 UI", "expect": { "valid": true } },
+  { "owner": "0xsline", "repo": "dsh-spotlight", "topics": ["dsh-plugin"], "note": "⌘K 面板", "expect": { "valid": true } },
+  { "owner": "dsh-market", "repo": "dsh-market", "topics": ["dsh-plugin"], "note": "应用内市场", "expect": { "valid": true } },
+  { "owner": "yjh051108", "repo": "dsh-routing-suite", "topics": ["dsh-plugin"], "note": "高星插件", "expect": { "valid": true } },
+  { "owner": "awesome-dsh-plugin", "repo": "dsh-find-plugin", "topics": ["dsh-plugin"], "note": "会话内搜索插件", "expect": { "valid": true } },
+  { "owner": "deepseek-ai", "repo": "deepseek-harness", "topics": ["dsh-plugin"], "note": "官方主仓（非 bundle 形态，应判无效）", "expect": { "valid": false, "reasons": ["no-dsh-bundle"] } },
+  { "owner": "nexu-io", "repo": "open-design", "topics": ["dsh-plugin"], "note": "94k★ 无关大项目仅打标", "expect": { "valid": false, "reasons": ["no-dsh-bundle"] } },
+  { "owner": "ruvnet", "repo": "ruflo", "topics": ["dsh-plugin"], "note": "70k★ 无关大项目仅打标", "expect": { "valid": false, "reasons": ["no-dsh-bundle"] } },
+  { "owner": "Nagi-ovo", "repo": "dsh-find-plugins", "topics": ["dsh-plugin"], "note": "skill 形态无 package.json", "expect": { "valid": false, "reasons": ["no-package.json"] } },
+  { "owner": "chen731215-dev", "repo": "dsh-tavern", "topics": ["dsh-plugin"], "note": "已归档", "expect": { "valid": false, "reasons": ["archived"] } },
+  { "owner": "weinibuliu", "repo": "deepseek-harness-vsc-extension", "topics": ["dsh-plugin"], "note": "已归档", "expect": { "valid": false, "reasons": ["archived"] } }
+]

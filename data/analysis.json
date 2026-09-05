@@ -1,64 +1,156 @@
 {
-  "generatedAt": "2026-09-05T04:53:32.790Z",
+  "generatedAt": "2026-09-05T05:51:24.456Z",
   "totals": {
-    "authoritative": 2,
-    "active30": 2,
+    "authoritative": 827,
+    "active30": 827,
     "active30Pct": 100,
-    "ageGate1": 2,
-    "ageGate1Pct": 100,
+    "ageGate1": 826,
+    "ageGate1Pct": 99.9,
     "byMonth": {
-      "2026-08": 2
+      "2026-08": 788,
+      "2026-02": 4,
+      "2026-07": 13,
+      "2026-04": 1,
+      "2026-03": 4,
+      "2026-01": 3,
+      "2026-06": 7,
+      "2026-05": 3,
+      "2026-09": 4
     }
   },
   "distribution": {
     "publish": {
-      "published": 0,
-      "unpublished": 2,
-      "stale": 0
+      "published": 454,
+      "unpublished": 373,
+      "stale": 113
     },
     "docs": {
-      "readme": 2,
-      "zh": 2,
-      "both": 2,
-      "none": 0
+      "readme": 11,
+      "zh": 10,
+      "both": 10,
+      "none": 816
     },
     "lib": {
-      "index": 0,
+      "index": 1,
       "client": 0,
       "both": 0
-    }
+    },
+    "publishPct": 54.9,
+    "zhPct": 1.2
   },
+  "npmStaleTop": [
+    {
+      "repo": "GanyuanRan/Aegis",
+      "stars": 1167,
+      "repoVersion": "2.9.6",
+      "npmLatest": "0.1.0"
+    },
+    {
+      "repo": "sandbaseai/sandbase-harness",
+      "stars": 642,
+      "repoVersion": "0.3.8",
+      "npmLatest": "0.0.1"
+    },
+    {
+      "repo": "adoresever/graph-memory",
+      "stars": 592,
+      "repoVersion": "1.6.0-beta.13",
+      "npmLatest": "1.5.8"
+    },
+    {
+      "repo": "FSMargoo/dsh-at-file",
+      "stars": 502,
+      "repoVersion": "0.7.0",
+      "npmLatest": "0.6.3"
+    },
+    {
+      "repo": "Han-1413141/dsh-cost-meter",
+      "stars": 254,
+      "repoVersion": "1.7.12",
+      "npmLatest": "1.7.10"
+    },
+    {
+      "repo": "zh667/TokenLedger",
+      "stars": 194,
+      "repoVersion": "0.1.1-blue.0",
+      "npmLatest": "0.1.0"
+    },
+    {
+      "repo": "tinqiao-oss/engramory",
+      "stars": 186,
+      "repoVersion": "0.2.4",
+      "npmLatest": "0.2.3"
+    },
+    {
+      "repo": "seriousz158/dsh-memory",
+      "stars": 184,
+      "repoVersion": "0.9.2",
+      "npmLatest": "0.8.1"
+    },
+    {
+      "repo": "weijiafu14/pi2dsh",
+      "stars": 181,
+      "repoVersion": "0.23.0",
+      "npmLatest": "0.24.0"
+    },
+    {
+      "repo": "kingOfSoySauce/dsh-liang-skin",
+      "stars": 162,
+      "repoVersion": "0.1.7",
+      "npmLatest": "0.1.6"
+    }
+  ],
   "topTopics": [
     {
-      "topic": "cordis",
-      "count": 2
+      "topic": "dsh-plugin",
+      "count": 815
     },
     {
       "topic": "deepseek-harness",
-      "count": 2
+      "count": 648
     },
     {
       "topic": "dsh",
-      "count": 2
+      "count": 485
     },
     {
-      "topic": "dsh-plugin",
-      "count": 2
+      "topic": "deepseek",
+      "count": 190
+    },
+    {
+      "topic": "dsh-plugins",
+      "count": 118
+    },
+    {
+      "topic": "cordis",
+      "count": 106
+    },
+    {
+      "topic": "plugin",
+      "count": 95
+    },
+    {
+      "topic": "ai-agent",
+      "count": 59
+    },
+    {
+      "topic": "typescript",
+      "count": 55
     },
     {
       "topic": "ai-agents",
-      "count": 1
+      "count": 53
     },
     {
-      "topic": "dsh-web",
-      "count": 1
+      "topic": "llm",
+      "count": 47
     },
     {
-      "topic": "dsh-web-ui",
-      "count": 1
+      "topic": "claude-code",
+      "count": 44
     }
   ],
-  "medianStars": 6887,
+  "medianStars": 16,
   "topByStars": [
     {
       "repo": "yjh051108/dsh-routing-suite",
@@ -71,6 +163,54 @@
       "stars": 6887,
       "published": false,
       "zh": true
+    },
+    {
+      "repo": "liustack/modlens",
+      "stars": 3868,
+      "published": false,
+      "zh": true
+    },
+    {
+      "repo": "omdsh-dev/DSH-better-sidebar",
+      "stars": 3339,
+      "published": true,
+      "zh": true
+    },
+    {
+      "repo": "dsh-market/dsh-market",
+      "stars": 3196,
+      "published": true,
+      "zh": true
+    },
+    {
+      "repo": "ccch1mneyyy/dsh-TUI",
+      "stars": 2837,
+      "published": false,
+      "zh": true
+    },
+    {
+      "repo": "MeteorNOX/DeepSeek-Balance-Whale-Widget",
+      "stars": 1727,
+      "published": true,
+      "zh": true
+    },
+    {
+      "repo": "NanmiCoder/dsh-agent-teams",
+      "stars": 1372,
+      "published": false,
+      "zh": true
+    },
+    {
+      "repo": "bowenliang123/dsh-context",
+      "stars": 1286,
+      "published": true,
+      "zh": true
+    },
+    {
+      "repo": "superdesigndev/treg",
+      "stars": 1190,
+      "published": false,
+      "zh": false
     }
   ]
 }
