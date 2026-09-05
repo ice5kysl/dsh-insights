@@ -65,7 +65,7 @@ async function callLLM(rows) {
     method: 'POST',
     headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` },
     body: JSON.stringify(payload),
-    signal: AbortSignal.timeout(90000),
+    signal: AbortSignal.timeout(300000),
   })
   if (!r.ok) {
     const t = await r.text()
@@ -85,10 +85,15 @@ async function main() {
 
   const doc = readJson(SRC)
   const plugins = doc?.plugins || []
+  // parallel sharding: LLM_SHARDS=n with LLM_SHARD=i lets n processes split the
+  // todo by a stable hash — each row is processed by exactly one shard.
+  const shards = Number(process.env.LLM_SHARDS || 1)
+  const shard = Number(process.env.LLM_SHARD || 0)
+  const h = (s2) => { let x = 0; for (const c of String(s2)) x = (x * 31 + c.charCodeAt(0)) >>> 0; return x }
   const done = new Set(existsSync(DONE) ? readFileSync(DONE, 'utf8').split('\n').filter(Boolean) : [])
-  const todo = plugins.filter((p) => !done.has(p.full_name))
+  const todo = plugins.filter((p) => !done.has(p.full_name) && (shards <= 1 || h(p.full_name) % shards === shard))
   const limit = maxRows > 0 ? Math.min(maxRows, todo.length) : todo.length
-  console.log(`[llm] ${todo.length} pending → tagging ${limit} (model=${model}, batch=${batch})`)
+  console.log(`[llm] shard ${shard}/${shards}: ${todo.length} pending → tagging ${limit} (model=${model}, batch=${batch})`)
   mkdirSync(join(ROOT, 'data', 'state'), { recursive: true })
 
   let tagged = 0
