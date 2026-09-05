@@ -24,7 +24,9 @@
     "compat": "node stages/11-enrich-compat.mjs",
     "backfill:npm": "node bin/backfill-npm.mjs",
     "badges": "node stages/12-badges.mjs",
-    "snapshot": "npm run analyze && npm run site && npm run export && npm run score && npm run export:json && npm run badges",
+    "history": "node stages/13-history.mjs",
+    "overlap": "node stages/14-overlap.mjs",
+    "snapshot": "npm run analyze && npm run site && npm run export && npm run score && npm run export:json && npm run badges && npm run history && npm run overlap",
     "finalize": "npm run analyze && npm run site && npm run export && node bin/query.mjs --sort stars --top 8"
   },
   "keywords": [
