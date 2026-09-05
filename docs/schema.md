@@ -84,7 +84,10 @@
 }
 ```
 
-**规则（RULE_VERSION=health-v1；升版必须在此加 changelog）**
+**规则（RULE_VERSION=health-v2；升版必须在此加 changelog）**
+
+Changelog：
+- health-v2 (2026-09-05)：`activity.too-young` 收窄——仅当插件 npm 发布版本 <2 时生效（有 ≥2 个发布版本 = 有存活证据，常见于仓库重建/迁移；刚建仓且只发 1 版仍警告）。
 
 | code | sev | 依据 |
 |---|---|---|

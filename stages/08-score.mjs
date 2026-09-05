@@ -29,7 +29,7 @@ const SRC = join(ROOT, 'data', 'plugins.jsonl')
 const OUT = join(ROOT, 'data', 'scored.jsonl')
 const SUMMARY = join(ROOT, 'data', 'health.json')
 
-export const RULE_VERSION = 'health-v1'
+export const RULE_VERSION = 'health-v2'
 
 /** Deduction book: code → { sev: 'warn'|'fail', label } */
 export const RULES = {
@@ -106,8 +106,12 @@ export function scoreOne(r) {
   } else if (!Array.isArray(r.topics)) missing.push('topics')
 
   // activity
+  // too-young means 'survivability unknown': a repo <1 day old. It does NOT
+  // apply to plugins with >=2 published npm versions — a release history is
+  // survivability evidence (re-created/migrated repos are the common case).
+  const matureShip = npm?.published === true && (npm.versions || 0) >= 2
   if (met) {
-    if (met.ageGate1 === false) warn('activity.too-young', { ageDays: met.ageDays ?? null })
+    if (met.ageGate1 === false && !matureShip) warn('activity.too-young', { ageDays: met.ageDays ?? null, npmVersions: npm?.versions ?? null })
     if (met.active30 === false) warn('activity.dormant', { idleDays: met.idleDays ?? null })
   } else missing.push('metrics')
 

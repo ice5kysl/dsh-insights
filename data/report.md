@@ -1,16 +1,16 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 1648 个插件 · 生成于 2026-09-05 · 由 dsh-plugin-insights 管线生成
+> 权威集 1850 个插件 · 生成于 2026-09-05 · 由 dsh-plugin-insights 管线生成
 
 ## 总览
-- 权威集规模：**1648**
-- 近 30 天活跃：1648（100%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：1644（99.8%）
+- 权威集规模：**1850**
+- 近 30 天活跃：1850（100%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：1845（99.7%）
 
 ## 发布与文档
-- npm 已发布 826 / 未发布 822 / 已发布但版本滞后 202
-- 有 README 1637 · 中英双语/中文 651 · 中文 README 文件 163 · 无 README 11
-- lib/index.js 797 · lib/client.js 678 · 双产物 604
+- npm 已发布 897 / 未发布 953 / 已发布但版本滞后 224
+- 有 README 1839 · 中英双语/中文 710 · 中文 README 文件 188 · 无 README 11
+- lib/index.js 862 · lib/client.js 715 · 双产物 635
 
 ## 月度新增（按仓库创建）
 - 2021-06：1
@@ -18,32 +18,32 @@
 - 2025-11：1
 - 2026-01：3
 - 2026-02：4
-- 2026-03：6
+- 2026-03：7
 - 2026-04：5
-- 2026-05：3
-- 2026-06：7
-- 2026-07：14
-- 2026-08：1573
-- 2026-09：30
+- 2026-05：13
+- 2026-06：16
+- 2026-07：27
+- 2026-08：1741
+- 2026-09：31
 
 ## Top topics
-- `dsh-plugin` × 1568
-- `deepseek-harness` × 1177
-- `dsh` × 852
-- `deepseek` × 302
-- `cordis` × 231
-- `dsh-plugins` × 230
-- `plugin` × 160
+- `dsh-plugin` × 1770
+- `deepseek-harness` × 1270
+- `dsh` × 935
+- `deepseek` × 321
+- `cordis` × 245
+- `dsh-plugins` × 241
+- `plugin` × 169
 - `cordis-plugin` × 132
 - `dsh-bundle` × 111
-- `typescript` × 97
-- `dsh-plugin-market` × 95
-- `ai-agents` × 81
+- `typescript` × 110
+- `dsh-plugin-market` × 96
+- `ai-agents` × 93
 
-## 健康分（health-v1 · 客观启发式，非安全审计）
-- 分布：A 846 · B 796 · C 6 · D 0
-- 平均 87.5 · 中位 90
-- 最常见扣分：`manifest.no-client-export` 70.3% · `docs.zh-missing` 60.4% · `npm.unpublished` 49.9% · `manifest.not-lib-main` 43.9% · `npm.version-drift` 12.3% · `repo.no-license` 7.3% · `manifest.no-files-whitelist` 4% · `repo.no-dsh-topic` 2.3% · `activity.too-young` 0.2%
+## 健康分（health-v2 · 客观启发式，非安全审计）
+- 分布：A 913 · B 926 · C 11 · D 0
+- 平均 87.2 · 中位 85
+- 最常见扣分：`manifest.no-client-export` 71.1% · `docs.zh-missing` 61.6% · `npm.unpublished` 51.5% · `manifest.not-lib-main` 44.6% · `npm.version-drift` 12.1% · `repo.no-license` 8.1% · `manifest.no-files-whitelist` 4.4% · `repo.no-dsh-topic` 2.1% · `activity.too-young` 0.2%
 
 ### 健康榜前 10
 | repo | ★ | 健康 |
