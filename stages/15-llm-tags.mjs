@@ -65,7 +65,7 @@ async function callLLM(rows) {
     method: 'POST',
     headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` },
     body: JSON.stringify(payload),
-    signal: AbortSignal.timeout(300000),
+    signal: AbortSignal.timeout(Number(process.env.LLM_TIMEOUT || 420000)),
   })
   if (!r.ok) {
     const t = await r.text()
@@ -102,36 +102,47 @@ async function main() {
   async function run() {
     while (queue.length) {
       const chunk = queue.splice(0, batch)
-      try {
-        const text = await callLLM(chunk)
-        const lines = String(text).split('\n').filter((l) => l.trim().startsWith('{'))
-        chunk.forEach((p, i) => {
-          const obj = lines[i] ? extractJson(lines[i]) : null
-          const row = {
-            full_name: p.full_name,
-            url: p.url,
-            category: obj?.category ?? null,
-            capabilityTags: Array.isArray(obj?.capabilityTags) ? obj.capabilityTags.slice(0, 8) : [],
-            commands: Array.isArray(obj?.commands) ? obj.commands.slice(0, 12) : [],
-            summaryZh: obj?.summaryZh ?? null,
-            summaryEn: obj?.summaryEn ?? null,
-            claims: Array.isArray(obj?.claims) ? obj.claims.slice(0, 6) : [],
-            confidence: typeof obj?.confidence === 'number' ? obj.confidence : null,
-            model, taggedAt: new Date().toISOString(),
-            spotCheck: 'LLM 生成 · 人工抽查（~5%）· 不进 health 分数',
-          }
-          appendFileSync(OUT, JSON.stringify(row) + '\n')
-          appendFileSync(DONE, p.full_name + '\n')
-          done.add(p.full_name)
-          tagged++
-        })
-        if (lines.length < chunk.length) console.warn(`[llm] batch ${batch}: got ${lines.length} JSON lines for ${chunk.length} rows`)
-      } catch (e) {
-        failed++
-        console.error(`[llm] batch failed (${failed}): ${e?.message?.slice(0, 160)}`)
-        if (failed >= 3) { console.error('[llm] too many failures — stop (resume later, progress kept)'); break }
+      // resilience: retry the SAME chunk up to 3x with backoff before giving up
+      let text = null
+      for (let attempt = 1; attempt <= 3 && text === null; attempt++) {
+        try { text = await callLLM(chunk) }
+        catch (e) {
+          console.error(`[llm] chunk attempt ${attempt}/3 failed: ${String(e?.message || e).slice(0, 140)} — backoff ${30 * attempt}s`)
+          if (attempt < 3) await new Promise((r) => setTimeout(r, 30000 * attempt))
+        }
       }
-      await new Promise((r) => setTimeout(r, 300))
+      if (text === null) {
+        failed++
+        console.error(`[llm] chunk abandoned after 3 attempts (abandoned=${failed}) — keep going`)
+        if (failed >= 6) { console.error('[llm] too many abandoned chunks — stop (resume later, progress kept)'); break }
+        continue
+      }
+      const lines = String(text).split('\n').filter((l) => l.trim().startsWith('{'))
+      let batchOk = 0
+      chunk.forEach((p, i) => {
+        const obj = lines[i] ? extractJson(lines[i]) : null
+        const row = {
+          full_name: p.full_name,
+          url: p.url,
+          category: obj?.category ?? null,
+          capabilityTags: Array.isArray(obj?.capabilityTags) ? obj.capabilityTags.slice(0, 8) : [],
+          commands: Array.isArray(obj?.commands) ? obj.commands.slice(0, 12) : [],
+          summaryZh: obj?.summaryZh ?? null,
+          summaryEn: obj?.summaryEn ?? null,
+          claims: Array.isArray(obj?.claims) ? obj.claims.slice(0, 6) : [],
+          confidence: typeof obj?.confidence === 'number' ? obj.confidence : null,
+          model, taggedAt: new Date().toISOString(),
+          spotCheck: 'LLM 生成 · 人工抽查（~5%）· 不进 health 分数',
+        }
+        if (!row.category && !row.summaryZh) { console.warn(`[llm] no usable JSON for ${p.full_name} — leave pending for catch-up`); return }
+        appendFileSync(OUT, JSON.stringify(row) + '\n')
+        appendFileSync(DONE, p.full_name + '\n')
+        done.add(p.full_name)
+        tagged++
+        batchOk++
+      })
+      if (lines.length < chunk.length) console.warn(`[llm] got ${lines.length} JSON lines for ${chunk.length} rows`)
+      await new Promise((r) => setTimeout(r, 500))
     }
   }
   await run()
