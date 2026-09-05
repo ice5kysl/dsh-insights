@@ -24,6 +24,9 @@ function main() {
   let enrich = []
   try { enrich = JSON.parse(readFileSync(join(ROOT, 'data', 'enrich.json'), 'utf8')) } catch { /* ok */ }
   const enMap = new Map(enrich.map((x) => [x.full_name, x]))
+  let llmRows = []
+  try { llmRows = readFileSync(join(ROOT, 'data', 'llm.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l)) } catch { /* ok */ }
+  const llmMap = new Map(llmRows.map((x) => [x.full_name, x]))
   const byStars = plugins.slice().sort((x, y) => (y.stars || 0) - (x.stars || 0))
   const t = a.totals || {}
   const d = a.distribution || {}
@@ -391,6 +394,8 @@ function openDrawer(repo){
       +'<div class="dd-sec"><h3>描述</h3><div class="dd-desc">'+escA(d.desc||'—')+'</div>'+(d.topics&&d.topics.length?'<div class="chipset" style="margin-top:10px">'+d.topics.map(function(t){return '<span>'+escA(t)+'</span>'}).join('')+'</div>':'')+'</div>'
       +'<div class="dd-kpis">'+ddK('★',d.stars)+ddK('fork',d.forks)+ddK('仓库年龄',Math.round(d.ageDays)+' 天')+'</div>'
       +'<div class="dd-sec"><h3>npm</h3>'+npmHtml+'</div>'
+      +'<div class="dd-sec"><h3>收录 / 下载</h3>'+(d.channels?(d.channels.aw?'<span class="flag"><b>✓</b> awesome-dsh-plugin</span>':'')+(d.channels.im?'<span class="flag"><b>✓</b> imsai</span>':'')+(!d.channels.aw&&!d.channels.im?'<span class="flag">curated 未收录</span>':''):'')+(d.weekly!=null?'<span class="flag"><b>⬇</b> 周下载 '+escA(d.weekly)+'</span>':'')+'</div>'
+      +'<div class="dd-sec"><h3>LLM 解读</h3>'+(d.llm?('<div class="dd-desc">'+escA(d.llm.summaryZh||d.llm.summaryEn||'—')+'</div>'+(d.llm.category?'<div class="chipset" style="margin-top:8px"><span>'+escA(d.llm.category)+'</span></div>':'')+(d.llm.capabilityTags&&d.llm.capabilityTags.length?'<div class="chipset" style="margin-top:6px">'+d.llm.capabilityTags.map(function(t){return '<span>'+escA(t)+'</span>'}).join('')+'</div>':'')+(d.llm.claims&&d.llm.claims.length?'<div class="dd-desc" style="margin-top:8px;color:var(--mut)">宣称：'+d.llm.claims.map(escA).join(' · ')+'</div>':'')):'<div class="dim">未标注 · 待 LLM 标注轮</div>')+'</div>'
       +flags
       +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='A'?'#0e9f6e':d.grade==='B'?'#2d66f7':d.grade==='C'?'#d97706':'#dc2626')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div></div>'
   +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3><div id="dd-peers" class="loading">计算中…</div></div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
@@ -453,6 +458,7 @@ draw();
     category: enMap.get(r.full_name)?.category || null,
     channels: { aw: enMap.get(r.full_name)?.inAwesome ? 1 : 0, im: enMap.get(r.full_name)?.inImsai ? 1 : 0 },
     weekly: enMap.get(r.full_name)?.weekly ?? null,
+    llm: llmMap.get(r.full_name) ?? null,
     npm: r.npm || { pub: false },
   }))
   writeFileSync(join(ROOT, 'site', 'plugins-detail.json'), JSON.stringify(detail))
