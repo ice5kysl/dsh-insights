@@ -71,6 +71,16 @@
 - [ ] 回复：采纳（选项 __）/ 拒绝（理由：____）/ 替代路径（____）
 - [ ] 若拒绝：替代路径记录 + 我们独立数据层继续（badge 热链 / llms.txt / 市场镜像 DSHM_REGISTRY_URL）
 
+## 附：Discussion 帖子草稿（可直接粘贴）
+
+**ZH**
+> 我们做了 dsh 插件生态的客观健康分数据层（[dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)）：对全量 `dsh-plugin` topic（13.6k+）分片抓取 → manifest 门禁判真伪 → 11 条纯客观规则打分（A–D，逐条证据，星数不进分，缺失不扣分）。数据 MIT 开放、规则版本化、15 条校准 seeds 每轮回归。
+> 看到贵方 README 说"不排名、不评判质量"——正好互补：**我们不抢收录权，只提供卡片上的分数**。提案两个选项：A) 把 `health` 作为可选字段/sidecar 并入 plugins.json，市场卡片直接显示徽章；B) 新人收录门槛 `health ≥ B`（数据支撑 + 免费复核）。join key 用 `owner/name`，schema 只增不改，贵方可随时停用。详见仓库 [docs/M2-INTEGRATION.md](https://github.com/ice5kysl/dsh-plugin-insights/blob/main/docs/M2-INTEGRATION.md)。期待意见！
+
+**EN**
+> We built an objective health-score layer for the dsh plugin ecosystem ([dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)): sharded full crawl of the `dsh-plugin` topic (13.6k+) → manifest-gate authenticity → 11 purely objective rules scoring A–D with per-deduction evidence (no stars, no invented data). Open (MIT), versioned rules, 15 calibration seeds regressed every run.
+> Your README says you don't rank or judge quality — that's exactly complementary: we don't want your curation seat, we just want to be the number on the card. Two options: A) optional `health` field/sidecar merged into plugins.json so market cards show the badge; B) a contribution gate of `health ≥ B` (data-backed, free re-check). Join key `owner/name`; schema only additive; you can drop us anytime. Details: [docs/M2-INTEGRATION.md](https://github.com/ice5kysl/dsh-plugin-insights/blob/main/docs/M2-INTEGRATION.md). Thoughts?
+
 ## 附：仓库内可直接引用的产出
 
 | 产物 | 路径 | 用途 |
