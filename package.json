@@ -15,7 +15,10 @@
     "discover": "node stages/01-discover.mjs",
     "validate": "node stages/02-validate.mjs",
     "analyze": "node stages/03-analyze.mjs",
-    "site": "node stages/04-site.mjs"
+    "site": "node stages/04-site.mjs",
+    "export": "node stages/05-export.mjs",
+    "query": "node bin/query.mjs",
+    "snapshot": "npm run analyze && npm run site && npm run export"
   },
   "keywords": [
     "dsh",
