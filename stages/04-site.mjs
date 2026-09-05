@@ -96,6 +96,8 @@ function main() {
   const catsMax = Math.max(1, ...(a.categories || []).map((x) => x.count))
   const catsHtml = (a.categories || []).slice(0, 8).map((x) =>
     '<div class="hbar"><span class="hbar-l" title="' + esc(x.category) + '">' + esc(x.category) + '</span><div class="hbar-t"><div class="hbar-f" style="width:' + Math.max(2, Math.round((x.count / catsMax) * 100)) + '%"></div></div><span class="hbar-v">' + x.count + '</span></div>').join('')
+  const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
+    '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num g g-' + esc(e.grade) + '">' + esc(e.grade) + '</td><td class="num">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('') || ''
 
   const date = (a.generatedAt || '').slice(0, 10)
 
@@ -230,6 +232,7 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
     ${kpi(lib.both ?? 0, 'host+client 双产物', `index ${lib.index} · client ${lib.client}`)}
     ${kpi((t.active30Pct ?? 0) + '%', '近 30 天活跃', '生态活跃信号')}
     ${kpi(a.quality?.avgScore ?? '—', '平均质量分', `A+B ${a.quality?.gradePct ?? 0}%`)}
+    ${kpi(a.channels ? a.channels.coveredPct + '%' : '—', 'curated 收录率', `${a.channels?.covered ?? 0} 已进 awesome/imsai`)}
   </div>
 
   <div class="grid" id="charts">
@@ -275,6 +278,12 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
       <table><thead><tr><th>仓库</th><th style="text-align:right">★</th><th>npm</th><th>中/双语</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
 
+    <div class="panel span-12" id="suggested">
+      <h2>优质未收录 · 建议收录</h2><p class="sub">A/B 级、已发布 npm、尚未进入 awesome/imsai 列表（按质量分）· Top 10</p>
+      <table><thead><tr><th>仓库</th><th style="text-align:right">质量</th><th style="text-align:right">★</th><th>npm / 周下载</th></tr></thead><tbody>
+      ${suggestedHtml || '<tr><td class="dim">暂无（请先跑 00-lists + analyze）</td></tr>'}
+      </tbody></table>
+    </div>
     <div class="panel span-12" id="table">
       <h2>全量插件表</h2>
       <p class="sub">搜索 / 筛选 / 点击表头排序 · 已加载 ${plugins.length} 个权威插件</p>
@@ -425,6 +434,8 @@ draw();
     grade: enMap.get(r.full_name)?.grade ?? null,
     category: enMap.get(r.full_name)?.category || null,
     peers: peersOf(r.full_name),
+    channels: { aw: enMap.get(r.full_name)?.inAwesome ? 1 : 0, im: enMap.get(r.full_name)?.inImsai ? 1 : 0 },
+    weekly: enMap.get(r.full_name)?.weekly ?? null,
     npm: r.npm || { pub: false },
   }))
   writeFileSync(join(ROOT, 'site', 'plugins-detail.json'), JSON.stringify(detail))

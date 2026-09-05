@@ -12,6 +12,26 @@
 - 有 README 2100 · 中英双语/中文 793 · 中文 README 文件 211 · 无 README 13
 - lib/index.js 967 · lib/client.js 800 · 双产物 709
 
+## 收录渠道（curated 覆盖）
+- awesome-dsh-plugin 765 · imsai 235 · 至少一个渠道 995（47.1%） · 未收录 1118
+
+## 优质未收录 · 建议收录（Top 15）
+- RevolutionLA/dsh-dream-skin A
+- pengyue-polaron/deepseek-harness-genui A
+- Renzic-Stone/DSH-EasyRewrite A
+- mexiaosqwq/dsh-web-mobile A
+- a179-sanae/dsh-auto-collapse A
+- jjxjjjjiik-bot/dsh-chat-timeline A
+- SenmuuuuW/dsh-whale-report A
+- nevertoday/dsh-theme-plugin A
+- Ultronen/dsh-archived-chats A
+- CocoSgt/dsh-attachments A
+- mmzm0808/dsh-deepseek-usage A
+- CocoSgt/dsh-inspector A
+- nonentity303/dsh-plugin-manager A
+- lilyblessing/dsh-mcp-skill-panel A
+- jiuyuechuwuhao/dsh-canvas-preview A
+
 ## 质量评分（启发式）
 - 平均分 68.8 · A+B 占比 41.4%
 - A 47 · B 827 · C 1191 · D 48

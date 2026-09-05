@@ -24,6 +24,15 @@ function readRows(f) {
 
 function pct(n, d) { return d === 0 ? 0 : Math.round((n / d) * 1000) / 10 }
 
+function readChannels() {
+  try {
+    const l = JSON.parse(readFileSync(join(ROOT, 'data', 'listed.json'), 'utf8'))
+    return { awesome: new Set(l.awesome || []), imsai: new Set(l.imsai || []), fetchedAt: l.fetchedAt || null }
+  } catch { return { awesome: new Set(), imsai: new Set() } }
+}
+function readDownloadsFile() {
+  try { return JSON.parse(readFileSync(join(ROOT, 'data', 'downloads.json'), 'utf8')) || null } catch { return null }
+}
 function readDeep() {
   try {
     const rows = readFileSync(join(ROOT, 'data', 'deep.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
@@ -90,6 +99,9 @@ function analyze(rows) {
   const lib = { index: 0, client: 0, both: 0 }
   const topics = {}
   const stars = []
+  const channels = readChannels()
+  const dlDoc = readDownloadsFile()
+  const dlMap = dlDoc?.map || {}
   const enrich = []
   const gradeAgg = { A: 0, B: 0, C: 0, D: 0 }
   const catAgg = {}
@@ -114,7 +126,10 @@ function analyze(rows) {
     stars.push(r.stars || 0)
     const q = quality(r)
     const cat = classify(r.repo || r.full_name || '', r.description || '')
-    enrich.push({ full_name: r.full_name, score: q.score, grade: q.grade, category: cat })
+    const inAwesome = channels.awesome.has(r.full_name)
+    const inImsai = channels.imsai.has(r.full_name)
+    const weekly = r.npm?.published && r.pkgName ? (dlMap[r.pkgName]?.d ?? null) : null
+    enrich.push({ full_name: r.full_name, stars: r.stars || 0, score: q.score, grade: q.grade, category: cat, inAwesome, inImsai, covered: inAwesome || inImsai, weekly })
     gradeAgg[q.grade] = (gradeAgg[q.grade] || 0) + 1
     catAgg[cat] = (catAgg[cat] || 0) + 1
     scoreSum += q.score
@@ -129,6 +144,12 @@ function analyze(rows) {
     .sort((a, b) => (b.stars || 0) - (a.stars || 0))
     .slice(0, 10)
     .map((r) => ({ repo: r.full_name, stars: r.stars, repoVersion: r.version, npmLatest: r.npm.latest }))
+  const aw = enrich.filter((e) => e.inAwesome).length
+  const im = enrich.filter((e) => e.inImsai).length
+  const covered = enrich.filter((e) => e.covered).length
+  const suggested = enrich.filter((e) => (e.grade === 'A' || e.grade === 'B') && !e.covered)
+    .sort((x, y) => (y.score || 0) - (x.score || 0)).slice(0, 20)
+  const dlTop = enrich.filter((e) => e.weekly != null).sort((x, y) => (y.weekly || 0) - (x.weekly || 0)).slice(0, 15)
   writeFileSync(join(ROOT, 'data', 'enrich.json'), JSON.stringify(enrich))
   return {
     generatedAt: new Date().toISOString(),
@@ -143,6 +164,9 @@ function analyze(rows) {
     topTopics: Object.entries(topics).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([t, c]) => ({ topic: t, count: c })),
     medianStars: n ? stars[Math.floor(n / 2)] : 0,
     topByStars: topStars,
+    channels: { awesome: aw, imsai: im, covered, coveredPct: pct(covered, n), none: n - covered, fetchedAt: channels.fetchedAt },
+    suggested,
+    downloads: dlDoc ? { fetchedAt: dlDoc.fetchedAt, top: dlTop, sum: Object.values(dlMap).reduce((s2, v) => s2 + (v.d || 0), 0) } : null,
     deep: readDeep(),
     quality: {
       grades: gradeAgg,
@@ -170,6 +194,22 @@ function render(a) {
   L.push(`- 有 README ${a.distribution.docs.readme} · 中英双语/中文 ${a.distribution.docs.zh} · 中文 README 文件 ${a.distribution.docs.zhFile} · 无 README ${a.distribution.docs.none}`)
   L.push(`- lib/index.js ${a.distribution.lib.index} · lib/client.js ${a.distribution.lib.client} · 双产物 ${a.distribution.lib.both}`)
   L.push('')
+  if (a.channels && a.totals.authoritative) {
+    L.push('## 收录渠道（curated 覆盖）')
+    L.push(`- awesome-dsh-plugin ${a.channels.awesome} · imsai ${a.channels.imsai} · 至少一个渠道 ${a.channels.covered}（${a.channels.coveredPct}%） · 未收录 ${a.channels.none}`)
+    L.push('')
+    L.push('## 优质未收录 · 建议收录（Top 15）')
+    for (const e of a.suggested.slice(0, 15)) {
+      const dl = e.weekly != null ? ' · 周下载 ' + e.weekly : ''
+      L.push(`- ${e.full_name} ${e.grade}${dl}`)
+    }
+    L.push('')
+  }
+  if (a.downloads && a.downloads.top.length) {
+    L.push('## npm 周下载 Top 10')
+    for (const e of a.downloads.top.slice(0, 10)) L.push(`- ${e.full_name}：${e.weekly}`)
+    L.push('')
+  }
   L.push('## 质量评分（启发式）')
   L.push(`- 平均分 ${a.quality.avgScore} · A+B 占比 ${a.quality.gradePct}%`)
   L.push(`- A ${a.quality.grades.A} · B ${a.quality.grades.B} · C ${a.quality.grades.C} · D ${a.quality.grades.D}`)

@@ -33,6 +33,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
         run: node bin/dsh-plugin-insights.mjs run
+      - name: Refresh enrich (lists/downloads/diff)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node bin/refresh-extra.mjs
       - name: Commit snapshot changes
         run: |
           git config user.name 'github-actions[bot]'
