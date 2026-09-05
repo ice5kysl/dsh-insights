@@ -1,9 +1,11 @@
-# Daily refresh of the dsh-plugin-insights snapshot (CI 定时刷新模板)
+# Daily refresh of the dsh-plugin-insights snapshot (CI 定时刷新)
 #
-# - Requires a repo secret GITHUB_TOKEN with `repo` scope (a fine-grained token
-#   with Contents read/write on this repo is enough) to raise the API budget.
-# - Runs the full pipeline (discover → validate → analyze → site → export) and
-#   commits the new snapshot when anything changed.
+# - Requires a repo secret `DSH_GH_TOKEN` (fine-grained PAT, Contents read/write
+#   + Metadata read on this repo) for a raised GitHub API budget. Falls back to
+#   the built-in `GITHUB_TOKEN` if the secret is absent (search still capped,
+#   budget-floor in stages makes the run degrade gracefully).
+# - Runs the full pipeline (discover → validate → analyze → site → export →
+#   score → export:json) and commits the new snapshot when anything changed.
 # - `workflow_dispatch` lets you trigger it manually.
 
 name: refresh
@@ -29,7 +31,7 @@ jobs:
           node-version: 20
       - name: Run pipeline
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
         run: node bin/dsh-plugin-insights.mjs run
       - name: Commit snapshot changes
         run: |

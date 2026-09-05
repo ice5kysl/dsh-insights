@@ -1,43 +1,46 @@
 {
-  "generatedAt": "2026-09-05T06:15:05.087Z",
+  "generatedAt": "2026-09-05T06:55:09.833Z",
   "totals": {
-    "authoritative": 1249,
-    "active30": 1249,
+    "authoritative": 1648,
+    "active30": 1648,
     "active30Pct": 100,
-    "ageGate1": 1245,
-    "ageGate1Pct": 99.7,
+    "ageGate1": 1644,
+    "ageGate1Pct": 99.8,
     "byMonth": {
-      "2026-08": 1194,
+      "2026-08": 1573,
       "2026-02": 4,
       "2026-07": 14,
-      "2026-04": 1,
-      "2026-03": 4,
+      "2026-04": 5,
+      "2026-03": 6,
       "2026-01": 3,
       "2026-06": 7,
       "2026-05": 3,
-      "2026-09": 19
+      "2026-09": 30,
+      "2021-06": 1,
+      "2025-08": 1,
+      "2025-11": 1
     }
   },
   "distribution": {
     "publish": {
-      "published": 642,
-      "unpublished": 607,
-      "stale": 168
+      "published": 826,
+      "unpublished": 822,
+      "stale": 202
     },
     "docs": {
-      "readme": 1238,
-      "zhFile": 137,
-      "zh": 521,
-      "both": 511,
+      "readme": 1637,
+      "zhFile": 163,
+      "zh": 651,
+      "both": 641,
       "none": 11
     },
     "lib": {
-      "index": 586,
-      "client": 512,
-      "both": 452
+      "index": 797,
+      "client": 678,
+      "both": 604
     },
-    "publishPct": 51.4,
-    "zhPct": 40.9
+    "publishPct": 50.1,
+    "zhPct": 38.9
   },
   "npmStaleTop": [
     {
@@ -104,54 +107,54 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 1194
+      "count": 1568
     },
     {
       "topic": "deepseek-harness",
-      "count": 943
+      "count": 1177
     },
     {
       "topic": "dsh",
-      "count": 689
+      "count": 852
     },
     {
       "topic": "deepseek",
-      "count": 244
-    },
-    {
-      "topic": "dsh-plugins",
-      "count": 198
+      "count": 302
     },
     {
       "topic": "cordis",
-      "count": 190
+      "count": 231
+    },
+    {
+      "topic": "dsh-plugins",
+      "count": 230
+    },
+    {
+      "topic": "plugin",
+      "count": 160
     },
     {
       "topic": "cordis-plugin",
       "count": 132
     },
     {
-      "topic": "plugin",
-      "count": 128
-    },
-    {
       "topic": "dsh-bundle",
       "count": 111
     },
     {
-      "topic": "dsh-plugin-market",
-      "count": 82
+      "topic": "typescript",
+      "count": 97
     },
     {
-      "topic": "typescript",
-      "count": 78
+      "topic": "dsh-plugin-market",
+      "count": 95
     },
     {
       "topic": "ai-agents",
-      "count": 69
+      "count": 81
     }
   ],
-  "medianStars": 10,
+  "medianStars": 7,
   "topByStars": [
     {
       "repo": "yjh051108/dsh-routing-suite",
@@ -185,6 +188,12 @@
     },
     {
       "repo": "ccch1mneyyy/dsh-TUI",
+      "stars": 2838,
+      "published": false,
+      "zh": false
+    },
+    {
+      "repo": "ccch1mneyyy/dsh-TUI",
       "stars": 2837,
       "published": false,
       "zh": true
@@ -206,71 +215,65 @@
       "stars": 1286,
       "published": true,
       "zh": true
-    },
-    {
-      "repo": "superdesigndev/treg",
-      "stars": 1190,
-      "published": false,
-      "zh": false
     }
   ],
   "health": {
-    "generatedAt": "2026-09-05T06:15:05.086Z",
+    "generatedAt": "2026-09-05T06:55:09.831Z",
     "ruleVersion": "health-v1",
-    "total": 1249,
+    "total": 1648,
     "grades": {
-      "A": 650,
-      "B": 594,
-      "C": 5,
+      "A": 846,
+      "B": 796,
+      "C": 6,
       "D": 0
     },
-    "avg": 87.6,
+    "avg": 87.5,
     "median": 90,
     "topDeductions": [
       {
         "code": "manifest.no-client-export",
-        "count": 879,
-        "pct": 70.4
+        "count": 1159,
+        "pct": 70.3
       },
       {
         "code": "docs.zh-missing",
-        "count": 727,
-        "pct": 58.2
+        "count": 996,
+        "pct": 60.4
       },
       {
         "code": "npm.unpublished",
-        "count": 607,
-        "pct": 48.6
+        "count": 822,
+        "pct": 49.9
       },
       {
         "code": "manifest.not-lib-main",
-        "count": 545,
-        "pct": 43.6
+        "count": 723,
+        "pct": 43.9
       },
       {
         "code": "npm.version-drift",
-        "count": 168,
-        "pct": 13.5
+        "count": 202,
+        "pct": 12.3
       },
       {
         "code": "repo.no-license",
-        "count": 92,
-        "pct": 7.4
+        "count": 121,
+        "pct": 7.3
       },
       {
         "code": "manifest.no-files-whitelist",
-        "count": 49,
-        "pct": 3.9
+        "count": 66,
+        "pct": 4
       },
       {
         "code": "repo.no-dsh-topic",
-        "count": 35,
-        "pct": 2.8
+        "count": 38,
+        "pct": 2.3
       },
       {
         "code": "activity.too-young",
         "count": 4,
-        "pct": 0.3
+        "pct": 0.2
       }
     ]
   },

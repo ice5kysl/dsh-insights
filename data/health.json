@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-05T06:14:41.899Z",
+  "generatedAt": "2026-09-05T06:55:10.060Z",
   "ruleVersion": "health-v1",
-  "total": 1244,
+  "total": 1648,
   "grades": {
-    "A": 645,
-    "B": 594,
-    "C": 5,
+    "A": 846,
+    "B": 796,
+    "C": 6,
     "D": 0
   },
   "avg": 87.5,
@@ -13,48 +13,48 @@
   "topDeductions": [
     {
       "code": "manifest.no-client-export",
-      "count": 874,
+      "count": 1159,
       "pct": 70.3
     },
     {
       "code": "docs.zh-missing",
-      "count": 727,
-      "pct": 58.4
+      "count": 996,
+      "pct": 60.4
     },
     {
       "code": "npm.unpublished",
-      "count": 604,
-      "pct": 48.6
+      "count": 822,
+      "pct": 49.9
     },
     {
       "code": "manifest.not-lib-main",
-      "count": 545,
-      "pct": 43.8
+      "count": 723,
+      "pct": 43.9
     },
     {
       "code": "npm.version-drift",
-      "count": 168,
-      "pct": 13.5
+      "count": 202,
+      "pct": 12.3
     },
     {
       "code": "repo.no-license",
-      "count": 92,
-      "pct": 7.4
+      "count": 121,
+      "pct": 7.3
     },
     {
       "code": "manifest.no-files-whitelist",
-      "count": 49,
-      "pct": 3.9
+      "count": 66,
+      "pct": 4
     },
     {
       "code": "repo.no-dsh-topic",
-      "count": 35,
-      "pct": 2.8
+      "count": 38,
+      "pct": 2.3
     },
     {
       "code": "activity.too-young",
       "count": 4,
-      "pct": 0.3
+      "pct": 0.2
     }
   ]
 }

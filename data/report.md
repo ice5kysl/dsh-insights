@@ -1,46 +1,49 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 1249 个插件 · 生成于 2026-09-05 · 由 dsh-plugin-insights 管线生成
+> 权威集 1648 个插件 · 生成于 2026-09-05 · 由 dsh-plugin-insights 管线生成
 
 ## 总览
-- 权威集规模：**1249**
-- 近 30 天活跃：1249（100%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：1245（99.7%）
+- 权威集规模：**1648**
+- 近 30 天活跃：1648（100%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：1644（99.8%）
 
 ## 发布与文档
-- npm 已发布 642 / 未发布 607 / 已发布但版本滞后 168
-- 有 README 1238 · 中英双语/中文 521 · 中文 README 文件 137 · 无 README 11
-- lib/index.js 586 · lib/client.js 512 · 双产物 452
+- npm 已发布 826 / 未发布 822 / 已发布但版本滞后 202
+- 有 README 1637 · 中英双语/中文 651 · 中文 README 文件 163 · 无 README 11
+- lib/index.js 797 · lib/client.js 678 · 双产物 604
 
 ## 月度新增（按仓库创建）
+- 2021-06：1
+- 2025-08：1
+- 2025-11：1
 - 2026-01：3
 - 2026-02：4
-- 2026-03：4
-- 2026-04：1
+- 2026-03：6
+- 2026-04：5
 - 2026-05：3
 - 2026-06：7
 - 2026-07：14
-- 2026-08：1194
-- 2026-09：19
+- 2026-08：1573
+- 2026-09：30
 
 ## Top topics
-- `dsh-plugin` × 1194
-- `deepseek-harness` × 943
-- `dsh` × 689
-- `deepseek` × 244
-- `dsh-plugins` × 198
-- `cordis` × 190
+- `dsh-plugin` × 1568
+- `deepseek-harness` × 1177
+- `dsh` × 852
+- `deepseek` × 302
+- `cordis` × 231
+- `dsh-plugins` × 230
+- `plugin` × 160
 - `cordis-plugin` × 132
-- `plugin` × 128
 - `dsh-bundle` × 111
-- `dsh-plugin-market` × 82
-- `typescript` × 78
-- `ai-agents` × 69
+- `typescript` × 97
+- `dsh-plugin-market` × 95
+- `ai-agents` × 81
 
 ## 健康分（health-v1 · 客观启发式，非安全审计）
-- 分布：A 650 · B 594 · C 5 · D 0
-- 平均 87.6 · 中位 90
-- 最常见扣分：`manifest.no-client-export` 70.4% · `docs.zh-missing` 58.2% · `npm.unpublished` 48.6% · `manifest.not-lib-main` 43.6% · `npm.version-drift` 13.5% · `repo.no-license` 7.4% · `manifest.no-files-whitelist` 3.9% · `repo.no-dsh-topic` 2.8% · `activity.too-young` 0.3%
+- 分布：A 846 · B 796 · C 6 · D 0
+- 平均 87.5 · 中位 90
+- 最常见扣分：`manifest.no-client-export` 70.3% · `docs.zh-missing` 60.4% · `npm.unpublished` 49.9% · `manifest.not-lib-main` 43.9% · `npm.version-drift` 12.3% · `repo.no-license` 7.3% · `manifest.no-files-whitelist` 4% · `repo.no-dsh-topic` 2.3% · `activity.too-young` 0.2%
 
 ### 健康榜前 10
 | repo | ★ | 健康 |
@@ -64,11 +67,11 @@
 | liustack/modlens | 3868 | — | ✅ |
 | omdsh-dev/DSH-better-sidebar | 3339 | ✅ | ✅ |
 | dsh-market/dsh-market | 3196 | ✅ | ✅ |
+| ccch1mneyyy/dsh-TUI | 2838 | — | — |
 | ccch1mneyyy/dsh-TUI | 2837 | — | ✅ |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 1727 | ✅ | ✅ |
 | NanmiCoder/dsh-agent-teams | 1372 | — | ✅ |
 | bowenliang123/dsh-context | 1286 | ✅ | ✅ |
-| superdesigndev/treg | 1190 | — | — |
 
 ## npm 版本滞后榜（仓库新于发布）
 | repo | ★ | 仓库版本 → npm |
