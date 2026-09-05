@@ -26,8 +26,8 @@ function svg(label, value, color) {
   const lw = label.length * 6.5 + 12
   const vw = value.length * 6.5 + 12
   const w = lw + vw
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="20" role="img" aria-label="dsh plugin health">
-  <title>dsh plugin health: ${value}</title>
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="20" role="img" aria-label="plugin health">
+  <title>plugin health: ${value}</title>
   <linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient>
   <rect width="${w}" height="20" rx="3" fill="#555"/>
   <rect x="${lw}" width="${vw}" height="20" fill="${color}"/>

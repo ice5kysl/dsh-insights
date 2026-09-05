@@ -35,13 +35,13 @@ function main() {
   if (!p) { console.error(`plugin ${target} not in insights.json (not validated or rejected)`); process.exit(2) }
   const h = p.health || {}
   const color = COLOR[h.grade] || '#6b7280'
-  const label = 'dsh health'
+  const label = 'plugin health'
   const value = h.grade && h.score != null ? `${h.grade} · ${h.score}/100` : 'n/a'
   const lw = label.length * 6.5 + 12
   const vw = value.length * 6.5 + 12
   const w = lw + vw
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="20" role="img" aria-label="dsh plugin health">
-  <title>dsh plugin health: ${value}</title>
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="20" role="img" aria-label="plugin health">
+  <title>plugin health: ${value}</title>
   <linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient>
   <rect width="${w}" height="20" rx="3" fill="#555"/>
   <rect x="${lw}" width="${vw}" height="20" fill="${color}"/>
