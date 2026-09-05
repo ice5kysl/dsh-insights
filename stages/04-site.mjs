@@ -25,12 +25,6 @@ function main() {
   try { enrich = JSON.parse(readFileSync(join(ROOT, 'data', 'enrich.json'), 'utf8')) } catch { /* ok */ }
   const enMap = new Map(enrich.map((x) => [x.full_name, x]))
   const byStars = plugins.slice().sort((x, y) => (y.stars || 0) - (x.stars || 0))
-  const peersOf = (full) => {
-    const cat = enMap.get(full)?.category
-    if (!cat) return []
-    return byStars.filter((o) => o.full_name !== full && enMap.get(o.full_name)?.category === cat).slice(0, 5)
-      .map((o) => ({ repo: o.full_name, url: o.html_url, stars: o.stars }))
-  }
   const t = a.totals || {}
   const d = a.distribution || {}
   const pub = d.publish || {}
@@ -361,18 +355,20 @@ function ddRow(k,v){return '<tr><td>'+k+'</td><td>'+v+'</td></tr>'}
 function ddFlag(ok,l){return '<span class="flag"'+(ok?'':' style="opacity:.42"')+'><b>'+(ok?'✓':'·')+'</b> '+escA(l)+'</span>'}
 function loadHist(repo,d){
   var h=$('#dd-hist'); if(!h) return;
+  if(histCache[repo]){ h.innerHTML=histCache[repo]; return }
+  var done=function(html){ histCache[repo]=html; h.innerHTML=html };
   if(d.pkgName){
     fetch('https://registry.npmjs.org/'+encodeURIComponent(d.pkgName).replace(/%40/g,'@')).then(function(r){return r.ok?r.json():null}).then(function(doc){
       if(!doc||!doc.time){h.innerHTML='<div class="dim">无 npm 版本历史</div>';return}
       var vs=[];for(var k in doc.time){if(/^\d/.test(k))vs.push({v:k,t:(doc.time[k]||'').slice(0,10)})}
       vs.sort(function(a,b){return a.t<b.t?-1:a.t>b.t?1:0}).reverse();
-      h.innerHTML='<table class="dd-table">'+vs.slice(0,8).map(function(x){return ddRow('<span class="warn">'+escA(x.v)+'</span>',escA(x.t))}).join('')+'</table>'+(vs.length>8?'<div class="dim" style="font-size:11px;margin-top:4px">共 '+vs.length+' 个版本 · 最早 '+escA(vs[vs.length-1].t)+'</div>':'')
-    }).catch(function(){h.innerHTML='<div class="dim">版本历史不可用</div>'})
+      done('<table class="dd-table">'+vs.slice(0,8).map(function(x){return ddRow('<span class="warn">'+escA(x.v)+'</span>',escA(x.t))}).join('')+'</table>'+(vs.length>8?'<div class="dim" style="font-size:11px;margin-top:4px">共 '+vs.length+' 个版本 · 最早 '+escA(vs[vs.length-1].t)+'</div>':''));
+    }).catch(function(){done('<div class="dim">版本历史不可用</div>')})
   } else {
     fetch('https://api.github.com/repos/'+encodeURIComponent(repo)+'/releases?per_page=6').then(function(r){return r.ok?r.json():null}).then(function(rel){
-      if(!rel||!rel.length){h.innerHTML='<div class="dim">无 GitHub Release（或未发布 / 接口限流）</div>';return}
-      h.innerHTML='<table class="dd-table">'+rel.map(function(x){return ddRow(escA(x.tag_name||x.name),(x.published_at||'').slice(0,10))}).join('')+'</table>'
-    }).catch(function(){h.innerHTML='<div class="dim">Release 历史不可用</div>'})
+      if(!rel||!rel.length){done('<div class="dim">无 GitHub Release（或未发布 / 接口限流）</div>');return}
+      done('<table class="dd-table">'+rel.map(function(x){return ddRow(escA(x.tag_name||x.name),(x.published_at||'').slice(0,10))}).join('')+'</table>');
+    }).catch(function(){done('<div class="dim">Release 历史不可用</div>')})
   }
 }
 function openDrawer(repo){
@@ -391,10 +387,26 @@ function openDrawer(repo){
       +'<div class="dd-sec"><h3>npm</h3>'+npmHtml+'</div>'
       +flags
       +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='A'?'#0e9f6e':d.grade==='B'?'#2d66f7':d.grade==='C'?'#d97706':'#dc2626')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div></div>'
-  +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3>'+(d.peers&&d.peers.length?'<div>'+d.peers.map(function(p){return '<div class="peer"><a href="'+escA(p.url)+'" target="_blank">'+escA(p.repo)+'</a><span class="num">★ '+p.stars+'</span></div>'}).join('')+'</div>':'<div class="dim">暂无同类</div>')+'</div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
+  +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3><div id="dd-peers" class="loading">计算中…</div></div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
       +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
     loadHist(repo,d);
+    loadPeers(repo,d);
   })
+}
+var histCache={};
+var rowsBy=null;
+function rowsIndex(){ if(!rowsBy){ rowsBy={}; ROWS.forEach(function(r){ rowsBy[r[0]]=r }) } return rowsBy }
+var catsCache=null;
+function catsMap(){ if(!catsCache){ catsCache=fetch('plugins-cats.json').then(function(r){return r.ok?r.json():null}) } return catsCache }
+function loadPeers(repo,d){
+  var el=$('#dd-peers'); if(!el) return;
+  if(!d.category){ el.innerHTML='<div class="dim">暂无分类</div>'; return }
+  catsMap().then(function(cj){
+    var ri=rowsIndex(); var list=(cj&&cj.cats&&cj.cats[d.category])||[];
+    var peers=list.filter(function(x){return x!==repo}).map(function(x){var r=ri[x];return r?{repo:x,url:r[1],stars:r[2]}:null}).filter(Boolean)
+      .sort(function(a,b){return b.stars-a.stars}).slice(0,5);
+    el.innerHTML=peers.length?('<div>'+peers.map(function(pp){return '<div class="peer"><a href="'+escA(pp.url)+'" target="_blank">'+escA(pp.repo)+'</a><span class="num">★ '+pp.stars+'</span></div>'}).join('')+'</div>'):'<div class="dim">暂无同类</div>';
+  }).catch(function(){el.innerHTML='<div class="dim">同类加载失败</div>'})
 }
 function closeDrawer(){$('#drawer').classList.remove('on');$('#scrim').classList.remove('on');document.body.style.overflow=''}
 $('#dd-close').onclick=closeDrawer;$('#scrim').onclick=closeDrawer;
@@ -419,7 +431,7 @@ draw();
     source: r.source || '',
     license: r.license || null,
     topics: r.topics || [],
-    desc: (r.description || '').slice(0, 600),
+    desc: (r.description || '').slice(0, 300),
     pkgName: r.pkgName || null,
     version: r.version || null,
     dshPlatform: r.eval?.dshPlatform || null,
@@ -433,13 +445,15 @@ draw();
     score: enMap.get(r.full_name)?.score ?? null,
     grade: enMap.get(r.full_name)?.grade ?? null,
     category: enMap.get(r.full_name)?.category || null,
-    peers: peersOf(r.full_name),
     channels: { aw: enMap.get(r.full_name)?.inAwesome ? 1 : 0, im: enMap.get(r.full_name)?.inImsai ? 1 : 0 },
     weekly: enMap.get(r.full_name)?.weekly ?? null,
     npm: r.npm || { pub: false },
   }))
   writeFileSync(join(ROOT, 'site', 'plugins-detail.json'), JSON.stringify(detail))
-  console.log(`[site] ${plugins.length} rows → site/index.html (${(html.length / 1024).toFixed(0)} KB) + plugins-detail.json (${(JSON.stringify(detail).length / 1024).toFixed(0)} KB)`)
+  const cats = {}
+  for (const pl of byStars) { const cat = enMap.get(pl.full_name)?.category; if (cat) (cats[cat] ??= []).push(pl.full_name) }
+  writeFileSync(join(ROOT, 'site', 'plugins-cats.json'), JSON.stringify({ generatedAt: new Date().toISOString(), cats }) + '\n')
+  console.log(`[site] ${plugins.length} rows → site/index.html (${(html.length / 1024).toFixed(0)} KB) + plugins-detail.json (${(JSON.stringify(detail).length / 1024).toFixed(0)} KB) + plugins-cats.json (${(JSON.stringify(cats).length / 1024).toFixed(0)} KB)`)
 }
 
 main()
