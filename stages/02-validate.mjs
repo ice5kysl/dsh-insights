@@ -57,27 +57,55 @@ async function validateOne(c) {
   if (c.fork) return { ok: false, reason: 'fork' }
   if (c.archived) return { ok: false, reason: 'archived' }
 
-  const metaR = await ghApi(`/repos/${c.owner}/${c.name}`)
-  if (!metaR.ok) return { ok: false, reason: metaR.status === 404 ? 'repo-gone' : `repo-http${metaR.status}` }
-  const m = metaR.body
-  if (m.fork) return { ok: false, reason: 'fork' }
-  if (m.archived) return { ok: false, reason: 'archived' }
-  const branch = m.default_branch || 'main'
+  // ---- cost-optimised: probe the default branch tree BEFORE the meta call.
+  // Search candidates already carry stars/dates/topics; we only need a branch
+  // to read files. Meta is fetched only when fields are missing or probing
+  // fails (renamed/deleted repo, npm-mapped rows).
+  const needMeta = !(c.created_at && c.pushed_at) || !c.html_url
+  let branch = c.default_branch || null
+  let tree = null
+  if (!needMeta) {
+    for (const b of [branch, 'main', 'master'].filter(Boolean)) {
+      const t = await repoTreeFiles(c.owner, c.name, b)
+      if (t) { tree = t; branch = b; break }
+    }
+    if (!tree && !branch) { /* probing failed on candidate-supplied names */ }
+  }
+
+  let m = null
+  if (!tree || needMeta) {
+    const metaR = await ghApi(`/repos/${c.owner}/${c.name}`)
+    if (!metaR.ok) return { ok: false, reason: metaR.status === 404 ? 'repo-gone' : `repo-http${metaR.status}` }
+    m = metaR.body
+    if (m.fork) return { ok: false, reason: 'fork' }
+    if (m.archived) return { ok: false, reason: 'archived' }
+    branch = m.default_branch || branch || 'main'
+    if (!tree) tree = await repoTreeFiles(c.owner, c.name, branch)
+    if (!tree) return { ok: false, reason: 'tree-failed', record: { owner: c.owner, repo: c.name } }
+  }
+
+  const meta = m || {
+    full_name: `${c.owner}/${c.name}`,
+    html_url: c.html_url || `https://github.com/${c.owner}/${c.name}`,
+    stargazers_count: c.stars ?? 0, forks_count: c.forks ?? 0,
+    created_at: c.created_at, pushed_at: c.pushed_at,
+    topics: c.topics || [], description: c.description || '',
+    license: c.license ?? null,
+  }
   const record = {
     kind: 'repo', owner: c.owner, repo: c.name,
-    full_name: m.full_name,
-    html_url: m.html_url || `https://github.com/${m.full_name}`,
-    stars: m.stargazers_count ?? 0, forks: m.forks_count ?? 0,
-    created_at: m.created_at, pushed_at: m.pushed_at,
+    full_name: meta.full_name || `${c.owner}/${c.name}`,
+    html_url: meta.html_url || `https://github.com/${meta.full_name}`,
+    stars: meta.stargazers_count ?? 0, forks: meta.forks_count ?? 0,
+    created_at: meta.created_at, pushed_at: meta.pushed_at,
     archived: false, fork: false,
     default_branch: branch,
-    topics: m.topics || [],
-    description: m.description || '',
-    license: m.license?.spdx_id || null,
+    topics: meta.topics || [],
+    description: meta.description || '',
+    license: meta.license?.spdx_id ?? meta.license ?? null,
     source: c.source || null,
   }
 
-  const tree = await repoTreeFiles(record.owner, record.repo, branch)
   const hasFile = (p) => tree ? tree.has(p) : null
   record.files = {
     tree: Boolean(tree),
@@ -88,7 +116,6 @@ async function validateOne(c) {
     readmeZh: hasFile('README.zh-CN.md'),
     license: hasFile('LICENSE'),
   }
-  if (!tree) return { ok: false, reason: 'tree-failed', record }
 
   const pkgRaw = await ghContents(record.owner, record.repo, 'package.json', branch)
   if (!pkgRaw) return { ok: false, reason: 'no-package.json', record }
