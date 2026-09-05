@@ -32,7 +32,7 @@ Resumable: `data/state/done.ids` keeps progress; re-running continues where it s
 ## Status
 
 - [x] pipeline scaffold + pilot run (discover 3125 raw → validate first 25 → report+site)
-- [ ] full validation of all repo candidates (resumable; budget-paced)
+- [~] full validation of all repo candidates in progress (resumable; ~2889 repo candidates, batch 900 running; CONCURRENCY+resume ready)
 - [ ] npm candidates → repo mapping
 - [ ] limited deep checks (read-only-surface / sanitizers) on top/self plugins
 - [ ] final snapshot commit + CI daily refresh template
