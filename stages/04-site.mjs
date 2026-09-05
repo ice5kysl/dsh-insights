@@ -102,6 +102,13 @@ function main() {
   const weeksHtml = wkArr.map(([k, c]) =>
     '<div class="mbar"><span class="mbar-l">' + k.slice(5) + '</span><div class="mbar-t"><div class="mbar-f" style="width:' + Math.max(2, Math.round((c / wkMax) * 100)) + '%"></div></div><span class="mbar-v">' + c + '</span></div>').join('')
 
+  const topPickHtml = (a.categories || []).slice(0, 6).map((c) => {
+    const pick = byStars.find((p) => enMap.get(p.full_name)?.category === c.category)
+    if (!pick) return ''
+    const g = enMap.get(pick.full_name)?.grade || ''
+    return '<tr data-repo="' + esc(pick.full_name) + '"><td class="lnk"><a href="' + esc(pick.html_url || '') + '" target="_blank">' + esc(pick.full_name) + '</a></td><td class="dim">' + esc(c.category) + '</td><td class="num">★ ' + (pick.stars || 0) + '</td><td class="num"><span class="grade ' + esc(g) + '">' + esc(g) + '</span></td></tr>'
+  }).join('')
+
   const date = (a.generatedAt || '').slice(0, 10)
 
   const html = `<!doctype html>
@@ -212,7 +219,32 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
 .qualbar{height:8px;border-radius:6px;background:#eef1f6;margin-top:10px;overflow:hidden}
 .qualbar i{display:block;height:100%;background:linear-gradient(90deg,#2d66f7,#0e9f6e)}
 @media(prefers-color-scheme:dark){.g{background:#1b2a55;color:#93b4ff}.qualbar{background:#1c2a44}}
-</style>
+
+/* ---- left rail app shell ---- */
+body{margin-left:0}
+.rail{position:fixed;left:0;top:60px;bottom:0;width:172px;background:var(--card);border-right:1px solid var(--line);z-index:30;padding:10px 8px;overflow:auto}
+.rail .rl{font-size:11px;color:var(--mut);padding:10px 10px 4px;letter-spacing:.08em;text-transform:uppercase}
+.rail button{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;margin:2px 0;border:none;background:transparent;border-radius:9px;cursor:pointer;font-size:13.5px;color:var(--ink);text-align:left}
+.rail button:hover{background:#eef2ff}
+.rail button.on{background:#eef2ff;color:var(--brand);font-weight:700}
+.rail .ico{width:18px;text-align:center;flex:none}
+.main-shell{margin-left:172px;padding:0 18px}
+.view{display:none}
+.view.on{display:block;animation:fade .18s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+.vhead{margin:16px 0 4px;font-size:13px;color:var(--mut)}
+.vhead b{color:var(--ink);font-size:15px}
+@media (max-width:900px){.rail{position:static;width:100%;top:auto;display:flex;gap:4px;overflow-x:auto;padding:6px 8px;height:auto}.rail button{width:auto;flex:1 0 auto;padding:7px 10px}.main-shell{margin-left:0;padding:0 12px}}
+/* table alignment */
+.ptable th,.ptable td{vertical-align:top}
+.ptable th.num,.ptable td.num{text-align:right;font-variant-numeric:tabular-nums}
+.ptable th:first-child,.ptable td:first-child{white-space:nowrap}
+.ptable td.desc{max-width:300px}
+.grade{display:inline-block;min-width:22px;text-align:center;font-weight:800;border-radius:6px;padding:1px 7px;font-size:11.5px;cursor:default}
+.grade.A{background:#e7f6ef;color:#0e9f6e}.grade.B{background:#eef2ff;color:#2d66f7}.grade.C{background:#fdf1e3;color:#d97706}.grade.D{background:#fdeaea;color:#dc2626}
+.score li{margin:3px 0;font-size:12px;display:flex;justify-content:space-between;gap:10px}
+.score b{color:var(--brand);font-variant-numeric:tabular-nums}
+
 </head>
 <body>
 <div class="topbar"><div class="wrap">
@@ -281,6 +313,10 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
       <table><thead><tr><th>仓库</th><th style="text-align:right">★</th><th>npm</th><th>中/双语</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
 
+    <div class="panel span-6" id="scenario">
+      <h2>场景推荐 · 各分类首选</h2><p class="sub">每个功能分类里质量/活跃度最高的插件（点击打开详情）</p>
+      <table class="ptable"><thead><tr><th>推荐</th><th>场景</th><th class="num">★</th><th class="num">质量</th></tr></thead><tbody>${topPickHtml || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+    </div>
     <div class="panel span-12" id="suggested">
       <h2>优质未收录 · 建议收录</h2><p class="sub">A/B 级、已发布 npm、尚未进入 awesome/imsai 列表（按质量分）· Top 10</p>
       <table><thead><tr><th>仓库</th><th style="text-align:right">质量</th><th style="text-align:right">★</th><th>npm / 周下载</th></tr></thead><tbody>
@@ -294,6 +330,7 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
         <input id="q" placeholder="搜索仓库名 / 描述…" autocomplete="off">
         <button class="chip on" data-npm="">全部 npm</button><button class="chip" data-npm="pub">已发布</button><button class="chip" data-npm="unpub">未发布</button><button class="chip" data-npm="stale">版本滞后</button>
         <button class="chip" data-zh="0">中/双语</button>
+        <button class="chip gchip" data-gr="A">A</button><button class="chip gchip" data-gr="B">B</button><button class="chip gchip" data-gr="C">C</button><button class="chip gchip" data-gr="D">D</button>
         <button class="chip" data-active="1">近 30 天活跃</button>
       </div>
       <div style="overflow:auto;max-height:560px">
@@ -327,12 +364,12 @@ footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-c
 <script>
 const ROWS=${dataJson};
 const $=s=>document.querySelector(s);
-let q='',npm='',zh='',act='',sort=-1,desc=false,page=0,PAGE=120;
+let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
 function filtered(){
   let r=ROWS;
   if(q){const t=q.toLowerCase();r=r.filter(x=>(x[0]+' '+x[8]).toLowerCase().includes(t))}
   if(npm==='pub')r=r.filter(x=>x[4]);if(npm==='unpub')r=r.filter(x=>!x[4]);if(npm==='stale')r=r.filter(x=>x[4]);
-  if(zh==='1')r=r.filter(x=>x[5]);if(act==='1')r=r.filter(x=>x[7]);
+  if(zh==='1')r=r.filter(x=>x[5]);if(act==='1')r=r.filter(x=>x[7]);if(gr)r=r.filter(x=>x[9]===gr);
   if(sort>=0){r=r.slice().sort((a,b)=>{const va=a[sort],vb=b[sort];const c=typeof va==='number'&&typeof vb==='number'?va-vb:String(va).localeCompare(String(vb));return desc?-c:c})}
   return r;
 }
@@ -350,6 +387,7 @@ document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
   if(c.dataset.npm!==undefined){npm=c.dataset.npm;document.querySelectorAll('[data-npm]').forEach(x=>x.classList.toggle('on',x===c))}
   if(c.dataset.zh!==undefined){zh=(zh==='1'?'':'1');document.querySelectorAll('[data-zh]').forEach(x=>x.classList.toggle('on',zh==='1'))}
   if(c.dataset.active!==undefined){act=(act==='1'?'':'1');c.classList.toggle('on',act==='1')}
+  if(c.dataset.gr!==undefined){gr=(gr===c.dataset.gr?'':c.dataset.gr);document.querySelectorAll('.gchip').forEach(x=>x.classList.toggle('on',x===c&&gr))}
   page=0;draw();
 }));
 document.querySelectorAll('.ptable th[data-k]').forEach(th=>th.addEventListener('click',()=>{const k=+th.dataset.k;if(sort===k)desc=!desc;else{sort=k;desc=false}page=0;draw()}));
@@ -401,6 +439,7 @@ function openDrawer(repo){
   +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3><div id="dd-peers" class="loading">计算中…</div></div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
       +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
     loadHist(repo,d);
+    if(d.parts&&d.parts.length){ var li=d.parts.map(function(p){return '<li><span>'+escA(p.label)+'</span><b>+'+escA(p.v)+'</b></li>'}).join(''); b.insertAdjacentHTML('beforeend','<div class="dd-sec"><h3>打分明细</h3><ul class="score" style="margin:0;padding:0;list-style:none">'+li+'</ul><div class="dim" style="font-size:11px;margin-top:6px">基分 25 + 加分项（A≥90 · B≥72 · C≥52）。未列出的能力项表示未达标/未加分。</div></div>') }
     loadPeers(repo,d);
   })
 }
@@ -423,8 +462,38 @@ function closeDrawer(){$('#drawer').classList.remove('on');$('#scrim').classList
 $('#dd-close').onclick=closeDrawer;$('#scrim').onclick=closeDrawer;
 document.addEventListener('keydown',function(ev){if(ev.key==='Escape')closeDrawer()});
 $('#tb').addEventListener('click',function(ev){ if(ev.target.closest('a'))return; var tr=ev.target.closest('tr[data-repo]'); if(tr)openDrawer(tr.getAttribute('data-repo')) });
+function repoOfTr(tr){ var a=tr.querySelector('a'); if(!a)return null; var m=a.getAttribute('href'); if(m&&m.indexOf('github.com/')>0)return m.split('github.com/')[1].replace(/\/$/,''); return null }
+document.addEventListener('click',function(ev){ var tr=ev.target.closest('tr'); if(!tr||tr.closest('#tb'))return; if(ev.target.closest('a'))return; var rp=tr.getAttribute('data-repo')||repoOfTr(tr); if(rp)openDrawer(rp) });
 
 draw();
+(function bootViews(){
+  var pages=[['overview','总览','⌂'],['rank','榜单','★'],['scenario','场景推荐','✦'],['suggest','收录建议','＋'],['browse','插件库','☰']];
+  var cw=document.querySelector('.wrap .kpis').parentElement;
+  var desktop=matchMedia('(min-width:901px)').matches;
+  if(desktop) cw.style.marginLeft='172px';
+  function applyMargin(m){ if(m){cw.style.marginLeft='172px'}else{cw.style.marginLeft='0'} }
+  matchMedia('(min-width:901px)').addEventListener('change',function(ev){ applyMargin(ev.matches) });
+  var rail=document.createElement('aside'); rail.className='rail'; rail.id='rail';
+  rail.innerHTML='<div class="rl">导航</div>'+pages.map(function(p){return '<button data-v="'+p[0]+'"><span class="ico">'+p[2]+'</span>'+p[1]+'</button>'}).join('');
+  cw.parentNode.insertBefore(rail,cw);
+  function pgOf(t){ if(/新增|发布分布|文档覆盖|Top topics|质量分级|功能分类|场景推荐/.test(t))return 'overview'; if(/版本滞后|Star 榜|下载/.test(t))return 'rank'; if(/各分类首选|场景/.test(t))return 'scenario'; if(/优质未收录/.test(t))return 'suggest'; if(/全量插件表/.test(t))return 'browse'; return 'overview' }
+  var views={};
+  pages.forEach(function(p){ var v=document.createElement('section'); v.className='view'; v.id='v-'+p[0]; v.innerHTML='<div class="vhead"><b>'+p[1]+'</b></div>'; cw.appendChild(v); views[p[0]]=v; });
+  var kpis=document.querySelector('.kpis');
+  var grid=document.querySelector('.grid');
+  if(kpis) views.overview.appendChild(kpis);
+  if(grid){
+    Array.prototype.slice.call(grid.children).forEach(function(pan){
+      var h=pan.querySelector('h2'); var pg=pgOf(h?h.textContent:''); var vv=views[pg];
+      var g=vv.querySelector('.grid'); if(!g){ g=document.createElement('div'); g.className='grid'; vv.appendChild(g) }
+      g.appendChild(pan);
+    });
+    grid.remove();
+  }
+  function show(id){ pages.forEach(function(p){ var v=document.getElementById('v-'+p[0]); if(v)v.classList.toggle('on',p[0]===id) }); document.querySelectorAll('.rail button').forEach(function(b){ b.classList.toggle('on',b.dataset.v===id) }); window.scrollTo(0,0) }
+  document.querySelectorAll('.rail button').forEach(function(b){ b.addEventListener('click',function(){ show(b.dataset.v) }) });
+  show('overview');
+})();
 </script>
 </body>
 </html>`
@@ -459,6 +528,7 @@ draw();
     channels: { aw: enMap.get(r.full_name)?.inAwesome ? 1 : 0, im: enMap.get(r.full_name)?.inImsai ? 1 : 0 },
     weekly: enMap.get(r.full_name)?.weekly ?? null,
     llm: llmMap.get(r.full_name) ?? null,
+    parts: enMap.get(r.full_name)?.parts || [],
     npm: r.npm || { pub: false },
   }))
   writeFileSync(join(ROOT, 'site', 'plugins-detail.json'), JSON.stringify(detail))
