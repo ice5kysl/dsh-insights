@@ -31,6 +31,18 @@ function main() {
   }))
   const dataJson = JSON.stringify(rows).replace(/</g, '\\u003c')
 
+  const months = Object.entries(analysis.totals?.byMonth || {}).sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).slice(-10)
+  const maxMonth = Math.max(1, ...months.map(([, c]) => c))
+  let monthsHtml = ''
+  if (months.length) {
+    monthsHtml = '<h2>月度新增（权威集 · 按仓库创建）</h2><div style="margin:8px 0">'
+    for (const [m, c] of months) {
+      const w = Math.max(1, Math.round((c / maxMonth) * 100))
+      monthsHtml += `<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><span style="width:64px;color:var(--mut)">${m}</span><div style="height:14px;background:var(--brand);border-radius:4px;width:${w}%"></div><span style="color:var(--mut);font-size:12px">${c}</span></div>\n`
+    }
+    monthsHtml += '</div>'
+  }
+
   const totals = analysis.totals || {}
   const dist = analysis.distribution || {}
   const html = `<!doctype html>
@@ -58,6 +70,7 @@ a{color:var(--brand);text-decoration:none}
 <div class="card"><b>${dist.lib?.both ?? 0}</b><span>host+client 双产物</span></div>
 <div class="card"><b>${totals.active30Pct ?? 0}%</b><span>近30天活跃</span></div>
 </div>
+${monthsHtml}
 <h2>插件列表（可搜索）</h2>
 <input id="q" placeholder="过滤：名称 / 描述 / 是否发布…">
 <table><thead><tr><th>repo</th><th>★</th><th>npm</th><th>中文/双语</th><th>lib 双产物</th><th>近30天活跃</th><th>描述</th><th>创建</th></tr></thead><tbody id="tb"></tbody></table>
