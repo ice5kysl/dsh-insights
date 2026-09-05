@@ -162,25 +162,6 @@ async function main() {
     }
   }
   await Promise.all(Array.from({ length: conc }, worker))
-    if (LIMIT && processed >= LIMIT) break
-    processed++
-    try {
-      const res = await validateOne(c)
-      const row = res.record || { owner: c.owner, repo: c.name, source: c.source || null }
-      if (res.ok) {
-        appendFileSync(PLUGINS, JSON.stringify({ valid: true, checkedAt: new Date().toISOString(), ...row }) + '\n')
-        valid++
-      } else {
-        appendFileSync(INVALID, JSON.stringify({ valid: false, reason: res.reason, checkedAt: new Date().toISOString(), ...row }) + '\n')
-      }
-      appendFileSync(STATE, c.id + '\n')
-      done.add(c.id)
-    } catch (e) {
-      transient++
-      console.error(`[validate] transient ${c.id}: ${e?.message}`)
-      if (transient % 10 === 0) await sleep(5000)
-    }
-  }
   console.log(`[validate] processed ${processed} this run (${valid} valid, ${transient} transient) · total done ${done.size} · remaining ${repos.length - processed}`)
 }
 
