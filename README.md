@@ -39,6 +39,7 @@ Resumable: `data/state/done.ids` keeps progress; re-running continues where it s
 | `data/downloads.json` | npm last-week downloads (CI) |
 | `data/llm.jsonl` | LLM capability tagging (category/tags/summary/claims) |
 | `data/prev-plugin-ids.json` / `last-diff.md` | snapshot diff baseline / latest diff |
+| `data/reports/*.md` | per-plugin 体检/改进报告（Stage 17） |
 | `site/index.html` + `plugins-detail.json` + `plugins-cats.json` | dashboard + per-plugin detail drawer data |
 
 ## Stage 地图
@@ -49,6 +50,7 @@ Resumable: `data/state/done.ids` keeps progress; re-running continues where it s
 01b-npm-map   npm 包→仓库映射                        08-score     评分              11-enrich-compat 兼容富化
 02-validate   真伪校验→权威集/分桶(断点续跑)          12-badges    徽章              13-history  历史趋势
 03-analyze    聚合+质量/分类/渠道(→enrich/analysis)   14-overlap   同质/重叠         15-llm-tags LLM 能力标注
+17-report    每插件体检/改进报告
 04-site       静态仪表盘+抽屉                         16-scenarios 场景分析
 05-export     CSV
 06-deep       限量深检(克隆/写面/消毒)

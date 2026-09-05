@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 /**
- * Stage 4 — generate the professional static analysis dashboard (site/index.html).
+ * Stage 4 — generate the static analysis dashboard (site/index.html).
  *
- * Self-contained (no external assets): KPI cards, charts (donut/bars), npm
- * drift & star leader panels, and a sortable/filterable/paginated plugin
- * table — all computed server-side from data/analysis.json + data/plugins.jsonl.
+ * Self-contained (no external assets). Single-page narrative layout:
+ * hero stat → 生态趋势 (weekly area chart) → 质量 → 榜单 → 插件库 (full
+ * table with search / filter / column toggles / URL-hash shareable state)
+ * → per-plugin detail drawer. All data computed from data/analysis.json +
+ * data/plugins.jsonl + data/enrich.json + data/llm.jsonl.
  *
  * @module dsh-plugin-insights/stage-4
  */
@@ -33,7 +35,6 @@ function main() {
   const pub = d.publish || {}
   const doc = d.docs || {}
   const lib = d.lib || {}
-  const months = Object.entries(t.byMonth || {}).sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).slice(-12)
 
   // ---- compact rows for the table -------------------------------------
   const rows = plugins.map((r) => [
@@ -45,11 +46,40 @@ function main() {
   ])
   const dataJson = JSON.stringify(rows).replace(/</g, '\\u003c')
 
-  // ---- helpers for charts ----------------------------------------------
-  const maxM = Math.max(1, ...months.map(([, c]) => c))
-  const monthBars = months.map(([m, c]) =>
-    `<div class="mbar"><span class="mbar-l">${m}</span><div class="mbar-t"><div class="mbar-f" style="width:${Math.max(2, Math.round((c / maxM) * 100))}%"></div></div><span class="mbar-v">${c}</span></div>`).join('')
+  // ---- weekly area chart (inline SVG, hover handled client-side) ------
+  const wkArr = Object.entries(t.byWeek || {}).sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).slice(-20)
+  const wkMax = Math.max(1, ...wkArr.map(([, c]) => c))
+  const CW = 960, CH = 200, PT = 12, PR = 6, PB = 26, PL = 34
+  const iw = CW - PL - PR, ih = CH - PT - PB
+  const wkPts = wkArr.map(([k, c], i) => ({
+    k: k.slice(5), c,
+    x: +(PL + (wkArr.length > 1 ? (i / (wkArr.length - 1)) * iw : iw / 2)).toFixed(1),
+    y: +(PT + ih - (c / wkMax) * ih).toFixed(1),
+  }))
+  const linePath = wkPts.map((p, i) => (i ? 'L' : 'M') + p.x + ' ' + p.y).join(' ')
+  const areaPath = wkPts.length ? linePath + ' L' + wkPts[wkPts.length - 1].x + ' ' + (PT + ih) + ' L' + wkPts[0].x + ' ' + (PT + ih) + ' Z' : ''
+  const gridLines = [0, 1, 2, 3].map((i) => {
+    const y = PT + (ih * i) / 3
+    const v = Math.round(wkMax * (1 - i / 3))
+    return '<line x1="' + PL + '" y1="' + y + '" x2="' + (CW - PR) + '" y2="' + y + '" class="grid"/>' +
+      '<text x="' + (PL - 6) + '" y="' + (y + 3) + '" class="gly">' + v + '</text>'
+  }).join('')
+  const xLabels = wkPts.length
+    ? [wkPts[0], wkPts[Math.floor(wkPts.length / 2)], wkPts[wkPts.length - 1]]
+        .map((p) => '<text x="' + p.x + '" y="' + (CH - 8) + '" class="glx" text-anchor="middle">' + p.k + '</text>').join('')
+    : ''
+  const areaSvg = wkPts.length
+    ? '<svg viewBox="0 0 ' + CW + ' ' + CH + '" style="width:100%;height:auto;display:block">' +
+      gridLines + xLabels +
+      '<path d="' + areaPath + '" class="area"/>' +
+      '<path d="' + linePath + '" class="line"/>' +
+      '<circle id="ch-dot" r="3.5" class="dot" style="display:none"/>' +
+      '<line id="ch-x" class="cross" style="display:none" y1="' + PT + '" y2="' + (PT + ih) + '"/>' +
+      '</svg>'
+    : '<div class="dim">数据积累中…</div>'
+  const lastWeek = wkArr.length ? wkArr[wkArr.length - 1][1] : 0
 
+  // ---- donuts ----------------------------------------------------------
   const donut = (parts, size = 118, sw = 21) => {
     const r = (size - sw) / 2
     const circ = 2 * Math.PI * r
@@ -63,53 +93,45 @@ function main() {
     }).join('')
     return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="flex:none">${segs}<circle cx="${size / 2}" cy="${size / 2}" r="${r * 0.72}" fill="var(--card)"/></svg>`
   }
-  const donutPublish = donut([{ v: pub.published, c: '#2d66f7' }, { v: pub.unpublished, c: '#e2e8f0' }])
+  const donutPublish = donut([{ v: pub.published, c: 'var(--ink)' }, { v: pub.unpublished, c: 'var(--track2)' }])
   const donutDocs = donut([
-    { v: doc.both, c: '#0e9f6e' },
-    { v: Math.max(0, doc.zh - doc.both), c: '#0ea5e9' },
-    { v: Math.max(0, doc.readme - doc.zh), c: '#94a3b8' },
-    { v: doc.none, c: '#e2e8f0' },
+    { v: doc.both, c: '#18181b' },
+    { v: Math.max(0, doc.zh - doc.both), c: '#52525b' },
+    { v: Math.max(0, doc.readme - doc.zh), c: '#a1a1aa' },
+    { v: doc.none, c: '#e4e4e7' },
   ])
 
-  const topicBars = (a.topTopics || []).slice(0, 8).map((x) => {
-    const w = Math.max(3, Math.round((x.count / ((a.topTopics || [])[0]?.count || 1)) * 100))
-    return `<div class="hbar"><span class="hbar-l" title="${esc(x.topic)}">${esc(x.topic)}</span><div class="hbar-t"><div class="hbar-f" style="width:${w}%"></div></div><span class="hbar-v">${x.count}</span></div>`
-  }).join('')
+  const bar = (label, count, max, color, title) =>
+    '<div class="hbar"><span class="hbar-l"' + (title ? ' title="' + esc(title) + '"' : '') + '>' + esc(label) + '</span>' +
+    '<div class="hbar-t"><div class="hbar-f" style="width:' + Math.max(2, Math.round((count / Math.max(1, max)) * 100)) + '%' + (color ? ';background:' + color : '') + '"></div></div>' +
+    '<span class="hbar-v">' + count + '</span></div>'
+
+  const topicBars = (a.topTopics || []).slice(0, 8).map((x) => bar(x.topic, x.count, (a.topTopics || [])[0]?.count || 1, null, x.topic)).join('')
+
+  const gCol = { A: 'var(--ok)', B: 'var(--accent)', C: 'var(--warn)', D: 'var(--err)' }
+  const gMax = Math.max(1, ...Object.keys(gCol).map((k) => a.quality?.grades?.[k] || 0))
+  const gradesHtml = Object.keys(gCol).map((k) => bar(k, a.quality?.grades?.[k] || 0, gMax, gCol[k])).join('')
+  const catsMax = Math.max(1, ...(a.categories || []).map((x) => x.count))
+  const catsHtml = (a.categories || []).slice(0, 8).map((x) => bar(x.category, x.count, catsMax, null, x.category)).join('')
 
   const staleRows = (a.npmStaleTop || []).map((s2) =>
-    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num">${s2.stars}</td><td class="num warn">${s2.repoVersion} → ${s2.npmLatest}</td></tr>`).join('')
+    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${s2.repoVersion} → ${s2.npmLatest}</td></tr>`).join('')
   const starRows = (a.topByStars || []).map((s2) =>
-    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num">★ ${s2.stars}</td><td class="ok">${s2.published ? 'npm ✓' : '—'}</td><td class="ok">${s2.zh ? '中/双语 ✓' : '—'}</td></tr>`).join('')
-
-  const kpi = (v, l, sub = '') => `<div class="kpi"><div class="kpi-v">${v}</div><div class="kpi-l">${l}</div>${sub ? `<div class="kpi-s">${sub}</div>` : ''}</div>`
-
-
-  const gCol = { A: '#0e9f6e', B: '#2d66f7', C: '#d97706', D: '#dc2626' }
-  const gMax = Math.max(1, ...Object.keys(gCol).map((k) => a.quality?.grades?.[k] || 0))
-  const gradesHtml = Object.keys(gCol).map((k) => {
-    const c = a.quality?.grades?.[k] || 0
-    return '<div class="hbar"><span class="hbar-l">' + k + '</span><div class="hbar-t"><div class="hbar-f" style="width:' + Math.max(2, Math.round((c / gMax) * 100)) + '%;background:' + gCol[k] + '"></div></div><span class="hbar-v">' + c + '</span></div>'
-  }).join('')
-  const catsMax = Math.max(1, ...(a.categories || []).map((x) => x.count))
-  const catsHtml = (a.categories || []).slice(0, 8).map((x) =>
-    '<div class="hbar"><span class="hbar-l" title="' + esc(x.category) + '">' + esc(x.category) + '</span><div class="hbar-t"><div class="hbar-f" style="width:' + Math.max(2, Math.round((x.count / catsMax) * 100)) + '%"></div></div><span class="hbar-v">' + x.count + '</span></div>').join('')
+    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td>${s2.published ? '<span class="ok">npm ✓</span>' : '<span class="dim">—</span>'}</td><td>${s2.zh ? '<span class="ok">中/双语 ✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
-    '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num g g-' + esc(e.grade) + '">' + esc(e.grade) + '</td><td class="num">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('') || ''
-
-
-  const wkArr = Object.entries(t.byWeek || {}).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)).slice(-18)
-  const wkMax = Math.max(1, ...wkArr.map(([, c]) => c))
-  const weeksHtml = wkArr.map(([k, c]) =>
-    '<div class="mbar"><span class="mbar-l">' + k.slice(5) + '</span><div class="mbar-t"><div class="mbar-f" style="width:' + Math.max(2, Math.round((c / wkMax) * 100)) + '%"></div></div><span class="mbar-v">' + c + '</span></div>').join('')
+    '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num"><span class="grade ' + esc(e.grade) + '">' + esc(e.grade) + '</span></td><td class="num mono">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('')
 
   const topPickHtml = (a.categories || []).slice(0, 6).map((c) => {
     const pick = byStars.find((p) => enMap.get(p.full_name)?.category === c.category)
     if (!pick) return ''
     const g = enMap.get(pick.full_name)?.grade || ''
-    return '<tr data-repo="' + esc(pick.full_name) + '"><td class="lnk"><a href="' + esc(pick.html_url || '') + '" target="_blank">' + esc(pick.full_name) + '</a></td><td class="dim">' + esc(c.category) + '</td><td class="num">★ ' + (pick.stars || 0) + '</td><td class="num"><span class="grade ' + esc(g) + '">' + esc(g) + '</span></td></tr>'
+    return '<tr data-repo="' + esc(pick.full_name) + '"><td><a href="' + esc(pick.html_url || '') + '" target="_blank">' + esc(pick.full_name) + '</a></td><td class="dim">' + esc(c.category) + '</td><td class="num mono">★ ' + (pick.stars || 0) + '</td><td class="num"><span class="grade ' + esc(g) + '">' + esc(g) + '</span></td></tr>'
   }).join('')
 
   const date = (a.generatedAt || '').slice(0, 10)
+
+  const stat = (v, l, sub) =>
+    '<div class="stat"><b class="mono">' + v + '</b><span>' + l + '</span>' + (sub ? '<small>' + sub + '</small>' : '') + '</div>'
 
   const html = `<!doctype html>
 <html lang="zh-CN">
@@ -120,252 +142,347 @@ function main() {
 <meta name="description" content="DeepSeek Harness (dsh) 插件生态全量索引、评估与分析仪表盘">
 <style>
 :root{
-  --bg:#f5f6fa;--card:#ffffff;--ink:#0f172a;--mut:#64748b;--line:#e6e9f0;--brand:#2d66f7;
-  --shadow:0 1px 2px rgba(15,23,42,.04),0 10px 30px -14px rgba(15,23,42,.14)
+  --bg:#fafafa;--card:#ffffff;--ink:#18181b;--mut:#71717a;--faint:#a1a1aa;--line:#e4e4e7;--track:#f4f4f5;--track2:#e4e4e7;
+  --accent:#2563eb;--ok:#059669;--warn:#d97706;--err:#dc2626;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.16,1,.3,1)
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#09090b;--card:#101012;--ink:#f4f4f5;--mut:#a1a1aa;--faint:#71717a;--line:#26262a;--track:#17171a;--track2:#27272a;--accent:#60a5fa}
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
-a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
-.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
-.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
-.brand .dot{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#2d66f7,#7c3aed);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:800}
-.brand small{color:var(--mut);font-weight:500;font-size:12px}
-.nav a{color:var(--mut);margin-left:16px;font-size:13px}
-.hero{background:linear-gradient(135deg,#15215e,#2d66f7 60%,#6d3fd1);color:#fff;padding:34px 0 30px}
-.hero h1{margin:0 0 6px;font-size:25px;letter-spacing:.2px}
-.hero p{margin:0;opacity:.86;font-size:14px}
-.hero .meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:20px;font-size:12.5px;opacity:.94}
-.hero .meta b{font-weight:700}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:20px 0 0}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
-.kpi-v{font-size:23px;font-weight:800;letter-spacing:-.3px;color:var(--brand)}
-.kpi-l{font-weight:600;font-size:13px;margin-top:2px}
-.kpi-s{color:var(--mut);font-size:11.5px}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px}
-.panel h2{margin:0 0 4px;font-size:15px;font-weight:700}
-.panel .sub{color:var(--mut);font-size:12px;margin:0 0 12px}
-.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}.span-12{grid-column:span 12}
-.mbar,.hbar{display:flex;align-items:center;gap:8px;margin:6px 0}
-.mbar-l,.hbar-l{width:62px;flex:none;color:var(--mut);font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mbar-t,.hbar-t{flex:1;background:#eef1f6;border-radius:6px;height:12px;overflow:hidden}
-.mbar-f{height:100%;border-radius:6px;background:linear-gradient(90deg,#2d66f7,#7c3aed)}
-.hbar-f{height:100%;border-radius:6px;background:linear-gradient(90deg,#0ea5e9,#2d66f7)}
-.mbar-v,.hbar-v{width:40px;text-align:right;font-weight:600;font-size:12px;flex:none}
-.legend{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--mut)}
-.legend b{color:var(--ink)}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-.donutwrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-table{width:100%;border-collapse:collapse;font-size:12.5px}
-.ptable th,.ptable td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
-.ptable th{color:var(--mut);font-weight:600;cursor:pointer;user-select:none;background:var(--card)}
-.ptable th:hover{color:var(--brand)}
-.ptable td.num{text-align:right;font-variant-numeric:tabular-nums}
-.ptable td.desc{white-space:normal;max-width:340px;color:var(--mut)}
-.ok{color:#0e9f6e}.warn{color:#d97706}.dim{color:var(--mut)}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
-.toolbar input{flex:1;min-width:200px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;font-size:13px;outline:none}
-.toolbar input:focus{border-color:var(--brand)}
-.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-size:12px;cursor:pointer;color:var(--mut)}
-.chip.on{background:#eef2ff;border-color:#c7d2fe;color:var(--brand);font-weight:600}
-.pager{display:flex;align-items:center;gap:12px;margin-top:12px;justify-content:center;color:var(--mut);font-size:12.5px}
-.pager button{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:5px 12px;cursor:pointer}
-.pager button:disabled{opacity:.4;cursor:default}
-.datalinks{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-.datalinks a{font-size:12.5px;border:1px solid #c7d2fe;color:var(--brand);background:#f5f7ff;border-radius:9px;padding:6px 12px}
-footer{margin:26px 0 44px;color:var(--mut);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-@media (max-width:960px){.span-5,.span-6,.span-7,.span-12{grid-column:span 12}}
-@media (prefers-color-scheme:dark){
-  :root{--bg:#0b1220;--card:#121b2e;--ink:#e6edf7;--mut:#8ea0bc;--line:#22314d}
-  .topbar{background:rgba(11,18,32,.88)}
-  .chip.on{background:#1b2a55;border-color:#3b55a8}
-  .mbar-t,.hbar-t{background:#1c2a44}
-}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.dim{color:var(--faint)}.ok{color:var(--ok)}.warn{color:var(--warn)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 
-.scrim{position:fixed;inset:0;background:rgba(9,14,32,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+/* ---- topbar ---- */
+.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:14px;color:var(--ink);white-space:nowrap}
+.brand:hover{text-decoration:none}
+.mark{width:22px;height:22px;border-radius:6px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:700 12px/1 var(--mono)}
+.brand small{color:var(--faint);font-weight:400;font-size:12px}
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{color:var(--mut);font-size:13px;padding:5px 10px;border-radius:7px}
+.nav a:hover{color:var(--ink);background:var(--track);text-decoration:none}
+.nav a.gh{border:1px solid var(--line);margin-left:6px}
+@media(max-width:720px){.brand small{display:none}.nav a{padding:5px 7px;font-size:12.5px}}
+
+/* ---- hero ---- */
+.hero{border-bottom:1px solid var(--line);padding:56px 0 36px;background:var(--card)}
+.kicker{font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.hero h1{margin:0;font-size:clamp(26px,4vw,36px);font-weight:700;letter-spacing:-.03em;line-height:1.15;max-width:22ch}
+.hero .lede{margin:12px 0 0;color:var(--mut);font-size:14.5px;max-width:68ch}
+.hero .meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12.5px;color:var(--mut)}
+.hero .meta b{color:var(--ink);font-weight:600}
+.bignum{margin-top:34px;display:flex;align-items:baseline;gap:14px}
+.bignum b{font:700 clamp(44px,7vw,64px)/1 var(--mono);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.bignum span{color:var(--mut);font-size:13px;max-width:24ch}
+.stats{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:1px solid var(--line)}
+.stat{padding:14px 18px 4px 0;display:flex;flex-direction:column;gap:1px}
+.stat+.stat{border-left:1px solid var(--line);padding-left:18px}
+.stat b{font-size:20px;font-weight:650;letter-spacing:-.02em}
+.stat span{font-size:12.5px;color:var(--mut)}
+.stat small{font-size:11px;color:var(--faint)}
+@media(max-width:640px){.stat+.stat{border-left:none;padding-left:0}}
+
+/* ---- sections ---- */
+.sec{padding:40px 0 8px}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.sec-h h2{margin:0;font-size:18px;font-weight:650;letter-spacing:-.02em}
+.sec-h .sub{margin:0;color:var(--faint);font-size:12.5px}
+.sec-n{font:600 11px/1 var(--mono);color:var(--faint);letter-spacing:.06em}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.panel h3{margin:0;font-size:13.5px;font-weight:650}
+.panel .p-sub{color:var(--faint);font-size:11.5px;margin:3px 0 14px}
+.panel .p-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+/* ---- charts ---- */
+.hbar{display:flex;align-items:center;gap:10px;margin:7px 0}
+.hbar-l{width:88px;flex:none;color:var(--mut);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbar-t{flex:1;background:var(--track);border-radius:4px;height:10px;overflow:hidden}
+.hbar-f{height:100%;border-radius:4px;background:var(--ink)}
+.hbar-v{width:36px;text-align:right;font:600 12px/1 var(--mono);font-variant-numeric:tabular-nums;flex:none;color:var(--mut)}
+.donutwrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.legend{display:flex;flex-direction:column;gap:7px;font-size:12.5px;color:var(--mut)}
+.legend b{color:var(--ink);font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2.5px;margin-right:7px;vertical-align:-1px}
+.chartbox{position:relative}
+.chartbox .grid{stroke:var(--line);stroke-width:1}
+.chartbox .gly{font:10px var(--mono);fill:var(--faint);text-anchor:end}
+.chartbox .glx{font:10px var(--mono);fill:var(--faint)}
+.chartbox .area{fill:color-mix(in srgb,var(--ink) 7%,transparent)}
+.chartbox .line{fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.chartbox .dot{fill:var(--card);stroke:var(--ink);stroke-width:2}
+.chartbox .cross{stroke:var(--faint);stroke-width:1;stroke-dasharray:3 3}
+.ch-tip{position:absolute;top:0;transform:translate(-50%,-118%);background:var(--ink);color:var(--bg);font:600 11.5px/1 var(--mono);padding:6px 9px;border-radius:7px;pointer-events:none;white-space:nowrap;display:none}
+
+/* ---- tables ---- */
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+.ptable th,.ptable td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
+.ptable th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;user-select:none;background:var(--card);position:sticky;top:0;z-index:1}
+.ptable th:hover{color:var(--ink)}
+.ptable th .arr{font-size:9px;color:var(--accent)}
+.ptable td.num,.ptable th.num{text-align:right}
+.ptable td.desc{white-space:normal;max-width:320px;color:var(--mut);font-size:12px}
+.ptable tbody tr{cursor:pointer;transition:background .12s}
+.ptable tbody tr:hover{background:var(--track)}
+.tbl-wrap{overflow:auto;max-height:600px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.tbl-wrap .ptable th{top:0}
+.grade{display:inline-block;min-width:22px;text-align:center;font:700 11px/1.5 var(--mono);border-radius:5px;padding:1px 6px;border:1px solid}
+.grade.A{color:var(--ok);background:color-mix(in srgb,var(--ok) 9%,transparent);border-color:color-mix(in srgb,var(--ok) 32%,transparent)}
+.grade.B{color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,transparent);border-color:color-mix(in srgb,var(--accent) 32%,transparent)}
+.grade.C{color:var(--warn);background:color-mix(in srgb,var(--warn) 10%,transparent);border-color:color-mix(in srgb,var(--warn) 35%,transparent)}
+.grade.D{color:var(--err);background:color-mix(in srgb,var(--err) 9%,transparent);border-color:color-mix(in srgb,var(--err) 32%,transparent)}
+#browse.hide-created .c-created,#browse.hide-zh .c-zh,#browse.hide-lib .c-lib,#browse.hide-act .c-act{display:none}
+
+/* ---- toolbar ---- */
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.toolbar input[type=text]{flex:1;min-width:200px;padding:7px 11px;border:1px solid var(--line);border-radius:8px;font-size:13px;outline:none;background:var(--card);color:var(--ink);transition:border-color .15s}
+.toolbar input[type=text]:focus{border-color:var(--ink)}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut);transition:all .15s var(--ease)}
+.chip:hover{border-color:var(--faint);color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:600}
+.cols{position:relative}
+.cols summary{list-style:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut);user-select:none}
+.cols summary:hover{color:var(--ink);border-color:var(--faint)}
+.cols summary::-webkit-details-marker{display:none}
+.cols .menu{position:absolute;right:0;top:calc(100% + 6px);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px;z-index:10;min-width:128px;box-shadow:0 8px 24px -8px rgba(0,0,0,.14)}
+.cols .menu label{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink);padding:5px 6px;border-radius:6px;cursor:pointer}
+.cols .menu label:hover{background:var(--track)}
+.pager{display:flex;align-items:center;gap:14px;margin-top:12px;justify-content:center;color:var(--mut);font-size:12.5px}
+.pager button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 13px;cursor:pointer;font-size:12.5px;transition:border-color .15s}
+.pager button:hover:not(:disabled){border-color:var(--ink)}
+.pager button:disabled{opacity:.35;cursor:default}
+.pager #info{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:11.5px}
+.datalinks{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+.datalinks a{font-size:12px;border:1px solid var(--line);color:var(--mut);background:var(--card);border-radius:8px;padding:5px 11px}
+.datalinks a:hover{color:var(--ink);border-color:var(--ink);text-decoration:none}
+
+/* ---- drawer ---- */
+.scrim{position:fixed;inset:0;background:rgba(9,9,11,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
 .scrim.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:var(--card);z-index:41;transform:translateX(102%);transition:transform .24s ease;box-shadow:-12px 0 40px rgba(9,14,32,.3);overflow:auto;display:flex;flex-direction:column}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:var(--card);border-left:1px solid var(--line);z-index:41;transform:translateX(102%);transition:transform .3s var(--ease);overflow:auto}
 .drawer.on{transform:none}
-.dd-head{position:sticky;top:0;background:linear-gradient(135deg,#15215e,#2d66f7);color:#fff;padding:16px 18px 12px}
-.dd-title{font-size:15px;font-weight:700;word-break:break-all;padding-right:28px}
-.dd-close{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.18);border:none;color:#fff;width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:14px}
-.dd-body{padding:14px 18px 36px}
-.dd-sec{margin-top:18px}
-.dd-sec h3{margin:0 0 8px;font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.dd-head{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);padding:15px 18px;z-index:2}
+.dd-title{font:650 14.5px/1.4 var(--mono);word-break:break-all;padding-right:34px}
+.dd-close{position:absolute;top:12px;right:12px;background:var(--track);border:1px solid var(--line);color:var(--mut);width:26px;height:26px;border-radius:7px;cursor:pointer;font-size:12px;transition:all .15s}
+.dd-close:hover{color:var(--ink);border-color:var(--ink)}
+.dd-body{padding:6px 18px 40px}
+.dd-sec{margin-top:20px}
+.dd-sec h3{margin:0 0 8px;font:600 11px/1 var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.07em}
 .dd-desc{font-size:13px}
-.dd-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.dd-kpi{background:#f2f5fb;border:1px solid var(--line);border-radius:10px;padding:8px 10px;text-align:center}
-.dd-kpi b{display:block;font-size:16px}
+.dd-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.dd-kpi{background:var(--track);border-radius:9px;padding:9px 10px;text-align:center}
+.dd-kpi b{display:block;font:650 15px/1.2 var(--mono);font-variant-numeric:tabular-nums}
 .dd-kpi span{font-size:10.5px;color:var(--mut)}
 .chipset{display:flex;flex-wrap:wrap;gap:6px}
-.chipset span{background:#eef2ff;color:#2d66f7;border-radius:999px;padding:2px 9px;font-size:11.5px}
-.flag{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:8px;padding:3px 8px;font-size:12px;margin:0 6px 6px 0}
-.flag b{color:#0e9f6e}
+.chipset span{background:var(--track);color:var(--mut);border-radius:999px;padding:2px 9px;font-size:11.5px}
+.flag{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:7px;padding:3px 8px;font-size:12px;margin:0 6px 6px 0}
+.flag b{color:var(--ok)}
 .dd-table{width:100%;font-size:12.5px;border-collapse:collapse}
-.dd-table td{padding:4px 0;border-bottom:1px solid var(--line)}
-.dd-table td:last-child{text-align:right;color:var(--mut)}
-.ptable tbody tr{cursor:pointer}
+.dd-table td{padding:5px 0;border-bottom:1px solid var(--line)}
+.dd-table td:last-child{text-align:right;color:var(--mut);font-family:var(--mono);font-size:11.5px}
 .linkrow{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
-.linkrow a{border:1px solid #c7d2fe;background:#f5f7ff;color:#2d66f7;border-radius:8px;padding:5px 11px;font-size:12px}
-.loading{color:var(--mut);font-size:12px}
-@media(prefers-color-scheme:dark){.dd-kpi{background:#16213a}.chipset span{background:#1b2a55;color:#93b4ff}.linkrow a{background:#16213a;border-color:#3b55a8}}
-.g{display:inline-block;min-width:20px;text-align:center;font-weight:800;border-radius:6px;padding:1px 6px;font-size:11.5px;background:#eef2ff;color:#2d66f7}
+.linkrow a{border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:5px 11px;font-size:12px}
+.linkrow a:hover{border-color:var(--ink);text-decoration:none}
+.loading{color:var(--faint);font-size:12px}
+.qual{display:flex;align-items:center;gap:14px}
+.qual .big{font:700 34px/1 var(--mono)}
+.qualbar{height:6px;border-radius:4px;background:var(--track);margin-top:10px;overflow:hidden}
+.qualbar i{display:block;height:100%;background:var(--ink)}
 .peer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px}
-.peer .num{color:var(--mut);font-size:11.5px}
-.qual{display:flex;align-items:center;gap:12px}
-.qual .big{font-size:34px;font-weight:800;line-height:1}
-.qualbar{height:8px;border-radius:6px;background:#eef1f6;margin-top:10px;overflow:hidden}
-.qualbar i{display:block;height:100%;background:linear-gradient(90deg,#2d66f7,#0e9f6e)}
-@media(prefers-color-scheme:dark){.g{background:#1b2a55;color:#93b4ff}.qualbar{background:#1c2a44}}
-
-/* ---- left rail app shell ---- */
-body{margin-left:0}
-.rail{position:fixed;left:0;top:60px;bottom:0;width:172px;background:var(--card);border-right:1px solid var(--line);z-index:30;padding:10px 8px;overflow:auto}
-.rail .rl{font-size:11px;color:var(--mut);padding:10px 10px 4px;letter-spacing:.08em;text-transform:uppercase}
-.rail button{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;margin:2px 0;border:none;background:transparent;border-radius:9px;cursor:pointer;font-size:13.5px;color:var(--ink);text-align:left}
-.rail button:hover{background:#eef2ff}
-.rail button.on{background:#eef2ff;color:var(--brand);font-weight:700}
-.rail .ico{width:18px;text-align:center;flex:none}
-.main-shell{margin-left:172px;padding:0 18px}
-.view{display:none}
-.view.on{display:block;animation:fade .18s ease}
-@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
-.vhead{margin:16px 0 4px;font-size:13px;color:var(--mut)}
-.vhead b{color:var(--ink);font-size:15px}
-@media (max-width:900px){.rail{position:static;width:100%;top:auto;display:flex;gap:4px;overflow-x:auto;padding:6px 8px;height:auto}.rail button{width:auto;flex:1 0 auto;padding:7px 10px}.main-shell{margin-left:0;padding:0 12px}}
-/* table alignment */
-.ptable th,.ptable td{vertical-align:top}
-.ptable th.num,.ptable td.num{text-align:right;font-variant-numeric:tabular-nums}
-.ptable th:first-child,.ptable td:first-child{white-space:nowrap}
-.ptable td.desc{max-width:300px}
-.grade{display:inline-block;min-width:22px;text-align:center;font-weight:800;border-radius:6px;padding:1px 7px;font-size:11.5px;cursor:default}
-.grade.A{background:#e7f6ef;color:#0e9f6e}.grade.B{background:#eef2ff;color:#2d66f7}.grade.C{background:#fdf1e3;color:#d97706}.grade.D{background:#fdeaea;color:#dc2626}
+.peer .num{color:var(--mut);font:11.5px var(--mono)}
 .score li{margin:3px 0;font-size:12px;display:flex;justify-content:space-between;gap:10px}
-.score b{color:var(--brand);font-variant-numeric:tabular-nums}
+.score b{color:var(--ink);font-family:var(--mono);font-variant-numeric:tabular-nums}
 
+footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <div class="brand"><span class="dot">d</span><div>dsh 插件生态洞察<small> · dsh-plugin-insights</small></div></div>
-  <div class="nav"><a href="#charts">洞察</a><a href="#rank">榜单</a><a href="#table">数据表</a><a href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">GitHub ↗</a></div>
+  <a class="brand" href="#top"><span class="mark">d</span>dsh 插件生态洞察<small>dsh-plugin-insights</small></a>
+  <nav class="nav"><a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a><a class="gh" href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 
-<div class="hero"><div class="wrap">
-  <h1>DeepSeek Harness 插件生态 · 全量索引与质量评估</h1>
-  <p>多源发现 → manifest 真伪校验 → 元数据评估（npm / 文档 / 双语文档 / 构建产物 / 活跃度）→ 生态洞察</p>
-  <div class="meta"><span>权威插件 <b>${t.authoritative ?? 0}</b></span><span>快照 <b>${date}</b></span><span><a style="color:#c7d2fe" href="https://github.com/ice5kysl/dsh-plugin-insights/blob/main/README.md" target="_blank">方法论 ↗</a></span></div>
-</div></div>
-
-<div class="wrap">
-  <div class="kpis">
-    ${kpi(t.authoritative ?? 0, '权威插件数', '通过 dsh.bundle manifest 校验')}
-    ${kpi(d.publishPct != null ? d.publishPct + '%' : '—', 'npm 发布率', `${pub.published} 已发布 · ${pub.stale} 滞后`)}
-    ${kpi(d.zhPct != null ? d.zhPct + '%' : '—', '中/双语文档', `${doc.both} 双文档 · ${doc.zhFile} 中文文件`)}
-    ${kpi(doc.none ?? 0, '无 README', '建议补充基本文档')}
-    ${kpi(lib.both ?? 0, 'host+client 双产物', `index ${lib.index} · client ${lib.client}`)}
-    ${kpi((t.active30Pct ?? 0) + '%', '近 30 天活跃', '生态活跃信号')}
-    ${kpi(a.quality?.avgScore ?? '—', '平均质量分', `A+B ${a.quality?.gradePct ?? 0}%`)}
-    ${kpi(a.channels ? a.channels.coveredPct + '%' : '—', 'curated 收录率', `${a.channels?.covered ?? 0} 已进 awesome/imsai`)}
+<header class="hero" id="top"><div class="wrap">
+  <p class="kicker">DeepSeek Harness Plugin Ecosystem</p>
+  <h1>dsh 插件生态 · 全量索引与质量评估</h1>
+  <p class="lede">多源发现 → manifest 真伪校验 → 元数据评估（npm / 文档 / 构建产物 / 活跃度）→ 生态洞察。启发式评估，非安全审计。</p>
+  <div class="meta"><span>快照 <b>${date}</b></span><span>最近一周新增 <b class="mono">+${lastWeek}</b></span><span><a href="https://github.com/ice5kysl/dsh-plugin-insights/blob/main/README.md" target="_blank">方法论 ↗</a></span></div>
+  <div class="bignum"><b class="count mono" data-v="${t.authoritative ?? 0}">0</b><span>权威插件<br>通过 dsh.bundle manifest 校验</span></div>
+  <div class="stats">
+    ${stat((d.publishPct != null ? d.publishPct + '%' : '—'), 'npm 发布率', (pub.published ?? 0) + ' 已发布 · ' + (pub.stale ?? 0) + ' 滞后')}
+    ${stat((d.zhPct != null ? d.zhPct + '%' : '—'), '中/双语文档', (doc.both ?? 0) + ' 双文档')}
+    ${stat((t.active30Pct ?? 0) + '%', '近 30 天活跃', '生态活跃信号')}
+    ${stat(a.quality?.avgScore ?? '—', '平均质量分', 'A+B ' + (a.quality?.gradePct ?? 0) + '%')}
+    ${stat(a.channels ? a.channels.coveredPct + '%' : '—', 'curated 收录率', (a.channels?.covered ?? 0) + ' 已进 awesome/imsai')}
+    ${stat(doc.none ?? 0, '无 README', '建议补充基本文档')}
   </div>
+</div></header>
 
-  <div class="grid" id="charts">
-    <div class="panel span-7">
-      <h2>权威集新增（按周）</h2><p class="sub">按仓库创建时间的周一归属 · 最近 ${wkArr.length} 周 · 标签为周起始日期</p>
-      ${weeksHtml || '<div class="dim">数据积累中…</div>'}
-    </div>
-    <div class="panel span-5">
-      <h2>npm 发布分布</h2><p class="sub">已发布 vs 未发布</p>
+<main class="wrap">
+
+<section class="sec" id="overview">
+  <div class="sec-h"><span class="sec-n">01</span><h2>生态趋势</h2><p class="sub">增长节奏 · 发布与文档覆盖 · 热门话题</p></div>
+  <div class="panel" style="margin-bottom:14px">
+    <div class="p-h"><h3>权威集新增 · 按周</h3><span class="p-sub">按仓库创建时间归属到周一 · 最近 ${wkArr.length} 周</span></div>
+    <div class="chartbox" id="chart-week">${areaSvg}<div class="ch-tip" id="ch-tip"></div></div>
+  </div>
+  <div class="cards">
+    <div class="panel">
+      <h3>npm 发布分布</h3><p class="p-sub">已发布 vs 未发布 · 版本滞后 ${pub.stale ?? 0}</p>
       <div class="donutwrap">${donutPublish}<div class="legend">
-        <div><i style="background:#2d66f7"></i>已发布 <b>${pub.published ?? 0}</b></div>
-        <div><i style="background:#e2e8f0"></i>未发布 <b>${pub.unpublished ?? 0}</b></div>
-        <div style="color:#d97706">版本滞后 ${pub.stale ?? 0}</div>
+        <div><i style="background:var(--ink)"></i>已发布 <b>${pub.published ?? 0}</b></div>
+        <div><i style="background:var(--track2)"></i>未发布 <b>${pub.unpublished ?? 0}</b></div>
+        <div style="color:var(--warn)">版本滞后 ${pub.stale ?? 0}</div>
       </div></div>
     </div>
-    <div class="panel span-6">
-      <h2>文档覆盖</h2><p class="sub">双语文档 / 中文 / 仅英文 / 无</p>
+    <div class="panel">
+      <h3>文档覆盖</h3><p class="p-sub">双语文档 / 中文 / 仅英文 / 无</p>
       <div class="donutwrap">${donutDocs}<div class="legend">
-        <div><i style="background:#0e9f6e"></i>中/双语 <b>${doc.both ?? 0}</b></div>
-        <div><i style="background:#0ea5e9"></i>含中文内容 <b>${Math.max(0, (doc.zh ?? 0) - (doc.both ?? 0))}</b></div>
-        <div><i style="background:#94a3b8"></i>仅英文 <b>${Math.max(0, (doc.readme ?? 0) - (doc.zh ?? 0))}</b></div>
-        <div><i style="background:#e2e8f0"></i>无 README <b>${doc.none ?? 0}</b></div>
+        <div><i style="background:#18181b"></i>中/双语 <b>${doc.both ?? 0}</b></div>
+        <div><i style="background:#52525b"></i>含中文内容 <b>${Math.max(0, (doc.zh ?? 0) - (doc.both ?? 0))}</b></div>
+        <div><i style="background:#a1a1aa"></i>仅英文 <b>${Math.max(0, (doc.readme ?? 0) - (doc.zh ?? 0))}</b></div>
+        <div><i style="background:#e4e4e7"></i>无 README <b>${doc.none ?? 0}</b></div>
       </div></div>
     </div>
-    <div class="panel span-6">
-      <h2>Top topics</h2><p class="sub">仓库自声明 topic（Top 8）</p>
+    <div class="panel">
+      <h3>Top topics</h3><p class="p-sub">仓库自声明 topic · Top 8</p>
       ${topicBars || '<div class="dim">暂无</div>'}
     </div>
-    <div class="panel span-6" id="rank">
-      <h2>npm 版本滞后榜</h2><p class="sub">仓库已领先于 npm 发布（Top 10）</p>
-      <table><thead><tr><th>仓库</th><th style="text-align:right">★</th><th style="text-align:right">仓库 → npm</th></tr></thead><tbody>${staleRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
-    </div>
-    <div class="panel span-6">
-      <h2>质量分级（启发式评分）</h2><p class="sub">平均分 ${a.quality?.avgScore ?? 0} · A+B ${a.quality?.gradePct ?? 0}%</p>
+  </div>
+</section>
+
+<section class="sec" id="quality">
+  <div class="sec-h"><span class="sec-n">02</span><h2>质量分布</h2><p class="sub">启发式评分 · 功能分类 · 各场景首选</p></div>
+  <div class="cards">
+    <div class="panel">
+      <h3>质量分级</h3><p class="p-sub">平均分 ${a.quality?.avgScore ?? 0} · A+B ${a.quality?.gradePct ?? 0}%</p>
       ${gradesHtml}
     </div>
-    <div class="panel span-6">
-      <h2>功能分类（启发式）</h2><p class="sub">按名称/描述归类 · Top 8</p>
+    <div class="panel">
+      <h3>功能分类</h3><p class="p-sub">按名称/描述归类 · Top 8</p>
       ${catsHtml}
     </div>
-    <div class="panel span-6">
-      <h2>Star 榜 Top 10</h2><p class="sub">社区关注度最高的权威插件</p>
-      <table><thead><tr><th>仓库</th><th style="text-align:right">★</th><th>npm</th><th>中/双语</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
-    </div>
-
-    <div class="panel span-6" id="scenario">
-      <h2>场景推荐 · 各分类首选</h2><p class="sub">每个功能分类里质量/活跃度最高的插件（点击打开详情）</p>
+    <div class="panel">
+      <h3>场景推荐 · 各分类首选</h3><p class="p-sub">每个分类里质量/活跃度最高 · 点击行看详情</p>
       <table class="ptable"><thead><tr><th>推荐</th><th>场景</th><th class="num">★</th><th class="num">质量</th></tr></thead><tbody>${topPickHtml || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
-    <div class="panel span-12" id="suggested">
-      <h2>优质未收录 · 建议收录</h2><p class="sub">A/B 级、已发布 npm、尚未进入 awesome/imsai 列表（按质量分）· Top 10</p>
-      <table><thead><tr><th>仓库</th><th style="text-align:right">质量</th><th style="text-align:right">★</th><th>npm / 周下载</th></tr></thead><tbody>
+  </div>
+</section>
+
+<section class="sec" id="rank">
+  <div class="sec-h"><span class="sec-n">03</span><h2>榜单</h2><p class="sub">社区关注 · 发布健康 · 值得收录</p></div>
+  <div class="cards">
+    <div class="panel">
+      <h3>Star 榜 Top 10</h3><p class="p-sub">社区关注度最高的权威插件</p>
+      <table><thead><tr><th style="text-align:left">仓库</th><th style="text-align:right">★</th><th>npm</th><th>中/双语</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+    </div>
+    <div class="panel">
+      <h3>npm 版本滞后榜</h3><p class="p-sub">仓库已领先于 npm 发布 · Top 10</p>
+      <table><thead><tr><th style="text-align:left">仓库</th><th style="text-align:right">★</th><th style="text-align:right">仓库 → npm</th></tr></thead><tbody>${staleRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+    </div>
+    <div class="panel">
+      <h3>优质未收录 · 建议收录</h3><p class="p-sub">A/B 级 · 已发布 npm · 尚未进 awesome/imsai · Top 10</p>
+      <table><thead><tr><th style="text-align:left">仓库</th><th style="text-align:right">质量</th><th style="text-align:right">★</th><th>npm / 周下载</th></tr></thead><tbody>
       ${suggestedHtml || '<tr><td class="dim">暂无（请先跑 00-lists + analyze）</td></tr>'}
       </tbody></table>
     </div>
-    <div class="panel span-12" id="table">
-      <h2>全量插件表</h2>
-      <p class="sub">搜索 / 筛选 / 点击表头排序 · 已加载 ${plugins.length} 个权威插件</p>
-      <div class="toolbar">
-        <input id="q" placeholder="搜索仓库名 / 描述…" autocomplete="off">
-        <button class="chip on" data-npm="">全部 npm</button><button class="chip" data-npm="pub">已发布</button><button class="chip" data-npm="unpub">未发布</button><button class="chip" data-npm="stale">版本滞后</button>
-        <button class="chip" data-zh="0">中/双语</button>
-        <button class="chip gchip" data-gr="A">A</button><button class="chip gchip" data-gr="B">B</button><button class="chip gchip" data-gr="C">C</button><button class="chip gchip" data-gr="D">D</button>
-        <button class="chip" data-active="1">近 30 天活跃</button>
-      </div>
-      <div style="overflow:auto;max-height:560px">
-      <table class="ptable">
-        <thead><tr>
-          <th data-k="0">仓库</th><th data-k="2" class="num">★</th><th data-k="3">创建</th><th data-k="4">npm</th><th data-k="5">中/双语</th><th data-k="6">双产物</th><th data-k="7">活跃</th><th>质量</th><th>描述</th>
-        </tr></thead>
-        <tbody id="tb"></tbody>
-      </table></div>
-      <div class="pager"><button id="prev">‹ 上一页</button><span id="info"></span><button id="next">下一页 ›</button></div>
-      <div class="datalinks">
-        <a href="../data/plugins.jsonl" target="_blank">⬇ plugins.jsonl</a>
-        <a href="../data/plugins.csv" target="_blank">⬇ plugins.csv</a>
-        <a href="../data/invalid.jsonl" target="_blank">⬇ invalid.jsonl（噪声分桶）</a>
-      </div>
-    </div>
   </div>
+</section>
 
+<section class="sec" id="browse">
+  <div class="sec-h"><span class="sec-n">04</span><h2>插件库</h2><p class="sub">搜索 / 筛选 / 点击表头排序 · 筛选状态同步到 URL，可直接分享 · 已加载 ${plugins.length} 个</p></div>
+  <div class="toolbar">
+    <input type="text" id="q" placeholder="搜索仓库名 / 描述…" autocomplete="off">
+    <button class="chip on" data-npm="">全部 npm</button><button class="chip" data-npm="pub">已发布</button><button class="chip" data-npm="unpub">未发布</button><button class="chip" data-npm="stale">版本滞后</button>
+    <button class="chip" data-zh="0">中/双语</button>
+    <button class="chip gchip" data-gr="A">A</button><button class="chip gchip" data-gr="B">B</button><button class="chip gchip" data-gr="C">C</button><button class="chip gchip" data-gr="D">D</button>
+    <button class="chip" data-active="1">近 30 天活跃</button>
+    <details class="cols"><summary>列 ▾</summary><div class="menu">
+      <label><input type="checkbox" checked data-col="created">创建日期</label>
+      <label><input type="checkbox" checked data-col="zh">中/双语</label>
+      <label><input type="checkbox" checked data-col="lib">双产物</label>
+      <label><input type="checkbox" checked data-col="act">活跃</label>
+    </div></details>
+  </div>
+  <div class="tbl-wrap">
+  <table class="ptable">
+    <thead><tr>
+      <th data-k="0">仓库</th><th data-k="2" class="num">★</th><th data-k="3" class="c-created">创建</th><th data-k="4">npm</th><th data-k="5" class="c-zh">中/双语</th><th data-k="6" class="c-lib">双产物</th><th data-k="7" class="c-act">活跃</th><th>质量</th><th>描述</th>
+    </tr></thead>
+    <tbody id="tb"></tbody>
+  </table></div>
+  <div class="pager"><button id="prev">‹ 上一页</button><span id="info"></span><button id="next">下一页 ›</button></div>
+  <div class="datalinks">
+    <a href="../data/plugins.jsonl" target="_blank">⬇ plugins.jsonl</a>
+    <a href="../data/plugins.csv" target="_blank">⬇ plugins.csv</a>
+    <a href="../data/invalid.jsonl" target="_blank">⬇ invalid.jsonl（噪声分桶）</a>
+  </div>
+</section>
+
+<footer>
+  <span>由 <a href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">dsh-plugin-insights</a> 管线自动生成 · ${date}</span>
+  <span>零依赖 · GitHub API + npm · 启发式评估，非安全审计</span>
+</footer>
+</main>
 
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-hidden="true">
   <div class="dd-head"><div class="dd-title" id="dd-title"></div><button class="dd-close" id="dd-close" title="关闭">✕</button></div>
   <div class="dd-body" id="dd-body"></div>
 </aside>
-  <footer>
-    <span>由 <a href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">dsh-plugin-insights</a> 管线自动生成 · ${date}</span>
-    <span>零依赖 · GitHub API + npm · 启发式评估，非安全审计</span>
-  </footer>
-</div>
 
 <script>
 const ROWS=${dataJson};
+const WKPTS=${JSON.stringify(wkPts)};
 const $=s=>document.querySelector(s);
 let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
+
+// ---- count-up (hero number) ----
+(function(){
+  var els=document.querySelectorAll('.count');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  els.forEach(function(el){
+    var v=+el.dataset.v||0;
+    if(reduce||v===0){el.textContent=v.toLocaleString('en-US');return}
+    var t0=null,D=900;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/D); var e2=1-Math.pow(1-p,3);
+      el.textContent=Math.round(v*e2).toLocaleString('en-US'); if(p<1)requestAnimationFrame(step) }
+    requestAnimationFrame(step);
+  });
+})();
+
+// ---- weekly area chart hover ----
+(function(){
+  var box=$('#chart-week'); if(!box||!WKPTS.length)return;
+  var dot=$('#ch-dot'),cross=$('#ch-x'),tip=$('#ch-tip');
+  var CW2=960,CH2=200;
+  box.addEventListener('mousemove',function(ev){
+    var r=box.getBoundingClientRect();
+    var ratio=(ev.clientX-r.left)/r.width;
+    var i=Math.round(ratio*(WKPTS.length-1));
+    i=Math.max(0,Math.min(WKPTS.length-1,i));
+    var p=WKPTS[i];
+    dot.style.display='';cross.style.display='';tip.style.display='';
+    dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y);
+    cross.setAttribute('x1',p.x);cross.setAttribute('x2',p.x);
+    tip.textContent=p.k+' · +'+p.c;
+    var left=p.x/CW2*r.width;
+    left=Math.max(34,Math.min(r.width-34,left));
+    tip.style.left=left+'px';
+    tip.style.top=(p.y/CH2*r.height)+'px';
+  });
+  box.addEventListener('mouseleave',function(){dot.style.display='none';cross.style.display='none';tip.style.display='none'});
+})();
+
+// ---- table ----
 function filtered(){
   let r=ROWS;
   if(q){const t=q.toLowerCase();r=r.filter(x=>(x[0]+' '+x[8]).toLowerCase().includes(t))}
@@ -379,17 +496,42 @@ function draw(){
   const list=filtered(),pages=Math.ceil(list.length/PAGE)||1;
   page=Math.min(page,pages-1);
   const seg=list.slice(page*PAGE,(page+1)*PAGE);
-  $('#tb').innerHTML=seg.map(r=>'<tr data-repo="'+e(r[0])+'" data-url="'+e(r[1])+'"><td><a href="'+e(r[1])+'" target="_blank">'+e(r[0])+'</a></td><td class="num">'+r[2]+'</td><td>'+r[3]+'</td><td>'+(r[4]?'<span class="ok">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td>'+(r[5]?'✓':'')+'</td><td>'+(r[6]?'✓':'')+'</td><td>'+(r[7]?'✓':'')+'</td><td>'+(r[9]?'<span class="g">'+e(r[9])+'</span>':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="9" class="dim">无匹配</td></tr>';
+  $('#tb').innerHTML=seg.map(r=>'<tr data-repo="'+e(r[0])+'" data-url="'+e(r[1])+'"><td><a href="'+e(r[1])+'" target="_blank">'+e(r[0])+'</a></td><td class="num mono">'+r[2]+'</td><td class="c-created mono" style="color:var(--mut)">'+r[3]+'</td><td>'+(r[4]?'<span class="ok mono">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td class="c-zh">'+(r[5]?'✓':'')+'</td><td class="c-lib">'+(r[6]?'✓':'')+'</td><td class="c-act">'+(r[7]?'✓':'')+'</td><td>'+(r[9]?'<span class="grade '+e(r[9])+'">'+e(r[9])+'</span>':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="9" class="dim" style="padding:24px;text-align:center">无匹配 — 试试放宽筛选条件</td></tr>';
   $('#info').textContent='第 '+(page+1)+'/'+pages+' 页 · 共 '+list.length+' 条';
   $('#prev').disabled=page===0;$('#next').disabled=page>=pages-1;
+  document.querySelectorAll('.ptable th[data-k]').forEach(th=>{
+    const k=+th.dataset.k;const base=th.textContent.replace(/ [↑↓]$/,'');
+    th.innerHTML=e(base)+(sort===k?' <span class="arr">'+(desc?'↓':'↑')+'</span>':'');
+  });
+  syncHash();
 }
-$('#q').addEventListener('input',e=>{q=e.target.value;page=0;draw()});
+function syncHash(){
+  const p=new URLSearchParams();
+  if(q)p.set('q',q);if(npm)p.set('npm',npm);if(zh)p.set('zh','1');if(act)p.set('act','1');if(gr)p.set('gr',gr);
+  const s=p.toString();
+  history.replaceState(null,'','#browse'+(s?'?'+s:''));
+}
+function readHash(){
+  if(location.hash.indexOf('#browse')!==0)return;
+  const p=new URLSearchParams(location.hash.split('?')[1]||'');
+  q=p.get('q')||'';npm=p.get('npm')||'';zh=p.get('zh')?'1':'';act=p.get('act')?'1':'';gr=p.get('gr')||'';
+  $('#q').value=q;
+  document.querySelectorAll('[data-npm]').forEach(x=>x.classList.toggle('on',x.dataset.npm===npm));
+  document.querySelectorAll('[data-zh]').forEach(x=>x.classList.toggle('on',zh==='1'));
+  document.querySelectorAll('[data-active]').forEach(x=>x.classList.toggle('on',act==='1'));
+  document.querySelectorAll('.gchip').forEach(x=>x.classList.toggle('on',x.dataset.gr===gr&&gr!==''));
+  setTimeout(()=>{const el=document.getElementById('browse');if(el)el.scrollIntoView()},60);
+}
+$('#q').addEventListener('input',ev=>{q=ev.target.value;page=0;draw()});
 document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
   if(c.dataset.npm!==undefined){npm=c.dataset.npm;document.querySelectorAll('[data-npm]').forEach(x=>x.classList.toggle('on',x===c))}
   if(c.dataset.zh!==undefined){zh=(zh==='1'?'':'1');document.querySelectorAll('[data-zh]').forEach(x=>x.classList.toggle('on',zh==='1'))}
   if(c.dataset.active!==undefined){act=(act==='1'?'':'1');c.classList.toggle('on',act==='1')}
   if(c.dataset.gr!==undefined){gr=(gr===c.dataset.gr?'':c.dataset.gr);document.querySelectorAll('.gchip').forEach(x=>x.classList.toggle('on',x===c&&gr))}
   page=0;draw();
+}));
+document.querySelectorAll('.cols input').forEach(cb=>cb.addEventListener('change',()=>{
+  document.getElementById('browse').classList.toggle('hide-'+cb.dataset.col,!cb.checked);
 }));
 document.querySelectorAll('.ptable th[data-k]').forEach(th=>th.addEventListener('click',()=>{const k=+th.dataset.k;if(sort===k)desc=!desc;else{sort=k;desc=false}page=0;draw()}));
 $('#prev').onclick=()=>{page--;draw()};$('#next').onclick=()=>{page++;draw()};
@@ -436,7 +578,7 @@ function openDrawer(repo){
       +'<div class="dd-sec"><h3>收录 / 下载</h3>'+(d.channels?(d.channels.aw?'<span class="flag"><b>✓</b> awesome-dsh-plugin</span>':'')+(d.channels.im?'<span class="flag"><b>✓</b> imsai</span>':'')+(!d.channels.aw&&!d.channels.im?'<span class="flag">curated 未收录</span>':''):'')+(d.weekly!=null?'<span class="flag"><b>⬇</b> 周下载 '+escA(d.weekly)+'</span>':'')+'</div>'
       +'<div class="dd-sec"><h3>LLM 解读</h3>'+(d.llm?('<div class="dd-desc">'+escA(d.llm.summaryZh||d.llm.summaryEn||'—')+'</div>'+(d.llm.category?'<div class="chipset" style="margin-top:8px"><span>'+escA(d.llm.category)+'</span></div>':'')+(d.llm.capabilityTags&&d.llm.capabilityTags.length?'<div class="chipset" style="margin-top:6px">'+d.llm.capabilityTags.map(function(t){return '<span>'+escA(t)+'</span>'}).join('')+'</div>':'')+(d.llm.claims&&d.llm.claims.length?'<div class="dd-desc" style="margin-top:8px;color:var(--mut)">宣称：'+d.llm.claims.map(escA).join(' · ')+'</div>':'')):'<div class="dim">未标注 · 待 LLM 标注轮</div>')+'</div>'
       +flags
-      +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='A'?'#0e9f6e':d.grade==='B'?'#2d66f7':d.grade==='C'?'#d97706':'#dc2626')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div></div>'
+      +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='A'?'var(--ok)':d.grade==='B'?'var(--accent)':d.grade==='C'?'var(--warn)':'var(--err)')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div></div>'
   +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3><div id="dd-peers" class="loading">计算中…</div></div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
       +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
     loadHist(repo,d);
@@ -466,35 +608,8 @@ $('#tb').addEventListener('click',function(ev){ if(ev.target.closest('a'))return
 function repoOfTr(tr){ var a=tr.querySelector('a'); if(!a)return null; var m=a.getAttribute('href')||''; var i=m.indexOf('github.com/'); if(i<0)return null; m=m.slice(i+11); if(m.indexOf('?')>=0)m=m.slice(0,m.indexOf('?')); while(m.slice(-1)==='/')m=m.slice(0,-1); return m }
 document.addEventListener('click',function(ev){ var tr=ev.target.closest('tr'); if(!tr||tr.closest('#tb'))return; if(ev.target.closest('a'))return; var rp=tr.getAttribute('data-repo')||repoOfTr(tr); if(rp)openDrawer(rp) });
 
+readHash();
 draw();
-(function bootViews(){
-  var pages=[['overview','总览','⌂'],['rank','榜单','★'],['scenario','场景推荐','✦'],['suggest','收录建议','＋'],['browse','插件库','☰']];
-  var cw=document.querySelector('.wrap .kpis').parentElement;
-  var desktop=matchMedia('(min-width:901px)').matches;
-  if(desktop) cw.style.marginLeft='172px';
-  function applyMargin(m){ if(m){cw.style.marginLeft='172px'}else{cw.style.marginLeft='0'} }
-  matchMedia('(min-width:901px)').addEventListener('change',function(ev){ applyMargin(ev.matches) });
-  var rail=document.createElement('aside'); rail.className='rail'; rail.id='rail';
-  rail.innerHTML='<div class="rl">导航</div>'+pages.map(function(p){return '<button data-v="'+p[0]+'"><span class="ico">'+p[2]+'</span>'+p[1]+'</button>'}).join('');
-  cw.parentNode.insertBefore(rail,cw);
-  function pgOf(t){ if(/新增|发布分布|文档覆盖|Top topics|质量分级|功能分类|场景推荐/.test(t))return 'overview'; if(/版本滞后|Star 榜|下载/.test(t))return 'rank'; if(/各分类首选|场景/.test(t))return 'scenario'; if(/优质未收录/.test(t))return 'suggest'; if(/全量插件表/.test(t))return 'browse'; return 'overview' }
-  var views={};
-  pages.forEach(function(p){ var v=document.createElement('section'); v.className='view'; v.id='v-'+p[0]; v.innerHTML='<div class="vhead"><b>'+p[1]+'</b></div>'; cw.appendChild(v); views[p[0]]=v; });
-  var kpis=document.querySelector('.kpis');
-  var grid=document.querySelector('.grid');
-  if(kpis) views.overview.appendChild(kpis);
-  if(grid){
-    Array.prototype.slice.call(grid.children).forEach(function(pan){
-      var h=pan.querySelector('h2'); var pg=pgOf(h?h.textContent:''); var vv=views[pg];
-      var g=vv.querySelector('.grid'); if(!g){ g=document.createElement('div'); g.className='grid'; vv.appendChild(g) }
-      g.appendChild(pan);
-    });
-    grid.remove();
-  }
-  function show(id){ pages.forEach(function(p){ var v=document.getElementById('v-'+p[0]); if(v)v.classList.toggle('on',p[0]===id) }); document.querySelectorAll('.rail button').forEach(function(b){ b.classList.toggle('on',b.dataset.v===id) }); window.scrollTo(0,0) }
-  document.querySelectorAll('.rail button').forEach(function(b){ b.addEventListener('click',function(){ show(b.dataset.v) }) });
-  show('overview');
-})();
 </script>
 </body>
 </html>`
