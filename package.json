@@ -18,7 +18,9 @@
     "site": "node stages/04-site.mjs",
     "export": "node stages/05-export.mjs",
     "query": "node bin/query.mjs",
-    "snapshot": "npm run analyze && npm run site && npm run export"
+    "regress": "node stages/07-regress.mjs",
+    "snapshot": "npm run analyze && npm run site && npm run export",
+    "finalize": "npm run analyze && npm run site && npm run export && node bin/query.mjs --sort stars --top 8"
   },
   "keywords": [
     "dsh",
