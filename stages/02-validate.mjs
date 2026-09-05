@@ -20,6 +20,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, appendFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { ghApi, ghContents, npmDoc, sleep } from '../lib/api.mjs'
 
 const ROOT = join(import.meta.dirname, '..')
@@ -165,4 +166,8 @@ async function main() {
   console.log(`[validate] processed ${processed} this run (${valid} valid, ${transient} transient) · total done ${done.size} · remaining ${repos.length - processed}`)
 }
 
-main().catch((e) => { console.error(e); process.exit(1) })
+export { hasSignal, validateOne }
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((e) => { console.error(e); process.exit(1) })
+}

@@ -15,10 +15,10 @@
 
 import { writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { ghSearch, ghApi, NPM, raw } from '../lib/api.mjs'
+import { ghSearch, ghSearchAll, ghApi, NPM, raw } from '../lib/api.mjs'
 
 const ROOT = join(import.meta.dirname, '..')
-const OUT = process.argv[2] || join(ROOT, 'data', 'candidates.jsonl')
+const OUT = process.argv[2] || join(ROOT, 'data', 'candidates-all.jsonl')
 const LIMIT_REPO_SOURCE = Number(process.env.LIMIT || 0)
 
 const seen = new Set()
@@ -56,10 +56,22 @@ async function main() {
   const t0 = Date.now()
 
   // 1) GitHub topic searches
-  for (const topic of ['dsh-plugin', 'deepseek-harness', 'dsh-bundle', 'cordis-plugin']) {
-    const items = await ghSearch(`topic:${topic}`)
-    console.log(`[discover] topic:${topic} → ${items.length}`)
-    for (const it of items) pushRepo(it, `topic:${topic}`)
+  //    dsh-plugin (the official discovery channel, ~13.6k repos) is crawled in
+  //    full via recursive created-window sharding (GitHub caps 1000/query).
+  //    Secondary topics stay capped as supplementary sources (mostly overlap).
+  const topicOrder = ['dsh-plugin', 'deepseek-harness', 'dsh-bundle', 'cordis-plugin']
+  for (const topic of topicOrder) {
+    if (topic === 'dsh-plugin') {
+      const t0 = Date.now()
+      const { items, warnings } = await ghSearchAll(`topic:${topic}`)
+      console.log(`[discover] topic:${topic} → ${items.length} (full crawl, ${((Date.now() - t0) / 1000).toFixed(0)}s)`)
+      for (const w of warnings) console.warn(`[discover] ${w}`)
+      for (const it of items) pushRepo(it, `topic:${topic}`)
+    } else {
+      const items = await ghSearch(`topic:${topic}`)
+      console.log(`[discover] topic:${topic} → ${items.length} (capped 1000, supplementary)`)
+      for (const it of items) pushRepo(it, `topic:${topic}`)
+    }
   }
 
   // 2) curated data directories
