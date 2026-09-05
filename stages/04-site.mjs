@@ -462,7 +462,7 @@ function closeDrawer(){$('#drawer').classList.remove('on');$('#scrim').classList
 $('#dd-close').onclick=closeDrawer;$('#scrim').onclick=closeDrawer;
 document.addEventListener('keydown',function(ev){if(ev.key==='Escape')closeDrawer()});
 $('#tb').addEventListener('click',function(ev){ if(ev.target.closest('a'))return; var tr=ev.target.closest('tr[data-repo]'); if(tr)openDrawer(tr.getAttribute('data-repo')) });
-function repoOfTr(tr){ var a=tr.querySelector('a'); if(!a)return null; var m=a.getAttribute('href'); if(m&&m.indexOf('github.com/')>0)return m.split('github.com/')[1].replace(/\/$/,''); return null }
+function repoOfTr(tr){ var a=tr.querySelector('a'); if(!a)return null; var m=a.getAttribute('href')||''; var i=m.indexOf('github.com/'); if(i<0)return null; m=m.slice(i+11); if(m.indexOf('?')>=0)m=m.slice(0,m.indexOf('?')); while(m.slice(-1)==='/')m=m.slice(0,-1); return m }
 document.addEventListener('click',function(ev){ var tr=ev.target.closest('tr'); if(!tr||tr.closest('#tb'))return; if(ev.target.closest('a'))return; var rp=tr.getAttribute('data-repo')||repoOfTr(tr); if(rp)openDrawer(rp) });
 
 draw();
