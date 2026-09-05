@@ -1,19 +1,28 @@
 # Daily refresh of the dsh-plugin-insights snapshot (CI 定时刷新)
 #
-# - Requires a repo secret `DSH_GH_TOKEN` (fine-grained PAT, Contents read/write
-#   + Metadata read on this repo) for a raised GitHub API budget. Falls back to
-#   the built-in `GITHUB_TOKEN` if the secret is absent (search still capped,
-#   budget-floor in stages makes the run degrade gracefully).
-# - Runs the full pipeline (discover → validate → analyze → site → export →
-#   score → export:json) and commits the new snapshot when anything changed.
-# - `workflow_dispatch` lets you trigger it manually.
+# - Default run (schedule): light refresh — lists / downloads / analyze /
+#   site / export / diff, then commits new snapshot when changed.
+# - Manual `workflow_dispatch` with mode=full: runs the entire pipeline
+#   (discover → validate → …) before refreshing.
+# - Token: falls back to built-in GITHUB_TOKEN; set repo secret `DSH_GH_TOKEN`
+#   for a raised API budget.
+# - Commit step pulls with rebase so concurrent pushes never break the run.
 
 name: refresh
 
 on:
   schedule:
-    - cron: '0 3 * * *'          # 每天 03:00 UTC
-  workflow_dispatch: {}
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'refresh (light) or full pipeline'
+        required: true
+        default: refresh
+        type: choice
+        options:
+          - refresh
+          - full
 
 permissions:
   contents: write
@@ -29,13 +38,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Run pipeline
+      - name: Full pipeline (optional)
+        if: inputs.mode == 'full'
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
         run: node bin/dsh-plugin-insights.mjs run
-      - name: Refresh enrich (lists/downloads/diff)
+      - name: Light refresh (lists/downloads/analyze/site/export/diff)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
         run: node bin/refresh-extra.mjs
       - name: Commit snapshot changes
         run: |
@@ -46,5 +56,6 @@ jobs:
             echo 'no changes'
           else
             git commit -m "chore: refresh snapshot $(date -u +%F)"
+            git pull --rebase --autostash
             git push
           fi
