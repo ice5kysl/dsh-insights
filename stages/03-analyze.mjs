@@ -36,15 +36,15 @@ function analyze(rows) {
       publish.published++
       if (r.version && r.npm.latest && r.npm.latest !== r.version) publish.stale++
     } else publish.unpublished++
-    const d = r.docs || {}
-    if (d.readme) docs.readme++
-    if (d.readmeZh || d.zhSignal) docs.zh++
-    if (d.readme && (d.readmeZh || d.zhSignal)) docs.both++
-    if (!d.readme && !d.readmeZh) docs.none++
-    const l = r.lib || {}
-    if (l.index) lib.index++
-    if (l.client) lib.client++
-    if (l.index && l.client) lib.both++
+    const f = r.files || {}
+    if (f.readme) docs.readme++
+    if (f.readmeZh) docs.zhFile++
+    if (r.metrics?.hasZhDocs) docs.zh++
+    if (f.readme && r.metrics?.hasZhDocs) docs.both++
+    if (!f.readme) docs.none++
+    if (f.libIndex) lib.index++
+    if (f.libClient) lib.client++
+    if (f.libIndex && f.libClient) lib.both++
     for (const t of r.topics || []) topics[t] = (topics[t] || 0) + 1
     stars.push(r.stars || 0)
   }

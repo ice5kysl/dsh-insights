@@ -24,8 +24,8 @@ function main() {
     stars: r.stars || 0,
     desc: (r.description || '').slice(0, 120),
     npm: r.npm?.published ? `✅ ${r.npm.latest}` : '—',
-    zh: r.docs?.readmeZh || r.docs?.zhSignal ? '✅' : '—',
-    lib: r.lib?.both ? '✅' : '~',
+    zh: (r.files?.readmeZh || r.metrics?.hasZhDocs) ? '✅' : '—',
+    lib: (r.files?.libIndex && r.files?.libClient) ? '✅' : '~',
     active: r.metrics?.active30 ? '✅' : '—',
     created: (r.created_at || '').slice(0, 10),
   }))
