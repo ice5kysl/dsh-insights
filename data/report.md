@@ -13,10 +13,10 @@
 - lib/index.js 967 · lib/client.js 800 · 双产物 709
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 765 · imsai 235 · 至少一个渠道 995（47.1%） · 未收录 1118
+- awesome-dsh-plugin 757 · imsai 235 · 至少一个渠道 987（46.7%） · 未收录 1126
 
 ## 优质未收录 · 建议收录（Top 15）
-- RevolutionLA/dsh-dream-skin A
+- RevolutionLA/dsh-dream-skin A · 周下载 9994
 - pengyue-polaron/deepseek-harness-genui A
 - Renzic-Stone/DSH-EasyRewrite A
 - mexiaosqwq/dsh-web-mobile A
@@ -31,6 +31,18 @@
 - nonentity303/dsh-plugin-manager A
 - lilyblessing/dsh-mcp-skill-panel A
 - jiuyuechuwuhao/dsh-canvas-preview A
+
+## npm 周下载 Top 10
+- dsh-market/dsh-market：128104
+- omdsh-dev/DSH-better-sidebar：97317
+- dream-num/dsh-univer-office：34192
+- bowenliang123/dsh-context：31332
+- Han-1413141/dsh-cost-meter：18196
+- ysr666/dsh-vision-router：13687
+- shaobeichen/dsh-pocket：13036
+- RevolutionLA/dsh-dream-skin：9994
+- omdsh-dev/dsh-mnemon：9682
+- MeteorNOX/DeepSeek-Balance-Whale-Widget：8084
 
 ## 质量评分（启发式）
 - 平均分 68.8 · A+B 占比 41.4%
