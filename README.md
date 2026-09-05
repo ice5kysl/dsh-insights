@@ -2,6 +2,8 @@
 
 > Index / validate / evaluate / analyze the whole **DeepSeek Harness (dsh) plugin ecosystem**. 全量 dsh 插件索引、评估与分析管线（零依赖 Node）。
 
+> **DSH 插件与生态洞察 · dsh-insights.com** — 对外品牌 dsh-insights（域名已购）｜引擎仓库与开放数据｜[VISION](./docs/VISION.md) · [ROADMAP](./docs/ROADMAP.md)
+
 ## 产品定位（Product）
 
 **dsh-plugin-insights = DSH 插件生态的质量评估数据层（quality data layer）**：全量索引 + 客观健康分 + 生态分析 + 开放数据快照。它**不是**第 N 个插件目录/市场，而是让已有目录（[awesome-dsh-plugin](https://awesome-dsh-plugin.com)）、应用内市场（[dsh-market](https://github.com/dsh-market/dsh-market)）和 agent 的卡片上有据可依的那个分数。健康分口径与体检工具见 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)。

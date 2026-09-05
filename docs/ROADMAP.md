@@ -1,86 +1,81 @@
-# dsh-plugin-insights · 路线图（Roadmap）
+# dsh-insights · 路线图（Roadmap）
 
-> 状态：v0.1 草案 · 2026-09-05 · 版本节奏见文末"快照与版本约定"。当前处于 **M0**。
+> 状态：**v0.2 再规划**（2026-09-05）· 取代 v0.1 · 当前处于 **M1 收口期**。
+> 结构：先"对外可见与内容产品"（M1），再"官方动态与兼容雷达"（M2），再"生态采纳/月报"（M3），最后"底座化与托管决策"（M4）。v0.1 的 M0 基座已完成（见文末完成清单）。
 
-## M0 · 基座收口（本周，2026-09 W2）
+## 里程碑速览
 
-**目标**：把原型收口成可复现、可发布的基座，为全量评估打底。
+```
+M1 对外可见（本周-2026-09 W4）  → dsh-insights.com 上线、信件/周报对外、站点品牌化
+M2 官方动态与兼容雷达（10月）   → Stage 19 官方快照、rc 雷达 v0、双栏周报
+M3 生态采纳与月报（10-11月）    → 徽章/渠道采纳、月度《dsh 演进报告》、深检规模化
+M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、数据底座授权、go/pivot/kill
+```
 
-范围与交付：
+## M1 · 对外可见与内容产品（2026-09 W3–W4）
 
-- [x] **分片全量抓取**：发现层改为多 qualifier 分片，覆盖 `dsh-plugin` topic 全量 **13,592**（规避 GitHub 1000/查询封顶；当前原型仅 3,125，口径修正，见 RESEARCH.md §口径）。*2026-09-05 实测：全量抓得 13,583（实时 total 13,600，差 17 ≈ 0.1%），9.5 分钟，`data/candidates-all.jsonl` 共 14,394 候选。*
-- [x] **校准集**：把已知真/假插件编入 `seeds`（ice5kysl 两个插件、joejojoking 抢注、DshMarketPlace 已裁 failed/not-a-layer 样本等），每轮跑批回归。*data/seeds.json 15 条（正 9 反 6），`npm run regress` 15/15 通过。*
-- [~] **数据契约 v0**：定稿 `data/plugins.jsonl` 行结构（现字段 + `updatedAt`/`evidence` 雏形）；对齐 awesome 目录 plugins.json 的 join key（`owner/name`）。*join key 已天然对齐（full_name）；score 字段 M1 引入。*
-- [ ] **开放快照**：首个全量权威集快照入库并提交；README 写清复现命令（含 GITHUB_TOKEN 用法）。
-- [~] **LICENSE 定稿**（MIT，代码与数据同款；O1 决策）；CI 每日刷新模板激活条件写明（需要 token + 远端）。*LICENSE 已入库；CI 激活待远端建立（用户决策中）。*
-- [x] 文档收口：VISION/ROADMAP/PRODUCT-PLAN/RESEARCH 已入库（本次）。
+**目标**：把"基座 + 原型报告"变成**一个能展示、能订阅、能外发的产品**。
 
-**退出标准**：一条命令从零跑出全量权威集快照；seeds 回归通过；README 可在陌生机器复现。
+- [x] 品牌与域名：对外 `dsh-insights.com`（已购）；引擎仓库 `dsh-plugin-insights`；文档 VISION/ROADMAP v0.2 定稿（本次）。
+- [ ] **域名接入**：Pages 自定义域 + CNAME（dsh-insights.com / www）；旧 github.io 301。
+- [ ] **站点品牌化**：标题/副标/页脚统一 dsh-insights；hero 文案覆盖"插件 + 官方 + 生态"；补 favicon/OG 元信息（社交分享）。
+- [ ] **「致作者的信」产品化**（Stage 17 已跑通）：默认全量生成（2113）；报告站路由 `/p/<owner>/<repo>`；后续接入"变化对比"（对上一期快照报分数/名次变化）。
+- [ ] **生态周报对外**（Stage 18 已跑通）：固定节奏（每周五）+ 站点周报页 + `data/weekly/LATEST.md`。
+- [ ] **校准与口径**：健康分规则版本化 + changelog；seeds 回归接入 snapshot（沿用 v0.1 M1 口径）。
+- [ ] **发布渠道 SOP**：LINUX DO / GitHub Discussions / awesome 社区 / （可选的 dsh 官方）发帖模板与节奏；转载许可文案。
 
-## M1 · 全量健康分 v1（2026-09 W3–W4）
+**退出标准**：dsh-insights.com 可访问且品牌一致；≥2 期周报对外；"致作者的信"可全量生成并至少覆盖自荐 2 插件公开发布样例。
 
-**目标**：对权威集输出全量健康分，成为"全生态唯一客观评分"。
+## M2 · 官方动态与兼容雷达（2026-10）
 
-范围与交付：
+**目标**：让"洞察"名副其实——覆盖 **dsh 本身**的演进，并在官方升级时帮插件作者提前避险。
 
-- [ ] 健康分引擎接 dsh-plugin-health 口径：A–D + 0–100，维度（manifest / npm 一致性 / 仓库卫生 / 文档 i18n / 只读面启发式）+ **证据 URL** + **缺失标注**。
-- [ ] `data/analysis.json` 升级为 schema v1（含 score 字段、维度分解、updatedAt、规则版本）。
-- [ ] 站点 v2：可搜索列表 + 分数徽章 + 月度新增柱状 + npm 滞后 Top + 缺口矩阵（vs 官方内置），零依赖图表。
-- [ ] 稳定查询：`by owner/repo`（本地 query CLI 已有 → 加 JSON 出口与站点页）。
-- [ ] 周快照节奏 + 校准回归接入 `npm run snapshot`。
+- [ ] **Stage 19 · 官方动态快照器**：抓 `deepseek-ai/DeepSeek-Harness` releases/tags、最新 rc、官方仓库 star/pushed、docs 变更数、`@deepseek-ai/*` 关键包 dist-tags 时间线 → `data/dynamics/dsh-YYYY-WW.json` 时间序列。
+- [ ] **周报升级为"官方 × 生态"双栏**：加入官方动态小节（release/rc、docs 信号、兼容提示）。
+- [ ] **rc 兼容雷达 v0**：对比"插件声明目标版本/最近验证"与官方最新 rc；发布"升级预警清单"（受影响 + 需验证）。
+- [ ] 官方仓库订阅与低流量抓取：纳入 CI refresh，成本极低。
+- [ ] 站点新增"核心 dsh"页：官方动态时间线与兼容状态表。
 
-**退出标准**：权威集 ≥80% 有可核验分数；口径文档 + 校准回归 100%；站点可公开访问。
+**退出标准**：官方动态时间序列 ≥4 周连续；rc 雷达产出可读预警；向 dsh 官方/社区至少发一次"官方动态 + 生态"合刊示例。
 
-## M2 · 生态采纳（2026-10 W1–W4）
+## M3 · 生态采纳与月度报告（2026-10 – 2026-11）
 
-**目标**：分数进入主目录/市场的消费流——**被吸收，不竞争**。
+**目标**：分数与观测进入主目录/市场/官方的消费流（**被吸收，不竞争**），并升级为月度深度内容。
 
-范围与交付：
+- [ ] **作者侧徽章**：SVG 健康徽章（`![health A](…)`）+"怎么修"链接（沿用 dsh-plugin-health 口径）。
+- [ ] **策展侧 pitch（两案并进）**：A 案 plugins.json `health` sidecar；B 案收录门槛（health ≥ B）。
+- [ ] **市场/agent 可读**：稳定 JSON URL、`llms.txt`/`robots.txt`、无登录墙。
+- [ ] **月度《dsh 演进报告》**：官方演进 + 生态规模/质量/缺口/兼容的月度汇编（面向官方与社区）。
+- [ ] **人工点评层**（已有 reviews.jsonl 种子）扩充到 Top 20–50，并标注 `reviewed` 与 `manual-draft` 分开。
+- [ ] 记录每家目录/官方响应与替代路径（RESEARCH 决策日志）。
 
-- [ ] **作者侧**：SVG 健康徽章（`![health A](…)` 可贴 README）+ health CLI 报告给可执行修复建议（现 -5/-20 扣分项 → "怎么修"链接）。
-- [ ] **策展侧 pitch**：向 awesome-dsh-plugin org 提交集成提案（两案并进）：
-  - A 案：plugins.json 增加可选 `health` sidecar（分数+规则版本+更新时间），市场卡片自动显示；
-  - B 案：贡献门槛——新人插件需 health ≥ B 才收录（我们提供数据支撑与免费核验）。
-- [ ] **市场侧**：给 dsh-market 提供质量 feed（同 plugins.json 形状或 DSHM_REGISTRY_URL 镜像可挂载）。
-- [ ] **agent 可读**：数据对 AI 爬虫开放（站点 `robots.txt`/`llms.txt` 允许；JSON URL 稳定不藏登录墙）。
-- [ ] 记录每家的响应：采纳 / 拒绝理由 / 替代路径（写 RESEARCH.md 决策日志）。
+**退出标准**：≥1 家主目录/市场/官方采纳或明确拒绝且有记录；badge 部署 ≥5 仓库；月报 ≥1 期。
 
-**退出标准**：≥1 家主目录/市场采纳（或明确拒绝并有记录的替代路径）；badge 在 ≥5 个作者仓库部署。
+## M4 · 底座化与托管决策（2026-11+）
 
-## M3 · 兼容矩阵与深检（2026-10 W5 – 2026-11）
+**目标**：验证"质量+动态数据底座"终局形态，做 go/no-go；同时回答"要不要独立站/数据库"。
 
-**目标**：把"不兼容"这个第二大痛点变成可查数据。
+- [ ] **托管决策触发器**（当前判定：**暂不上 DB/独立后端**）：出现 ① 用户生成内容（人工评价/收藏/注册）② 每日/实时 diff 需求 ③ 数据量到需搜索引擎级 → 才评估 SQLite/Postgres + 轻量后端；届时再迁移。
+- [ ] 数据底座授权探索：desktop 壳 / IDE / 厂商 / 官方（卖数据与分发底座而非网站）。
+- [ ] 上游收编预案：若官方/awesome org 下场，贡献数据与方法论的通道与协议。
+- [ ] KPI 复盘（PRODUCT-PLAN §KPI）→ go / pivot / kill。
 
-范围与交付：
+**退出标准**：一页纸 M4 结论（go/pivot/kill + 托管决策记录），无论方向。
 
-- [ ] **兼容矩阵 v1**：`engines.dsh` / lockstep `@deepseek-ai/dsh-*` peer 声明 vs 各 dsh 发行版本的实测口径（参考 dsh-market 的 host-aware 经验）。
-- [ ] **冲突/互斥检测**：基于 manifest 的 priority 覆盖、同名插件、重复 loader 条目——产出"插件冲突报告"。
-- [ ] **深检规模化**：只读面/消毒启发式（dsh-plugin-health `--dir` + 06-deep.mjs）覆盖 自荐 + star Top N + 标榜只读 的插件；结果并入 eval.deep，明确"非安全审计"。
-- [ ] **月度生态报告**：新增/发布率/滞后/缺口/拥挤赛道趋势（第 1 期）。
+## 非目标（全阶段，维持 v0.1）
 
-**退出标准**：兼容矩阵 v1 上线；月度报告发布 ≥1 期；深检覆盖 ≥100 插件。
+安装/交易/托管 · 社区评分 · 独立目录站竞争 · 承诺安全审计 · 登录型产品 · 论坛舆情抓取。
 
-## M4 · 底座化与商业化探索（2026-11+）
+## 完成清单（v0.1 M0 + 2026-09 会话增量）
 
-**目标**：验证"质量数据底座"的终局形态，做 go/no-go。
+- [x] 多源发现/分片全量抓取与真伪校验：权威集 **2113**（canonical 2875 全量验证、invalid 分桶 1274、0 重复、断点续跑/限速）。
+- [x] 数据快照 JSONL/CSV/schema + 报告 + 站点（KPI/按周新增/质量分级/功能分类/收录矩阵/优质未收录榜/详情抽屉/打分明细/LLM 解读）+ 查询 CLI。
+- [x] npm 周下载（CI 已取数入库）；快照 diff 基线；收录渠道清单；人工点评种子。
+- [x] 「致作者的信」（Stage 17）与「生态周报」（Stage 18）生成器 + 首批样例。
+- [x] CI：`refresh.yml`（默认轻量 / 手动 full，push 前 rebase）已启用并跑通一次。
 
-- [ ] 数据底座授权探索：desktop 壳（dataelement/dsh-desktop、hairyf、anywhere-labs）、IDE/厂商、未来官方——卖数据/分发底座而非网站（Smithery→Arcade 同款终局）。
-- [ ] 上游收编预案：若官方/awesome org 下场，数据与方法论贡献 upstream 的通道与协议。
-- [ ] KPI 复盘（见 PRODUCT-PLAN §KPI）→ go / pivot / kill。
+## 快照与版本约定（沿用）
 
-**退出标准**：写清 M4 复盘结论（一页纸），无论 go/no-go。
-
-## 非目标（全阶段）
-
-安装/交易/托管 · 社区评分 · 独立目录站竞争 · 承诺安全审计 · 登录型产品。
-
-## 快照与版本约定
-
-- 数据快照版本 = `v{YYYY.MM}` + 序号；`data/state/done.ids` 断点续跑不回退。
-- 每次快照需：`GITHUB_TOKEN="$(gh auth token)" npm run snapshot` + seeds 回归通过 + commit。
-- CI 每日刷新模板（已提交 .github 目录）在设置 token 与远端后激活。
-- 规则版本：健康分口径变化必须 bump 规则版本并附 changelog（公信力依赖此条）。
-
-## 每周执行节奏
-
-1. 跑批（断点续跑）→ 2. analyze + site + export → 3. seeds 回归 → 4. commit 快照 → 5. 更新站点与数据 URL → 6. 记决策日志。
+- 快照版本 = `v{YYYY.MM}.{n}`；`data/state/done.ids` 断点续跑不回退。
+- 每次快照：跑批 → analyze/site/export → 校准回归 → commit；CI 每日轻量 refresh + 可手动 full。
+- 健康分/雷达口径变更必须 bump 规则版本 + changelog。

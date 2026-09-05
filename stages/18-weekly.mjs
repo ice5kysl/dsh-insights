@@ -44,7 +44,7 @@ const dl = analysis.downloads
 const L = []
 L.push(`# DSH 插件生态周报 · ${wk}`)
 L.push('')
-L.push(`> 数据快照 ${(analysis.generatedAt || '').slice(0, 10)} · 由 DSH 生态观察站（dshPulse · 暂名）自动整理 · 开源：[dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)`)
+L.push(`> 数据快照 ${(analysis.generatedAt || '').slice(0, 10)} · 由 dsh-insights（DSH 插件洞察 · dsh-insights.com）自动整理 · 开源：[dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)`)
 L.push('')
 L.push('## 本期速览')
 L.push('')

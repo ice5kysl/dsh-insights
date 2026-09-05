@@ -138,7 +138,7 @@ function main() {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>dsh 插件生态洞察 · dsh-plugin-insights</title>
+<title>DSH 插件与生态洞察 · dsh-insights.com</title>
 <meta name="description" content="DeepSeek Harness (dsh) 插件生态全量索引、评估与分析仪表盘">
 <style>
 :root{
@@ -306,13 +306,13 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="#top"><span class="mark">d</span>dsh 插件生态洞察<small>dsh-plugin-insights</small></a>
+  <a class="brand" href="#top"><span class="mark">d</span>dsh-insights<small>DSH 插件与生态洞察</small></a>
   <nav class="nav"><a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a><a class="gh" href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 
 <header class="hero" id="top"><div class="wrap">
   <p class="kicker">DeepSeek Harness Plugin Ecosystem</p>
-  <h1>dsh 插件生态 · 全量索引与质量评估</h1>
+  <h1>DSH 插件与生态洞察 · dsh-insights</h1>
   <p class="lede">多源发现 → manifest 真伪校验 → 元数据评估（npm / 文档 / 构建产物 / 活跃度）→ 生态洞察。启发式评估，非安全审计。</p>
   <div class="meta"><span>快照 <b>${date}</b></span><span>最近一周新增 <b class="mono">+${lastWeek}</b></span><span><a href="https://github.com/ice5kysl/dsh-plugin-insights/blob/main/README.md" target="_blank">方法论 ↗</a></span></div>
   <div class="bignum"><b class="count mono" data-v="${t.authoritative ?? 0}">0</b><span>权威插件<br>通过 dsh.bundle manifest 校验</span></div>

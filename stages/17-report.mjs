@@ -14,7 +14,7 @@ import { join } from 'node:path'
 const ROOT = join(import.meta.dirname, '..')
 const OUT_DIR = join(ROOT, 'data', 'reports')
 mkdirSync(OUT_DIR, { recursive: true })
-const BRAND = 'DSH 生态观察站（dshPulse · 暂名）'
+const BRAND = 'DSH 插件洞察（dsh-insights.com）'
 const FOOTER = [
   '---',
   '',
