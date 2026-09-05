@@ -1,63 +1,36 @@
-# 插件报告 · ice5kysl/dsh-file-explorer-kit
+# 致 dsh-file-explorer-kit 的作者：一期一会 · 体检与建议
 
-> 生成 2026-09-05 · dsh-plugin-insights / Stage 17 · 启发式评估，非安全审计
+> ice5kysl/dsh-file-explorer-kit · 第 1 期（数据快照 2026-09-05）
 
-**B**（86/100）· 分类「侧栏 / 工作区」· ★0
+你好！我是 **DSH 生态观察站（dshPulse · 暂名）** 的自动观测员。这封信聊聊 dsh-file-explorer-kit 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
 
-- 仓库：https://github.com/ice5kysl/dsh-file-explorer-kit
-- npm：`dsh-file-explorer-kit@0.3.2`（2 版本）
-- 最近 push：2026-09-05 · 创建 2026-09-04
-- 收录：awesome-dsh-plugin — · imsai ✅
-- 同类（侧栏 / 工作区，145 个）分位：击败 **96%**（中位 72 分）
+**本期概览：B（86/100）· 在「侧栏 / 工作区」类 145 个插件里处于前 96%（同类中位 72）**
 
-## 打分明细
+- ★0 · dsh (DeepSeek Harness) file explorer: browse the active session's workspace and preview files (Markdown/image/PDF/text/binary) right inside the chat GUI — a sta
+- npm：`dsh-file-explorer-kit@0.3.2`（2 个版本）
+- 最近 push 2026-09-05 · 收录：awesome — · imsai ✅
 
-| 加分项 | +分 |
-|---|---|
-| manifest 清单 | +8 |
-| README | +6 |
-| 中英/双语 | +10 |
-| LICENSE | +4 |
-| lib/index.js | +5 |
-| lib/client.js | +5 |
-| client 导出 | +4 |
-| npm 已发布 | +8 |
-| 版本同步 | +6 |
-| 近30天活跃 | +5 |
-| 基分 | 25 |
+**做得好的**：manifest 清单、README、中英/双语、LICENSE、lib/index.js、lib/client.js、client 导出、npm 已发布、版本同步、近30天活跃 都已具备；按 README 解读，主要能力是「浏览并预览聊天会话工作区文件（Markdown/图片/PDF/文本/二进制），只读。」。这些是你的基本盘，保持即可。
 
-## 清单与产物
+**本期最值得做（Top 1，按性价比）**：
 
-README ✅ · 中文/双语 ✅ · LICENSE ✅ · cordis.patch ✅ · lib/index.js ✅ · lib/client.js ✅ · client 导出 ✅
+1. **提交 awesome-dsh-plugin** —— 上架主目录（曝光+反链）（+5）。怎么做：data/plugins/<owner>__<repo>.yml PR。
 
-## LLM 解读
+**能力标签**：file、preview、readonly、markdown、image、pdf、text、binary；README 宣称：browse the active session's workspace；preview Markdown/image/PDF/text/binary files inside the chat GUI；read-only /dsh-files host routes；conversation.view file tab
 
-浏览并预览聊天会话工作区文件（Markdown/图片/PDF/文本/二进制），只读。
-- 能力主类：file-explorer
-- 能力标签：file、preview、readonly、markdown、image、pdf、text、binary
-- 可验证宣称：browse the active session's workspace；preview Markdown/image/PDF/text/binary files inside the chat GUI；read-only /dsh-files host routes；conversation.view file tab；standard Cordis bundle plugin
+> 注：本期是基线首期。之后每期我们会对比上一期，告诉你分数/名次/收录/下载的**变化**。
 
-## 建议优化清单（按性价比）
+**想被更多人看到？** 下面这段可直接复制去提交收录：
 
-| 动作 | 影响 | 怎么做 |
-|---|---|---|
-| 提交 awesome-dsh-plugin | 曝光与反向链接（见下方文案） | fork → data/plugins/<owner>__<repo>.yml → PR（≤3 条/PR） |
-| 等待周下载数据入库 | 用于展示真实使用度 | 由 CI refresh 自动补齐 downloads.json |
+```text
+Add ice5kysl/dsh-file-explorer-kit to the DSH plugin directory (category ui) — a standard Cordis "bundle" plugin targeting @deepseek-ai/dsh ≥ 0.1.1-rc.2, published as dsh-file-explorer-kit@0.3.2.
+```
 
 ---
 
-## 提交收录（可复制）
+> 由 DSH 生态观察站（dshPulse · 暂名） 自动生成 · 数据快照 2026-09-05
+> 开源管线 [dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights) · 每插件体检 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health) · 示例页 https://ice5kysl.github.io/dsh-plugin-insights/
+> 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。
 
-### awesome-dsh-plugin（data/plugins/ice5kysl__dsh-file-explorer-kit.yml）
-```yaml
-url: https://github.com/ice5kysl/dsh-file-explorer-kit
-name: ice5kysl/dsh-file-explorer-kit
-category: ui
-description:
-  en: dsh (DeepSeek Harness) file explorer: browse the active session's workspace and preview files (Markdown/image/PDF/text/binary) right inside the chat GUI — a standard Cordis bundle plugin (read-only /dsh-files host routes
-```
-
-### PR 描述（EN/中文）
-
-Add ice5kysl/dsh-file-explorer-kit（category ui）—— 标准 Cordis bundle 插件，中英双语，目标 dsh ≥ 0.1.1-rc.2；npm：`dsh-file-explorer-kit@0.3.2`。
+> 注：本报告为启发式数据初稿，非安全审计；打分阈值 A≥90 · B≥72 · C≥52。
 

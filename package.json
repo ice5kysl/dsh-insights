@@ -33,7 +33,8 @@
     "diff": "node stages/08-diff.mjs",
     "refresh": "npm run lists && npm run downloads && npm run analyze && npm run site && npm run export && npm run diff",
     "suggest": "node bin/export-suggested.mjs",
-    "report": "node stages/17-report.mjs"
+    "report": "node stages/17-report.mjs",
+    "weekly": "node stages/18-weekly.mjs"
   },
   "keywords": [
     "dsh",

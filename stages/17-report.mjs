@@ -1,15 +1,11 @@
 #!/usr/bin/env node
 /**
- * Stage 17 — per-plugin health & improvement report generator.
+ * Stage 17 — per-plugin "letter to the author": a periodic health &
+ * improvement report written like a note from the ecosystem watcher,
+ * plus a small promotion footer for the product.
  *
- * Input:  none (batch) or `node stages/17-report.mjs owner/repo [owner/repo ...]`
- * Default batch: the two self plugins + top-5 优质未收录 suggestions.
- *
- * For each plugin writes data/reports/{owner}__{repo}.md
- * (score card · breakdown · signals · actionable optimization checklist ·
- *  channel pitch snippet · peer percentile · LLM reading when available).
- *
- * @module dsh-plugin-insights/stage-17
+ * Output: data/reports/{owner}__{repo}.md
+ * Run: npm run report  |  node stages/17-report.mjs owner/repo […]
  */
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
@@ -18,153 +14,133 @@ import { join } from 'node:path'
 const ROOT = join(import.meta.dirname, '..')
 const OUT_DIR = join(ROOT, 'data', 'reports')
 mkdirSync(OUT_DIR, { recursive: true })
+const BRAND = 'DSH 生态观察站（dshPulse · 暂名）'
+const FOOTER = [
+  '---',
+  '',
+  `> 由 ${BRAND} 自动生成 · 数据快照 ${new Date().toISOString().slice(0, 10)}`,
+  '> 开源管线 [dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights) · 每插件体检 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health) · 示例页 https://ice5kysl.github.io/dsh-plugin-insights/',
+  '> 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。',
+  '',
+  '> 注：本报告为启发式数据初稿，非安全审计；打分阈值 A≥90 · B≥72 · C≥52。',
+  '',
+].join('\n')
 
 const jl = (f) => { try { return readFileSync(join(ROOT, 'data', f), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l)) } catch { return [] } }
-
-// authoritative records + enrich + downloads + llm
 const plugins = jl('plugins.jsonl')
 const enrich = JSON.parse(readFileSync(join(ROOT, 'data', 'enrich.json'), 'utf8'))
-const dlDoc = (() => { try { return JSON.parse(readFileSync(join(ROOT, 'data', 'downloads.json'), 'utf8')) } catch { return null } })()
+let dlDoc = null
+try { dlDoc = JSON.parse(readFileSync(join(ROOT, 'data', 'downloads.json'), 'utf8')) } catch { /* ok */ }
 const llmRows = jl('llm.jsonl')
 const dlMap = dlDoc?.map || {}
 const plugBy = new Map(plugins.map((r) => [r.full_name, r]))
 const enBy = new Map(enrich.map((x) => [x.full_name, x]))
 const llmBy = new Map(llmRows.map((x) => [x.full_name, x]))
 
-function catPeers(full) {
+function peersOf(full) {
   const cat = enBy.get(full)?.category
-  if (!cat) return null
   const score = enBy.get(full)?.score ?? 0
-  const same = enrich.filter((x) => x.category === cat && x.full_name !== full)
-  if (!same.length) return { cat, below: '—', count: 0, median: null }
-  const sc = same.map((x) => x.score).sort((a, b) => a - b)
-  const below = sc.filter((v) => v <= score).length
-  const median = sc[Math.floor(sc.length / 2)]
-  return { cat, below, count: same.length + 1, median }
+  if (!cat) return null
+  const same = enrich.filter((x) => x.category === cat && x.full_name !== full).map((x) => x.score)
+  if (!same.length) return { cat, pct: null, median: null }
+  same.sort((a, b) => a - b)
+  const below = same.filter((v) => v <= score).length
+  return { cat, count: same.length + 1, pct: Math.round((below / Math.max(1, same.length)) * 100), median: same[Math.floor(same.length / 2)] }
 }
 
-function actions(r, en, llm, dl) {
+function advice(r) {
   const f = r.files || {}
   const e = r.eval || {}
   const m = r.metrics || {}
   const n = r.npm || {}
+  const en = enBy.get(r.full_name) || {}
   const out = []
-  const add = (p, what, why, how) => { if (p) out.push({ what, why, how }) }
-  add(!f.readme, '补充 README', '+6 质量分 · 用户/收录方首先看它', '按官方规范写简介/安装/开发/限制，参考同分位插件 README')
-  add(!(f.readmeZh || m.hasZhDocs), '补充中文/双语文档', '+10 质量分 · 覆盖中文生态', '加 README.zh-CN.md 或至少双语小节；仓库加中英互链')
-  add(!(f.license || r.license || e.licenseField), '补 LICENSE', '+4 · 开源可商用信号', '加 MIT/LICENSE 并在 package.json 声明 license')
-  add(!f.libClient, '提供浏览器客户端产物 lib/client.js', '+5 · 若面向 GUI 增强，浏览器面才生效', '按官方 bundle 规范加 ./client 面并构建到 lib/')
-  add(!e.hasClientExport, '声明 exports["./client"]', '+4 · 官方加载器解析需要', 'package.json exports 增加 ./client → lib/client.js')
-  add(!n.published, '发布到 npm', '+8 · 一键安装/被商店收录的前提', `npm login && npm publish（包名 ${r.pkgName || r.repo} 需未被占用）`)
-  if (n.published && r.version && n.latest && n.latest !== r.version) add(true, '同步 npm 版本', '+6 · 商店显示旧版会被弃用', `npm publish 发布 ${r.version}（当前 latest ${n.latest}）`)
-  if (!en.inAwesome) add(true, '提交 awesome-dsh-plugin', '曝光与反向链接（见下方文案）', 'fork → data/plugins/<owner>__<repo>.yml → PR（≤3 条/PR）')
-  if (!en.inImsai) add(true, '提交 imsai / deepseek1024 目录', '覆盖另一主流渠道', 'fork → catalog/plugins JSON → 一个 PR 一条')
-  if (n.published && dl == null) add(true, '等待周下载数据入库', '用于展示真实使用度', '由 CI refresh 自动补齐 downloads.json')
-  return out
-}
-
-function pitch(full, en, r) {
-  const npmTxt = r.npm?.published ? `npm：\`${r.pkgName}@${r.npm.latest}\`` : 'npm：待发布'
-  const zh = (r.metrics?.hasZhDocs ? '中英双语' : 'README 英文')
-  return [
-    `## 提交收录（可复制）`,
-    '',
-    `### awesome-dsh-plugin（data/plugins/${full.replace('/', '__')}.yml）`,
-    '```yaml',
-    `url: https://github.com/${full}`,
-    `name: ${full}`,
-    'category: ui',
-    'description:',
-    `  en: ${(r.description || '').slice(0, 220)}`,
-    '```',
-    '',
-    `### PR 描述（EN/中文）`,
-    '',
-    `Add ${full}（category ui）—— 标准 Cordis bundle 插件，${zh}，目标 dsh ≥ 0.1.1-rc.2；${npmTxt}。`,
-    '',
-  ].join('\n')
+  const push = (label, why, how, pts, ok) => { if (!ok) out.push({ label, why, how, pts }) }
+  push('补 README', '最基础的门面（+6）', '写简介/安装/开发/边界', 6, f.readme)
+  push('补充中英/双语文档', '中文生态第一印象（+10）', '加 README.zh-CN.md 并互链', 10, m.hasZhDocs || f.readmeZh)
+  push('补 LICENSE', '开源可信度（+4）', '加 MIT/LICENSE 并声明 license', 4, Boolean(f.license || r.license))
+  push('补浏览器面（lib/client.js + client 导出）', 'GUI 能力可被加载（+9）', '按官方 bundle 规范补 client 面', 9, f.libClient && e.hasClientExport)
+  push('发布到 npm', '一键安装与商店前提（+8）', 'npm publish（先查包名占用）', 8, n.published)
+  push('同步 npm 版本', '避免商店展示旧版（+6）', '把仓库当前版本发到 npm', 6, n.published && r.version && n.latest === r.version)
+  push('提交 awesome-dsh-plugin', '上架主目录（曝光+反链）（+5）', 'data/plugins/<owner>__<repo>.yml PR', 5, en.inAwesome)
+  push('提交 imsai/deepseek1024', '覆盖另一主流渠道（+5）', 'catalog/plugins JSON，一个 PR 一条', 5, en.inImsai)
+  return out.sort((a, b) => b.pts - a.pts)
 }
 
 function render(full) {
   const r = plugBy.get(full)
   const en = enBy.get(full)
+  if (!r || !en) return `# 致作者的信 · ${full}\n\n> 该插件暂不在当前权威集中（数据缺失/待重跑）。\n\n${FOOTER}\n`
   const llm = llmBy.get(full)
-  if (!r || !en) return `# ${full}\n\n> 不在当前权威集中或数据缺失\n`
   const dl = r.pkgName ? dlMap[r.pkgName] ?? null : null
-  const peers = catPeers(full)
-  const acts = actions(r, en, llm, dl)
-  const f = r.files || {}
-  const n = r.npm || {}
+  const peers = peersOf(full)
+  const adv = advice(r)
+  const name = full.split('/')[1]
   const m = r.metrics || {}
-  const flags = (k) => (k ? '✅' : '—')
+  const n = r.npm || {}
   const L = []
-  L.push(`# 插件报告 · ${full}`)
+  L.push(`# 致 ${name} 的作者：一期一会 · 体检与建议`)
   L.push('')
-  L.push(`> 生成 ${new Date().toISOString().slice(0, 10)} · dsh-plugin-insights / Stage 17 · 启发式评估，非安全审计`)
+  L.push(`> ${full} · 第 1 期（数据快照 ${new Date().toISOString().slice(0, 10)}）`)
   L.push('')
-  L.push(`**${en.grade}**（${en.score}/100）· 分类「${en.category}」· ★${r.stars || 0}`)
+  L.push(`你好！我是 **${BRAND}** 的自动观测员。这封信聊聊 ${name} 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。`)
   L.push('')
-  L.push(`- 仓库：${r.html_url || ('https://github.com/' + full)}`)
-  if (r.pkgName) L.push(`- npm：${n.published ? '`' + r.pkgName + '@' + n.latest + '`（' + n.versions + ' 版本）' : '未发布'}`)
-  if (dl) L.push(`- 周下载：**${dl.d}**（${(dl.start || '').slice(0, 10)} ~ ${(dl.end || '').slice(0, 10)}）`)
-  L.push(`- 最近 push：${(r.pushed_at || '').slice(0, 10)} · 创建 ${(r.created_at || '').slice(0, 10)}`)
-  L.push(`- 收录：${en.inAwesome ? 'awesome-dsh-plugin ✅' : 'awesome-dsh-plugin —'} · ${en.inImsai ? 'imsai ✅' : 'imsai —'}`)
-  if (peers && peers.median != null) L.push(`- 同类（${peers.cat}，${peers.count} 个）分位：击败 **${Math.round((peers.below / Math.max(1, peers.count - 1)) * 100)}%**（中位 ${peers.median} 分）`)
+  const catTxt = peers ? `在「${peers.cat}」类 ${peers.count || ''} 个插件里处于前 ${peers.pct}%` : '尚无可比同类'
+  L.push(`**本期概览：${en.grade}（${en.score}/100）· ${catTxt}${peers?.median != null ? `（同类中位 ${peers.median}）` : ''}**`)
   L.push('')
-  L.push('## 打分明细')
+  L.push(`- ★${r.stars || 0} · ${r.description ? (r.description || '').slice(0, 160) : '（无描述）'}`)
+  if (r.pkgName) L.push(`- npm：${n.published ? '`' + r.pkgName + '@' + n.latest + '`（' + n.versions + ' 个版本）' : '尚未发布'}`)
+  if (dl) L.push(`- 周下载：**${dl.d}**`)
+  L.push(`- 最近 push ${(r.pushed_at || '').slice(0, 10)} · 收录：${en.inAwesome ? 'awesome-dsh-plugin ✅' : 'awesome —'} ${en.inImsai ? '· imsai ✅' : '· imsai —'}`)
   L.push('')
-  L.push('| 加分项 | +分 |')
-  L.push('|---|---|')
-  for (const p of en.parts || []) L.push(`| ${p.label} | +${p.v} |`)
-  L.push(`| 基分 | 25 |`)
-  L.push('')
-  L.push('## 清单与产物')
-  L.push('')
-  L.push(`README ${flags(f.readme)} · 中文/双语 ${flags(m.hasZhDocs || f.readmeZh)} · LICENSE ${flags(f.license || r.license)} · cordis.patch ${flags(f.cordisPatch)} · lib/index.js ${flags(f.libIndex)} · lib/client.js ${flags(f.libClient)} · client 导出 ${flags(r.eval?.hasClientExport)}`)
-  L.push('')
-  if (llm) {
-    L.push('## LLM 解读')
-    L.push('')
-    if (llm.summaryZh || llm.summaryEn) L.push((llm.summaryZh || llm.summaryEn).slice(0, 400))
-    if (llm.category) L.push(`- 能力主类：${llm.category}`)
-    if (llm.capabilityTags && llm.capabilityTags.length) L.push(`- 能力标签：${llm.capabilityTags.join('、')}`)
-    if (llm.claims && llm.claims.length) L.push(`- 可验证宣称：${llm.claims.slice(0, 5).join('；')}`)
+  const good = (en.parts || []).map((p) => p.label)
+  if (good.length) {
+    L.push(`**做得好的**：${good.join('、')} 都已具备${llm ? '；按 README 解读，主要能力是「' + (llm.summaryZh || llm.summaryEn || '').slice(0, 120) + '」' : ''}。这些是你的基本盘，保持即可。`)
     L.push('')
   }
-  L.push('## 建议优化清单（按性价比）')
-  L.push('')
-  if (!acts.length) {
-    L.push('- ✅ 暂无启发式缺项；可持续发布迭代（新增能力、修复 issue、跟进 dsh rc）。')
+  if (adv.length) {
+    L.push(`**本期最值得做（Top ${Math.min(3, adv.length)}，按性价比）**：`)
+    L.push('')
+    adv.slice(0, 3).forEach((a, i) => {
+      L.push(`${i + 1}. **${a.label}** —— ${a.why}。怎么做：${a.how}。`)
+    })
+    if (adv.length > 3) {
+      L.push('')
+      L.push('其次还可以考虑：' + adv.slice(3).map((a) => `${a.label}（${a.why}）`).join('；') + '。')
+    }
+    L.push('')
   } else {
-    L.push('| 动作 | 影响 | 怎么做 |')
-    L.push('|---|---|---|')
-    for (const a of acts) L.push(`| ${a.what} | ${a.why} | ${a.how} |`)
+    L.push('本期没有明显的启发式短板。剩下的成长来自真实迭代：新能力、issue 响应、跟随 dsh rc 升级。')
+    L.push('')
   }
+  if (llm && llm.capabilityTags && llm.capabilityTags.length) {
+    L.push(`**能力标签**：${llm.capabilityTags.join('、')}${llm.claims && llm.claims.length ? `；README 宣称：${llm.claims.slice(0, 4).join('；')}` : ''}`)
+    L.push('')
+  }
+  L.push('> 注：本期是基线首期。之后每期我们会对比上一期，告诉你分数/名次/收录/下载的**变化**。')
   L.push('')
-  L.push('---')
-  L.push('')
-  L.push(pitch(full, en, r))
+  if (!en.inAwesome || !en.inImsai) {
+    L.push('**想被更多人看到？** 下面这段可直接复制去提交收录：')
+    L.push('')
+    L.push('```text')
+    L.push(`Add ${full} to the DSH plugin directory (category ui) — a standard Cordis "bundle" plugin targeting @deepseek-ai/dsh ≥ 0.1.1-rc.2${r.npm?.published ? `, published as ${r.pkgName}@${r.npm.latest}` : ''}.`)
+    L.push('```')
+    L.push('')
+  }
+  L.push(FOOTER)
   return L.join('\n') + '\n'
 }
 
 function main() {
   const args = process.argv.slice(2).filter((a) => !a.startsWith('-'))
   const self = ['ice5kysl/dsh-workspace-kit', 'ice5kysl/dsh-file-explorer-kit']
-  let targets
-  if (args.length) targets = args
-  else {
-    const analysis = JSON.parse(readFileSync(join(ROOT, 'data', 'analysis.json'), 'utf8'))
-    const top = (analysis.suggested || []).slice(0, 5).map((s) => s.full_name)
-    targets = [...self, ...top]
-  }
+  const targets = args.length ? args : self
   const written = []
   for (const full of targets) {
-    const name = full.replace('/', '__')
-    const md = render(full)
-    writeFileSync(join(OUT_DIR, name + '.md'), md)
+    writeFileSync(join(OUT_DIR, full.replace('/', '__') + '.md'), render(full))
     written.push(full)
   }
-  console.log(`[report] ${written.length} reports → data/reports/\n` + written.map((w) => '  - ' + w).join('\n'))
+  console.log(`[letter] ${written.length} → data/reports/\n` + written.map((w) => '  · ' + w).join('\n'))
 }
 
 main()
