@@ -20,7 +20,7 @@ import { readFileSync as readRows } from 'node:fs'
 
 const ROOT = join(import.meta.dirname, '..')
 const CACHE = join('/tmp', 'dsh-deep-cache')
-const LOCAL = '/Users/iceskysl/Code/Labs/dsh'
+const LOCAL = process.env.DSH_WORKSPACE || join(ROOT, '..') // 深检目标目录：环境变量或仓库父目录（不再硬编码本机路径）
 mkdirSync(CACHE, { recursive: true })
 
 function scanDir(dir, fullName) {

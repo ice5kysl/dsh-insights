@@ -17,7 +17,7 @@
    - 或独立 org（见 VISION O2）——决定"中立第三方"叙事。
 2. 推送：
    ```bash
-   cd /Users/iceskysl/Code/Labs/dsh/dsh-plugin-insights
+   cd <本仓库目录>
    git remote add origin git@github.com:ice5kysl/dsh-plugin-insights.git
    git push -u origin main
    ```
@@ -37,7 +37,7 @@
 ## Phase 3 · 全量快照（校验完成后）
 
 ```bash
-cd /Users/iceskysl/Code/Labs/dsh/dsh-plugin-insights
+cd <本仓库目录>
 GITHUB_TOKEN="$(gh auth token)" npm run snapshot   # 或逐段跑
 npm run regress                                    # 校准 15/15 复验
 git add data/ site/ && git commit -m "snapshot: full authoritative set v0.1"
