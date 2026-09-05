@@ -162,7 +162,7 @@ async function validateOne(c) {
 async function main() {
   const lines = readFileSync(CAND, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
   const repos = lines.filter((c) => c.kind === 'repo' && c.id && !done.has(c.id))
-  let processed = 0, valid = 0, transient = 0
+  let processed = 0, valid = 0, transient = 0, transConsec = 0
   const conc = Math.max(1, CONCURRENCY)
   const queue = repos.slice()
   async function worker() {
@@ -182,9 +182,16 @@ async function main() {
         }
         appendFileSync(STATE, c.id + "\n")
         done.add(c.id)
+        transConsec = 0
       } catch (e) {
         transient++
-        console.error(`[validate] transient ${c.id}: ${e?.message}`)
+        transConsec++
+        const msg = String(e?.message || '')
+        if (/rate|403|abuse|secondary/i.test(msg) && transConsec >= 8) {
+          console.error('[validate] persistent rate limiting — pausing cleanly; rerun later to resume (progress kept)')
+          process.exit(0)
+        }
+        console.error(`[validate] transient ${c.id}: ${msg.slice(0, 120)}`)
         if (transient % 10 === 0) await sleep(5000)
       }
     }
