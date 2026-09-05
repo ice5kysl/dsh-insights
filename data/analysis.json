@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-05T06:14:41.675Z",
+  "generatedAt": "2026-09-05T06:15:05.087Z",
   "totals": {
-    "authoritative": 1244,
-    "active30": 1244,
+    "authoritative": 1249,
+    "active30": 1249,
     "active30Pct": 100,
-    "ageGate1": 1240,
+    "ageGate1": 1245,
     "ageGate1Pct": 99.7,
     "byMonth": {
-      "2026-08": 1189,
+      "2026-08": 1194,
       "2026-02": 4,
       "2026-07": 14,
       "2026-04": 1,
@@ -20,24 +20,24 @@
   },
   "distribution": {
     "publish": {
-      "published": 640,
-      "unpublished": 604,
+      "published": 642,
+      "unpublished": 607,
       "stale": 168
     },
     "docs": {
-      "readme": 1233,
+      "readme": 1238,
       "zhFile": 137,
-      "zh": 516,
-      "both": 506,
+      "zh": 521,
+      "both": 511,
       "none": 11
     },
     "lib": {
-      "index": 581,
-      "client": 509,
-      "both": 449
+      "index": 586,
+      "client": 512,
+      "both": 452
     },
     "publishPct": 51.4,
-    "zhPct": 40.7
+    "zhPct": 40.9
   },
   "npmStaleTop": [
     {
@@ -104,19 +104,19 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 1189
+      "count": 1194
     },
     {
       "topic": "deepseek-harness",
-      "count": 940
+      "count": 943
     },
     {
       "topic": "dsh",
-      "count": 688
+      "count": 689
     },
     {
       "topic": "deepseek",
-      "count": 243
+      "count": 244
     },
     {
       "topic": "dsh-plugins",
@@ -212,6 +212,128 @@
       "stars": 1190,
       "published": false,
       "zh": false
+    }
+  ],
+  "health": {
+    "generatedAt": "2026-09-05T06:15:05.086Z",
+    "ruleVersion": "health-v1",
+    "total": 1249,
+    "grades": {
+      "A": 650,
+      "B": 594,
+      "C": 5,
+      "D": 0
+    },
+    "avg": 87.6,
+    "median": 90,
+    "topDeductions": [
+      {
+        "code": "manifest.no-client-export",
+        "count": 879,
+        "pct": 70.4
+      },
+      {
+        "code": "docs.zh-missing",
+        "count": 727,
+        "pct": 58.2
+      },
+      {
+        "code": "npm.unpublished",
+        "count": 607,
+        "pct": 48.6
+      },
+      {
+        "code": "manifest.not-lib-main",
+        "count": 545,
+        "pct": 43.6
+      },
+      {
+        "code": "npm.version-drift",
+        "count": 168,
+        "pct": 13.5
+      },
+      {
+        "code": "repo.no-license",
+        "count": 92,
+        "pct": 7.4
+      },
+      {
+        "code": "manifest.no-files-whitelist",
+        "count": 49,
+        "pct": 3.9
+      },
+      {
+        "code": "repo.no-dsh-topic",
+        "count": 35,
+        "pct": 2.8
+      },
+      {
+        "code": "activity.too-young",
+        "count": 4,
+        "pct": 0.3
+      }
+    ]
+  },
+  "topByHealth": [
+    {
+      "repo": "omdsh-dev/DSH-better-sidebar",
+      "stars": 3339,
+      "score": 100,
+      "grade": "A"
+    },
+    {
+      "repo": "omdsh-dev/dsh-mnemon",
+      "stars": 331,
+      "score": 100,
+      "grade": "A"
+    },
+    {
+      "repo": "shanliuling/dsh-image-gen",
+      "stars": 314,
+      "score": 100,
+      "grade": "A"
+    },
+    {
+      "repo": "RevolutionLA/dsh-dream-skin",
+      "stars": 142,
+      "score": 100,
+      "grade": "A"
+    },
+    {
+      "repo": "pengyue-polaron/deepseek-harness-genui",
+      "stars": 107,
+      "score": 100,
+      "grade": "A"
+    },
+    {
+      "repo": "mexiaosqwq/dsh-web-mobile",
+      "stars": 78,
+      "score": 100,
+      "grade": "A"
+    },
+    {
+      "repo": "anweat/dsh-web-search-pro",
+      "stars": 61,
+      "score": 100,
+      "grade": "A"
+    },
+    {
+      "repo": "a179-sanae/dsh-auto-collapse",
+      "stars": 53,
+      "score": 100,
+      "grade": "A"
+    },
+    {
+      "repo": "SiriLee/dsh-rewind",
+      "stars": 37,
+      "score": 100,
+      "grade": "A"
+    },
+    {
+      "repo": "jjxjjjjiik-bot/dsh-chat-timeline",
+      "stars": 32,
+      "score": 100,
+      "grade": "A"
     }
   ],
   "deep": {

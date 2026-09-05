@@ -11,6 +11,7 @@
 
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { scoreAll } from './08-score.mjs'
 
 const ROOT = join(import.meta.dirname, '..')
 const PLUGINS = process.argv[2] || join(ROOT, 'data', 'plugins.jsonl')
@@ -66,6 +67,14 @@ function analyze(rows) {
     .map((r) => ({ repo: r.full_name, stars: r.stars, published: Boolean(r.npm?.published), zh: Boolean(r.metrics?.hasZhDocs) }))
   const active = rows.filter((r) => r.metrics?.active30).length
   const ageOk = rows.filter((r) => r.metrics?.ageGate1).length
+  const scored = scoreAll(rows)
+  const { summary: health } = scored
+  const healthBy = new Map(scored.out.map((r) => [r.full_name, r.health]))
+  const topByHealth = rows
+    .slice()
+    .sort((a, b) => (healthBy.get(b.full_name)?.score ?? -1) - (healthBy.get(a.full_name)?.score ?? -1) || (b.stars || 0) - (a.stars || 0))
+    .slice(0, 10)
+    .map((r) => ({ repo: r.full_name, stars: r.stars, score: healthBy.get(r.full_name)?.score ?? null, grade: healthBy.get(r.full_name)?.grade ?? null }))
   const staleTop = rows
     .filter((r) => r.npm?.published && r.version && r.npm.latest && r.npm.latest !== r.version)
     .sort((a, b) => (b.stars || 0) - (a.stars || 0))
@@ -84,6 +93,8 @@ function analyze(rows) {
     topTopics: Object.entries(topics).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([t, c]) => ({ topic: t, count: c })),
     medianStars: n ? stars[Math.floor(n / 2)] : 0,
     topByStars: topStars,
+    health: { ...health, ruleVersion: health.ruleVersion },
+    topByHealth,
     deep: readDeep(),
   }
 }
@@ -110,6 +121,20 @@ function render(a) {
   L.push('## Top topics')
   for (const t of a.topTopics) L.push(`- \`${t.topic}\` × ${t.count}`)
   L.push('')
+  if (a.health && a.health.total) {
+    const h = a.health
+    L.push('## 健康分（' + h.ruleVersion + ' · 客观启发式，非安全审计）')
+    L.push(`- 分布：A ${h.grades.A} · B ${h.grades.B} · C ${h.grades.C} · D ${h.grades.D}`)
+    L.push(`- 平均 ${h.avg} · 中位 ${h.median}`)
+    const topD = h.topDeductions || []
+    if (topD.length) L.push('- 最常见扣分：' + topD.map((d) => `\`${d.code}\` ${d.pct}%`).join(' · '))
+    L.push('')
+    L.push('### 健康榜前 10')
+    L.push('| repo | ★ | 健康 |')
+    L.push('|---|---|---|')
+    for (const t of a.topByHealth) L.push(`| ${t.repo} | ${t.stars} | ${t.grade}(${t.score}) |`)
+    L.push('')
+  }
   L.push('## Star 榜前 10')
   L.push('| repo | ★ | npm | 中文/双语 |')
   L.push('|---|---|---|---|')
