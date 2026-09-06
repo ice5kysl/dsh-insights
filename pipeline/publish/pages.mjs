@@ -22,7 +22,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync, existsSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { page, mdToHtml, mdTitle, escHtml } from '../../lib/page.mjs'
-import { DATA, SITE, PATHS } from '../../lib/data.mjs'
+import { DATA, SITE, PATHS, loadPlugins, byFullName } from '../../lib/data.mjs'
 
 const ORIGIN = 'https://dsh-insights.com'
 
@@ -262,17 +262,28 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
 
   // ---- /scenarios/ 场景组合推荐 -------------------------------------------
   const scenarios = (JSON.parse(read('scenarios.json') || '{"scenarios":[]}')).scenarios || []
+  const plugBy = byFullName(loadPlugins())
+  const scRow = (p, extra) => `<div class="scrow"><a href="${escHtml(p.url)}" target="_blank" title="${escHtml(p.full_name)}">${escHtml(p.full_name)}</a><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}${p.npm ? ' · npm ' + escHtml(p.npm) : ''}${p.active ? ' · 活跃' : ''}${extra || ''}</span></div>`
   const scCards = scenarios.filter((s) => (s.plugins || []).length).map((s) => {
-    const rows = s.plugins.map((p) => `<div class="scrow"><a href="${escHtml(p.url)}" target="_blank" title="${escHtml(p.full_name)}">${escHtml(p.full_name)}</a><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}${p.npm ? ' · npm ' + escHtml(p.npm) : ''}${p.active ? ' · 活跃' : ''}</span></div>`).join('')
+    const withAge = s.plugins.map((p) => ({ ...p, created: (plugBy.get(p.full_name)?.created_at || '').slice(0, 10) }))
+    const best = withAge.slice(0, 5)
+    const fresh = [...withAge].sort((a, b) => (b.created || '').localeCompare(a.created || '')).slice(0, 5)
     const reasons = [...new Set(s.plugins.flatMap((p) => p.reasons || []))].slice(0, 3).join('；')
-    return `<div class="card"><b>${escHtml(s.zh)} <span style="color:var(--faint);font-weight:400;font-size:11.5px">${escHtml(s.en)}</span></b><p>${s.candidates} 个候选 · 按健康分/npm/活跃排序${reasons ? ' · ' + escHtml(reasons) : ''}</p>${rows}</div>`
+    return `<section class="scsec" id="sc-${escHtml(s.id)}">
+<h2 style="font-size:16px;margin:0 0 4px">${escHtml(s.zh)} <span style="color:var(--faint);font-weight:400;font-size:12px">${escHtml(s.en)}</span></h2>
+<p style="color:var(--faint);font-size:12px;margin:0 0 12px">${s.candidates} 个候选 · 按健康分/npm/活跃排序${reasons ? ' · ' + escHtml(reasons) : ''}</p>
+<div class="sc-cols">
+<div class="card" style="margin:0"><b>质量首选</b>${best.map((p) => scRow(p)).join('')}</div>
+<div class="card" style="margin:0"><b>新入场</b>${fresh.map((p) => scRow(p, ' · 创于 ' + escHtml(p.created || '—'))).join('') || '<p style="color:var(--faint);font-size:12px">暂无</p>'}</div>
+</div>
+</section>`
   }).join('\n')
   written.push(out('scenarios/index.html', page({
     title: '场景组合推荐', desc: '按使用场景挑选 dsh 插件组合：客观信号排序、每场景给备选、理由可展开。',
     base: '../', here: 'scenarios/',
     body: `<p class="crumb">Scenarios</p><h1 class="pagetitle">场景组合推荐</h1>
 <p class="lede">从「我要做什么」出发，而不是从「哪个星多」出发。每个场景给出健康分最高、npm 已发布、近期活跃的一组候选与备选——<b>客观信号排序，不接"最佳"叙事，不做付费置顶</b>。覆盖 ${scenarios.reduce((n, s) => n + (s.plugins || []).length, 0)} 个推荐位，随每日快照刷新。</p>
-<div class="cards">${scCards || '<div class="card"><b>数据积累中</b><p>场景数据随 LLM 标注覆盖逐步补齐。</p></div>'}</div>
+<div>${scCards || '<div class="card"><b>数据积累中</b><p>场景数据随 LLM 标注覆盖逐步补齐。</p></div>'}</div>
 <h2 style="font-size:16px;margin:28px 0 8px">排序口径</h2>
 <p class="lede">场景归属 = LLM 能力标签 ∪ 词汇桶（标注"LLM 生成，人工抽查"）；场景内排序 = 健康分 → npm 已发布 → 近 30 天活跃，星数仅作展示不参与排序。同样的数据在 <a href="../data/insights.json">/data/insights.json</a> 开放，agent 可直接消费。</p>`,
   })))
