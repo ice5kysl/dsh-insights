@@ -66,6 +66,12 @@ async function main() {
     .map((e) => ({ source: e.source, target: e.target, weight: Math.round(e.weight * 10) / 10, repos: [...e.repos].slice(0, 6) }))
     .sort((a, b) => b.weight - a.weight)
 
+  // P2-16：限流/失败静默 continue 可能产出空/近空图——此时保留旧文件并告警，绝不覆盖写
+  if (nodes.length < 10) {
+    console.error(`[author-graph] 采集结果近空（nodes=${nodes.length}，fetched ${fetched}/${plugins.length}）——保留旧 authors-graph.json 不覆盖；疑似限流/网络失败，下轮重跑`)
+    return
+  }
+
   const doc = {
     fetchedAt: new Date().toISOString(),
     sampledPlugins: plugins.length,

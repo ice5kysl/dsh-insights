@@ -57,7 +57,7 @@ const STEPS = [
 ]
 
 const DAILY = ['lists', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'pages']
-const SNAPSHOT = ['analyze', 'score', 'history', 'export-csv', 'export-json', 'overlap', 'scenarios', 'badges', 'site', 'pages']
+const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'overlap', 'scenarios', 'badges', 'site', 'pages']
 const CONTENT = ['letters', 'weekly', 'pages']
 const PROFILES = {
   daily: DAILY,

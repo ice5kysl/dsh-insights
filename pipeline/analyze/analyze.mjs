@@ -87,10 +87,10 @@ function analyze(rows) {
     if (r.created_at) {
       const dt = new Date(r.created_at)
       if (!Number.isNaN(dt.getTime())) {
-        const day = dt.getDay() // 0=Sun
+        const day = dt.getUTCDay() // 0=Sun（UTC 周归属，P2-13：消除本地时区漂移）
         const monday = new Date(dt.getTime() - ((day + 6) % 7) * 86400000)
         const pad = (n) => String(n).padStart(2, '0')
-        const wk = monday.getFullYear() + '-' + pad(monday.getMonth() + 1) + '-' + pad(monday.getDate())
+        const wk = monday.getUTCFullYear() + '-' + pad(monday.getUTCMonth() + 1) + '-' + pad(monday.getUTCDate())
         byWeek[wk] = (byWeek[wk] || 0) + 1
         const g = (healthBy.get(r.full_name) || {}).grade || 'D'
         ;(gradeWk[g] ??= {})[wk] = ((gradeWk[g] ??= {})[wk] || 0) + 1
@@ -175,17 +175,18 @@ function analyze(rows) {
   const weekOf = (iso) => {
     const dt = new Date(iso)
     if (Number.isNaN(dt.getTime())) return null
-    const day = dt.getDay()
+    const day = dt.getUTCDay() // UTC 周归属（P2-13）
     const monday = new Date(dt.getTime() - ((day + 6) % 7) * 86400000)
     const pad = (x) => String(x).padStart(2, '0')
-    return monday.getFullYear() + '-' + pad(monday.getMonth() + 1) + '-' + pad(monday.getDate())
+    return monday.getUTCFullYear() + '-' + pad(monday.getUTCMonth() + 1) + '-' + pad(monday.getUTCDate())
   }
   const candByWeek = {}
   for (const c of candRows) { const w = weekOf(c.created_at); if (w) candByWeek[w] = (candByWeek[w] || 0) + 1 }
   const coverage = {
     // topic 宇宙总量：GitHub search `topic:dsh-plugin` total_count（官方零门槛打标即入，含蹭标/无关/fork/子路径噪音）。
-    // 数值定期由 discover 全量抓取时刷新（见 data/discover-meta.json）；缺省用 RESEARCH 2026-09-05 实测。
-    topicUniverse: readJson(join(DATA, 'discover-meta.json'))?.topicTotal ?? { count: 13592, at: '2026-09-05' },
+    // 数值由 discover 全量抓取时刷新（见 data/discover-meta.json）；缺失时为 null（P2-15：
+    // 不用过期硬编码常数兜底），site 端 funnel 在 uni 为 0/null 时自动不渲染。
+    topicUniverse: readJson(join(DATA, 'discover-meta.json'))?.topicTotal ?? null,
     candidates,
     candidatesByWeek: candByWeek,
     validated,

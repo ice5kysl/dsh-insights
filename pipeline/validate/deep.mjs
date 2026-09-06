@@ -35,7 +35,7 @@ function scanDir(dir, fullName) {
   let sanitized = false
   function walk(p) {
     for (const e of readdirSync(p, { withFileTypes: true })) {
-      if (e.name.startsWith('.') || ['node_modules', 'lib', 'dist', 'docs'].includes(e.name)) continue
+      if (e.name.startsWith('.') || ['node_modules', 'dist', 'docs'].includes(e.name)) continue
       const full = join(p, e.name)
       if (e.isDirectory()) walk(full)
       else if (/\.(ts|tsx|js|mjs|jsx)$/.test(e.name)) {

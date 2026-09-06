@@ -27,14 +27,24 @@ const SRC = PATHS.plugins
 const OUT = PATHS.compat
 
 async function npmDocRaw(name) {
-  try {
-    const r = await fetch(`${NPM}/${String(name).replace(/^@/, '%40')}`, {
-      headers: { 'user-agent': 'dsh-insights' },
-      signal: AbortSignal.timeout(20000),
-    })
-    if (!r.ok) return null
-    return await r.json()
-  } catch { return null }
+  // P2-17：失败重试一次再放弃（此前静默 null 导致 compat.json 全仓最老）
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const r = await fetch(`${NPM}/${String(name).replace(/^@/, '%40')}`, {
+        headers: { 'user-agent': 'dsh-insights' },
+        signal: AbortSignal.timeout(20000),
+      })
+      if (!r.ok) {
+        if (attempt < 2 && r.status !== 404) { await sleep(2000); continue }
+        return null
+      }
+      return await r.json()
+    } catch {
+      if (attempt < 2) { await sleep(2000); continue }
+      return null
+    }
+  }
+  return null
 }
 
 function semverKey(v) {
@@ -69,11 +79,12 @@ async function run() {
 
   const plugins = []
   let i = 0
+  let failed = 0
   for (const t of targets) {
     const doc = await npmDocRaw(t.pkgName)
     i++
-    if (i % 100 === 0) console.log(`[compat] ${i}/${targets.length}`)
-    if (!doc) continue
+    if (i % 100 === 0) console.log(`[compat] ${i}/${targets.length} (failed ${failed})`)
+    if (!doc) { failed++; continue }
     const latest = doc['dist-tags']?.latest
     const v = doc.versions?.[latest] || {}
     const peers = v.peerDependencies || {}
@@ -102,6 +113,7 @@ async function run() {
   }
   writeJson(OUT, doc, true)
   const withEngines = plugins.filter((p) => p.enginesDsh || p.dshPeers.length).length
+  if (failed) console.error(`[compat] npm 请求失败 ${failed}/${targets.length}（重试一次后仍失败，已从结果中剔除）`)
   console.log(`[compat] ${plugins.length} plugins probed, ${withEngines} declare engines.dsh or dsh peers · official dsh versions ${officialDsh.versions.length} → data/compat.json`)
 }
 

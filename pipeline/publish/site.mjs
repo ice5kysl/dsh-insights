@@ -56,14 +56,14 @@ function main() {
   const wkGrade = t.byWeekGrades || {}
   const wkCand = a.coverage?.candidatesByWeek || {}
   const wkPresent = [...new Set([...Object.keys(t.byWeek || {}), ...Object.keys(wkCand), ...Object.keys(wkGrade.A || {}), ...Object.keys(wkGrade.B || {})])].sort()
-  // 连续周轴：以最近一个有数据的周一为终点，向前补零 20 周
+  // 连续周轴：以最近一个有数据的周一为终点，向前补零 20 周（UTC，P2-13）
   const wkKeys = []
   if (wkPresent.length) {
     const pad = (x) => String(x).padStart(2, '0')
-    const end = new Date(wkPresent[wkPresent.length - 1])
+    const end = new Date(wkPresent[wkPresent.length - 1] + 'T00:00:00Z')
     for (let i = 19; i >= 0; i--) {
       const d = new Date(end.getTime() - i * 7 * 86400000)
-      wkKeys.push(d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()))
+      wkKeys.push(d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate()))
     }
   }
   const SERIES = [
@@ -528,8 +528,8 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 
 <script>
 const ROWS=${dataJson};
-const WKS=${JSON.stringify(wkRows)};
-const WSERIES=${JSON.stringify(SERIES.map((s) => ({ key: s.key, label: s.label, color: s.color })))};
+const WKS=${JSON.stringify(wkRows).replace(/</g, '\\u003c')};
+const WSERIES=${JSON.stringify(SERIES.map((s) => ({ key: s.key, label: s.label, color: s.color }))).replace(/</g, '\\u003c')};
 const $=s=>document.querySelector(s);
 let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
 

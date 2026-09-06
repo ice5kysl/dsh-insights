@@ -39,8 +39,8 @@ const maxRows = Number(process.env.LLM_MAX || 200)
 const batch = Math.max(1, Number(process.env.LLM_BATCH || 10))
 
 const SYSTEM = `你是 dsh 插件生态分析助手。给每个 DeepSeek Harness 插件输出结构化 JSON，只做客观描述与能力提取，不做质量评价。
-输出 JSON 格式（无 markdown 包裹）：
-{"category":"主分类(英文kebab)","capabilityTags":["短标签,英文,<=8个"],"commands":["README里出现的命令/动作,没有则[]"],"summaryZh":"<=40字中文","summaryEn":"<=40词英文","claims":["README中可验证的具体宣称,如'46个工具','支持X协议';没有则[]"],"confidence":0-1}`
+输入每行以 "N. " 开头（N 为 1-based 序号）。逐条输出，每条一行 JSON（无 markdown 包裹），且每行必须带 "n" 字段等于输入序号，用于对位校验：
+{"n":序号,"category":"主分类(英文kebab)","capabilityTags":["短标签,英文,<=8个"],"commands":["README里出现的命令/动作,没有则[]"],"summaryZh":"<=40字中文","summaryEn":"<=40词英文","claims":["README中可验证的具体宣称,如'46个工具','支持X协议';没有则[]"],"confidence":0-1}`
 
 function extractJson(text) {
   const m = String(text).match(/\{[\s\S]*\}/)
@@ -54,8 +54,8 @@ async function callLLM(rows) {
     temperature: 0.2,
     messages: [
       { role: 'system', content: SYSTEM },
-      { role: 'user', content: '逐条分析以下插件（保持顺序），每条输出一行 JSON：\n' +
-        rows.map((p) => `${p.full_name} | ${(p.description || '').slice(0, 400)}`).join('\n') },
+      { role: 'user', content: '逐条分析以下插件（保持顺序），每条输出一行 JSON，"n" 字段等于该条序号：\n' +
+        rows.map((p, i) => `${i + 1}. ${p.full_name} | ${(p.description || '').slice(0, 400)}`).join('\n') },
     ],
   }
   const r = await fetch(`${base}/chat/completions`, {
@@ -115,9 +115,25 @@ async function main() {
         continue
       }
       const lines = String(text).split('\n').filter((l) => l.trim().startsWith('{'))
+      // P2-18：序号字段对位校验——按 "n" 匹配输入序号，对不上（缺号/重号/超界）
+      // 整个 chunk 丢弃，不写 llm.jsonl、不标 llm.done，下轮重试（杜绝行号错位错标）
+      const byN = new Map()
+      let alignOk = lines.length > 0
+      for (const l of lines) {
+        const obj = extractJson(l)
+        const n = obj && Number.isInteger(obj.n) ? obj.n : null
+        if (!obj || n == null || n < 1 || n > chunk.length || byN.has(n)) { alignOk = false; break }
+        byN.set(n, obj)
+      }
+      if (!alignOk || byN.size !== chunk.length) {
+        failed++
+        console.warn(`[llm] chunk 序号对位失败（${lines.length} 行输出 / ${chunk.length} 行输入）——整 chunk 丢弃重试（abandoned=${failed}）`)
+        if (failed >= 6) { console.error('[llm] too many abandoned chunks — stop (resume later, progress kept)'); break }
+        continue
+      }
       let batchOk = 0
       chunk.forEach((p, i) => {
-        const obj = lines[i] ? extractJson(lines[i]) : null
+        const obj = byN.get(i + 1)
         const row = {
           full_name: p.full_name,
           url: p.url,
@@ -138,7 +154,6 @@ async function main() {
         tagged++
         batchOk++
       })
-      if (lines.length < chunk.length) console.warn(`[llm] got ${lines.length} JSON lines for ${chunk.length} rows`)
       await sleep(500)
     }
   }

@@ -202,7 +202,7 @@ ${platRows}
 <div class="card" style="padding:8px"><div id="gwrap" style="position:relative"><svg id="gnet" viewBox="0 0 920 540" style="width:100%;height:auto;display:block"></svg><div id="gtip2" style="position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font:11.5px var(--mono);padding:6px 10px;border-radius:7px;display:none;max-width:260px;z-index:5"></div></div></div>
 <script>
 (function(){
-  var G=${JSON.stringify({ nodes: graph.nodes.slice(0, 60), links: graph.links })};
+  var G=${JSON.stringify({ nodes: graph.nodes.slice(0, 60), links: graph.links }).replace(/</g, '\\u003c')};
   var keep=new Set(G.nodes.map(function(n){return n.id}));
   var links=G.links.filter(function(l){return keep.has(l.source)&&keep.has(l.target)&&l.weight>=1.5}).slice(0,160);
   var nodes=G.nodes.map(function(n,i){ var a=i/G.nodes.length*2*Math.PI;

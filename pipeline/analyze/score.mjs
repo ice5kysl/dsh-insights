@@ -113,7 +113,8 @@ export function scoreOne(r) {
     if (evl.mainIsLib === false) warn('manifest.not-lib-main', { mainIsLib: false })
   }
   if (evl) {
-    if (evl.filesWhitelist == null) warn('manifest.no-files-whitelist', { filesWhitelist: null })
+    // filesWhitelist == null 视为未探测（探测不到不扣分，P2-12）：跳过该规则，记入 missing
+    if (evl.filesWhitelist == null) missing.push('filesWhitelist')
   }
 
   // npm

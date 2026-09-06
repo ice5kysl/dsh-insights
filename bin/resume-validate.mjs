@@ -18,6 +18,7 @@ const CAND = PATHS.candidatesAll
 const STATE = PATHS.doneIds
 const MARKER = join(DATA, 'state', 'COMPLETE.json')
 const every = Number(process.env.EVERY || 30)
+const MAX_ATTEMPTS = Number(process.env.MAX_ATTEMPTS || 500) // P2-14：for(;;) 必须有上限
 
 const run = (script) => {
   const r = spawnSync(process.execPath, [join(ROOT, script)], { stdio: 'inherit', env: { ...process.env } })
@@ -57,6 +58,10 @@ async function main() {
       process.exit(0)
     }
     attempts++
+    if (attempts > MAX_ATTEMPTS) {
+      console.error(`[resume] 已达尝试上限 ${MAX_ATTEMPTS} 次，仍缺 ${missing}/${total} —— 明确退出（非 0），人工核查后重跑可断点续跑`)
+      process.exit(1)
+    }
     if (await apiOk()) {
       console.log(`[resume] attempt ${attempts}: missing ${missing}/${total}; sweeping`)
       const st = run('pipeline/validate/validate.mjs')

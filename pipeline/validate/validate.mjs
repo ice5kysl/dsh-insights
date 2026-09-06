@@ -50,6 +50,13 @@ for (const f of [PLUGINS, INVALID]) {
 }
 const rowKey = (row) => (row.full_name || (row.owner && row.repo ? `${row.owner}/${row.repo}` : '') || '').toLowerCase()
 
+// transient（P1-3）：限流/网络/服务端类失败不落盘、不标 done，下轮重试。
+// 404 已映射为 repo-gone，故其余 repo-http* 一律视为 transient；
+// 仅 repo-gone 与明确的非插件判定（no-signal/fork/archived/
+// no-dsh-bundle/no-package.json/package-parse/patch-missing）才永久落盘。
+const isTransientReason = (reason) =>
+  /^repo-http/.test(reason) || reason === 'tree-failed' || reason === 'patch-fetch'
+
 const hasSignal = (c) => {
   const t = (c.topics || []).join(' ')
   const desc = `${c.description || ''} ${c.name || ''}`
@@ -203,6 +210,18 @@ async function main() {
       processed++
       try {
         const res = await validateOne(c)
+        if (!res.ok && isTransientReason(res.reason)) {
+          // transient：不 append invalid、不标 done，计入退避，下轮重试（P1-3）
+          transient++
+          transConsec++
+          if (transConsec >= 8) {
+            console.error(`[validate] persistent transient failures (${res.reason}) — pausing cleanly; rerun later to resume (progress kept)`)
+            process.exit(0)
+          }
+          console.error(`[validate] transient ${c.id}: ${res.reason}`)
+          if (transient % 10 === 0) await sleep(5000)
+          continue
+        }
         const row = res.record || { owner: c.owner, repo: c.name, source: c.source || null }
         const key = rowKey(row)
         const dup = key && seenRows.has(key)
