@@ -337,9 +337,9 @@ ${platRows}
     : '<p class="lede" style="margin:8px 0">数据积累中（较上一快照暂无变化）</p>'
   const boardCards = [
     ['★ 最多 star 榜', '作者全部插件 ★ 合计', miniList(byStars, (a) => `★${a.stars.toLocaleString()}`)],
+    ['多产榜', '权威集插件数', miniList(byProlific, (a) => `${a.plugins} 个 · A/B ${a.ab}`)],
     ['最新飙升榜', '较上一快照 ★ 增量（日更）', miniList(byRiser, (a) => `+${a.delta}`)],
     ['最新榜', '首次出现插件的时间', miniList(byNew, (a) => escHtml(a.firstCreated || '—'))],
-    ['多产榜', '权威集插件数', miniList(byProlific, (a) => `${a.plugins} 个 · A/B ${a.ab}`)],
   ].map(([t, sub, html]) => `<div class="card"><b>${t}</b><p>${sub}</p>${html}</div>`).join('\n')
 
   // 作者协作关系图（Top 200 ★ 插件 contributors 采样）
