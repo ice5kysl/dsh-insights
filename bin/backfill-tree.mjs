@@ -11,7 +11,7 @@
  * Run: GITHUB_TOKEN=... node bin/backfill-tree.mjs
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync, renameSync } from 'node:fs'
 import { PATHS } from '../lib/data.mjs'
 import { ghApi } from '../lib/api.mjs'
 
@@ -43,11 +43,19 @@ async function main() {
   console.log(`[backfill-tree] ${todo.length}/${rows.length} rows need tree signals`)
   let done = 0, failed = 0
   for (const r of todo) {
-    const sig = await treeSignals(r.owner, r.repo, r.default_branch)
+    let sig = null
+    try {
+      sig = await treeSignals(r.owner, r.repo, r.default_branch)
+    } catch (e) { /* fetch 超时/网络错误按失败计（保持缺失不扣分） */ }
     done++
     if (sig) Object.assign(r.files, sig)
     else failed++
     if (done % 200 === 0) console.log(`[backfill-tree] ${done}/${todo.length}（failed ${failed}）`)
+    if (done % 500 === 0) {
+      writeFileSync(PATHS.plugins + '.tmp', rows.map((x) => JSON.stringify(x)).join('\n') + '\n')
+      renameSync(PATHS.plugins + '.tmp', PATHS.plugins)
+      console.log(`[backfill-tree] checkpoint saved @${done}`)
+    }
   }
   writeFileSync(PATHS.plugins, rows.map((r) => JSON.stringify(r)).join('\n') + '\n')
   console.log(`[backfill-tree] done：${done - failed} 行已回填，${failed} 行拉取失败（保持缺失不扣分）`)
