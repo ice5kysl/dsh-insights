@@ -31,6 +31,7 @@ const ROOT = join(import.meta.dirname, '..')
 const STEPS = [
   ['lists',       'pipeline/collect/lists.mjs'],
   ['discover',    'pipeline/collect/discover.mjs'],
+  ['discover-incr','pipeline/collect/discover-incr.mjs'],
   ['npm-map',     'pipeline/collect/npm-map.mjs'],
   ['downloads',   'pipeline/collect/downloads.mjs'],
   ['dynamics',    'pipeline/collect/dynamics.mjs'],
@@ -57,7 +58,7 @@ const STEPS = [
   ['weekly',      'pipeline/content/weekly.mjs'],
 ]
 
-const DAILY = ['lists', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'pages']
+const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'pages']
 const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'overlap', 'scenarios', 'badges', 'site', 'pages']
 const CONTENT = ['letters', 'weekly', 'pages']
 const PROFILES = {
