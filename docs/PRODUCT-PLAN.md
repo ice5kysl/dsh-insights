@@ -42,8 +42,8 @@ L3 生态趋势           / 趋势图                 分数变化对比   主�
 
 已完成（M0 + M1 部分）不再赘述，以下是要补的**结构性差距**：
 
-1. **站点架构到头了**：单个 `index.html`（451 KB 内联）承载不了 L2/L3——权威集全量（4k+）信件页、周报存档、官方时间线都需要多页路由。现在改比上线后再改便宜。
-2. **没有订阅机制**：周报的"固定节奏"目前=手动发帖。静态站最便宜的订阅是 **RSS/Atom feed**（`/feed.xml`），一次生成、永久有效。
+1. ~~站点架构到头了~~（已解决 2026-09-06）：多页静态站已上线（/p/ 信件页、/weekly 存档、/dynamics、/authors、/scenarios、/badge、/data、/about），仪表盘 844 KB 内联仍可控。
+2. ~~没有订阅机制~~（已解决）：`/feed.xml` RSS 已上线（周报 + 回填特刊，含 atom:self 与 item description）。
 3. **rc 雷达缺数据契约（实测）**：当前 `plugins.jsonl` 只有 `dshPlatform`（web 1371 / null 731），**没有任何插件声明的目标 dsh 版本**。雷达 v0 要求的"声明目标版本 vs 最新 rc"对比，必须先扩 02-validate 采集契约字段（见 §4.4），否则雷达只能产出空预警。
 4. **内容生产的单人风险**：周报/信件若依赖人写，必然断更。原则：**机器生成全文，人只做 review + 外发**。content/letters、content/weekly 已是这个形态，要保持。
 5. **域名/品牌切换的成本项**：Pages CNAME、github.io 301、favicon/OG、`llms.txt` 里的 URL 更新——小但零碎，集中在 M1 一次做完。
