@@ -212,7 +212,7 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .nav a{color:var(--mut);font-size:13px;padding:5px 10px;border-radius:7px}
 .nav a:hover{color:var(--ink);background:var(--track);text-decoration:none}
 .nav a.gh{border:1px solid var(--line);margin-left:6px}
-@media(max-width:720px){.brand small{display:none}.nav a{padding:5px 7px;font-size:12.5px}}
+@media(max-width:720px){.brand small{display:none}.topbar .wrap{flex-wrap:wrap;height:auto;padding:6px 28px;row-gap:2px}.nav{overflow-x:auto;width:100%;padding-bottom:4px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{padding:5px 7px;font-size:12.5px;white-space:nowrap;flex:none}}
 
 /* ---- hero ---- */
 .hero{border-bottom:1px solid var(--line);padding:56px 0 36px;background:var(--card)}
