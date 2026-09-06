@@ -97,8 +97,6 @@ function main() {
 .wk-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:18px}
 .wk-cur{font:600 12.5px var(--mono);color:var(--mut)}
 .wk-actions{display:flex;gap:6px;flex-wrap:wrap}
-.wkbtn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut)}
-.wkbtn:hover{border-color:var(--faint);color:var(--ink);text-decoration:none}
 @media(max-width:860px){.wk{grid-template-columns:1fr}.wk-side{position:static;max-height:none;display:flex;overflow-x:auto;gap:4px;padding:6px}.wk-item{white-space:nowrap;flex:none}}
 @media print{
   body *{visibility:hidden}
@@ -596,6 +594,70 @@ ${badgeExHtml}
     (navigator.clipboard?navigator.clipboard.writeText(c1.textContent):Promise.reject()).then(function(){ ok.textContent='已复制 ✓' }).catch(function(){ ok.textContent='请手动复制' });
     setTimeout(function(){ ok.textContent='' },2000) });
 })();
+</script>`,
+  })))
+
+  // ---- / 首页（全站汇总门户） ----------------------------------------------
+  const an0 = JSON.parse(read('analysis.json') || '{}')
+  const t0 = an0.totals || {}
+  const cov0 = an0.coverage || {}
+  const gr0 = an0.quality?.grades || {}
+  const dyn0 = JSON.parse(read('dynamics.json') || 'null')
+  const latestRel = dyn0?.dsh?.releases?.[0]
+  const distTags = dyn0?.dsh?.npm?.distTags || {}
+  const latestWk = weekly[0]
+  const wkBullets = latestWk ? (latestWk.md.split('## 本期速览')[1] || '').split('\n').filter((l) => l.startsWith('- ')).slice(0, 5).map((l) => mdToHtml(l)).join('') : ''
+  const navCard = (href, icon, name, desc, stat) => `<a class="card" href="${href}" style="text-decoration:none;color:inherit;display:block"><b>${icon} ${name}</b><p>${desc}</p><p style="color:var(--accent);font:600 12px var(--mono);margin-top:8px">${stat}</p></a>`
+  written.push(out('index.html', page({
+    title: 'DSH Insights · DeepSeek Harness 全景观察站', desc: '插件健康 · 官方动态 · 生态趋势——全量、客观、可复核的 DSH 生态观测。',
+    base: './', here: '',
+    body: `
+<div style="padding:56px 0 28px;border-bottom:1px solid var(--line)">
+  <svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><rect x="16" y="34" width="8" height="14" rx="2" fill="var(--bg)"/><rect x="28" y="25" width="8" height="23" rx="2" fill="var(--bg)"/><rect x="40" y="14" width="8" height="34" rx="2" fill="var(--accent)"/></svg>
+  <h1 class="pagetitle" style="font-size:clamp(30px,4.6vw,44px);margin-top:20px">DSH Insights</h1>
+  <p class="lede" style="font-size:16px;margin-bottom:6px">DeepSeek Harness <b>全景观察站</b>：插件健康 · 官方动态 · 生态趋势</p>
+  <p class="lede">对 ${(cov0.topicUniverse?.count || 0).toLocaleString()} 个 topic 仓库做全量发现，manifest 门禁逐条校验出权威集，六维框架客观评分（可复核、非安全审计）。开放数据 + 生态周报 + 官方动态雷达，面向插件作者、使用者和 dsh 官方。</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:22px">
+    <a class="wkbtn" style="background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600" href="plugins/">浏览插件库（${(t0.authoritative || 0).toLocaleString()} 个权威插件）→</a>
+    <a class="wkbtn" href="weekly/">读生态周报</a>
+    <a class="wkbtn" href="feed.xml">订阅 RSS</a>
+    <a class="wkbtn" href="badge/">作者接入徽章</a>
+  </div>
+</div>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:22px">
+  <div class="card"><b class="mono" style="font-size:22px">${(t0.authoritative || 0).toLocaleString()}</b><p>权威插件（manifest 门禁）</p></div>
+  <div class="card"><b class="mono" style="font-size:22px;color:#7c3aed">${gr0.S ?? 0}</b><p>S 级（≥95 分）插件</p></div>
+  <div class="card"><b class="mono" style="font-size:22px">${(cov0.candidates || 0).toLocaleString()}</b><p>多源候选（topic∪策展∪npm）</p></div>
+  <div class="card"><b class="mono" style="font-size:22px">${(an0.authorStats?.total || 0).toLocaleString()}</b><p>作者/组织</p></div>
+  <div class="card"><b class="mono" style="font-size:22px">${weekly.length}</b><p>周报期数（每周五更新）</p></div>
+</div>
+<div class="sc-cols" style="margin-top:26px">
+  <div class="card" style="margin:0"><b>📮 本周速览 · ${latestWk ? escHtml(latestWk.slug) : ''}</b>
+    ${latestWk ? `<div class="article" style="font-size:13px">${wkBullets}</div><p style="margin-top:10px"><a href="weekly/#${latestWk.slug}">读全文（可导出 Markdown/PDF/图片）→</a></p>` : '<p>生成中</p>'}
+  </div>
+  <div class="card" style="margin:0"><b>🛰 官方动态</b>
+    ${latestRel ? `<p style="margin-top:8px;font-size:13px">最新 release：<a href="https://github.com/deepseek-ai/DeepSeek-Harness/releases/tag/${escHtml(latestRel.tag)}" target="_blank"><b>${escHtml(latestRel.tag)}</b></a>（${escHtml((latestRel.published_at || '').slice(0, 10))}${latestRel.breaking ? ' · <span style="color:var(--warn)">含 breaking 说明</span>' : ''}）</p>${latestRel.summary ? `<p style="font-size:12.5px;color:var(--mut);margin-top:6px">${escHtml(latestRel.summary)}</p>` : ''}` : ''}
+    <p style="font-size:12.5px;color:var(--mut);margin-top:8px">npm dist-tags：${Object.entries(distTags).map(([k, v]) => `${k}=${v}`).join(' · ')}</p>
+    <p style="margin-top:10px"><a href="dynamics/">官方动态与 rc 兼容信号 →</a></p>
+  </div>
+</div>
+<h2 style="font-size:16px;margin:30px 0 10px">全站导览</h2>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+  ${navCard('plugins/', '🔌', '插件库', '全量权威插件：搜索/筛选/排序，点进详情页看评分与扣分明细', `${(t0.authoritative || 0).toLocaleString()} 个 · 六维评分`)}
+  ${navCard('dashboard/', '📊', '仪表盘', '生态趋势多线图 · 覆盖漏斗 · 质量分布 · 榜单', `均分 ${an0.quality?.avgScore ?? '—'} · S+A ${(gr0.S ?? 0) + (gr0.A ?? 0)} 个`)}
+  ${navCard('scenarios/', '🧩', '场景组合推荐', '从「我要做什么」出发选插件：质量首选 + 新入场', '22 个场景')}
+  ${navCard('authors/', '👥', '作者榜', '生态里的重要人物：榜单 + 协作关系图', `${(an0.authorStats?.total || 0).toLocaleString()} 位`)}
+  ${navCard('dynamics/', '🛰', '官方动态', 'dsh releases/dist-tags · DeepSeek 平台 · rc 兼容信号', latestRel ? escHtml(latestRel.tag) : '—')}
+  ${navCard('weekly/', '📮', '生态周报', '双栏阅读器 · 可导出 Markdown/PDF/图片 · RSS', `${weekly.length} 期 · 每周五`)}
+  ${navCard('data/', '📦', '开放数据', '稳定 JSON URL · agent 可读 · CC BY 4.0', 'insights.json 等 11 个数据集')}
+  ${navCard('badge/', '🏅', '健康徽章', '把客观评分带进 README：一页接入指南', 'health-v4 · 每日刷新')}
+  ${navCard('about/', '🔍', '关于 · 指标体系', '方法论全公开：权威集门禁 · 六维框架 · 校准回归', '可复核到每条扣分')}
+</div>
+<script>
+// 旧锚点兼容：/#browse?… → /plugins/；/#overview 等仪表盘区块 → /dashboard/
+(function(){ var h=location.hash||'';
+  if(h.indexOf('#browse')===0){ location.replace('/plugins/'+h) }
+  else if(/^#(overview|quality|rank)/.test(h)){ location.replace('/dashboard/'+h) } })();
 </script>`,
   })))
 

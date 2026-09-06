@@ -15,7 +15,7 @@ import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { PATHS, SITE, readJsonl, readJson, loadEnrichMap, byFullName, loadPlugins } from '../../lib/data.mjs'
 
-const OUT = join(SITE, 'index.html')
+const OUT = join(SITE, 'dashboard', 'index.html')
 
 const SEVP = { fail: 20, major: 10, warn: 5, minor: 2 }
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -392,11 +392,11 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="#top"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><rect x="16" y="34" width="8" height="14" rx="2" fill="var(--bg)"/><rect x="28" y="25" width="8" height="23" rx="2" fill="var(--bg)"/><rect x="40" y="14" width="8" height="34" rx="2" fill="var(--accent)"/></svg></span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
-  <nav class="nav"><a href="./" class="here">仪表盘</a><a href="plugins/">插件库</a><a href="dynamics/">动态</a><a href="scenarios/">场景</a><a href="authors/">作者</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="badge/">徽章</a><a href="about/">关于</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><rect x="16" y="34" width="8" height="14" rx="2" fill="var(--bg)"/><rect x="28" y="25" width="8" height="23" rx="2" fill="var(--bg)"/><rect x="40" y="14" width="8" height="34" rx="2" fill="var(--accent)"/></svg></span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
+  <nav class="nav"><a href="/">首页</a><a href="./" class="here">仪表盘</a><a href="/plugins/">插件库</a><a href="/dynamics/">动态</a><a href="/scenarios/">场景</a><a href="/authors/">作者</a><a href="/weekly/">周报</a><a href="/data/">开放数据</a><a href="/badge/">徽章</a><a href="/about/">关于</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <div class="subnav"><div class="wrap">
-  <a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a>
+  <a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="/plugins/">插件库</a>
 </div></div>
 
 <header class="hero" id="top"><div class="wrap">
@@ -697,7 +697,7 @@ draw();
 </script>
 </body>
 </html>`
-  mkdirSync(SITE, { recursive: true })
+  mkdirSync(join(SITE, 'dashboard'), { recursive: true })
   writeFileSync(OUT, html)
 
   // ---- /plugins/ 独立插件库页：复用同一 head/导航/browse/script（表格与抽屉零拷贝） ----
@@ -708,9 +708,8 @@ draw();
   const tbStart = html.indexOf('<div class="topbar">')
   const tbEnd = html.indexOf('<div class="subnav">')
   const topbar = html.slice(tbStart, tbEnd)
-    .replace('href="./" class="here">仪表盘', 'href="../">仪表盘')
-    .replace('href="plugins/">插件库', 'href="./" class="here">插件库')
-    .replace(/href="(dynamics|scenarios|authors|weekly|data|badge|about)\//g, 'href="../$1/')
+    .replace('href="./" class="here">仪表盘', 'href="/dashboard/">仪表盘')
+    .replace('href="/plugins/">插件库', 'href="./" class="here">插件库')
   const browseStart = html.indexOf('<section class="sec" id="browse">')
   const scriptStart = html.lastIndexOf('<script>')
   // browse 段 + footer + </main> + scrim + drawer（抽屉标记必须带上，否则抽屉代码空引用）
