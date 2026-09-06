@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * dsh-plugin-insights · health badge renderer (M2 author hook).
+ * dsh-insights · health badge renderer (M2 author hook).
  *
  * Emits an SVG "health" badge for one plugin, resolved from the latest
  * scored snapshot (data/insights.json), so authors can paste it into their
@@ -11,7 +11,7 @@
  *   node bin/badge.mjs omdsh-dev/DSH-better-sidebar          # SVG → stdout
  *   node bin/badge.mjs ice5kysl/dsh-workspace-kit -o health.svg
  *
- * @module dsh-plugin-insights/badge
+ * @module dsh-insights/badge
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'

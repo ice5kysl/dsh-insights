@@ -1,4 +1,4 @@
-# dsh-plugin-insights · 生态调研证据库（Research）
+# dsh-insights · 生态调研证据库（Research）
 
 > 采集于 2026-09-05。所有数字标注 [V] = 本次 GitHub API / npm registry / HTTP 抓取实测；[C] = 策展列表文案等二手但经核。来源 URL 在文末。本文件是 VISION/PRODUCT-PLAN 的数据底稿与决策日志。
 
@@ -70,7 +70,7 @@
 
 ## 6. 决策日志（持续追加）
 
-- 2026-09-05：产品形态定为"质量评估数据层"，沿用 dsh-plugin-insights 仓库与命名（用户决策）。
+- 2026-09-05：产品形态定为"质量评估数据层"，沿用 dsh-insights 仓库与命名（用户决策）。
 - 2026-09-05：差异化=全量客观健康分+透明规则+快照历史+agent 可读+诚实非审计边界。
 - 2026-09-05：O1 数据许可暂定 MIT 同款；O3 与 DshMarketPlace 关系待定（记录其 verdict 口径可借鉴）。
 - 2026-09-05 [V]：**官方姿态坐实**——deepseek-harness README 无任何市场/目录推荐；根目录无 ROADMAP；docs 树无 marketplace 相关页；CONTRIBUTING 明言"仍早期、暂不接受外部 PR（团队小，仅监控 Discussions）"；插件分发完全外包社区。官方抓手仅：`dsh-plugin` topic 打标 + 作者向文档 + Discussions/Discord。

@@ -3,7 +3,7 @@
  * Stage 5 — export the authoritative set as CSV.
  * Output: data/plugins.csv
  *
- * @module dsh-plugin-insights/stage-5
+ * @module dsh-insights/stage-5
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'

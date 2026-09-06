@@ -6,7 +6,7 @@
  * score/grade. Format versioned, append-only, one entry per UTC day. The git
  * history of this file IS the long-term asset nobody else can backfill.
  *
- * @module dsh-plugin-insights/stage-13
+ * @module dsh-insights/stage-13
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'

@@ -4,7 +4,7 @@
 
 ## 一句话提案
 
-> 让 **dsh-plugin-insights 的健康分（health-v1）**成为权威目录与市场卡片上的可选质量字段/收录门槛——数据开源、规则透明、每周刷新、**纯客观、非安全审计**。不抢你们的收录权，只提供"卡片上那个分数"。
+> 让 **dsh-insights 的健康分（health-v1）**成为权威目录与市场卡片上的可选质量字段/收录门槛——数据开源、规则透明、每周刷新、**纯客观、非安全审计**。不抢你们的收录权，只提供"卡片上那个分数"。
 
 ## 背景（为什么现在提）
 
@@ -74,12 +74,12 @@
 ## 附：Discussion 帖子草稿（可直接粘贴）
 
 **ZH**
-> 我们做了 dsh 插件生态的客观健康分数据层（[dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)）：对全量 `dsh-plugin` topic（13.6k+）分片抓取 → manifest 门禁判真伪 → 11 条纯客观规则打分（A–D，逐条证据，星数不进分，缺失不扣分）。数据 MIT 开放、规则版本化、15 条校准 seeds 每轮回归。
-> 看到贵方 README 说"不排名、不评判质量"——正好互补：**我们不抢收录权，只提供卡片上的分数**。提案两个选项：A) 把 `health` 作为可选字段/sidecar 并入 plugins.json，市场卡片直接显示徽章；B) 新人收录门槛 `health ≥ B`（数据支撑 + 免费复核）。join key 用 `owner/name`，schema 只增不改，贵方可随时停用。详见仓库 [docs/M2-INTEGRATION.md](https://github.com/ice5kysl/dsh-plugin-insights/blob/main/docs/M2-INTEGRATION.md)。期待意见！
+> 我们做了 dsh 插件生态的客观健康分数据层（[dsh-insights](https://github.com/ice5kysl/dsh-insights)）：对全量 `dsh-plugin` topic（13.6k+）分片抓取 → manifest 门禁判真伪 → 11 条纯客观规则打分（A–D，逐条证据，星数不进分，缺失不扣分）。数据 MIT 开放、规则版本化、15 条校准 seeds 每轮回归。
+> 看到贵方 README 说"不排名、不评判质量"——正好互补：**我们不抢收录权，只提供卡片上的分数**。提案两个选项：A) 把 `health` 作为可选字段/sidecar 并入 plugins.json，市场卡片直接显示徽章；B) 新人收录门槛 `health ≥ B`（数据支撑 + 免费复核）。join key 用 `owner/name`，schema 只增不改，贵方可随时停用。详见仓库 [docs/M2-INTEGRATION.md](https://github.com/ice5kysl/dsh-insights/blob/main/docs/M2-INTEGRATION.md)。期待意见！
 
 **EN**
-> We built an objective health-score layer for the dsh plugin ecosystem ([dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)): sharded full crawl of the `dsh-plugin` topic (13.6k+) → manifest-gate authenticity → 11 purely objective rules scoring A–D with per-deduction evidence (no stars, no invented data). Open (MIT), versioned rules, 15 calibration seeds regressed every run.
-> Your README says you don't rank or judge quality — that's exactly complementary: we don't want your curation seat, we just want to be the number on the card. Two options: A) optional `health` field/sidecar merged into plugins.json so market cards show the badge; B) a contribution gate of `health ≥ B` (data-backed, free re-check). Join key `owner/name`; schema only additive; you can drop us anytime. Details: [docs/M2-INTEGRATION.md](https://github.com/ice5kysl/dsh-plugin-insights/blob/main/docs/M2-INTEGRATION.md). Thoughts?
+> We built an objective health-score layer for the dsh plugin ecosystem ([dsh-insights](https://github.com/ice5kysl/dsh-insights)): sharded full crawl of the `dsh-plugin` topic (13.6k+) → manifest-gate authenticity → 11 purely objective rules scoring A–D with per-deduction evidence (no stars, no invented data). Open (MIT), versioned rules, 15 calibration seeds regressed every run.
+> Your README says you don't rank or judge quality — that's exactly complementary: we don't want your curation seat, we just want to be the number on the card. Two options: A) optional `health` field/sidecar merged into plugins.json so market cards show the badge; B) a contribution gate of `health ≥ B` (data-backed, free re-check). Join key `owner/name`; schema only additive; you can drop us anytime. Details: [docs/M2-INTEGRATION.md](https://github.com/ice5kysl/dsh-insights/blob/main/docs/M2-INTEGRATION.md). Thoughts?
 
 ## 附：仓库内可直接引用的产出
 

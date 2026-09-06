@@ -16,8 +16,8 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 
 **目标**：把"基座 + 原型报告"变成**一个能展示、能订阅、能外发的产品**。
 
-- [x] 品牌与域名：对外 `dsh-insights.com`（已购）；引擎仓库 `dsh-plugin-insights`；文档 VISION/ROADMAP v0.2 定稿（本次）。
-- [ ] **域名接入**：Pages 自定义域 + CNAME（dsh-insights.com / www）；旧 github.io 301。
+- [x] 品牌与域名：对外 `dsh-insights.com`（已购）；引擎仓库 `dsh-insights`；文档 VISION/ROADMAP v0.2 定稿（本次）。
+- [x] **域名接入**：Pages 自定义域 + CNAME（dsh-insights.com / www）+ HTTPS 强制；旧 github.io 由项目页自动跳转到自定义域。（2026-09-06）
 - [ ] **站点品牌化**：标题/副标/页脚统一 dsh-insights；hero 文案覆盖"插件 + 官方 + 生态"；补 favicon/OG 元信息（社交分享）。
 - [ ] **「致作者的信」产品化**（Stage 17 已跑通）：默认全量生成（2113）；报告站路由 `/p/<owner>/<repo>`；后续接入"变化对比"（对上一期快照报分数/名次变化）。
 - [ ] **生态周报对外**（Stage 18 已跑通）：固定节奏（每周五）+ 站点周报页 + `data/weekly/LATEST.md`。

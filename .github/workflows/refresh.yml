@@ -1,4 +1,4 @@
-# Daily refresh of the dsh-plugin-insights snapshot (CI 定时刷新)
+# Daily refresh of the dsh-insights snapshot (CI 定时刷新)
 #
 # - Default run (schedule): light refresh — lists / downloads / analyze /
 #   site / export / diff, then commits new snapshot when changed.
@@ -42,7 +42,7 @@ jobs:
         if: inputs.mode == 'full'
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
-        run: node bin/dsh-plugin-insights.mjs run
+        run: node bin/dsh-insights.mjs run
       - name: Light refresh (lists/downloads/analyze/site/export/diff)
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}

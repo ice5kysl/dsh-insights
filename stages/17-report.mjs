@@ -19,7 +19,7 @@ const FOOTER = [
   '---',
   '',
   `> 由 ${BRAND} 自动生成 · 数据快照 ${new Date().toISOString().slice(0, 10)}`,
-  '> 开源管线 [dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights) · 每插件体检 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health) · 示例页 https://ice5kysl.github.io/dsh-plugin-insights/',
+  '> 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 每插件体检 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health) · 示例页 https://dsh-insights.com/',
   '> 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。',
   '',
   '> 注：本报告为启发式数据初稿，非安全审计；打分阈值 A≥90 · B≥72 · C≥52。',

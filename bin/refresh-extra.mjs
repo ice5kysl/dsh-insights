@@ -3,7 +3,7 @@
  * Refresh extras used by CI (and locally when network allows):
  *   00 lists → 07 downloads → analyze → site → export → 08 diff
  *
- * @module dsh-plugin-insights/bin/refresh-extra
+ * @module dsh-insights/bin/refresh-extra
  */
 
 import { spawnSync } from 'node:child_process'

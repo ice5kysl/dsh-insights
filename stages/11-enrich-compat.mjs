@@ -16,7 +16,7 @@
  * plugins carry no registry signal (excluded, noted). This is a heuristic
  * compat *signal*, not a runtime test.
  *
- * @module dsh-plugin-insights/stage-11
+ * @module dsh-insights/stage-11
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'
@@ -33,7 +33,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 async function npmDocRaw(name) {
   try {
     const r = await fetch(`${NPM}/${String(name).replace(/^@/, '%40')}`, {
-      headers: { 'user-agent': 'dsh-plugin-insights' },
+      headers: { 'user-agent': 'dsh-insights' },
       signal: AbortSignal.timeout(20000),
     })
     if (!r.ok) return null

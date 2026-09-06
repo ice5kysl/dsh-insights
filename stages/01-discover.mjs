@@ -10,7 +10,7 @@
  *
  * Output: data/candidates.jsonl  (one candidate per line)
  *
- * @module dsh-plugin-insights/stage-1
+ * @module dsh-insights/stage-1
  */
 
 import { writeFileSync } from 'node:fs'

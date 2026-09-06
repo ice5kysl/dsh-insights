@@ -1,4 +1,4 @@
-# 数据集 Schema（dsh-plugin-insights）
+# 数据集 Schema（dsh-insights）
 
 快照由 `stages/02-validate.mjs` 产出，JSONL（每行一个对象，UTF-8）。行按来源分三类：
 

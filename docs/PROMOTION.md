@@ -4,19 +4,19 @@
 
 ## 一、定位一句话（对外口径，别跑偏）
 
-> dsh-plugin-insights = DeepSeek Harness 插件生态的**客观健康分数据层**：全量真伪判定 + A–D 健康分（逐条证据、规则公开、非安全审计）+ 开放数据。我们不做目录、不做市场、不做榜单——只提供"卡片上那个分数"。
+> dsh-insights = DeepSeek Harness 插件生态的**客观健康分数据层**：全量真伪判定 + A–D 健康分（逐条证据、规则公开、非安全审计）+ 开放数据。我们不做目录、不做市场、不做榜单——只提供"卡片上那个分数"。
 
 ## 二、三类用户 × 用法
 
 ### 1. 插件使用者（安装前决策）
-- 用站点：https://ice5kysl.github.io/dsh-plugin-insights/ （按健康分排序、点开看扣分原因）
+- 用站点：https://dsh-insights.com/ （按健康分排序、点开看扣分原因）
 - 用 CLI：`node bin/query.mjs --grade A --active30 --npm published --search "会话管理"`
 - 用 agent：问 dsh 里的 agent"哪个插件值得装"，指向 `/data/insights.json`
 - 心智锚点：A/B/C/D + 证据；**信任来自可复核**（点开看到"为什么扣分"）
 
 ### 2. 插件作者（被看见 + 被信任）
 - 自查：`npx --yes github:ice5kysl/dsh-plugin-health <owner/repo>` 或跑本仓库评分
-- 徽章：托管后 `![dsh health](https://ice5kysl.github.io/dsh-plugin-insights/badge/<owner>/<repo>.svg)`（路由待站点加；本地 `node bin/badge.mjs` 先出 SVG）
+- 徽章：托管后 `![dsh health](https://dsh-insights.com/badge/<owner>/<repo>.svg)`（路由待站点加；本地 `node bin/badge.mjs` 先出 SVG）
 - 修复路径：报告给"怎么修"（发布 npm / 补 exports["./client"] / 中英 README / LICENSE / dsh-plugin topic / 保持活跃）
 - 投稿加分：给 awesome-dsh-plugin 投稿时自带 `health ≥ B` 证据（若门槛方案落地）
 
@@ -49,7 +49,7 @@ node bin/query.mjs --search omdsh
 # 找"健康 A + 已发 npm + 活跃"的文件管理类
 node bin/query.mjs --grade A --npm published --active30 --search file --top 10
 # 拿全量数据（agent/脚本）
-curl https://ice5kysl.github.io/dsh-plugin-insights/data/insights.json
+curl https://dsh-insights.com/data/insights.json
 # 作者自查插件健康
 npx --yes github:ice5kysl/dsh-plugin-health ice5kysl/dsh-workspace-kit
 ```

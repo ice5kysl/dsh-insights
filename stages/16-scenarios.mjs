@@ -15,7 +15,7 @@
  *
  * Output: data/scenarios.json (agent-readable, stable schema v1)
  *
- * @module dsh-plugin-insights/stage-16
+ * @module dsh-insights/stage-16
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'

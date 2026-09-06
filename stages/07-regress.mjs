@@ -8,7 +8,7 @@
  *
  * Usage: npm run regress        (requires GITHUB_TOKEN for the 5000/hr budget)
  *
- * @module dsh-plugin-insights/stage-7
+ * @module dsh-insights/stage-7
  */
 
 import { readFileSync } from 'node:fs'

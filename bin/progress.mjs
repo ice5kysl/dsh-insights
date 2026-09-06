@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * dsh-plugin-insights · progress & coverage CLI
+ * dsh-insights · progress & coverage CLI
  *
  * Reports how much of the candidate universe has been validated, the current
  * authoritative-set size, and (with two samples) an implied completion rate.
  *
  *   node bin/progress.mjs
  *
- * @module dsh-plugin-insights/progress
+ * @module dsh-insights/progress
  */
 
 import { readFileSync } from 'node:fs'

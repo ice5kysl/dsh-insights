@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * dsh-plugin-insights · query CLI over the authoritative snapshot.
+ * dsh-insights · query CLI over the authoritative snapshot.
  *
  * Examples:
  *   node bin/query.mjs --sort stars --top 15
@@ -13,7 +13,7 @@
  * Health is scored inline with the same rule set as the snapshot (08-score),
  * so results are always consistent with data/insights.json.
  *
- * @module dsh-plugin-insights/query
+ * @module dsh-insights/query
  */
 
 import { readFileSync } from 'node:fs'

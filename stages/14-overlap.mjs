@@ -10,7 +10,7 @@
  * detection; the LLM stage (ANALYSIS-DEPTH.md D3) refines families later.
  * Output members sorted by health desc then stars desc.
  *
- * @module dsh-plugin-insights/stage-14
+ * @module dsh-insights/stage-14
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'

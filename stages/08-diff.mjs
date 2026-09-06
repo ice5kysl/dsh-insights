@@ -5,7 +5,7 @@
  *     star risers, and writes data/last-diff.md
  *   - else: establishes the baseline (first snapshot) and notes so.
  *
- * @module dsh-plugin-insights/stage-8
+ * @module dsh-insights/stage-8
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'

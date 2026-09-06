@@ -5,7 +5,7 @@
  * Stores data/listed.json:
  *   { fetchedAt, awesome: ["owner/repo", ...], imsai: [...], dshpluginTopic: true }
  *
- * @module dsh-plugin-insights/stage-00
+ * @module dsh-insights/stage-00
  */
 
 import { writeFileSync } from 'node:fs'

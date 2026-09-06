@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * dsh-plugin-insights · one-shot npm backfill (fix scoped-package mislabels)
+ * dsh-insights · one-shot npm backfill (fix scoped-package mislabels)
  *
  * Before 2026-09-05 the npm probe double-encoded scoped package names, so
  * every `@scope/...` pkgName was marked unpublished. This rewrites the `npm`
@@ -11,7 +11,7 @@
  *
  *   GITHUB_TOKEN="$(gh auth token)" node bin/backfill-npm.mjs
  *
- * @module dsh-plugin-insights/backfill
+ * @module dsh-insights/backfill
  */
 
 import { readFileSync, writeFileSync, renameSync, existsSync } from 'node:fs'

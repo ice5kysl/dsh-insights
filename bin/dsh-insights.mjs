@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * dsh-plugin-insights — orchestrate the full pipeline.
+ * dsh-insights — orchestrate the full pipeline.
  *
- *   node bin/dsh-plugin-insights.mjs run [--limit N] [--skip-discover]
+ *   node bin/dsh-insights.mjs run [--limit N] [--skip-discover]
  *
  * Stages:
  *   01 discover → data/candidates.jsonl
@@ -13,7 +13,7 @@
  * Rate limiting: stages pace themselves from the GitHub API envelope. Set
  * GITHUB_TOKEN for a 5000/hr budget (git: `GITHUB_TOKEN=$(gh auth token)`).
  *
- * @module dsh-plugin-insights/cli
+ * @module dsh-insights/cli
  */
 
 import { spawnSync } from 'node:child_process'

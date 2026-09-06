@@ -5,7 +5,7 @@
  * writes data/COMPLETE.json and exits. Survives rate limits (clean pause in
  * stage 02) by re-running until the missing count reaches zero.
  *
- * @module dsh-plugin-insights/resume
+ * @module dsh-insights/resume
  */
 
 import { spawnSync } from 'node:child_process'
@@ -36,7 +36,7 @@ function counts() {
 async function apiOk() {
   try {
     const res = await fetch('https://api.github.com/rate_limit', {
-      headers: { 'user-agent': 'dsh-plugin-insights', accept: 'application/vnd.github+json', ...(process.env.GITHUB_TOKEN ? { authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}) },
+      headers: { 'user-agent': 'dsh-insights', accept: 'application/vnd.github+json', ...(process.env.GITHUB_TOKEN ? { authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}) },
       signal: AbortSignal.timeout(15000),
     })
     return res.ok

@@ -11,7 +11,7 @@
  *   data/npm-mapped.jsonl  — mapping rows
  *   data/candidates-all.jsonl — candidates-full (repos) + new npm→repo rows
  *
- * @module dsh-plugin-insights/stage-01b
+ * @module dsh-insights/stage-01b
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'

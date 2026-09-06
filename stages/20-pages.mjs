@@ -14,7 +14,7 @@
  * Zero-dependency; page chrome and Markdown rendering live in lib/page.mjs.
  * Run: node stages/20-pages.mjs   (after analyze/site/report/weekly stages)
  *
- * @module dsh-plugin-insights/stage-20
+ * @module dsh-insights/stage-20
  */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync, existsSync, statSync } from 'node:fs'
@@ -70,7 +70,7 @@ function main() {
     title: '生态周报', desc: 'DSH 插件生态周报存档：每周五自动生成，机器整理、人工校对后外发。',
     base: '../', here: 'weekly/',
     body: `<p class="crumb">Weekly</p><h1 class="pagetitle">生态周报</h1>
-<p class="lede">每周五自动生成 · 数据快照驱动 · 面向社区与 dsh 官方。订阅：<a href="../feed.xml">RSS</a> 或 watch <a href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">GitHub 仓库</a>。</p>
+<p class="lede">每周五自动生成 · 数据快照驱动 · 面向社区与 dsh 官方。订阅：<a href="../feed.xml">RSS</a> 或 watch <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub 仓库</a>。</p>
 ${weeklyList || '<p class="lede">暂无周报。</p>'}`,
   })))
 
@@ -108,7 +108,7 @@ ${weeklyList || '<p class="lede">暂无周报。</p>'}`,
     copyFileSync(src, join(SITE, 'data', f))
     const kb = Math.round(statSync(src).size / 1024)
     written.push(`data/${f}（拷贝）`)
-    cards.push(`<div class="card"><b>${escHtml(desc)}</b><code>/data/${f}</code><p>${kb} KB · <a href="${f}">下载</a> · <a href="https://github.com/ice5kysl/dsh-plugin-insights/blob/main/docs/schema.md" target="_blank">schema</a></p></div>`)
+    cards.push(`<div class="card"><b>${escHtml(desc)}</b><code>/data/${f}</code><p>${kb} KB · <a href="${f}">下载</a> · <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/schema.md" target="_blank">schema</a></p></div>`)
   }
   written.push(out('data/index.html', page({
     title: '开放数据', desc: 'dsh-insights 开放数据集：稳定 URL、可复核口径、CC BY 4.0。',
@@ -139,7 +139,7 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
 <h2>边界声明</h2>
 <p>启发式评估 ≠ 安全审计。不做社区评分/投票、不做安装托管交易、不做登录产品。深检（写面/消毒）为增量信号，单独标注。</p>
 <h2>可复核</h2>
-<p>数据、规则、管线全部开源：<a href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">GitHub</a>。发现误判请提 issue —— 争议工单本身是公信力指标（见指标体系 C2）。</p>
+<p>数据、规则、管线全部开源：<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>。发现误判请提 issue —— 争议工单本身是公信力指标（见指标体系 C2）。</p>
 </div>`,
   })))
 
@@ -181,7 +181,7 @@ DeepSeek Harness (dsh) 插件与生态洞察：全量权威集 + 客观健康分
 - ${ORIGIN}/data/ — 数据集索引与许可（CC BY 4.0）
 
 ## 源仓库
-- https://github.com/ice5kysl/dsh-plugin-insights（管线 + 完整历史快照）
+- https://github.com/ice5kysl/dsh-insights（管线 + 完整历史快照）
 `))
 
   console.log(`[pages] ${written.length} 个产物：`)

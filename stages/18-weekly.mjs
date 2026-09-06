@@ -44,7 +44,7 @@ const dl = analysis.downloads
 const L = []
 L.push(`# DSH 插件生态周报 · ${wk}`)
 L.push('')
-L.push(`> 数据快照 ${(analysis.generatedAt || '').slice(0, 10)} · 由 dsh-insights（DSH 插件洞察 · dsh-insights.com）自动整理 · 开源：[dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)`)
+L.push(`> 数据快照 ${(analysis.generatedAt || '').slice(0, 10)} · 由 dsh-insights（DSH 插件洞察 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)`)
 L.push('')
 L.push('## 本期速览')
 L.push('')
@@ -102,8 +102,8 @@ if (diff) {
 }
 L.push('---')
 L.push('')
-L.push('> 数据来源：GitHub 公开元数据 + npm registry；评估为启发式（非安全审计）。完整数据集 data/plugins.jsonl / csv，站点 https://ice5kysl.github.io/dsh-plugin-insights/')
-L.push('> 周报与"致作者的信"由 dsh-plugin-insights 自动生成，欢迎转载（保留出处即可）。')
+L.push('> 数据来源：GitHub 公开元数据 + npm registry；评估为启发式（非安全审计）。完整数据集 data/plugins.jsonl / csv，站点 https://dsh-insights.com/')
+L.push('> 周报与"致作者的信"由 dsh-insights 自动生成，欢迎转载（保留出处即可）。')
 L.push('')
 
 const file = join(W, `${wk}-dsh-生态周报.md`)

@@ -7,7 +7,7 @@
  * agent asked "which dsh plugin …" can join on full_name and rank by health
  * without scraping HTML. Fields are a frozen subset — additions are additive.
  *
- * @module dsh-plugin-insights/stage-9
+ * @module dsh-insights/stage-9
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'
@@ -53,7 +53,7 @@ function main() {
   })
 
   const doc = {
-    $schema: 'https://dsh-plugin-insights.dev/schema/insights-v1',
+    $schema: 'https://dsh-insights.dev/schema/insights-v1',
     generatedAt: new Date().toISOString(),
     ruleVersion: RULE_VERSION,
     meta: {

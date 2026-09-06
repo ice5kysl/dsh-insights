@@ -1,6 +1,6 @@
 # 发布清单（RELEASE CHECKLIST）· 从本地到公开
 
-> 目标：把 dsh-plugin-insights 变成可被生态引用的公开数据层。每步都有可复现命令；标 ⏸ 的步骤需要你（仓库 owner）操作。
+> 目标：把 dsh-insights 变成可被生态引用的公开数据层。每步都有可复现命令；标 ⏸ 的步骤需要你（仓库 owner）操作。
 
 ## Phase 0 · 前置确认（本地，已完成/进行中）
 
@@ -13,12 +13,12 @@
 
 ## Phase 1 · 建仓并推送（⏸ 你操作，~5 分钟）
 
-1. GitHub 新建空仓库 `ice5kysl/dsh-plugin-insights`（建议 Public + MIT）。
+1. GitHub 新建空仓库 `ice5kysl/dsh-insights`（建议 Public + MIT）。
    - 或独立 org（见 VISION O2）——决定"中立第三方"叙事。
 2. 推送：
    ```bash
    cd <本仓库目录>
-   git remote add origin git@github.com:ice5kysl/dsh-plugin-insights.git
+   git remote add origin git@github.com:ice5kysl/dsh-insights.git
    git push -u origin main
    ```
 3. 建 secret `GITHUB_TOKEN`（repo 写权限）→ 供 `refresh.yml` 每日刷新用。
@@ -29,9 +29,9 @@
 - [x] `.github/workflows/refresh.yml`（已有）：每日 03:00 UTC 跑全量管线并 commit 快照（需要 secret）。
 - [ ] `.github/workflows/pages.yml`（本清单配套）：main 更新后把 `site/` 部署到 GitHub Pages → 得到公开站点 URL。
 - [ ] 公开数据 URL 约定（Pages 根 = repo `site/` 目录下的发布形态，实际路径以部署为准）：
-  - 站点：`https://ice5kysl.github.io/dsh-plugin-insights/`
+  - 站点：`https://dsh-insights.com/`
   - 数据：同目录 `data/insights.json`（若 Pages 只发 site/ 则需要把 data 也放入部署产物）
-  - badge 热链：`https://ice5kysl.github.io/dsh-plugin-insights/badge/<owner>/<repo>.svg`（站点需带 badge 目录/路由；本地先 `node bin/badge.mjs`）
+  - badge 热链：`https://dsh-insights.com/badge/<owner>/<repo>.svg`（站点需带 badge 目录/路由；本地先 `node bin/badge.mjs`）
 - [ ] 在仓库根放 `llms.txt`（若 Pages 根可读）：一句话说明 + `data/insights.json` URL → 对 AI 爬虫开放。
 
 ## Phase 3 · 全量快照（校验完成后）

@@ -1,6 +1,6 @@
 # dsh-insights — DSH 插件与生态洞察
 
-> **对外站点：https://dsh-insights.com**（品牌）· 本仓库 = **引擎 + 开放数据**（dsh-plugin-insights）
+> **对外站点：https://dsh-insights.com** · 本仓库 = 管线 + 站点 + 开放数据（ice5kysl/dsh-insights）
 > 全量索引 → 真伪校验 → 健康评分 → 收录矩阵 → 「致作者的信」→ 生态周报 · 零依赖 Node · 开放可复核
 >
 > 文档：[Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [产品规划](./docs/PRODUCT-PLAN.md) · [调研证据库](./docs/RESEARCH.md) · 每插件体检工具 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)
@@ -17,7 +17,7 @@ dsh-insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层
 
 ## 站点与样例
 
-- 演示仪表盘：https://ice5kysl.github.io/dsh-plugin-insights/（即将迁移 dsh-insights.com）
+- 站点：https://dsh-insights.com（仪表盘 · [周报](https://dsh-insights.com/weekly/) · [插件报告](https://dsh-insights.com/p/ice5kysl/dsh-workspace-kit/) · [开放数据](https://dsh-insights.com/data/) · [RSS](https://dsh-insights.com/feed.xml)）
 - 「致作者的信」样例：`data/reports/ice5kysl__dsh-workspace-kit.md`
 - 生态周报样例：`data/weekly/LATEST.md`
 
@@ -32,7 +32,7 @@ dsh-insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层
 | `data/llm.jsonl` · `reviews.jsonl` | LLM 能力标注 · 人工点评种子 |
 | `data/reports/*.md` | 每插件「致作者的信」 |
 | `data/weekly/*.md` · `last-diff.md` | 生态周报 · 快照 diff |
-| `site/` | 自包含仪表盘 + 详情抽屉（零依赖） |
+| `site/` | 多页静态站（仪表盘 + 周报存档 + /p/ 插件页 + /data + /about + feed.xml，零依赖） |
 
 ## 管线（Stage 地图）
 
@@ -41,14 +41,14 @@ dsh-insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层
 03-analyze 聚合+评分/分类/渠道(→enrich)  04-site 仪表盘+抽屉  05-export CSV
 06-deep 限量深检(写面/消毒)  07-downloads npm 周下载  07-regress rc 回归  08-score/diff 评分/快照diff
 09-export-json  11-enrich-compat  12-badges  13-history  14-overlap  15-llm-tags  16-scenarios
-17-report 「致作者的信」  18-weekly 生态周报   （Stage 19 官方动态快照 · M2）
-bin: dsh-plugin-insights(run) · query · report · weekly · export-suggested · refresh-extra · resume-validate …
+17-report 「致作者的信」  18-weekly 生态周报  20-pages 多页站点(weekly/p/data/about/feed)   （Stage 19 官方动态快照 · M2）
+bin: dsh-insights(run) · query · report · weekly · export-suggested · refresh-extra · resume-validate …
 ```
 
 ## 快速开始
 
 ```bash
-GITHUB_TOKEN="$(gh auth token)" node bin/dsh-plugin-insights.mjs run   # 全量：发现→校验→analyze→site
+GITHUB_TOKEN="$(gh auth token)" node bin/dsh-insights.mjs run   # 全量：发现→校验→analyze→site
 npm run lists && npm run downloads && npm run analyze && npm run site && npm run export && npm run diff  # 轻量 refresh
 npm run report                      # 生成默认「致作者的信」（自荐 2 插件）
 node stages/17-report.mjs owner/repo  # 指定插件写信
@@ -58,14 +58,14 @@ node bin/query.mjs --sort stars --top 10   # 查询
 
 断点续跑：`data/state/done.ids`；限速自动退避；CI：`.github/workflows/refresh.yml`（默认轻量 / 手动 full）已启用。
 
-## Status（2026-09-05）
+## Status（2026-09-06）
 
 - [x] 发现+校验：canonical 2875 全量验证 → **权威集 2113**（0 重复）
 - [x] 仪表盘（KPI/按周新增/质量分级/功能分类/收录覆盖/优质未收录榜/全表+详情抽屉/打分明细/LLM 解读）
 - [x] 健康评分与致作者的信（Stage 17）、生态周报（Stage 18）生成器 + 样例
 - [x] npm 周下载入库（CI 已跑通）；快照 diff 基线；人工点评种子 5 条
-- [x] VISION/ROADMAP v0.2；品牌 dsh-insights（dsh-insights.com 已购）
-- [ ] M1：域名接入 + 站点品牌化 + 周报外发 SOP
+- [x] **dsh-insights.com 已上线**（Pages 自定义域 + HTTPS 强制 + www 301）；站点多页化（Stage 20：周报/插件页/开放数据/方法论/RSS）
+- [ ] M1 剩余：信件全量生成（2113 页）+ 契约字段普查 + 周报外发 SOP
 - [ ] M2：Stage 19 官方动态快照器 + rc 兼容雷达（见 ROADMAP）
 
 ## 方法论与边界

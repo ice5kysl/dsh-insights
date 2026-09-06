@@ -4,11 +4,11 @@
  *
  * Turns every plugin in data/insights.json into a static SVG badge so the
  * GitHub Pages site can serve hotlinkable URLs:
- *   https://ice5kysl.github.io/dsh-plugin-insights/badge/<owner>/<repo>.svg
+ *   https://dsh-insights.com/badge/<owner>/<repo>.svg
  *
  * Usage: npm run badges   (after export:json / score)
  *
- * @module dsh-plugin-insights/stage-12
+ * @module dsh-insights/stage-12
  */
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'

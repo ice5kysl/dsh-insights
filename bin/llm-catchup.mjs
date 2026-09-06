@@ -9,7 +9,7 @@
  *
  * Usage: node bin/llm-catchup.mjs   (then rerun LLM with your key)
  *
- * @module dsh-plugin-insights/llm-catchup
+ * @module dsh-insights/llm-catchup
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'

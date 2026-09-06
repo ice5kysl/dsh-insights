@@ -8,7 +8,7 @@
  * → per-plugin detail drawer. All data computed from data/analysis.json +
  * data/plugins.jsonl + data/enrich.json + data/llm.jsonl.
  *
- * @module dsh-plugin-insights/stage-4
+ * @module dsh-insights/stage-4
  */
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
@@ -308,14 +308,14 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 <body>
 <div class="topbar"><div class="wrap">
   <a class="brand" href="#top"><span class="mark">d</span>dsh-insights<small>DSH 插件与生态洞察</small></a>
-  <nav class="nav"><a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a><a href="weekly/">周报</a><a href="data/">数据</a><a href="about/">方法论</a><a class="gh" href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">GitHub ↗</a></nav>
+  <nav class="nav"><a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a><a href="weekly/">周报</a><a href="data/">数据</a><a href="about/">方法论</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 
 <header class="hero" id="top"><div class="wrap">
   <p class="kicker">DeepSeek Harness Plugin Ecosystem</p>
   <h1>DSH 插件与生态洞察 · dsh-insights</h1>
   <p class="lede">多源发现 → manifest 真伪校验 → 元数据评估（npm / 文档 / 构建产物 / 活跃度）→ 生态洞察。启发式评估，非安全审计。</p>
-  <div class="meta"><span>快照 <b>${date}</b></span><span>最近一周新增 <b class="mono">+${lastWeek}</b></span><span><a href="https://github.com/ice5kysl/dsh-plugin-insights/blob/main/README.md" target="_blank">方法论 ↗</a></span></div>
+  <div class="meta"><span>快照 <b>${date}</b></span><span>最近一周新增 <b class="mono">+${lastWeek}</b></span><span><a href="https://github.com/ice5kysl/dsh-insights/blob/main/README.md" target="_blank">方法论 ↗</a></span></div>
   <div class="bignum"><b class="count mono" data-v="${t.authoritative ?? 0}">0</b><span>权威插件<br>通过 dsh.bundle manifest 校验</span></div>
   <div class="stats">
     ${stat((d.publishPct != null ? d.publishPct + '%' : '—'), 'npm 发布率', (pub.published ?? 0) + ' 已发布 · ' + (pub.stale ?? 0) + ' 滞后')}
@@ -429,7 +429,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 </section>
 
 <footer>
-  <span>由 <a href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">dsh-plugin-insights</a> 管线自动生成 · ${date}</span>
+  <span>由 <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">dsh-insights</a> 管线自动生成 · ${date}</span>
   <span>零依赖 · GitHub API + npm · 启发式评估，非安全审计</span>
 </footer>
 </main>

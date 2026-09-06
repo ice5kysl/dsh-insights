@@ -10,7 +10,7 @@
  *   - plus automatically: any plugin whose description contains read-only/只读
  * Output: data/deep.jsonl keyed by full_name.
  *
- * @module dsh-plugin-insights/stage-6
+ * @module dsh-insights/stage-6
  */
 
 import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'

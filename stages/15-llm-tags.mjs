@@ -19,7 +19,7 @@
  *   DEEPSEEK_API_KEY=sk-… LLM_MAX=0 node stages/15-llm-tags.mjs  # all
  *   node stages/15-llm-tags.mjs --dry-run                        # count only
  *
- * @module dsh-plugin-insights/stage-15
+ * @module dsh-insights/stage-15
  */
 
 import { readFileSync, writeFileSync, appendFileSync, mkdirSync, existsSync } from 'node:fs'

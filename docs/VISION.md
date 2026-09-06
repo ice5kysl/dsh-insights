@@ -1,6 +1,6 @@
 # dsh-insights · 产品愿景（Vision）
 
-> 状态：**v0.2 再规划**（2026-09-05）· 取代 v0.1 草案 · 对外品牌与域名：**dsh-insights.com** · 引擎仓库：[dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)
+> 状态：**v0.2 再规划**（2026-09-05）· 取代 v0.1 草案 · 对外品牌与域名：**dsh-insights.com** · 引擎仓库：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
 > 精要与证据锚点见 [RESEARCH.md](./RESEARCH.md)（数字均实测标注 [V]）与 [PRODUCT-PLAN.md](./PRODUCT-PLAN.md)。
 
 ## 一句话愿景
@@ -11,7 +11,7 @@ DSH 的哲学是 "Everything is a Plugin"；我们的回答是：**Every plugin 
 
 ## v0.2 相对 v0.1 的关键变化（本次再规划）
 
-1. **品牌与域名落定**：对外 = **dsh-insights**（域名 `dsh-insights.com` 已购入）；引擎代码仓库保持 `dsh-plugin-insights`（品牌与引擎分离）。
+1. **品牌与域名落定**：对外 = **dsh-insights**（域名 `dsh-insights.com` 已购入）；引擎代码仓库保持 `dsh-insights`（品牌与引擎分离）。
 2. **范围从"插件洞察"升级为"全 dsh 洞察"**：新增 **L2 官方动态**（releases/rc、docs、内置能力演进）与 **L3 生态/社区动态**，不只是 L1 插件质量。
 3. **对外产出前置为一等公民**：「致作者的信」（每插件）+「生态周报」（周更）成为常规交付，面向**社区与 dsh 官方**分发。
 4. **兼容雷达**（官方 rc 升级 → 预警受影响插件）被明确为高价值独立能力，与插件质量分开演进。

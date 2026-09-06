@@ -4,7 +4,7 @@
  * api.npmjs.org is blocked in some sandboxes).
  * Output: data/downloads.json { fetchedAt, map }
  *
- * @module dsh-plugin-insights/stage-7
+ * @module dsh-insights/stage-7
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'

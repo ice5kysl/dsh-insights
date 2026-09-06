@@ -3,7 +3,7 @@
  * Export the "优质未收录 · 建议收录" list as shareable markdown + CSV.
  * Outputs: data/suggested.md · data/suggested.csv
  *
- * @module dsh-plugin-insights/bin/export-suggested
+ * @module dsh-insights/bin/export-suggested
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'

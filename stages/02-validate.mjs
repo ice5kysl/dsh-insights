@@ -15,7 +15,7 @@
  *   data/plugins.jsonl   authoritative set
  *   data/invalid.jsonl   bucketed noise/rejects
  *
- * @module dsh-plugin-insights/stage-2
+ * @module dsh-insights/stage-2
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, appendFileSync } from 'node:fs'

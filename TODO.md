@@ -1,4 +1,4 @@
-# dsh-plugin-insights · 续跑计划
+# dsh-insights · 续跑计划
 
 按优先级排序（自动续跑轮次按此推进）：
 

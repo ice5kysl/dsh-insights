@@ -1,17 +1,17 @@
 {
-  "name": "dsh-plugin-insights",
+  "name": "dsh-insights",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "description": "Index / validate / evaluate / analyze the whole DeepSeek Harness (dsh) plugin ecosystem. Zero-dependency Node pipeline: discover → manifest validation → metadata eval → snapshot dataset + report + static site.",
   "bin": {
-    "dsh-plugin-insights": "./bin/dsh-plugin-insights.mjs"
+    "dsh-insights": "./bin/dsh-insights.mjs"
   },
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "run": "node bin/dsh-plugin-insights.mjs",
+    "run": "node bin/dsh-insights.mjs",
     "discover": "node stages/01-discover.mjs",
     "validate": "node stages/02-validate.mjs",
     "analyze": "node stages/03-analyze.mjs",

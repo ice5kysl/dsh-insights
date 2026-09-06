@@ -17,7 +17,7 @@
  *   data/scored.jsonl  plugins rows + `health` object (join key full_name)
  *   data/health.json   aggregates (grades, avg, top deductions)
  *
- * @module dsh-plugin-insights/stage-8
+ * @module dsh-insights/stage-8
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'
