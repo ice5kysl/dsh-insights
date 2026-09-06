@@ -1,66 +1,37 @@
-# 插件报告 · pengyue-polaron/deepseek-harness-genui
+# 致 deepseek-harness-genui 的作者：一期一会 · 体检与建议
 
-> 生成 2026-09-05 · dsh-plugin-insights / Stage 17 · 启发式评估，非安全审计
+> pengyue-polaron/deepseek-harness-genui · 第 1 期（数据快照 2026-09-06）
 
-**A**（100/100）· 分类「会话管理」· ★107
+你好！我是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）** 的自动观测员。这封信聊聊 deepseek-harness-genui 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
 
-- 仓库：https://github.com/pengyue-polaron/deepseek-harness-genui
-- npm：`dsh-plugin-genui@0.14.0`（5 版本）
-- 最近 push：2026-09-02 · 创建 2026-08-14
-- 收录：awesome-dsh-plugin — · imsai —
-- 同类（会话管理，217 个）分位：击败 **100%**（中位 68 分）
+**本期概览：S（100/100）· 在「会话管理」类 423 个插件里超过 99% 的同类（同类中位 83）**
 
-## 打分明细
+- ★107 · Task-specific React apps for DeepSeek Harness with state carried into the next Agent turn
+- npm：`dsh-plugin-genui@0.14.0`（5 个版本）
+- 最近 push 2026-09-02 · 收录：awesome — · imsai —
 
-| 加分项 | +分 |
-|---|---|
-| manifest 清单 | +8 |
-| README | +6 |
-| 中英/双语 | +10 |
-| LICENSE | +4 |
-| lib/index.js | +5 |
-| lib/client.js | +5 |
-| client 导出 | +4 |
-| npm 已发布 | +8 |
-| 版本同步 | +6 |
-| 近30天活跃 | +5 |
-| 有 star | +6 |
-| 高社区关注 | +8 |
-| 基分 | 25 |
+**做得好的**：client 导出齐备、产物布局规范、files 白名单、npm 已发布、npm 版本同步、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃 等检查全部通过；按 README 解读，主要能力是「为DeepSeek Harness创建特定任务React应用，并将状态延续到下一Agent轮。」。这些是你的基本盘，保持即可。
 
-## 清单与产物
+**本期最值得做（Top 2，按扣分权重）**：
 
-README ✅ · 中文/双语 ✅ · LICENSE ✅ · cordis.patch ✅ · lib/index.js ✅ · lib/client.js ✅ · client 导出 ✅
+1. **提交 awesome-dsh-plugin** —— 上架主目录（曝光+反链）。怎么做：data/plugins/<owner>__<repo>.yml 提 PR。
+2. **提交 imsai/deepseek1024** —— 覆盖另一主流渠道。怎么做：catalog/plugins JSON，一个 PR 一条。
 
-## LLM 解读
+**能力标签**：react、apps、state；README 宣称：task-specific React apps；state carried to next Agent turn
 
-为DeepSeek Harness创建特定任务React应用，并将状态延续到下一Agent轮。
-- 能力主类：ui-generation
-- 能力标签：react、apps、state
-- 可验证宣称：task-specific React apps；state carried to next Agent turn
+> 注：本期是基线首期。之后每期我们会对比上一期，告诉你分数/名次/收录/下载的**变化**。
 
-## 建议优化清单（按性价比）
+**想被更多人看到？** 下面这段可直接复制去提交收录：
 
-| 动作 | 影响 | 怎么做 |
-|---|---|---|
-| 提交 awesome-dsh-plugin | 曝光与反向链接（见下方文案） | fork → data/plugins/<owner>__<repo>.yml → PR（≤3 条/PR） |
-| 提交 imsai / deepseek1024 目录 | 覆盖另一主流渠道 | fork → catalog/plugins JSON → 一个 PR 一条 |
-| 等待周下载数据入库 | 用于展示真实使用度 | 由 CI refresh 自动补齐 downloads.json |
+```text
+Add pengyue-polaron/deepseek-harness-genui to the DSH plugin directory (category ui) — a standard Cordis "bundle" plugin targeting @deepseek-ai/dsh ≥ 0.1.1-rc.2, published as dsh-plugin-genui@0.14.0.
+```
 
 ---
 
-## 提交收录（可复制）
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-06
+> 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 每插件体检 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health) · 示例页 https://dsh-insights.com/
+> 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。
 
-### awesome-dsh-plugin（data/plugins/pengyue-polaron__deepseek-harness-genui.yml）
-```yaml
-url: https://github.com/pengyue-polaron/deepseek-harness-genui
-name: pengyue-polaron/deepseek-harness-genui
-category: ui
-description:
-  en: Task-specific React apps for DeepSeek Harness with state carried into the next Agent turn
-```
-
-### PR 描述（EN/中文）
-
-Add pengyue-polaron/deepseek-harness-genui（category ui）—— 标准 Cordis bundle 插件，中英双语，目标 dsh ≥ 0.1.1-rc.2；npm：`dsh-plugin-genui@0.14.0`。
+> 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

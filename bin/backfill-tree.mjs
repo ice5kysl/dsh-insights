@@ -39,7 +39,7 @@ async function treeSignals(owner, repo, branch) {
 
 
 /** 并发安全落盘：重读当前文件，把本次处理出的信号合并进去（不吞掉 sweep 的新增行） */
-function saveMerged() {
+function saveMerged(rows) {
   const fresh = readFileSync(PATHS.plugins, 'utf8').split('\n').filter(Boolean)
     .map((l) => { try { return JSON.parse(l) } catch { return null } }).filter(Boolean)
   const sigBy = new Map()
@@ -66,9 +66,9 @@ async function main() {
     if (sig) Object.assign(r.files, sig)
     else failed++
     if (done % 200 === 0) console.log(`[backfill-tree] ${done}/${todo.length}（failed ${failed}）`)
-    if (done % 500 === 0) { saveMerged(); console.log(`[backfill-tree] checkpoint merged @${done}`) }
+    if (done % 500 === 0) { saveMerged(rows); console.log(`[backfill-tree] checkpoint merged @${done}`) }
   }
-  saveMerged()
+  saveMerged(rows)
   console.log(`[backfill-tree] done：${done - failed} 行已回填，${failed} 行拉取失败（保持缺失不扣分）`)
 }
 

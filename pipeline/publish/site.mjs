@@ -185,6 +185,10 @@ function main() {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DSH Insights · DeepSeek Harness 全景观察站</title>
 <meta name="description" content="DeepSeek Harness (dsh) 插件生态全量索引、评估与分析仪表盘">
+<meta property="og:title" content="DSH Insights · DeepSeek Harness 全景观察站">
+<meta property="og:description" content="插件健康 · 官方动态 · 生态趋势——全量、客观、可复核的 DSH 生态观测。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://dsh-insights.com/og.png">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">

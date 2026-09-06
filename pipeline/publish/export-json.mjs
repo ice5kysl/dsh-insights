@@ -40,7 +40,7 @@ function main() {
   })
 
   const doc = {
-    $schema: 'https://dsh-insights.com/schema/insights-v1',
+    $schema: 'https://dsh-insights.com/data/insights.schema.json',
     generatedAt: new Date().toISOString(),
     ruleVersion: RULE_VERSION,
     meta: {

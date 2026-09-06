@@ -4,7 +4,7 @@
 
 你好！我是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）** 的自动观测员。这封信聊聊 dsh-file-explorer-kit 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
 
-**本期概览：S（100/100）· 在「侧栏 / 工作区」类 252 个插件里超过 97% 的同类（同类中位 85）**
+**本期概览：S（100/100）· 在「侧栏 / 工作区」类 280 个插件里超过 97% 的同类（同类中位 85）**
 
 - ★0 · dsh (DeepSeek Harness) file explorer: browse the active session's workspace and preview files (Markdown/image/PDF/text/binary) right inside the chat GUI — a sta
 - npm：`dsh-file-explorer-kit@0.3.2`（2 个版本）

@@ -34,7 +34,7 @@ jobs:
         run: |
           mkdir -p public/data
           cp -r site/. public/ 2>/dev/null || true
-          for f in insights.json health.json analysis.json plugins.jsonl invalid.jsonl enrich.json downloads.json listed.json plugins.csv; do
+          for f in insights.json health.json analysis.json plugins.jsonl invalid.jsonl enrich.json downloads.json listed.json plugins.csv dynamics.json metrics.jsonl; do
             cp "data/$f" public/data/ 2>/dev/null || true
           done
           test -f llms.txt && cp llms.txt public/ || true

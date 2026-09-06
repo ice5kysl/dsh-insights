@@ -164,7 +164,7 @@ function render(full) {
 function main() {
   const args = process.argv.slice(2).filter((a) => !a.startsWith('-'))
   const self = ['ice5kysl/dsh-workspace-kit', 'ice5kysl/dsh-file-explorer-kit']
-  const targets = args.length ? args : self
+  const targets = args.length ? args : process.argv.includes('--self') ? self : plugins.map((r) => r.full_name)
   const written = []
   for (const full of targets) {
     writeFileSync(join(OUT_DIR, full.replace('/', '__') + '.md'), render(full))

@@ -161,6 +161,7 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
   // ---- plugin letter pages (/p/<owner>/<repo>/) --------------------------
   const reportFiles = existsSync(PATHS.reportsDir)
     ? readdirSync(PATHS.reportsDir).filter((f) => f.endsWith('.md')) : []
+  let pWrote = 0
   for (const f of reportFiles) {
     const md = read('reports', f)
     if (!md) continue
@@ -169,11 +170,17 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
     const title = mdTitle(md, `${owner}/${repo}`)
     const body = `<p class="crumb">致作者的信 · ${escHtml(owner)}/${escHtml(repo)}</p>
 <div class="article">${mdToHtml(md)}</div>`
-    written.push(out(`p/${owner}/${repo}/index.html`, page({
+    const html = page({
       title, desc: `${owner}/${repo} 的健康体检与改进建议（DSH Insights 自动生成）`,
       base: '../../../', here: null, body, og: { type: 'article' },
-    })))
+    })
+    // diff 驱动：内容不变不重写（全量 4k+ 页避免每日 churn）
+    const fp = join(SITE, 'p', owner, repo, 'index.html')
+    if (existsSync(fp) && readFileSync(fp, 'utf8') === html) continue
+    written.push(out(`p/${owner}/${repo}/index.html`, html))
+    pWrote++
   }
+  if (reportFiles.length) console.log(`[pages] /p/ ${pWrote} changed / ${reportFiles.length} letter pages`)
 
   // ---- /data/ open-data index (+ copy public datasets) -------------------
   const DATASETS = [
@@ -183,9 +190,11 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
     ['enrich.json', '每插件评分 / 等级 / 分类 / 收录渠道'],
     ['analysis.json', '聚合统计（仪表盘数据源）'],
     ['health.json', '健康分聚合（分级分布/均分/top 扣分）'],
+    ['dynamics.json', '官方动态快照（dsh releases/dist-tags/DeepSeek 平台）'],
     ['plugins.csv', '权威集表格（25 列，Excel 友好）'],
     ['downloads.json', 'npm 周下载（CI 更新）'],
     ['listed.json', '收录渠道清单（awesome / imsai）'],
+    ['metrics.jsonl', '产品发展指标自测量（周度追加）'],
   ]
   const cards = []
   mkdirSync(join(SITE, 'data'), { recursive: true })
@@ -197,6 +206,47 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
     written.push(`data/${f}（拷贝）`)
     cards.push(`<div class="card"><b>${escHtml(desc)}</b><code>/data/${f}</code><p>${kb} KB · <a href="${f}">下载</a> · <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">schema</a></p></div>`)
   }
+  out('data/insights.schema.json', JSON.stringify({
+    $schema: 'https://json-schema.org/draft/2020-12/schema',
+    $id: 'https://dsh-insights.com/data/insights.schema.json',
+    title: 'DSH Insights 全量洞察快照（insights.json）',
+    type: 'object',
+    required: ['$schema', 'generatedAt', 'ruleVersion', 'meta', 'plugins'],
+    properties: {
+      $schema: { type: 'string' },
+      generatedAt: { type: 'string', format: 'date-time' },
+      ruleVersion: { type: 'string', examples: ['health-v4'] },
+      meta: { type: 'object' },
+      plugins: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['full_name', 'url', 'health'],
+          properties: {
+            full_name: { type: 'string', description: 'owner/repo（join key）' },
+            url: { type: 'string' },
+            stars: { type: 'integer' },
+            license: { type: ['string', 'null'] },
+            topics: { type: 'array', items: { type: 'string' } },
+            pkgName: { type: ['string', 'null'] },
+            version: { type: ['string', 'null'] },
+            npm: { type: 'object', properties: { published: { type: 'boolean' }, latest: { type: ['string', 'null'] } } },
+            description: { type: 'string' },
+            health: {
+              type: 'object',
+              required: ['score', 'grade'],
+              properties: {
+                score: { type: 'integer', minimum: 0, maximum: 100 },
+                grade: { type: 'string', enum: ['S', 'A', 'B', 'C', 'D'], description: 'S≥95 A≥90 B≥75 C≥60 D<60' },
+                dimScores: { type: 'object', properties: { eng: { type: 'integer' }, docs: { type: 'integer' }, discover: { type: 'integer' }, maint: { type: 'integer' } } },
+                drops: { type: 'array', items: { type: 'string' }, description: '扣分规则 code，口径见 docs/SCHEMA.md §health' },
+              },
+            },
+          },
+        },
+      },
+    },
+  }, null, 2) + '\n')
   written.push(out('data/index.html', page({
     title: '开放数据', desc: 'DSH Insights 开放数据集：稳定 URL、可复核口径、CC BY 4.0。',
     base: '../', here: 'data/',
@@ -204,7 +254,7 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
 <p class="lede">全量、可复核、持续更新。URL 稳定（公布即不变更），agent 可直接抓取，无需登录。使用请注明出处（CC BY 4.0）。</p>
 <div class="cards">${cards.join('')}</div>
 <h2 style="font-size:16px;margin:28px 0 8px">许可与口径</h2>
-<p class="lede">代码 <b>MIT</b> · 数据 <b>CC BY 4.0</b>（署名：dsh-insights.com）。「权威集」= 非 fork/归档 + package.json 声明 dsh.bundle.patch 且 patch 已提交（下限口径）。健康分为启发式评估，<b>非安全审计</b>。</p>
+<p class="lede">代码 <b>MIT</b> · 数据 <b>CC BY 4.0</b>（署名：dsh-insights.com，全文见 <a href="https://github.com/ice5kysl/dsh-insights/blob/main/DATA-LICENSE" target="_blank">DATA-LICENSE</a>）。「权威集」= 非 fork/归档 + package.json 声明 dsh.bundle.patch 且 patch 已提交（下限口径）。健康分为启发式评估，<b>非安全审计</b>。</p>
 <h2 style="font-size:16px;margin:28px 0 8px">调用示例</h2>
 <pre style="background:var(--track);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12.5px;overflow:auto"><code>curl ${ORIGIN}/data/insights.json
 curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,

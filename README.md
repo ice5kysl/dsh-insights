@@ -80,7 +80,8 @@ node bin/query.mjs --sort stars --top 10   # 查询
 - [x] 健康评分与致作者的信（content/letters）、生态周报（content/weekly）生成器 + 样例
 - [x] npm 周下载入库（CI 已跑通）；快照 diff 基线；人工点评种子 5 条
 - [x] **dsh-insights.com 已上线**（Pages 自定义域 + HTTPS 强制 + www 301）；站点多页化（publish/pages：周报/插件页/开放数据/方法论/RSS）
-- [ ] M1 剩余：信件全量生成（权威集全量，当前 4.1k+ 页）+ 契约字段普查 + 周报外发 SOP
+- [x] 信件全量生成（4,681 封 + `/p/` 插件页全量，diff 驱动重写 · 2026-09-06）
+- [ ] M1 剩余：契约字段普查 + 周报外发 SOP
 - [x] M2（v0 已上线）：collect/dynamics 快照器 + /dynamics 页 + 周报官方小节（2026-09-06）
 - [ ] M2 剩余：rc 兼容雷达（v1 API 符号路线；声明率实测 ~1% 否决 v0）+ 官方时间序列 ≥4 周
 
