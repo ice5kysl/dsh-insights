@@ -34,6 +34,7 @@ const STEPS = [
   ['npm-map',     'pipeline/collect/npm-map.mjs'],
   ['downloads',   'pipeline/collect/downloads.mjs'],
   ['dynamics',    'pipeline/collect/dynamics.mjs'],
+  ['author-graph', 'pipeline/collect/author-graph.mjs'],
   ['validate',    'pipeline/validate/validate.mjs'],
   ['regress',     'pipeline/validate/regress.mjs'],
   ['deep',        'pipeline/validate/deep.mjs'],
@@ -59,7 +60,7 @@ const SNAPSHOT = ['analyze', 'score', 'history', 'overlap', 'export-csv', 'expor
 const CONTENT = ['letters', 'weekly', 'pages']
 const PROFILES = {
   daily: DAILY,
-  friday: [...new Set([...DAILY, ...CONTENT])],
+  friday: [...new Set(['author-graph', ...DAILY, ...CONTENT])],
   snapshot: SNAPSHOT,
   full: ['lists', 'discover', 'npm-map', 'downloads', 'validate', ...SNAPSHOT, 'diff'],
   content: CONTENT,
