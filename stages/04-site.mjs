@@ -117,7 +117,7 @@ function main() {
   const staleRows = (a.npmStaleTop || []).map((s2) =>
     `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${s2.repoVersion} → ${s2.npmLatest}</td></tr>`).join('')
   const starRows = (a.topByStars || []).map((s2) =>
-    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td>${s2.published ? '<span class="ok">npm ✓</span>' : '<span class="dim">—</span>'}</td><td>${s2.zh ? '<span class="ok">中/双语 ✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
+    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td>${s2.published ? '<span class="ok">npm ✓</span>' : '<span class="dim">—</span>'}</td><td>${s2.zh ? '<span class="ok">i18n·中英 ✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
     '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num"><span class="grade ' + esc(e.grade) + '">' + esc(e.grade) + '</span></td><td class="num mono">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('')
 
@@ -318,7 +318,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="bignum"><b class="count mono" data-v="${t.authoritative ?? 0}">0</b><span>权威插件<br>通过 dsh.bundle manifest 校验</span></div>
   <div class="stats">
     ${stat((d.publishPct != null ? d.publishPct + '%' : '—'), 'npm 发布率', (pub.published ?? 0) + ' 已发布 · ' + (pub.stale ?? 0) + ' 滞后')}
-    ${stat((d.zhPct != null ? d.zhPct + '%' : '—'), '中/双语文档', (doc.both ?? 0) + ' 双文档')}
+    ${stat((d.zhPct != null ? d.zhPct + '%' : '—'), 'i18n 双语（中/英检出）', (doc.both ?? 0) + ' 份双语文档')}
     ${stat((t.active30Pct ?? 0) + '%', '近 30 天活跃', '生态活跃信号')}
     ${stat(a.quality?.avgScore ?? '—', '平均质量分', 'A+B ' + (a.quality?.gradePct ?? 0) + '%')}
     ${stat(a.channels ? a.channels.coveredPct + '%' : '—', 'curated 收录率', (a.channels?.covered ?? 0) + ' 已进 awesome/imsai')}
@@ -344,11 +344,11 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
       </div></div>
     </div>
     <div class="panel">
-      <h3>文档覆盖</h3><p class="p-sub">双语文档 / 中文 / 仅英文 / 无</p>
+      <h3>i18n · 文档语言足迹</h3><p class="p-sub">按 README 检出：双语 / 含中文 / 单语 / 无 · 多语言(ja/ko/…)检测规划见 M1</p>
       <div class="donutwrap">${donutDocs}<div class="legend">
-        <div><i style="background:#18181b"></i>中/双语 <b>${doc.both ?? 0}</b></div>
-        <div><i style="background:#52525b"></i>含中文内容 <b>${Math.max(0, (doc.zh ?? 0) - (doc.both ?? 0))}</b></div>
-        <div><i style="background:#a1a1aa"></i>仅英文 <b>${Math.max(0, (doc.readme ?? 0) - (doc.zh ?? 0))}</b></div>
+        <div><i style="background:#18181b"></i>双语(EN+中文) <b>${doc.both ?? 0}</b></div>
+        <div><i style="background:#52525b"></i>含中文（i18n 样本） <b>${Math.max(0, (doc.zh ?? 0) - (doc.both ?? 0))}</b></div>
+        <div><i style="background:#a1a1aa"></i>单语（基础 README） <b>${Math.max(0, (doc.readme ?? 0) - (doc.zh ?? 0))}</b></div>
         <div><i style="background:#e4e4e7"></i>无 README <b>${doc.none ?? 0}</b></div>
       </div></div>
     </div>
@@ -382,7 +382,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="cards">
     <div class="panel">
       <h3>Star 榜 Top 10</h3><p class="p-sub">社区关注度最高的权威插件</p>
-      <table><thead><tr><th style="text-align:left">仓库</th><th style="text-align:right">★</th><th>npm</th><th>中/双语</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+      <table><thead><tr><th style="text-align:left">仓库</th><th style="text-align:right">★</th><th>npm</th><th>i18n·中英</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
     <div class="panel">
       <h3>npm 版本滞后榜</h3><p class="p-sub">仓库已领先于 npm 发布 · Top 10</p>
@@ -402,12 +402,12 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="toolbar">
     <input type="text" id="q" placeholder="搜索仓库名 / 描述…" autocomplete="off">
     <button class="chip on" data-npm="">全部 npm</button><button class="chip" data-npm="pub">已发布</button><button class="chip" data-npm="unpub">未发布</button><button class="chip" data-npm="stale">版本滞后</button>
-    <button class="chip" data-zh="0">中/双语</button>
+    <button class="chip" data-zh="0">i18n·中英</button>
     <button class="chip gchip" data-gr="A">A</button><button class="chip gchip" data-gr="B">B</button><button class="chip gchip" data-gr="C">C</button><button class="chip gchip" data-gr="D">D</button>
     <button class="chip" data-active="1">近 30 天活跃</button>
     <details class="cols"><summary>列 ▾</summary><div class="menu">
       <label><input type="checkbox" checked data-col="created">创建日期</label>
-      <label><input type="checkbox" checked data-col="zh">中/双语</label>
+      <label><input type="checkbox" checked data-col="zh">i18n·中英</label>
       <label><input type="checkbox" checked data-col="lib">双产物</label>
       <label><input type="checkbox" checked data-col="act">活跃</label>
     </div></details>
@@ -415,7 +415,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="tbl-wrap">
   <table class="ptable">
     <thead><tr>
-      <th data-k="0">仓库</th><th data-k="2" class="num">★</th><th data-k="3" class="c-created">创建</th><th data-k="4">npm</th><th data-k="5" class="c-zh">中/双语</th><th data-k="6" class="c-lib">双产物</th><th data-k="7" class="c-act">活跃</th><th>质量</th><th>描述</th>
+      <th data-k="0">仓库</th><th data-k="2" class="num">★</th><th data-k="3" class="c-created">创建</th><th data-k="4">npm</th><th data-k="5" class="c-zh">i18n·中英</th><th data-k="6" class="c-lib">双产物</th><th data-k="7" class="c-act">活跃</th><th>质量</th><th>描述</th>
     </tr></thead>
     <tbody id="tb"></tbody>
   </table></div>

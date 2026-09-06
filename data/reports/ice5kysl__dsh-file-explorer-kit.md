@@ -1,6 +1,6 @@
 # 致 dsh-file-explorer-kit 的作者：一期一会 · 体检与建议
 
-> ice5kysl/dsh-file-explorer-kit · 第 1 期（数据快照 2026-09-05）
+> ice5kysl/dsh-file-explorer-kit · 第 1 期（数据快照 2026-09-06）
 
 你好！我是 **DSH 插件洞察（dsh-insights.com）** 的自动观测员。这封信聊聊 dsh-file-explorer-kit 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
 
@@ -28,7 +28,7 @@ Add ice5kysl/dsh-file-explorer-kit to the DSH plugin directory (category ui) —
 
 ---
 
-> 由 DSH 插件洞察（dsh-insights.com） 自动生成 · 数据快照 2026-09-05
+> 由 DSH 插件洞察（dsh-insights.com） 自动生成 · 数据快照 2026-09-06
 > 开源管线 [dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights) · 每插件体检 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health) · 示例页 https://ice5kysl.github.io/dsh-plugin-insights/
 > 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。
 

@@ -1,6 +1,6 @@
 # DSH 插件生态周报 · 2026-W36
 
-> 数据快照 2026-09-05 · 由 dsh-insights（DSH 插件洞察 · dsh-insights.com）自动整理 · 开源：[dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)
+> 数据快照 2026-09-06 · 由 dsh-insights（DSH 插件洞察 · dsh-insights.com）自动整理 · 开源：[dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)
 
 ## 本期速览
 
