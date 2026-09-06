@@ -9,7 +9,7 @@
 
 import { writeFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
-import { PATHS, readJsonl } from '../../lib/data.mjs'
+import { PATHS, readJsonl, loadPlugins } from '../../lib/data.mjs'
 
 const CONC = Number(process.env.CONC || 12)
 
@@ -23,7 +23,7 @@ function curl(name) {
 }
 
 async function main() {
-  const plugins = readJsonl(PATHS.plugins)
+  const plugins = loadPlugins()
   const names = [...new Set(plugins.filter((p) => p.npm?.published && p.pkgName).map((p) => p.pkgName))]
   console.log(`[downloads] ${names.length} packages`)
   const map = {}

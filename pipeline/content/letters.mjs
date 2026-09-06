@@ -13,7 +13,7 @@
 
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
-import { PATHS, readJsonl, readJson, byFullName } from '../../lib/data.mjs'
+import { PATHS, readJsonl, readJson, byFullName, loadPlugins } from '../../lib/data.mjs'
 
 const OUT_DIR = PATHS.reportsDir
 mkdirSync(OUT_DIR, { recursive: true })
@@ -29,7 +29,7 @@ const FOOTER = [
   '',
 ].join('\n')
 
-const plugins = readJsonl(PATHS.plugins)
+const plugins = loadPlugins()
 const enrich = readJson(PATHS.enrich, [])
 const dlDoc = readJson(PATHS.downloads)
 const llmRows = readJsonl(PATHS.llm)

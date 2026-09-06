@@ -15,10 +15,10 @@
 
 import { writeFileSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { DATA, PATHS, readJsonl, readJson, writeJson } from '../../lib/data.mjs'
+import { DATA, PATHS, readJsonl, readJson, writeJson, loadPlugins } from '../../lib/data.mjs'
 import { scoreAll } from './score.mjs'
 
-const PLUGINS = process.argv[2] || PATHS.plugins
+const PLUGINS = process.argv[2] || null
 
 function pct(n, d) { return d === 0 ? 0 : Math.round((n / d) * 1000) / 10 }
 
@@ -310,7 +310,7 @@ function render(a) {
 }
 
 function main() {
-  const rows = readJsonl(PLUGINS)
+  const rows = PLUGINS ? readJsonl(PLUGINS) : loadPlugins()
   const a = analyze(rows)
   writeJson(PATHS.analysis, a, true)
   writeFileSync(PATHS.reportMd, render(a))

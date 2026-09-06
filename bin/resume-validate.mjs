@@ -26,8 +26,8 @@ const run = (script) => {
 
 function counts() {
   try {
-    const ids = readJsonl(CAND).filter((c) => c.kind === 'repo').map((c) => `${c.owner}/${c.name}`)
-    const done = new Set(readFileSync(STATE, 'utf8').split('\n').filter(Boolean))
+    const ids = readJsonl(CAND).filter((c) => c.kind === 'repo').map((c) => String(c.id || `${c.owner}/${c.name}`).toLowerCase())
+    const done = new Set(readFileSync(STATE, 'utf8').split('\n').filter(Boolean).map((s) => s.toLowerCase()))
     return { total: ids.length, missing: ids.filter((id) => !done.has(id)).length, doneUnique: done.size }
   } catch { return { total: -1, missing: -1, doneUnique: -1 } }
 }

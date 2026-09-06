@@ -28,7 +28,7 @@ function pushRepo(repo, source, extra = {}) {
   if (!full.includes('/') || seen.has(full)) return
   seen.add(full)
   rows.push({
-    kind: 'repo', id: full, source,
+    kind: 'repo', id: full.toLowerCase(), source,
     name: full.split('/')[1], owner: full.split('/')[0],
     stars: repo.stargazers_count ?? 0,
     description: repo.description || '',

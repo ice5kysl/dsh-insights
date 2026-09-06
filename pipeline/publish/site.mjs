@@ -13,7 +13,7 @@
 
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
-import { PATHS, SITE, readJsonl, readJson, loadEnrichMap, byFullName } from '../../lib/data.mjs'
+import { PATHS, SITE, readJsonl, readJson, loadEnrichMap, byFullName, loadPlugins } from '../../lib/data.mjs'
 
 const OUT = join(SITE, 'index.html')
 
@@ -21,7 +21,7 @@ const SEVP = { fail: 20, major: 10, warn: 5, minor: 2 }
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
 function main() {
-  const plugins = readJsonl(PATHS.plugins)
+  const plugins = loadPlugins()
   const a = readJson(PATHS.analysis, {})
   const enMap = loadEnrichMap()
   const llmMap = byFullName(readJsonl(PATHS.llm))
@@ -146,7 +146,7 @@ function main() {
   const catsHtml = (a.categories || []).slice(0, 8).map((x) => bar(x.category, x.count, catsMax, null, x.category)).join('')
 
   const staleRows = (a.npmStaleTop || []).map((s2) =>
-    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${s2.repoVersion} → ${s2.npmLatest}</td></tr>`).join('')
+    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${esc(s2.repoVersion)} → ${esc(s2.npmLatest)}</td></tr>`).join('')
   const starRows = (a.topByStars || []).map((s2) =>
     `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td class="num">${s2.published ? '<span class="ok" title="npm 已发布">✓</span>' : '<span class="dim">—</span>'}</td><td class="num">${s2.zh ? '<span class="ok" title="中/双语文档">✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
@@ -695,7 +695,7 @@ function openDrawer(repo){
   detMap().then(function(m){
     var d=m[repo]; if(!d){b.innerHTML='<div class="dd-sec"><h3>详情</h3><div class="dd-desc">暂无本地详情（可能晚于当前快照）。</div></div>';return}
     var flags='<div class="dd-sec"><h3>清单与构建产物</h3>'+ddFlag(d.files.rd,'README')+ddFlag(d.files.zh,'中文 README')+ddFlag(d.files.lic,'LICENSE')+ddFlag(d.files.cp,'cordis.patch.yml')+ddFlag(d.files.idx,'lib/index.js')+ddFlag(d.files.cli,'lib/client.js')+(d.hasClientExport?ddFlag(true,'exports["./client"]'):'')+'</div>'
-    var npmHtml=d.npm&&d.npm.pub
+    var npmHtml=d.npm&&d.npm.published
       ? '<table class="dd-table">'+ddRow('latest','<span class="ok">'+escA(d.npm.latest)+'</span>')+ddRow('发布版本数',d.npm.versions)+ddRow('最近发布',escA((d.npm.latestTime||'').slice(0,10)||'—'))+'</table>'+(d.version&&d.npm.latest&&d.npm.latest!==d.version?'<div class="warn" style="font-size:12px;margin-top:6px">⚠ 版本滞后：仓库 '+escA(d.version)+' vs npm '+escA(d.npm.latest)+'</div>':'')
       : '<div class="dim">未发布到 npm</div>'
     b.innerHTML=''
@@ -773,7 +773,7 @@ draw();
     llm: llmMap.get(r.full_name) ?? null,
     parts: (enMap.get(r.full_name)?.drops || []).map((d) => ({ label: d.label, v: -(SEVP[d.sev] || 5) })),
     dims: enMap.get(r.full_name)?.dimScores || {},
-    npm: r.npm || { pub: false },
+    npm: r.npm || { published: false },
   }))
   writeFileSync(join(SITE, 'plugins-detail.json'), JSON.stringify(detail))
   const cats = {}

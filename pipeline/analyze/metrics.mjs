@@ -10,7 +10,7 @@
 
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
-import { PATHS, SITE, readJson, readJsonl } from '../../lib/data.mjs'
+import { PATHS, SITE, readJson, readJsonl, loadPlugins } from '../../lib/data.mjs'
 import { ghApi } from '../../lib/api.mjs'
 import { appendFileSync, readFileSync, existsSync } from 'node:fs'
 
@@ -48,7 +48,7 @@ async function main() {
   const row = {
     date: today,
     // A 覆盖
-    authoritative: analysis.totals?.authoritative ?? readJsonl(PATHS.plugins).length,
+    authoritative: analysis.totals?.authoritative ?? loadPlugins().length,
     candidates: analysis.coverage?.candidates ?? null,
     topicUniverse: analysis.coverage?.topicUniverse?.count ?? null,
     // B 新鲜度 / 质量

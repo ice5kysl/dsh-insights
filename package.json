@@ -8,7 +8,7 @@
     "dsh-insights": "./bin/dsh-insights.mjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20.11"
   },
   "scripts": {
     "run": "node bin/dsh-insights.mjs",
@@ -20,6 +20,7 @@
     "export": "node pipeline/publish/export-csv.mjs",
     "query": "node bin/query.mjs",
     "regress": "node pipeline/validate/regress.mjs",
+    "llm": "node pipeline/analyze/llm-tags.mjs",
     "score": "node pipeline/analyze/score.mjs",
     "export:json": "node pipeline/publish/export-json.mjs",
     "compat": "node pipeline/analyze/compat.mjs",

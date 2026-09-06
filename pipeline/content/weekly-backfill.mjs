@@ -15,12 +15,12 @@
 
 import { writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { PATHS, readJsonl, readJson } from '../../lib/data.mjs'
+import { PATHS, readJsonl, readJson, loadPlugins } from '../../lib/data.mjs'
 
 const W = PATHS.weeklyDir
 mkdirSync(W, { recursive: true })
 
-const plugins = readJsonl(PATHS.plugins)
+const plugins = loadPlugins()
 const candidates = readJsonl(PATHS.candidatesAll).filter((c) => c.kind === 'repo')
 const enrich = readJson(PATHS.enrich, [])
 const enBy = new Map(enrich.map((x) => [x.full_name, x]))

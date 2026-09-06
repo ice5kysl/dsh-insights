@@ -70,7 +70,7 @@ async function main() {
     if (!repoIds.has(repo)) {
       const [owner, rname] = repo.split('/')
       repoIds.add(repo)
-      added.push({ kind: 'repo', id: repo, source: `npm:${name}`, name: rname, owner, stars: 0, description: (mani.description || '').slice(0, 300), topics: [], archived: false, fork: false, pushed_at: null, created_at: null, default_branch: null, html_url: `https://github.com/${repo}`, npmName: name })
+      added.push({ kind: 'repo', id: repo.toLowerCase(), source: `npm:${name}`, name: rname, owner, stars: 0, description: (mani.description || '').slice(0, 300), topics: [], archived: false, fork: false, pushed_at: null, created_at: null, default_branch: null, html_url: `https://github.com/${repo}`, npmName: name })
     }
     if (i % 50 === 0) console.log(`[npm-map] ${i}/${npmNames.size} (mapped ${mapped.length}, new repos ${added.length})`)
   }

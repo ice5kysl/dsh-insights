@@ -1,66 +1,66 @@
 {
-  "generatedAt": "2026-09-06T04:15:46.427Z",
+  "generatedAt": "2026-09-06T04:25:04.169Z",
   "ruleVersion": "health-v4",
-  "total": 4064,
+  "total": 4160,
   "grades": {
-    "S": 380,
-    "A": 723,
-    "B": 2700,
-    "C": 259,
+    "S": 381,
+    "A": 730,
+    "B": 2754,
+    "C": 293,
     "D": 2
   },
-  "avg": 84.5,
+  "avg": 84.4,
   "median": 85,
   "topDeductions": [
     {
       "code": "manifest.no-client-export",
-      "count": 2928,
-      "pct": 72
+      "count": 2998,
+      "pct": 72.1
     },
     {
       "code": "docs.zh-missing",
-      "count": 2502,
-      "pct": 61.6
+      "count": 2551,
+      "pct": 61.3
     },
     {
       "code": "npm.unpublished",
-      "count": 2076,
-      "pct": 51.1
+      "count": 2129,
+      "pct": 51.2
     },
     {
       "code": "manifest.not-lib-main",
-      "count": 1737,
-      "pct": 42.7
+      "count": 1781,
+      "pct": 42.8
     },
     {
       "code": "repo.sparse-topics",
-      "count": 710,
+      "count": 729,
       "pct": 17.5
     },
     {
       "code": "npm.version-drift",
-      "count": 545,
-      "pct": 13.4
+      "count": 562,
+      "pct": 13.5
     },
     {
       "code": "npm.single-release",
-      "count": 485,
+      "count": 497,
       "pct": 11.9
     },
     {
-      "code": "docs.no-description",
-      "count": 421,
+      "code": "repo.no-license",
+      "count": 432,
       "pct": 10.4
     },
     {
-      "code": "repo.no-license",
-      "count": 419,
+      "code": "docs.no-description",
+      "count": 430,
       "pct": 10.3
     },
     {
       "code": "eng.no-ci",
-      "count": 214,
-      "pct": 5.3
+      "count": 293,
+      "pct": 7
     }
   ]
 }

@@ -23,7 +23,7 @@
  */
 
 import { pathToFileURL } from 'node:url'
-import { PATHS, readJsonl, writeJson } from '../../lib/data.mjs'
+import { PATHS, readJsonl, writeJson, loadPlugins } from '../../lib/data.mjs'
 
 export const RULE_VERSION = 'health-v4'
 
@@ -225,7 +225,7 @@ export function scoreAll(rows) {
 }
 
 function main() {
-  const rows = readJsonl(PATHS.plugins)
+  const rows = loadPlugins()
   const { out, summary } = scoreAll(rows)
   writeJson(PATHS.health, summary, true)
   console.log(`[score] ${out.length} rows · ${JSON.stringify(summary.grades)} · avg ${summary.avg} · median ${summary.median} · rule ${RULE_VERSION}`)

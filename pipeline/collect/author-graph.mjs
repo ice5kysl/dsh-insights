@@ -13,14 +13,14 @@
  * Run: node pipeline/collect/author-graph.mjs [采样数=200]
  */
 
-import { PATHS, readJsonl, writeJson } from '../../lib/data.mjs'
+import { PATHS, readJsonl, writeJson, loadPlugins } from '../../lib/data.mjs'
 import { ghApi } from '../../lib/api.mjs'
 
 const SAMPLE = Number(process.argv[2]) || 200
 const PER_REPO = 10
 
 async function main() {
-  const plugins = readJsonl(PATHS.plugins)
+  const plugins = loadPlugins()
     .sort((a, b) => (b.stars || 0) - (a.stars || 0))
     .slice(0, SAMPLE)
   console.log(`[author-graph] sampling top ${plugins.length} plugins by ★`)

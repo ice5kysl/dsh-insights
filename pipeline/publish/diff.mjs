@@ -10,10 +10,10 @@
  */
 
 import { writeFileSync, existsSync } from 'node:fs'
-import { PATHS, readJsonl, readJson } from '../../lib/data.mjs'
+import { PATHS, readJsonl, readJson, loadPlugins } from '../../lib/data.mjs'
 
 function main() {
-  const now = readJsonl(PATHS.plugins)
+  const now = loadPlugins()
   const cur = new Map(now.map((r) => [r.full_name, r]))
   const prevArr = existsSync(PATHS.prevIds) ? readJson(PATHS.prevIds, []) : null
   const prev = prevArr ? new Map(prevArr.map((x) => [x.id, x])) : null

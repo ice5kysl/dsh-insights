@@ -16,7 +16,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { join } from 'node:path'
-import { PATHS, readJsonl } from '../../lib/data.mjs'
+import { PATHS, readJsonl, loadPlugins } from '../../lib/data.mjs'
 
 const ROOT = join(import.meta.dirname, '..', '..')
 const CACHE = join('/tmp', 'dsh-deep-cache')
@@ -56,7 +56,7 @@ function scanDir(dir, fullName) {
 }
 
 async function main() {
-  const rows = readJsonl(PATHS.plugins)
+  const rows = loadPlugins()
   const fromEnv = (process.env.DEEP_REPOS || '').split(',').map((s) => s.trim()).filter(Boolean)
   const auto = rows.filter((r) => /read-?only|只读|readonly/i.test(r.description || '')).slice(0, 5).map((r) => r.full_name)
   const top = rows.slice().sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 3).map((r) => r.full_name)

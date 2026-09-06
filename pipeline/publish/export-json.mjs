@@ -12,11 +12,11 @@
 
 import { writeFileSync } from 'node:fs'
 import { pathToFileURL } from 'node:url'
-import { PATHS, readJsonl } from '../../lib/data.mjs'
+import { PATHS, readJsonl, loadPlugins } from '../../lib/data.mjs'
 import { scoreAll, RULE_VERSION } from '../analyze/score.mjs'
 
 function main() {
-  const rows = readJsonl(PATHS.plugins)
+  const rows = loadPlugins()
   const { out: scored, summary } = scoreAll(rows)
   const byName = new Map(scored.map((s) => [s.full_name, s.health]))
   const plugins = rows.map((r) => {

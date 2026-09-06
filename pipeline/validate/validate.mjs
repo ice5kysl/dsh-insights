@@ -34,7 +34,21 @@ const BUDGET_FLOOR = Number(process.env.BUDGET_FLOOR || 250)
 
 mkdirSync(join(ROOT, 'data', 'state'), { recursive: true })
 
-const done = new Set(existsSync(STATE) ? readFileSync(STATE, 'utf8').split('\n').filter(Boolean) : [])
+const done = new Set(existsSync(STATE) ? readFileSync(STATE, 'utf8').split('\n').filter(Boolean).map((s) => s.toLowerCase()) : [])
+// 已落库行的 full_name 小写索引（valid+invalid 两侧）——append 前查重，防大小写/改名变体重复（P0-1）
+const seenRows = new Set()
+for (const f of [PLUGINS, INVALID]) {
+  if (!existsSync(f)) continue
+  for (const line of readFileSync(f, 'utf8').split('\n')) {
+    if (!line.trim()) continue
+    try {
+      const r = JSON.parse(line)
+      const fn = r.full_name || (r.owner && r.repo ? `${r.owner}/${r.repo}` : null)
+      if (fn) seenRows.add(fn.toLowerCase())
+    } catch { /* tolerate trailing partial appends */ }
+  }
+}
+const rowKey = (row) => (row.full_name || (row.owner && row.repo ? `${row.owner}/${row.repo}` : '') || '').toLowerCase()
 
 const hasSignal = (c) => {
   const t = (c.topics || []).join(' ')
@@ -172,7 +186,7 @@ async function validateOne(c) {
 
 async function main() {
   const lines = readFileSync(CAND, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
-  const repos = lines.filter((c) => c.kind === 'repo' && c.id && !done.has(c.id))
+  const repos = lines.filter((c) => c.kind === 'repo' && c.id && !done.has(String(c.id).toLowerCase()))
   let processed = 0, valid = 0, transient = 0, transConsec = 0
   const conc = Math.max(1, CONCURRENCY)
   const queue = repos.slice()
@@ -190,14 +204,21 @@ async function main() {
       try {
         const res = await validateOne(c)
         const row = res.record || { owner: c.owner, repo: c.name, source: c.source || null }
+        const key = rowKey(row)
+        const dup = key && seenRows.has(key)
+        if (dup) console.error(`[validate] dup skipped ${key}`)
         if (res.ok) {
-          appendFileSync(PLUGINS, JSON.stringify({ valid: true, checkedAt: new Date().toISOString(), ...row }) + "\n")
-          valid++
-        } else {
+          if (!dup) {
+            appendFileSync(PLUGINS, JSON.stringify({ valid: true, checkedAt: new Date().toISOString(), ...row }) + "\n")
+            seenRows.add(key)
+            valid++
+          }
+        } else if (!dup) {
           appendFileSync(INVALID, JSON.stringify({ valid: false, reason: res.reason, checkedAt: new Date().toISOString(), ...row }) + "\n")
+          seenRows.add(key)
         }
-        appendFileSync(STATE, c.id + "\n")
-        done.add(c.id)
+        appendFileSync(STATE, String(c.id).toLowerCase() + "\n")
+        done.add(String(c.id).toLowerCase())
         transConsec = 0
       } catch (e) {
         transient++
