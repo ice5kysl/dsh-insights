@@ -45,6 +45,7 @@ const STEPS = [
   ['overlap',     'pipeline/analyze/overlap.mjs'],
   ['llm-tags',    'pipeline/analyze/llm-tags.mjs'],
   ['scenarios',   'pipeline/analyze/scenarios.mjs'],
+  ['metrics',     'pipeline/analyze/metrics.mjs'],
   ['export-csv',  'pipeline/publish/export-csv.mjs'],
   ['export-json', 'pipeline/publish/export-json.mjs'],
   ['badges',      'pipeline/publish/badges.mjs'],
@@ -60,7 +61,7 @@ const SNAPSHOT = ['analyze', 'score', 'history', 'overlap', 'export-csv', 'expor
 const CONTENT = ['letters', 'weekly', 'pages']
 const PROFILES = {
   daily: DAILY,
-  friday: [...new Set(['author-graph', ...DAILY, ...CONTENT])],
+  friday: [...new Set(['author-graph', ...DAILY, 'metrics', ...CONTENT])],
   snapshot: SNAPSHOT,
   full: ['lists', 'discover', 'npm-map', 'downloads', 'validate', ...SNAPSHOT, 'diff'],
   content: CONTENT,
