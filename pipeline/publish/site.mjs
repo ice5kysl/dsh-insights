@@ -123,9 +123,9 @@ function main() {
   const catsHtml = (a.categories || []).slice(0, 8).map((x) => bar(x.category, x.count, catsMax, null, x.category)).join('')
 
   const staleRows = (a.npmStaleTop || []).map((s2) =>
-    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${s2.repoVersion} → ${s2.npmLatest}</td></tr>`).join('')
+    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${s2.repoVersion} → ${s2.npmLatest}</td></tr>`).join('')
   const starRows = (a.topByStars || []).map((s2) =>
-    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td>${s2.published ? '<span class="ok">npm ✓</span>' : '<span class="dim">—</span>'}</td><td>${s2.zh ? '<span class="ok">i18n·中英 ✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
+    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td>${s2.published ? '<span class="ok">npm ✓</span>' : '<span class="dim">—</span>'}</td><td>${s2.zh ? '<span class="ok">i18n·中英 ✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
     '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num"><span class="grade ' + esc(e.grade) + '">' + esc(e.grade) + '</span></td><td class="num mono">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('')
 
@@ -133,7 +133,7 @@ function main() {
     const pick = byStars.find((p) => enMap.get(p.full_name)?.category === c.category)
     if (!pick) return ''
     const g = enMap.get(pick.full_name)?.grade || ''
-    return '<tr data-repo="' + esc(pick.full_name) + '"><td><a href="' + esc(pick.html_url || '') + '" target="_blank">' + esc(pick.full_name) + '</a></td><td class="dim">' + esc(c.category) + '</td><td class="num mono">★ ' + (pick.stars || 0) + '</td><td class="num"><span class="grade ' + esc(g) + '">' + esc(g) + '</span></td></tr>'
+    return '<tr data-repo="' + esc(pick.full_name) + '"><td><a href="' + esc(pick.html_url || '') + '" target="_blank" title="' + esc(pick.full_name) + '">' + esc(pick.full_name) + '</a></td><td class="dim">' + esc(c.category) + '</td><td class="num mono">★ ' + (pick.stars || 0) + '</td><td class="num"><span class="grade ' + esc(g) + '">' + esc(g) + '</span></td></tr>'
   }).join('')
 
   const date = (a.generatedAt || '').slice(0, 10)
@@ -164,7 +164,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .dim{color:var(--faint)}.ok{color:var(--ok)}.warn{color:var(--warn)}
-.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.wrap{max-width:1400px;margin:0 auto;padding:0 28px}
 
 /* ---- topbar ---- */
 .topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -209,7 +209,7 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .sec-h h2{margin:0;font-size:18px;font-weight:650;letter-spacing:-.02em}
 .sec-h .sub{margin:0;color:var(--faint);font-size:12.5px}
 .sec-n{font:600 11px/1 var(--mono);color:var(--faint);letter-spacing:.06em}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
 .panel h3{margin:0;font-size:13.5px;font-weight:650}
 .panel .p-sub{color:var(--faint);font-size:11.5px;margin:3px 0 14px}
@@ -249,6 +249,7 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 /* ---- tables ---- */
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 .cards table th,.cards table td.num{white-space:nowrap}
+.cards .ptable td{max-width:260px;overflow:hidden;text-overflow:ellipsis}
 .ptable th,.ptable td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
 .ptable th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;user-select:none;background:var(--card);position:sticky;top:0;z-index:1}
 .ptable th:hover{color:var(--ink)}
