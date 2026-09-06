@@ -63,16 +63,99 @@ function main() {
       title, desc: 'DSH 插件生态周报（自动生成 · 数据可复核）',
       base: '../', here: 'weekly/', body, og: { type: 'article' },
     })))
-    weekly.push({ slug, title, date })
+    weekly.push({ slug, title, date, html: mdToHtml(md), md })
   }
-  const weeklyList = weekly.map((w) =>
-    `<div class="listrow"><a href="${w.slug}.html">${escHtml(w.title)}</a><span class="meta">${w.slug}</span></div>`).join('')
+  const weeklyIssues = weekly.map((w) => ({ slug: w.slug, title: w.title, html: w.html, md: w.md }))
   written.push(out('weekly/index.html', page({
-    title: '生态周报', desc: 'DSH 插件生态周报存档：每周五自动生成，机器整理、人工校对后外发。',
+    title: '生态周报', desc: 'DSH 插件生态周报存档：双栏阅读器，支持导出 Markdown / PDF / PNG。',
     base: '../', here: 'weekly/',
     body: `<p class="crumb">Weekly</p><h1 class="pagetitle">生态周报</h1>
-<p class="lede">每周五自动生成 · 数据快照驱动 · 面向社区与 dsh 官方。订阅：<a href="../feed.xml">RSS</a> 或 watch <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub 仓库</a>。</p>
-${weeklyList || '<p class="lede">暂无周报。</p>'}`,
+<p class="lede">每周五自动生成 · 数据快照驱动 · 面向社区与 dsh 官方。订阅：<a href="../feed.xml">RSS</a> 或 watch <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub 仓库</a>。点左侧期次直接阅读，可导出 Markdown / PDF / PNG。</p>
+<div class="wk">
+  <aside class="wk-side" id="wk-side"></aside>
+  <div class="wk-main">
+    <div class="wk-bar">
+      <span id="wk-cur" class="wk-cur"></span>
+      <span class="wk-actions">
+        <button class="wkbtn" id="wk-md">⬇ Markdown</button>
+        <button class="wkbtn" id="wk-pdf">⬇ PDF</button>
+        <button class="wkbtn" id="wk-png">⬇ 图片</button>
+        <a class="wkbtn" id="wk-link" href="#" target="_blank">永久链接 ↗</a>
+      </span>
+    </div>
+    <div id="wk-article" class="article"></div>
+  </div>
+</div>
+<style>
+.wk{display:grid;grid-template-columns:248px 1fr;gap:30px;align-items:start}
+.wk-side{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:8px}
+.wk-item{display:block;width:100%;text-align:left;border:0;background:none;padding:10px 12px;border-radius:9px;cursor:pointer;color:var(--mut);font-size:13px;line-height:1.45}
+.wk-item:hover{background:var(--track);color:var(--ink)}
+.wk-item.on{background:color-mix(in srgb,var(--accent) 9%,transparent);color:var(--accent);font-weight:650}
+.wk-item small{display:block;font:11px var(--mono);color:var(--faint);margin-top:2px}
+.wk-main{min-width:0}
+.wk-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.wk-cur{font:600 12.5px var(--mono);color:var(--mut)}
+.wk-actions{display:flex;gap:6px;flex-wrap:wrap}
+.wkbtn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut)}
+.wkbtn:hover{border-color:var(--faint);color:var(--ink);text-decoration:none}
+@media(max-width:860px){.wk{grid-template-columns:1fr}.wk-side{position:static;max-height:none;display:flex;overflow-x:auto;gap:4px;padding:6px}.wk-item{white-space:nowrap;flex:none}}
+@media print{
+  body *{visibility:hidden}
+  #wk-article,#wk-article *{visibility:visible}
+  #wk-article{position:absolute;left:0;top:0;width:100%;padding:0 24px}
+}
+</style>
+<script>
+var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
+(function(){
+  var side=document.getElementById('wk-side'),art=document.getElementById('wk-article'),cur=document.getElementById('wk-cur'),link=document.getElementById('wk-link');
+  var bySlug={}; ISSUES.forEach(function(x){bySlug[x.slug]=x});
+  function current(){ var h=decodeURIComponent((location.hash||'').replace(/^#/,'')); return bySlug[h]?h:ISSUES[0].slug }
+  function render(){
+    var s=current(),it=bySlug[s];
+    art.innerHTML=it.html;
+    cur.textContent=s;
+    link.href='./'+s+'.html';
+    side.querySelectorAll('.wk-item').forEach(function(b){b.classList.toggle('on',b.dataset.s===s)});
+  }
+  side.innerHTML=ISSUES.map(function(it){
+    return '<button class="wk-item" data-s="'+it.slug+'">'+it.title.replace(/^DSH 插件生态周报 · /,'')+'<small>'+it.slug+'</small></button>' }).join('');
+  side.querySelectorAll('.wk-item').forEach(function(b){b.addEventListener('click',function(){location.hash='#'+b.dataset.s})});
+  window.addEventListener('hashchange',render);
+  render();
+  document.getElementById('wk-md').addEventListener('click',function(){
+    var it=bySlug[current()];
+    var blob=new Blob([it.md],{type:'text/markdown;charset=utf-8'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='dsh-weekly-'+current()+'.md';a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
+  });
+  document.getElementById('wk-pdf').addEventListener('click',function(){ window.print() });
+  document.getElementById('wk-png').addEventListener('click',function(){
+    var s=current();
+    var node=art.cloneNode(true);
+    var w=860,h=Math.max(400,art.scrollHeight+80);
+    var wrap=document.createElement('div');
+    wrap.setAttribute('xmlns','http://www.w3.org/1999/xhtml');
+    wrap.setAttribute('style','width:'+w+'px;padding:36px 44px;background:#ffffff;color:#18181b;font:14px/1.75 -apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif');
+    var st=document.createElement('style');
+    st.textContent='h1{font-size:24px;margin:0 0 14px;letter-spacing:-.02em}h2{font-size:18px;margin:26px 0 8px;border-bottom:1px solid #e4e4e7;padding-bottom:6px}h3{font-size:15px;margin:20px 0 6px}p{margin:9px 0}ul,ol{margin:9px 0;padding-left:22px}li{margin:4px 0}blockquote{margin:12px 0;padding:8px 14px;border-left:3px solid #e4e4e7;color:#71717a;background:#f4f4f5;border-radius:0 8px 8px 0;font-size:13px}code{font:12.5px ui-monospace,Menlo,Consolas,monospace;background:#f4f4f5;border-radius:5px;padding:1px 5px}pre{background:#f4f4f5;border:1px solid #e4e4e7;border-radius:10px;padding:12px 14px;overflow:auto;font-size:12.5px}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0}th{color:#71717a;font-size:11px;text-transform:uppercase;letter-spacing:.05em;text-align:left}th,td{padding:7px 10px;border-bottom:1px solid #e4e4e7;white-space:nowrap}hr{border:none;border-top:1px solid #e4e4e7;margin:24px 0}a{color:#2563eb;text-decoration:none}strong{font-weight:650}';
+    wrap.appendChild(st);
+    wrap.appendChild(node);
+    var xhtml=new XMLSerializer().serializeToString(wrap);
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'"><foreignObject width="100%" height="100%">'+xhtml+'</foreignObject></svg>';
+    var img=new Image();
+    img.onload=function(){
+      var c=document.createElement('canvas');c.width=w*2;c.height=h*2;
+      var x=c.getContext('2d');x.fillStyle='#ffffff';x.fillRect(0,0,c.width,c.height);
+      x.drawImage(img,0,0,w*2,h*2);
+      var a=document.createElement('a');a.download='dsh-weekly-'+s+'.png';a.href=c.toDataURL('image/png');a.click();
+    };
+    img.onerror=function(){ alert('图片导出失败（浏览器限制），可改用 PDF 导出') };
+    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  });
+})();
+</script>`,
   })))
 
   // ---- plugin letter pages (/p/<owner>/<repo>/) --------------------------
