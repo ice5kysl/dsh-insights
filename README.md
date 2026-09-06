@@ -1,77 +1,79 @@
-# dsh-plugin-insights
+# dsh-insights — DSH 插件与生态洞察
 
-> Index / validate / evaluate / analyze the whole **DeepSeek Harness (dsh) plugin ecosystem**. 全量 dsh 插件索引、评估与分析管线（零依赖 Node）。
+> **对外站点：https://dsh-insights.com**（品牌）· 本仓库 = **引擎 + 开放数据**（dsh-plugin-insights）
+> 全量索引 → 真伪校验 → 健康评分 → 收录矩阵 → 「致作者的信」→ 生态周报 · 零依赖 Node · 开放可复核
+>
+> 文档：[Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [产品规划](./docs/PRODUCT-PLAN.md) · [调研证据库](./docs/RESEARCH.md) · 每插件体检工具 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)
 
-> **DSH 插件与生态洞察 · dsh-insights.com** — 对外品牌 dsh-insights（域名已购）｜引擎仓库与开放数据｜[VISION](./docs/VISION.md) · [ROADMAP](./docs/ROADMAP.md)
+## 是什么
 
-## 产品定位（Product）
+dsh-insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层）：
 
-**dsh-plugin-insights = DSH 插件生态的质量评估数据层（quality data layer）**：全量索引 + 客观健康分 + 生态分析 + 开放数据快照。它**不是**第 N 个插件目录/市场，而是让已有目录（[awesome-dsh-plugin](https://awesome-dsh-plugin.com)）、应用内市场（[dsh-market](https://github.com/dsh-market/dsh-market)）和 agent 的卡片上有据可依的那个分数。健康分口径与体检工具见 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)。
+- **L1 插件洞察**：对全量候选做真伪判定 → 权威集（manifest 门禁）→ 健康分（A–D/0–100，带证据）→ 收录渠道矩阵与「优质未收录」榜 → 打分明细/同类分位。
+- **L2 官方动态（规划中）**：官方 releases/rc 节奏、docs 与内置能力演进、**rc 兼容雷达**（升级预警）。
+- **L3 生态报告**：「致作者的信」（每插件，Stage 17）与「生态周报」（周更，Stage 18），面向社区与 dsh 官方。
 
-产品文档：[Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [产品规划](./docs/PRODUCT-PLAN.md) · [生态调研证据库](./docs/RESEARCH.md)
+它不是第 N 个插件目录/市场，而是让已有目录、市场、agent 与 dsh 官方**有据可依**的数据与观测源。健康分口径与体检工具见 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)。
 
----
+## 站点与样例
 
-What it does: instead of being yet another curated list, this pipeline treats the ecosystem as data —
+- 演示仪表盘：https://ice5kysl.github.io/dsh-plugin-insights/（即将迁移 dsh-insights.com）
+- 「致作者的信」样例：`data/reports/ice5kysl__dsh-workspace-kit.md`
+- 生态周报样例：`data/weekly/LATEST.md`
 
-1. **Discover** (multi-source): GitHub `topic:dsh-plugin` / `deepseek-harness` / `dsh-bundle` / `cordis-plugin` searches + curated-list data dirs (awesome-dsh-plugin `data/plugins`, imsai-sh `catalog/plugins`) + npm search.
-2. **Validate → authoritative set**: cheap noise filtering first, then real checks — not fork/archived, `package.json` declares `dsh.bundle.patch`, patch file committed. Noise is bucketed (`data/invalid.jsonl`).
-3. **Evaluate (metadata, full-set)**: manifest shape, `exports["./client"]`, `lib/` artifacts, npm publish state & version drift, docs / bilingual docs, repo age/activity/stars/topics, licenses. (Limited deep clone-based security scans come later, reusing `dsh-plugin-health` heuristics.)
-4. **Analyze + publish**: aggregate stats (`data/analysis.json`, `data/report.md`) and a self-contained static site (`site/index.html`).
+## 数据产出（开放）
 
-## Run
+| file | 说明 |
+|---|---|
+| `data/plugins.jsonl` · `invalid.jsonl` | **权威集 2113** + 分桶 1274（0 重复） |
+| `data/plugins.csv` · `analysis.json` · `enrich.json` | 表格 / 聚合 / 每插件评分+分类+渠道 |
+| `data/downloads.json` | npm 周下载（CI 更新） |
+| `data/listed.json` | 收录渠道清单（awesome / imsai） |
+| `data/llm.jsonl` · `reviews.jsonl` | LLM 能力标注 · 人工点评种子 |
+| `data/reports/*.md` | 每插件「致作者的信」 |
+| `data/weekly/*.md` · `last-diff.md` | 生态周报 · 快照 diff |
+| `site/` | 自包含仪表盘 + 详情抽屉（零依赖） |
+
+## 管线（Stage 地图）
+
+```
+00-lists 收录渠道   01-discover 多源发现  01b-npm-map npm→repo  02-validate 真伪→权威集/分桶(断点续跑)
+03-analyze 聚合+评分/分类/渠道(→enrich)  04-site 仪表盘+抽屉  05-export CSV
+06-deep 限量深检(写面/消毒)  07-downloads npm 周下载  07-regress rc 回归  08-score/diff 评分/快照diff
+09-export-json  11-enrich-compat  12-badges  13-history  14-overlap  15-llm-tags  16-scenarios
+17-report 「致作者的信」  18-weekly 生态周报   （Stage 19 官方动态快照 · M2）
+bin: dsh-plugin-insights(run) · query · report · weekly · export-suggested · refresh-extra · resume-validate …
+```
+
+## 快速开始
 
 ```bash
-GITHUB_TOKEN="$(gh auth token)" node bin/dsh-plugin-insights.mjs run [--limit N]
-# or stage by stage:
-npm run discover && npm run validate && npm run analyze && npm run site
+GITHUB_TOKEN="$(gh auth token)" node bin/dsh-plugin-insights.mjs run   # 全量：发现→校验→analyze→site
+npm run lists && npm run downloads && npm run analyze && npm run site && npm run export && npm run diff  # 轻量 refresh
+npm run report                      # 生成默认「致作者的信」（自荐 2 插件）
+node stages/17-report.mjs owner/repo  # 指定插件写信
+npm run weekly                      # 生成生态周报（data/weekly/）
+node bin/query.mjs --sort stars --top 10   # 查询
 ```
 
-Resumable: `data/state/done.ids` keeps progress; re-running continues where it stopped.
+断点续跑：`data/state/done.ids`；限速自动退避；CI：`.github/workflows/refresh.yml`（默认轻量 / 手动 full）已启用。
 
-## Outputs
+## Status（2026-09-05）
 
-| file | what |
-|---|---|
-| `data/candidates-full/all.jsonl` | raw candidates (topics/curated/npm + npm→repo mapping) |
-| `data/plugins.jsonl` · `data/invalid.jsonl` | **authoritative set** (2113) + bucketed rejects (1274) |
-| `data/analysis.json` / `data/report.md` | aggregates + human report |
-| `data/enrich.json` | per-plugin quality score/grade + functional category + curated-channel flags |
-| `data/listed.json` | curated-channel membership (awesome / imsai) |
-| `data/downloads.json` | npm last-week downloads (CI) |
-| `data/llm.jsonl` | LLM capability tagging (category/tags/summary/claims) |
-| `data/prev-plugin-ids.json` / `last-diff.md` | snapshot diff baseline / latest diff |
-| `data/reports/*.md` | per-plugin 体检/改进报告（Stage 17） |
-| `site/index.html` + `plugins-detail.json` + `plugins-cats.json` | dashboard + per-plugin detail drawer data |
+- [x] 发现+校验：canonical 2875 全量验证 → **权威集 2113**（0 重复）
+- [x] 仪表盘（KPI/按周新增/质量分级/功能分类/收录覆盖/优质未收录榜/全表+详情抽屉/打分明细/LLM 解读）
+- [x] 健康评分与致作者的信（Stage 17）、生态周报（Stage 18）生成器 + 样例
+- [x] npm 周下载入库（CI 已跑通）；快照 diff 基线；人工点评种子 5 条
+- [x] VISION/ROADMAP v0.2；品牌 dsh-insights（dsh-insights.com 已购）
+- [ ] M1：域名接入 + 站点品牌化 + 周报外发 SOP
+- [ ] M2：Stage 19 官方动态快照器 + rc 兼容雷达（见 ROADMAP）
 
-## Stage 地图
+## 方法论与边界
 
-```
-00-lists      收录渠道清单(awesome/imsai)            07-downloads  npm 周下载     08-diff       快照 diff/基线
-01-discover   多源发现(4×topic+curated+npm)          07-regress   dsh rc 回归评估  09-export-json 导出 JSON
-01b-npm-map   npm 包→仓库映射                        08-score     评分              11-enrich-compat 兼容富化
-02-validate   真伪校验→权威集/分桶(断点续跑)          12-badges    徽章              13-history  历史趋势
-03-analyze    聚合+质量/分类/渠道(→enrich/analysis)   14-overlap   同质/重叠         15-llm-tags LLM 能力标注
-17-report    每插件体检/改进报告
-04-site       静态仪表盘+抽屉                         16-scenarios 场景分析
-05-export     CSV
-06-deep       限量深检(克隆/写面/消毒)
-bin: dsh-plugin-insights(run) · query · refresh-extra · resume-validate · backfill-npm · badge · llm-catchup …
-```
+"权威集" = 非 fork/归档 + `package.json` 声明 `dsh.bundle.patch` 且 patch 已提交（下限口径；纯 tarball 分发会进分桶复核）。健康分为**启发式、非安全审计**；深检（写面/消毒）为增量信号；人工点评与自动评估分开标注。数据许可与口径变更见 docs 与 LICENSE。
 
-## Status
+## 贡献 / 联系我们
 
-- [x] 发现+校验：canonical 2875 全量验证 → **权威集 2113**（分桶 1274，0 重复，COMPLETE marker）
-- [x] 快照数据集 JSONL/CSV/schema 入库并推送（GitHub Pages 仪表盘在线）
-- [x] 质量评分/功能分类/同类推荐/收录渠道矩阵/优质未收录建议榜/按周新增/LLM 解读抽屉
-- [x] CI：`refresh.yml`（默认轻量 refresh，可手动 full；push 前 rebase）**已启用**
-- [ ] npm 下载量数据待首次 CI 成功后入库（stage07 已就绪）
-- [ ] 人工评价层 Top20（`data/reviews.jsonl` 种子已建，见下）
-- [ ] 站点缺口对照（vs 官方内置）可视化
-
-### 人工评价层（manual reviews）
-
-`data/reviews.jsonl`：`{ full_name, kind:'manual-draft', reviewer, date, strengths[], risks[], bestFor }`。
-种子覆盖自荐插件与建议榜头部；标注 `manual-draft` 需人工校对后再升为 `reviewed`。
-
-Methodology notes: "authoritative" = passes the manifest gate above; it is a lower bound (plugins that ship only via tarball/GitHub releases without a committed manifest may be missed — flagged as `no-signal`/`no-package.json` for review). Searches cap at GitHub's 1000-result limit per query; curated dirs may be truncated by the contents API. Set `GITHUB_TOKEN` for the 5000/hr budget.
+- 想上榜/被收录/纠错/校准：提 issue 或 PR（数据与方法论全开源可复核）
+- 想让你的插件进「优质未收录」榜或被写信：告诉我们 repo；人工点评在校对中
+- 给 dsh 官方/社区：引用自由，注明出处即可；欢迎合作校核
