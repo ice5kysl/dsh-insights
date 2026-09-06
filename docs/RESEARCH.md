@@ -88,6 +88,10 @@
 
 - 2026-09-05：**M2 提案已发出**——awesome-dsh-plugin org Discussions **#4399**（Ideas 分类，ZH+EN）：https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/discussions/4399 · 待回复记录。
 - 2026-09-05：**LLM 语义分析上线（D3 首跑）**——llm-tags stage，deepseek-v4-flash（用户 key，经 `export DEEPSEEK_API_KEY` 注入；代码不读 .env，`.env.example` 仅列变量名）。经验：10 行/批 >90s 超时 → 调 4 行/批 + 300s 超时 + 3 分片并行（LLM_SHARDS）；个别行模型漏输出（batch 4 got 3）待补。输出 data/llm.jsonl，不进 health 分数。
+- 2026-09-06：**全量审计与修复闭环**——4 路并行审计（数据一致性/管线代码/站点产物/CI 工程）产出 48 项清单（docs/AUDIT-2026-09-06.md），当日全部关闭：去重键统一 full_name 小写 + compaction + 0 重复硬门禁、CI 单 cron + workflow_run 部署接力、首页 XSS 修复、check-docs 文档数字对账脚本。
+- 2026-09-06：**健康分 v3→v4 连续升版**——v3 区分度重构（四档扣分 fail−20/major−10/warn−5/minor−2 + 7 条新规则）；v4 新增 S 级（≥95）。分布 @4,160 快照：S 9.2% / A 17.7% / B 66.5% / C 6.6% / D 0.05%。
+- 2026-09-06：**内容与站点放量**——信件全量 4,681 封 + /p/ 全量详情页（diff 驱动）；站点改版：汇总门户、仪表盘/插件库分页、周报双栏阅读器（MD/PDF/PNG 导出）、作者协作图 v2、Umami 访问统计。
+- 2026-09-06：**改进清单立项**（docs/IMPROVEMENTS-2026-09-06.md）——最高优先：权威集元数据刷新回路（discover 每次全量已拿到新鲜 stars/pushed_at 但被丢弃，活跃度口径随冻结数据衰减）+ history 逐日累积（时间层资产不可回填）；另立评分区分度叙事、信件双语、GraphQL 批量校验等。
 
 ## 来源
 

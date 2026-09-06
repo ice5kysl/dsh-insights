@@ -7,22 +7,22 @@
 
 ## 一、对外口径（v0.2，别跑偏）
 
-> DSH Insights = DeepSeek Harness 的**生态与动态全景观察站**：全量插件真伪判定 + A–D 健康分（逐条证据、规则公开、非安全审计）+ 官方动态与 rc 兼容雷达（M2）+ 生态周报。我们不做目录、不做市场、不做榜单——只提供可引用、可复核的数据与观测。
+> DSH Insights = DeepSeek Harness 的**生态与动态全景观察站**：全量插件真伪判定 + S–D 健康分（逐条证据、规则公开、非安全审计）+ 官方动态（v0 已上线）与 rc 兼容雷达（M2）+ 生态周报。我们不做目录、不做市场、不做榜单——只提供可引用、可复核的数据与观测。
 
 L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，只提供卡片上那个分数」（详见 [M2-INTEGRATION.md](./M2-INTEGRATION.md)）。
 
 **叙事三件套（帖子/README/演示统一用）**
-1. 数据点：topic 13.6k、3 周 3,159 策展条目、中位 ★3、47% 未发 npm
-2. 证据点：70% 缺 client export / 58% 无中文文档（analyze 实测）
+1. 数据点：topic 13.7k、3 周 3,159 策展条目、中位 ★3、仅 ~48% 发布 npm（09-05 实测口径）
+2. 证据点：72% 缺 client export / 61% 无中文文档（health.json topDeductions @2026-09-06）
 3. 反差点：14.5k★ 权威列表明说"不评判质量" → 评估层无人做、我们做且开源
 
 ## 二、三类用户 × 用法
 
 ### 1. 插件使用者（安装前决策）
-- 站点：https://dsh-insights.com/ （按健康分排序、点开看扣分原因）
+- 站点：https://dsh-insights.com/plugins/ （健康分排序/筛选，点开看扣分明细）
 - CLI：`node bin/query.mjs --grade A --active30 --npm published --search "会话管理"`
 - agent：指向 `https://dsh-insights.com/data/insights.json`（稳定 URL，永不变更）
-- 心智锚点：A/B/C/D + 证据；**信任来自可复核**
+- 心智锚点：S/A/B/C/D + 证据；**信任来自可复核**
 
 ### 2. 插件作者（被看见 + 被信任）
 - 插件页/信件：`https://dsh-insights.com/p/<owner>/<repo>/`（分数证据 + 最值得做的 3 件事）
@@ -74,5 +74,5 @@ npx --yes github:ice5kysl/dsh-plugin-health ice5kysl/dsh-workspace-kit   # 作�
 ## 七、风险与回滚（原 RELEASE-CHECKLIST 残余）
 
 - CI 每日刷新踩 search 限额 → refresh 用 token 分片 + BUDGET_FLOOR（已内置），失败自动下轮补。
-- Pages 数据文件大（scored/insights MB 级）→ Pages 只发瘦身数据，完整数据留仓库（pages.yml 已按此配置）。
+- Pages 数据文件大（insights/enrich MB 级）→ Pages 只发瘦身数据，完整数据留仓库（pages.yml 已按此配置）。
 - 采纳被拒 → 走 RESEARCH 决策日志"替代路径"：独立数据层 + badge 热链 + dsh-market `DSHM_REGISTRY_URL` 镜像。

@@ -42,7 +42,7 @@ L3 生态趋势           / 趋势图                 分数变化对比   主�
 
 已完成（M0 + M1 部分）不再赘述，以下是要补的**结构性差距**：
 
-1. ~~站点架构到头了~~（已解决 2026-09-06）：多页静态站已上线（/p/ 信件页、/weekly 存档、/dynamics、/authors、/scenarios、/badge、/data、/about），仪表盘 844 KB 内联仍可控。
+1. ~~站点架构到头了~~（已解决 2026-09-06）：多页静态站已上线（汇总门户 + /dashboard 仪表盘 + /plugins 插件库 + /p/ 全量详情页 + /weekly + /dynamics、/authors、/scenarios、/badge、/data、/about）；仪表盘与插件库各内嵌 ~1.6MB 表格数据（减重方案见 IMPROVEMENTS §B5）。
 2. ~~没有订阅机制~~（已解决）：`/feed.xml` RSS 已上线（周报 + 回填特刊，含 atom:self 与 item description）。
 3. **rc 雷达缺数据契约（实测）**：当前 `plugins.jsonl` 只有 `dshPlatform`（web 1371 / null 731），**没有任何插件声明的目标 dsh 版本**。雷达 v0 要求的"声明目标版本 vs 最新 rc"对比，必须先扩 02-validate 采集契约字段（见 §4.4），否则雷达只能产出空预警。
 4. **内容生产的单人风险**：周报/信件若依赖人写，必然断更。原则：**机器生成全文，人只做 review + 外发**。content/letters、content/weekly 已是这个形态，要保持。
@@ -75,7 +75,7 @@ site/
 ### 4.3 内容管线节奏（CI 编排）
 
 ```
-refresh.yml   每日 03:00   light refresh（现状）
+refresh.yml   每日 03:07 UTC（单 cron，job 内按 UTC 周五切 friday profile）   light refresh
               每周五       + content/weekly 周报生成 + feed.xml 重建 + commit
               手动 full     全量
 信件          不每信每天重生：仅当 enrich 分数/等级变化才重写对应 md（diff 驱动），
@@ -115,12 +115,12 @@ Pages 自定义域 + CNAME（apex + www）→ 强制 HTTPS → 旧 github.io 仓
 ROADMAP 的 M1–M4 框架不动，调整的是**M1 内部排序**与 M2/M3 的两个取舍：
 
 ```
-M1 收口（9月）   ① 站点 v2 多页化（含 feed.xml）   ← 新增，最先做，地基
-                ② 域名接入清单
-                ③ 信件全量生成 + /p/ 路由（依赖①）
-                ④ 周报第 1 期 + RSS 订阅上线
-                ⑤ 契约字段采集扩展（为雷达铺路） ← 从 M2 提前
-                ⑥ 外发 SOP（LINUX DO / Discussions）
+M1 收口（9月）   ① 站点 v2 多页化（含 feed.xml）✓ 2026-09-06
+                ② 域名接入清单 ✓
+                ③ 信件全量生成 + /p/ 路由（依赖①）✓ 4,681 页
+                ④ 周报第 1 期 + RSS 订阅上线 ✓（W33–W36 存档，W36 对外）
+                ⑤ 契约字段采集扩展（为雷达铺路）← 从 M2 提前
+                ⑥ 外发 SOP（LINUX DO / Discussions）SOP 已立，执行中
 M2（10月）      collect/dynamics + 双栏周报 + 雷达 v0/v1（视声明率定路线）+ /dynamics 页
 M3（10-11月）   采纳推进（sidecar/门槛 pitch）+ 徽章 ≥5 + 人工点评 Top20-50
                 —— 月报降级为季度汇编，等周报跑稳 4 期再做

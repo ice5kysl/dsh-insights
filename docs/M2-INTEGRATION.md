@@ -5,7 +5,7 @@
 
 ## 一句话提案
 
-> 让 **DSH Insights 的健康分（health-v1）**成为权威目录与市场卡片上的可选质量字段/收录门槛——数据开源、规则透明、每周刷新、**纯客观、非安全审计**。不抢你们的收录权，只提供"卡片上那个分数"。
+> 让 **DSH Insights 的健康分（health-v4）**成为权威目录与市场卡片上的可选质量字段/收录门槛——数据开源、规则透明、每周刷新、**纯客观、非安全审计**。不抢你们的收录权，只提供"卡片上那个分数"。
 
 ## 背景（为什么现在提）
 
@@ -23,7 +23,7 @@
 
 ## 数据契约（join key = `owner/name`，与贵方 plugins.json 对齐）
 
-示例（形状取自本机已校验插件，正式文件见仓库 `data/insights.json`，MIT 开放）：
+示例（形状取自本机已校验插件，正式文件见仓库 `data/insights.json`，代码 MIT / 数据 CC BY 4.0）：
 
 ```jsonc
 {
@@ -33,8 +33,8 @@
   "license": "MIT",
   "npm": { "published": true, "latest": "0.18.0" },
   "health": {
-    "score": 100, "grade": "A",          // A≥90 B≥75 C≥60 D<60
-    "drops": [],                          // 扣分 code+证据见 insights.json / scored.jsonl
+    "score": 100, "grade": "S",          // S≥95 · A≥90 · B≥75 · C≥60 · D<60
+    "drops": [],                          // 扣分 code+证据见 insights.json / enrich.json
     "ruleVersion": "health-v4"
   }
 }
@@ -44,7 +44,7 @@
 
 **选项 A · 卡片字段 / sidecar（推荐先做）**
 - 你们在 CI 里把 `insights.json`（或其按 `full_name` 子集）并入 `plugins.json` 的聚合流程，给每个插件条目附带可选 `health:{score,grade,ruleVersion}`。
-- 效果：dsh-market 卡片与 awesome-dsh-plugin.com 插件页自动显示 A–D 徽章；**一行数据、零 UI 成本**（你们已有卡片渲染）。
+- 效果：dsh-market 卡片与 awesome-dsh-plugin.com 插件页自动显示 S–D 徽章；**一行数据、零 UI 成本**（你们已有卡片渲染）。
 - 我们的承诺：schema 只增不改；快照周更 + 每次变更 commit；你们随时可停用（数据独立在贵方 CI 中，无运行时依赖我方）。
 
 **选项 B · 收录门槛（策展人减负）**
@@ -56,7 +56,7 @@
 
 - ❌ 不排名、不做"最佳插件"榜单、不干预你们收录决策——只提供可引用的事实信号。
 - ❌ 不是安全审计：健康分是启发式首筛；深检（写面/消毒）只作为附加信号，明示非审计。
-- ✅ 全开源（MIT）、方法论文档化、规则版本可回滚、seeds 回归公开。
+- ✅ 全开源（代码 MIT / 数据 CC BY 4.0）、方法论文档化、规则版本可回滚、seeds 回归公开。
 - ✅ 中文生态优先但规则对英文作者可申诉（`docs.zh-missing` 等主观项可下调权重，v2 讨论）。
 
 ## 需要你们拍板的
@@ -72,7 +72,7 @@
 - [ ] 回复：采纳（选项 __）/ 拒绝（理由：____）/ 替代路径（____）——待回复（2026-09-06 时点）
 - [ ] 若拒绝：替代路径记录 + 我们独立数据层继续（badge 热链 / llms.txt / 市场镜像 DSHM_REGISTRY_URL）
 
-## 附：Discussion 帖子草稿（可直接粘贴）
+## 附：Discussion 帖子草稿（发出时口径为 health-v1 · 11 条规则 · A–D；现行口径 v4 · 19 条 · S–D，引用时以 SCHEMA.md §health 为准）
 
 **ZH**
 > 我们做了 dsh 插件生态的客观健康分数据层（[dsh-insights](https://github.com/ice5kysl/dsh-insights)）：对全量 `dsh-plugin` topic（13.6k+）分片抓取 → manifest 门禁判真伪 → 11 条纯客观规则打分（A–D，逐条证据，星数不进分，缺失不扣分）。数据 MIT 开放、规则版本化、15 条校准 seeds 每轮回归。

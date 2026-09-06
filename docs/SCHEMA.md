@@ -65,10 +65,12 @@
 
 - `data/analysis.json` — 聚合统计（totals/distribution/topTopics/topByStars）。
 - `data/enrich.json` — 每插件统一记录（health 分 + category + 收录渠道 + 周下载），见 §health。
-- `data/insights.json` — 对外 agent 契约（稳定 URL，schema 只增不改）。
+- `data/insights.json` — 对外 agent 契约（稳定 URL，schema 只增不改）；`data/insights.schema.json` 为其 JSON Schema。
+- `data/dynamics.json` — 官方动态快照（L2 v0：releases 摘要/dist-tags/平台仓库信号）。
+- `data/metrics.jsonl` — 产品自测量指标（周五 CI append）。
 - `data/report.md` — 人类可读报告。
-- `data/last-diff.md` — 与**上一快照**的 diff（每次产出后基线滚动，`data/prev-plugin-ids.json` 更新为当前快照）。
-- `site/index.html` — 自包含静态站。
+- `data/last-diff.md` — 与**上一快照**的 diff（周报已不依赖它：weekly 生成时按 history 基线现场重算本周 diff）。
+- `site/` — 多页静态站（门户 /dashboard /plugins /p/ /weekly /dynamics /scenarios /authors /badge /data /about）。
 
 历史变更（2026-09-06）：评分体系统一为 health-v2 扣分制（v0.1 的 enrich 加分制废弃，其含 star 加分违背口径）；`data/scored.jsonl`、`data/snapshot-meta.json`、`data/COMPLETE.json`、`data/candidates.jsonl` 停止产出（git 历史保留）。
 
@@ -110,7 +112,7 @@
 }
 ```
 
-**规则（RULE_VERSION=health-v3；升版必须在此加 changelog）**
+**规则（RULE_VERSION=health-v4；升版必须在此加 changelog）**
 
 Changelog：
 - health-v4 (2026-09-06)：新增 **S 级（≥95）**——v3 下 A(≥90) 占 28% 仍偏宽，S 档（实测 10.0%）给真正卓越的插件出头空间；阈值成为 S≥95 · A≥90 · B≥75 · C≥60 · D<60。

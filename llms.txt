@@ -1,23 +1,23 @@
 # DSH Insights
 
-DeepSeek Harness 全景观察站：插件健康（全量权威集 + 客观健康分 A–D）· 官方动态（dsh 官方 + DeepSeek 平台信号，M2）· 生态趋势（生态周报）。启发式评估，非安全审计。
+DeepSeek Harness 全景观察站：插件健康（全量权威集 + 客观健康分 S–D）· 官方动态（dsh 官方 + DeepSeek 平台信号，v0 已上线）· 生态趋势（生态周报）。启发式评估，非安全审计。
 
 ## 数据入口（稳定 URL，可直接抓取）
 - https://dsh-insights.com/data/insights.json — 全量洞察快照（首选）
 - https://dsh-insights.com/data/plugins.jsonl — 权威集（一行一插件）
 - https://dsh-insights.com/data/enrich.json — 每插件评分/分类/渠道
+- https://dsh-insights.com/data/insights.schema.json — 契约 JSON Schema
 - https://dsh-insights.com/feed.xml — 生态周报 RSS
 
 ## 页面
-- https://dsh-insights.com/ — 首页（全站汇总门户）
-- https://dsh-insights.com/dashboard/ — 仪表盘（趋势/质量/榜单）
-- https://dsh-insights.com/plugins/ — 插件库（搜索/筛选/排序）
+- https://dsh-insights.com/ — 首页（全站汇总门户：搜索直达 + KPI + 最新入库 + 场景速配）
+- https://dsh-insights.com/dashboard/ — 仪表盘（趋势/质量/榜单 + 插件库 #browse：搜索/筛选/排序）
 - https://dsh-insights.com/dynamics/ — 官方动态（releases/dist-tags/rc 信号）
 - https://dsh-insights.com/scenarios/ — 场景组合推荐（按场景选插件）
 - https://dsh-insights.com/authors/ — 作者榜与协作关系图
 - https://dsh-insights.com/badge/ — 健康徽章（接入指南）
 - https://dsh-insights.com/weekly/ — 周报存档
-- https://dsh-insights.com/p/<owner>/<repo>/ — 插件详情页（评分/维度画像/扣分明细/同类/致作者的信）
+- https://dsh-insights.com/p/<owner>/<repo>/ — 插件详情页（评分/维度画像/扣分明细/同类；致作者的信为外发物料不上页）
 - https://dsh-insights.com/about/ — 关于 · 方法论与指标体系
 - https://dsh-insights.com/data/ — 数据集索引与许可（CC BY 4.0）
 

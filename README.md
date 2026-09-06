@@ -1,96 +1,88 @@
-# DSH Insights — DeepSeek Harness 全景观察站
+# DSH Insights — The DeepSeek Harness Ecosystem Observatory
 
-> **对外站点：https://dsh-insights.com** · 本仓库 = 管线 + 站点 + 开放数据（ice5kysl/dsh-insights）
-> **插件健康 · 官方动态 · 生态趋势**：全量索引 → 真伪校验 → 健康评分 → 收录矩阵 → 「致作者的信」→ 生态周报 →（M2）官方动态快照 + rc 兼容雷达 · 零依赖 Node · 开放可复核
+> **Live: <https://dsh-insights.com>** · This repo = pipeline + site + open data ([ice5kysl/dsh-insights](https://github.com/ice5kysl/dsh-insights))
+> **Plugin health · Official dynamics · Ecosystem trends** — full-ecosystem indexing → authenticity gate → objective health scores (evidence attached) → channel coverage → letters to authors → weekly report → official-dynamics snapshots (+ rc compat radar, M2). Zero-dependency Node. Open and reproducible.
 >
-> 文档：[Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [产品规划](./docs/PRODUCT-PLAN.md) · [产品设计](./docs/PRODUCT-DESIGN.md) · [调研证据库](./docs/RESEARCH.md) · [数据 Schema](./docs/SCHEMA.md) · [外发 SOP](./docs/OUTREACH.md) · 每插件体检工具 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)
+> **English (default)** · [简体中文](./README.zh-CN.md) · Docs: [Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [Product Plan](./docs/PRODUCT-PLAN.md) · [Product Design](./docs/PRODUCT-DESIGN.md) · [Research](./docs/RESEARCH.md) · [Schema](./docs/SCHEMA.md) · [Outreach](./docs/OUTREACH.md) · Per-plugin CLI [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)
 
-## 是什么
+## Why
 
-DSH Insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层）：
+The `dsh-plugin` topic went from zero to **13,700+ repos in about a month**. Discovery is solved (awesome lists, marketplaces) — **trust is not**: duplicates, abandoned forks, non-installable bundles and compat risk are the real user cost, and nobody scores any of it. The official directory explicitly opts out of ranking.
 
-- **L1 插件洞察**：对全量候选做真伪判定 → 权威集（manifest 门禁）→ 健康分（A–D/0–100，带证据）→ 收录渠道矩阵与「优质未收录」榜 → 打分明细/同类分位。
-- **L2 官方动态（v0 已上线）**：dsh 官方 releases/rc 节奏、docs 与内置能力演进、**rc 兼容雷达**（升级预警）+ DeepSeek 平台官方信号（模型/API 发布，同属可观测公开信号）。
-- **L3 生态报告**：「致作者的信」（每插件，content/letters）与「生态周报」（周更，content/weekly），面向社区与 dsh 官方。
+DSH Insights is the missing evaluation layer: **every plugin gets an honest, reproducible number.**
 
-它不是第 N 个插件目录/市场，而是让已有目录、市场、agent 与 dsh 官方**有据可依**的数据与观测源。健康分口径与体检工具见 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)。
+## The three layers
 
-## 站点与样例
+| Layer | What | Delivered as |
+|---|---|---|
+| **L1 · Plugin insights** | Authenticity gate (manifest) → authoritative set → health score **S–D / 0–100** (health-v4, per-deduction evidence) → channel coverage → "quality unlisted" list | Snapshot data + site + per-plugin pages + letters |
+| **L2 · Official dynamics** (v0 live) | dsh releases/rc cadence, dist-tags, DeepSeek platform signals; rc compat radar (M2) | `/dynamics` + weekly official section |
+| **L3 · Ecosystem reports** | Weekly report (every Friday, CI-generated) + a "letter to the author" per plugin (outreach material) | `/weekly` + RSS + `data/reports/` |
 
-- 站点：https://dsh-insights.com（仪表盘 · [周报](https://dsh-insights.com/weekly/) · [插件报告](https://dsh-insights.com/p/ice5kysl/dsh-workspace-kit/) · [开放数据](https://dsh-insights.com/data/) · [RSS](https://dsh-insights.com/feed.xml)）
-- 「致作者的信」样例：`data/reports/ice5kysl__dsh-workspace-kit.md`
-- 生态周报样例：`data/weekly/LATEST.md`
+Not another directory or marketplace — a data & observation source for directories, marketplaces, agents and the dsh team to build on.
 
-## 数据产出（开放）
+## Site
 
-| file | 说明 |
+Home (search + KPI + latest arrivals + scenario shortcuts) · [Dashboard](https://dsh-insights.com/dashboard/) (trends/quality/rankings + full plugin library `#browse`) · Plugin pages [`/p/<owner>/<repo>/`](https://dsh-insights.com/p/ice5kysl/dsh-workspace-kit/) (objective data for **every** authoritative plugin) · [Scenarios](https://dsh-insights.com/scenarios/) · [Authors](https://dsh-insights.com/authors/) · [Weekly](https://dsh-insights.com/weekly/) (reader with MD/PDF/PNG export) · [Dynamics](https://dsh-insights.com/dynamics/) · [Badges](https://dsh-insights.com/badge/) · [Open data](https://dsh-insights.com/data/) · [About/methodology](https://dsh-insights.com/about/) · [RSS](https://dsh-insights.com/feed.xml). Dark/light theme toggle, readable without JS, `llms.txt` for agents.
+
+## Data outputs (open)
+
+| File | What |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | **权威集 4,507** + 分桶 2,603（0 重复 · 硬门禁 · 2026-09-06 快照，校验滚动扩大中） |
-| `data/plugins.csv` · `analysis.json` · `enrich.json` | 表格 / 聚合 / 每插件评分+分类+渠道 |
-| `data/downloads.json` | npm 周下载（CI 更新） |
-| `data/listed.json` | 收录渠道清单（awesome / imsai） |
-| `data/llm.jsonl` · `reviews.jsonl` | LLM 能力标注 · 人工点评种子 |
-| `data/reports/*.md` | 每插件「致作者的信」 |
-| `data/weekly/*.md` · `last-diff.md` | 生态周报 · 快照 diff |
-| `site/` | 多页静态站（仪表盘 + 周报存档 + /p/ 插件页 + /data + /about + feed.xml，零依赖） |
+| `data/plugins.jsonl` · `invalid.jsonl` | **Authoritative set 9,141** + 3,642 noise buckets (0 duplicates · hard gate · 2026-09-06 snapshot, validation still rolling) |
+| `data/insights.json` + `insights.schema.json` | Agent contract (stable URL, additive-only schema) |
+| `data/analysis.json` · `enrich.json` · `plugins.csv` | Aggregates / per-plugin scores+channels / spreadsheet |
+| `data/dynamics.json` · `metrics.jsonl` | Official-dynamics snapshot · product self-metrics |
+| `data/llm.jsonl` · `data/reports/*.md` · `data/weekly/*.md` | LLM capability tags · letters to authors · weekly issues |
 
-## 管线（分层 · pipeline/<层>/）
+License: **code MIT · data CC BY 4.0** (attribution: dsh-insights.com). Repo metadata (descriptions etc.) remains © its original authors.
 
-```
-collect 采集     discover 多源发现 · npm-map npm→repo · lists 收录渠道 · downloads npm 周下载
-                 └─ dynamics（M2：dsh 官方 + DeepSeek 平台信号快照）
-validate 校验    validate 真伪→权威集/分桶(断点续跑) · regress 校准回归(硬门禁) · deep 限量深检(写面/消毒)
-analyze 分析     analyze 聚合+评分/分类/渠道(→enrich) · score 健康分 · compat 兼容信号
-                 history 快照历史 · overlap 重叠族 · llm-tags LLM标注 · scenarios 场景推荐
-publish 发布     site 仪表盘 · pages 多页站(weekly/p/data/about/feed) · export-csv · export-json(agent契约)
-                 badges 徽章 · diff 快照diff
-content 内容     letters 「致作者的信」 · weekly 生态周报
-```
-
-统一编排器 `bin/pipeline.mjs`（管线单一事实来源）：
+## Pipeline
 
 ```
-node bin/pipeline.mjs daily      # CI 每日轻量（collect 增量 + 发布层）
-node bin/pipeline.mjs friday     # daily + 内容层（信件 + 周报）—— CI 每周五
-node bin/pipeline.mjs snapshot   # 分析 + 发布全链
-node bin/pipeline.mjs full       # 全量：发现 → 校验 → snapshot
+collect    discover (sharded full crawl) · npm-map · lists · downloads · dynamics · refresh (metadata merge)
+validate   validate (authenticity → set/buckets, resumable) · regress (calibration gate) · deep (sampled write-face/sanitizer)
+analyze    analyze (→ enrich) · score · history · compat · overlap · llm-tags · scenarios
+publish    site (dashboard) · pages (home/p/weekly/dynamics/scenarios/authors/badge/data/about) · exports · badges · diff
+content    letters (outreach material) · weekly
+```
+
+One orchestrator (`bin/pipeline.mjs`):
+
+```bash
+node bin/pipeline.mjs daily      # CI daily (light refresh)
+node bin/pipeline.mjs friday     # daily + discover/refresh + author-graph + metrics + letters + weekly (CI Fridays)
+node bin/pipeline.mjs snapshot   # analyze → publish full chain
+node bin/pipeline.mjs full       # discovery → validation → snapshot
 node bin/pipeline.mjs --only score,badges / --from analyze / --dry
 ```
 
-层与产品三层的关系：collect/validate/analyze = L1 数据底座；content = L3；L2 官方动态（M2）落在 collect/dynamics → publish /dynamics 页 → 周报双栏。
-bin: pipeline(编排) · dsh-insights(run，别名) · query · export-suggested · badge · resume-validate · llm-catchup · progress · compact(数据去重) · backfill-tree(树信号回填) · check-docs(文档数字对账)
-
-## 快速开始
+Quick start:
 
 ```bash
-GITHUB_TOKEN="$(gh auth token)" node bin/pipeline.mjs full      # 全量：发现→校验→snapshot
-node bin/pipeline.mjs daily                                     # 轻量 refresh（= CI 每日）
-npm run report                      # 生成默认「致作者的信」（自荐 2 插件）
-node pipeline/content/letters.mjs owner/repo  # 指定插件写信
-npm run weekly                      # 生成生态周报（data/weekly/）
-node bin/query.mjs --sort stars --top 10   # 查询
+GITHUB_TOKEN="$(gh auth token)" node bin/pipeline.mjs full   # first full run
+node bin/query.mjs --sort stars --top 10                     # query the set
+node bin/recheck.mjs owner/repo                              # force re-validate one plugin
+node bin/check-docs.mjs                                      # README ↔ data reconciliation
 ```
 
-断点续跑：`data/state/done.ids`；限速自动退避；CI：`.github/workflows/refresh.yml`（每日 daily / 周五 friday 含周报 / 手动 full）已启用。
+CI (`.github/workflows/refresh.yml`): single cron 03:07 UTC, Friday profile switched in-job, concurrency-grouped; deploys via `workflow_run`. `recheck.yml` lets authors trigger a re-check of their plugin from Actions.
 
-## Status（2026-09-06）
+## Scoring in one paragraph
 
-- [x] 发现+校验：候选池 14,331 全量分片抓取 → 断点续跑校验中（已完成 ~6.5k/14k）→ **权威集 4,507**（0 重复 · @2026-09-06）
-- [x] 仪表盘（KPI/按周新增/质量分级/功能分类/收录覆盖/优质未收录榜/全表+详情抽屉/打分明细/LLM 解读）
-- [x] 健康评分与致作者的信（content/letters）、生态周报（content/weekly）生成器 + 样例
-- [x] npm 周下载入库（CI 已跑通）；快照 diff 基线；人工点评种子 5 条
-- [x] **dsh-insights.com 已上线**（Pages 自定义域 + HTTPS 强制 + www 301）；站点多页化（publish/pages：周报/插件页/开放数据/方法论/RSS）
-- [x] 信件全量生成（4,681 封 + `/p/` 插件页全量，diff 驱动重写 · 2026-09-06）
-- [ ] M1 剩余：契约字段普查 + 周报外发 SOP
-- [x] M2（v0 已上线）：collect/dynamics 快照器 + /dynamics 页 + 周报官方小节（2026-09-06）
-- [ ] M2 剩余：rc 兼容雷达（v1 API 符号路线；声明率实测 ~1% 否决 v0）+ 官方时间序列 ≥4 周
+Start at 100, deduct per rule (fail −20 / major −10 / warn −5 / minor −2), every deduction carries evidence; missing data is never invented or penalized; stars never enter the score; LLM output is display-only. Grades **S ≥95 · A ≥90 · B ≥75 · C ≥60 · D <60**. Heuristic assessment, **not a security audit** — deep inspection (write-face/sanitizer) is a separate, clearly-labeled signal. Disputes: [issue templates](.github/ISSUE_TEMPLATE/) (ZH/EN both fine).
 
-## 方法论与边界
+## Status (2026-09-06)
 
-"权威集" = 非 fork/归档 + `package.json` 声明 `dsh.bundle.patch` 且 patch 已提交（下限口径；纯 tarball 分发会进分桶复核）。健康分为**启发式、非安全审计**；深检（写面/消毒）为增量信号；人工点评与自动评估分开标注。数据许可与口径变更见 docs 与 LICENSE。
+- [x] Full crawl + validation: 14,331 candidates → **9,141** authoritative (0-duplicate hard gate; resumable, still rolling)
+- [x] Site live (custom domain, dark/light, search, SEO basics, analytics); per-plugin pages for the full set; weekly reader with MD/PDF/PNG export
+- [x] Health v4 (S-grade added) + calibration regression in snapshot gate; audit backlog closed (see `docs/AUDIT-2026-09-06.md`)
+- [x] Metadata refresh loop (Tier 0) wired into Fridays; letters frozen to snapshot dates (diff-driven pages)
+- [ ] M1 exit remaining: contract-field survey · i18n detector (ja/ko/es) · weekly outreach (≥2 issues public, W37 = first)
+- [ ] M2 remaining: rc compat radar (v1 API-symbol route) · official timeline ≥4 weeks
 
-## 贡献 / 联系我们
+## Contributing
 
-- 想上榜/被收录/纠错/校准：提 issue 或 PR（数据与方法论全开源可复核）
-- 想让你的插件进「优质未收录」榜或被写信：告诉我们 repo；人工点评在校对中
-- 给 dsh 官方/社区：引用自由，注明出处即可；欢迎合作校核
+- **Plugin authors**: check your page at `/p/<owner>/<repo>/`, embed the badge, [request a re-check](https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml), appeal scores or correct data via issues (ZH/EN both fine).
+- **Curators / agents**: consume `/data/insights.json` (join key `owner/repo`, additive schema, CC BY 4.0).
+- Everything is generated by an open pipeline — clone and reproduce any number.
