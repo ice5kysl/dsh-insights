@@ -1,9 +1,9 @@
 {
   "schema": "scenarios-v1",
-  "generatedAt": "2026-09-06T02:32:58.057Z",
+  "generatedAt": "2026-09-06T05:16:40.217Z",
   "note": "LLM 标签 ∪ 词汇匹配；排序=健康分→npm→stars（展示）。推荐非\"最佳\"宣称，理由逐条可见。",
-  "llmTagged": 1834,
-  "totalPlugins": 2113,
+  "llmTagged": 1823,
+  "totalPlugins": 4160,
   "scenarios": [
     {
       "id": "session-archive",
@@ -16,7 +16,7 @@
           "url": "https://github.com/Ultronen/dsh-archived-chats",
           "stars": 18,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.0.7",
           "active": true,
           "reasons": [
@@ -28,20 +28,8 @@
           "url": "https://github.com/ice5kysl/dsh-workspace-kit",
           "stars": 0,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.2",
-          "active": true,
-          "reasons": [
-            "标签: archive"
-          ]
-        },
-        {
-          "full_name": "Meredith2328/dsh-sticky-note",
-          "url": "https://github.com/Meredith2328/dsh-sticky-note",
-          "stars": 46,
-          "score": 95,
-          "grade": "A",
-          "npm": "1.0.0",
           "active": true,
           "reasons": [
             "标签: archive"
@@ -52,7 +40,7 @@
           "url": "https://github.com/Jimmy0123-ux/dsh-token-pet",
           "stars": 34,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.1",
           "active": true,
           "reasons": [
@@ -64,7 +52,7 @@
           "url": "https://github.com/TOBYCAI/dsh-sessions-manager",
           "stars": 9,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "3.4.0",
           "active": true,
           "reasons": [
@@ -76,11 +64,23 @@
           "url": "https://github.com/MS666666/dsh-archive-manager",
           "stars": 2,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.3",
           "active": true,
           "reasons": [
             "标签: archive"
+          ]
+        },
+        {
+          "full_name": "Saikel-Orado-Liu/dsh-archive-manager",
+          "url": "https://github.com/Saikel-Orado-Liu/dsh-archive-manager",
+          "stars": 2,
+          "score": 95,
+          "grade": "S",
+          "npm": "0.1.1",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
           ]
         }
       ]
@@ -96,7 +96,7 @@
           "url": "https://github.com/omdsh-dev/DSH-better-sidebar",
           "stars": 3339,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.18.0",
           "active": true,
           "reasons": [
@@ -108,8 +108,32 @@
           "url": "https://github.com/SiriLee/dsh-rewind",
           "stars": 37,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.7.5",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "lee259/dsh-workbench",
+          "url": "https://github.com/lee259/dsh-workbench",
+          "stars": 6,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.14.1",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "zhxqc/dsh-oh-my-theme",
+          "url": "https://github.com/zhxqc/dsh-oh-my-theme",
+          "stars": 6,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.6.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -120,7 +144,7 @@
           "url": "https://github.com/jiuyuechuwuhao/dsh-canvas-preview",
           "stars": 4,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.4.9",
           "active": true,
           "reasons": [
@@ -128,39 +152,15 @@
           ]
         },
         {
-          "full_name": "nirvanaslash/dsh-artifact-preview",
-          "url": "https://github.com/nirvanaslash/dsh-artifact-preview",
-          "stars": 2,
+          "full_name": "banlanzs/dsh-web-enhanced",
+          "url": "https://github.com/banlanzs/dsh-web-enhanced",
+          "stars": 3,
           "score": 100,
-          "grade": "A",
-          "npm": "0.1.2",
+          "grade": "S",
+          "npm": "0.21.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "Physicolor/dsh-lifeline",
-          "url": "https://github.com/Physicolor/dsh-lifeline",
-          "stars": 0,
-          "score": 100,
-          "grade": "A",
-          "npm": "0.1.1",
-          "active": true,
-          "reasons": [
-            "标签: preview"
-          ]
-        },
-        {
-          "full_name": "ice5kysl/dsh-file-explorer-kit",
-          "url": "https://github.com/ice5kysl/dsh-file-explorer-kit",
-          "stars": 0,
-          "score": 100,
-          "grade": "A",
-          "npm": "0.3.2",
-          "active": true,
-          "reasons": [
-            "标签: file/preview"
           ]
         }
       ]
@@ -176,7 +176,7 @@
           "url": "https://github.com/omdsh-dev/DSH-better-sidebar",
           "stars": 3339,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.18.0",
           "active": true,
           "reasons": [
@@ -188,7 +188,7 @@
           "url": "https://github.com/omdsh-dev/dsh-mnemon",
           "stars": 331,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.5.2",
           "active": true,
           "reasons": [
@@ -200,7 +200,7 @@
           "url": "https://github.com/SiriLee/dsh-rewind",
           "stars": 37,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.7.5",
           "active": true,
           "reasons": [
@@ -212,7 +212,7 @@
           "url": "https://github.com/jjxjjjjiik-bot/dsh-chat-timeline",
           "stars": 32,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.5",
           "active": true,
           "reasons": [
@@ -224,7 +224,7 @@
           "url": "https://github.com/heartmove/dsh-side-chat",
           "stars": 13,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.3.3",
           "active": true,
           "reasons": [
@@ -236,7 +236,7 @@
           "url": "https://github.com/HeathHe/dsh-worktree-panel",
           "stars": 8,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.5",
           "active": true,
           "reasons": [
@@ -256,7 +256,7 @@
           "url": "https://github.com/omdsh-dev/dsh-mnemon",
           "stars": 331,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.5.2",
           "active": true,
           "reasons": [
@@ -268,7 +268,7 @@
           "url": "https://github.com/anweat/dsh-web-search-pro",
           "stars": 61,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.11",
           "active": true,
           "reasons": [
@@ -280,7 +280,7 @@
           "url": "https://github.com/nevertoday/dsh-theme-plugin",
           "stars": 23,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.3.3",
           "active": true,
           "reasons": [
@@ -292,7 +292,7 @@
           "url": "https://github.com/Ultronen/dsh-archived-chats",
           "stars": 18,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.0.7",
           "active": true,
           "reasons": [
@@ -304,7 +304,7 @@
           "url": "https://github.com/MineRPi/dsh-trilium",
           "stars": 1,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.2",
           "active": true,
           "reasons": [
@@ -316,7 +316,7 @@
           "url": "https://github.com/runcat-tommy/dsh-chinese-poetry",
           "stars": 1,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.2.5",
           "active": true,
           "reasons": [
@@ -336,7 +336,7 @@
           "url": "https://github.com/omdsh-dev/dsh-mnemon",
           "stars": 331,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.5.2",
           "active": true,
           "reasons": [
@@ -344,11 +344,23 @@
           ]
         },
         {
+          "full_name": "polarskicpl/dsh-codex-migrate",
+          "url": "https://github.com/polarskicpl/dsh-codex-migrate",
+          "stars": 5,
+          "score": 100,
+          "grade": "S",
+          "npm": "2.0.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
           "full_name": "Mutx163/dsh-model-memory",
           "url": "https://github.com/Mutx163/dsh-model-memory",
           "stars": 2,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.12",
           "active": true,
           "reasons": [
@@ -360,7 +372,7 @@
           "url": "https://github.com/MineRPi/dsh-trilium",
           "stars": 1,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.2",
           "active": true,
           "reasons": [
@@ -368,39 +380,27 @@
           ]
         },
         {
-          "full_name": "NyaaCaster/dsh-yuque-kb",
-          "url": "https://github.com/NyaaCaster/dsh-yuque-kb",
-          "stars": 0,
-          "score": 100,
-          "grade": "A",
-          "npm": "0.1.1",
+          "full_name": "PerryLink/dsh-composer-history",
+          "url": "https://github.com/PerryLink/dsh-composer-history",
+          "stars": 10,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.7.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
           ]
         },
         {
-          "full_name": "Renzic-Stone/DSH-EasyRewrite",
-          "url": "https://github.com/Renzic-Stone/DSH-EasyRewrite",
-          "stars": 102,
-          "score": 95,
-          "grade": "A",
-          "npm": "2.3.1",
+          "full_name": "nbfys/dsh-web-attention-badge-enhanced",
+          "url": "https://github.com/nbfys/dsh-web-attention-badge-enhanced",
+          "stars": 1,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.3.2",
           "active": true,
           "reasons": [
-            "标签: recall"
-          ]
-        },
-        {
-          "full_name": "limbo947/dsh-recall-plugin",
-          "url": "https://github.com/limbo947/dsh-recall-plugin",
-          "stars": 30,
-          "score": 95,
-          "grade": "A",
-          "npm": "2.3.3",
-          "active": true,
-          "reasons": [
-            "标签: recall"
+            "描述/主题词命中"
           ]
         }
       ]
@@ -416,8 +416,56 @@
           "url": "https://github.com/chendefine/dsh-web-fetch-playwright",
           "stars": 3,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.2.6",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "Uddoo/dsh-dashboard",
+          "url": "https://github.com/Uddoo/dsh-dashboard",
+          "stars": 3,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.7.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "jianweideng0515-create/dsh-usage-stats",
+          "url": "https://github.com/jianweideng0515-create/dsh-usage-stats",
+          "stars": 2,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.3.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "DGPisces/dsh-openai-oauth",
+          "url": "https://github.com/DGPisces/dsh-openai-oauth",
+          "stars": 5,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.4.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "hrhgit/dsh-model-manager",
+          "url": "https://github.com/hrhgit/dsh-model-manager",
+          "stars": 0,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.2.1",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -428,59 +476,11 @@
           "url": "https://github.com/V1ki/dsh-plugin-subscriptions",
           "stars": 321,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.7.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "Han-1413141/dsh-cost-meter",
-          "url": "https://github.com/Han-1413141/dsh-cost-meter",
-          "stars": 254,
-          "score": 95,
-          "grade": "A",
-          "npm": "1.7.10",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "maxwell-feng/dsh-tinyfish-search",
-          "url": "https://github.com/maxwell-feng/dsh-tinyfish-search",
-          "stars": 15,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.2.1",
-          "active": true,
-          "reasons": [
-            "标签: provider"
-          ]
-        },
-        {
-          "full_name": "SeverusZh/dsh-plugin-subagent-director",
-          "url": "https://github.com/SeverusZh/dsh-plugin-subagent-director",
-          "stars": 15,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.5.0",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "wenzetan/dsh-llm-newapi",
-          "url": "https://github.com/wenzetan/dsh-llm-newapi",
-          "stars": 7,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.8.4",
-          "active": true,
-          "reasons": [
-            "标签: provider"
           ]
         }
       ]
@@ -496,7 +496,7 @@
           "url": "https://github.com/omdsh-dev/DSH-better-sidebar",
           "stars": 3339,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.18.0",
           "active": true,
           "reasons": [
@@ -504,24 +504,36 @@
           ]
         },
         {
-          "full_name": "ice5kysl/dsh-workspace-kit",
-          "url": "https://github.com/ice5kysl/dsh-workspace-kit",
-          "stars": 0,
+          "full_name": "polarskicpl/dsh-codex-migrate",
+          "url": "https://github.com/polarskicpl/dsh-codex-migrate",
+          "stars": 5,
           "score": 100,
-          "grade": "A",
-          "npm": "0.1.2",
+          "grade": "S",
+          "npm": "2.0.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
           ]
         },
         {
-          "full_name": "hhb1028/dsh-client-ui-timeline",
-          "url": "https://github.com/hhb1028/dsh-client-ui-timeline",
+          "full_name": "anweat/dsh-assistant-message-forge",
+          "url": "https://github.com/anweat/dsh-assistant-message-forge",
+          "stars": 2,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.1.1",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "ice5kysl/dsh-workspace-kit",
+          "url": "https://github.com/ice5kysl/dsh-workspace-kit",
           "stars": 0,
           "score": 100,
-          "grade": "A",
-          "npm": "0.1.0",
+          "grade": "S",
+          "npm": "0.1.2",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -532,7 +544,7 @@
           "url": "https://github.com/runcat-tommy/dsh-panda-calendar",
           "stars": 0,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.1.0",
           "active": true,
           "reasons": [
@@ -544,20 +556,8 @@
           "url": "https://github.com/y2zyyr/dsh-restart-control",
           "stars": 0,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.7",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "dsh-market/dsh-market",
-          "url": "https://github.com/dsh-market/dsh-market",
-          "stars": 3196,
-          "score": 95,
-          "grade": "A",
-          "npm": "1.43.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -572,23 +572,11 @@
       "candidates": 6,
       "plugins": [
         {
-          "full_name": "mexiaosqwq/dsh-web-mobile",
-          "url": "https://github.com/mexiaosqwq/dsh-web-mobile",
-          "stars": 78,
-          "score": 100,
-          "grade": "A",
-          "npm": "2.3.0",
-          "active": true,
-          "reasons": [
-            "标签: mobile"
-          ]
-        },
-        {
           "full_name": "KyoMio/dsh-zen-remote",
           "url": "https://github.com/KyoMio/dsh-zen-remote",
           "stars": 8,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.1.12",
           "active": true,
           "reasons": [
@@ -596,35 +584,11 @@
           ]
         },
         {
-          "full_name": "shaobeichen/dsh-pocket",
-          "url": "https://github.com/shaobeichen/dsh-pocket",
-          "stars": 952,
-          "score": 95,
-          "grade": "A",
-          "npm": "2.10.3",
-          "active": true,
-          "reasons": [
-            "标签: mobile/remote"
-          ]
-        },
-        {
-          "full_name": "elysia395/dsh-wallpaper-engine",
-          "url": "https://github.com/elysia395/dsh-wallpaper-engine",
-          "stars": 242,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.7.0",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
-          ]
-        },
-        {
           "full_name": "saya-ch/dsh-mobile",
           "url": "https://github.com/saya-ch/dsh-mobile",
           "stars": 217,
-          "score": 95,
-          "grade": "A",
+          "score": 98,
+          "grade": "S",
           "npm": "0.3.9",
           "active": true,
           "reasons": [
@@ -632,15 +596,51 @@
           ]
         },
         {
-          "full_name": "Buzzso/dsh-sev",
-          "url": "https://github.com/Buzzso/dsh-sev",
-          "stars": 136,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.3.4",
+          "full_name": "mexiaosqwq/dsh-web-mobile",
+          "url": "https://github.com/mexiaosqwq/dsh-web-mobile",
+          "stars": 78,
+          "score": 98,
+          "grade": "S",
+          "npm": "2.3.0",
+          "active": true,
+          "reasons": [
+            "标签: mobile"
+          ]
+        },
+        {
+          "full_name": "zoumutou/dsh-cost-balance",
+          "url": "https://github.com/zoumutou/dsh-cost-balance",
+          "stars": 3,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.1.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "Luawig/dsh-cloudflare-access",
+          "url": "https://github.com/Luawig/dsh-cloudflare-access",
+          "stars": 0,
+          "score": 96,
+          "grade": "S",
+          "npm": "1.0.0",
           "active": true,
           "reasons": [
             "标签: remote"
+          ]
+        },
+        {
+          "full_name": "shaobeichen/dsh-pocket",
+          "url": "https://github.com/shaobeichen/dsh-pocket",
+          "stars": 952,
+          "score": 95,
+          "grade": "S",
+          "npm": "2.10.3",
+          "active": true,
+          "reasons": [
+            "标签: mobile/remote"
           ]
         }
       ]
@@ -656,7 +656,7 @@
           "url": "https://github.com/RevolutionLA/dsh-dream-skin",
           "stars": 142,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "8.30.1",
           "active": true,
           "reasons": [
@@ -668,7 +668,7 @@
           "url": "https://github.com/nevertoday/dsh-theme-plugin",
           "stars": 23,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.3.3",
           "active": true,
           "reasons": [
@@ -676,11 +676,35 @@
           ]
         },
         {
+          "full_name": "zhxqc/dsh-oh-my-theme",
+          "url": "https://github.com/zhxqc/dsh-oh-my-theme",
+          "stars": 6,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.6.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "wangxilhy23/dsh-wx-skin",
+          "url": "https://github.com/wangxilhy23/dsh-wx-skin",
+          "stars": 4,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.1.2",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
           "full_name": "runcat-tommy/dsh-theme-manager",
           "url": "https://github.com/runcat-tommy/dsh-theme-manager",
           "stars": 0,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.3.0",
           "active": true,
           "reasons": [
@@ -688,36 +712,12 @@
           ]
         },
         {
-          "full_name": "elysia395/dsh-wallpaper-engine",
-          "url": "https://github.com/elysia395/dsh-wallpaper-engine",
-          "stars": 242,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.7.0",
-          "active": true,
-          "reasons": [
-            "标签: wallpaper"
-          ]
-        },
-        {
-          "full_name": "YRN-playmaker/dsh-wallpaper_share",
-          "url": "https://github.com/YRN-playmaker/dsh-wallpaper_share",
-          "stars": 29,
-          "score": 95,
-          "grade": "A",
-          "npm": "26.9.4",
-          "active": true,
-          "reasons": [
-            "标签: wallpaper"
-          ]
-        },
-        {
-          "full_name": "XCNXNXNX/dsh-portable-tavern",
-          "url": "https://github.com/XCNXNXNX/dsh-portable-tavern",
-          "stars": 23,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.3.0",
+          "full_name": "qiqikuaidianpao/mypet",
+          "url": "https://github.com/qiqikuaidianpao/mypet",
+          "stars": 0,
+          "score": 100,
+          "grade": "S",
+          "npm": "1.4.2",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -736,8 +736,20 @@
           "url": "https://github.com/Luaphes/dsh-web-attention-badge",
           "stars": 5,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.3.2",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "elviszhang007/dsh-moyan",
+          "url": "https://github.com/elviszhang007/dsh-moyan",
+          "stars": 4,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.5.3",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -748,7 +760,7 @@
           "url": "https://github.com/EastMG/dsh-gacha-calendar",
           "stars": 1,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.8.19",
           "active": true,
           "reasons": [
@@ -756,36 +768,12 @@
           ]
         },
         {
-          "full_name": "MeteorNOX/DeepSeek-Balance-Whale-Widget",
-          "url": "https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget",
-          "stars": 1727,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.2.10",
-          "active": true,
-          "reasons": [
-            "标签: whale"
-          ]
-        },
-        {
-          "full_name": "Jimmy0123-ux/dsh-token-pet",
-          "url": "https://github.com/Jimmy0123-ux/dsh-token-pet",
-          "stars": 34,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.1.1",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "Andiii208/dsh-ultramath",
-          "url": "https://github.com/Andiii208/dsh-ultramath",
-          "stars": 13,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.6.3",
+          "full_name": "qiqikuaidianpao/mypet",
+          "url": "https://github.com/qiqikuaidianpao/mypet",
+          "stars": 0,
+          "score": 100,
+          "grade": "S",
+          "npm": "1.4.2",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -795,12 +783,24 @@
           "full_name": "eric-song-dev/dsh-ikun-pet",
           "url": "https://github.com/eric-song-dev/dsh-ikun-pet",
           "stars": 10,
-          "score": 95,
-          "grade": "A",
+          "score": 96,
+          "grade": "S",
           "npm": "2.2.0",
           "active": true,
           "reasons": [
             "标签: pet"
+          ]
+        },
+        {
+          "full_name": "Er1c0v0/dsh-whale-pet",
+          "url": "https://github.com/Er1c0v0/dsh-whale-pet",
+          "stars": 5,
+          "score": 96,
+          "grade": "S",
+          "npm": "0.1.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
           ]
         }
       ]
@@ -816,7 +816,7 @@
           "url": "https://github.com/shanliuling/dsh-image-gen",
           "stars": 314,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.4.0",
           "active": true,
           "reasons": [
@@ -828,8 +828,20 @@
           "url": "https://github.com/Physicolor/dsh-ui-harmonizer",
           "stars": 12,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.8.3",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "wangxilhy23/dsh-wx-skin",
+          "url": "https://github.com/wangxilhy23/dsh-wx-skin",
+          "stars": 4,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.1.2",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -840,7 +852,7 @@
           "url": "https://github.com/nirvanaslash/dsh-artifact-preview",
           "stars": 2,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.2",
           "active": true,
           "reasons": [
@@ -852,7 +864,7 @@
           "url": "https://github.com/ice5kysl/dsh-file-explorer-kit",
           "stars": 0,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.3.2",
           "active": true,
           "reasons": [
@@ -860,27 +872,15 @@
           ]
         },
         {
-          "full_name": "Totoro-qaq/dsh-plugin-bridge",
-          "url": "https://github.com/Totoro-qaq/dsh-plugin-bridge",
-          "stars": 162,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.3.2",
+          "full_name": "Jamailar/beav-deepseek-harness",
+          "url": "https://github.com/Jamailar/beav-deepseek-harness",
+          "stars": 2,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.1.5",
           "active": true,
           "reasons": [
-            "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "fandc520/dsh-comfyui",
-          "url": "https://github.com/fandc520/dsh-comfyui",
-          "stars": 51,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.4.0",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
+            "标签: image"
           ]
         }
       ]
@@ -892,11 +892,35 @@
       "candidates": 6,
       "plugins": [
         {
+          "full_name": "PandaPolo/dsh-voice-call",
+          "url": "https://github.com/PandaPolo/dsh-voice-call",
+          "stars": 3,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.1.1",
+          "active": true,
+          "reasons": [
+            "标签: voice/tts"
+          ]
+        },
+        {
+          "full_name": "eric-song-dev/dsh-ikun-pet",
+          "url": "https://github.com/eric-song-dev/dsh-ikun-pet",
+          "stars": 10,
+          "score": 96,
+          "grade": "S",
+          "npm": "2.2.0",
+          "active": true,
+          "reasons": [
+            "标签: audio"
+          ]
+        },
+        {
           "full_name": "PensiveFei/dsh-voice-scribe",
           "url": "https://github.com/PensiveFei/dsh-voice-scribe",
           "stars": 32,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.4.7",
           "active": true,
           "reasons": [
@@ -908,7 +932,7 @@
           "url": "https://github.com/DIAG5/dsh-better-input",
           "stars": 25,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.2.0",
           "active": true,
           "reasons": [
@@ -920,7 +944,7 @@
           "url": "https://github.com/WizisCool/dsh-ears",
           "stars": 16,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.3.0",
           "active": true,
           "reasons": [
@@ -928,39 +952,15 @@
           ]
         },
         {
-          "full_name": "eric-song-dev/dsh-ikun-pet",
-          "url": "https://github.com/eric-song-dev/dsh-ikun-pet",
-          "stars": 10,
-          "score": 95,
-          "grade": "A",
-          "npm": "2.2.0",
-          "active": true,
-          "reasons": [
-            "标签: audio"
-          ]
-        },
-        {
           "full_name": "kendu76/dsh-music-player",
           "url": "https://github.com/kendu76/dsh-music-player",
           "stars": 5,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.0.0",
           "active": true,
           "reasons": [
             "标签: audio"
-          ]
-        },
-        {
-          "full_name": "MaRi23333/dsh-fish-tts",
-          "url": "https://github.com/MaRi23333/dsh-fish-tts",
-          "stars": 3,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.2.10",
-          "active": true,
-          "reasons": [
-            "标签: TTS/voice"
           ]
         }
       ]
@@ -976,7 +976,7 @@
           "url": "https://github.com/RevolutionLA/dsh-dream-skin",
           "stars": 142,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "8.30.1",
           "active": true,
           "reasons": [
@@ -988,7 +988,7 @@
           "url": "https://github.com/Physicolor/dsh-ui-harmonizer",
           "stars": 12,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.8.3",
           "active": true,
           "reasons": [
@@ -1000,7 +1000,7 @@
           "url": "https://github.com/Max-Samson/dsh-usage-chart",
           "stars": 11,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.1.2",
           "active": true,
           "reasons": [
@@ -1008,24 +1008,24 @@
           ]
         },
         {
-          "full_name": "Shiye-10Pages/dsh-whale-meter",
-          "url": "https://github.com/Shiye-10Pages/dsh-whale-meter",
-          "stars": 11,
-          "score": 100,
-          "grade": "A",
-          "npm": "0.1.0",
-          "active": true,
-          "reasons": [
-            "标签: token/cost"
-          ]
-        },
-        {
           "full_name": "Physicolor/dsh-widgets",
           "url": "https://github.com/Physicolor/dsh-widgets",
           "stars": 6,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.4.1",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "xueayi/dsh-opencode-go-usage",
+          "url": "https://github.com/xueayi/dsh-opencode-go-usage",
+          "stars": 5,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.1.6",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -1036,7 +1036,7 @@
           "url": "https://github.com/zeng6125-rgb/dsh-llm-retry-settings",
           "stars": 4,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.8",
           "active": true,
           "reasons": [
@@ -1056,7 +1056,7 @@
           "url": "https://github.com/pengyue-polaron/deepseek-harness-genui",
           "stars": 107,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.14.0",
           "active": true,
           "reasons": [
@@ -1068,8 +1068,20 @@
           "url": "https://github.com/Likenttt/garmin-connect-plugin-for-dsh",
           "stars": 11,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.6",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "polarskicpl/dsh-codex-migrate",
+          "url": "https://github.com/polarskicpl/dsh-codex-migrate",
+          "stars": 5,
+          "score": 100,
+          "grade": "S",
+          "npm": "2.0.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -1079,8 +1091,8 @@
           "full_name": "xiajiajun516/dsh-config-manager",
           "url": "https://github.com/xiajiajun516/dsh-config-manager",
           "stars": 79,
-          "score": 95,
-          "grade": "A",
+          "score": 98,
+          "grade": "S",
           "npm": "0.1.56",
           "active": true,
           "reasons": [
@@ -1088,39 +1100,27 @@
           ]
         },
         {
-          "full_name": "Walvez/dsh-codex-sync",
-          "url": "https://github.com/Walvez/dsh-codex-sync",
-          "stars": 25,
-          "score": 95,
-          "grade": "A",
-          "npm": "1.6.1",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "null119/dsh-mcp-manage",
-          "url": "https://github.com/null119/dsh-mcp-manage",
-          "stars": 15,
-          "score": 95,
-          "grade": "A",
-          "npm": "1.1.0",
-          "active": true,
-          "reasons": [
-            "标签: MCP"
-          ]
-        },
-        {
-          "full_name": "duhu2000/dsh-mcp-connector",
-          "url": "https://github.com/duhu2000/dsh-mcp-connector",
-          "stars": 14,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.2.34",
+          "full_name": "lilyblessing/dsh-mcp-skill-panel",
+          "url": "https://github.com/lilyblessing/dsh-mcp-skill-panel",
+          "stars": 6,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.5.3",
           "active": true,
           "reasons": [
             "标签: mcp"
+          ]
+        },
+        {
+          "full_name": "creativedswork/dsh-uni-editor",
+          "url": "https://github.com/creativedswork/dsh-uni-editor",
+          "stars": 1,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.3.2",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
           ]
         }
       ]
@@ -1136,7 +1136,7 @@
           "url": "https://github.com/Likenttt/garmin-connect-plugin-for-dsh",
           "stars": 11,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.6",
           "active": true,
           "reasons": [
@@ -1147,8 +1147,8 @@
           "full_name": "xiajiajun516/dsh-config-manager",
           "url": "https://github.com/xiajiajun516/dsh-config-manager",
           "stars": 79,
-          "score": 95,
-          "grade": "A",
+          "score": 98,
+          "grade": "S",
           "npm": "0.1.56",
           "active": true,
           "reasons": [
@@ -1159,8 +1159,8 @@
           "full_name": "linhut/gongwen-skill",
           "url": "https://github.com/linhut/gongwen-skill",
           "stars": 38,
-          "score": 95,
-          "grade": "A",
+          "score": 98,
+          "grade": "S",
           "npm": "2.10.0",
           "active": true,
           "reasons": [
@@ -1168,11 +1168,23 @@
           ]
         },
         {
+          "full_name": "lilyblessing/dsh-mcp-skill-panel",
+          "url": "https://github.com/lilyblessing/dsh-mcp-skill-panel",
+          "stars": 6,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.5.3",
+          "active": true,
+          "reasons": [
+            "标签: skills"
+          ]
+        },
+        {
           "full_name": "Walvez/dsh-codex-sync",
           "url": "https://github.com/Walvez/dsh-codex-sync",
           "stars": 25,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.6.1",
           "active": true,
           "reasons": [
@@ -1184,23 +1196,11 @@
           "url": "https://github.com/minivv/dsh-agent-skills",
           "stars": 13,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.7",
           "active": true,
           "reasons": [
             "LLM 分类命中",
-            "标签: skills"
-          ]
-        },
-        {
-          "full_name": "Chael-Chael/dsh-reference-anything",
-          "url": "https://github.com/Chael-Chael/dsh-reference-anything",
-          "stars": 13,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.4.0",
-          "active": true,
-          "reasons": [
             "标签: skills"
           ]
         }
@@ -1217,7 +1217,7 @@
           "url": "https://github.com/omdsh-dev/DSH-better-sidebar",
           "stars": 3339,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.18.0",
           "active": true,
           "reasons": [
@@ -1229,8 +1229,20 @@
           "url": "https://github.com/shanliuling/dsh-image-gen",
           "stars": 314,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.4.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "IT-coder-Yy/dsh-git-plugin",
+          "url": "https://github.com/IT-coder-Yy/dsh-git-plugin",
+          "stars": 6,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.2.3",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -1241,7 +1253,7 @@
           "url": "https://github.com/Fayelin12/dsh-office",
           "stars": 4,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.4.0",
           "active": true,
           "reasons": [
@@ -1253,7 +1265,7 @@
           "url": "https://github.com/hongyue0721/dsh-kimicode-swarm",
           "stars": 4,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.2",
           "active": true,
           "reasons": [
@@ -1261,27 +1273,15 @@
           ]
         },
         {
-          "full_name": "omdsh-dev/dsh-llm-fallbacks",
-          "url": "https://github.com/omdsh-dev/dsh-llm-fallbacks",
-          "stars": 20,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.4.1",
+          "full_name": "Uddoo/dsh-dashboard",
+          "url": "https://github.com/Uddoo/dsh-dashboard",
+          "stars": 3,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.7.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "SeverusZh/dsh-plugin-subagent-director",
-          "url": "https://github.com/SeverusZh/dsh-plugin-subagent-director",
-          "stars": 15,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.5.0",
-          "active": true,
-          "reasons": [
-            "标签: subagent"
           ]
         }
       ]
@@ -1297,7 +1297,7 @@
           "url": "https://github.com/omdsh-dev/DSH-better-sidebar",
           "stars": 3339,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.18.0",
           "active": true,
           "reasons": [
@@ -1309,7 +1309,7 @@
           "url": "https://github.com/omdsh-dev/dsh-mnemon",
           "stars": 331,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.5.2",
           "active": true,
           "reasons": [
@@ -1321,7 +1321,7 @@
           "url": "https://github.com/jjxjjjjiik-bot/dsh-chat-timeline",
           "stars": 32,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.5",
           "active": true,
           "reasons": [
@@ -1333,7 +1333,7 @@
           "url": "https://github.com/SenmuuuuW/dsh-whale-report",
           "stars": 31,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.6.1",
           "active": true,
           "reasons": [
@@ -1345,7 +1345,7 @@
           "url": "https://github.com/heartmove/dsh-side-chat",
           "stars": 13,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.3.3",
           "active": true,
           "reasons": [
@@ -1357,7 +1357,7 @@
           "url": "https://github.com/hanzhangzzz/dsh-diagram",
           "stars": 10,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.4.0",
           "active": true,
           "reasons": [
@@ -1377,7 +1377,7 @@
           "url": "https://github.com/omdsh-dev/DSH-better-sidebar",
           "stars": 3339,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.18.0",
           "active": true,
           "reasons": [
@@ -1389,7 +1389,7 @@
           "url": "https://github.com/HeathHe/dsh-worktree-panel",
           "stars": 8,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.5",
           "active": true,
           "reasons": [
@@ -1397,48 +1397,48 @@
           ]
         },
         {
-          "full_name": "extracurricular-ai/dsh-filesnap",
-          "url": "https://github.com/extracurricular-ai/dsh-filesnap",
-          "stars": 41,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.2.2",
+          "full_name": "IT-coder-Yy/dsh-git-plugin",
+          "url": "https://github.com/IT-coder-Yy/dsh-git-plugin",
+          "stars": 6,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.2.3",
           "active": true,
           "reasons": [
             "描述/主题词命中"
           ]
         },
         {
-          "full_name": "Make0209/dsh-usage-stats",
-          "url": "https://github.com/Make0209/dsh-usage-stats",
-          "stars": 27,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.1.16",
+          "full_name": "Uddoo/dsh-dashboard",
+          "url": "https://github.com/Uddoo/dsh-dashboard",
+          "stars": 3,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.7.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
           ]
         },
         {
-          "full_name": "SnowCrescenter-tech/dsh-milestone",
-          "url": "https://github.com/SnowCrescenter-tech/dsh-milestone",
-          "stars": 25,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.6.6",
+          "full_name": "banlanzs/dsh-web-enhanced",
+          "url": "https://github.com/banlanzs/dsh-web-enhanced",
+          "stars": 3,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.21.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
           ]
         },
         {
-          "full_name": "XieZongChen/dsh-md-notes",
-          "url": "https://github.com/XieZongChen/dsh-md-notes",
-          "stars": 17,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.11.0",
+          "full_name": "weiyuou-chowbus/dsh-git-status",
+          "url": "https://github.com/weiyuou-chowbus/dsh-git-status",
+          "stars": 0,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.1.1",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -1457,7 +1457,31 @@
           "url": "https://github.com/Luaphes/dsh-web-attention-badge",
           "stars": 5,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
+          "npm": "0.3.2",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "ly6170/dsh-messager",
+          "url": "https://github.com/ly6170/dsh-messager",
+          "stars": 5,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.3.1",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "nbfys/dsh-web-attention-badge-enhanced",
+          "url": "https://github.com/nbfys/dsh-web-attention-badge-enhanced",
+          "stars": 1,
+          "score": 98,
+          "grade": "S",
           "npm": "0.3.2",
           "active": true,
           "reasons": [
@@ -1469,7 +1493,7 @@
           "url": "https://github.com/Han-1413141/dsh-cost-meter",
           "stars": 254,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.7.10",
           "active": true,
           "reasons": [
@@ -1481,7 +1505,7 @@
           "url": "https://github.com/Phant0Meow/dsh-meow-smooth",
           "stars": 37,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.7.0",
           "active": true,
           "reasons": [
@@ -1489,39 +1513,15 @@
           ]
         },
         {
-          "full_name": "SeverusZh/dsh-notify-windows",
-          "url": "https://github.com/SeverusZh/dsh-notify-windows",
-          "stars": 6,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.7.4",
-          "active": true,
-          "reasons": [
-            "标签: notify/alert"
-          ]
-        },
-        {
           "full_name": "Shrbuz/dsh-session-buddy",
           "url": "https://github.com/Shrbuz/dsh-session-buddy",
           "stars": 4,
           "score": 95,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.3.0",
           "active": true,
           "reasons": [
             "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "Pasumao/dsh-plugin-notify",
-          "url": "https://github.com/Pasumao/dsh-plugin-notify",
-          "stars": 4,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.1.6",
-          "active": true,
-          "reasons": [
-            "标签: notify"
           ]
         }
       ]
@@ -1537,8 +1537,32 @@
           "url": "https://github.com/omdsh-dev/dsh-mnemon",
           "stars": 331,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.5.2",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "zhxqc/dsh-oh-my-theme",
+          "url": "https://github.com/zhxqc/dsh-oh-my-theme",
+          "stars": 6,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.6.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "xueayi/dsh-opencode-go-usage",
+          "url": "https://github.com/xueayi/dsh-opencode-go-usage",
+          "stars": 5,
+          "score": 100,
+          "grade": "S",
+          "npm": "0.1.6",
           "active": true,
           "reasons": [
             "描述/主题词命中"
@@ -1549,7 +1573,7 @@
           "url": "https://github.com/Fayelin12/dsh-office",
           "stars": 4,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.4.0",
           "active": true,
           "reasons": [
@@ -1561,7 +1585,7 @@
           "url": "https://github.com/chendefine/dsh-web-fetch-playwright",
           "stars": 3,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.2.6",
           "active": true,
           "reasons": [
@@ -1573,35 +1597,11 @@
           "url": "https://github.com/zhy201810576/dsh-vditor",
           "stars": 2,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.0.2",
           "active": true,
           "reasons": [
             "标签: markdown"
-          ]
-        },
-        {
-          "full_name": "nirvanaslash/dsh-artifact-preview",
-          "url": "https://github.com/nirvanaslash/dsh-artifact-preview",
-          "stars": 2,
-          "score": 100,
-          "grade": "A",
-          "npm": "0.1.2",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "MineRPi/dsh-trilium",
-          "url": "https://github.com/MineRPi/dsh-trilium",
-          "stars": 1,
-          "score": 100,
-          "grade": "A",
-          "npm": "0.1.2",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
           ]
         }
       ]
@@ -1617,7 +1617,7 @@
           "url": "https://github.com/Physicolor/dsh-ui-harmonizer",
           "stars": 12,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.8.3",
           "active": true,
           "reasons": [
@@ -1629,7 +1629,7 @@
           "url": "https://github.com/Likenttt/garmin-connect-plugin-for-dsh",
           "stars": 11,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.6",
           "active": true,
           "reasons": [
@@ -1641,7 +1641,7 @@
           "url": "https://github.com/Physicolor/dsh-widgets",
           "stars": 6,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.4.1",
           "active": true,
           "reasons": [
@@ -1653,7 +1653,7 @@
           "url": "https://github.com/chendefine/dsh-web-fetch-playwright",
           "stars": 3,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.2.6",
           "active": true,
           "reasons": [
@@ -1665,7 +1665,7 @@
           "url": "https://github.com/nirvanaslash/dsh-artifact-preview",
           "stars": 2,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.2",
           "active": true,
           "reasons": [
@@ -1677,7 +1677,7 @@
           "url": "https://github.com/ice5kysl/dsh-workspace-kit",
           "stars": 0,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "0.1.2",
           "active": true,
           "reasons": [
@@ -1697,7 +1697,7 @@
           "url": "https://github.com/Ultronen/dsh-archived-chats",
           "stars": 18,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.0.7",
           "active": true,
           "reasons": [
@@ -1709,7 +1709,7 @@
           "url": "https://github.com/Max-Samson/dsh-usage-chart",
           "stars": 11,
           "score": 100,
-          "grade": "A",
+          "grade": "S",
           "npm": "1.1.2",
           "active": true,
           "reasons": [
@@ -1717,11 +1717,35 @@
           ]
         },
         {
+          "full_name": "feiyang-dev/dsh-vault",
+          "url": "https://github.com/feiyang-dev/dsh-vault",
+          "stars": 3,
+          "score": 100,
+          "grade": "S",
+          "npm": "1.5.0",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
+          "full_name": "dream-num/dsh-univer-office",
+          "url": "https://github.com/dream-num/dsh-univer-office",
+          "stars": 272,
+          "score": 98,
+          "grade": "S",
+          "npm": "0.2.14",
+          "active": true,
+          "reasons": [
+            "描述/主题词命中"
+          ]
+        },
+        {
           "full_name": "Shiye-10Pages/dsh-whale-meter",
           "url": "https://github.com/Shiye-10Pages/dsh-whale-meter",
           "stars": 11,
-          "score": 100,
-          "grade": "A",
+          "score": 98,
+          "grade": "S",
           "npm": "0.1.0",
           "active": true,
           "reasons": [
@@ -1732,36 +1756,12 @@
           "full_name": "PM25000/dsh-ths-holdings",
           "url": "https://github.com/PM25000/dsh-ths-holdings",
           "stars": 3,
-          "score": 100,
-          "grade": "A",
+          "score": 98,
+          "grade": "S",
           "npm": "0.1.7",
           "active": true,
           "reasons": [
             "标签: chart"
-          ]
-        },
-        {
-          "full_name": "dream-num/dsh-univer-office",
-          "url": "https://github.com/dream-num/dsh-univer-office",
-          "stars": 272,
-          "score": 95,
-          "grade": "A",
-          "npm": "0.2.14",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
-          ]
-        },
-        {
-          "full_name": "lamost423/dsh-maze",
-          "url": "https://github.com/lamost423/dsh-maze",
-          "stars": 65,
-          "score": 95,
-          "grade": "A",
-          "npm": "2.1.0",
-          "active": true,
-          "reasons": [
-            "描述/主题词命中"
           ]
         }
       ]

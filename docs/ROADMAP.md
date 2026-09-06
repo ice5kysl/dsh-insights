@@ -20,7 +20,7 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 - [x] 品牌与域名：对外 `dsh-insights.com`（已购）；引擎仓库 `dsh-insights`；文档 VISION/ROADMAP v0.2 定稿（本次）。
 - [x] **域名接入**：Pages 自定义域 + CNAME（dsh-insights.com / www）+ HTTPS 强制；旧 github.io 由项目页自动跳转到自定义域。（2026-09-06）
 - [ ] **站点品牌化**：标题/副标/页脚统一 DSH Insights；hero 文案覆盖"插件 + 官方 + 生态"；补 favicon/OG 元信息（社交分享）。
-- [ ] **「致作者的信」产品化**（content/letters 已跑通）：默认全量生成（2113）；报告站路由 `/p/<owner>/<repo>`；后续接入"变化对比"（对上一期快照报分数/名次变化）。
+- [ ] **「致作者的信」产品化**（content/letters 已跑通）：默认全量生成（随权威集，当前 4.1k+）；报告站路由 `/p/<owner>/<repo>`；后续接入"变化对比"（对上一期快照报分数/名次变化）。
 - [ ] **生态周报对外**（content/weekly 已跑通）：固定节奏（每周五）+ 站点周报页 + `data/weekly/LATEST.md`。
 - [ ] **校准与口径**：健康分规则版本化 + changelog；seeds 回归接入 snapshot（沿用 v0.1 M1 口径）。
 - [ ] **多语言 i18n 检测器**：README 语言足迹从"中/英检出"扩展到 ja/ko/es 等多语言（文件名普查 + 内容脚本检测），输出每插件语言清单并入数据与站点（i18n 维度）。
@@ -32,11 +32,11 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 
 **目标**：让"洞察"名副其实——覆盖 **dsh 本身**的演进，并在官方升级时帮插件作者提前避险。
 
-- [ ] **官方动态快照器**（`pipeline/collect/dynamics.mjs`，原 collect/dynamics）：抓 `deepseek-ai/DeepSeek-Harness` releases/tags、最新 rc、官方仓库 star/pushed、docs 变更数、`@deepseek-ai/*` 关键包 dist-tags 时间线 **+ DeepSeek 平台官方信号**（模型/API 发布，可观测公开信号源）→ `data/dynamics/dsh-YYYY-WW.json` 时间序列。
-- [ ] **周报升级为"官方 × 生态"双栏**：加入官方动态小节（release/rc、docs 信号、兼容提示）。
-- [ ] **rc 兼容雷达 v0**：对比"插件声明目标版本/最近验证"与官方最新 rc；发布"升级预警清单"（受影响 + 需验证）。
-- [ ] 官方仓库订阅与低流量抓取：纳入 CI refresh，成本极低。
-- [ ] 站点新增"核心 dsh"页：官方动态时间线与兼容状态表。
+- [x] **官方动态快照器**（`pipeline/collect/dynamics.mjs`，v0 已上线 2026-09-06）：dsh releases/rc（含 breaking 关键词）+ npm dist-tags 时间线 + DeepSeek 平台官方仓库 → `data/dynamics.json`（单文件当前态；时间序列目录形态待 D3 决策）。
+- [x] **周报升级为"官方 × 生态"双栏**（v0）：官方动态小节已入周报模板。
+- [ ] **rc 兼容雷达**：走 v1 API 符号路线——契约字段声明率实测 ~1%（184 探测仅 2 声明 engines.dsh），v0 声明对比已否决。
+- [x] 官方仓库订阅与低流量抓取：已纳入 CI refresh（daily profile）。
+- [x] 站点新增"核心 dsh"页：`/dynamics/`（dist-tag 状态表 + releases 时间线 + rc 兼容信号）。
 
 **退出标准**：官方动态时间序列 ≥4 周连续；rc 雷达产出可读预警；向 dsh 官方/社区至少发一次"官方动态 + 生态"合刊示例。
 
@@ -70,7 +70,7 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 
 ## 完成清单（v0.1 M0 + 2026-09 会话增量）
 
-- [x] 多源发现/分片全量抓取与真伪校验：权威集 **2113**（canonical 2875 全量验证、invalid 分桶 1274、0 重复、断点续跑/限速）。
+- [x] 多源发现/分片全量抓取与真伪校验：权威集 **2113**（2026-09-05 时点；canonical 2875、invalid 分桶 1274、0 重复、断点续跑/限速。2026-09-06 起候选池扩至 14,331 全量续跑）。
 - [x] 数据快照 JSONL/CSV/schema + 报告 + 站点（KPI/按周新增/质量分级/功能分类/收录矩阵/优质未收录榜/详情抽屉/打分明细/LLM 解读）+ 查询 CLI。
 - [x] npm 周下载（CI 已取数入库）；快照 diff 基线；收录渠道清单；人工点评种子。
 - [x] 「致作者的信」（content/letters）与「生态周报」（content/weekly）生成器 + 首批样例。

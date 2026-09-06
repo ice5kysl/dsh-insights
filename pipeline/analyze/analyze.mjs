@@ -171,7 +171,9 @@ function analyze(rows) {
     validated = readFileSync(PATHS.doneIds, 'utf8').split('\n').filter(Boolean).filter((id) => candIds.has(id)).length
   } catch { validated = n }
   const bucketAgg = {}
-  for (const r of readJsonl(PATHS.invalid)) bucketAgg[r.reason || '?'] = (bucketAgg[r.reason || '?'] || 0) + 1
+  const invalidRows = readJsonl(PATHS.invalid)
+  for (const r of invalidRows) bucketAgg[r.reason || '?'] = (bucketAgg[r.reason || '?'] || 0) + 1
+  const invalidUnique = invalidRows.length // P1-11：漏斗可加和——完成校验 ≡ 权威 + 分桶（invalid.jsonl 已经 compaction 去重）
   const weekOf = (iso) => {
     const dt = new Date(iso)
     if (Number.isNaN(dt.getTime())) return null
@@ -189,8 +191,10 @@ function analyze(rows) {
     topicUniverse: readJson(join(DATA, 'discover-meta.json'))?.topicTotal ?? null,
     candidates,
     candidatesByWeek: candByWeek,
-    validated,
+    validated: n + invalidUnique,
+    candidatesValidated: validated,
     authoritative: n,
+    invalidUnique,
     invalidBuckets: Object.entries(bucketAgg).sort((a, b) => b[1] - a[1]).map(([reason, count]) => ({ reason, count })),
   }
 

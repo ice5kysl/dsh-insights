@@ -19,6 +19,7 @@
     "site": "node pipeline/publish/site.mjs",
     "export": "node pipeline/publish/export-csv.mjs",
     "query": "node bin/query.mjs",
+    "check:docs": "node bin/check-docs.mjs",
     "regress": "node pipeline/validate/regress.mjs",
     "llm": "node pipeline/analyze/llm-tags.mjs",
     "score": "node pipeline/analyze/score.mjs",

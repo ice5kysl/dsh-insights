@@ -10,7 +10,7 @@
 DSH Insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层）：
 
 - **L1 插件洞察**：对全量候选做真伪判定 → 权威集（manifest 门禁）→ 健康分（A–D/0–100，带证据）→ 收录渠道矩阵与「优质未收录」榜 → 打分明细/同类分位。
-- **L2 官方动态（规划中）**：dsh 官方 releases/rc 节奏、docs 与内置能力演进、**rc 兼容雷达**（升级预警）+ DeepSeek 平台官方信号（模型/API 发布，同属可观测公开信号）。
+- **L2 官方动态（v0 已上线）**：dsh 官方 releases/rc 节奏、docs 与内置能力演进、**rc 兼容雷达**（升级预警）+ DeepSeek 平台官方信号（模型/API 发布，同属可观测公开信号）。
 - **L3 生态报告**：「致作者的信」（每插件，content/letters）与「生态周报」（周更，content/weekly），面向社区与 dsh 官方。
 
 它不是第 N 个插件目录/市场，而是让已有目录、市场、agent 与 dsh 官方**有据可依**的数据与观测源。健康分口径与体检工具见 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)。
@@ -25,7 +25,7 @@ DSH Insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层
 
 | file | 说明 |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | **权威集 2113** + 分桶 1274（0 重复） |
+| `data/plugins.jsonl` · `invalid.jsonl` | **权威集 4,160** + 分桶 2,353（0 重复 · 硬门禁 · 2026-09-06 快照，校验滚动扩大中） |
 | `data/plugins.csv` · `analysis.json` · `enrich.json` | 表格 / 聚合 / 每插件评分+分类+渠道 |
 | `data/downloads.json` | npm 周下载（CI 更新） |
 | `data/listed.json` | 收录渠道清单（awesome / imsai） |
@@ -58,7 +58,7 @@ node bin/pipeline.mjs --only score,badges / --from analyze / --dry
 ```
 
 层与产品三层的关系：collect/validate/analyze = L1 数据底座；content = L3；L2 官方动态（M2）落在 collect/dynamics → publish /dynamics 页 → 周报双栏。
-bin: pipeline(编排) · dsh-insights(run，别名) · query · export-suggested · badge · resume-validate · llm-catchup · progress
+bin: pipeline(编排) · dsh-insights(run，别名) · query · export-suggested · badge · resume-validate · llm-catchup · progress · compact(数据去重) · backfill-tree(树信号回填) · check-docs(文档数字对账)
 
 ## 快速开始
 
@@ -75,13 +75,14 @@ node bin/query.mjs --sort stars --top 10   # 查询
 
 ## Status（2026-09-06）
 
-- [x] 发现+校验：canonical 2875 全量验证 → **权威集 2113**（0 重复）
+- [x] 发现+校验：候选池 14,331 全量分片抓取 → 断点续跑校验中（已完成 ~6.5k/14k）→ **权威集 4,160**（0 重复 · @2026-09-06）
 - [x] 仪表盘（KPI/按周新增/质量分级/功能分类/收录覆盖/优质未收录榜/全表+详情抽屉/打分明细/LLM 解读）
 - [x] 健康评分与致作者的信（content/letters）、生态周报（content/weekly）生成器 + 样例
 - [x] npm 周下载入库（CI 已跑通）；快照 diff 基线；人工点评种子 5 条
 - [x] **dsh-insights.com 已上线**（Pages 自定义域 + HTTPS 强制 + www 301）；站点多页化（publish/pages：周报/插件页/开放数据/方法论/RSS）
-- [ ] M1 剩余：信件全量生成（2113 页）+ 契约字段普查 + 周报外发 SOP
-- [ ] M2：collect/dynamics 官方动态快照器 + rc 兼容雷达（见 ROADMAP）
+- [ ] M1 剩余：信件全量生成（权威集全量，当前 4.1k+ 页）+ 契约字段普查 + 周报外发 SOP
+- [x] M2（v0 已上线）：collect/dynamics 快照器 + /dynamics 页 + 周报官方小节（2026-09-06）
+- [ ] M2 剩余：rc 兼容雷达（v1 API 符号路线；声明率实测 ~1% 否决 v0）+ 官方时间序列 ≥4 周
 
 ## 方法论与边界
 

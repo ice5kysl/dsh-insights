@@ -49,7 +49,7 @@ dsh-insights.com
 | 版本历史 | npm/GitHub releases 时间线 |
 | OG meta | 标题含插件名+等级——作者分享自己的页即传播 |
 
-更新机制：**diff 驱动**——enrich 中该插件分数/等级变化才重新生成，避免 2113 页每日空转。
+更新机制：**diff 驱动**——enrich 中该插件分数/等级变化才重新生成，避免权威集全量页面每日空转。
 
 ### 2.3 `/weekly/` 周报（M1 收口上线）
 
@@ -85,11 +85,10 @@ dsh-insights.com
 
 | 频率 | workflow | 跑什么 | 产物 |
 |---|---|---|---|
-| 每日 03:00 | refresh.yml（现状） | lists → downloads → analyze → site → export → diff | 快照 commit |
-| 每周五 | refresh.yml 分支 | 上述 + content/weekly 周报 + feed.xml 重建 | 周报 commit |
-| M1 末起每日 | 同上 | 契约字段采集（02-validate 扩展） | eval.contract 入库 |
-| M2 起每日 | 同上 | collect/dynamics 官方动态快照 | data/dynamics/ |
-| 每月 1 日 | 手动/定时 full | discover → validate 全量 | 候选池刷新 |
+| 每日 03:07 UTC | refresh.yml（单 cron + concurrency 组） | `pipeline daily`：lists → downloads → dynamics → analyze → site → export-csv → diff → pages | 快照 commit → pages.yml `workflow_run` 接力部署 |
+| 每周五（同 cron，job 内按 UTC 周五切换） | refresh.yml | `pipeline friday`：daily 全套 + author-graph + metrics + letters + weekly + feed.xml | 周报 commit → 部署 |
+| 手动 workflow_dispatch | refresh.yml | mode=full → `pipeline full`（discover → npm-map → validate → snapshot） | 全量 |
+| 快照时（snapshot profile） | 本地/手动 | analyze → score → history → regress（门禁） → exports → overlap/scenarios → badges → site → pages | 全链 |
 | 分数变化时 | diff 驱动 | 对应插件的信件 + 徽章 + 插件页重生成 | 单页 commit |
 
 原则：**机器生成全文，人只 review + 外发**；任何一环失败降级为"本期沿用上次"，不阻塞管线。
@@ -103,7 +102,7 @@ dsh-insights.com
 ```
 北极星：生态采纳
 ├── A. 覆盖（做得全不全）
-│   ├── A1 权威集数量（现 2113）
+│   ├── A1 权威集数量（滚动，以 analysis.json 为准）
 │   ├── A2 topic 全量覆盖率（权威集+分桶 / topic 总量）
 │   └── A3 候选池新鲜度（新增候选入库滞后天数）
 ├── B. 新鲜度（更新得勤不勤）

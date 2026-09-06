@@ -12,7 +12,8 @@ import { PATHS, readJsonl } from '../../lib/data.mjs'
 const SRC = PATHS.plugins
 
 const esc = (v) => {
-  const s = v == null ? '' : String(v)
+  let s = v == null ? '' : String(v).replace(/\r/g, ' ')
+  if (/^[=+\-@]/.test(s)) s = "'" + s // 公式注入防护（Excel/Sheets）
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
 }
 

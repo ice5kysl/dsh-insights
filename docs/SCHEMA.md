@@ -78,7 +78,7 @@
 
 ## `health` — 健康分（`pipeline/analyze/score.mjs` 唯一真源 → `data/health.json` + `data/enrich.json` + `data/insights.json`）
 
-评分只有一套（health-v2 扣分制），由 `score.mjs` 的 `scoreAll` 提供；`analyze`（enrich.json）、`export-json`（insights.json）、badges、history 全部经它取分，不再各自实现。`data/health.json` 为聚合（grades/avg/median/topDeductions）；`data/enrich.json` 每插件行：`{full_name, stars, score, grade, dimScores, drops:[{code,sev,label}], missing[], category, inAwesome, inImsai, covered, weekly}`（score/grade/drops 来自 health；category/收录渠道/周下载为 analyze 独有维度）。
+评分只有一套（health-v4 扣分制，S≥95/A≥90/B≥75/C≥60），由 `score.mjs` 的 `scoreAll` 提供；`analyze`（enrich.json）、`export-json`（insights.json）、badges、history 全部经它取分，不再各自实现。`data/health.json` 为聚合（grades/avg/median/topDeductions）；`data/enrich.json` 每插件行：`{full_name, stars, score, grade, dimScores, drops:[{code,sev,label}], missing[], category, inAwesome, inImsai, covered, weekly}`（score/grade/drops 来自 health；category/收录渠道/周下载为 analyze 独有维度）。
 
 ### 评估指标体系 v1（维度框架）
 
@@ -100,7 +100,7 @@
 "health": {
   "score": 87,                  // 0–100，从 100 扣分，clamp ≥0
   "grade": "B",                 // S≥95 · A≥90 · B≥75 · C≥60 · D<60
-  "ruleVersion": "health-v1",
+  "ruleVersion": "health-v4",
   "at": "ISO…",
   "drops": [                    // 每条扣分都带证据
     { "code": "npm.unpublished", "sev": "warn", "label": "未发布到 npm（仅仓库安装）", "evidence": { "pkgName": "…" } }

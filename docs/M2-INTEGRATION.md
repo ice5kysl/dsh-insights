@@ -17,7 +17,7 @@
 
 1. **全量抓取**：`topic:dsh-plugin` created 时间窗分片全量（13,583 / 13,600，2026-09-05 实测），规避 GitHub 1000/查询封顶。
 2. **真伪判定**：manifest 门禁——非 fork/归档 + `package.json` 声明 `dsh.bundle.patch` + patch 文件已提交 → `data/plugins.jsonl`（权威集）。
-3. **健康分 health-v1**：纯客观 11 条规则（manifest/npm/docs/repo/activity），从 100 扣分（warn −5 / fail −20），**每条扣分带证据值**，缺失数据不虚构不扣分，星数不进分。
+3. **健康分 health-v4**：纯客观 19 条规则（六维框架：工程质量/文档完整性/可发现性/维护活跃计分，安全卫生/采用度只展示），从 100 扣分四档（fail −20 / major −10 / warn −5 / minor −2），**每条扣分带证据值**，缺失数据不虚构不扣分，星数不进分。
 4. **校准回归**：15 条已知真/假 seeds，`npm run regress` 每次跑批必过（当前 15/15）。
 5. 规则升版必须 bump `RULE_VERSION` + changelog（docs/SCHEMA.md §health）；已注明 TUI/CLI 类插件的 client-export 误伤 caveat 与申诉通道。
 
@@ -35,7 +35,7 @@
   "health": {
     "score": 100, "grade": "A",          // A≥90 B≥75 C≥60 D<60
     "drops": [],                          // 扣分 code+证据见 insights.json / scored.jsonl
-    "ruleVersion": "health-v1"
+    "ruleVersion": "health-v4"
   }
 }
 ```
@@ -67,9 +67,9 @@
 
 ## 决策日志（收到回复后填写 → docs/RESEARCH.md §决策日志）
 
-- [ ] 2026-09-05：提案文档 v1 就绪（本文件）。
-- [ ] 发出渠道：________（Discussions / PR / 邮件）
-- [ ] 回复：采纳（选项 __）/ 拒绝（理由：____）/ 替代路径（____）
+- [x] 2026-09-05：提案文档 v1 就绪（本文件）。
+- [x] 发出渠道：awesome-dsh-plugin org Discussions **#4399**（Ideas 分类，ZH+EN）
+- [ ] 回复：采纳（选项 __）/ 拒绝（理由：____）/ 替代路径（____）——待回复（2026-09-06 时点）
 - [ ] 若拒绝：替代路径记录 + 我们独立数据层继续（badge 热链 / llms.txt / 市场镜像 DSHM_REGISTRY_URL）
 
 ## 附：Discussion 帖子草稿（可直接粘贴）
@@ -87,7 +87,7 @@
 | 产物 | 路径 | 用途 |
 |---|---|---|
 | agent 可读全量 | `data/insights.json` | 选项 A 的数据源 |
-| 逐条扣分证据 | `data/scored.jsonl` | 争议复核 |
+| 逐条扣分证据 | `data/enrich.json`（drops/dimScores）· `data/insights.json` | 争议复核 |
 | 聚合与报告 | `data/analysis.json` / `data/report.md` | 生态趋势引用 |
 | 徽章渲染 | `bin/badge.mjs` | 托管后 `badge/<owner>/<repo>.svg` |
 | 健康分规则 | `docs/SCHEMA.md §health` | 口径文档 |

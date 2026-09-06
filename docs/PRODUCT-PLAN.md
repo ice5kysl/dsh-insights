@@ -42,7 +42,7 @@ L3 生态趋势           / 趋势图                 分数变化对比   主�
 
 已完成（M0 + M1 部分）不再赘述，以下是要补的**结构性差距**：
 
-1. **站点架构到头了**：单个 `index.html`（451 KB 内联）承载不了 L2/L3——2113 封信件页、周报存档、官方时间线都需要多页路由。现在改比上线后再改便宜。
+1. **站点架构到头了**：单个 `index.html`（451 KB 内联）承载不了 L2/L3——权威集全量（4k+）信件页、周报存档、官方时间线都需要多页路由。现在改比上线后再改便宜。
 2. **没有订阅机制**：周报的"固定节奏"目前=手动发帖。静态站最便宜的订阅是 **RSS/Atom feed**（`/feed.xml`），一次生成、永久有效。
 3. **rc 雷达缺数据契约（实测）**：当前 `plugins.jsonl` 只有 `dshPlatform`（web 1371 / null 731），**没有任何插件声明的目标 dsh 版本**。雷达 v0 要求的"声明目标版本 vs 最新 rc"对比，必须先扩 02-validate 采集契约字段（见 §4.4），否则雷达只能产出空预警。
 4. **内容生产的单人风险**：周报/信件若依赖人写，必然断更。原则：**机器生成全文，人只做 review + 外发**。content/letters、content/weekly 已是这个形态，要保持。
@@ -61,7 +61,7 @@ ROADMAP M4 的触发器（UGC / 实时 diff / 搜索级数据量）一个都没�
 ```
 site/
   index.html            仪表盘（现有，保留重设计后的单页叙事）
-  p/<owner>/<repo>/index.html   每封信件一页（2113 页，从 data/reports/*.md 渲染）
+  p/<owner>/<repo>/index.html   每封信件一页（权威集全量，从 data/reports/*.md 渲染）
   weekly/index.html + weekly/2026-W36.html   周报存档
   feed.xml              RSS（周报 + 重大口径变更）
   llms.txt              扩展为完整 agent 导航（数据 URL、口径、更新频率）
@@ -79,7 +79,7 @@ refresh.yml   每日 03:00   light refresh（现状）
               每周五       + content/weekly 周报生成 + feed.xml 重建 + commit
               手动 full     全量
 信件          不每信每天重生：仅当 enrich 分数/等级变化才重写对应 md（diff 驱动），
-              避免 2113 个文件无意义 churn。
+              避免权威集全量文件无意义 churn。
 ```
 
 ### 4.4 collect/dynamics 官方动态快照器（M2）

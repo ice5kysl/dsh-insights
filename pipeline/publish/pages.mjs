@@ -99,6 +99,7 @@ ${weeklyList || '<p class="lede">暂无周报。</p>'}`,
     ['invalid.jsonl', '噪声分桶（被拒候选 + reason）'],
     ['enrich.json', '每插件评分 / 等级 / 分类 / 收录渠道'],
     ['analysis.json', '聚合统计（仪表盘数据源）'],
+    ['health.json', '健康分聚合（分级分布/均分/top 扣分）'],
     ['plugins.csv', '权威集表格（25 列，Excel 友好）'],
     ['downloads.json', 'npm 周下载（CI 更新）'],
     ['listed.json', '收录渠道清单（awesome / imsai）'],
@@ -312,11 +313,12 @@ ${graphSec}
   })))
 
   // ---- /badge/ 健康徽章 ---------------------------------------------------
-  const badgeEx = [
-    ['omdsh-dev/DSH-better-sidebar', 'A · 100/100'],
-    ['zhu1090093659/dsh-web', 'B · 85/100'],
-    ['ConsoleSun/Gemini-Eyes', 'C · 70/100'],
-  ]
+  const enrichForBadge = JSON.parse(read('enrich.json') || '[]')
+  const badgeEx = ['omdsh-dev/DSH-better-sidebar', 'zhu1090093659/dsh-web', 'ConsoleSun/Gemini-Eyes']
+    .map((f) => {
+      const e = enrichForBadge.find((x) => x.full_name === f)
+      return e ? [f, `${e.grade} · ${e.score}/100`] : null
+    }).filter(Boolean)
   const badgeExHtml = badgeEx.map(([f, note]) => `<div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)"><img src="../badge/${f}.svg" alt="${f} badge" style="height:22px"><span style="font-size:12px;color:var(--mut)"><a href="https://github.com/${f}" target="_blank">${f}</a> · ${note}</span></div>`).join('')
   written.push(out('badge/index.html', page({
     title: '健康徽章', desc: '把 DSH Insights 客观健康分带进你的 README：徽章的价值、解读与接入方法。',
@@ -425,42 +427,22 @@ ${badgeExHtml}
     <link>${ORIGIN}/weekly/${w.slug}.html</link>
     <guid>${ORIGIN}/weekly/${w.slug}.html</guid>
     <pubDate>${w.date.toUTCString()}</pubDate>
+    <description>${escHtml(w.title)}（DSH Insights 自动生成，数据可复核）</description>
   </item>`).join('\n')
   written.push(out('feed.xml', `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
   <title>DSH Insights · DSH 生态周报</title>
   <link>${ORIGIN}/weekly/</link>
-  <description>DeepSeek Harness 插件生态周报：每周五自动生成，数据可复核。</description>
+  <atom:link href="${ORIGIN}/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>DeepSeek Harness 插件生态周报：每周五 CI 自动生成（历史期含回填特刊），数据可复核。</description>
   <language>zh-CN</language>
 ${items}
 </channel>
 </rss>
 `))
 
-  // ---- llms.txt (agent navigation) ----------------------------------------
-  written.push(out('llms.txt', `# DSH Insights
-
-DeepSeek Harness 全景观察站：插件健康（全量权威集 + 客观健康分 A–D）· 官方动态（dsh 官方 + DeepSeek 平台信号）· 生态趋势（生态周报）。启发式评估，非安全审计。
-
-## 数据入口（稳定 URL，可直接抓取）
-- ${ORIGIN}/data/insights.json — 全量洞察快照（首选）
-- ${ORIGIN}/data/plugins.jsonl — 权威集（一行一插件）
-- ${ORIGIN}/data/enrich.json — 每插件评分/分类/渠道
-- ${ORIGIN}/feed.xml — 生态周报 RSS
-
-## 页面
-- ${ORIGIN}/ — 仪表盘（人类可读）
-- ${ORIGIN}/dynamics/ — 官方动态（releases/dist-tags/rc 信号）
-- ${ORIGIN}/scenarios/ — 场景组合推荐（按场景选插件）
-- ${ORIGIN}/weekly/ — 周报存档
-- ${ORIGIN}/p/<owner>/<repo>/ — 单插件健康报告
-- ${ORIGIN}/about/ — 关于 · 方法论与指标体系
-- ${ORIGIN}/data/ — 数据集索引与许可（CC BY 4.0）
-
-## 源仓库
-- https://github.com/ice5kysl/dsh-insights（管线 + 完整历史快照）
-`))
+  // llms.txt：单一来源为仓库根 llms.txt（pages.yml 部署时拷入 public/），此处不再生成（P2-1）
 
   console.log(`[pages] ${written.length} 个产物：`)
   for (const w of written) console.log('  -', w)
