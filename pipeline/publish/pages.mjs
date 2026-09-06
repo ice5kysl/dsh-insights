@@ -328,7 +328,7 @@ ${graphSec}
 ${badgeExHtml}
 
 <h2 style="font-size:16px;margin:28px 0 8px">如何解读</h2>
-<p class="lede">徽章显示「等级 · 分数」：100 起扣，warn −5 / fail −20，阈值 <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。评的是六维框架中的计分四维（工程质量 / 文档完整性 / 可发现性 / 维护活跃），每条扣分都带证据、可在插件页和仪表盘抽屉里逐项核查——<b>分数的意义不在于高低，在于可复核</b>。框架全文见 <a href="../about/">关于 · 指标体系</a>。</p>
+<p class="lede">徽章显示「等级 · 分数」：100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。评的是六维框架中的计分四维（工程质量 / 文档完整性 / 可发现性 / 维护活跃），每条扣分都带证据、可在插件页和仪表盘抽屉里逐项核查——<b>分数的意义不在于高低，在于可复核</b>。框架全文见 <a href="../about/">关于 · 指标体系</a>。</p>
 
 <h2 style="font-size:16px;margin:28px 0 8px">为什么值得挂</h2>
 <p class="lede">对作者：潜在用户装前 10 秒的信任凭证；分数提升是看得见的修复回报；徽章链回插件页，带来反链与同类定位。对生态：目录与市场装不下所有插件，但每个 README 都可以挂分数——徽章是让「信得过」在生态里自传播的钩子。我们不做排名、不做安全审计，只提供客观信号。</p>
@@ -384,7 +384,7 @@ ${badgeExHtml}
 <h2>覆盖与完整性（为什么权威集 ≪ topic 总数）</h2>
 <p>GitHub <code>topic:dsh-plugin</code> 是官方唯一发现机制，<b>打标即入、零门槛</b>——其中混有大量蹭标、无关仓库、fork、monorepo 子路径与已删除仓库。我们的漏斗：<b>topic 宇宙（≈13.7k，首页漏斗实时口径）→ 多源候选（topic 分片全量抓取 + 策展目录 + npm 映射，去重）→ manifest 门禁逐条校验 → 权威集 + 分桶</b>。权威集是「货真价实可按官方 bundle 形态安装」的下限子集；<code>no-dsh-bundle</code> / <code>no-package.json</code> 桶里的候选可能是插件但形态非标，留待人工复核而不是混入权威集。校验按 API 预算<b>滚动推进、断点续跑</b>，权威集随每次快照扩大——<b>覆盖率数字本身也公开</b>（首页覆盖漏斗），这就是我们对「完整性」的回答方式：不报大数，报可核验的数。</p>
 <h2>插件评估指标体系（六维框架 v1）</h2>
-<p>每个插件从六个维度考察：<b>计分四维</b>进入总分（100 起扣 · warn −5 / fail −20），<b>展示两维</b>只呈现不进分，<b>兼容性</b>为预留维度。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>；插件详情抽屉可见各维度子分（dimScores）。</p>
+<p>每个插件从六个维度考察：<b>计分四维</b>进入总分（100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2，health-v3 区分度重构），<b>展示两维</b>只呈现不进分，<b>兼容性</b>为预留维度。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>；插件详情抽屉可见各维度子分（dimScores）。</p>
 <table>
 <tr><th>维度</th><th>指标项</th><th>计分处理</th></tr>
 <tr><td>工程质量</td><td>client 导出 · main=lib 布局 · files 白名单 · npm 发布 · 版本一致</td><td><b>计分</b></td></tr>

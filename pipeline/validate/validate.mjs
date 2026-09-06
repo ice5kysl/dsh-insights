@@ -49,8 +49,13 @@ async function repoTreeFiles(owner, repo, branch) {
   const r = await ghApi(`/repos/${owner}/${repo}/git/trees/${encodeURIComponent(branch)}?recursive=1`)
   if (!r.ok) return null
   const set = new Set()
-  for (const t of r.body?.tree || []) if (t.path) set.add(t.path)
-  return set
+  const sizeOf = new Map()
+  for (const t of r.body?.tree || []) {
+    if (!t.path) continue
+    set.add(t.path)
+    if (typeof t.size === 'number') sizeOf.set(t.path, t.size)
+  }
+  return { set, sizeOf, has: (p) => set.has(p) }
 }
 
 async function validateOne(c) {
@@ -108,6 +113,7 @@ async function validateOne(c) {
   }
 
   const hasFile = (p) => tree ? tree.has(p) : null
+  const treeHas = (re) => tree ? [...tree.set].some((p) => re.test(p)) : null
   record.files = {
     tree: Boolean(tree),
     cordisPatch: hasFile('cordis.patch.yml'),
@@ -116,6 +122,10 @@ async function validateOne(c) {
     readme: hasFile('README.md'),
     readmeZh: hasFile('README.zh-CN.md'),
     license: hasFile('LICENSE'),
+    readmeBytes: tree?.sizeOf?.get('README.md') ?? null,
+    hasTests: treeHas(/(^|\/)(__tests__|tests?|spec)(\/|\.)|(\.(test|spec)\.(m?js|ts)$)/i),
+    hasCI: treeHas(/^\.github\/workflows\/.+\.ya?ml$/i),
+    hasDocsDir: treeHas(/^docs\//i),
   }
 
   const pkgRaw = await ghContents(record.owner, record.repo, 'package.json', branch)

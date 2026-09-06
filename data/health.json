@@ -1,65 +1,65 @@
 {
-  "generatedAt": "2026-09-06T02:56:02.712Z",
-  "ruleVersion": "health-v2",
-  "total": 2652,
+  "generatedAt": "2026-09-06T03:36:37.490Z",
+  "ruleVersion": "health-v3",
+  "total": 3549,
   "grades": {
-    "A": 1280,
-    "B": 1359,
-    "C": 13,
-    "D": 0
+    "A": 1019,
+    "B": 2376,
+    "C": 152,
+    "D": 2
   },
-  "avg": 87.2,
+  "avg": 85,
   "median": 85,
   "topDeductions": [
     {
       "code": "manifest.no-client-export",
-      "count": 1911,
+      "count": 2558,
       "pct": 72.1
     },
     {
       "code": "docs.zh-missing",
-      "count": 1662,
-      "pct": 62.7
+      "count": 2212,
+      "pct": 62.3
     },
     {
       "code": "npm.unpublished",
-      "count": 1335,
-      "pct": 50.3
+      "count": 1780,
+      "pct": 50.2
     },
     {
       "code": "manifest.not-lib-main",
-      "count": 1161,
-      "pct": 43.8
+      "count": 1524,
+      "pct": 42.9
+    },
+    {
+      "code": "repo.sparse-topics",
+      "count": 579,
+      "pct": 16.3
     },
     {
       "code": "npm.version-drift",
-      "count": 328,
-      "pct": 12.4
+      "count": 478,
+      "pct": 13.5
+    },
+    {
+      "code": "npm.single-release",
+      "count": 423,
+      "pct": 11.9
     },
     {
       "code": "repo.no-license",
-      "count": 250,
+      "count": 353,
+      "pct": 9.9
+    },
+    {
+      "code": "docs.no-description",
+      "count": 333,
       "pct": 9.4
     },
     {
       "code": "manifest.no-files-whitelist",
-      "count": 117,
-      "pct": 4.4
-    },
-    {
-      "code": "repo.no-dsh-topic",
-      "count": 39,
-      "pct": 1.5
-    },
-    {
-      "code": "activity.too-young",
-      "count": 3,
-      "pct": 0.1
-    },
-    {
-      "code": "docs.no-readme",
-      "count": 2,
-      "pct": 0.1
+      "count": 174,
+      "pct": 4.9
     }
   ]
 }

@@ -1,36 +1,36 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 3224 个插件 · 生成于 2026-09-06 · 由 DSH Insights 管线生成
+> 权威集 3610 个插件 · 生成于 2026-09-06 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**3224**
-- 近 7 天活跃：991（30.7%）· 近 30 天：3224（100%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：3219（99.8%）
+- 权威集规模：**3610**
+- 近 7 天活跃：1039（28.8%）· 近 30 天：3610（100%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：3605（99.9%）
 
 ## 发布与文档
-- npm 已发布 1597 / 未发布 1627 / 已发布但版本滞后 431
-- 有 README 3210 · 中英双语/中文 1203 · 中文 README 文件 309 · 无 README 14
-- lib/index.js 1477 · lib/client.js 1183 · 双产物 1056
+- npm 已发布 1800 / 未发布 1810 / 已发布但版本滞后 487
+- 有 README 3595 · 中英双语/中文 1357 · 中文 README 文件 343 · 无 README 15
+- lib/index.js 1659 · lib/client.js 1335 · 双产物 1191
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 757 · imsai 236 · 至少一个渠道 988（30.6%） · 未收录 2236
+- awesome-dsh-plugin 757 · imsai 236 · 至少一个渠道 988（27.4%） · 未收录 2622
 
 ## 优质未收录 · 建议收录（Top 15）
 - omdsh-dev/DSH-better-sidebar A · 周下载 97317
 - shanliuling/dsh-image-gen A · 周下载 2665
 - RevolutionLA/dsh-dream-skin A · 周下载 9994
 - pengyue-polaron/deepseek-harness-genui A
-- mexiaosqwq/dsh-web-mobile A
-- a179-sanae/dsh-auto-collapse A
 - SiriLee/dsh-rewind A
 - jjxjjjjiik-bot/dsh-chat-timeline A
 - SenmuuuuW/dsh-whale-report A
 - nevertoday/dsh-theme-plugin A
 - Ultronen/dsh-archived-chats A
 - Likenttt/garmin-connect-plugin-for-dsh A
-- Shiye-10Pages/dsh-whale-meter A
 - hanzhangzzz/dsh-diagram A
-- nonentity303/dsh-plugin-manager A
+- chendefine/dsh-web-fetch-playwright A
+- jiuyuechuwuhao/dsh-canvas-preview A
+- zeng6125-rgb/dsh-llm-retry-settings A
+- zhy201810576/dsh-vditor A · 周下载 466
 
 ## npm 周下载 Top 10
 - dsh-market/dsh-market：128104
@@ -45,22 +45,22 @@
 - omdsh-dev/dsh-mnemon：9682
 
 ## 质量评分（启发式）
-- 平均分 87.1 · A+B 占比 99.6%
-- A 1555 · B 1655 · C 14 · D 0
+- 平均分 85 · A+B 占比 95.7%
+- A 1039 · B 2414 · C 155 · D 2
 
 ## 功能分类（启发式 Top 12）
-- 其它：865
-- 模型 / 代理：358
-- 文件浏览 / 预览：324
-- 会话管理：308
-- 状态 / 监控 / 用量：254
-- 搜索 / 命令面板：219
-- 侧栏 / 工作区：206
-- 工具 / 效率：205
-- 主题 / 视觉美化：137
-- 消息 / 协作集成：129
-- 开发 / 数据：116
-- 记忆 / 知识：103
+- 其它：982
+- 模型 / 代理：400
+- 文件浏览 / 预览：363
+- 会话管理：335
+- 状态 / 监控 / 用量：291
+- 搜索 / 命令面板：236
+- 工具 / 效率：234
+- 侧栏 / 工作区：228
+- 主题 / 视觉美化：165
+- 消息 / 协作集成：140
+- 开发 / 数据：126
+- 记忆 / 知识：110
 
 ## 月度新增（按仓库创建）
 - 2021-06：1
@@ -73,22 +73,22 @@
 - 2026-05：13
 - 2026-06：16
 - 2026-07：27
-- 2026-08：3101
+- 2026-08：3487
 - 2026-09：44
 
 ## Top topics
-- `dsh-plugin` × 3140
-- `deepseek-harness` × 2137
-- `dsh` × 1494
-- `deepseek` × 507
-- `dsh-plugins` × 397
-- `cordis` × 391
-- `plugin` × 253
-- `typescript` × 165
-- `ai-agent` × 157
-- `dsh-plugin-market` × 136
+- `dsh-plugin` × 3526
+- `deepseek-harness` × 2374
+- `dsh` × 1647
+- `deepseek` × 551
+- `dsh-plugins` × 441
+- `cordis` × 424
+- `plugin` × 283
+- `typescript` × 194
+- `ai-agent` × 167
+- `dsh-plugin-market` × 156
+- `ai-agents` × 140
 - `cordis-plugin` × 132
-- `ai-agents` × 126
 
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |

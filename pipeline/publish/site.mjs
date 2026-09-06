@@ -17,6 +17,7 @@ import { PATHS, SITE, readJsonl, readJson, loadEnrichMap, byFullName } from '../
 
 const OUT = join(SITE, 'index.html')
 
+const SEVP = { fail: 20, major: 10, warn: 5, minor: 2 }
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
 function main() {
@@ -703,7 +704,7 @@ function openDrawer(repo){
   +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3><div id="dd-peers" class="loading">计算中…</div></div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
       +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
     loadHist(repo,d);
-    if(d.parts&&d.parts.length){ var li=d.parts.map(function(p){return '<li><span>'+escA(p.label)+'</span><b>'+escA(p.v)+'</b></li>'}).join(''); b.insertAdjacentHTML('beforeend','<div class="dd-sec"><h3>扣分明细</h3><ul class="score" style="margin:0;padding:0;list-style:none">'+li+'</ul><div class="dim" style="font-size:11px;margin-top:6px">100 起扣 · warn −5 / fail −20（A≥90 · B≥75 · C≥60）。未列出的项表示未扣分；探测不到的数据不虚构不扣分。</div></div>') }
+    if(d.parts&&d.parts.length){ var li=d.parts.map(function(p){return '<li><span>'+escA(p.label)+'</span><b>'+escA(p.v)+'</b></li>'}).join(''); b.insertAdjacentHTML('beforeend','<div class="dd-sec"><h3>扣分明细</h3><ul class="score" style="margin:0;padding:0;list-style:none">'+li+'</ul><div class="dim" style="font-size:11px;margin-top:6px">100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2（A≥90 · B≥75 · C≥60）。未列出的项表示未扣分；探测不到的数据不虚构不扣分。</div></div>') }
     loadPeers(repo,d);
   })
 }
@@ -765,7 +766,7 @@ draw();
     channels: { aw: enMap.get(r.full_name)?.inAwesome ? 1 : 0, im: enMap.get(r.full_name)?.inImsai ? 1 : 0 },
     weekly: enMap.get(r.full_name)?.weekly ?? null,
     llm: llmMap.get(r.full_name) ?? null,
-    parts: (enMap.get(r.full_name)?.drops || []).map((d) => ({ label: d.label, v: d.sev === 'fail' ? -20 : -5 })),
+    parts: (enMap.get(r.full_name)?.drops || []).map((d) => ({ label: d.label, v: -(SEVP[d.sev] || 5) })),
     dims: enMap.get(r.full_name)?.dimScores || {},
     npm: r.npm || { pub: false },
   }))

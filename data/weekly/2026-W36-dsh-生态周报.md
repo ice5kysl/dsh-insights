@@ -4,13 +4,13 @@
 
 ## 本期速览
 
-- 权威插件 **2956** 个（通过 dsh.bundle manifest 校验；另有 1820 个被拒/噪声分桶）
-- 近 7 天活跃 32.3%（30 天 100%）· 可过收录门禁（仓库≥1天）99.8%
-- npm 发布率 49.3%（已发布 1456 / 版本滞后 376）
-- 中英/双语文档率 36.9% · 平均质量分 87.1（A+B 99.6%）
-- curated 收录覆盖 33.4%（988 个已进 awesome/imsai）
+- 权威插件 **3610** 个（通过 dsh.bundle manifest 校验；另有 2132 个被拒/噪声分桶）
+- 近 7 天活跃 28.8%（30 天 100%）· 可过收录门禁（仓库≥1天）99.9%
+- npm 发布率 49.9%（已发布 1800 / 版本滞后 487）
+- 中英/双语文档率 37.3% · 平均质量分 85（A+B 95.7%）
+- curated 收录覆盖 27.4%（988 个已进 awesome/imsai）
 - npm 周下载样本 Top 15 合计 417107
-- LLM 能力标注进度：1834/2956
+- LLM 能力标注进度：1834/3610
 
 ## 官方动态（dsh × DeepSeek 平台）
 
@@ -42,11 +42,11 @@
 - dream-num/dsh-univer-office：**34192**/周
 - bowenliang123/dsh-context：**31332**/周
 - Han-1413141/dsh-cost-meter：**18196**/周
+- Creakono/dsh-cost-meter：**18196**/周
 - ysr666/dsh-vision-router：**13687**/周
 - shaobeichen/dsh-pocket：**13036**/周
 - RevolutionLA/dsh-dream-skin：**9994**/周
 - omdsh-dev/dsh-mnemon：**9682**/周
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：**8084**/周
 
 ### npm 版本滞后（仓库领先于发布）Top 5
 
@@ -58,10 +58,10 @@
 
 ## 信号与观察（启发式）
 
-- 质量两级分化仍在：A 级 1425 个 vs D 级 0 个（C 级是主体 13），生态"能跑但文档/发布不齐"的中段插件占比最高。
-- 功能分类上「其它」最拥挤（775 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
-- 13 个插件没有 README、1500 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
-- curated 收录仍集中于少数头部（988/2956），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
+- 质量两级分化仍在：A 级 1039 个 vs D 级 2 个（C 级是主体 155），生态"能跑但文档/发布不齐"的中段插件占比最高。
+- 功能分类上「其它」最拥挤（982 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
+- 15 个插件没有 README、1810 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
+- curated 收录仍集中于少数头部（988/3610），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
 - 本期相对上期有新增/消失/star 变动，见下方 diff 摘要。
 
 ## 优质未收录 · 建议收录（Top 8，供作者与目录维护者）
@@ -70,10 +70,10 @@
 - shanliuling/dsh-image-gen（A，★314，周下载 2665）
 - RevolutionLA/dsh-dream-skin（A，★142，周下载 9994）
 - pengyue-polaron/deepseek-harness-genui（A，★107）
-- mexiaosqwq/dsh-web-mobile（A，★78）
-- a179-sanae/dsh-auto-collapse（A，★53）
 - SiriLee/dsh-rewind（A，★37）
 - jjxjjjjiik-bot/dsh-chat-timeline（A，★32）
+- SenmuuuuW/dsh-whale-report（A，★31）
+- nevertoday/dsh-theme-plugin（A，★23）
 
 ## 本期动作 & 社区行动
 

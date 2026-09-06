@@ -110,23 +110,32 @@
 }
 ```
 
-**规则（RULE_VERSION=health-v2；升版必须在此加 changelog）**
+**规则（RULE_VERSION=health-v3；升版必须在此加 changelog）**
 
 Changelog：
+- health-v3 (2026-09-06)：**区分度重构**——扣分从一刀切 −5/−20 改为四档（fail −20 / major −10 / warn −5 / minor −2）；`npm.unpublished` 升 major（无法一键安装是核心可用性）；`not-lib-main`/`no-files-whitelist` 降 minor；新增 7 条：`docs.no-description`、`repo.sparse-topics`、`npm.single-release`、`npm.release-stale`（>90 天）、`eng.no-tests`、`eng.no-ci`、`docs.no-docs-dir`、`docs.tiny-readme`（<400B）。树探测信号（tests/CI/docsDir/readmeBytes）随 backfill 逐步生效（缺失不扣分）。背景：v2 分布 A+B 99.6% 无区分度。
 - health-v2 (2026-09-05)：`activity.too-young` 收窄——仅当插件 npm 发布版本 <2 时生效（有 ≥2 个发布版本 = 有存活证据，常见于仓库重建/迁移；刚建仓且只发 1 版仍警告）。
 
 | code | sev | 依据 |
 |---|---|---|
-| manifest.no-client-export | warn −5 | `exports["./client"]` 缺失（注：TUI/CLI 类插件可能本无 web client，见 caveat） |
-| manifest.not-lib-main | warn −5 | `main !== lib/index.js` |
-| manifest.no-files-whitelist | warn −5 | package.json 无 `files` 白名单 |
-| npm.unpublished | warn −5 | 未发布 npm（仅仓库安装；生态 47% 未发布，故非 fail） |
-| npm.version-drift | warn −5 | npm `latest` ≠ 仓库 `version`（含同名抢注/错配可能，evidence 双侧给出） |
 | docs.no-readme | fail −20 | 无 README |
+| npm.unpublished | major −10 | 未发布 npm（无法一键安装，核心可用性） |
+| manifest.no-client-export | warn −5 | `exports["./client"]` 缺失（注：TUI/CLI 类插件可能本无 web client，见 caveat） |
+| npm.version-drift | warn −5 | npm `latest` ≠ 仓库 `version`（含同名抢注/错配可能，evidence 双侧给出） |
+| npm.release-stale | warn −5 | npm 最近发布距今 >90 天 |
 | docs.zh-missing | warn −5 | 无中文/双语文档（生态惯例 zh-first；英文作者可申诉调参） |
+| docs.no-description | warn −5 | 仓库无 description |
 | repo.no-license | warn −5 | 无 LICENSE |
 | repo.no-dsh-topic | warn −5 | topics 非空且无 `dsh-plugin`（可发现性） |
-| activity.too-young | warn −5 | 仓库 <1 天 |
+| activity.too-young | warn −5 | 仓库 <1 天（npm ≥2 版本豁免） |
 | activity.dormant | warn −5 | 闲置 >30 天 |
+| eng.no-tests | warn −5 | 无测试目录/测试文件（树探测） |
+| manifest.not-lib-main | minor −2 | `main !== lib/index.js` |
+| manifest.no-files-whitelist | minor −2 | package.json 无 `files` 白名单 |
+| repo.sparse-topics | minor −2 | topics 仅 1 个（可发现面窄） |
+| npm.single-release | minor −2 | npm 仅 1 个发布版本 |
+| eng.no-ci | minor −2 | 无 `.github/workflows`（树探测） |
+| docs.no-docs-dir | minor −2 | 无 `docs/` 目录（树探测） |
+| docs.tiny-readme | minor −2 | README <400 字节（树探测 blob 大小） |
 
-原则：纯客观信号；不做 star 分（星数会刷、monorepo 污染）；不做社区评分；missing 数据不虚构不扣分。caveat：`manifest.no-client-export`/`not-lib-main` 对非 web 形态（TUI/CLI/desktop）可能误伤——v1 先按 warn 标注并给证据，误判可申诉。
+原则：纯客观信号；不做 star 分（星数会刷、monorepo 污染）；不做社区评分；missing 数据不虚构不扣分（树探测字段在 backfill 完成前对部分行缺失，这些行相应规则不触发）。caveat：`manifest.no-client-export`/`not-lib-main` 对非 web 形态（TUI/CLI/desktop）可能误伤——按 warn/minor 标注并给证据，误判可申诉。

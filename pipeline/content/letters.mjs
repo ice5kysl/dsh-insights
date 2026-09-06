@@ -25,7 +25,7 @@ const FOOTER = [
   '> 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 每插件体检 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health) · 示例页 https://dsh-insights.com/',
   '> 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。',
   '',
-  '> 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣（warn −5 / fail −20），阈值 A≥90 · B≥75 · C≥60。',
+  '> 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 A≥90 · B≥75 · C≥60。',
   '',
 ].join('\n')
 
@@ -66,7 +66,8 @@ const ADVICE = {
 
 function advice(r, en) {
   const drops = (en.drops || []).map((d) => ({ ...ADVICE[d.code], sev: d.sev, code: d.code })).filter((a) => a.label)
-  drops.sort((a, b) => (b.sev === 'fail' ? 20 : 5) - (a.sev === 'fail' ? 20 : 5))
+  const SEV_P = { fail: 20, major: 10, warn: 5, minor: 2 }
+  drops.sort((a, b) => (SEV_P[b.sev] || 5) - (SEV_P[a.sev] || 5))
   const out = drops.map((a) => ({ label: a.label, why: a.why, how: a.how }))
   // 收录渠道建议（不进分数，排在分数项之后）
   if (!en.inAwesome) out.push({ label: '提交 awesome-dsh-plugin', why: '上架主目录（曝光+反链）', how: 'data/plugins/<owner>__<repo>.yml 提 PR' })
