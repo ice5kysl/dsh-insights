@@ -11,7 +11,7 @@
  * @module dsh-insights/stage-12
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { escHtml } from '../../lib/page.mjs'
@@ -53,10 +53,14 @@ function main() {
     const color = COLOR[h.grade] || '#6b7280'
     const sub = join(OUT_DIR, owner)
     mkdirSync(sub, { recursive: true })
-    writeFileSync(join(sub, `${repo}.svg`), svg('DSH Insights', `${h.grade} · ${h.score}/100`, color))
+    // D2：内容不变不重写（避免 4k+ SVG 每次快照全量 churn）
+    const fp = join(sub, `${repo}.svg`)
+    const content = svg('DSH Insights', `${h.grade} · ${h.score}/100`, color)
+    if (existsSync(fp) && readFileSync(fp, 'utf8') === content) continue
+    writeFileSync(fp, content)
     n++
   }
-  console.log(`[badges] ${n} svg badges → site/badge/ (rule ${doc.ruleVersion})`)
+  console.log(`[badges] ${n} changed / ${plugins.length} svg badges → site/badge/ (rule ${doc.ruleVersion})`)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

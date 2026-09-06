@@ -92,7 +92,7 @@ refresh.yml   每日 03:00   light refresh（现状）
 | 官方包 | npm `@deepseek-ai/*` dist-tags | latest/rc 版本与时间 |
 | 官方活跃度 | repo pushed_at、docs 目录最近 commit 数 | 节奏信号 |
 
-产出 `data/dynamics/dsh-YYYY-Www.json` 时间序列（append-only，周粒度），供站点 `/dynamics` 与周报官方小节消费。
+产出 `data/dynamics.json`（单文件当前态；时间序列由 git 历史累积，与「git 即存档」约定一致），供站点 `/dynamics` 与周报官方小节消费。
 
 ### 4.5 rc 兼容雷达（M2，分两阶段）
 

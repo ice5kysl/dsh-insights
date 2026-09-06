@@ -46,7 +46,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 | 周快照稳定后 | awesome org / dsh-market 跟进 | 每周数据 URL 更新 + 采纳谈判 | ≥1 家接入（M3 退出标准） |
 | 徽章热链稳定后 | 作者圈层 | 推动 Top 插件 README 挂 badge | 部署 ≥5 仓库（M3） |
 
-**转载许可**：数据与报告开放引用，注明出处（dsh-insights.com）即可；数据许可形态（MIT 同款 vs CC0）定稿见 VISION O1 与 /data 页声明。
+**转载许可**：数据与报告按 **CC BY 4.0** 开放引用，署名 dsh-insights.com 即可（见根 `DATA-LICENSE` 与 /data 页声明）。
 
 ## 四、周报外发 SOP（ROADMAP M1 缺口，本节约定）
 

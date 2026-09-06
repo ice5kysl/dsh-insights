@@ -32,7 +32,7 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 
 **目标**：让"洞察"名副其实——覆盖 **dsh 本身**的演进，并在官方升级时帮插件作者提前避险。
 
-- [x] **官方动态快照器**（`pipeline/collect/dynamics.mjs`，v0 已上线 2026-09-06）：dsh releases/rc（含 breaking 关键词）+ npm dist-tags 时间线 + DeepSeek 平台官方仓库 → `data/dynamics.json`（单文件当前态；时间序列目录形态待 D3 决策）。
+- [x] **官方动态快照器**（`pipeline/collect/dynamics.mjs`，v0 已上线 2026-09-06）：dsh releases/rc（含 breaking 关键词）+ npm dist-tags 时间线 + DeepSeek 平台官方仓库 → `data/dynamics.json`（单文件当前态；时间序列由 git 历史累积——D3 已定 2026-09-06）。
 - [x] **周报升级为"官方 × 生态"双栏**（v0）：官方动态小节已入周报模板。
 - [ ] **rc 兼容雷达**：走 v1 API 符号路线——契约字段声明率实测 ~1%（184 探测仅 2 声明 engines.dsh），v0 声明对比已否决。
 - [x] 官方仓库订阅与低流量抓取：已纳入 CI refresh（daily profile）。

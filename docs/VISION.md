@@ -84,7 +84,7 @@ DSH 的哲学是 "Everything is a Plugin"；我们的回答是：**Every plugin 
 
 ## 开放问题
 
-- O1 数据许可最终形态（MIT 同款 vs 数据层 CC0）——站点上线前定稿。
+- ~~O1 数据许可~~（已定稿 2026-09-06）：代码 MIT / 数据 **CC BY 4.0**（署名为 dsh-insights.com），见根 `DATA-LICENSE`。
 - O2 仓库/组织归属（ice5kysl 个人 vs 独立 org）——影响"中立第三方"叙事与官方合作。
 - O3 与 DshMarketPlace（可安装性实装核验）的关系：竞争/借鉴/数据互换。
 - O4 dsh-insights.com 托管方案（Pages 自定义域 + CNAME；触发点出现后再评估独立站/DB，见 ROADMAP M4）。
