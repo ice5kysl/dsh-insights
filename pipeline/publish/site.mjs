@@ -257,6 +257,11 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .hbar{transition:background .12s;border-radius:6px}
 .hbar:hover{background:var(--track)}
 .hbar:hover .hbar-f{filter:brightness(1.2)}
+.dimrow{display:flex;align-items:center;gap:8px;font-size:12px;margin-top:5px}
+.dimrow span{width:64px;color:var(--mut);flex:none;font-size:11.5px}
+.dimt{flex:1;height:6px;background:var(--track);border-radius:3px;overflow:hidden}
+.dimt i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.dimrow b{width:26px;text-align:right;font:600 11.5px var(--mono)}
 .gtip{position:fixed;z-index:70;pointer-events:none;background:var(--ink);color:var(--bg);font:11.5px var(--mono);padding:4px 9px;border-radius:6px;display:none;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .chartbox{position:relative}
 .chartbox .grid{stroke:var(--line);stroke-width:1}
@@ -688,7 +693,7 @@ function openDrawer(repo){
       +'<div class="dd-sec"><h3>收录 / 下载</h3>'+(d.channels?(d.channels.aw?'<span class="flag"><b>✓</b> awesome-dsh-plugin</span>':'')+(d.channels.im?'<span class="flag"><b>✓</b> imsai</span>':'')+(!d.channels.aw&&!d.channels.im?'<span class="flag">curated 未收录</span>':''):'')+(d.weekly!=null?'<span class="flag"><b>⬇</b> 周下载 '+escA(d.weekly)+'</span>':'')+'</div>'
       +'<div class="dd-sec"><h3>LLM 解读</h3>'+(d.llm?('<div class="dd-desc">'+escA(d.llm.summaryZh||d.llm.summaryEn||'—')+'</div>'+(d.llm.category?'<div class="chipset" style="margin-top:8px"><span>'+escA(d.llm.category)+'</span></div>':'')+(d.llm.capabilityTags&&d.llm.capabilityTags.length?'<div class="chipset" style="margin-top:6px">'+d.llm.capabilityTags.map(function(t){return '<span>'+escA(t)+'</span>'}).join('')+'</div>':'')+(d.llm.claims&&d.llm.claims.length?'<div class="dd-desc" style="margin-top:8px;color:var(--mut)">宣称：'+d.llm.claims.map(escA).join(' · ')+'</div>':'')):'<div class="dim">未标注 · 待 LLM 标注轮</div>')+'</div>'
       +flags
-      +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='A'?'var(--ok)':d.grade==='B'?'var(--accent)':d.grade==='C'?'var(--warn)':'var(--err)')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div></div>'
+      +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='A'?'var(--ok)':d.grade==='B'?'var(--accent)':d.grade==='C'?'var(--warn)':'var(--err)')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div>'+(function(){var DM=[['eng','工程质量'],['docs','文档完整性'],['discover','可发现性'],['maint','维护活跃']];var rows=DM.map(function(dm){var v=(d.dims&&d.dims[dm[0]]!=null)?d.dims[dm[0]]:null;return '<div class="dimrow"><span>'+dm[1]+'</span><div class="dimt"><i style="width:'+(v==null?0:v)+'%"></i></div><b>'+(v==null?'—':v)+'</b></div>'}).join('');return '<div style="margin-top:10px">'+rows+'</div><div class="dim" style="font-size:11px;margin-top:6px">安全卫生（深检抽样）与采用度（★/下载/收录）为展示信号、不进总分；兼容性维度随 rc 雷达（M2）上线。</div>'})()+'</div>'
   +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3><div id="dd-peers" class="loading">计算中…</div></div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
       +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
     loadHist(repo,d);
@@ -755,6 +760,7 @@ draw();
     weekly: enMap.get(r.full_name)?.weekly ?? null,
     llm: llmMap.get(r.full_name) ?? null,
     parts: (enMap.get(r.full_name)?.drops || []).map((d) => ({ label: d.label, v: d.sev === 'fail' ? -20 : -5 })),
+    dims: enMap.get(r.full_name)?.dimScores || {},
     npm: r.npm || { pub: false },
   }))
   writeFileSync(join(SITE, 'plugins-detail.json'), JSON.stringify(detail))

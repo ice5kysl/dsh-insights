@@ -34,8 +34,8 @@ function main() {
         : { published: false, latest: null },
       description: (r.description || '').slice(0, 300),
       health: h
-        ? { score: h.score, grade: h.grade, drops: h.drops.map((d) => d.code) }
-        : { score: 0, grade: '?', drops: [] },
+        ? { score: h.score, grade: h.grade, dimScores: h.dimScores || {}, drops: h.drops.map((d) => d.code) }
+        : { score: 0, grade: '?', dimScores: {}, drops: [] },
     }
   })
 

@@ -76,7 +76,23 @@
 
 ## `health` — 健康分（`pipeline/analyze/score.mjs` 唯一真源 → `data/health.json` + `data/enrich.json` + `data/insights.json`）
 
-评分只有一套（health-v2 扣分制），由 `score.mjs` 的 `scoreAll` 提供；`analyze`（enrich.json）、`export-json`（insights.json）、badges、history 全部经它取分，不再各自实现。`data/health.json` 为聚合（grades/avg/median/topDeductions）；`data/enrich.json` 每插件行：`{full_name, stars, score, grade, drops:[{code,sev,label}], missing[], category, inAwesome, inImsai, covered, weekly}`（score/grade/drops 来自 health；category/收录渠道/周下载为 analyze 独有维度）。
+评分只有一套（health-v2 扣分制），由 `score.mjs` 的 `scoreAll` 提供；`analyze`（enrich.json）、`export-json`（insights.json）、badges、history 全部经它取分，不再各自实现。`data/health.json` 为聚合（grades/avg/median/topDeductions）；`data/enrich.json` 每插件行：`{full_name, stars, score, grade, dimScores, drops:[{code,sev,label}], missing[], category, inAwesome, inImsai, covered, weekly}`（score/grade/drops 来自 health；category/收录渠道/周下载为 analyze 独有维度）。
+
+### 评估指标体系 v1（维度框架）
+
+六个维度；**计分四维**进入总分（100 起扣），**展示两维**只呈现不进分，**兼容维度**预留：
+
+| 维度 | 定义 | 指标项（数据来源） | 计分处理 |
+|---|---|---|---|
+| 工程质量 `eng` | bundle 规范与发布卫生 | client 导出 · main=lib 布局 · files 白名单 · npm 发布 · npm↔仓库版本一致（package.json / npm registry） | **计分**（warn −5/项） |
+| 文档完整性 `docs` | 用户上手材料与许可 | README 有无（fail −20）· 中文/双语文档 · LICENSE（git tree 探测） | **计分** |
+| 可发现性 `discover` | 被找到的能力 | `dsh-plugin` topic（repo topics）；策展收录 awesome/imsai（listed.json） | topic **计分**；收录**只展示** |
+| 维护活跃 `maint` | 存活与持续维护信号 | 仓库年龄 <1 天 · >30 天无提交（pushed_at；npm ≥2 版本豁免 too-young） | **计分** |
+| 安全卫生 `safety` | 写面/消毒启发式（非审计） | 源文件写面（fs 写/子进程/HTTP 写动词）· 渲染消毒器（深检 deep.jsonl，抽样覆盖） | **增量信号，单独标注，不进总分**（覆盖不足，不虚构） |
+| 采用度 `adoption` | 社区使用与关注 | ★ · npm 周下载（downloads.json）· 收录渠道 | **只展示不进分**（可刷/monorepo 污染，见原则） |
+| 兼容性 `compat` | 与 dsh 版本匹配 | engines.dsh 声明（实测声明率 ~1%，不可用）· 深检 API 符号 × rc changelog（M2 雷达 v1） | **预留维度，暂缺测** |
+
+原则（维持）：纯客观信号；星数不进分；缺失不虚构不扣分（missing 明示）；社区评分/投票永不引入。`dimScores` = 各计分维度独立 100 起扣（与该维度内规则扣分同步），总分 = 全部计分规则合并起扣。
 
 ```jsonc
 "health": {

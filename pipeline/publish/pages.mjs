@@ -189,8 +189,19 @@ ${platRows}
 <p>非 fork / 非归档 · <code>package.json</code> 声明 <code>dsh.bundle.patch</code> · patch 文件已提交。这是下限口径：纯 tarball 分发的插件会进入分桶人工复核（<code>invalid.jsonl</code>）。</p>
 <h2>覆盖与完整性（为什么权威集 ≪ topic 总数）</h2>
 <p>GitHub <code>topic:dsh-plugin</code> 是官方唯一发现机制，<b>打标即入、零门槛</b>——其中混有大量蹭标、无关仓库、fork、monorepo 子路径与已删除仓库。我们的漏斗：<b>topic 宇宙（≈13.7k，首页漏斗实时口径）→ 多源候选（topic 分片全量抓取 + 策展目录 + npm 映射，去重）→ manifest 门禁逐条校验 → 权威集 + 分桶</b>。权威集是「货真价实可按官方 bundle 形态安装」的下限子集；<code>no-dsh-bundle</code> / <code>no-package.json</code> 桶里的候选可能是插件但形态非标，留待人工复核而不是混入权威集。校验按 API 预算<b>滚动推进、断点续跑</b>，权威集随每次快照扩大——<b>覆盖率数字本身也公开</b>（首页覆盖漏斗），这就是我们对「完整性」的回答方式：不报大数，报可核验的数。</p>
-<h2>健康分（health-v2）</h2>
-<p>100 起扣 · warn −5 / fail −20 · 纯客观信号（manifest 规范 / npm 发布与版本一致 / README 与中文文档 / LICENSE / dsh-plugin topic / 活跃度），星数不进分。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。每条扣分带证据；探测不到的数据不虚构、不扣分（missing 明示）。规则全文与 changelog 见 <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">SCHEMA §health</a>。</p>
+<h2>插件评估指标体系（六维框架 v1）</h2>
+<p>每个插件从六个维度考察：<b>计分四维</b>进入总分（100 起扣 · warn −5 / fail −20），<b>展示两维</b>只呈现不进分，<b>兼容性</b>为预留维度。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>；插件详情抽屉可见各维度子分（dimScores）。</p>
+<table>
+<tr><th>维度</th><th>指标项</th><th>计分处理</th></tr>
+<tr><td>工程质量</td><td>client 导出 · main=lib 布局 · files 白名单 · npm 发布 · 版本一致</td><td><b>计分</b></td></tr>
+<tr><td>文档完整性</td><td>README（唯一的 fail 级）· 中文/双语文档 · LICENSE</td><td><b>计分</b></td></tr>
+<tr><td>可发现性</td><td>dsh-plugin topic（计分）· 策展收录（只展示）</td><td><b>部分计分</b></td></tr>
+<tr><td>维护活跃</td><td>仓库年龄 · 30 天无提交（npm ≥2 版本豁免新仓规则）</td><td><b>计分</b></td></tr>
+<tr><td>安全卫生</td><td>写面 / 渲染消毒（深检抽样，启发式≠审计）</td><td>增量信号，<b>不进总分</b></td></tr>
+<tr><td>采用度</td><td>★ · npm 周下载 · 收录渠道</td><td><b>只展示不进分</b>（可刷/污染）</td></tr>
+<tr><td>兼容性</td><td>engines.dsh 声明（实测仅 ~1% 插件声明）· API 符号 × rc changelog（M2 雷达）</td><td>预留，暂缺测</td></tr>
+</table>
+<p>原则：纯客观信号 · 星数不进分 · 探测不到的不虚构不扣分（missing 明示）· 每条扣分带证据 · 社区评分永不引入。规则全文与 changelog 见 <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">SCHEMA §health</a>。</p>
 <h2>校准</h2>
 <p>已知真/假插件编入校准集，每次快照跑回归（<code>pipeline/validate/regress.mjs</code>），回归非 100% 则当周快照不发布。口径变更必须 bump 规则版本并写 changelog。</p>
 <h2>指标体系（我们怎么衡量自己）</h2>

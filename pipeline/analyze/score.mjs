@@ -27,6 +27,31 @@ import { PATHS, readJsonl, writeJson } from '../../lib/data.mjs'
 
 export const RULE_VERSION = 'health-v2'
 
+/**
+ * 评估指标体系 v1（docs/SCHEMA.md §health 有完整定义与说明）。
+ * 六维框架：工程质量 eng / 文档完整性 docs / 可发现性 discover / 维护活跃 maint
+ * 计分；安全卫生 safety 与采用度 adoption 只展示不进分；兼容性 compat 预留。
+ */
+export const DIMS = {
+  eng: { label: '工程质量', desc: 'bundle 规范与发布卫生' },
+  docs: { label: '文档完整性', desc: '上手材料与许可' },
+  discover: { label: '可发现性', desc: '被找到的能力（topic/收录）' },
+  maint: { label: '维护活跃', desc: '存活与持续维护信号' },
+}
+const DIM_OF = {
+  'manifest.no-client-export': 'eng',
+  'manifest.not-lib-main': 'eng',
+  'manifest.no-files-whitelist': 'eng',
+  'npm.unpublished': 'eng',
+  'npm.version-drift': 'eng',
+  'docs.no-readme': 'docs',
+  'docs.zh-missing': 'docs',
+  'repo.no-license': 'docs',
+  'repo.no-dsh-topic': 'discover',
+  'activity.too-young': 'maint',
+  'activity.dormant': 'maint',
+}
+
 /** Deduction book: code → { sev: 'warn'|'fail', label } */
 export const RULES = {
   // manifest shape
@@ -116,10 +141,16 @@ export function scoreOne(r) {
   const grade = score >= 90 ? 'A' : score >= 75 ? 'B' : score >= 60 ? 'C' : 'D'
 
   const byDim = {}
+  const dimPenalty = {}
   for (const d of drops) {
     const dim = d.code.split('.')[0]
     ;(byDim[dim] ??= []).push(d)
+    const fd = DIM_OF[d.code]
+    if (fd) dimPenalty[fd] = (dimPenalty[fd] || 0) + (d.sev === 'fail' ? 20 : 5)
   }
+  const dimScores = Object.fromEntries(
+    Object.keys(DIMS).map((k) => [k, Math.max(0, 100 - (dimPenalty[k] || 0))])
+  )
 
   return {
     score,
@@ -127,6 +158,7 @@ export function scoreOne(r) {
     ruleVersion: RULE_VERSION,
     at: new Date().toISOString(),
     dims: byDim,
+    dimScores,
     drops,
     missing: [...new Set(missing)],
   }

@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-06T02:36:01.467Z",
+  "generatedAt": "2026-09-06T02:56:02.815Z",
   "totals": {
-    "authoritative": 2222,
-    "active30": 2222,
+    "authoritative": 2652,
+    "active30": 2652,
     "active30Pct": 100,
-    "ageGate1": 2217,
+    "ageGate1": 2647,
     "ageGate1Pct": 99.8,
     "byMonth": {
-      "2026-08": 2099,
+      "2026-08": 2529,
       "2026-02": 4,
       "2026-07": 27,
       "2026-04": 6,
@@ -21,7 +21,7 @@
       "2025-11": 1
     },
     "byWeek": {
-      "2026-08-10": 1263,
+      "2026-08-10": 1693,
       "2026-02-16": 3,
       "2026-08-03": 54,
       "2026-08-17": 528,
@@ -55,7 +55,7 @@
     },
     "byWeekGrades": {
       "A": {
-        "2026-08-10": 629,
+        "2026-08-10": 824,
         "2026-08-03": 12,
         "2026-08-17": 282,
         "2026-07-06": 1,
@@ -69,7 +69,7 @@
         "2026-07-13": 1
       },
       "B": {
-        "2026-08-10": 629,
+        "2026-08-10": 864,
         "2026-02-16": 3,
         "2026-07-13": 9,
         "2026-04-27": 2,
@@ -111,24 +111,24 @@
   },
   "distribution": {
     "publish": {
-      "published": 1102,
-      "unpublished": 1120,
-      "stale": 263
+      "published": 1317,
+      "unpublished": 1335,
+      "stale": 328
     },
     "docs": {
-      "readme": 2209,
-      "zhFile": 232,
-      "zh": 839,
-      "both": 829,
+      "readme": 2639,
+      "zhFile": 273,
+      "zh": 987,
+      "both": 977,
       "none": 13
     },
     "lib": {
-      "index": 1004,
-      "client": 826,
-      "both": 732
+      "index": 1196,
+      "client": 965,
+      "both": 864
     },
-    "publishPct": 49.6,
-    "zhPct": 37.3
+    "publishPct": 49.7,
+    "zhPct": 36.8
   },
   "npmStaleTop": [
     {
@@ -195,54 +195,54 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 2138
+      "count": 2568
     },
     {
       "topic": "deepseek-harness",
-      "count": 1533
+      "count": 1780
     },
     {
       "topic": "dsh",
-      "count": 1080
+      "count": 1253
     },
     {
       "topic": "deepseek",
-      "count": 372
+      "count": 431
     },
     {
       "topic": "cordis",
-      "count": 284
+      "count": 328
     },
     {
       "topic": "dsh-plugins",
-      "count": 266
+      "count": 311
     },
     {
       "topic": "plugin",
-      "count": 184
+      "count": 214
     },
     {
       "topic": "typescript",
-      "count": 133
+      "count": 147
+    },
+    {
+      "topic": "ai-agent",
+      "count": 137
     },
     {
       "topic": "cordis-plugin",
       "count": 132
     },
     {
-      "topic": "ai-agent",
-      "count": 115
+      "topic": "dsh-plugin-market",
+      "count": 113
     },
     {
       "topic": "dsh-bundle",
       "count": 111
-    },
-    {
-      "topic": "dsh-plugin-market",
-      "count": 104
     }
   ],
-  "medianStars": 4,
+  "medianStars": 3,
   "topByStars": [
     {
       "repo": "yjh051108/dsh-routing-suite",
@@ -309,8 +309,8 @@
     "awesome": 757,
     "imsai": 236,
     "covered": 988,
-    "coveredPct": 44.5,
-    "none": 1234,
+    "coveredPct": 37.3,
+    "none": 1664,
     "fetchedAt": "2026-09-06T01:13:38.488Z"
   },
   "suggested": [
@@ -319,6 +319,12 @@
       "stars": 3339,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [
         "files"
@@ -334,6 +340,12 @@
       "stars": 314,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "模型 / 代理",
@@ -347,6 +359,12 @@
       "stars": 142,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "状态 / 监控 / 用量",
@@ -360,6 +378,12 @@
       "stars": 107,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "会话管理",
@@ -373,6 +397,12 @@
       "stars": 78,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "其它",
@@ -386,6 +416,12 @@
       "stars": 53,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "其它",
@@ -399,6 +435,12 @@
       "stars": 37,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "侧栏 / 工作区",
@@ -412,6 +454,12 @@
       "stars": 32,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "其它",
@@ -425,6 +473,12 @@
       "stars": 31,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "状态 / 监控 / 用量",
@@ -438,6 +492,12 @@
       "stars": 23,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "主题 / 视觉美化",
@@ -451,6 +511,12 @@
       "stars": 18,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "搜索 / 命令面板",
@@ -464,6 +530,12 @@
       "stars": 11,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "文件浏览 / 预览",
@@ -477,6 +549,12 @@
       "stars": 11,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "状态 / 监控 / 用量",
@@ -490,6 +568,12 @@
       "stars": 10,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "会话管理",
@@ -503,6 +587,12 @@
       "stars": 7,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "其它",
@@ -516,6 +606,12 @@
       "stars": 3,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "文件浏览 / 预览",
@@ -529,6 +625,12 @@
       "stars": 4,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "文件浏览 / 预览",
@@ -542,6 +644,12 @@
       "stars": 4,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "状态 / 监控 / 用量",
@@ -555,6 +663,12 @@
       "stars": 2,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "文件浏览 / 预览",
@@ -568,6 +682,12 @@
       "stars": 0,
       "score": 100,
       "grade": "A",
+      "dimScores": {
+        "eng": 100,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
       "drops": [],
       "missing": [],
       "category": "其它",
@@ -585,6 +705,12 @@
         "stars": 3196,
         "score": 95,
         "grade": "A",
+        "dimScores": {
+          "eng": 95,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.no-client-export",
@@ -606,6 +732,12 @@
         "stars": 3339,
         "score": 100,
         "grade": "A",
+        "dimScores": {
+          "eng": 100,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [],
         "missing": [
           "files"
@@ -621,6 +753,12 @@
         "stars": 272,
         "score": 95,
         "grade": "A",
+        "dimScores": {
+          "eng": 95,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.not-lib-main",
@@ -640,6 +778,12 @@
         "stars": 1286,
         "score": 95,
         "grade": "A",
+        "dimScores": {
+          "eng": 95,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.no-client-export",
@@ -661,6 +805,12 @@
         "stars": 254,
         "score": 95,
         "grade": "A",
+        "dimScores": {
+          "eng": 95,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "npm.version-drift",
@@ -680,6 +830,12 @@
         "stars": 1070,
         "score": 85,
         "grade": "B",
+        "dimScores": {
+          "eng": 90,
+          "docs": 95,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.no-client-export",
@@ -709,6 +865,12 @@
         "stars": 952,
         "score": 95,
         "grade": "A",
+        "dimScores": {
+          "eng": 95,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.no-client-export",
@@ -728,6 +890,12 @@
         "stars": 142,
         "score": 100,
         "grade": "A",
+        "dimScores": {
+          "eng": 100,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [],
         "missing": [],
         "category": "状态 / 监控 / 用量",
@@ -741,6 +909,12 @@
         "stars": 331,
         "score": 100,
         "grade": "A",
+        "dimScores": {
+          "eng": 100,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [],
         "missing": [],
         "category": "搜索 / 命令面板",
@@ -754,6 +928,12 @@
         "stars": 1727,
         "score": 95,
         "grade": "A",
+        "dimScores": {
+          "eng": 95,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.no-client-export",
@@ -775,6 +955,12 @@
         "stars": 242,
         "score": 95,
         "grade": "A",
+        "dimScores": {
+          "eng": 100,
+          "docs": 95,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "docs.zh-missing",
@@ -794,6 +980,12 @@
         "stars": 300,
         "score": 85,
         "grade": "B",
+        "dimScores": {
+          "eng": 90,
+          "docs": 95,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.no-client-export",
@@ -823,6 +1015,12 @@
         "stars": 134,
         "score": 95,
         "grade": "A",
+        "dimScores": {
+          "eng": 95,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.not-lib-main",
@@ -842,6 +1040,12 @@
         "stars": 127,
         "score": 90,
         "grade": "A",
+        "dimScores": {
+          "eng": 95,
+          "docs": 95,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.no-client-export",
@@ -866,6 +1070,12 @@
         "stars": 217,
         "score": 95,
         "grade": "A",
+        "dimScores": {
+          "eng": 95,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
         "drops": [
           {
             "code": "manifest.not-lib-main",
@@ -891,62 +1101,62 @@
   },
   "quality": {
     "grades": {
-      "A": 1085,
-      "B": 1124,
+      "A": 1280,
+      "B": 1359,
       "C": 13,
       "D": 0
     },
     "avgScore": 87.2,
-    "gradePct": 99.4
+    "gradePct": 99.5
   },
   "categories": [
     {
       "category": "其它",
-      "count": 559
+      "count": 690
     },
     {
       "category": "模型 / 代理",
-      "count": 253
+      "count": 294
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 227
+      "count": 272
     },
     {
       "category": "会话管理",
-      "count": 227
+      "count": 265
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 181
+      "count": 208
     },
     {
       "category": "搜索 / 命令面板",
-      "count": 160
+      "count": 184
     },
     {
       "category": "工具 / 效率",
-      "count": 149
+      "count": 181
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 149
+      "count": 167
     },
     {
       "category": "主题 / 视觉美化",
-      "count": 88
+      "count": 109
     },
     {
       "category": "消息 / 协作集成",
-      "count": 86
+      "count": 102
     },
     {
       "category": "开发 / 数据",
-      "count": 75
+      "count": 94
     },
     {
       "category": "记忆 / 知识",
-      "count": 68
+      "count": 86
     }
   ],
   "coverage": {
@@ -1025,16 +1235,16 @@
       "2025-10-20": 1,
       "1969-12-29": 245
     },
-    "validated": 3535,
-    "authoritative": 2222,
+    "validated": 4273,
+    "authoritative": 2652,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 554
+        "count": 748
       },
       {
         "reason": "no-package.json",
-        "count": 488
+        "count": 596
       },
       {
         "reason": "no-signal",
@@ -1046,11 +1256,11 @@
       },
       {
         "reason": "archived",
-        "count": 14
+        "count": 19
       },
       {
         "reason": "patch-missing",
-        "count": 5
+        "count": 6
       },
       {
         "reason": "repo-http403",
@@ -1074,5 +1284,5 @@
       }
     ]
   },
-  "enrichCount": 2222
+  "enrichCount": 2652
 }

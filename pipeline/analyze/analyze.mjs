@@ -116,7 +116,7 @@ function analyze(rows) {
     const inAwesome = channels.awesome.has(r.full_name)
     const inImsai = channels.imsai.has(r.full_name)
     const weekly = r.npm?.published && r.pkgName ? (dlMap[r.pkgName]?.d ?? null) : null
-    enrich.push({ full_name: r.full_name, stars: r.stars || 0, score: h.score, grade: h.grade, drops: h.drops.map((d) => ({ code: d.code, sev: d.sev, label: d.label })), missing: h.missing || [], category: cat, inAwesome, inImsai, covered: inAwesome || inImsai, weekly })
+    enrich.push({ full_name: r.full_name, stars: r.stars || 0, score: h.score, grade: h.grade, dimScores: h.dimScores || {}, drops: h.drops.map((d) => ({ code: d.code, sev: d.sev, label: d.label })), missing: h.missing || [], category: cat, inAwesome, inImsai, covered: inAwesome || inImsai, weekly })
     gradeAgg[h.grade] = (gradeAgg[h.grade] || 0) + 1
     catAgg[cat] = (catAgg[cat] || 0) + 1
     scoreSum += h.score
