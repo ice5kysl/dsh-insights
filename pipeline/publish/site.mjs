@@ -159,9 +159,9 @@ function main() {
   const catsHtml = (a.categories || []).slice(0, 8).map((x) => bar(x.category, x.count, catsMax, null, x.category)).join('')
 
   const staleRows = (a.npmStaleTop || []).map((s2) =>
-    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${esc(s2.repoVersion)} → ${esc(s2.npmLatest)}</td></tr>`).join('')
+    `<tr><td><a href="/p/${esc(s2.repo)}/" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${esc(s2.repoVersion)} → ${esc(s2.npmLatest)}</td></tr>`).join('')
   const starRows = (a.topByStars || []).map((s2) =>
-    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td class="num">${s2.published ? '<span class="ok" title="npm 已发布">✓</span>' : '<span class="dim">—</span>'}</td><td class="num">${s2.zh ? '<span class="ok" title="中/双语文档">✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
+    `<tr><td><a href="/p/${esc(s2.repo)}/" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td class="num">${s2.published ? '<span class="ok" title="npm 已发布">✓</span>' : '<span class="dim">—</span>'}</td><td class="num">${s2.zh ? '<span class="ok" title="中/双语文档">✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
     '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num"><span class="grade ' + esc(e.grade) + '">' + esc(e.grade) + '</span></td><td class="num mono">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('')
   const authorRows = (a.authors || []).slice(0, 10).map((au) =>
@@ -538,11 +538,6 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 </footer>
 </main>
 
-<div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-hidden="true">
-  <div class="dd-head"><div class="dd-title" id="dd-title"></div><button class="dd-close" id="dd-close" title="关闭">✕</button></div>
-  <div class="dd-body" id="dd-body"></div>
-</aside>
 
 <script>
 const ROWS=${dataJson};
@@ -649,7 +644,7 @@ function draw(){
   const list=filtered(),pages=Math.ceil(list.length/PAGE)||1;
   page=Math.min(page,pages-1);
   const seg=list.slice(page*PAGE,(page+1)*PAGE);
-  $('#tb').innerHTML=seg.map(r=>'<tr data-repo="'+e(r[0])+'" data-url="'+e(r[1])+'"><td><a href="'+e(r[1])+'" target="_blank">'+e(r[0])+'</a></td><td class="num mono">'+r[2]+'</td><td class="c-created mono" style="color:var(--mut)">'+r[3]+'</td><td>'+(r[4]?'<span class="ok mono">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td class="c-zh">'+(r[5]?'✓':'')+'</td><td class="c-lib">'+(r[6]?'✓':'')+'</td><td class="c-act">'+(r[7]?'✓':'')+'</td><td>'+(r[9]?'<span class="grade '+e(r[9])+'">'+e(r[9])+'</span>':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="9" class="dim" style="padding:24px;text-align:center">无匹配 — 试试放宽筛选条件</td></tr>';
+  $('#tb').innerHTML=seg.map(r=>'<tr data-repo="'+e(r[0])+'"><td><a href="/p/'+e(r[0])+'/">'+e(r[0])+'</a></td><td class="num mono">'+r[2]+'</td><td class="c-created mono" style="color:var(--mut)">'+r[3]+'</td><td>'+(r[4]?'<span class="ok mono">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td class="c-zh">'+(r[5]?'✓':'')+'</td><td class="c-lib">'+(r[6]?'✓':'')+'</td><td class="c-act">'+(r[7]?'✓':'')+'</td><td>'+(r[9]?'<span class="grade '+e(r[9])+'">'+e(r[9])+'</span>':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="9" class="dim" style="padding:24px;text-align:center">无匹配 — 试试放宽筛选条件</td></tr>';
   $('#info').textContent='第 '+(page+1)+'/'+pages+' 页 · 共 '+list.length+' 条';
   $('#prev').disabled=page===0;$('#next').disabled=page>=pages-1;
   document.querySelectorAll('.ptable th[data-k]').forEach(th=>{
@@ -694,77 +689,8 @@ document.querySelectorAll('.cols input').forEach(cb=>cb.addEventListener('change
 document.querySelectorAll('.ptable th[data-k]').forEach(th=>th.addEventListener('click',()=>{const k=+th.dataset.k;if(sort===k)desc=!desc;else{sort=k;desc=false}$('#f-sort').value='';page=0;draw()}));
 $('#prev').onclick=()=>{page--;draw()};$('#next').onclick=()=>{page++;draw()};
 
-// ---- plugin detail drawer ----
-function escA(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-var detCache=null;
-function detMap(){ if(!detCache){ detCache=fetch('/plugins-detail.json').then(function(r){return r.ok?r.json():[]}).then(function(arr){var m={};arr.forEach(function(d){m[d.full_name]=d});return m}).catch(function(){return {}}) } return detCache }
-function ddK(l,v){return '<div class="dd-kpi"><b>'+escA(v)+'</b><span>'+l+'</span></div>'}
-function ddRow(k,v){return '<tr><td>'+k+'</td><td>'+v+'</td></tr>'}
-function ddFlag(ok,l){return '<span class="flag"'+(ok?'':' style="opacity:.42"')+'><b>'+(ok?'✓':'·')+'</b> '+escA(l)+'</span>'}
-function loadHist(repo,d){
-  var h=$('#dd-hist'); if(!h) return;
-  if(histCache[repo]){ h.innerHTML=histCache[repo]; return }
-  var done=function(html){ histCache[repo]=html; h.innerHTML=html };
-  if(d.pkgName){
-    fetch('https://registry.npmjs.org/'+encodeURIComponent(d.pkgName).replace(/%40/g,'@')).then(function(r){return r.ok?r.json():null}).then(function(doc){
-      if(!doc||!doc.time){h.innerHTML='<div class="dim">无 npm 版本历史</div>';return}
-      var vs=[];for(var k in doc.time){if(/^\d/.test(k))vs.push({v:k,t:(doc.time[k]||'').slice(0,10)})}
-      vs.sort(function(a,b){return a.t<b.t?-1:a.t>b.t?1:0}).reverse();
-      done('<table class="dd-table">'+vs.slice(0,8).map(function(x){return ddRow('<span class="warn">'+escA(x.v)+'</span>',escA(x.t))}).join('')+'</table>'+(vs.length>8?'<div class="dim" style="font-size:11px;margin-top:4px">共 '+vs.length+' 个版本 · 最早 '+escA(vs[vs.length-1].t)+'</div>':''));
-    }).catch(function(){done('<div class="dim">版本历史不可用</div>')})
-  } else {
-    fetch('https://api.github.com/repos/'+encodeURIComponent(repo)+'/releases?per_page=6').then(function(r){return r.ok?r.json():null}).then(function(rel){
-      if(!rel||!rel.length){done('<div class="dim">无 GitHub Release（或未发布 / 接口限流）</div>');return}
-      done('<table class="dd-table">'+rel.map(function(x){return ddRow(escA(x.tag_name||x.name),(x.published_at||'').slice(0,10))}).join('')+'</table>');
-    }).catch(function(){done('<div class="dim">Release 历史不可用</div>')})
-  }
-}
-function openDrawer(repo){
-  $('#dd-title').textContent=repo;
-  var b=$('#dd-body');b.innerHTML='<div class="loading">加载详情…</div>';
-  $('#drawer').classList.add('on');$('#scrim').classList.add('on');document.body.style.overflow='hidden';
-  detMap().then(function(m){
-    var d=m[repo]; if(!d){b.innerHTML='<div class="dd-sec"><h3>详情</h3><div class="dd-desc">暂无本地详情（可能晚于当前快照）。</div></div>';return}
-    var flags='<div class="dd-sec"><h3>清单与构建产物</h3>'+ddFlag(d.files.rd,'README')+ddFlag(d.files.zh,'中文 README')+ddFlag(d.files.lic,'LICENSE')+ddFlag(d.files.cp,'cordis.patch.yml')+ddFlag(d.files.idx,'lib/index.js')+ddFlag(d.files.cli,'lib/client.js')+(d.hasClientExport?ddFlag(true,'exports["./client"]'):'')+'</div>'
-    var npmHtml=d.npm&&d.npm.published
-      ? '<table class="dd-table">'+ddRow('latest','<span class="ok">'+escA(d.npm.latest)+'</span>')+ddRow('发布版本数',d.npm.versions)+ddRow('最近发布',escA((d.npm.latestTime||'').slice(0,10)||'—'))+'</table>'+(d.version&&d.npm.latest&&d.npm.latest!==d.version?'<div class="warn" style="font-size:12px;margin-top:6px">⚠ 版本滞后：仓库 '+escA(d.version)+' vs npm '+escA(d.npm.latest)+'</div>':'')
-      : '<div class="dim">未发布到 npm</div>'
-    b.innerHTML=''
-      +'<div class="dd-sec"><h3>描述</h3><div class="dd-desc">'+escA(d.desc||'—')+'</div>'+(d.topics&&d.topics.length?'<div class="chipset" style="margin-top:10px">'+d.topics.map(function(t){return '<span>'+escA(t)+'</span>'}).join('')+'</div>':'')+'</div>'
-      +'<div class="dd-kpis">'+ddK('★',d.stars)+ddK('fork',d.forks)+ddK('仓库年龄',Math.round(d.ageDays)+' 天')+'</div>'
-      +'<div class="dd-sec"><h3>npm</h3>'+npmHtml+'</div>'
-      +'<div class="dd-sec"><h3>收录 / 下载</h3>'+(d.channels?(d.channels.aw?'<span class="flag"><b>✓</b> awesome-dsh-plugin</span>':'')+(d.channels.im?'<span class="flag"><b>✓</b> imsai</span>':'')+(!d.channels.aw&&!d.channels.im?'<span class="flag">curated 未收录</span>':''):'')+(d.weekly!=null?'<span class="flag"><b>⬇</b> 周下载 '+escA(d.weekly)+'</span>':'')+'</div>'
-      +'<div class="dd-sec"><h3>LLM 解读</h3>'+(d.llm?('<div class="dd-desc">'+escA(d.llm.summaryZh||d.llm.summaryEn||'—')+'</div>'+(d.llm.category?'<div class="chipset" style="margin-top:8px"><span>'+escA(d.llm.category)+'</span></div>':'')+(d.llm.capabilityTags&&d.llm.capabilityTags.length?'<div class="chipset" style="margin-top:6px">'+d.llm.capabilityTags.map(function(t){return '<span>'+escA(t)+'</span>'}).join('')+'</div>':'')+(d.llm.claims&&d.llm.claims.length?'<div class="dd-desc" style="margin-top:8px;color:var(--mut)">宣称：'+d.llm.claims.map(escA).join(' · ')+'</div>':'')):'<div class="dim">未标注 · 待 LLM 标注轮</div>')+'</div>'
-      +flags
-      +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='S'?'#7c3aed':d.grade==='A'?'var(--ok)':d.grade==='B'?'var(--accent)':d.grade==='C'?'var(--warn)':'var(--err)')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div>'+(function(){var DM=[['eng','工程质量'],['docs','文档完整性'],['discover','可发现性'],['maint','维护活跃']];var rows=DM.map(function(dm){var v=(d.dims&&d.dims[dm[0]]!=null)?d.dims[dm[0]]:null;return '<div class="dimrow"><span>'+dm[1]+'</span><div class="dimt"><i style="width:'+(v==null?0:v)+'%"></i></div><b>'+(v==null?'—':v)+'</b></div>'}).join('');return '<div style="margin-top:10px">'+rows+'</div><div class="dim" style="font-size:11px;margin-top:6px">安全卫生（深检抽样）与采用度（★/下载/收录）为展示信号、不进总分；兼容性维度随 rc 雷达（M2）上线。</div>'})()+'</div>'
-  +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3><div id="dd-peers" class="loading">计算中…</div></div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
-      +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
-    loadHist(repo,d);
-    if(d.parts&&d.parts.length){ var li=d.parts.map(function(p){return '<li><span>'+escA(p.label)+'</span><b>'+escA(p.v)+'</b></li>'}).join(''); b.insertAdjacentHTML('beforeend','<div class="dd-sec"><h3>扣分明细</h3><ul class="score" style="margin:0;padding:0;list-style:none">'+li+'</ul><div class="dim" style="font-size:11px;margin-top:6px">100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2（S≥95 · A≥90 · B≥75 · C≥60）。未列出的项表示未扣分；探测不到的数据不虚构不扣分。</div></div>') }
-    loadPeers(repo,d);
-  })
-}
-var histCache={};
-var rowsBy=null;
-function rowsIndex(){ if(!rowsBy){ rowsBy={}; ROWS.forEach(function(r){ rowsBy[r[0]]=r }) } return rowsBy }
-var catsCache=null;
-function catsMap(){ if(!catsCache){ catsCache=fetch('/plugins-cats.json').then(function(r){return r.ok?r.json():null}) } return catsCache }
-function loadPeers(repo,d){
-  var el=$('#dd-peers'); if(!el) return;
-  if(!d.category){ el.innerHTML='<div class="dim">暂无分类</div>'; return }
-  catsMap().then(function(cj){
-    var ri=rowsIndex(); var list=(cj&&cj.cats&&cj.cats[d.category])||[];
-    var peers=list.filter(function(x){return x!==repo}).map(function(x){var r=ri[x];return r?{repo:x,url:r[1],stars:r[2]}:null}).filter(Boolean)
-      .sort(function(a,b){return b.stars-a.stars}).slice(0,5);
-    el.innerHTML=peers.length?('<div>'+peers.map(function(pp){return '<div class="peer"><a href="'+escA(pp.url)+'" target="_blank">'+escA(pp.repo)+'</a><span class="num">★ '+pp.stars+'</span></div>'}).join('')+'</div>'):'<div class="dim">暂无同类</div>';
-  }).catch(function(){el.innerHTML='<div class="dim">同类加载失败</div>'})
-}
-function closeDrawer(){$('#drawer').classList.remove('on');$('#scrim').classList.remove('on');document.body.style.overflow=''}
-$('#dd-close').onclick=closeDrawer;$('#scrim').onclick=closeDrawer;
-document.addEventListener('keydown',function(ev){if(ev.key==='Escape')closeDrawer()});
-$('#tb').addEventListener('click',function(ev){ if(ev.target.closest('a'))return; var tr=ev.target.closest('tr[data-repo]'); if(tr)openDrawer(tr.getAttribute('data-repo')) });
-function repoOfTr(tr){ var a=tr.querySelector('a'); if(!a)return null; var m=a.getAttribute('href')||''; var i=m.indexOf('github.com/'); if(i<0)return null; m=m.slice(i+11); if(m.indexOf('?')>=0)m=m.slice(0,m.indexOf('?')); while(m.slice(-1)==='/')m=m.slice(0,-1); return m }
-document.addEventListener('click',function(ev){ var tr=ev.target.closest('tr'); if(!tr||tr.closest('#tb'))return; if(ev.target.closest('a'))return; var rp=tr.getAttribute('data-repo')||repoOfTr(tr); if(rp)openDrawer(rp) });
+function repoOfTr(tr){ var a=tr.querySelector('a'); if(!a)return null; var m=a.getAttribute('href')||''; var i=m.indexOf('/p/'); if(i<0)return null; m=m.slice(i+3); if(m.indexOf('?')>=0)m=m.slice(0,m.indexOf('?')); while(m.slice(-1)==='/')m=m.slice(0,-1); return m }
+document.addEventListener('click',function(ev){ var tr=ev.target.closest('tr'); if(!tr||tr.closest('#tb'))return; if(ev.target.closest('a'))return; var rp=tr.getAttribute('data-repo')||repoOfTr(tr); if(rp)location.href='/p/'+rp+'/' });
 
 readHash();
 draw();

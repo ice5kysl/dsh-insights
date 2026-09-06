@@ -22,7 +22,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync, existsSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { page, mdToHtml, mdTitle, escHtml } from '../../lib/page.mjs'
-import { DATA, SITE, PATHS, loadPlugins, byFullName } from '../../lib/data.mjs'
+import { DATA, SITE, PATHS, loadPlugins, byFullName, readJsonl } from '../../lib/data.mjs'
 
 const ORIGIN = 'https://dsh-insights.com'
 
@@ -158,7 +158,15 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
 </script>`,
   })))
 
-  // ---- plugin letter pages (/p/<owner>/<repo>/) --------------------------
+  // ---- plugin detail pages (/p/<owner>/<repo>/) —— 完整插件详情页（信件为其中一节） --
+  const enrichAll = JSON.parse(read('enrich.json') || '[]')
+  const enBy = new Map(enrichAll.map((x) => [x.full_name, x]))
+  const plugAll = loadPlugins()
+  const plugByP = byFullName(plugAll)
+  const llmBy = byFullName(readJsonl(PATHS.llm))
+  const deepBy = byFullName(readJsonl(PATHS.deep))
+  const dlMap = (JSON.parse(read('downloads.json') || '{}').map) || {}
+  const dimLabel = { eng: '工程质量', docs: '文档完整性', discover: '可发现性', maint: '维护活跃' }
   const reportFiles = existsSync(PATHS.reportsDir)
     ? readdirSync(PATHS.reportsDir).filter((f) => f.endsWith('.md')) : []
   let pWrote = 0
@@ -167,12 +175,63 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
     if (!md) continue
     const [owner, repo] = f.replace(/\.md$/, '').split('__')
     if (!owner || !repo) continue
+    const full = `${owner}/${repo}`
+    const r = plugByP.get(full) || {}
+    const en = enBy.get(full) || {}
+    const llm = llmBy.get(full)
+    const deep = deepBy.get(full)
+    const dl = r.pkgName ? dlMap[r.pkgName]?.d ?? null : null
+    const peers = en.category
+      ? enrichAll.filter((x) => x.category === en.category && x.full_name !== full)
+          .sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 5) : []
+    const dimRows = Object.entries(dimLabel).map(([k, label]) => {
+      const v = en.dimScores?.[k]
+      return `<div class="dimrow"><span>${label}</span><div class="dimt"><i style="width:${v == null ? 0 : v}%"></i></div><b>${v == null ? '—' : v}</b></div>`
+    }).join('')
+    const dropsRows = (en.drops || []).map((d) => `<div class="scrow"><a style="cursor:default">${escHtml(d.label)}</a><span class="meta">${d.sev === 'fail' ? 'fail −20' : d.sev === 'major' ? '−10' : d.sev === 'minor' ? '−2' : '−5'}</span></div>`).join('')
+    const peersHtml = peers.map((p) => `<div class="scrow"><a href="/p/${escHtml(p.full_name)}/">${escHtml(p.full_name)}</a><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}</span></div>`).join('')
     const title = mdTitle(md, `${owner}/${repo}`)
-    const body = `<p class="crumb">致作者的信 · ${escHtml(owner)}/${escHtml(repo)}</p>
+    const body = `<p class="crumb">插件详情 · ${escHtml(full)}</p>
+<div style="display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:6px">
+  <img src="https://github.com/${escHtml(owner)}.png?size=80" width="56" height="56" style="border-radius:14px" alt="">
+  <div style="flex:1;min-width:260px">
+    <h1 class="pagetitle" style="margin-bottom:4px">${escHtml(repo)} <span style="color:var(--faint);font-weight:400;font-size:16px">${escHtml(owner)}</span></h1>
+    <p class="lede" style="margin-bottom:10px;max-width:none">${escHtml(r.description || '（无描述）')}</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      ${en.grade ? `<span class="grade ${en.grade}" style="font-size:15px;min-width:30px;padding:3px 10px">${en.grade}</span><b class="mono" style="font-size:15px">${en.score ?? '—'}/100</b>` : ''}
+      ${en.category ? `<span class="pill">${escHtml(en.category)}</span>` : ''}
+      <a class="wkbtn" href="https://github.com/${escHtml(full)}" target="_blank">GitHub ↗</a>
+      ${r.npm?.published ? `<a class="wkbtn" href="https://www.npmjs.com/package/${escHtml(r.pkgName)}" target="_blank">npm ${escHtml(r.npm.latest || '')} ↗</a>` : ''}
+      <a class="wkbtn" href="https://github.com/${escHtml(owner)}" target="_blank">作者主页 ↗</a>
+    </div>
+  </div>
+</div>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr))">
+  <div class="card"><b>★ ${(r.stars || 0).toLocaleString()}</b><p>GitHub stars</p></div>
+  <div class="card"><b>${r.forks || 0}</b><p>forks</p></div>
+  <div class="card"><b>${escHtml((r.created_at || '').slice(0, 10) || '—')}</b><p>创建于</p></div>
+  <div class="card"><b>${escHtml((r.pushed_at || '').slice(0, 10) || '—')}</b><p>最近 push</p></div>
+  <div class="card"><b>${dl != null ? dl.toLocaleString() + '/周' : '—'}</b><p>npm 周下载</p></div>
+</div>
+<div class="sc-cols" style="margin-top:16px">
+  <div class="card" style="margin:0"><b>评分维度（六维框架）</b>${dimRows}<p style="font-size:11px;color:var(--faint);margin-top:10px">安全卫生（深检抽样）与采用度只展示不进分；兼容性随 rc 雷达上线。口径见 <a href="/about/">关于·指标体系</a>。</p></div>
+  <div class="card" style="margin:0"><b>扣分明细（health-v4）</b>${dropsRows || '<p style="color:var(--ok);font-size:13px;margin-top:8px">无扣分项 ✓</p>'}${(en.missing || []).length ? `<p style="font-size:11px;color:var(--faint);margin-top:8px">未探测（不扣分）：${escHtml(en.missing.join('、'))}</p>` : ''}</div>
+</div>
+<div class="sc-cols" style="margin-top:14px">
+  <div class="card" style="margin:0"><b>收录 / 发布</b>
+    <p style="font-size:13px;margin-top:8px">${en.inAwesome ? '✅ awesome-dsh-plugin' : '— awesome 未收录'} · ${en.inImsai ? '✅ imsai' : '— imsai 未收录'}</p>
+    <p style="font-size:13px;color:var(--mut)">${r.npm?.published ? `npm <b>${escHtml(r.pkgName)}@${escHtml(r.npm.latest || '')}</b>（${r.npm.versions ?? '?'} 个版本 · 最近发布 ${escHtml((r.npm.latestTime || '').slice(0, 10))}）` : '未发布 npm（仅仓库安装）'}</p>
+    ${(r.npm?.published && r.version && r.npm.latest !== r.version) ? `<p style="font-size:12.5px;color:var(--warn)">⚠ 版本滞后：仓库 ${escHtml(r.version)} vs npm ${escHtml(r.npm.latest)}</p>` : ''}
+    <p style="font-size:12.5px;margin-top:10px"><b>徽章接入</b>：<code style="font-size:11.5px">https://dsh-insights.com/badge/${escHtml(full)}.svg</code> · <a href="/badge/">接入指南 ↗</a></p>
+  </div>
+  <div class="card" style="margin:0"><b>LLM 解读</b>${llm ? `<p style="font-size:13px;margin-top:8px">${escHtml(llm.summaryZh || llm.summaryEn || '—')}</p>${(llm.capabilityTags || []).length ? `<p style="margin-top:8px">${llm.capabilityTags.map((t) => `<span class="pill">${escHtml(t)}</span>`).join('')}</p>` : ''}${(llm.claims || []).length ? `<p style="font-size:12px;color:var(--mut);margin-top:8px">README 宣称：${escHtml(llm.claims.slice(0, 4).join('；'))}</p>` : ''}` : '<p style="color:var(--faint);font-size:13px;margin-top:8px">未标注 · 待 LLM 标注轮</p>'}${deep ? `<p style="font-size:12.5px;margin-top:10px;border-top:1px solid var(--line);padding-top:8px"><b>深检（写面/消毒，非审计）</b>：${escHtml(deep.verdict)} · 写面 ${deep.writeCount} 处 · ${deep.sanitized ? '有消毒器' : '无消毒器'}</p>` : ''}</div>
+</div>
+${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">同类插件（${escHtml(en.category)}）</h2><div class="card">${peersHtml}</div>` : ''}
+<h2 style="font-size:16px;margin:26px 0 8px">致作者的信</h2>
 <div class="article">${mdToHtml(md)}</div>`
     const html = page({
-      title, desc: `${owner}/${repo} 的健康体检与改进建议（DSH Insights 自动生成）`,
-      base: '../../../', here: null, body, og: { type: 'article' },
+      title: `${repo} · 插件详情 · DSH Insights`, desc: `${full} 的健康分、维度画像、扣分明细与改进建议（DSH Insights 自动生成）`,
+      base: '../../../', here: 'plugins/', body, og: { type: 'article', title: `${full} · ${en.grade || ''} ${en.score ?? ''}/100 · DSH Insights` },
     })
     // diff 驱动：内容不变不重写（全量 4k+ 页避免每日 churn）
     const fp = join(SITE, 'p', owner, repo, 'index.html')
