@@ -185,7 +185,7 @@ ${platRows}
   const byNew = [...authors].sort((x, y) => (y.firstCreated || '').localeCompare(x.firstCreated || '')).slice(0, 10)
   const byProlific = [...authors].sort((x, y) => y.plugins - x.plugins).slice(0, 10)
   const miniList = (rows, val) => rows.length
-    ? rows.map((a, i) => `<div class="listrow"><a href="https://github.com/${escHtml(a.owner)}" target="_blank" title="${escHtml(a.owner)}"><span style="color:var(--faint);font-family:var(--mono);font-size:11px;margin-right:6px">${i + 1}</span>${escHtml(a.owner)}</a><span class="meta">${val(a)}</span></div>`).join('')
+    ? rows.map((a, i) => `<div class="listrow"><a href="https://github.com/${escHtml(a.owner)}" target="_blank" title="${escHtml(a.owner)}"><span style="color:var(--faint);font-family:var(--mono);font-size:11px;margin-right:4px">${i + 1}</span><img src="https://github.com/${escHtml(a.owner)}.png?size=40" width="18" height="18" loading="lazy" alt="" style="border-radius:50%;vertical-align:-3px;margin-right:6px">${escHtml(a.owner)}</a><span class="meta">${val(a)}</span></div>`).join('')
     : '<p class="lede" style="margin:8px 0">数据积累中（较上一快照暂无变化）</p>'
   const boardCards = [
     ['★ 最多 star 榜', '作者全部插件 ★ 合计', miniList(byStars, (a) => `★${a.stars.toLocaleString()}`)],
@@ -263,7 +263,7 @@ ${platRows}
 </script>` : ''
   const authorRows = authors.map((a, i) => `<tr>
 <td class="num">${i + 1}</td>
-<td><a href="https://github.com/${escHtml(a.owner)}" target="_blank">${escHtml(a.owner)}</a></td>
+<td><a href="https://github.com/${escHtml(a.owner)}" target="_blank"><img src="https://github.com/${escHtml(a.owner)}.png?size=40" width="20" height="20" loading="lazy" alt="" style="border-radius:50%;vertical-align:-4px;margin-right:7px">${escHtml(a.owner)}</a></td>
 <td class="num" data-v="${a.plugins}">${a.plugins}</td>
 <td class="num" data-v="${a.ab}">${a.ab}</td>
 <td class="num" data-v="${a.avg}">${a.avg}</td>
@@ -279,7 +279,7 @@ ${platRows}
     base: '../', here: 'authors/',
     body: `<p class="crumb">Authors</p><h1 class="pagetitle">作者 · 生态里的重要人物</h1>
 <p class="lede">${ast.total ?? '—'} 位作者/组织构成这个生态：${ast.multi ?? '—'} 位多产（≥2 个插件），Top 10 作者产出占权威集 ${ast.top10Share ?? '—'}%。榜单按客观信号排序（★ 只作展示，不进质量分）。</p>
-<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${boardCards}</div>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">${boardCards}</div>
 ${graphSec}
 <h2 style="font-size:16px;margin:28px 0 8px">作者库（全量 ${authors.length}）</h2>
 <table class="ptable" id="atable" style="width:100%;margin-top:8px">

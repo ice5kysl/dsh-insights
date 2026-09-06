@@ -152,7 +152,7 @@ function main() {
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
     '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num"><span class="grade ' + esc(e.grade) + '">' + esc(e.grade) + '</span></td><td class="num mono">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('')
   const authorRows = (a.authors || []).slice(0, 10).map((au) =>
-    '<tr><td><a href="https://github.com/' + esc(au.owner) + '" target="_blank" title="' + esc(au.owner) + '">' + esc(au.owner) + '</a></td><td class="num mono">' + au.plugins + '</td><td class="num mono">' + au.ab + '</td><td class="num mono">★ ' + au.stars.toLocaleString() + '</td></tr>').join('')
+    '<tr><td><a href="https://github.com/' + esc(au.owner) + '" target="_blank" title="' + esc(au.owner) + '"><img src="https://github.com/' + esc(au.owner) + '.png?size=40" width="18" height="18" loading="lazy" alt="" style="border-radius:50%;vertical-align:-3px;margin-right:6px">' + esc(au.owner) + '</a></td><td class="num mono">' + au.plugins + '</td><td class="num mono">' + au.ab + '</td><td class="num mono">★ ' + au.stars.toLocaleString() + '</td></tr>').join('')
 
   const topPickHtml = (a.categories || []).slice(0, 6).map((c) => {
     const pick = byStars.find((p) => enMap.get(p.full_name)?.category === c.category)
