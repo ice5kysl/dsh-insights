@@ -57,7 +57,7 @@ function main() {
   // ---- weekly multi-line chart (inline SVG, hover handled client-side) --
   const wkGrade = t.byWeekGrades || {}
   const wkCand = a.coverage?.candidatesByWeek || {}
-  const wkPresent = [...new Set([...Object.keys(t.byWeek || {}), ...Object.keys(wkCand), ...Object.keys(wkGrade.A || {}), ...Object.keys(wkGrade.B || {})])].sort()
+  const wkPresent = [...new Set([...Object.keys(t.byWeek || {}), ...Object.keys(wkCand), ...Object.keys(wkGrade.A || {}), ...Object.keys(wkGrade.B || {}), ...Object.keys(wkGrade.S || {})])].sort()
   // 连续周轴：以最近一个有数据的周一为终点，向前补零 20 周（UTC，P2-13）
   const wkKeys = []
   if (wkPresent.length) {
@@ -70,6 +70,7 @@ function main() {
   }
   const SERIES = [
     { key: 'cand', label: '候选新增', color: '#a1a1aa', data: wkCand },
+    { key: 'gs', label: 'S 级新增', color: '#7c3aed', data: wkGrade.S || {} },
     { key: 'auth', label: '权威集新增', color: 'var(--ink)', data: t.byWeek || {} },
     { key: 'ga', label: 'A 级新增', color: 'var(--ok)', data: wkGrade.A || {} },
     { key: 'gb', label: 'B 级新增', color: 'var(--accent)', data: wkGrade.B || {} },
@@ -146,7 +147,7 @@ function main() {
   const bucketsTxt = (cov.invalidBuckets || []).slice(0, 5).map((b) => `${esc(b.reason)} ${b.count}`).join(' · ')
   const funnelHtml = uni ? [
     bar('topic 宇宙', uni, uni, null, `topic:dsh-plugin 全量（${uniAt} 实测）· 官方打标即入、零门槛`),
-    bar('多源候选', cov.candidates || 0, uni, null, 'topic 分片全量抓取 + 策展目录 + npm 映射 · 去重'),
+    bar('多源候选', cov.candidates || 0, uni, null, 'topic 分片全量 ∪ 策展目录 ∪ npm 映射（含未打 dsh-plugin topic 的仓库，故候选数可超过 topic 宇宙）· 去重'),
     bar('完成校验', cov.validated || 0, uni, null, 'manifest 门禁逐条核验（断点续跑）'),
     bar('权威集 ✓', cov.authoritative || 0, uni, 'var(--ok)', '非 fork/归档 + 声明 dsh.bundle.patch 且 patch 已提交'),
   ].join('') : ''
@@ -254,7 +255,7 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .sec-h h2{margin:0;font-size:18px;font-weight:650;letter-spacing:-.02em}
 .sec-h .sub{margin:0;color:var(--faint);font-size:12.5px}
 .sec-n{font:600 11px/1 var(--mono);color:var(--faint);letter-spacing:.06em}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
 .panel h3{margin:0;font-size:13.5px;font-weight:650}
 .panel .p-sub{color:var(--faint);font-size:11.5px;margin:3px 0 14px}
@@ -302,7 +303,8 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 /* ---- tables ---- */
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 .cards table th,.cards table td{white-space:nowrap}
-.cards .ptable td:first-child{max-width:260px;overflow:hidden;text-overflow:ellipsis}
+.cards .ptable td:first-child{max-width:220px;overflow:hidden;text-overflow:ellipsis}
+.cards .ptable td:nth-child(2).pick-cat{max-width:96px;overflow:hidden;text-overflow:ellipsis;color:var(--mut)}
 .ptable th,.ptable td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
 .ptable th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;user-select:none;background:var(--card);position:sticky;top:0;z-index:1}
 .ptable th:hover{color:var(--ink)}
@@ -391,7 +393,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 <body>
 <div class="topbar"><div class="wrap">
   <a class="brand" href="#top"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><rect x="16" y="34" width="8" height="14" rx="2" fill="var(--bg)"/><rect x="28" y="25" width="8" height="23" rx="2" fill="var(--bg)"/><rect x="40" y="14" width="8" height="34" rx="2" fill="var(--accent)"/></svg></span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
-  <nav class="nav"><a href="./" class="here">仪表盘</a><a href="dynamics/">动态</a><a href="scenarios/">场景</a><a href="authors/">作者</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="badge/">徽章</a><a href="about/">关于</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <nav class="nav"><a href="./" class="here">仪表盘</a><a href="plugins/">插件库</a><a href="dynamics/">动态</a><a href="scenarios/">场景</a><a href="authors/">作者</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="badge/">徽章</a><a href="about/">关于</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <div class="subnav"><div class="wrap">
   <a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a>
@@ -420,7 +422,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   ${funnelHtml ? `<div class="panel" style="margin-bottom:14px">
     <div class="p-h"><h3>覆盖漏斗 · ${cov.authoritative} 与 ${uni.toLocaleString()} 的关系</h3><span class="p-sub">分桶复核 ${invalidTotal}：${bucketsTxt}</span></div>
     ${funnelHtml}
-    <p class="p-sub" style="margin-top:10px">topic 是「打标即入」的原始宇宙——含蹭标、无关仓库、fork、monorepo 子路径与已删除仓库；权威集是 manifest 门禁逐条核验后的可信子集，<b>校验按 API 预算滚动推进（断点续跑），权威集随快照持续扩大</b>。纯 tarball 分发等边界形态进分桶人工复核。口径详见 <a href="about/">方法论</a>。</p>
+    <p class="p-sub" style="margin-top:10px">topic 是「打标即入」的原始宇宙——含蹭标、无关仓库、fork、monorepo 子路径与已删除仓库；权威集是 manifest 门禁逐条核验后的可信子集，<b>校验按 API 预算滚动推进（断点续跑），权威集随快照持续扩大</b>；候选池 = topic ∪ 策展 ∪ npm，含未打 topic 的仓库，故可能大于 topic 宇宙。纯 tarball 分发等边界形态进分桶人工复核。口径详见 <a href="about/">方法论</a>。</p>
   </div>` : ''}
   <div class="panel" style="margin-bottom:14px">
     <div class="p-h"><h3>生态新增 · 按周</h3><span class="p-sub">按仓库创建时间归属到周一 · 最近 ${wkRows.length} 周 · ${legendHtml}</span></div>
@@ -695,7 +697,7 @@ $('#prev').onclick=()=>{page--;draw()};$('#next').onclick=()=>{page++;draw()};
 // ---- plugin detail drawer ----
 function escA(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 var detCache=null;
-function detMap(){ if(!detCache){ detCache=fetch('plugins-detail.json').then(function(r){return r.ok?r.json():[]}).then(function(arr){var m={};arr.forEach(function(d){m[d.full_name]=d});return m}).catch(function(){return {}}) } return detCache }
+function detMap(){ if(!detCache){ detCache=fetch('/plugins-detail.json').then(function(r){return r.ok?r.json():[]}).then(function(arr){var m={};arr.forEach(function(d){m[d.full_name]=d});return m}).catch(function(){return {}}) } return detCache }
 function ddK(l,v){return '<div class="dd-kpi"><b>'+escA(v)+'</b><span>'+l+'</span></div>'}
 function ddRow(k,v){return '<tr><td>'+k+'</td><td>'+v+'</td></tr>'}
 function ddFlag(ok,l){return '<span class="flag"'+(ok?'':' style="opacity:.42"')+'><b>'+(ok?'✓':'·')+'</b> '+escA(l)+'</span>'}
@@ -746,7 +748,7 @@ var histCache={};
 var rowsBy=null;
 function rowsIndex(){ if(!rowsBy){ rowsBy={}; ROWS.forEach(function(r){ rowsBy[r[0]]=r }) } return rowsBy }
 var catsCache=null;
-function catsMap(){ if(!catsCache){ catsCache=fetch('plugins-cats.json').then(function(r){return r.ok?r.json():null}) } return catsCache }
+function catsMap(){ if(!catsCache){ catsCache=fetch('/plugins-cats.json').then(function(r){return r.ok?r.json():null}) } return catsCache }
 function loadPeers(repo,d){
   var el=$('#dd-peers'); if(!el) return;
   if(!d.category){ el.innerHTML='<div class="dim">暂无分类</div>'; return }
@@ -771,6 +773,27 @@ draw();
 </html>`
   mkdirSync(SITE, { recursive: true })
   writeFileSync(OUT, html)
+
+  // ---- /plugins/ 独立插件库页：复用同一 head/导航/browse/script（表格与抽屉零拷贝） ----
+  const headEnd = html.indexOf('</head>') + 7
+  const head = html.slice(0, headEnd)
+    .replace('<title>DSH Insights · DeepSeek Harness 全景观察站</title>', '<title>插件库 · DSH Insights</title>')
+    .replace('</head>', '<style>section[id]{scroll-margin-top:70px}</style>\n</head>')
+  const tbStart = html.indexOf('<div class="topbar">')
+  const tbEnd = html.indexOf('<div class="subnav">')
+  const topbar = html.slice(tbStart, tbEnd)
+    .replace('href="./" class="here">仪表盘', 'href="../">仪表盘')
+    .replace('href="plugins/">插件库', 'href="./" class="here">插件库')
+    .replace(/href="(dynamics|scenarios|authors|weekly|data|badge|about)\//g, 'href="../$1/')
+  const browseStart = html.indexOf('<section class="sec" id="browse">')
+  const scriptStart = html.lastIndexOf('<script>')
+  // browse 段 + footer + </main> + scrim + drawer（抽屉标记必须带上，否则抽屉代码空引用）
+  const browse = html.slice(browseStart, scriptStart)
+  const script = html.slice(scriptStart, html.indexOf('</script>', scriptStart) + 9)
+  const pluginsHtml = head + '\n<body>\n' + topbar + '\n<main class="wrap">' + browse + script + '\n</body>\n</html>'
+  mkdirSync(join(SITE, 'plugins'), { recursive: true })
+  writeFileSync(join(SITE, 'plugins', 'index.html'), pluginsHtml)
+  console.log('[site] + plugins/index.html（独立插件库页）')
   // ---- per-plugin detail file for the drawer (keeps index.html light) ----
   const detail = plugins.map((r) => ({
     full_name: r.full_name,
