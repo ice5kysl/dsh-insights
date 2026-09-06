@@ -190,6 +190,8 @@ function analyze(rows) {
   const topStars = rows.slice().sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 10)
     .map((r) => ({ repo: r.full_name, stars: r.stars, published: Boolean(r.npm?.published), zh: Boolean(r.metrics?.hasZhDocs) }))
   const active = rows.filter((r) => r.metrics?.active30).length
+  const NOW = Date.now()
+  const active7 = rows.filter((r) => r.pushed_at && (NOW - new Date(r.pushed_at).getTime()) < 7 * 86400000).length
   const ageOk = rows.filter((r) => r.metrics?.ageGate1).length
   const staleTop = rows
     .filter((r) => r.npm?.published && r.version && r.npm.latest && r.npm.latest !== r.version)
@@ -207,6 +209,7 @@ function analyze(rows) {
     generatedAt: new Date().toISOString(),
     totals: {
       authoritative: n,
+      active7, active7Pct: pct(active7, n),
       active30: active, active30Pct: pct(active, n),
       ageGate1: ageOk, ageGate1Pct: pct(ageOk, n),
       byMonth,
@@ -243,7 +246,7 @@ function render(a) {
   L.push('')
   L.push('## 总览')
   L.push(`- 权威集规模：**${a.totals.authoritative}**`)
-  L.push(`- 近 30 天活跃：${a.totals.active30}（${a.totals.active30Pct}%）`)
+  L.push(`- 近 7 天活跃：${a.totals.active7}（${a.totals.active7Pct}%）· 近 30 天：${a.totals.active30}（${a.totals.active30Pct}%）`)
   L.push(`- 仓库年龄 ≥ 1 天（可过收录门禁）：${a.totals.ageGate1}（${a.totals.ageGate1Pct}%）`)
   L.push('')
   L.push('## 发布与文档')

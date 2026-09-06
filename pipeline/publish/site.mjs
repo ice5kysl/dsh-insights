@@ -35,7 +35,7 @@ function main() {
   const rows = plugins.map((r) => [
     r.full_name, r.html_url || '', r.stars || 0, (r.created_at || '').slice(0, 10),
     r.npm?.published ? (r.npm.latest || '✓') : '', r.metrics?.hasZhDocs ? 1 : 0,
-    r.files?.libIndex && r.files?.libClient ? 1 : 0, r.metrics?.active30 ? 1 : 0,
+    r.files?.libIndex && r.files?.libClient ? 1 : 0, (r.pushed_at && (Date.now() - new Date(r.pushed_at).getTime()) < 7 * 86400000) ? 1 : 0,
     (r.description || '').slice(0, 110),
     enMap.get(r.full_name)?.grade || '',
   ])
@@ -381,7 +381,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="stats">
     ${stat((d.publishPct != null ? d.publishPct + '%' : '—'), 'npm 发布率', (pub.published ?? 0) + ' 已发布 · ' + (pub.stale ?? 0) + ' 滞后')}
     ${stat((d.zhPct != null ? d.zhPct + '%' : '—'), 'i18n 双语（中/英检出）', (doc.both ?? 0) + ' 份双语文档')}
-    ${stat((t.active30Pct ?? 0) + '%', '近 30 天活跃', '生态活跃信号')}
+    ${stat((t.active7Pct ?? 0) + '%', '近 7 天活跃', '以周为基准的生态活跃信号 · 30 天 ' + (t.active30Pct ?? 0) + '%')}
     ${stat(a.quality?.avgScore ?? '—', '平均质量分', 'A+B ' + (a.quality?.gradePct ?? 0) + '%')}
     ${stat(a.channels ? a.channels.coveredPct + '%' : '—', 'curated 收录率', (a.channels?.covered ?? 0) + ' 已进 awesome/imsai')}
     ${stat(doc.none ?? 0, '无 README', '建议补充基本文档')}
@@ -475,7 +475,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
     <button class="chip on" data-npm="">全部 npm</button><button class="chip" data-npm="pub">已发布</button><button class="chip" data-npm="unpub">未发布</button><button class="chip" data-npm="stale">版本滞后</button>
     <button class="chip" data-zh="0">i18n·中英</button>
     <button class="chip gchip" data-gr="A">A</button><button class="chip gchip" data-gr="B">B</button><button class="chip gchip" data-gr="C">C</button><button class="chip gchip" data-gr="D">D</button>
-    <button class="chip" data-active="1">近 30 天活跃</button>
+    <button class="chip" data-active="1">近 7 天活跃</button>
     <details class="cols"><summary>列 ▾</summary><div class="menu">
       <label><input type="checkbox" checked data-col="created">创建日期</label>
       <label><input type="checkbox" checked data-col="zh">i18n·中英</label>

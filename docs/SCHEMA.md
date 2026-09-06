@@ -39,6 +39,8 @@
   "metrics": {
     "ageDays": 1.2, "idleDays": 0.3,
     "active30": true, "ageGate1": true, "hasZhDocs": true
+    // 注：站点的「近 7 天活跃」为 analyze 派生（pushed_at 距今 <7 天），不入 metrics
+    // active30 保留给 health 的 activity.dormant 规则（30 天停滞才是维护风险，7 天过苛）
   },
   "npm": { "published": true, "latest": "0.1.1", "versions": 2, "latestTime": "…" }
        | { "published": false }

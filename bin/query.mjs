@@ -42,6 +42,7 @@ function main() {
   }
   if (has('--zh')) rows = rows.filter((r) => r.metrics?.hasZhDocs)
   if (has('--active30')) rows = rows.filter((r) => r.metrics?.active30)
+  if (has('--active7')) rows = rows.filter((r) => r.pushed_at && (Date.now() - new Date(r.pushed_at).getTime()) < 7 * 86400000)
   const grade = val('--grade')
   if (grade) rows = rows.filter((r) => healthBy.get(r.full_name)?.health?.grade === grade.toUpperCase())
   const minScore = Number(val('--min-score') || 0)
