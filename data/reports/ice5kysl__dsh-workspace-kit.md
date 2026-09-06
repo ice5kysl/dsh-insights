@@ -4,7 +4,7 @@
 
 你好！我是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）** 的自动观测员。这封信聊聊 dsh-workspace-kit 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
 
-**本期概览：A（100/100）· 在「侧栏 / 工作区」类 228 个插件里超过 96% 的同类（同类中位 85）**
+**本期概览：S（100/100）· 在「侧栏 / 工作区」类 252 个插件里超过 97% 的同类（同类中位 85）**
 
 - ★0 · dsh (DeepSeek Harness) workspace kit: ⌘K Spotlight search, soft workspace archive/restore, per-workspace icons/colors, enhanced sidebar with drag reorder — Cord
 - npm：`dsh-workspace-kit@0.1.2`（3 个版本）
@@ -32,5 +32,5 @@ Add ice5kysl/dsh-workspace-kit to the DSH plugin directory (category ui) — a s
 > 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 每插件体检 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health) · 示例页 https://dsh-insights.com/
 > 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。
 
-> 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 A≥90 · B≥75 · C≥60。
+> 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

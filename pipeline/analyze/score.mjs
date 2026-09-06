@@ -25,7 +25,7 @@
 import { pathToFileURL } from 'node:url'
 import { PATHS, readJsonl, writeJson } from '../../lib/data.mjs'
 
-export const RULE_VERSION = 'health-v3'
+export const RULE_VERSION = 'health-v4'
 
 /**
  * 评估指标体系 v1（docs/SCHEMA.md §health 有完整定义与说明）。
@@ -173,7 +173,7 @@ export function scoreOne(r) {
 
   const penalty = drops.reduce((s, d) => s + (SEV_PENALTY[d.sev] || 5), 0)
   const score = Math.max(0, 100 - penalty)
-  const grade = score >= 90 ? 'A' : score >= 75 ? 'B' : score >= 60 ? 'C' : 'D'
+  const grade = score >= 95 ? 'S' : score >= 90 ? 'A' : score >= 75 ? 'B' : score >= 60 ? 'C' : 'D'
 
   const byDim = {}
   const dimPenalty = {}
@@ -201,7 +201,7 @@ export function scoreOne(r) {
 
 export function scoreAll(rows) {
   const out = rows.map((r) => ({ ...r, health: scoreOne(r) }))
-  const grades = { A: 0, B: 0, C: 0, D: 0 }
+  const grades = { S: 0, A: 0, B: 0, C: 0, D: 0 }
   let sum = 0
   const dropCounter = {}
   for (const r of out) {

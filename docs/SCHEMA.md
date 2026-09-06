@@ -99,7 +99,7 @@
 ```jsonc
 "health": {
   "score": 87,                  // 0–100，从 100 扣分，clamp ≥0
-  "grade": "B",                 // A≥90 · B≥75 · C≥60 · D<60
+  "grade": "B",                 // S≥95 · A≥90 · B≥75 · C≥60 · D<60
   "ruleVersion": "health-v1",
   "at": "ISO…",
   "drops": [                    // 每条扣分都带证据
@@ -113,6 +113,7 @@
 **规则（RULE_VERSION=health-v3；升版必须在此加 changelog）**
 
 Changelog：
+- health-v4 (2026-09-06)：新增 **S 级（≥95）**——v3 下 A(≥90) 占 28% 仍偏宽，S 档（实测 10.0%）给真正卓越的插件出头空间；阈值成为 S≥95 · A≥90 · B≥75 · C≥60 · D<60。
 - health-v3 (2026-09-06)：**区分度重构**——扣分从一刀切 −5/−20 改为四档（fail −20 / major −10 / warn −5 / minor −2）；`npm.unpublished` 升 major（无法一键安装是核心可用性）；`not-lib-main`/`no-files-whitelist` 降 minor；新增 7 条：`docs.no-description`、`repo.sparse-topics`、`npm.single-release`、`npm.release-stale`（>90 天）、`eng.no-tests`、`eng.no-ci`、`docs.no-docs-dir`、`docs.tiny-readme`（<400B）。树探测信号（tests/CI/docsDir/readmeBytes）随 backfill 逐步生效（缺失不扣分）。背景：v2 分布 A+B 99.6% 无区分度。
 - health-v2 (2026-09-05)：`activity.too-young` 收窄——仅当插件 npm 发布版本 <2 时生效（有 ≥2 个发布版本 = 有存活证据，常见于仓库重建/迁移；刚建仓且只发 1 版仍警告）。
 

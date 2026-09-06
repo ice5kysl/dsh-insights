@@ -150,7 +150,7 @@ function analyze(rows) {
   }
   const authors = [...authorAgg.values()].map((a0) => ({
     owner: a0.owner, plugins: a0.plugins, stars: a0.stars, grades: a0.grades,
-    ab: (a0.grades.A || 0) + (a0.grades.B || 0),
+    ab: (a0.grades.S || 0) + (a0.grades.A || 0) + (a0.grades.B || 0),
     npm: a0.npm, covered: a0.covered, lastPush: (a0.lastPush || '').slice(0, 10),
     firstCreated: (a0.firstCreated || '').slice(0, 10),
     delta: a0.delta,
@@ -278,7 +278,7 @@ function render(a) {
   }
   L.push('## 质量评分（启发式）')
   L.push(`- 平均分 ${a.quality.avgScore} · A+B 占比 ${a.quality.gradePct}%`)
-  L.push(`- A ${a.quality.grades.A} · B ${a.quality.grades.B} · C ${a.quality.grades.C} · D ${a.quality.grades.D}`)
+  L.push(`- S ${a.quality.grades.S ?? 0} · A ${a.quality.grades.A} · B ${a.quality.grades.B} · C ${a.quality.grades.C} · D ${a.quality.grades.D}`)
   L.push('')
   L.push('## 功能分类（启发式 Top 12）')
   for (const c of a.categories) L.push(`- ${c.category}：${c.count}`)

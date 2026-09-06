@@ -139,7 +139,7 @@ function main() {
     bar('权威集 ✓', cov.authoritative || 0, uni, 'var(--ok)', '非 fork/归档 + 声明 dsh.bundle.patch 且 patch 已提交'),
   ].join('') : ''
 
-  const gCol = { A: 'var(--ok)', B: 'var(--accent)', C: 'var(--warn)', D: 'var(--err)' }
+  const gCol = { S: '#7c3aed', A: 'var(--ok)', B: 'var(--accent)', C: 'var(--warn)', D: 'var(--err)' }
   const gMax = Math.max(1, ...Object.keys(gCol).map((k) => a.quality?.grades?.[k] || 0))
   const gradesHtml = Object.keys(gCol).map((k) => bar(k, a.quality?.grades?.[k] || 0, gMax, gCol[k])).join('')
   const catsMax = Math.max(1, ...(a.categories || []).map((x) => x.count))
@@ -298,6 +298,7 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}
 .tbl-wrap{overflow:auto;max-height:600px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
 .tbl-wrap .ptable th{top:0}
 .grade{display:inline-block;min-width:22px;text-align:center;font:700 11px/1.5 var(--mono);border-radius:5px;padding:1px 6px;border:1px solid}
+.grade.S{color:#7c3aed;background:color-mix(in srgb,#7c3aed 9%,transparent);border-color:color-mix(in srgb,#7c3aed 32%,transparent)}
 .grade.A{color:var(--ok);background:color-mix(in srgb,var(--ok) 9%,transparent);border-color:color-mix(in srgb,var(--ok) 32%,transparent)}
 .grade.B{color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,transparent);border-color:color-mix(in srgb,var(--accent) 32%,transparent)}
 .grade.C{color:var(--warn);background:color-mix(in srgb,var(--warn) 10%,transparent);border-color:color-mix(in srgb,var(--warn) 35%,transparent)}
@@ -479,7 +480,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
     <input type="text" id="q" placeholder="搜索仓库名 / 描述…" autocomplete="off">
     <button class="chip on" data-npm="">全部 npm</button><button class="chip" data-npm="pub">已发布</button><button class="chip" data-npm="unpub">未发布</button><button class="chip" data-npm="stale">版本滞后</button>
     <button class="chip" data-zh="0">i18n·中英</button>
-    <button class="chip gchip" data-gr="A">A</button><button class="chip gchip" data-gr="B">B</button><button class="chip gchip" data-gr="C">C</button><button class="chip gchip" data-gr="D">D</button>
+    <button class="chip gchip" data-gr="S">S</button><button class="chip gchip" data-gr="A">A</button><button class="chip gchip" data-gr="B">B</button><button class="chip gchip" data-gr="C">C</button><button class="chip gchip" data-gr="D">D</button>
     <button class="chip" data-active="1">近 7 天活跃</button>
     <details class="cols"><summary>列 ▾</summary><div class="menu">
       <label><input type="checkbox" checked data-col="created">创建日期</label>
@@ -704,11 +705,11 @@ function openDrawer(repo){
       +'<div class="dd-sec"><h3>收录 / 下载</h3>'+(d.channels?(d.channels.aw?'<span class="flag"><b>✓</b> awesome-dsh-plugin</span>':'')+(d.channels.im?'<span class="flag"><b>✓</b> imsai</span>':'')+(!d.channels.aw&&!d.channels.im?'<span class="flag">curated 未收录</span>':''):'')+(d.weekly!=null?'<span class="flag"><b>⬇</b> 周下载 '+escA(d.weekly)+'</span>':'')+'</div>'
       +'<div class="dd-sec"><h3>LLM 解读</h3>'+(d.llm?('<div class="dd-desc">'+escA(d.llm.summaryZh||d.llm.summaryEn||'—')+'</div>'+(d.llm.category?'<div class="chipset" style="margin-top:8px"><span>'+escA(d.llm.category)+'</span></div>':'')+(d.llm.capabilityTags&&d.llm.capabilityTags.length?'<div class="chipset" style="margin-top:6px">'+d.llm.capabilityTags.map(function(t){return '<span>'+escA(t)+'</span>'}).join('')+'</div>':'')+(d.llm.claims&&d.llm.claims.length?'<div class="dd-desc" style="margin-top:8px;color:var(--mut)">宣称：'+d.llm.claims.map(escA).join(' · ')+'</div>':'')):'<div class="dim">未标注 · 待 LLM 标注轮</div>')+'</div>'
       +flags
-      +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='A'?'var(--ok)':d.grade==='B'?'var(--accent)':d.grade==='C'?'var(--warn)':'var(--err)')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div>'+(function(){var DM=[['eng','工程质量'],['docs','文档完整性'],['discover','可发现性'],['maint','维护活跃']];var rows=DM.map(function(dm){var v=(d.dims&&d.dims[dm[0]]!=null)?d.dims[dm[0]]:null;return '<div class="dimrow"><span>'+dm[1]+'</span><div class="dimt"><i style="width:'+(v==null?0:v)+'%"></i></div><b>'+(v==null?'—':v)+'</b></div>'}).join('');return '<div style="margin-top:10px">'+rows+'</div><div class="dim" style="font-size:11px;margin-top:6px">安全卫生（深检抽样）与采用度（★/下载/收录）为展示信号、不进总分；兼容性维度随 rc 雷达（M2）上线。</div>'})()+'</div>'
+      +'<div class="dd-sec"><h3>质量评分（启发式）</h3><div class="qual"><div class="big" style="color:'+(d.grade==='S'?'#7c3aed':d.grade==='A'?'var(--ok)':d.grade==='B'?'var(--accent)':d.grade==='C'?'var(--warn)':'var(--err)')+'">'+escA(d.grade||'—')+'</div><div class="meta">'+escA(d.score!=null?d.score+' / 100':'未评分')+'<br>分类：'+escA(d.category||'其它')+'</div></div><div class="qualbar"><i style="width:'+escA(d.score!=null?d.score:0)+'%"></i></div>'+(function(){var DM=[['eng','工程质量'],['docs','文档完整性'],['discover','可发现性'],['maint','维护活跃']];var rows=DM.map(function(dm){var v=(d.dims&&d.dims[dm[0]]!=null)?d.dims[dm[0]]:null;return '<div class="dimrow"><span>'+dm[1]+'</span><div class="dimt"><i style="width:'+(v==null?0:v)+'%"></i></div><b>'+(v==null?'—':v)+'</b></div>'}).join('');return '<div style="margin-top:10px">'+rows+'</div><div class="dim" style="font-size:11px;margin-top:6px">安全卫生（深检抽样）与采用度（★/下载/收录）为展示信号、不进总分；兼容性维度随 rc 雷达（M2）上线。</div>'})()+'</div>'
   +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3><div id="dd-peers" class="loading">计算中…</div></div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
       +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
     loadHist(repo,d);
-    if(d.parts&&d.parts.length){ var li=d.parts.map(function(p){return '<li><span>'+escA(p.label)+'</span><b>'+escA(p.v)+'</b></li>'}).join(''); b.insertAdjacentHTML('beforeend','<div class="dd-sec"><h3>扣分明细</h3><ul class="score" style="margin:0;padding:0;list-style:none">'+li+'</ul><div class="dim" style="font-size:11px;margin-top:6px">100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2（A≥90 · B≥75 · C≥60）。未列出的项表示未扣分；探测不到的数据不虚构不扣分。</div></div>') }
+    if(d.parts&&d.parts.length){ var li=d.parts.map(function(p){return '<li><span>'+escA(p.label)+'</span><b>'+escA(p.v)+'</b></li>'}).join(''); b.insertAdjacentHTML('beforeend','<div class="dd-sec"><h3>扣分明细</h3><ul class="score" style="margin:0;padding:0;list-style:none">'+li+'</ul><div class="dim" style="font-size:11px;margin-top:6px">100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2（S≥95 · A≥90 · B≥75 · C≥60）。未列出的项表示未扣分；探测不到的数据不虚构不扣分。</div></div>') }
     loadPeers(repo,d);
   })
 }

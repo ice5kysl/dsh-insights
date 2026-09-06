@@ -20,7 +20,7 @@ import { PATHS, SITE } from '../../lib/data.mjs'
 const SRC = PATHS.insights
 const OUT_DIR = join(SITE, 'badge')
 
-const COLOR = { A: '#15803d', B: '#2d66f7', C: '#b45309', D: '#b91c1c' }
+const COLOR = { S: '#6d28d9', A: '#15803d', B: '#2d66f7', C: '#b45309', D: '#b91c1c' }
 const esc = escHtml
 
 function svg(label, value, color) {
@@ -53,7 +53,7 @@ function main() {
     const color = COLOR[h.grade] || '#6b7280'
     const sub = join(OUT_DIR, owner)
     mkdirSync(sub, { recursive: true })
-    writeFileSync(join(sub, `${repo}.svg`), svg('dsh health', `${h.grade} · ${h.score}/100`, color))
+    writeFileSync(join(sub, `${repo}.svg`), svg('DSH Insights', `${h.grade} · ${h.score}/100`, color))
     n++
   }
   console.log(`[badges] ${n} svg badges → site/badge/ (rule ${doc.ruleVersion})`)

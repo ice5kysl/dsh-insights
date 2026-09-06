@@ -19,7 +19,7 @@ import { join } from 'node:path'
 
 const INSIGHTS = join(import.meta.dirname, '..', 'data', 'insights.json')
 
-const COLOR = { A: '#15803d', B: '#2d66f7', C: '#b45309', D: '#b91c1c' }
+const COLOR = { S: '#6d28d9', A: '#15803d', B: '#2d66f7', C: '#b45309', D: '#b91c1c' }
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
 function main() {
