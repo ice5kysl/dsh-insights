@@ -22,14 +22,15 @@
  * @module dsh-insights/stage-15
  */
 
-import { readFileSync, writeFileSync, appendFileSync, mkdirSync, existsSync } from 'node:fs'
+import { readFileSync, appendFileSync, mkdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { sleep } from '../../lib/api.mjs'
+import { DATA, PATHS, readJson } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const SRC = join(ROOT, 'data', 'insights.json')
-const OUT = join(ROOT, 'data', 'llm.jsonl')
-const DONE = join(ROOT, 'data', 'state', 'llm.done')
+const SRC = PATHS.insights
+const OUT = PATHS.llm
+const DONE = PATHS.llmDone
 
 const key = process.env.DEEPSEEK_API_KEY || process.env.LLM_API_KEY || ''
 const base = process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com'
@@ -40,10 +41,6 @@ const batch = Math.max(1, Number(process.env.LLM_BATCH || 10))
 const SYSTEM = `你是 dsh 插件生态分析助手。给每个 DeepSeek Harness 插件输出结构化 JSON，只做客观描述与能力提取，不做质量评价。
 输出 JSON 格式（无 markdown 包裹）：
 {"category":"主分类(英文kebab)","capabilityTags":["短标签,英文,<=8个"],"commands":["README里出现的命令/动作,没有则[]"],"summaryZh":"<=40字中文","summaryEn":"<=40词英文","claims":["README中可验证的具体宣称,如'46个工具','支持X协议';没有则[]"],"confidence":0-1}`
-
-function readJson(f) {
-  try { return JSON.parse(readFileSync(f, 'utf8')) } catch { return null }
-}
 
 function extractJson(text) {
   const m = String(text).match(/\{[\s\S]*\}/)
@@ -94,7 +91,7 @@ async function main() {
   const todo = plugins.filter((p) => !done.has(p.full_name) && (shards <= 1 || h(p.full_name) % shards === shard))
   const limit = maxRows > 0 ? Math.min(maxRows, todo.length) : todo.length
   console.log(`[llm] shard ${shard}/${shards}: ${todo.length} pending → tagging ${limit} (model=${model}, batch=${batch})`)
-  mkdirSync(join(ROOT, 'data', 'state'), { recursive: true })
+  mkdirSync(join(DATA, 'state'), { recursive: true })
 
   let tagged = 0
   let failed = 0
@@ -108,7 +105,7 @@ async function main() {
         try { text = await callLLM(chunk) }
         catch (e) {
           console.error(`[llm] chunk attempt ${attempt}/3 failed: ${String(e?.message || e).slice(0, 140)} — backoff ${30 * attempt}s`)
-          if (attempt < 3) await new Promise((r) => setTimeout(r, 30000 * attempt))
+          if (attempt < 3) await sleep(30000 * attempt)
         }
       }
       if (text === null) {
@@ -142,7 +139,7 @@ async function main() {
         batchOk++
       })
       if (lines.length < chunk.length) console.warn(`[llm] got ${lines.length} JSON lines for ${chunk.length} rows`)
-      await new Promise((r) => setTimeout(r, 500))
+      await sleep(500)
     }
   }
   await run()

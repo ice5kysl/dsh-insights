@@ -6,11 +6,10 @@
  * @module dsh-insights/stage-5
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { writeFileSync } from 'node:fs'
+import { PATHS, readJsonl } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const SRC = join(ROOT, 'data', 'plugins.jsonl')
+const SRC = PATHS.plugins
 
 const esc = (v) => {
   const s = v == null ? '' : String(v)
@@ -18,7 +17,7 @@ const esc = (v) => {
 }
 
 function main() {
-  const rows = readFileSync(SRC, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
+  const rows = readJsonl(SRC)
   const cols = [
     'full_name', 'html_url', 'stars', 'forks', 'created_at', 'pushed_at',
     'license', 'pkgName', 'version', 'source',
@@ -40,7 +39,7 @@ function main() {
     const topics = (r.topics || []).join('|')
     lines.push(cols.map((c) => esc(c === 'topics' ? topics : c === 'description' ? r.description : get(r, c))).join(','))
   }
-  writeFileSync(join(ROOT, 'data', 'plugins.csv'), lines.join('\n') + '\n')
+  writeFileSync(PATHS.pluginsCsv, lines.join('\n') + '\n')
   console.log(`[export] ${rows.length} rows → data/plugins.csv`)
 }
 

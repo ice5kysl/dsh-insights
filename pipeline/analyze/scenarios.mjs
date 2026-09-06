@@ -18,14 +18,12 @@
  * @module dsh-insights/stage-16
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { PATHS, readJsonl, readJson, writeJson, byFullName } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const LLM = join(ROOT, 'data', 'llm.jsonl')
-const INS = join(ROOT, 'data', 'insights.json')
-const OUT = join(ROOT, 'data', 'scenarios.json')
+const LLM = PATHS.llm
+const INS = PATHS.insights
+const OUT = PATHS.scenarios
 
 /** scenario registry v1 — id, zh/en name, match words (llm tags/keywords + desc tokens). */
 const SCENARIOS = [
@@ -53,20 +51,11 @@ const SCENARIOS = [
   { id: 'data-research', zh: '数据/研究/量化', en: 'data & research', words: ['research', '研究', 'data', '数据', 'stock', '股票', 'quant', 'chart'] },
 ]
 
-function readLinesJson(f) {
-  const out = []
-  for (const l of readFileSync(f, 'utf8').split('\n')) {
-    if (!l.trim()) continue
-    try { out.push(JSON.parse(l)) } catch { /* skip */ }
-  }
-  return out
-}
-
 function main() {
-  const insights = JSON.parse(readFileSync(INS, 'utf8'))
+  const insights = readJson(INS)
   const plugins = insights.plugins || []
-  const llmRows = readLinesJson(LLM)
-  const tagBy = new Map(llmRows.map((r) => [r.full_name, r]))
+  const llmRows = readJsonl(LLM)
+  const tagBy = byFullName(llmRows)
 
   const hayBy = new Map()
   for (const p of plugins) {
@@ -121,7 +110,7 @@ function main() {
     totalPlugins: plugins.length,
     scenarios,
   }
-  writeFileSync(OUT, JSON.stringify(doc, null, 2) + '\n')
+  writeJson(OUT, doc, true)
   console.log(`[scenarios] ${scenarios.length} scenarios (${llmRows.length} plugins LLM-tagged) → data/scenarios.json`)
 }
 

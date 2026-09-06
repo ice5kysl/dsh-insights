@@ -13,20 +13,18 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { PATHS, readJsonl, writeJsonl } from '../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
-const LLM = join(ROOT, 'data', 'llm.jsonl')
-const DONE = join(ROOT, 'data', 'state', 'llm.done')
+const LLM = PATHS.llm
+const DONE = PATHS.llmDone
 
 function main() {
-  const lines = readFileSync(LLM, 'utf8').split('\n').filter(Boolean)
-  const rows = lines.map((l) => { try { return JSON.parse(l) } catch { return null } }).filter(Boolean)
+  const rows = readJsonl(LLM)
   const bad = rows.filter((r) => !r.category && !r.summaryZh && !r.summaryEn)
   if (!bad.length) { console.log('[llm-catchup] no unparsed rows'); return }
   const badIds = new Set(bad.map((r) => r.full_name))
   const kept = rows.filter((r) => !badIds.has(r.full_name))
-  writeFileSync(LLM, kept.map((r) => JSON.stringify(r)).join('\n') + '\n')
+  writeJsonl(LLM, kept)
   const doneIds = readFileSync(DONE, 'utf8').split('\n').filter(Boolean).filter((id) => !badIds.has(id))
   writeFileSync(DONE, doneIds.join('\n') + '\n')
   console.log(`[llm-catchup] pruned ${bad.length} unparsed rows & re-queued them (${kept.length} kept)`)

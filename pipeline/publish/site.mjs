@@ -11,24 +11,19 @@
  * @module dsh-insights/stage-4
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
+import { PATHS, SITE, readJsonl, readJson, loadEnrichMap, byFullName } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const OUT = join(ROOT, 'site', 'index.html')
+const OUT = join(SITE, 'index.html')
 
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
 function main() {
-  const plugins = readFileSync(join(ROOT, 'data', 'plugins.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
-  let a = {}
-  try { a = JSON.parse(readFileSync(join(ROOT, 'data', 'analysis.json'), 'utf8')) } catch { /* ok */ }
-  let enrich = []
-  try { enrich = JSON.parse(readFileSync(join(ROOT, 'data', 'enrich.json'), 'utf8')) } catch { /* ok */ }
-  const enMap = new Map(enrich.map((x) => [x.full_name, x]))
-  let llmRows = []
-  try { llmRows = readFileSync(join(ROOT, 'data', 'llm.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l)) } catch { /* ok */ }
-  const llmMap = new Map(llmRows.map((x) => [x.full_name, x]))
+  const plugins = readJsonl(PATHS.plugins)
+  const a = readJson(PATHS.analysis, {})
+  const enMap = loadEnrichMap()
+  const llmMap = byFullName(readJsonl(PATHS.llm))
   const byStars = plugins.slice().sort((x, y) => (y.stars || 0) - (x.stars || 0))
   const t = a.totals || {}
   const d = a.distribution || {}
@@ -585,7 +580,7 @@ function openDrawer(repo){
   +'<div class="dd-sec"><h3>同类插件 · 同分类按 ★</h3><div id="dd-peers" class="loading">计算中…</div></div>'+'<div class="dd-sec"><h3>仓库</h3><table class="dd-table">'+ddRow('创建',escA((d.created||'').slice(0,10)))+ddRow('最近 push',escA((d.pushed||'').slice(0,10)))+ddRow('默认分支',escA(d.branch||'—'))+ddRow('数据来源',escA(d.source||'—'))+'</table><div class="linkrow"><a href="'+escA(d.url)+'" target="_blank">GitHub ↗</a>'+(d.pkgName?'<a href="https://www.npmjs.com/package/'+escA(d.pkgName)+'" target="_blank">npm ↗</a>':'')+'</div></div>'
       +'<div class="dd-sec"><h3>版本历史</h3><div id="dd-hist" class="loading">加载中…</div></div>';
     loadHist(repo,d);
-    if(d.parts&&d.parts.length){ var li=d.parts.map(function(p){return '<li><span>'+escA(p.label)+'</span><b>+'+escA(p.v)+'</b></li>'}).join(''); b.insertAdjacentHTML('beforeend','<div class="dd-sec"><h3>打分明细</h3><ul class="score" style="margin:0;padding:0;list-style:none">'+li+'</ul><div class="dim" style="font-size:11px;margin-top:6px">基分 25 + 加分项（A≥90 · B≥72 · C≥52）。未列出的能力项表示未达标/未加分。</div></div>') }
+    if(d.parts&&d.parts.length){ var li=d.parts.map(function(p){return '<li><span>'+escA(p.label)+'</span><b>'+escA(p.v)+'</b></li>'}).join(''); b.insertAdjacentHTML('beforeend','<div class="dd-sec"><h3>扣分明细</h3><ul class="score" style="margin:0;padding:0;list-style:none">'+li+'</ul><div class="dim" style="font-size:11px;margin-top:6px">100 起扣 · warn −5 / fail −20（A≥90 · B≥75 · C≥60）。未列出的项表示未扣分；探测不到的数据不虚构不扣分。</div></div>') }
     loadPeers(repo,d);
   })
 }
@@ -616,7 +611,7 @@ draw();
 </script>
 </body>
 </html>`
-  mkdirSync(join(ROOT, 'site'), { recursive: true })
+  mkdirSync(SITE, { recursive: true })
   writeFileSync(OUT, html)
   // ---- per-plugin detail file for the drawer (keeps index.html light) ----
   const detail = plugins.map((r) => ({
@@ -647,13 +642,13 @@ draw();
     channels: { aw: enMap.get(r.full_name)?.inAwesome ? 1 : 0, im: enMap.get(r.full_name)?.inImsai ? 1 : 0 },
     weekly: enMap.get(r.full_name)?.weekly ?? null,
     llm: llmMap.get(r.full_name) ?? null,
-    parts: enMap.get(r.full_name)?.parts || [],
+    parts: (enMap.get(r.full_name)?.drops || []).map((d) => ({ label: d.label, v: d.sev === 'fail' ? -20 : -5 })),
     npm: r.npm || { pub: false },
   }))
-  writeFileSync(join(ROOT, 'site', 'plugins-detail.json'), JSON.stringify(detail))
+  writeFileSync(join(SITE, 'plugins-detail.json'), JSON.stringify(detail))
   const cats = {}
   for (const pl of byStars) { const cat = enMap.get(pl.full_name)?.category; if (cat) (cats[cat] ??= []).push(pl.full_name) }
-  writeFileSync(join(ROOT, 'site', 'plugins-cats.json'), JSON.stringify({ generatedAt: new Date().toISOString(), cats }) + '\n')
+  writeFileSync(join(SITE, 'plugins-cats.json'), JSON.stringify({ generatedAt: new Date().toISOString(), cats }) + '\n')
   console.log(`[site] ${plugins.length} rows → site/index.html (${(html.length / 1024).toFixed(0)} KB) + plugins-detail.json (${(JSON.stringify(detail).length / 1024).toFixed(0)} KB) + plugins-cats.json (${(JSON.stringify(cats).length / 1024).toFixed(0)} KB)`)
 }
 

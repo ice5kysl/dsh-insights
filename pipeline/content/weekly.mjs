@@ -7,24 +7,20 @@
  * shareable zh-CN report with numbers, movers, signals, and calls to action.
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
+import { PATHS, readJson, readJsonl } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const W = join(ROOT, 'data', 'weekly')
+const W = PATHS.weeklyDir
 mkdirSync(W, { recursive: true })
 
-const analysis = JSON.parse(readFileSync(join(ROOT, 'data', 'analysis.json'), 'utf8'))
-let enrich = []
-try { enrich = JSON.parse(readFileSync(join(ROOT, 'data', 'enrich.json'), 'utf8')) } catch { /* ok */ }
-let invalid = 0
-try { invalid = readFileSync(join(ROOT, 'data', 'invalid.jsonl'), 'utf8').split('\n').filter(Boolean).length } catch { /* ok */ }
-let llmCount = 0
-try { llmCount = readFileSync(join(ROOT, 'data', 'llm.jsonl'), 'utf8').split('\n').filter(Boolean).length } catch { /* ok */ }
+const analysis = readJson(PATHS.analysis)
+const enrich = readJson(PATHS.enrich, [])
+const invalid = readJsonl(PATHS.invalid).length
+const llmCount = readJsonl(PATHS.llm).length
 let diff = null
-try { diff = readFileSync(join(ROOT, 'data', 'last-diff.md'), 'utf8') } catch { /* ok */ }
-let reviews = 0
-try { reviews = readFileSync(join(ROOT, 'data', 'reviews.jsonl'), 'utf8').split('\n').filter(Boolean).length } catch { /* ok */ }
+try { diff = readFileSync(PATHS.lastDiff, 'utf8') } catch { /* ok */ }
+const reviews = readJsonl(PATHS.reviews).length
 
 function isoWeek(d) {
   const date = new Date(d + 'T00:00:00Z')
@@ -91,7 +87,7 @@ L.push('')
 L.push('## 本期动作 & 社区行动')
 L.push('')
 L.push('- 我们持续在做的：质量分级/打分明细/收录渠道矩阵/LLM 能力标注/每插件"致作者的信"；人工点评种子 ' + reviews + ' 条待校对。')
-L.push('- 给插件作者：站内可看自己与同类差距；想上榜就补 README/中文文档/npm 发布/进目录——每项都有对应加分。')
+L.push('- 给插件作者：站内可看自己与同类差距；想上榜就补 README/中文文档/npm 发布/进目录——每少一条扣分就离 A 近一步。')
 L.push('- 给 dsh 官方/社区：如果你希望某类能力得到生态补足或某插件进入官方视野，欢迎到仓库 issue 提需求；数据与管线完全开源可复核。')
 L.push('')
 if (diff) {

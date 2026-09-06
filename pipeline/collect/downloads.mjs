@@ -7,11 +7,10 @@
  * @module dsh-insights/stage-7
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
+import { writeFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
-import { join } from 'node:path'
+import { PATHS, readJsonl } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
 const CONC = Number(process.env.CONC || 12)
 
 function curl(name) {
@@ -24,7 +23,7 @@ function curl(name) {
 }
 
 async function main() {
-  const plugins = readFileSync(join(ROOT, 'data', 'plugins.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
+  const plugins = readJsonl(PATHS.plugins)
   const names = [...new Set(plugins.filter((p) => p.npm?.published && p.pkgName).map((p) => p.pkgName))]
   console.log(`[downloads] ${names.length} packages`)
   const map = {}
@@ -42,7 +41,7 @@ async function main() {
     }
   }
   await Promise.all(Array.from({ length: Math.min(CONC, names.length || 1) }, worker))
-  writeFileSync(join(ROOT, 'data', 'downloads.json'), JSON.stringify({ fetchedAt: new Date().toISOString(), map }))
+  writeFileSync(PATHS.downloads, JSON.stringify({ fetchedAt: new Date().toISOString(), map }))
   const sum = Object.values(map).reduce((s, v) => s + v.d, 0)
   console.log(`[downloads] ok ${ok}/${names.length} · 周下载合计 ${sum} → data/downloads.json`)
 }

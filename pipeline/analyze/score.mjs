@@ -13,21 +13,17 @@
  *     `missing` and skipped (no deduction for what we could not see).
  *   - every rule bump must change RULE_VERSION and add a changelog entry.
  *
+ * 唯一评分真源：analyze（enrich.json）、export-json（insights.json）、
+ * badges、history 全部经 scoreAll 取分；本 stage 只落盘聚合 health.json。
+ *
  * Outputs:
- *   data/scored.jsonl  plugins rows + `health` object (join key full_name)
  *   data/health.json   aggregates (grades, avg, top deductions)
  *
- * @module dsh-insights/stage-8
+ * @module dsh-insights/pipeline-analyze-score
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
-
-const ROOT = join(import.meta.dirname, '..', '..')
-const SRC = join(ROOT, 'data', 'plugins.jsonl')
-const OUT = join(ROOT, 'data', 'scored.jsonl')
-const SUMMARY = join(ROOT, 'data', 'health.json')
+import { PATHS, readJsonl, writeJson } from '../../lib/data.mjs'
 
 export const RULE_VERSION = 'health-v2'
 
@@ -136,15 +132,6 @@ export function scoreOne(r) {
   }
 }
 
-function readRows(f) {
-  const rows = []
-  for (const line of readFileSync(f, 'utf8').split('\n')) {
-    if (!line.trim()) continue
-    try { rows.push(JSON.parse(line)) } catch { /* tolerate trailing partial appends */ }
-  }
-  return rows
-}
-
 export function scoreAll(rows) {
   const out = rows.map((r) => ({ ...r, health: scoreOne(r) }))
   const grades = { A: 0, B: 0, C: 0, D: 0 }
@@ -171,10 +158,9 @@ export function scoreAll(rows) {
 }
 
 function main() {
-  const rows = readRows(SRC)
+  const rows = readJsonl(PATHS.plugins)
   const { out, summary } = scoreAll(rows)
-  writeFileSync(OUT, out.map((r) => JSON.stringify(r)).join('\n') + '\n')
-  writeFileSync(SUMMARY, JSON.stringify(summary, null, 2) + '\n')
+  writeJson(PATHS.health, summary, true)
   console.log(`[score] ${out.length} rows · ${JSON.stringify(summary.grades)} · avg ${summary.avg} · median ${summary.median} · rule ${RULE_VERSION}`)
 }
 

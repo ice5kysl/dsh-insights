@@ -16,7 +16,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { join } from 'node:path'
-import { readFileSync as readRows } from 'node:fs'
+import { PATHS, readJsonl } from '../../lib/data.mjs'
 
 const ROOT = join(import.meta.dirname, '..', '..')
 const CACHE = join('/tmp', 'dsh-deep-cache')
@@ -56,7 +56,7 @@ function scanDir(dir, fullName) {
 }
 
 async function main() {
-  const rows = readRows(join(ROOT, 'data', 'plugins.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
+  const rows = readJsonl(PATHS.plugins)
   const fromEnv = (process.env.DEEP_REPOS || '').split(',').map((s) => s.trim()).filter(Boolean)
   const auto = rows.filter((r) => /read-?only|只读|readonly/i.test(r.description || '')).slice(0, 5).map((r) => r.full_name)
   const top = rows.slice().sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 3).map((r) => r.full_name)
@@ -88,7 +88,7 @@ async function main() {
       console.log(`[deep] ${fullName}: ${scan.srcFiles} files, writes=${writes}, sanitized=${scan.sanitized}`)
     } catch (e) { console.error(`[deep] scan failed ${fullName}: ${e.message}`) }
   }
-  writeFileSync(join(ROOT, 'data', 'deep.jsonl'), out.map((r) => JSON.stringify(r)).join('\n') + '\n')
+  writeFileSync(PATHS.deep, out.map((r) => JSON.stringify(r)).join('\n') + '\n')
   console.log(`[deep] ${out.length} results → data/deep.jsonl`)
 }
 

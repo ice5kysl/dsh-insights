@@ -2,22 +2,22 @@
 /**
  * Auto-finish runner — sweeps the CANONICAL candidate universe until every
  * candidate has a validation outcome, then finalizes (analyze/site/export),
- * writes data/COMPLETE.json and exits. Survives rate limits (clean pause in
+ * writes data/state/COMPLETE.json and exits. Survives rate limits (clean pause in
  * stage 02) by re-running until the missing count reaches zero.
  *
  * @module dsh-insights/resume
  */
 
 import { spawnSync } from 'node:child_process'
-import { readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
+import { sleep } from '../lib/api.mjs'
+import { ROOT, DATA, PATHS, readJsonl, writeJson } from '../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
-const CAND = join(ROOT, 'data', 'candidates-all.jsonl')
-const STATE = join(ROOT, 'data', 'state', 'done.ids')
-const MARKER = join(ROOT, 'data', 'COMPLETE.json')
+const CAND = PATHS.candidatesAll
+const STATE = PATHS.doneIds
+const MARKER = join(DATA, 'state', 'COMPLETE.json')
 const every = Number(process.env.EVERY || 30)
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 const run = (script) => {
   const r = spawnSync(process.execPath, [join(ROOT, script)], { stdio: 'inherit', env: { ...process.env } })
@@ -26,8 +26,7 @@ const run = (script) => {
 
 function counts() {
   try {
-    const ids = readFileSync(CAND, 'utf8').split('\n').filter(Boolean)
-      .map((l) => JSON.parse(l)).filter((c) => c.kind === 'repo').map((c) => `${c.owner}/${c.name}`)
+    const ids = readJsonl(CAND).filter((c) => c.kind === 'repo').map((c) => `${c.owner}/${c.name}`)
     const done = new Set(readFileSync(STATE, 'utf8').split('\n').filter(Boolean))
     return { total: ids.length, missing: ids.filter((id) => !done.has(id)).length, doneUnique: done.size }
   } catch { return { total: -1, missing: -1, doneUnique: -1 } }
@@ -52,7 +51,8 @@ async function main() {
       run('pipeline/analyze/analyze.mjs')
       run('pipeline/publish/site.mjs')
       run('pipeline/publish/export-csv.mjs')
-      writeFileSync(MARKER, JSON.stringify({ complete: true, at: new Date().toISOString(), total, done: doneUnique, missing: 0 }) + '\n')
+      mkdirSync(join(DATA, 'state'), { recursive: true })
+      writeJson(MARKER, { complete: true, at: new Date().toISOString(), total, done: doneUnique, missing: 0 })
       console.log(`[resume] COMPLETE — ${total} candidates, ${doneUnique} done → ${MARKER}`)
       process.exit(0)
     }

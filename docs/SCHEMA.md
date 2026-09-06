@@ -3,7 +3,7 @@
 > 状态：v0.2 · 2026-09-06 · 数据契约：权威集/分桶/健康分的字段口径与规则 changelog
 > 文档地图：[VISION](./VISION.md)（为什么）→ [PRODUCT-PLAN](./PRODUCT-PLAN.md)（做什么/怎么做）→ [PRODUCT-DESIGN](./PRODUCT-DESIGN.md)（页面与指标）→ [ROADMAP](./ROADMAP.md)（什么时候）· [RESEARCH](./RESEARCH.md)（证据）· SCHEMA（数据契约）· [OUTREACH](./OUTREACH.md)（外发）
 
-快照由  产出，JSONL（每行一个对象，UTF-8）。行按来源分三类：
+快照由 `pipeline/validate/validate.mjs` 产出，JSONL（每行一个对象，UTF-8）。行按来源分三类：
 
 ## `data/plugins.jsonl` — 权威集（有效插件）
 
@@ -57,21 +57,26 @@
 
 ## `data/candidates*.jsonl` — 原始候选
 
-`candidates-all.jsonl` = 各来源 repo 行去重 + npm→repo 映射新增行；`npm-mapped.jsonl` 为映射明细（`{kind:'npm-map', name, repo, repository, latest}`）。
+`candidates-all.jsonl` = 各来源 repo 行去重 + npm→repo 映射新增行；`state/npm-mapped.jsonl` 为映射明细（`{kind:'npm-map', name, repo, repository, latest}`，采集中间存档）。
 
 ## 派生产物
 
 - `data/analysis.json` — 聚合统计（totals/distribution/topTopics/topByStars）。
+- `data/enrich.json` — 每插件统一记录（health 分 + category + 收录渠道 + 周下载），见 §health。
+- `data/insights.json` — 对外 agent 契约（稳定 URL，schema 只增不改）。
 - `data/report.md` — 人类可读报告。
+- `data/last-diff.md` — 与**上一快照**的 diff（每次产出后基线滚动，`data/prev-plugin-ids.json` 更新为当前快照）。
 - `site/index.html` — 自包含静态站。
+
+历史变更（2026-09-06）：评分体系统一为 health-v2 扣分制（v0.1 的 enrich 加分制废弃，其含 star 加分违背口径）；`data/scored.jsonl`、`data/snapshot-meta.json`、`data/COMPLETE.json`、`data/candidates.jsonl` 停止产出（git 历史保留）。
 
 ## 校验口径（methodology）
 
 "有效/权威" = 仓库非 fork/归档 + 存在 `package.json` 且声明 `dsh.bundle.patch` + 该 patch 文件已提交。这是**下限**（manifest 未提交/纯 tarball 分发的会进 invalid 桶复核）。GitHub 搜索每查询 ≤1000 条、contents 列目录 ≤1000 条；完整宇宙需多轮/多源补充。
 
-## `health` — 健康分（ → `data/scored.jsonl` + `data/health.json`）
+## `health` — 健康分（`pipeline/analyze/score.mjs` 唯一真源 → `data/health.json` + `data/enrich.json` + `data/insights.json`）
 
-每条权威插件行附带 `health` 对象；`data/scored.jsonl` = plugins.jsonl 行 + `health`（join key `full_name`）；`data/health.json` 为聚合（grades/avg/median/topDeductions）。
+评分只有一套（health-v2 扣分制），由 `score.mjs` 的 `scoreAll` 提供；`analyze`（enrich.json）、`export-json`（insights.json）、badges、history 全部经它取分，不再各自实现。`data/health.json` 为聚合（grades/avg/median/topDeductions）；`data/enrich.json` 每插件行：`{full_name, stars, score, grade, drops:[{code,sev,label}], missing[], category, inAwesome, inImsai, covered, weekly}`（score/grade/drops 来自 health；category/收录渠道/周下载为 analyze 独有维度）。
 
 ```jsonc
 "health": {

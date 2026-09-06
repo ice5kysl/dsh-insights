@@ -9,31 +9,19 @@
  * @module dsh-insights/stage-13
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { scoreAll } from './score.mjs'
+import { PATHS, readJsonl, readJson, writeJson } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const PLUGINS = join(ROOT, 'data', 'plugins.jsonl')
-const OUT = join(ROOT, 'data', 'history.json')
+const PLUGINS = PATHS.plugins
+const OUT = PATHS.history
 const FORMAT = 'history-v1'
 
-function readRows(f) {
-  const rows = []
-  for (const line of readFileSync(f, 'utf8').split('\n')) {
-    if (!line.trim()) continue
-    try { rows.push(JSON.parse(line)) } catch { /* tolerate */ }
-  }
-  return rows
-}
-
 function main() {
-  const rows = readRows(PLUGINS)
+  const rows = readJsonl(PLUGINS)
   const { out, summary } = scoreAll(rows)
   const date = new Date().toISOString().slice(0, 10)
-  let history = { format: FORMAT, entries: [] }
-  try { history = JSON.parse(readFileSync(OUT, 'utf8')) } catch { /* first run */ }
+  const history = readJson(OUT, { format: FORMAT, entries: [] })
   if (history.entries.length && history.entries[history.entries.length - 1].date === date) {
     console.log(`[history] ${date} already recorded — skipping (${history.entries.length} entries)`)
     return
@@ -48,7 +36,7 @@ function main() {
     median: summary.median,
     plugins,
   })
-  writeFileSync(OUT, JSON.stringify(history) + '\n')
+  writeJson(OUT, history)
   console.log(`[history] appended ${date} (total ${summary.total}) → ${history.entries.length} entries in data/history.json`)
 }
 

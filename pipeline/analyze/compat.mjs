@@ -19,16 +19,12 @@
  * @module dsh-insights/stage-11
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { NPM } from '../../lib/api.mjs'
+import { NPM, sleep } from '../../lib/api.mjs'
+import { PATHS, readJsonl, writeJson } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const SRC = join(ROOT, 'data', 'plugins.jsonl')
-const OUT = join(ROOT, 'data', 'compat.json')
-
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+const SRC = PATHS.plugins
+const OUT = PATHS.compat
 
 async function npmDocRaw(name) {
   try {
@@ -48,17 +44,8 @@ function semverKey(v) {
   return [Number(m[1] || 0), Number(m[2] || 0), Number(m[3] || 0)]
 }
 
-function readRows(f) {
-  const rows = []
-  for (const line of readFileSync(f, 'utf8').split('\n')) {
-    if (!line.trim()) continue
-    try { rows.push(JSON.parse(line)) } catch { /* tolerate partial append */ }
-  }
-  return rows
-}
-
 function main() {
-  const rows = readRows(SRC)
+  const rows = readJsonl(SRC)
   const published = rows.filter((r) => r.npm?.published && r.pkgName)
   const seen = new Set()
   const targets = published.filter((r) => { const k = r.pkgName; if (seen.has(k)) return false; seen.add(k); return true })
@@ -113,7 +100,7 @@ async function run() {
     officialDsh,
     plugins,
   }
-  writeFileSync(OUT, JSON.stringify(doc, null, 2) + '\n')
+  writeJson(OUT, doc, true)
   const withEngines = plugins.filter((p) => p.enginesDsh || p.dshPeers.length).length
   console.log(`[compat] ${plugins.length} plugins probed, ${withEngines} declare engines.dsh or dsh peers · official dsh versions ${officialDsh.versions.length} → data/compat.json`)
 }

@@ -20,9 +20,8 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync, existsSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { page, mdToHtml, mdTitle, escHtml } from '../../lib/page.mjs'
+import { DATA, SITE, PATHS } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const SITE = join(ROOT, 'site')
 const ORIGIN = 'https://dsh-insights.com'
 
 const out = (rel, content) => {
@@ -31,7 +30,7 @@ const out = (rel, content) => {
   writeFileSync(p, content)
   return rel
 }
-const read = (...parts) => { try { return readFileSync(join(ROOT, ...parts), 'utf8') } catch { return null } }
+const read = (...parts) => { try { return readFileSync(join(DATA, ...parts), 'utf8') } catch { return null } }
 
 // ISO week → Monday date (for RSS pubDate)
 function isoWeekDate(y, w) {
@@ -45,12 +44,12 @@ function main() {
   const written = []
 
   // ---- weekly pages ------------------------------------------------------
-  const weeklyFiles = readdirSync(join(ROOT, 'data', 'weekly'))
+  const weeklyFiles = readdirSync(PATHS.weeklyDir)
     .filter((f) => /^(\d{4})-W(\d{2}).*\.md$/.test(f))
     .sort().reverse()
   const weekly = []
   for (const f of weeklyFiles) {
-    const md = read('data', 'weekly', f)
+    const md = read('weekly', f)
     if (!md) continue
     const m = f.match(/^(\d{4})-W(\d{2})/)
     const slug = `${m[1]}-W${m[2]}`
@@ -75,10 +74,10 @@ ${weeklyList || '<p class="lede">暂无周报。</p>'}`,
   })))
 
   // ---- plugin letter pages (/p/<owner>/<repo>/) --------------------------
-  const reportFiles = existsSync(join(ROOT, 'data', 'reports'))
-    ? readdirSync(join(ROOT, 'data', 'reports')).filter((f) => f.endsWith('.md')) : []
+  const reportFiles = existsSync(PATHS.reportsDir)
+    ? readdirSync(PATHS.reportsDir).filter((f) => f.endsWith('.md')) : []
   for (const f of reportFiles) {
-    const md = read('data', 'reports', f)
+    const md = read('reports', f)
     if (!md) continue
     const [owner, repo] = f.replace(/\.md$/, '').split('__')
     if (!owner || !repo) continue
@@ -95,15 +94,17 @@ ${weeklyList || '<p class="lede">暂无周报。</p>'}`,
   const DATASETS = [
     ['insights.json', '全量洞察快照（agent 首选入口）'],
     ['plugins.jsonl', '权威集全量（一行一插件）'],
+    ['invalid.jsonl', '噪声分桶（被拒候选 + reason）'],
     ['enrich.json', '每插件评分 / 等级 / 分类 / 收录渠道'],
     ['analysis.json', '聚合统计（仪表盘数据源）'],
+    ['plugins.csv', '权威集表格（25 列，Excel 友好）'],
     ['downloads.json', 'npm 周下载（CI 更新）'],
     ['listed.json', '收录渠道清单（awesome / imsai）'],
   ]
   const cards = []
   mkdirSync(join(SITE, 'data'), { recursive: true })
   for (const [f, desc] of DATASETS) {
-    const src = join(ROOT, 'data', f)
+    const src = join(DATA, f)
     if (!existsSync(src)) continue
     copyFileSync(src, join(SITE, 'data', f))
     const kb = Math.round(statSync(src).size / 1024)
@@ -132,8 +133,8 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
 <div class="article">
 <h2>权威集门禁</h2>
 <p>非 fork / 非归档 · <code>package.json</code> 声明 <code>dsh.bundle.patch</code> · patch 文件已提交。这是下限口径：纯 tarball 分发的插件会进入分桶人工复核（<code>invalid.jsonl</code>）。</p>
-<h2>健康分（health-v1）</h2>
-<p>基分 25 + 加分项（manifest 清单 / README / 双语文档 / LICENSE / 构建产物 / client 导出 / npm 发布 / 版本同步 / 活跃度等）。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 72</span> <span class="grade C">C ≥ 52</span> <span class="grade D">D</span>。每项打分带证据；缺数据明说降级，不乱判。</p>
+<h2>健康分（health-v2）</h2>
+<p>100 起扣 · warn −5 / fail −20 · 纯客观信号（manifest 规范 / npm 发布与版本一致 / README 与中文文档 / LICENSE / dsh-plugin topic / 活跃度），星数不进分。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。每条扣分带证据；探测不到的数据不虚构、不扣分（missing 明示）。规则全文与 changelog 见 <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">SCHEMA §health</a>。</p>
 <h2>校准</h2>
 <p>已知真/假插件编入校准集，每次快照跑回归（<code>pipeline/validate/regress.mjs</code>），回归非 100% 则当周快照不发布。口径变更必须 bump 规则版本并写 changelog。</p>
 <h2>边界声明</h2>

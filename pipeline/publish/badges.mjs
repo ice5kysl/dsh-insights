@@ -14,13 +14,14 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { escHtml } from '../../lib/page.mjs'
+import { PATHS, SITE } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const SRC = join(ROOT, 'data', 'insights.json')
-const OUT_DIR = join(ROOT, 'site', 'badge')
+const SRC = PATHS.insights
+const OUT_DIR = join(SITE, 'badge')
 
 const COLOR = { A: '#15803d', B: '#2d66f7', C: '#b45309', D: '#b91c1c' }
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const esc = escHtml
 
 function svg(label, value, color) {
   const lw = label.length * 6.5 + 12

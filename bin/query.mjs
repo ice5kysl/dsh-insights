@@ -16,22 +16,20 @@
  * @module dsh-insights/query
  */
 
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { existsSync } from 'node:fs'
 import { scoreAll } from '../pipeline/analyze/score.mjs'
+import { PATHS, readJsonl, byFullName } from '../lib/data.mjs'
 
-const FILE = join(import.meta.dirname, '..', 'data', 'plugins.jsonl')
+const FILE = PATHS.plugins
 const args = process.argv.slice(2)
 const val = (n) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : null }
 const has = (n) => args.includes(n)
 
 function main() {
-  let rows
-  try {
-    rows = readFileSync(FILE, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
-  } catch { console.error('no snapshot yet: run the pipeline first'); process.exit(1) }
+  if (!existsSync(FILE)) { console.error('no snapshot yet: run the pipeline first'); process.exit(1) }
+  let rows = readJsonl(FILE)
 
-  const healthBy = new Map(scoreAll(rows).out.map((r) => [r.full_name, r.health]))
+  const healthBy = byFullName(scoreAll(rows).out)
 
   if (has('--npm')) {
     const mode = val('--npm') || 'published'
@@ -45,16 +43,16 @@ function main() {
   if (has('--zh')) rows = rows.filter((r) => r.metrics?.hasZhDocs)
   if (has('--active30')) rows = rows.filter((r) => r.metrics?.active30)
   const grade = val('--grade')
-  if (grade) rows = rows.filter((r) => healthBy.get(r.full_name)?.grade === grade.toUpperCase())
+  if (grade) rows = rows.filter((r) => healthBy.get(r.full_name)?.health?.grade === grade.toUpperCase())
   const minScore = Number(val('--min-score') || 0)
-  if (minScore) rows = rows.filter((r) => (healthBy.get(r.full_name)?.score ?? -1) >= minScore)
+  if (minScore) rows = rows.filter((r) => (healthBy.get(r.full_name)?.health?.score ?? -1) >= minScore)
   const search = val('--search')
   if (search) rows = rows.filter((r) => (r.full_name + ' ' + (r.description || '')).toLowerCase().includes(search.toLowerCase()))
 
   const sortBy = val('--sort') || 'stars'
   rows = rows.slice().sort((a, b) => {
     if (sortBy === 'health') {
-      const hs = (x) => healthBy.get(x.full_name)?.score ?? -1
+      const hs = (x) => healthBy.get(x.full_name)?.health?.score ?? -1
       return hs(b) - hs(a)
     }
     return ((b[sortBy] ?? b.metrics?.[sortBy] ?? 0)) - ((a[sortBy] ?? a.metrics?.[sortBy] ?? 0))
@@ -66,7 +64,7 @@ function main() {
   console.log('repo | 健康 | ★ | npm | 中文/双语 | 活跃30 | 描述')
   console.log('---|---|---|---|---|---|---')
   for (const r of rows) {
-    const h = healthBy.get(r.full_name)
+    const h = healthBy.get(r.full_name)?.health
     const npm = r.npm?.published ? (r.npm.latest || '✅') : '—'
     const hs = h ? `${h.grade}(${h.score})` : '—'
     console.log(`${r.full_name} | ${hs} | ${r.stars || 0} | ${npm} | ${r.metrics?.hasZhDocs ? '✅' : '—'} | ${r.metrics?.active30 ? '✅' : '—'} | ${(r.description || '').slice(0, 70)}`)

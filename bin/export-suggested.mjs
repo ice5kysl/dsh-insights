@@ -6,13 +6,12 @@
  * @module dsh-insights/bin/export-suggested
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
+import { writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { DATA, PATHS, readJson } from '../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
-const analysis = JSON.parse(readFileSync(join(ROOT, 'data', 'analysis.json'), 'utf8'))
-let enrich = []
-try { enrich = JSON.parse(readFileSync(join(ROOT, 'data', 'enrich.json'), 'utf8')) } catch { /* ok */ }
+const analysis = readJson(PATHS.analysis)
+const enrich = readJson(PATHS.enrich, [])
 const catOf = new Map(enrich.map((x) => [x.full_name, x.category]))
 const rows = (analysis.suggested || []).map((s) => ({
   repo: s.full_name,
@@ -34,6 +33,6 @@ const csv = ['repo,grade,stars,score,weekly,category',
   ...rows.map((r) => [r.repo, r.grade, r.stars, r.score, r.weekly, r.cat].map(esc).join(',')),
 ].join('\n') + '\n'
 
-writeFileSync(join(ROOT, 'data', 'suggested.md'), md)
-writeFileSync(join(ROOT, 'data', 'suggested.csv'), csv)
+writeFileSync(join(DATA, 'suggested.md'), md)
+writeFileSync(join(DATA, 'suggested.csv'), csv)
 console.log(`[suggested] ${rows.length} → data/suggested.md + data/suggested.csv`)

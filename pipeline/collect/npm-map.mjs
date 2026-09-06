@@ -8,19 +8,19 @@
  * `repo` candidates tagged source `npm:<name>`; existing ones are noted.
  *
  * Outputs:
- *   data/npm-mapped.jsonl  — mapping rows
+ *   data/npm-mapped.jsonl  — mapping rows（采集中间存档）
  *   data/candidates-all.jsonl — candidates-full (repos) + new npm→repo rows
  *
  * @module dsh-insights/stage-01b
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { NPM, raw, sleep } from '../../lib/api.mjs'
+import { DATA, PATHS, readJsonl } from '../../lib/data.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const FULL = process.argv[2] || join(ROOT, 'data', 'candidates-full.jsonl')
-const ALL = join(ROOT, 'data', 'candidates-all.jsonl')
+const FULL = process.argv[2] || join(DATA, 'candidates-full.jsonl')
+const ALL = PATHS.candidatesAll
 
 function githubFromUrl(url) {
   if (!url) return null
@@ -51,7 +51,7 @@ async function npmSearchAll(text = 'dsh deepseek-harness plugin', max = 750) {
 }
 
 async function main() {
-  const lines = existsSync(FULL) ? readFileSync(FULL, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l)) : []
+  const lines = readJsonl(FULL)
   const repoIds = new Set(lines.filter((c) => c.kind === 'repo').map((c) => `${c.owner}/${c.name}`))
   const npmNames = new Set(lines.filter((c) => c.kind === 'npm').map((c) => c.name))
   const search = await npmSearchAll()
@@ -74,7 +74,7 @@ async function main() {
     }
     if (i % 50 === 0) console.log(`[npm-map] ${i}/${npmNames.size} (mapped ${mapped.length}, new repos ${added.length})`)
   }
-  writeFileSync(join(ROOT, 'data', 'npm-mapped.jsonl'), mapped.map((r) => JSON.stringify(r)).join('\n') + '\n')
+  writeFileSync(join(DATA, 'npm-mapped.jsonl'), mapped.map((r) => JSON.stringify(r)).join('\n') + '\n')
   const merged = [...lines.filter((c) => c.kind === 'repo'), ...added]
   writeFileSync(ALL, merged.map((r) => JSON.stringify(r)).join('\n') + '\n')
   console.log(`[npm-map] mapped ${mapped.length} → new repo candidates ${added.length}; total repos in candidates-all.jsonl: ${merged.length}`)

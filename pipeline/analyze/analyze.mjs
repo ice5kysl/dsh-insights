@@ -1,49 +1,41 @@
 #!/usr/bin/env node
 /**
  * pipeline/analyze · analyze — aggregate analysis over the authoritative set (+ deep sampling).
- * Also computes per-plugin heuristic quality score/grade and a functional
- * category, persisted to data/enrich.json for the site & drawer.
+ * Per-plugin health score comes from the single scoring source (analyze/score.mjs);
+ * this stage adds the dimensions only it owns (functional category, curated-channel
+ * coverage, weekly npm downloads) and persists data/enrich.json for the site & drawer.
  *
  * Outputs:
  *   data/analysis.json   aggregates (+ grades/categories distributions)
  *   data/report.md       human-readable report
- *   data/enrich.json     per-plugin { full_name, score, grade, category }
+ *   data/enrich.json     per-plugin { full_name, stars, score, grade, drops, category, inAwesome, inImsai, covered, weekly }
  *
- * @module dsh-insights/stage-3
+ * @module dsh-insights/pipeline-analyze
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { writeFileSync } from 'node:fs'
+import { PATHS, readJsonl, readJson, writeJson } from '../../lib/data.mjs'
+import { scoreAll } from './score.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const PLUGINS = process.argv[2] || join(ROOT, 'data', 'plugins.jsonl')
-
-function readRows(f) {
-  try { return readFileSync(f, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l)) } catch { return [] }
-}
+const PLUGINS = process.argv[2] || PATHS.plugins
 
 function pct(n, d) { return d === 0 ? 0 : Math.round((n / d) * 1000) / 10 }
 
 function readChannels() {
-  try {
-    const l = JSON.parse(readFileSync(join(ROOT, 'data', 'listed.json'), 'utf8'))
-    return { awesome: new Set(l.awesome || []), imsai: new Set(l.imsai || []), fetchedAt: l.fetchedAt || null }
-  } catch { return { awesome: new Set(), imsai: new Set() } }
-}
-function readDownloadsFile() {
-  try { return JSON.parse(readFileSync(join(ROOT, 'data', 'downloads.json'), 'utf8')) || null } catch { return null }
+  const l = readJson(PATHS.listed)
+  return l
+    ? { awesome: new Set(l.awesome || []), imsai: new Set(l.imsai || []), fetchedAt: l.fetchedAt || null }
+    : { awesome: new Set(), imsai: new Set() }
 }
 function readDeep() {
-  try {
-    const rows = readFileSync(join(ROOT, 'data', 'deep.jsonl'), 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
-    if (!rows.length) return null
-    return {
-      targets: rows.length,
-      readonlyClean: rows.filter((r) => r.verdict === 'readonly-clean' || r.verdict === 'no-render-no-writes').length,
-      withWrites: rows.filter((r) => (r.writeCount || 0) > 0).length,
-      sanitized: rows.filter((r) => r.sanitized).length,
-    }
-  } catch { return null }
+  const rows = readJsonl(PATHS.deep)
+  if (!rows.length) return null
+  return {
+    targets: rows.length,
+    readonlyClean: rows.filter((r) => r.verdict === 'readonly-clean' || r.verdict === 'no-render-no-writes').length,
+    withWrites: rows.filter((r) => (r.writeCount || 0) > 0).length,
+    sanitized: rows.filter((r) => r.sanitized).length,
+  }
 }
 
 // ---- functional classification (heuristic, priority-ordered) ----------
@@ -68,31 +60,11 @@ function classify(name, desc) {
   return OTHER
 }
 
-// ---- heuristic quality score -------------------------------------------
-function quality(r) {
-  const f = r.files || {}
-  let s = 25
-  const parts = []
-  const add = (v, label) => { s += v; parts.push([label, v]) }
-  if (f.cordisPatch) add(8, 'manifest 清单')
-  if (f.readme) add(6, 'README')
-  if (r.metrics?.hasZhDocs) add(10, '中英/双语')
-  if (f.license || r.license || r.eval?.licenseField) add(4, 'LICENSE')
-  if (f.libIndex) add(5, 'lib/index.js')
-  if (f.libClient) add(5, 'lib/client.js')
-  if (r.eval?.hasClientExport) add(4, 'client 导出')
-  if (r.npm?.published) add(8, 'npm 已发布')
-  if (r.npm?.published && r.version && r.npm.latest === r.version) add(6, '版本同步')
-  if (r.metrics?.active30) add(5, '近30天活跃')
-  if ((r.stars || 0) > 0) add(6, '有 star')
-  if ((r.stars || 0) >= 100) add(8, '高社区关注')
-  const score = Math.min(100, s)
-  const grade = score >= 90 ? 'A' : score >= 72 ? 'B' : score >= 52 ? 'C' : 'D'
-  return { score, grade, parts }
-}
+// ---- health score: single source is analyze/score.mjs (health-v2) -------
 
 function analyze(rows) {
   const n = rows.length
+  const healthBy = new Map(scoreAll(rows).out.map((r) => [r.full_name, r.health]))
   const byMonth = {}
   const byWeek = {}
   const publish = { published: 0, unpublished: 0, stale: 0 }
@@ -101,7 +73,7 @@ function analyze(rows) {
   const topics = {}
   const stars = []
   const channels = readChannels()
-  const dlDoc = readDownloadsFile()
+  const dlDoc = readJson(PATHS.downloads)
   const dlMap = dlDoc?.map || {}
   const enrich = []
   const gradeAgg = { A: 0, B: 0, C: 0, D: 0 }
@@ -135,15 +107,15 @@ function analyze(rows) {
     if (f.libIndex && f.libClient) lib.both++
     for (const t of r.topics || []) topics[t] = (topics[t] || 0) + 1
     stars.push(r.stars || 0)
-    const q = quality(r)
+    const h = healthBy.get(r.full_name) || { score: 0, grade: 'D', drops: [] }
     const cat = classify(r.repo || r.full_name || '', r.description || '')
     const inAwesome = channels.awesome.has(r.full_name)
     const inImsai = channels.imsai.has(r.full_name)
     const weekly = r.npm?.published && r.pkgName ? (dlMap[r.pkgName]?.d ?? null) : null
-    enrich.push({ full_name: r.full_name, stars: r.stars || 0, score: q.score, grade: q.grade, category: cat, inAwesome, inImsai, covered: inAwesome || inImsai, weekly, parts: q.parts.map((p) => ({ label: p[0], v: p[1] })) })
-    gradeAgg[q.grade] = (gradeAgg[q.grade] || 0) + 1
+    enrich.push({ full_name: r.full_name, stars: r.stars || 0, score: h.score, grade: h.grade, drops: h.drops.map((d) => ({ code: d.code, sev: d.sev, label: d.label })), missing: h.missing || [], category: cat, inAwesome, inImsai, covered: inAwesome || inImsai, weekly })
+    gradeAgg[h.grade] = (gradeAgg[h.grade] || 0) + 1
     catAgg[cat] = (catAgg[cat] || 0) + 1
-    scoreSum += q.score
+    scoreSum += h.score
   }
   stars.sort((a, b) => b - a)
   const topStars = rows.slice().sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 10)
@@ -161,7 +133,7 @@ function analyze(rows) {
   const suggested = enrich.filter((e) => (e.grade === 'A' || e.grade === 'B') && !e.covered)
     .sort((x, y) => (y.score || 0) - (x.score || 0)).slice(0, 20)
   const dlTop = enrich.filter((e) => e.weekly != null).sort((x, y) => (y.weekly || 0) - (x.weekly || 0)).slice(0, 15)
-  writeFileSync(join(ROOT, 'data', 'enrich.json'), JSON.stringify(enrich))
+  writeJson(PATHS.enrich, enrich)
   return {
     generatedAt: new Date().toISOString(),
     totals: {
@@ -256,10 +228,10 @@ function render(a) {
 }
 
 function main() {
-  const rows = readRows(PLUGINS)
+  const rows = readJsonl(PLUGINS)
   const a = analyze(rows)
-  writeFileSync(join(ROOT, 'data', 'analysis.json'), JSON.stringify(a, null, 2) + '\n')
-  writeFileSync(join(ROOT, 'data', 'report.md'), render(a))
+  writeJson(PATHS.analysis, a, true)
+  writeFileSync(PATHS.reportMd, render(a))
   console.log(`[analyze] ${rows.length} plugins → analysis.json + report.md + enrich.json (avg ${a.quality.avgScore} / A+B ${a.quality.gradePct}%)`)
 }
 

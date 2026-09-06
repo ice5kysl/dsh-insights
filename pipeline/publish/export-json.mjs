@@ -10,26 +10,13 @@
  * @module dsh-insights/stage-9
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { writeFileSync } from 'node:fs'
 import { pathToFileURL } from 'node:url'
+import { PATHS, readJsonl } from '../../lib/data.mjs'
 import { scoreAll, RULE_VERSION } from '../analyze/score.mjs'
 
-const ROOT = join(import.meta.dirname, '..', '..')
-const SRC = join(ROOT, 'data', 'plugins.jsonl')
-const OUT = join(ROOT, 'data', 'insights.json')
-
-function readRows(f) {
-  const rows = []
-  for (const line of readFileSync(f, 'utf8').split('\n')) {
-    if (!line.trim()) continue
-    try { rows.push(JSON.parse(line)) } catch { /* tolerate trailing partial appends */ }
-  }
-  return rows
-}
-
 function main() {
-  const rows = readRows(SRC)
+  const rows = readJsonl(PATHS.plugins)
   const { out: scored, summary } = scoreAll(rows)
   const byName = new Map(scored.map((s) => [s.full_name, s.health]))
   const plugins = rows.map((r) => {
@@ -53,7 +40,7 @@ function main() {
   })
 
   const doc = {
-    $schema: 'https://dsh-insights.dev/schema/insights-v1',
+    $schema: 'https://dsh-insights.com/schema/insights-v1',
     generatedAt: new Date().toISOString(),
     ruleVersion: RULE_VERSION,
     meta: {
@@ -63,7 +50,7 @@ function main() {
     },
     plugins,
   }
-  writeFileSync(OUT, JSON.stringify(doc) + '\n')
+  writeFileSync(PATHS.insights, JSON.stringify(doc) + '\n')
   console.log(`[export:json] ${plugins.length} plugins → data/insights.json (${(doc.plugins.reduce((s, p) => s + JSON.stringify(p).length, 0) / 1024).toFixed(0)} KB payload)`)
 }
 
