@@ -6,7 +6,7 @@
  * any OpenAI-compatible endpoint) and stores STRUCTURED, HUMAN-SPOT-CHECKABLE
  * outputs — never free-text verdicts, never fed into the health score.
  *
- * Rules (docs/ANALYSIS-DEPTH.md §C):
+ * Rules (docs/ROADMAP.md 附录A（LLM 使用纪律）):
  *   - only reads; output fields are {category, capabilityTags[], commands[],
  *     summaryZh, summaryEn, claims[], confidence} — claims list facts to verify.
  *   - resume: rows already tagged (id in data/state/llm.done) are skipped.

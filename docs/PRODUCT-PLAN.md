@@ -1,7 +1,7 @@
 # dsh-insights · 产品规划（Product Plan）
 
-> 状态：**v0.2 · 2026-09-06** · 与 [VISION.md](./VISION.md) v0.2 / [ROADMAP.md](./ROADMAP.md) v0.2 配套，取代 v0.1 草案
-> 定位已从"插件质量数据层"升级为 **DSH 生态与动态全景观察站**（L1 插件 / L2 官方动态 / L3 生态报告）。本文件把 v0.2 定位落成可执行的产品与技术方案。
+> 状态：**v0.2 · 2026-09-06** · 取代 v0.1 草案 · 定位已从"插件质量数据层"升级为 **DSH 生态与动态全景观察站**（L1 插件 / L2 官方动态 / L3 生态报告）。本文件把 v0.2 定位落成可执行的产品与技术方案。
+> 文档地图：[VISION](./VISION.md)（为什么）→ PRODUCT-PLAN（做什么/怎么做）→ [PRODUCT-DESIGN](./PRODUCT-DESIGN.md)（页面与指标）→ [ROADMAP](./ROADMAP.md)（什么时候）· [RESEARCH](./RESEARCH.md)（证据）· [SCHEMA](./SCHEMA.md)（数据契约）· [OUTREACH](./OUTREACH.md)（外发）
 
 ## 0. v0.2 定位的实质（我们到底在做什么变化）
 

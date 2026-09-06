@@ -1,5 +1,8 @@
 # 数据集 Schema（dsh-insights）
 
+> 状态：v0.2 · 2026-09-06 · 数据契约：权威集/分桶/健康分的字段口径与规则 changelog
+> 文档地图：[VISION](./VISION.md)（为什么）→ [PRODUCT-PLAN](./PRODUCT-PLAN.md)（做什么/怎么做）→ [PRODUCT-DESIGN](./PRODUCT-DESIGN.md)（页面与指标）→ [ROADMAP](./ROADMAP.md)（什么时候）· [RESEARCH](./RESEARCH.md)（证据）· SCHEMA（数据契约）· [OUTREACH](./OUTREACH.md)（外发）
+
 快照由 `stages/02-validate.mjs` 产出，JSONL（每行一个对象，UTF-8）。行按来源分三类：
 
 ## `data/plugins.jsonl` — 权威集（有效插件）

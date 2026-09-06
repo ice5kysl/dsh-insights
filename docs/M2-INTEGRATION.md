@@ -1,6 +1,7 @@
 # M2 集成提案：给 awesome-dsh-plugin / dsh-market 的健康分数据层
 
-> 状态：草案 v1 · 2026-09-05 · 提议对象：[awesome-dsh-plugin org](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)（收录注册表 / awesome-dsh-plugin.com）与 [dsh-market](https://github.com/dsh-market/dsh-market)（应用内市场，消费其 plugins.json）。本文件也是 PR/Discussions 的草稿与决策日志模板。
+> 状态：**已发出**（2026-09-05 · awesome-dsh-plugin org Discussions **#4399** · 待回复）· 本「集成提案」对应 [ROADMAP](./ROADMAP.md) v0.2 的 **M3 采纳推进**，与「M2 官方动态」无关（文件名因对外链接保留，勿改名）· 回复记录回填本文末尾决策日志并同步 [RESEARCH](./RESEARCH.md) §决策日志
+> 提议对象：[awesome-dsh-plugin org](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)（收录注册表 / awesome-dsh-plugin.com）与 [dsh-market](https://github.com/dsh-market/dsh-market)（应用内市场，消费其 plugins.json）。本文件也是 PR/Discussions 的草稿与决策日志模板。
 
 ## 一句话提案
 
@@ -18,7 +19,7 @@
 2. **真伪判定**：manifest 门禁——非 fork/归档 + `package.json` 声明 `dsh.bundle.patch` + patch 文件已提交 → `data/plugins.jsonl`（权威集）。
 3. **健康分 health-v1**：纯客观 11 条规则（manifest/npm/docs/repo/activity），从 100 扣分（warn −5 / fail −20），**每条扣分带证据值**，缺失数据不虚构不扣分，星数不进分。
 4. **校准回归**：15 条已知真/假 seeds，`npm run regress` 每次跑批必过（当前 15/15）。
-5. 规则升版必须 bump `RULE_VERSION` + changelog（docs/schema.md §health）；已注明 TUI/CLI 类插件的 client-export 误伤 caveat 与申诉通道。
+5. 规则升版必须 bump `RULE_VERSION` + changelog（docs/SCHEMA.md §health）；已注明 TUI/CLI 类插件的 client-export 误伤 caveat 与申诉通道。
 
 ## 数据契约（join key = `owner/name`，与贵方 plugins.json 对齐）
 
@@ -89,4 +90,4 @@
 | 逐条扣分证据 | `data/scored.jsonl` | 争议复核 |
 | 聚合与报告 | `data/analysis.json` / `data/report.md` | 生态趋势引用 |
 | 徽章渲染 | `bin/badge.mjs` | 托管后 `badge/<owner>/<repo>.svg` |
-| 健康分规则 | `docs/schema.md §health` | 口径文档 |
+| 健康分规则 | `docs/SCHEMA.md §health` | 口径文档 |

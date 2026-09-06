@@ -1,6 +1,8 @@
 # dsh-insights · 生态调研证据库（Research）
 
-> 采集于 2026-09-05。所有数字标注 [V] = 本次 GitHub API / npm registry / HTTP 抓取实测；[C] = 策展列表文案等二手但经核。来源 URL 在文末。本文件是 VISION/PRODUCT-PLAN 的数据底稿与决策日志。
+> 状态：v0.2 · 2026-09-06 · 证据库与决策日志：VISION/PRODUCT-PLAN 的数据底稿
+> 文档地图：[VISION](./VISION.md)（为什么）→ [PRODUCT-PLAN](./PRODUCT-PLAN.md)（做什么/怎么做）→ [PRODUCT-DESIGN](./PRODUCT-DESIGN.md)（页面与指标）→ [ROADMAP](./ROADMAP.md)（什么时候）· RESEARCH（证据）· [SCHEMA](./SCHEMA.md)（数据契约）· [OUTREACH](./OUTREACH.md)（外发）
+> 采集于 2026-09-05。所有数字标注 [V] = 本次 GitHub API / npm registry / HTTP 抓取实测；[C] = 策展列表文案等二手但经核。来源 URL 在文末。历史决策日志条目不回写（提及已归档文档处以 git 历史为准）。
 
 ## 1. 生态规模
 

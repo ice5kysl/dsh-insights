@@ -7,7 +7,7 @@
  * family and who competes with whom" — the duplication pain quantified.
  *
  * NOTE v1 is a heuristic vocabulary pass, NOT functional-equivalence
- * detection; the LLM stage (ANALYSIS-DEPTH.md D3) refines families later.
+ * detection; the LLM stage (docs/ROADMAP.md 附录A D3) refines families later.
  * Output members sorted by health desc then stars desc.
  *
  * @module dsh-insights/stage-14
@@ -68,7 +68,7 @@ function main() {
   // dedupe a plugin can land in several families — keep all, it's fine (multi-capability)
   const out = {
     generatedAt: new Date().toISOString(),
-    ruleNote: '词汇启发式 v1：bilingual keyword lexicon over name/description/topics — approximate capability families, NOT functional-equivalence detection. LLM stage refines (see docs/ANALYSIS-DEPTH.md D3).',
+    ruleNote: '词汇启发式 v1：bilingual keyword lexicon over name/description/topics — approximate capability families, NOT functional-equivalence detection. LLM stage refines (see docs/ROADMAP.md 附录A D3).',
     totalPlugins: plugins.length,
     buckets,
   }

@@ -1,7 +1,7 @@
 # dsh-insights · 产品愿景（Vision）
 
-> 状态：**v0.2 再规划**（2026-09-05）· 取代 v0.1 草案 · 对外品牌与域名：**dsh-insights.com** · 引擎仓库：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
-> 精要与证据锚点见 [RESEARCH.md](./RESEARCH.md)（数字均实测标注 [V]）与 [PRODUCT-PLAN.md](./PRODUCT-PLAN.md)。
+> 状态：**v0.2 · 2026-09-06** · 取代 v0.1 草案 · 对外品牌与域名：**dsh-insights.com** · 引擎仓库：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
+> 文档地图：VISION（为什么）→ [PRODUCT-PLAN](./PRODUCT-PLAN.md)（做什么/怎么做）→ [PRODUCT-DESIGN](./PRODUCT-DESIGN.md)（页面与指标）→ [ROADMAP](./ROADMAP.md)（什么时候）· [RESEARCH](./RESEARCH.md)（证据，数字均实测标注 [V]）· [SCHEMA](./SCHEMA.md)（数据契约）· [OUTREACH](./OUTREACH.md)（外发）
 
 ## 一句话愿景
 

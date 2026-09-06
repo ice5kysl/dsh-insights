@@ -108,7 +108,7 @@ ${weeklyList || '<p class="lede">暂无周报。</p>'}`,
     copyFileSync(src, join(SITE, 'data', f))
     const kb = Math.round(statSync(src).size / 1024)
     written.push(`data/${f}（拷贝）`)
-    cards.push(`<div class="card"><b>${escHtml(desc)}</b><code>/data/${f}</code><p>${kb} KB · <a href="${f}">下载</a> · <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/schema.md" target="_blank">schema</a></p></div>`)
+    cards.push(`<div class="card"><b>${escHtml(desc)}</b><code>/data/${f}</code><p>${kb} KB · <a href="${f}">下载</a> · <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">schema</a></p></div>`)
   }
   written.push(out('data/index.html', page({
     title: '开放数据', desc: 'dsh-insights 开放数据集：稳定 URL、可复核口径、CC BY 4.0。',

@@ -59,7 +59,7 @@ function main() {
     meta: {
       total: summary.total,
       grades: summary.grades,
-      note: 'health 为客观启发式信号，非安全审计；missing 数据不虚构。规则见 docs/schema.md §health。',
+      note: 'health 为客观启发式信号，非安全审计；missing 数据不虚构。规则见 docs/SCHEMA.md §health。',
     },
     plugins,
   }

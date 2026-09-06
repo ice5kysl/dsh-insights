@@ -6,7 +6,7 @@
  * with an A–D grade, per-dimension breakdown and evidence for every deduction.
  * Module-exported so downstream stages (09 JSON export, site) reuse it.
  *
- * Design rules (see docs/schema.md §health):
+ * Design rules (see docs/SCHEMA.md §health):
  *   - purely objective signals; no community ratings, no star-based scoring.
  *   - deductions only; start at 100; warn −5 / fail −20, clamp ≥ 0.
  *   - missing data is never invented: unavailable probes are listed under
