@@ -1,16 +1,26 @@
 # DSH 插件生态周报 · 2026-W36
 
-> 数据快照 2026-09-06 · 由 dsh-insights（DSH 插件洞察 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
+> 数据快照 2026-09-06 · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
 
 ## 本期速览
 
-- 权威插件 **2113** 个（通过 dsh.bundle manifest 校验；另有 1274 个被拒/噪声分桶）
+- 权威插件 **2222** 个（通过 dsh.bundle manifest 校验；另有 1484 个被拒/噪声分桶）
 - 近 30 天活跃 100% · 可过收录门禁（仓库≥1天）99.8%
-- npm 发布率 49.7%（已发布 1050 / 版本滞后 253）
-- 中英/双语文档率 37.1% · 平均质量分 87.2（A+B 99.4%）
-- curated 收录覆盖 46.8%（988 个已进 awesome/imsai）
+- npm 发布率 49.6%（已发布 1102 / 版本滞后 263）
+- 中英/双语文档率 37.3% · 平均质量分 87.2（A+B 99.4%）
+- curated 收录覆盖 44.5%（988 个已进 awesome/imsai）
 - npm 周下载样本 Top 15 合计 417107
-- LLM 能力标注进度：1834/2113
+- LLM 能力标注进度：1834/2222
+
+## 官方动态（dsh × DeepSeek 平台）
+
+- dsh 官方仓库 ★213,198 · 最近 push 2026-09-04
+- npm dist-tags：latest=0.1.2-rc.1 · alpha=0.1.2-alpha.5 · next=0.1.2-rc.1
+- 最新 release：dsh-v0.1.3-alpha.1（pre-release · 2026-09-04 · ⚠️ 含 breaking 说明）
+- 最近 8 个 release 中 5 个含 breaking/迁移关键词——升级前请核对 releases 说明
+- rc 兼容信号：latest=0.1.2-rc.1；已探测 184 个 npm 插件，仅 2 个声明 engines.dsh（声明率过低，雷达走 v1 API 符号路线）
+- DeepSeek 平台：DeepSeek-V3 ★104,437 · v1.0.0；DeepSeek-R1 ★92,022 · v1.0.0
+- 详见站点「动态」页：https://dsh-insights.com/dynamics/
 
 ## 增长与榜单
 
@@ -48,10 +58,10 @@
 
 ## 信号与观察（启发式）
 
-- 质量两级分化仍在：A 级 1035 个 vs D 级 0 个（C 级是主体 13），生态"能跑但文档/发布不齐"的中段插件占比最高。
-- 功能分类上「其它」最拥挤（519 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
-- 13 个插件没有 README、1063 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
-- curated 收录仍集中于少数头部（988/2113），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
+- 质量两级分化仍在：A 级 1085 个 vs D 级 0 个（C 级是主体 13），生态"能跑但文档/发布不齐"的中段插件占比最高。
+- 功能分类上「其它」最拥挤（559 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
+- 13 个插件没有 README、1120 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
+- curated 收录仍集中于少数头部（988/2222），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
 - 本期相对上期有新增/消失/star 变动，见下方 diff 摘要。
 
 ## 优质未收录 · 建议收录（Top 8，供作者与目录维护者）
@@ -88,4 +98,4 @@
 ---
 
 > 数据来源：GitHub 公开元数据 + npm registry；评估为启发式（非安全审计）。完整数据集 data/plugins.jsonl / csv，站点 https://dsh-insights.com/
-> 周报与"致作者的信"由 dsh-insights 自动生成，欢迎转载（保留出处即可）。
+> 周报与"致作者的信"由 DSH Insights 自动生成，欢迎转载（保留出处即可）。

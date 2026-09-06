@@ -16,6 +16,7 @@ mkdirSync(W, { recursive: true })
 
 const analysis = readJson(PATHS.analysis)
 const enrich = readJson(PATHS.enrich, [])
+const dyn = readJson(PATHS.dynamics)
 const invalid = readJsonl(PATHS.invalid).length
 const llmCount = readJsonl(PATHS.llm).length
 let diff = null
@@ -40,7 +41,7 @@ const dl = analysis.downloads
 const L = []
 L.push(`# DSH 插件生态周报 · ${wk}`)
 L.push('')
-L.push(`> 数据快照 ${(analysis.generatedAt || '').slice(0, 10)} · 由 dsh-insights（DSH 插件洞察 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)`)
+L.push(`> 数据快照 ${(analysis.generatedAt || '').slice(0, 10)} · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)`)
 L.push('')
 L.push('## 本期速览')
 L.push('')
@@ -52,6 +53,23 @@ L.push(`- curated 收录覆盖 ${ch ? ch.coveredPct + '%（' + ch.covered + ' �
 if (dl) L.push(`- npm 周下载样本 ${dl.top.length ? 'Top ' + dl.top.length + ' 合计 ' + dl.sum : '暂无'}`)
 L.push(`- LLM 能力标注进度：${llmCount}/${t.authoritative}`)
 L.push('')
+if (dyn) {
+  const dn = dyn.dsh?.npm || {}
+  const latestRel = (dyn.dsh?.releases || [])[0]
+  L.push('## 官方动态（dsh × DeepSeek 平台）')
+  L.push('')
+  L.push(`- dsh 官方仓库 ★${(dyn.dsh?.stars || 0).toLocaleString()} · 最近 push ${(dyn.dsh?.pushed_at || '').slice(0, 10)}`)
+  if (dn.distTags && Object.keys(dn.distTags).length) L.push(`- npm dist-tags：${Object.entries(dn.distTags).map(([k, v]) => `${k}=${v}`).join(' · ')}`)
+  if (latestRel) L.push(`- 最新 release：${latestRel.tag}（${latestRel.prerelease ? 'pre-release' : 'release'} · ${(latestRel.published_at || '').slice(0, 10)}${latestRel.breaking ? ' · ⚠️ 含 breaking 说明' : ''}）`)
+  const brk = (dyn.dsh?.releases || []).filter((r) => r.breaking).length
+  if (brk > 1) L.push(`- 最近 ${dyn.dsh.releases.length} 个 release 中 ${brk} 个含 breaking/迁移关键词——升级前请核对 releases 说明`)
+  const cs = dyn.compatSignal
+  if (cs) L.push(`- rc 兼容信号：latest=${cs.distTags?.latest ?? '—'}；已探测 ${cs.pluginsProbed} 个 npm 插件，仅 ${cs.declaringEngines} 个声明 engines.dsh（声明率过低，雷达走 v1 API 符号路线）`)
+  const plat = (dyn.platform || []).filter((p) => !p.error)
+  if (plat.length) L.push(`- DeepSeek 平台：${plat.map((p) => `${p.repo.split('/')[1]} ★${(p.stars || 0).toLocaleString()}${p.latestRelease ? ' · ' + p.latestRelease.tag : ''}`).join('；')}`)
+  L.push(`- 详见站点「动态」页：https://dsh-insights.com/dynamics/`)
+  L.push('')
+}
 L.push('## 增长与榜单')
 L.push('')
 L.push('| 仓库 | ★ | npm | 中/双语 |')

@@ -6,6 +6,7 @@
  * Generates:
  *   site/weekly/<slug>.html + weekly/index.html   from data/weekly/*.md
  *   site/p/<owner>/<repo>/index.html              from data/reports/*.md
+ *   site/dynamics/index.html                       official dynamics (L2)
  *   site/scenarios/index.html                      scenario bundle recommendations
  *   site/about/index.html                          about / methodology / metrics
  *   site/data/index.html                           open-data index (+ copies data files)
@@ -142,6 +143,39 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
 <p class="lede">场景归属 = LLM 能力标签 ∪ 词汇桶（标注"LLM 生成，人工抽查"）；场景内排序 = 健康分 → npm 已发布 → 近 30 天活跃，星数仅作展示不参与排序。同样的数据在 <a href="../data/insights.json">/data/insights.json</a> 开放，agent 可直接消费。</p>`,
   })))
 
+  // ---- /dynamics/ 官方动态（L2） -------------------------------------------
+  const dyn = JSON.parse(read('dynamics.json') || 'null')
+  let dynBody = ''
+  if (dyn) {
+    const dsh = dyn.dsh || {}
+    const npm = dsh.npm || {}
+    const daysSince = (iso) => iso ? Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 86400000)) : null
+    const distRows = Object.entries(npm.distTags || {}).map(([tag, v]) => {
+      const ver = (npm.versions || []).find((x) => x.version === v)
+      return `<tr><td>${escHtml(tag)}</td><td class="mono">${escHtml(v)}</td><td>${ver ? escHtml((ver.time || '').slice(0, 10)) + '（' + daysSince(ver.time) + ' 天前）' : '—'}</td></tr>`
+    }).join('')
+    const relRows = (dsh.releases || []).map((r) => `<div class="listrow"><a href="https://github.com/${escHtml(dsh.repo)}/releases/tag/${escHtml(r.tag)}" target="_blank">${escHtml(r.tag)}${r.breaking ? ' <span class="pill" style="color:var(--warn);border-color:var(--warn)">breaking?</span>' : ''}</a><span class="meta">${r.prerelease ? 'pre-release' : 'release'} · ${escHtml((r.published_at || '').slice(0, 10))}</span></div>`).join('')
+    const platRows = (dyn.platform || []).filter((p) => !p.error).map((p) => `<div class="listrow"><a href="https://github.com/${escHtml(p.repo)}" target="_blank">${escHtml(p.repo)}</a><span class="meta">★${(p.stars || 0).toLocaleString()} · push ${escHtml((p.pushed_at || '').slice(0, 10))}${p.latestRelease ? ' · ' + escHtml(p.latestRelease.tag) : ''}</span></div>`).join('')
+    const cs = dyn.compatSignal
+    dynBody = `<p class="crumb">Official Dynamics</p><h1 class="pagetitle">官方动态</h1>
+<p class="lede">dsh 官方与 DeepSeek 平台的可观测公开信号（releases / dist-tags / 仓库活动），每日随快照刷新。不做新闻舆情。采集于 ${escHtml((dyn.fetchedAt || '').slice(0, 16).replace('T', ' '))} UTC。</p>
+<div class="cards">
+  <div class="card"><b>DeepSeek Harness（dsh 官方）</b><code>${escHtml(dsh.repo)}</code><p>★${(dsh.stars || 0).toLocaleString()} · 最近 push ${escHtml((dsh.pushed_at || '').slice(0, 10))} · ${escHtml(dsh.description || '')}</p></div>
+  <div class="card"><b>npm dist-tags</b><code>@deepseek-ai/dsh</code><table style="width:100%;font-size:12.5px;margin-top:8px"><tr><th align="left">tag</th><th align="left">版本</th><th align="left">发布时间</th></tr>${distRows}</table></div>
+  <div class="card"><b>rc 兼容信号（雷达 v0 前置普查）</b><p>已探测 ${cs ? cs.pluginsProbed : '—'} 个 npm 插件：声明 <code>engines.dsh</code> 的仅 <b>${cs ? cs.declaringEngines : '—'}</b> 个，声明 dsh peer 依赖的 ${cs ? cs.declaringPeers : '—'} 个。<br>声明率太低 → 「声明 vs 最新 rc」的雷达 v0 不成立，主线走 v1（插件 API 符号 × rc changelog 交集，M2）。当前最新 rc：<b>${escHtml((npm.distTags || {}).latest || '—')}</b>，升级前请到 <a href="https://github.com/${escHtml(dsh.repo)}/releases" target="_blank">releases</a> 核对 breaking 说明。</p></div>
+</div>
+<h2 style="font-size:16px;margin:28px 0 8px">dsh 官方 releases（最近 ${(dsh.releases || []).length} 个）</h2>
+${relRows || '<p class="lede">暂无</p>'}
+<h2 style="font-size:16px;margin:28px 0 8px">DeepSeek 平台官方仓库</h2>
+${platRows}
+<p class="lede" style="margin-top:18px">${escHtml(dyn.note || '')}</p>`
+  }
+  written.push(out('dynamics/index.html', page({
+    title: '官方动态', desc: 'dsh 官方与 DeepSeek 平台的可观测动态：releases、dist-tags、rc 兼容信号。',
+    base: '../', here: 'dynamics/',
+    body: dynBody || '<p class="crumb">Official Dynamics</p><h1 class="pagetitle">官方动态</h1><p class="lede">数据采集中，下个快照上线。</p>',
+  })))
+
   // ---- /about/ 关于 · 方法论与指标体系 --------------------------------------
   written.push(out('about/index.html', page({
     title: '关于', desc: 'DSH Insights 是什么、指标体系、评估口径与边界声明。',
@@ -210,6 +244,7 @@ DeepSeek Harness 全景观察站：插件健康（全量权威集 + 客观健康
 
 ## 页面
 - ${ORIGIN}/ — 仪表盘（人类可读）
+- ${ORIGIN}/dynamics/ — 官方动态（releases/dist-tags/rc 信号）
 - ${ORIGIN}/scenarios/ — 场景组合推荐（按场景选插件）
 - ${ORIGIN}/weekly/ — 周报存档
 - ${ORIGIN}/p/<owner>/<repo>/ — 单插件健康报告

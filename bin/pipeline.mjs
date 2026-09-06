@@ -33,6 +33,7 @@ const STEPS = [
   ['discover',    'pipeline/collect/discover.mjs'],
   ['npm-map',     'pipeline/collect/npm-map.mjs'],
   ['downloads',   'pipeline/collect/downloads.mjs'],
+  ['dynamics',    'pipeline/collect/dynamics.mjs'],
   ['validate',    'pipeline/validate/validate.mjs'],
   ['regress',     'pipeline/validate/regress.mjs'],
   ['deep',        'pipeline/validate/deep.mjs'],
@@ -53,7 +54,7 @@ const STEPS = [
   ['weekly',      'pipeline/content/weekly.mjs'],
 ]
 
-const DAILY = ['lists', 'downloads', 'analyze', 'site', 'export-csv', 'diff', 'pages']
+const DAILY = ['lists', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'pages']
 const SNAPSHOT = ['analyze', 'score', 'history', 'overlap', 'export-csv', 'export-json', 'badges', 'site', 'pages']
 const CONTENT = ['letters', 'weekly', 'pages']
 const PROFILES = {
