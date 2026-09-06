@@ -288,7 +288,10 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
       const ver = (npm.versions || []).find((x) => x.version === v)
       return `<tr><td>${escHtml(tag)}</td><td class="mono">${escHtml(v)}</td><td>${ver ? escHtml((ver.time || '').slice(0, 10)) + '（' + daysSince(ver.time) + ' 天前）' : '—'}</td></tr>`
     }).join('')
-    const relRows = (dsh.releases || []).map((r) => `<div class="listrow"><a href="https://github.com/${escHtml(dsh.repo)}/releases/tag/${escHtml(r.tag)}" target="_blank">${escHtml(r.tag)}${r.breaking ? ' <span class="pill" style="color:var(--warn);border-color:var(--warn)">breaking?</span>' : ''}</a><span class="meta">${r.prerelease ? 'pre-release' : 'release'} · ${escHtml((r.published_at || '').slice(0, 10))}</span></div>`).join('')
+    const relRows = (dsh.releases || []).map((r) => `<div style="padding:10px 2px;border-bottom:1px solid var(--line)">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><a href="https://github.com/${escHtml(dsh.repo)}/releases/tag/${escHtml(r.tag)}" target="_blank" style="font-weight:600;color:var(--ink)">${escHtml(r.tag)}</a>${r.breaking ? ' <span class="pill" style="color:var(--warn);border-color:var(--warn)">breaking?</span>' : ''}<span style="color:var(--faint);font:12px var(--mono);white-space:nowrap;flex:none">${r.prerelease ? 'pre-release' : 'release'} · ${escHtml((r.published_at || '').slice(0, 10))}${(r.added || r.fixed) ? ` · ${r.added} 新增/${r.fixed} 修复` : ''}</span></div>
+${r.summary ? `<div style="color:var(--mut);font-size:12.5px;margin-top:4px">${escHtml(r.summary)}</div>` : ''}
+</div>`).join('')
     const platRows = (dyn.platform || []).filter((p) => !p.error).map((p) => `<div class="listrow"><a href="https://github.com/${escHtml(p.repo)}" target="_blank">${escHtml(p.repo)}</a><span class="meta">★${(p.stars || 0).toLocaleString()} · push ${escHtml((p.pushed_at || '').slice(0, 10))}${p.latestRelease ? ' · ' + escHtml(p.latestRelease.tag) : ''}</span></div>`).join('')
     const cs = dyn.compatSignal
     dynBody = `<p class="crumb">Official Dynamics</p><h1 class="pagetitle">官方动态</h1>
