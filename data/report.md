@@ -1,6 +1,6 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 2113 个插件 · 生成于 2026-09-06 · 由 dsh-plugin-insights 管线生成
+> 权威集 2113 个插件 · 生成于 2026-09-06 · 由 dsh-insights 管线生成
 
 ## 总览
 - 权威集规模：**2113**
@@ -13,7 +13,7 @@
 - lib/index.js 967 · lib/client.js 800 · 双产物 709
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 757 · imsai 235 · 至少一个渠道 987（46.7%） · 未收录 1126
+- awesome-dsh-plugin 757 · imsai 236 · 至少一个渠道 988（46.8%） · 未收录 1125
 
 ## 优质未收录 · 建议收录（Top 15）
 - RevolutionLA/dsh-dream-skin A · 周下载 9994
