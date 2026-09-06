@@ -25,7 +25,7 @@ DSH Insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层
 
 | file | 说明 |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | **权威集 4,160** + 分桶 2,353（0 重复 · 硬门禁 · 2026-09-06 快照，校验滚动扩大中） |
+| `data/plugins.jsonl` · `invalid.jsonl` | **权威集 4,559** + 分桶 2,532（0 重复 · 硬门禁 · 2026-09-06 快照，校验滚动扩大中） |
 | `data/plugins.csv` · `analysis.json` · `enrich.json` | 表格 / 聚合 / 每插件评分+分类+渠道 |
 | `data/downloads.json` | npm 周下载（CI 更新） |
 | `data/listed.json` | 收录渠道清单（awesome / imsai） |
@@ -75,7 +75,7 @@ node bin/query.mjs --sort stars --top 10   # 查询
 
 ## Status（2026-09-06）
 
-- [x] 发现+校验：候选池 14,331 全量分片抓取 → 断点续跑校验中（已完成 ~6.5k/14k）→ **权威集 4,160**（0 重复 · @2026-09-06）
+- [x] 发现+校验：候选池 14,331 全量分片抓取 → 断点续跑校验中（已完成 ~6.5k/14k）→ **权威集 4,559**（0 重复 · @2026-09-06）
 - [x] 仪表盘（KPI/按周新增/质量分级/功能分类/收录覆盖/优质未收录榜/全表+详情抽屉/打分明细/LLM 解读）
 - [x] 健康评分与致作者的信（content/letters）、生态周报（content/weekly）生成器 + 样例
 - [x] npm 周下载入库（CI 已跑通）；快照 diff 基线；人工点评种子 5 条

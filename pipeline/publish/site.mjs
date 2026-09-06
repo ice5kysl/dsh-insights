@@ -49,6 +49,8 @@ function main() {
     r.files?.libIndex && r.files?.libClient ? 1 : 0, (r.pushed_at && (Date.now() - new Date(r.pushed_at).getTime()) < 7 * 86400000) ? 1 : 0,
     (r.description || '').slice(0, 110),
     enMap.get(r.full_name)?.grade || '',
+    enMap.get(r.full_name)?.score ?? 0,
+    (r.pushed_at || '').slice(0, 10),
   ])
   const dataJson = JSON.stringify(rows).replace(/</g, '\\u003c')
 
@@ -320,6 +322,9 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}
 .toolbar input[type=text]{flex:1;min-width:200px;padding:7px 11px;border:1px solid var(--line);border-radius:8px;font-size:13px;outline:none;background:var(--card);color:var(--ink);transition:border-color .15s}
 .toolbar input[type=text]:focus{border-color:var(--ink)}
 .chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut);transition:all .15s var(--ease)}
+.fsel{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--mut);cursor:pointer;max-width:132px}
+.fsel:hover{border-color:var(--faint);color:var(--ink)}
+.fsel:focus{outline:none;border-color:var(--accent)}
 .chip:hover{border-color:var(--faint);color:var(--ink)}
 .chip.on{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:600}
 .cols{position:relative}
@@ -485,13 +490,20 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 </section>
 
 <section class="sec" id="browse">
-  <div class="sec-h"><span class="sec-n">04</span><h2>插件库</h2><p class="sub">搜索 / 筛选 / 点击表头排序 · 筛选状态同步到 URL，可直接分享 · 已加载 ${plugins.length} 个</p></div>
+  <div class="sec-h"><span class="sec-n">04</span><h2>插件库</h2><p class="sub">搜索 / 筛选 / 排序 · 状态同步到 URL，可直接分享 · 已加载 ${plugins.length} 个</p></div>
   <div class="toolbar">
     <input type="text" id="q" placeholder="搜索仓库名 / 描述…" autocomplete="off">
-    <button class="chip on" data-npm="">全部 npm</button><button class="chip" data-npm="pub">已发布</button><button class="chip" data-npm="unpub">未发布</button><button class="chip" data-npm="stale">版本滞后</button>
+    <select id="f-gr" class="fsel" title="质量等级筛选">
+      <option value="">全部等级</option><option value="S">S 级</option><option value="A">A 级</option><option value="B">B 级</option><option value="C">C 级</option><option value="D">D 级</option>
+    </select>
+    <select id="f-npm" class="fsel" title="npm 状态筛选">
+      <option value="">全部 npm</option><option value="pub">已发布</option><option value="unpub">未发布</option><option value="stale">版本滞后</option>
+    </select>
     <button class="chip" data-zh="0">i18n·中英</button>
-    <button class="chip gchip" data-gr="S">S</button><button class="chip gchip" data-gr="A">A</button><button class="chip gchip" data-gr="B">B</button><button class="chip gchip" data-gr="C">C</button><button class="chip gchip" data-gr="D">D</button>
     <button class="chip" data-active="1">近 7 天活跃</button>
+    <select id="f-sort" class="fsel" title="排序">
+      <option value="">默认（★ 降序）</option><option value="stars-asc">★ 最少</option><option value="new">最新创建</option><option value="old">最早创建</option><option value="active">最近活跃</option><option value="score">质量分</option><option value="name">名称 A→Z</option>
+    </select>
     <details class="cols"><summary>列 ▾</summary><div class="menu">
       <label><input type="checkbox" checked data-col="created">创建日期</label>
       <label><input type="checkbox" checked data-col="zh">i18n·中英</label>
@@ -643,6 +655,7 @@ function draw(){
 function syncHash(){
   const p=new URLSearchParams();
   if(q)p.set('q',q);if(npm)p.set('npm',npm);if(zh)p.set('zh','1');if(act)p.set('act','1');if(gr)p.set('gr',gr);
+  const sv=$('#f-sort').value;if(sv)p.set('sort',sv);
   const s=p.toString();
   // only pin a hash when filters are active — a bare #browse would make
   // reloads/native fragment navigation jump past the hero for no reason
@@ -653,24 +666,26 @@ function readHash(){
   const p=new URLSearchParams(location.hash.split('?')[1]||'');
   q=p.get('q')||'';npm=p.get('npm')||'';zh=p.get('zh')?'1':'';act=p.get('act')?'1':'';gr=p.get('gr')||'';
   $('#q').value=q;
-  document.querySelectorAll('[data-npm]').forEach(x=>x.classList.toggle('on',x.dataset.npm===npm));
+  $('#f-npm').value=npm;$('#f-gr').value=gr;
+  var sv=p.get('sort')||'';if(SORTMAP[sv]){$('#f-sort').value=sv;sort=SORTMAP[sv][0];desc=SORTMAP[sv][1]}
   document.querySelectorAll('[data-zh]').forEach(x=>x.classList.toggle('on',zh==='1'));
   document.querySelectorAll('[data-active]').forEach(x=>x.classList.toggle('on',act==='1'));
-  document.querySelectorAll('.gchip').forEach(x=>x.classList.toggle('on',x.dataset.gr===gr&&gr!==''));
   setTimeout(()=>{const el=document.getElementById('browse');if(el)el.scrollIntoView({behavior:'instant',block:'start'})},60);
 }
 $('#q').addEventListener('input',ev=>{q=ev.target.value;page=0;draw()});
+$('#f-gr').addEventListener('change',ev=>{gr=ev.target.value;page=0;draw()});
+$('#f-npm').addEventListener('change',ev=>{npm=ev.target.value;page=0;draw()});
+var SORTMAP={'':[-1,true],'stars-asc':[2,false],'new':[3,true],'old':[3,false],'active':[11,true],'score':[10,true],'name':[0,false]};
+$('#f-sort').addEventListener('change',ev=>{var m=SORTMAP[ev.target.value]||[-1,true];sort=m[0];desc=m[1];page=0;draw()});
 document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
-  if(c.dataset.npm!==undefined){npm=c.dataset.npm;document.querySelectorAll('[data-npm]').forEach(x=>x.classList.toggle('on',x===c))}
   if(c.dataset.zh!==undefined){zh=(zh==='1'?'':'1');document.querySelectorAll('[data-zh]').forEach(x=>x.classList.toggle('on',zh==='1'))}
   if(c.dataset.active!==undefined){act=(act==='1'?'':'1');c.classList.toggle('on',act==='1')}
-  if(c.dataset.gr!==undefined){gr=(gr===c.dataset.gr?'':c.dataset.gr);document.querySelectorAll('.gchip').forEach(x=>x.classList.toggle('on',x===c&&gr))}
   page=0;draw();
 }));
 document.querySelectorAll('.cols input').forEach(cb=>cb.addEventListener('change',()=>{
   document.getElementById('browse').classList.toggle('hide-'+cb.dataset.col,!cb.checked);
 }));
-document.querySelectorAll('.ptable th[data-k]').forEach(th=>th.addEventListener('click',()=>{const k=+th.dataset.k;if(sort===k)desc=!desc;else{sort=k;desc=false}page=0;draw()}));
+document.querySelectorAll('.ptable th[data-k]').forEach(th=>th.addEventListener('click',()=>{const k=+th.dataset.k;if(sort===k)desc=!desc;else{sort=k;desc=false}$('#f-sort').value='';page=0;draw()}));
 $('#prev').onclick=()=>{page--;draw()};$('#next').onclick=()=>{page++;draw()};
 
 // ---- plugin detail drawer ----
