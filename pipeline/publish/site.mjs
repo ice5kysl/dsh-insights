@@ -80,24 +80,24 @@ function main() {
     const circ = 2 * Math.PI * r
     const total = parts.reduce((s2, p) => s2 + p.v, 0) || 1
     let off = 0
-    const segs = parts.map((p) => {
+    const segs = parts.map((p, i) => {
       const len = Math.max(0, (p.v / total) * circ)
-      const el = `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${p.c}" stroke-width="${sw}" stroke-dasharray="${len.toFixed(1)} ${circ.toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}"/>`
+      const el = `<circle class="dseg" data-i="${i}" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${p.c}" stroke-width="${sw}" stroke-dasharray="${len.toFixed(1)} ${circ.toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" data-tip="${esc(p.label)} · ${p.v}（${Math.round((p.v / total) * 1000) / 10}%）"/>`
       off += len
       return el
     }).join('')
-    return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="flex:none">${segs}<circle cx="${size / 2}" cy="${size / 2}" r="${r * 0.72}" fill="var(--card)"/></svg>`
+    return `<svg class="donut" data-total="${total}" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="flex:none">${segs}<circle cx="${size / 2}" cy="${size / 2}" r="${r * 0.72}" fill="var(--card)"/><text class="dnum" x="${size / 2}" y="${size / 2 + 3}">${total}</text><text class="dlab" x="${size / 2}" y="${size / 2 + 16}">总计</text></svg>`
   }
-  const donutPublish = donut([{ v: pub.published, c: 'var(--ink)' }, { v: pub.unpublished, c: 'var(--track2)' }])
+  const donutPublish = donut([{ v: pub.published, c: 'var(--ink)', label: '已发布' }, { v: pub.unpublished, c: 'var(--track2)', label: '未发布' }])
   const donutDocs = donut([
-    { v: doc.both, c: '#18181b' },
-    { v: Math.max(0, doc.zh - doc.both), c: '#52525b' },
-    { v: Math.max(0, doc.readme - doc.zh), c: '#a1a1aa' },
-    { v: doc.none, c: '#e4e4e7' },
+    { v: doc.both, c: '#18181b', label: '双语(EN+中文)' },
+    { v: Math.max(0, doc.zh - doc.both), c: '#52525b', label: '含中文' },
+    { v: Math.max(0, doc.readme - doc.zh), c: '#a1a1aa', label: '单语' },
+    { v: doc.none, c: '#e4e4e7', label: '无 README' },
   ])
 
   const bar = (label, count, max, color, title) =>
-    '<div class="hbar"><span class="hbar-l"' + (title ? ' title="' + esc(title) + '"' : '') + '>' + esc(label) + '</span>' +
+    '<div class="hbar" data-tip="' + esc(title || `${label} · ${count}`) + '"><span class="hbar-l"' + (title ? ' title="' + esc(title) + '"' : '') + '>' + esc(label) + '</span>' +
     '<div class="hbar-t"><div class="hbar-f" style="width:' + Math.max(2, Math.round((count / Math.max(1, max)) * 100)) + '%' + (color ? ';background:' + color : '') + '"></div></div>' +
     '<span class="hbar-v">' + count + '</span></div>'
 
@@ -225,6 +225,17 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .legend{display:flex;flex-direction:column;gap:7px;font-size:12.5px;color:var(--mut)}
 .legend b{color:var(--ink);font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums}
 .legend i{display:inline-block;width:9px;height:9px;border-radius:2.5px;margin-right:7px;vertical-align:-1px}
+.donut .dseg{transition:opacity .15s;cursor:pointer}
+.donut.has-sel .dseg{opacity:.22}
+.donut.has-sel .dseg.sel{opacity:1}
+.donut .dnum{font:700 14px var(--mono);fill:var(--ink);text-anchor:middle}
+.donut .dlab{font:9px var(--mono);fill:var(--faint);text-anchor:middle}
+.dleg{cursor:pointer;border-radius:6px;padding:1px 5px;margin:-1px -5px}
+.dleg:hover,.dleg.sel{background:var(--track);color:var(--ink)}
+.hbar{transition:background .12s;border-radius:6px}
+.hbar:hover{background:var(--track)}
+.hbar:hover .hbar-f{filter:brightness(1.2)}
+.gtip{position:fixed;z-index:70;pointer-events:none;background:var(--ink);color:var(--bg);font:11.5px var(--mono);padding:4px 9px;border-radius:6px;display:none;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .chartbox{position:relative}
 .chartbox .grid{stroke:var(--line);stroke-width:1}
 .chartbox .gly{font:10px var(--mono);fill:var(--faint);text-anchor:end}
@@ -361,18 +372,18 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
     <div class="panel">
       <h3>npm 发布分布</h3><p class="p-sub">已发布 vs 未发布 · 版本滞后 ${pub.stale ?? 0}</p>
       <div class="donutwrap">${donutPublish}<div class="legend">
-        <div><i style="background:var(--ink)"></i>已发布 <b>${pub.published ?? 0}</b></div>
-        <div><i style="background:var(--track2)"></i>未发布 <b>${pub.unpublished ?? 0}</b></div>
+        <div class="dleg" data-i="0"><i style="background:var(--ink)"></i>已发布 <b>${pub.published ?? 0}</b></div>
+        <div class="dleg" data-i="1"><i style="background:var(--track2)"></i>未发布 <b>${pub.unpublished ?? 0}</b></div>
         <div style="color:var(--warn)">版本滞后 ${pub.stale ?? 0}</div>
       </div></div>
     </div>
     <div class="panel">
       <h3>i18n · 文档语言足迹</h3><p class="p-sub">按 README 检出：双语 / 含中文 / 单语 / 无 · 多语言(ja/ko/…)检测规划见 M1</p>
       <div class="donutwrap">${donutDocs}<div class="legend">
-        <div><i style="background:#18181b"></i>双语(EN+中文) <b>${doc.both ?? 0}</b></div>
-        <div><i style="background:#52525b"></i>含中文（i18n 样本） <b>${Math.max(0, (doc.zh ?? 0) - (doc.both ?? 0))}</b></div>
-        <div><i style="background:#a1a1aa"></i>单语（基础 README） <b>${Math.max(0, (doc.readme ?? 0) - (doc.zh ?? 0))}</b></div>
-        <div><i style="background:#e4e4e7"></i>无 README <b>${doc.none ?? 0}</b></div>
+        <div class="dleg" data-i="0"><i style="background:#18181b"></i>双语(EN+中文) <b>${doc.both ?? 0}</b></div>
+        <div class="dleg" data-i="1"><i style="background:#52525b"></i>含中文（i18n 样本） <b>${Math.max(0, (doc.zh ?? 0) - (doc.both ?? 0))}</b></div>
+        <div class="dleg" data-i="2"><i style="background:#a1a1aa"></i>单语（基础 README） <b>${Math.max(0, (doc.readme ?? 0) - (doc.zh ?? 0))}</b></div>
+        <div class="dleg" data-i="3"><i style="background:#e4e4e7"></i>无 README <b>${doc.none ?? 0}</b></div>
       </div></div>
     </div>
     <div class="panel">
@@ -487,9 +498,9 @@ let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
   var box=$('#chart-week'); if(!box||!WKPTS.length)return;
   var dot=$('#ch-dot'),cross=$('#ch-x'),tip=$('#ch-tip');
   var CW2=960,CH2=200;
-  box.addEventListener('mousemove',function(ev){
+  function onPoint(clientX,clientY){
     var r=box.getBoundingClientRect();
-    var ratio=(ev.clientX-r.left)/r.width;
+    var ratio=(clientX-r.left)/r.width;
     var i=Math.round(ratio*(WKPTS.length-1));
     i=Math.max(0,Math.min(WKPTS.length-1,i));
     var p=WKPTS[i];
@@ -501,9 +512,53 @@ let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
     left=Math.max(34,Math.min(r.width-34,left));
     tip.style.left=left+'px';
     tip.style.top=(p.y/CH2*r.height)+'px';
-  });
+  }
+  box.addEventListener('mousemove',function(ev){ onPoint(ev.clientX,ev.clientY) });
+  box.addEventListener('touchmove',function(ev){ if(ev.touches[0])onPoint(ev.touches[0].clientX,ev.touches[0].clientY) },{passive:true});
   box.addEventListener('mouseleave',function(){dot.style.display='none';cross.style.display='none';tip.style.display='none'});
 })();
+
+// ---- global tooltip ([data-tip]) ----
+(function(){
+  var tip=document.createElement('div'); tip.className='gtip'; document.body.appendChild(tip);
+  function move(ev){ var x=ev.clientX+12,y=ev.clientY+14;
+    if(x+tip.offsetWidth>innerWidth-8)x=ev.clientX-tip.offsetWidth-12;
+    if(y+tip.offsetHeight>innerHeight-8)y=ev.clientY-tip.offsetHeight-14;
+    tip.style.left=x+'px'; tip.style.top=y+'px' }
+  document.addEventListener('mouseover',function(ev){
+    var t=ev.target.closest&&ev.target.closest('[data-tip]');
+    if(!t)return; tip.textContent=t.getAttribute('data-tip'); tip.style.display='block'; move(ev);
+  });
+  document.addEventListener('mousemove',function(ev){ if(tip.style.display==='block')move(ev) });
+  document.addEventListener('mouseout',function(ev){
+    if(ev.target.closest&&ev.target.closest('[data-tip]'))tip.style.display='none';
+  });
+})();
+
+// ---- donut segment ↔ legend sync ----
+document.querySelectorAll('.donutwrap').forEach(function(wrap){
+  var svg=wrap.querySelector('svg.donut'); if(!svg)return;
+  var segs=svg.querySelectorAll('.dseg');
+  var dnum=svg.querySelector('.dnum'),dlab=svg.querySelector('.dlab');
+  var total=svg.getAttribute('data-total');
+  function sel(i,on){
+    svg.classList.toggle('has-sel',on);
+    segs.forEach(function(s){ s.classList.toggle('sel',on&&s.getAttribute('data-i')===String(i)) });
+    wrap.querySelectorAll('.dleg').forEach(function(l){ l.classList.toggle('sel',on&&l.getAttribute('data-i')===String(i)) });
+    if(on){ var seg=svg.querySelector('.dseg[data-i="'+i+'"]');
+      var t=(seg.getAttribute('data-tip')||'').split(' · ');
+      dnum.textContent=t[1]?t[1].split('（')[0]:''; dlab.textContent=t[0]||''; }
+    else { dnum.textContent=total; dlab.textContent='总计' }
+  }
+  segs.forEach(function(s){
+    s.addEventListener('mouseenter',function(){ sel(s.getAttribute('data-i'),true) });
+    s.addEventListener('mouseleave',function(){ sel(0,false) });
+  });
+  wrap.querySelectorAll('.dleg').forEach(function(l){
+    l.addEventListener('mouseenter',function(){ sel(l.getAttribute('data-i'),true) });
+    l.addEventListener('mouseleave',function(){ sel(0,false) });
+  });
+});
 
 // ---- table ----
 function filtered(){
