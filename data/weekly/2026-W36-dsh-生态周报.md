@@ -1,16 +1,16 @@
 # DSH 插件生态周报 · 2026-W36
 
-> 数据快照 2026-09-06 · 由 dsh-insights（DSH 插件洞察 · dsh-insights.com）自动整理 · 开源：[dsh-plugin-insights](https://github.com/ice5kysl/dsh-plugin-insights)
+> 数据快照 2026-09-06 · 由 dsh-insights（DSH 插件洞察 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
 
 ## 本期速览
 
 - 权威插件 **2113** 个（通过 dsh.bundle manifest 校验；另有 1274 个被拒/噪声分桶）
 - 近 30 天活跃 100% · 可过收录门禁（仓库≥1天）99.8%
 - npm 发布率 49.7%（已发布 1050 / 版本滞后 253）
-- 中英/双语文档率 37.1% · 平均质量分 68.8（A+B 41.4%）
-- curated 收录覆盖 46.7%（987 个已进 awesome/imsai）
+- 中英/双语文档率 37.1% · 平均质量分 87.2（A+B 99.4%）
+- curated 收录覆盖 46.8%（988 个已进 awesome/imsai）
 - npm 周下载样本 Top 15 合计 417107
-- LLM 能力标注进度：1836/2113
+- LLM 能力标注进度：1834/2113
 
 ## 增长与榜单
 
@@ -48,32 +48,32 @@
 
 ## 信号与观察（启发式）
 
-- 质量两级分化仍在：A 级 47 个 vs D 级 48 个（C 级是主体 1191），生态"能跑但文档/发布不齐"的中段插件占比最高。
+- 质量两级分化仍在：A 级 1035 个 vs D 级 0 个（C 级是主体 13），生态"能跑但文档/发布不齐"的中段插件占比最高。
 - 功能分类上「其它」最拥挤（519 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
 - 13 个插件没有 README、1063 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
-- curated 收录仍集中于少数头部（987/2113），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
+- curated 收录仍集中于少数头部（988/2113），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
 - 本期相对上期有新增/消失/star 变动，见下方 diff 摘要。
 
 ## 优质未收录 · 建议收录（Top 8，供作者与目录维护者）
 
+- omdsh-dev/DSH-better-sidebar（A，★3339，周下载 97317）
+- shanliuling/dsh-image-gen（A，★314，周下载 2665）
 - RevolutionLA/dsh-dream-skin（A，★142，周下载 9994）
 - pengyue-polaron/deepseek-harness-genui（A，★107）
-- Renzic-Stone/DSH-EasyRewrite（A，★102）
 - mexiaosqwq/dsh-web-mobile（A，★78）
 - a179-sanae/dsh-auto-collapse（A，★53）
+- SiriLee/dsh-rewind（A，★37）
 - jjxjjjjiik-bot/dsh-chat-timeline（A，★32）
-- SenmuuuuW/dsh-whale-report（A，★31）
-- nevertoday/dsh-theme-plugin（A，★23）
 
 ## 本期动作 & 社区行动
 
 - 我们持续在做的：质量分级/打分明细/收录渠道矩阵/LLM 能力标注/每插件"致作者的信"；人工点评种子 5 条待校对。
-- 给插件作者：站内可看自己与同类差距；想上榜就补 README/中文文档/npm 发布/进目录——每项都有对应加分。
+- 给插件作者：站内可看自己与同类差距；想上榜就补 README/中文文档/npm 发布/进目录——每少一条扣分就离 A 近一步。
 - 给 dsh 官方/社区：如果你希望某类能力得到生态补足或某插件进入官方视野，欢迎到仓库 issue 提需求；数据与管线完全开源可复核。
 
 ---
 
-# 快照 Diff · 2026-09-05
+# 快照 Diff · 2026-09-06
 
 - 当前权威插件：**2113**（上次 2113）
 - 新增 0 · 消失 0
@@ -87,5 +87,5 @@
 
 ---
 
-> 数据来源：GitHub 公开元数据 + npm registry；评估为启发式（非安全审计）。完整数据集 data/plugins.jsonl / csv，站点 https://ice5kysl.github.io/dsh-plugin-insights/
-> 周报与"致作者的信"由 dsh-plugin-insights 自动生成，欢迎转载（保留出处即可）。
+> 数据来源：GitHub 公开元数据 + npm registry；评估为启发式（非安全审计）。完整数据集 data/plugins.jsonl / csv，站点 https://dsh-insights.com/
+> 周报与"致作者的信"由 dsh-insights 自动生成，欢迎转载（保留出处即可）。

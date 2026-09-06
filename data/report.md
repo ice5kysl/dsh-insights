@@ -16,21 +16,21 @@
 - awesome-dsh-plugin 757 · imsai 236 · 至少一个渠道 988（46.8%） · 未收录 1125
 
 ## 优质未收录 · 建议收录（Top 15）
+- omdsh-dev/DSH-better-sidebar A · 周下载 97317
+- shanliuling/dsh-image-gen A · 周下载 2665
 - RevolutionLA/dsh-dream-skin A · 周下载 9994
 - pengyue-polaron/deepseek-harness-genui A
-- Renzic-Stone/DSH-EasyRewrite A
 - mexiaosqwq/dsh-web-mobile A
 - a179-sanae/dsh-auto-collapse A
+- SiriLee/dsh-rewind A
 - jjxjjjjiik-bot/dsh-chat-timeline A
 - SenmuuuuW/dsh-whale-report A
 - nevertoday/dsh-theme-plugin A
 - Ultronen/dsh-archived-chats A
-- CocoSgt/dsh-attachments A
-- mmzm0808/dsh-deepseek-usage A
-- CocoSgt/dsh-inspector A
+- Likenttt/garmin-connect-plugin-for-dsh A
+- Shiye-10Pages/dsh-whale-meter A
+- hanzhangzzz/dsh-diagram A
 - nonentity303/dsh-plugin-manager A
-- lilyblessing/dsh-mcp-skill-panel A
-- jiuyuechuwuhao/dsh-canvas-preview A
 
 ## npm 周下载 Top 10
 - dsh-market/dsh-market：128104
@@ -45,8 +45,8 @@
 - MeteorNOX/DeepSeek-Balance-Whale-Widget：8084
 
 ## 质量评分（启发式）
-- 平均分 68.8 · A+B 占比 41.4%
-- A 47 · B 827 · C 1191 · D 48
+- 平均分 87.2 · A+B 占比 99.4%
+- A 1035 · B 1065 · C 13 · D 0
 
 ## 功能分类（启发式 Top 12）
 - 其它：519
