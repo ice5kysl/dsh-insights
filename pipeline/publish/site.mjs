@@ -103,6 +103,19 @@ function main() {
 
   const topicBars = (a.topTopics || []).slice(0, 8).map((x) => bar(x.topic, x.count, (a.topTopics || [])[0]?.count || 1, null, x.topic)).join('')
 
+  // ---- coverage funnel（口径透明：为什么权威集 ≪ topic 宇宙） -------------
+  const cov = a.coverage || {}
+  const uni = cov.topicUniverse?.count || 0
+  const uniAt = (cov.topicUniverse?.at || '').slice(0, 10)
+  const invalidTotal = (cov.invalidBuckets || []).reduce((s2, b) => s2 + b.count, 0)
+  const bucketsTxt = (cov.invalidBuckets || []).slice(0, 5).map((b) => `${esc(b.reason)} ${b.count}`).join(' · ')
+  const funnelHtml = uni ? [
+    bar('topic 宇宙', uni, uni, null, `topic:dsh-plugin 全量（${uniAt} 实测）· 官方打标即入、零门槛`),
+    bar('多源候选', cov.candidates || 0, uni, null, 'topic 分片全量抓取 + 策展目录 + npm 映射 · 去重'),
+    bar('完成校验', cov.validated || 0, uni, null, 'manifest 门禁逐条核验（断点续跑）'),
+    bar('权威集 ✓', cov.authoritative || 0, uni, 'var(--ok)', '非 fork/归档 + 声明 dsh.bundle.patch 且 patch 已提交'),
+  ].join('') : ''
+
   const gCol = { A: 'var(--ok)', B: 'var(--accent)', C: 'var(--warn)', D: 'var(--err)' }
   const gMax = Math.max(1, ...Object.keys(gCol).map((k) => a.quality?.grades?.[k] || 0))
   const gradesHtml = Object.keys(gCol).map((k) => bar(k, a.quality?.grades?.[k] || 0, gMax, gCol[k])).join('')
@@ -156,6 +169,12 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 /* ---- topbar ---- */
 .topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.subnav{position:sticky;top:56px;z-index:29;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.subnav .wrap{display:flex;align-items:center;gap:2px;height:38px;overflow-x:auto}
+.subnav a{color:var(--mut);font-size:12.5px;padding:4px 10px;border-radius:7px;white-space:nowrap}
+.subnav a:hover{color:var(--ink);background:var(--track);text-decoration:none}
+.nav a.here{color:var(--ink);font-weight:650}
+section[id],div[id="browse"]{scroll-margin-top:108px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:14px;color:var(--ink);white-space:nowrap}
 .brand:hover{text-decoration:none}
 .mark{width:22px;height:22px;border-radius:6px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:700 12px/1 var(--mono)}
@@ -303,7 +322,10 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 <body>
 <div class="topbar"><div class="wrap">
   <a class="brand" href="#top"><span class="mark">d</span>dsh-insights<small>DeepSeek Harness 全景观察站</small></a>
-  <nav class="nav"><a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a><a href="weekly/">周报</a><a href="data/">数据</a><a href="about/">方法论</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <nav class="nav"><a href="./" class="here">仪表盘</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="about/">方法论</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+</div></div>
+<div class="subnav"><div class="wrap">
+  <a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a>
 </div></div>
 
 <header class="hero" id="top"><div class="wrap">
@@ -326,6 +348,11 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 
 <section class="sec" id="overview">
   <div class="sec-h"><span class="sec-n">01</span><h2>生态趋势</h2><p class="sub">增长节奏 · 发布与文档覆盖 · 热门话题</p></div>
+  ${funnelHtml ? `<div class="panel" style="margin-bottom:14px">
+    <div class="p-h"><h3>覆盖漏斗 · ${cov.authoritative} 与 ${uni.toLocaleString()} 的关系</h3><span class="p-sub">分桶复核 ${invalidTotal}：${bucketsTxt}</span></div>
+    ${funnelHtml}
+    <p class="p-sub" style="margin-top:10px">topic 是「打标即入」的原始宇宙——含蹭标、无关仓库、fork、monorepo 子路径与已删除仓库；权威集是 manifest 门禁逐条核验后的下限口径。<b>不是收录不全，是过滤后的可信子集</b>；纯 tarball 分发等边界形态进分桶人工复核。口径详见 <a href="about/">方法论</a>。</p>
+  </div>` : ''}
   <div class="panel" style="margin-bottom:14px">
     <div class="p-h"><h3>权威集新增 · 按周</h3><span class="p-sub">按仓库创建时间归属到周一 · 最近 ${wkArr.length} 周</span></div>
     <div class="chartbox" id="chart-week">${areaSvg}<div class="ch-tip" id="ch-tip"></div></div>

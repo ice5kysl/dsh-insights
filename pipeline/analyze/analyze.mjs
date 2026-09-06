@@ -13,8 +13,9 @@
  * @module dsh-insights/pipeline-analyze
  */
 
-import { writeFileSync } from 'node:fs'
-import { PATHS, readJsonl, readJson, writeJson } from '../../lib/data.mjs'
+import { writeFileSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { DATA, PATHS, readJsonl, readJson, writeJson } from '../../lib/data.mjs'
 import { scoreAll } from './score.mjs'
 
 const PLUGINS = process.argv[2] || PATHS.plugins
@@ -118,6 +119,27 @@ function analyze(rows) {
     scoreSum += h.score
   }
   stars.sort((a, b) => b - a)
+
+  // ---- coverage funnel（口径透明：topic 宇宙 → 候选 → 校验 → 权威集 + 分桶）----
+  const candRows = readJsonl(PATHS.candidatesAll).filter((c) => c.kind === 'repo')
+  const candidates = candRows.length
+  let validated = 0
+  try {
+    const candIds = new Set(candRows.map((c) => c.id))
+    validated = readFileSync(PATHS.doneIds, 'utf8').split('\n').filter(Boolean).filter((id) => candIds.has(id)).length
+  } catch { validated = n }
+  const bucketAgg = {}
+  for (const r of readJsonl(PATHS.invalid)) bucketAgg[r.reason || '?'] = (bucketAgg[r.reason || '?'] || 0) + 1
+  const coverage = {
+    // topic 宇宙总量：GitHub search `topic:dsh-plugin` total_count（官方零门槛打标即入，含蹭标/无关/fork/子路径噪音）。
+    // 数值定期由 discover 全量抓取时刷新（见 data/discover-meta.json）；缺省用 RESEARCH 2026-09-05 实测。
+    topicUniverse: readJson(join(DATA, 'discover-meta.json'))?.topicTotal ?? { count: 13592, at: '2026-09-05' },
+    candidates,
+    validated,
+    authoritative: n,
+    invalidBuckets: Object.entries(bucketAgg).sort((a, b) => b[1] - a[1]).map(([reason, count]) => ({ reason, count })),
+  }
+
   const topStars = rows.slice().sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 10)
     .map((r) => ({ repo: r.full_name, stars: r.stars, published: Boolean(r.npm?.published), zh: Boolean(r.metrics?.hasZhDocs) }))
   const active = rows.filter((r) => r.metrics?.active30).length
@@ -158,6 +180,7 @@ function analyze(rows) {
       gradePct: pct((gradeAgg.A || 0) + (gradeAgg.B || 0), n),
     },
     categories: Object.entries(catAgg).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([cat, count]) => ({ category: cat, count })),
+    coverage,
     enrichCount: enrich.length,
   }
 }

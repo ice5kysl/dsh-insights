@@ -133,6 +133,8 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
 <div class="article">
 <h2>权威集门禁</h2>
 <p>非 fork / 非归档 · <code>package.json</code> 声明 <code>dsh.bundle.patch</code> · patch 文件已提交。这是下限口径：纯 tarball 分发的插件会进入分桶人工复核（<code>invalid.jsonl</code>）。</p>
+<h2>覆盖与完整性（为什么权威集 ≪ topic 总数）</h2>
+<p>GitHub <code>topic:dsh-plugin</code> 是官方唯一发现机制，<b>打标即入、零门槛</b>——其中混有大量蹭标、无关仓库、fork、monorepo 子路径与已删除仓库。我们的漏斗：<b>topic 宇宙（≈13.6k，首页漏斗实时口径）→ 多源候选（topic 分片全量抓取 + 策展目录 + npm 映射，去重）→ manifest 门禁逐条校验 → 权威集 + 分桶</b>。权威集是「货真价实可按官方 bundle 形态安装」的下限子集；<code>no-dsh-bundle</code> / <code>no-package.json</code> 桶里的候选可能是插件但形态非标，留待人工复核而不是混入权威集。<b>覆盖率数字本身也公开</b>（首页覆盖漏斗），这就是我们对「完整性」的回答方式：不报大数，报可核验的数。</p>
 <h2>健康分（health-v2）</h2>
 <p>100 起扣 · warn −5 / fail −20 · 纯客观信号（manifest 规范 / npm 发布与版本一致 / README 与中文文档 / LICENSE / dsh-plugin topic / 活跃度），星数不进分。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。每条扣分带证据；探测不到的数据不虚构、不扣分（missing 明示）。规则全文与 changelog 见 <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">SCHEMA §health</a>。</p>
 <h2>校准</h2>

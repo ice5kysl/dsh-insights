@@ -60,11 +60,13 @@ async function main() {
   //    full via recursive created-window sharding (GitHub caps 1000/query).
   //    Secondary topics stay capped as supplementary sources (mostly overlap).
   const topicOrder = ['dsh-plugin', 'deepseek-harness', 'dsh-bundle', 'cordis-plugin']
+  let topicTotal = null
   for (const topic of topicOrder) {
     if (topic === 'dsh-plugin') {
       const t0 = Date.now()
-      const { items, warnings } = await ghSearchAll(`topic:${topic}`)
-      console.log(`[discover] topic:${topic} → ${items.length} (full crawl, ${((Date.now() - t0) / 1000).toFixed(0)}s)`)
+      const { items, warnings, total } = await ghSearchAll(`topic:${topic}`)
+      if (total) topicTotal = { count: total, at: new Date().toISOString() }
+      console.log(`[discover] topic:${topic} → ${items.length} (full crawl of ${total || '?'}, ${((Date.now() - t0) / 1000).toFixed(0)}s)`)
       for (const w of warnings) console.warn(`[discover] ${w}`)
       for (const it of items) pushRepo(it, `topic:${topic}`)
     } else {
@@ -121,6 +123,12 @@ async function main() {
 
   const limited = LIMIT_REPO_SOURCE ? rows.filter((r) => r.kind === 'repo').slice(0, LIMIT_REPO_SOURCE) : rows
   writeFileSync(OUT, limited.map((r) => JSON.stringify(r)).join('\n') + '\n')
+  writeFileSync(join(ROOT, 'data', 'discover-meta.json'), JSON.stringify({
+    at: new Date().toISOString(),
+    topicTotal,
+    candidates: limited.length,
+    repoCandidates: limited.filter((r) => r.kind === 'repo').length,
+  }, null, 2) + '\n')
   console.log(`[discover] total candidates: ${limited.length} (source rows ${rows.length}) → ${OUT} (${((Date.now() - t0) / 1000).toFixed(1)}s)`)
 }
 

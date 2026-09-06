@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T01:57:39.987Z",
+  "generatedAt": "2026-09-06T02:15:10.537Z",
   "totals": {
     "authoritative": 2113,
     "active30": 2113,
@@ -894,5 +894,60 @@
       "count": 62
     }
   ],
+  "coverage": {
+    "topicUniverse": {
+      "count": 13592,
+      "at": "2026-09-05"
+    },
+    "candidates": 2875,
+    "validated": 2875,
+    "authoritative": 2113,
+    "invalidBuckets": [
+      {
+        "reason": "no-dsh-bundle",
+        "count": 505
+      },
+      {
+        "reason": "no-package.json",
+        "count": 454
+      },
+      {
+        "reason": "no-signal",
+        "count": 195
+      },
+      {
+        "reason": "repo-gone",
+        "count": 88
+      },
+      {
+        "reason": "archived",
+        "count": 12
+      },
+      {
+        "reason": "patch-missing",
+        "count": 5
+      },
+      {
+        "reason": "repo-http403",
+        "count": 5
+      },
+      {
+        "reason": "package-parse",
+        "count": 4
+      },
+      {
+        "reason": "fork",
+        "count": 4
+      },
+      {
+        "reason": "patch-fetch",
+        "count": 1
+      },
+      {
+        "reason": "tree-failed",
+        "count": 1
+      }
+    ]
+  },
   "enrichCount": 2113
 }
