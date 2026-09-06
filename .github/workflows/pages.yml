@@ -3,6 +3,11 @@ name: pages
 on:
   push:
     branches: [main]
+  # bot push 不触发 workflow：refresh 成功完成后由本 workflow 接力部署，形成 CI 闭环
+  workflow_run:
+    workflows: [refresh]
+    types: [completed]
+    branches: [main]
   workflow_dispatch: {}
 
 permissions:
@@ -17,11 +22,14 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Stage public root (site + slim public data + llms.txt)
         run: |
           mkdir -p public/data

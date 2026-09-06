@@ -1,21 +1,20 @@
 # Daily refresh of the dsh-insights snapshot (CI 定时刷新)
 #
-# - Daily (schedule 03:07 UTC): `pipeline daily` — lists / downloads /
-#   analyze / site / export / diff / pages, then commits new snapshot.
-# - Friday (schedule 03:07 UTC Fri): `pipeline friday` — daily + 内容层
-#   （letters diff 驱动 + 生态周报 + feed 重建），落地 PRODUCT-PLAN §4.3 周报节奏。
-# - Manual `workflow_dispatch` mode=full: `pipeline full`（discover →
-#   validate → 全量）；mode=friday 可手动补跑周报。
+# - 每日 03:07 UTC 一条 cron；job 内按 UTC 星期几选择 profile：
+#   周五跑 `pipeline friday`（daily + 作者关系图 + metrics + 信件 + 周报），
+#   其余天跑 `pipeline daily`。
+# - Manual `workflow_dispatch` mode=full: `pipeline full`（全量管线）。
 # - Token: falls back to built-in GITHUB_TOKEN; set repo secret `DSH_GH_TOKEN`
 #   for a raised API budget.
-# - Commit step pulls with rebase so concurrent pushes never break the run.
+# - concurrency 组防止多 run 并发写 data/（cancel-in-progress: false 排队执行）。
+# - bot push 不触发新 workflow（GitHub 限制），Pages 部署由 pages.yml 的
+#   `workflow_run`（refresh 成功完成后）触发，形成闭环。
 
 name: refresh
 
 on:
   schedule:
     - cron: '7 3 * * *'
-    - cron: '7 3 * * 5'
   workflow_dispatch:
     inputs:
       mode:
@@ -30,6 +29,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
 
 jobs:
   refresh:
@@ -47,16 +50,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
         run: node bin/pipeline.mjs full
-      - name: Friday refresh (daily + letters + weekly)
-        if: inputs.mode == 'friday' || (github.event_name == 'schedule' && github.event.schedule == '7 3 * * 5')
+      - name: Daily refresh (周五自动切 friday profile)
+        if: inputs.mode != 'full'
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
-        run: node bin/pipeline.mjs friday
-      - name: Daily refresh
-        if: inputs.mode != 'full' && inputs.mode != 'friday' && github.event.schedule != '7 3 * * 5'
-        env:
-          GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
-        run: node bin/pipeline.mjs daily
+        run: |
+          if [ "${{ inputs.mode }}" = "friday" ] || [ "$(date -u +%u)" = "5" ]; then
+            echo "Friday profile"
+            node bin/pipeline.mjs friday
+          else
+            echo "Daily profile"
+            node bin/pipeline.mjs daily
+          fi
       - name: Commit snapshot changes
         run: |
           git config user.name 'github-actions[bot]'
