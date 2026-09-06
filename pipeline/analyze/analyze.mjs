@@ -123,6 +123,39 @@ function analyze(rows) {
   }
   stars.sort((a, b) => b - a)
 
+  // ---- 作者维度（owner 聚合：谁是生态重要人物） ----------------------------
+  const enBy = new Map(enrich.map((x) => [x.full_name, x]))
+  const authorAgg = new Map()
+  for (const r of rows) {
+    const o = r.owner || (r.full_name || '').split('/')[0]
+    if (!o) continue
+    const h = healthBy.get(r.full_name) || { score: 0, grade: 'D' }
+    const e = enBy.get(r.full_name) || {}
+    let a0 = authorAgg.get(o)
+    if (!a0) { a0 = { owner: o, plugins: 0, stars: 0, grades: { A: 0, B: 0, C: 0, D: 0 }, npm: 0, covered: 0, lastPush: '', topPlugin: null, topStars: -1, scoreSum: 0, cats: {} }; authorAgg.set(o, a0) }
+    a0.plugins++
+    a0.stars += r.stars || 0
+    a0.grades[h.grade] = (a0.grades[h.grade] || 0) + 1
+    a0.scoreSum += h.score
+    if (r.npm?.published) a0.npm++
+    if (e.covered) a0.covered++
+    if ((r.pushed_at || '') > a0.lastPush) a0.lastPush = r.pushed_at || ''
+    if ((r.stars || 0) > a0.topStars) { a0.topStars = r.stars || 0; a0.topPlugin = r.full_name }
+    const c0 = e.category || '其它'
+    a0.cats[c0] = (a0.cats[c0] || 0) + 1
+  }
+  const authors = [...authorAgg.values()].map((a0) => ({
+    owner: a0.owner, plugins: a0.plugins, stars: a0.stars, grades: a0.grades,
+    ab: (a0.grades.A || 0) + (a0.grades.B || 0),
+    npm: a0.npm, covered: a0.covered, lastPush: (a0.lastPush || '').slice(0, 10),
+    avg: Math.round((a0.scoreSum / Math.max(1, a0.plugins)) * 10) / 10,
+    topPlugin: a0.topPlugin, topStars: a0.topStars,
+    topCat: Object.entries(a0.cats).sort((x, y) => y[1] - x[1])[0]?.[0] || null,
+  })).sort((x, y) => (y.ab - x.ab) || (y.stars - x.stars) || (y.plugins - x.plugins))
+  const multi = authors.filter((a0) => a0.plugins >= 2).length
+  const top10Plugins = authors.slice(0, 10).reduce((s2, a0) => s2 + a0.plugins, 0)
+  const authorStats = { total: authors.length, multi, top10Share: pct(top10Plugins, n) }
+
   // ---- coverage funnel（口径透明：topic 宇宙 → 候选 → 校验 → 权威集 + 分桶）----
   const candRows = readJsonl(PATHS.candidatesAll).filter((c) => c.kind === 'repo')
   const candidates = candRows.length
@@ -195,6 +228,8 @@ function analyze(rows) {
       gradePct: pct((gradeAgg.A || 0) + (gradeAgg.B || 0), n),
     },
     categories: Object.entries(catAgg).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([cat, count]) => ({ category: cat, count })),
+    authors,
+    authorStats,
     coverage,
     enrichCount: enrich.length,
   }

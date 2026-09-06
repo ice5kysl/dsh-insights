@@ -150,6 +150,8 @@ function main() {
     `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td>${s2.published ? '<span class="ok">npm ✓</span>' : '<span class="dim">—</span>'}</td><td>${s2.zh ? '<span class="ok">i18n·中英 ✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
     '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num"><span class="grade ' + esc(e.grade) + '">' + esc(e.grade) + '</span></td><td class="num mono">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('')
+  const authorRows = (a.authors || []).slice(0, 10).map((au) =>
+    '<tr><td><a href="https://github.com/' + esc(au.owner) + '" target="_blank" title="' + esc(au.owner) + '">' + esc(au.owner) + '</a></td><td class="num mono">' + au.plugins + '</td><td class="num mono">' + au.ab + '</td><td class="num mono">★ ' + au.stars.toLocaleString() + '</td></tr>').join('')
 
   const topPickHtml = (a.categories || []).slice(0, 6).map((c) => {
     const pick = byStars.find((p) => enMap.get(p.full_name)?.category === c.category)
@@ -364,7 +366,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 <body>
 <div class="topbar"><div class="wrap">
   <a class="brand" href="#top"><span class="mark">d</span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
-  <nav class="nav"><a href="./" class="here">仪表盘</a><a href="dynamics/">动态</a><a href="scenarios/">场景</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="about/">关于</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <nav class="nav"><a href="./" class="here">仪表盘</a><a href="dynamics/">动态</a><a href="scenarios/">场景</a><a href="authors/">作者</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="about/">关于</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <div class="subnav"><div class="wrap">
   <a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a>
@@ -458,6 +460,10 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
       <table class="ptable"><thead><tr><th>仓库</th><th class="num">质量</th><th class="num">★</th><th>npm / 周下载</th></tr></thead><tbody>
       ${suggestedHtml || '<tr><td class="dim">暂无（请先跑 00-lists + analyze）</td></tr>'}
       </tbody></table>
+    </div>
+    <div class="panel">
+      <h3>作者榜 Top 10</h3><p class="p-sub">按 A/B 级插件数 · <a href="authors/">全部 ${a.authorStats?.total ?? ''} 位作者 →</a></p>
+      <table class="ptable"><thead><tr><th>作者</th><th class="num">插件</th><th class="num">A/B</th><th class="num">★合计</th></tr></thead><tbody>${authorRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
   </div>
 </section>

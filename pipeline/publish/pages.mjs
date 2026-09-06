@@ -176,6 +176,62 @@ ${platRows}
     body: dynBody || '<p class="crumb">Official Dynamics</p><h1 class="pagetitle">官方动态</h1><p class="lede">数据采集中，下个快照上线。</p>',
   })))
 
+  // ---- /authors/ 作者榜 ----------------------------------------------------
+  const an = JSON.parse(read('analysis.json') || '{}')
+  const authors = an.authors || []
+  const ast = an.authorStats || {}
+  const authorRows = authors.map((a, i) => `<tr>
+<td class="num">${i + 1}</td>
+<td><a href="https://github.com/${escHtml(a.owner)}" target="_blank">${escHtml(a.owner)}</a></td>
+<td class="num" data-v="${a.plugins}">${a.plugins}</td>
+<td class="num" data-v="${a.ab}">${a.ab}</td>
+<td class="num" data-v="${a.avg}">${a.avg}</td>
+<td class="num" data-v="${a.stars}">★${a.stars.toLocaleString()}</td>
+<td class="num" data-v="${a.npm}">${a.npm}</td>
+<td class="num" data-v="${a.covered}">${a.covered}</td>
+<td class="num" data-v="${a.lastPush || ''}">${escHtml(a.lastPush || '—')}</td>
+<td>${a.topPlugin ? `<a href="https://github.com/${escHtml(a.topPlugin)}" target="_blank" title="${escHtml(a.topPlugin)}">${escHtml(a.topPlugin.split('/')[1])}</a>` : '—'}</td>
+<td>${escHtml(a.topCat || '—')}</td>
+</tr>`).join('\n')
+  written.push(out('authors/index.html', page({
+    title: '作者榜', desc: 'DSH 插件生态的作者与组织：插件数、质量、影响力、代表插件全表。',
+    base: '../', here: 'authors/',
+    body: `<p class="crumb">Authors</p><h1 class="pagetitle">作者榜 · 生态里的重要人物</h1>
+<p class="lede">按仓库 owner（个人或组织）聚合：${ast.total ?? '—'} 位作者，其中 ${ast.multi ?? '—'} 位多产（≥2 个插件），Top 10 作者产出占权威集 ${ast.top10Share ?? '—'}%。默认按 A/B 级插件数排序（点表头切换）；★ 只作展示信号，不参与质量分。</p>
+<div class="cards">
+  <div class="card"><b>${ast.total ?? '—'}</b><p>作者/组织总数</p></div>
+  <div class="card"><b>${ast.multi ?? '—'}</b><p>多产作者（≥2 插件）</p></div>
+  <div class="card"><b>${ast.top10Share ?? '—'}%</b><p>Top 10 作者产出占比</p></div>
+</div>
+<table class="ptable" id="atable" style="width:100%;margin-top:14px">
+<thead><tr><th class="num">#</th><th>作者</th><th class="num" data-k="num">插件</th><th class="num" data-k="num">A/B</th><th class="num" data-k="num">均分</th><th class="num" data-k="num">★合计</th><th class="num" data-k="num">npm</th><th class="num" data-k="num">收录</th><th class="num" data-k="str">最近活跃</th><th>代表插件</th><th>主分类</th></tr></thead>
+<tbody>${authorRows}</tbody></table>
+<p class="lede" style="margin-top:14px">口径：作者 = 仓库 owner（个人或组织，GitHub 不区分展示）；收录 = 进 awesome/imsai 渠道数；均分 = 其全部插件健康分均值。数据随每日快照刷新。</p>
+<style>
+.ptable{border-collapse:collapse;font-size:12.5px}
+.ptable th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
+.ptable td{padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.ptable td.num,.ptable th.num{text-align:right}
+.ptable tbody tr:hover{background:var(--track)}
+.ptable td:nth-child(10){max-width:180px;overflow:hidden;text-overflow:ellipsis}
+</style>
+<script>
+(function(){
+  var tb=document.getElementById('atable'); if(!tb)return;
+  var ths=tb.querySelectorAll('th'), tbody=tb.querySelector('tbody'), desc=true, col=-1;
+  ths.forEach(function(th,i){ th.addEventListener('click',function(){
+    var numeric=i>=2&&i<=8; desc=(col===i)?!desc:true; col=i;
+    var rows=[].slice.call(tbody.querySelectorAll('tr'));
+    rows.sort(function(a,b){ var x=a.children[i],y=b.children[i];
+      if(numeric){ var vx=parseFloat((x.getAttribute('data-v')||x.textContent).replace(/[^0-9.\\-]/g,''))||0, vy=parseFloat((y.getAttribute('data-v')||y.textContent).replace(/[^0-9.\\-]/g,''))||0; return desc?vy-vx:vx-vy }
+      var sx=x.textContent,sy=y.textContent; return desc?sx.localeCompare(sy):sy.localeCompare(sx) });
+    rows.forEach(function(r){ tbody.appendChild(r) });
+    tbody.querySelectorAll('tr').forEach(function(r,j){ r.children[0].textContent=j+1 });
+  }) });
+})();
+</script>`,
+  })))
+
   // ---- /about/ 关于 · 方法论与指标体系 --------------------------------------
   written.push(out('about/index.html', page({
     title: '关于', desc: 'DSH Insights 是什么、指标体系、评估口径与边界声明。',
