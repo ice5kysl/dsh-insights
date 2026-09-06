@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 /**
- * Stage 17 — per-plugin "letter to the author": a periodic health &
+ * pipeline/content · letters — per-plugin "letter to the author": a periodic health &
  * improvement report written like a note from the ecosystem watcher,
  * plus a small promotion footer for the product.
  *
  * Output: data/reports/{owner}__{repo}.md
- * Run: npm run report  |  node stages/17-report.mjs owner/repo […]
+ * Run: npm run report  |  node pipeline/content/letters.mjs owner/repo […]
  */
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const OUT_DIR = join(ROOT, 'data', 'reports')
 mkdirSync(OUT_DIR, { recursive: true })
 const BRAND = 'DSH 插件洞察（dsh-insights.com）'

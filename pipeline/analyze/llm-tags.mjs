@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 15 — LLM capability tagging (D3) → data/llm.jsonl (append, resumable)
+ * pipeline/analyze · llm-tags — LLM capability tagging (D3) → data/llm.jsonl (append, resumable)
  *
  * Batches the authoritative set through a chat-completions API (DeepSeek or
  * any OpenAI-compatible endpoint) and stores STRUCTURED, HUMAN-SPOT-CHECKABLE
@@ -15,9 +15,9 @@
  *     https://api.deepseek.com) · LLM_MODEL (default deepseek-chat).
  *
  * Usage:
- *   DEEPSEEK_API_KEY=sk-… node stages/15-llm-tags.mjs            # first 200
- *   DEEPSEEK_API_KEY=sk-… LLM_MAX=0 node stages/15-llm-tags.mjs  # all
- *   node stages/15-llm-tags.mjs --dry-run                        # count only
+ *   DEEPSEEK_API_KEY=sk-… node pipeline/analyze/llm-tags.mjs            # first 200
+ *   DEEPSEEK_API_KEY=sk-… LLM_MAX=0 node pipeline/analyze/llm-tags.mjs  # all
+ *   node pipeline/analyze/llm-tags.mjs --dry-run                        # count only
  *
  * @module dsh-insights/stage-15
  */
@@ -26,7 +26,7 @@ import { readFileSync, writeFileSync, appendFileSync, mkdirSync, existsSync } fr
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const SRC = join(ROOT, 'data', 'insights.json')
 const OUT = join(ROOT, 'data', 'llm.jsonl')
 const DONE = join(ROOT, 'data', 'state', 'llm.done')

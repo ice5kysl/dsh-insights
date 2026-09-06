@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 13 — snapshot history accumulator (D5, time-layer moat) → data/history.json
+ * pipeline/analyze · history — snapshot history accumulator (D5, time-layer moat) → data/history.json
  *
  * Appends one dated entry per run containing the aggregate + every plugin's
  * score/grade. Format versioned, append-only, one entry per UTC day. The git
@@ -12,9 +12,9 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { scoreAll } from './08-score.mjs'
+import { scoreAll } from './score.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const PLUGINS = join(ROOT, 'data', 'plugins.jsonl')
 const OUT = join(ROOT, 'data', 'history.json')
 const FORMAT = 'history-v1'

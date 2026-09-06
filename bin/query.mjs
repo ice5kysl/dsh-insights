@@ -18,7 +18,7 @@
 
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { scoreAll } from '../stages/08-score.mjs'
+import { scoreAll } from '../pipeline/analyze/score.mjs'
 
 const FILE = join(import.meta.dirname, '..', 'data', 'plugins.jsonl')
 const args = process.argv.slice(2)

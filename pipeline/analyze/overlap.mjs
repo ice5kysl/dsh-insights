@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 14 — overlap-family detection (D1, analysis-layer moat) → data/overlap.json
+ * pipeline/analyze · overlap — overlap-family detection (D1, analysis-layer moat) → data/overlap.json
  *
  * Groups plugins into approximate capability families from a bilingual
  * keyword lexicon over name/description/topics. Answers "how crowded is this
@@ -17,7 +17,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const SRC = join(ROOT, 'data', 'insights.json')
 const OUT = join(ROOT, 'data', 'overlap.json')
 

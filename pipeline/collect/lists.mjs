@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 00 — fetch membership of curated plugin directories (channels).
+ * pipeline/collect · lists — fetch membership of curated plugin directories (channels).
  *
  * Stores data/listed.json:
  *   { fetchedAt, awesome: ["owner/repo", ...], imsai: [...], dshpluginTopic: true }
@@ -10,9 +10,9 @@
 
 import { writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { ghApi } from '../lib/api.mjs'
+import { ghApi } from '../../lib/api.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 
 async function listDir(owner, repo, path) {
   const out = []

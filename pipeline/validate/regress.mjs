@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 7 — calibration regression over data/seeds.json
+ * pipeline/validate · regress — calibration regression over data/seeds.json
  *
  * Every seed is run through the live validator (02-validate) and the verdict
  * is compared against its expected outcome. Any mismatch fails the run, so a
@@ -13,9 +13,9 @@
 
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { validateOne } from './02-validate.mjs'
+import { validateOne } from './validate.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const seeds = JSON.parse(readFileSync(join(ROOT, 'data', 'seeds.json'), 'utf8'))
 
 let pass = 0

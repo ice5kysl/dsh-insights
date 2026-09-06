@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 18 — weekly DSH plugin-ecosystem report (for community / dsh official).
+ * pipeline/content · weekly — weekly DSH plugin-ecosystem report (for community / dsh official).
  * Outputs: data/weekly/YYYY-Www-dsh-周报.md + data/weekly/LATEST.md
  *
  * Reads current snapshot (analysis/enrich/downloads/llm/diff) and renders a
@@ -10,7 +10,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const W = join(ROOT, 'data', 'weekly')
 mkdirSync(W, { recursive: true })
 

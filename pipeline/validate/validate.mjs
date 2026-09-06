@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 2 — validate candidates and build the authoritative set.
+ * pipeline/validate · validate — validate candidates and build the authoritative set.
  *
  * Cost-optimized:
  *   - cheap signal filter first (no API calls for noise)
@@ -21,9 +21,9 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, appendFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { ghApi, ghContents, npmDoc, sleep, lastRemaining } from '../lib/api.mjs'
+import { ghApi, ghContents, npmDoc, sleep, lastRemaining } from '../../lib/api.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const CAND = process.argv[2] || join(ROOT, 'data', 'candidates-all.jsonl')
 const PLUGINS = join(ROOT, 'data', 'plugins.jsonl')
 const INVALID = join(ROOT, 'data', 'invalid.jsonl')

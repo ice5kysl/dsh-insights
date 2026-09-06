@@ -8,7 +8,7 @@
 
 ```
 M1 对外可见（本周-2026-09 W4）  → dsh-insights.com 上线、信件/周报对外、站点品牌化
-M2 官方动态与兼容雷达（10月）   → Stage 19 官方快照、rc 雷达 v0、双栏周报
+M2 官方动态与兼容雷达（10月）   → collect/dynamics 官方快照、rc 雷达 v0、双栏周报
 M3 生态采纳与月报（10-11月）    → 徽章/渠道采纳、月度《dsh 演进报告》、深检规模化
 M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、数据底座授权、go/pivot/kill
 ```
@@ -20,8 +20,8 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 - [x] 品牌与域名：对外 `dsh-insights.com`（已购）；引擎仓库 `dsh-insights`；文档 VISION/ROADMAP v0.2 定稿（本次）。
 - [x] **域名接入**：Pages 自定义域 + CNAME（dsh-insights.com / www）+ HTTPS 强制；旧 github.io 由项目页自动跳转到自定义域。（2026-09-06）
 - [ ] **站点品牌化**：标题/副标/页脚统一 dsh-insights；hero 文案覆盖"插件 + 官方 + 生态"；补 favicon/OG 元信息（社交分享）。
-- [ ] **「致作者的信」产品化**（Stage 17 已跑通）：默认全量生成（2113）；报告站路由 `/p/<owner>/<repo>`；后续接入"变化对比"（对上一期快照报分数/名次变化）。
-- [ ] **生态周报对外**（Stage 18 已跑通）：固定节奏（每周五）+ 站点周报页 + `data/weekly/LATEST.md`。
+- [ ] **「致作者的信」产品化**（content/letters 已跑通）：默认全量生成（2113）；报告站路由 `/p/<owner>/<repo>`；后续接入"变化对比"（对上一期快照报分数/名次变化）。
+- [ ] **生态周报对外**（content/weekly 已跑通）：固定节奏（每周五）+ 站点周报页 + `data/weekly/LATEST.md`。
 - [ ] **校准与口径**：健康分规则版本化 + changelog；seeds 回归接入 snapshot（沿用 v0.1 M1 口径）。
 - [ ] **多语言 i18n 检测器**：README 语言足迹从"中/英检出"扩展到 ja/ko/es 等多语言（文件名普查 + 内容脚本检测），输出每插件语言清单并入数据与站点（i18n 维度）。
 - [ ] **发布渠道 SOP**：LINUX DO / GitHub Discussions / awesome 社区 / （可选的 dsh 官方）发帖模板与节奏；转载许可文案。
@@ -32,7 +32,7 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 
 **目标**：让"洞察"名副其实——覆盖 **dsh 本身**的演进，并在官方升级时帮插件作者提前避险。
 
-- [ ] **Stage 19 · 官方动态快照器**：抓 `deepseek-ai/DeepSeek-Harness` releases/tags、最新 rc、官方仓库 star/pushed、docs 变更数、`@deepseek-ai/*` 关键包 dist-tags 时间线 → `data/dynamics/dsh-YYYY-WW.json` 时间序列。
+- [ ] **官方动态快照器**（`pipeline/collect/dynamics.mjs`，原 collect/dynamics）：抓 `deepseek-ai/DeepSeek-Harness` releases/tags、最新 rc、官方仓库 star/pushed、docs 变更数、`@deepseek-ai/*` 关键包 dist-tags 时间线 **+ DeepSeek 平台官方信号**（模型/API 发布，可观测公开信号源）→ `data/dynamics/dsh-YYYY-WW.json` 时间序列。
 - [ ] **周报升级为"官方 × 生态"双栏**：加入官方动态小节（release/rc、docs 信号、兼容提示）。
 - [ ] **rc 兼容雷达 v0**：对比"插件声明目标版本/最近验证"与官方最新 rc；发布"升级预警清单"（受影响 + 需验证）。
 - [ ] 官方仓库订阅与低流量抓取：纳入 CI refresh，成本极低。
@@ -73,7 +73,7 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 - [x] 多源发现/分片全量抓取与真伪校验：权威集 **2113**（canonical 2875 全量验证、invalid 分桶 1274、0 重复、断点续跑/限速）。
 - [x] 数据快照 JSONL/CSV/schema + 报告 + 站点（KPI/按周新增/质量分级/功能分类/收录矩阵/优质未收录榜/详情抽屉/打分明细/LLM 解读）+ 查询 CLI。
 - [x] npm 周下载（CI 已取数入库）；快照 diff 基线；收录渠道清单；人工点评种子。
-- [x] 「致作者的信」（Stage 17）与「生态周报」（Stage 18）生成器 + 首批样例。
+- [x] 「致作者的信」（content/letters）与「生态周报」（content/weekly）生成器 + 首批样例。
 - [x] CI：`refresh.yml`（默认轻量 / 手动 full，push 前 rebase）已启用并跑通一次。
 
 ## 快照与版本约定（沿用）
@@ -88,14 +88,14 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 
 | # | 项 | 壁垒 | 成本 | 状态（2026-09-06 核实） |
 |---|---|---|---|---|
-| D1 | 重叠/重复族检测（词汇桶→LLM 精修） | 分析层 | 低 | ✅ v1 已跑：`stages/14-overlap.mjs` 词汇启发式 → `data/overlap.json` |
+| D1 | 重叠/重复族检测（词汇桶→LLM 精修） | 分析层 | 低 | ✅ v1 已跑： 词汇启发式 → `data/overlap.json` |
 | D2 | OSV 供应链漏洞计数（health-v3 新维度） | 事实层 | 低 | ⬜ 未做 |
-| D3 | LLM 语义标注（能力摘要/分类/i18n，结构化回填） | 分析层 | 中 | ✅ 首跑：`stages/15-llm-tags.mjs` → `data/llm.jsonl`（增量续跑中） |
+| D3 | LLM 语义标注（能力摘要/分类/i18n，结构化回填） | 分析层 | 中 | ✅ 首跑： → `data/llm.jsonl`（增量续跑中） |
 | D4 | 实装 smoke 测试（CI 沙箱跑真实 harness） | 事实层(最硬) | 高 | ⬜ 未做（M3，从 top50 + 自荐开始） |
-| D5 | 快照历史积累（分数趋势） | 时间层 | 低 | ✅ 在跑：`stages/13-history.mjs` 每日 append |
+| D5 | 快照历史积累（分数趋势） | 时间层 | 低 | ✅ 在跑： 每日 append |
 | D6 | README 结构质量（小节/坏链/截图） | 信任层 | 低 | ⬜ 未做（M2） |
-| D7 | 单插件 dossier 页 | 信任层 | 中 | 🟡 部分：`/p/<o>/<r>/` 插件页（Stage 20）已上线，深检/趋势并入待做 |
-| D8 | 场景推荐（场景词表 + 透明排序 + scenarios.json） | 分析层 | 中 | ✅ v1 已跑：`stages/16-scenarios.mjs` + 站点场景首选 |
+| D7 | 单插件 dossier 页 | 信任层 | 中 | 🟡 部分：`/p/<o>/<r>/` 插件页（publish/pages）已上线，深检/趋势并入待做 |
+| D8 | 场景推荐（场景词表 + 透明排序 + scenarios.json） | 分析层 | 中 | ✅ v1 已跑：`pipeline/analyze/scenarios.mjs` + 站点场景首选 |
 
 **LLM 使用纪律（公信力底线，维持）**：LLM 只做"人没法机械化、但结果可被人类抽查"的活；输出必须结构化 + 注明"LLM 生成，人工抽查"，**不进 health 分数**（分数只含纯客观信号）。成本控制：只对权威集 + 增量（新增/变更）；分级模型（便宜模型做标签）。别让 LLM 下"好/坏"判断。
 

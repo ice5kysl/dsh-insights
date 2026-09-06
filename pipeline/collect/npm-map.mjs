@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 01b — map npm-published dsh packages back to their GitHub repos,
+ * pipeline/collect · npm-map — map npm-published dsh packages back to their GitHub repos,
  * and merge new repo candidates into a full candidate set.
  *
  * For every npm candidate (+ paginated npm search) fetch the latest manifest
@@ -16,9 +16,9 @@
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { NPM, raw, sleep } from '../lib/api.mjs'
+import { NPM, raw, sleep } from '../../lib/api.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const FULL = process.argv[2] || join(ROOT, 'data', 'candidates-full.jsonl')
 const ALL = join(ROOT, 'data', 'candidates-all.jsonl')
 

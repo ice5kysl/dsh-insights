@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 6 — limited deep checks on selected plugins (clone + source scan).
+ * pipeline/validate · deep — limited deep checks on selected plugins (clone + source scan).
  *
  * Heuristics (same spirit as dsh-plugin-health):
  *   - filesystem writes / subprocess spawn / HTTP write verbs in src
@@ -18,7 +18,7 @@ import { spawnSync } from 'node:child_process'
 import { join } from 'node:path'
 import { readFileSync as readRows } from 'node:fs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const CACHE = join('/tmp', 'dsh-deep-cache')
 const LOCAL = process.env.DSH_WORKSPACE || join(ROOT, '..') // 深检目标目录：环境变量或仓库父目录（不再硬编码本机路径）
 mkdirSync(CACHE, { recursive: true })

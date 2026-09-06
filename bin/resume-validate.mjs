@@ -49,9 +49,9 @@ async function main() {
     const { total, missing, doneUnique } = counts()
     if (total > 0 && missing === 0) {
       console.log(`[resume] all ${total} candidates validated — finalizing`)
-      run('stages/03-analyze.mjs')
-      run('stages/04-site.mjs')
-      run('stages/05-export.mjs')
+      run('pipeline/analyze/analyze.mjs')
+      run('pipeline/publish/site.mjs')
+      run('pipeline/publish/export-csv.mjs')
       writeFileSync(MARKER, JSON.stringify({ complete: true, at: new Date().toISOString(), total, done: doneUnique, missing: 0 }) + '\n')
       console.log(`[resume] COMPLETE — ${total} candidates, ${doneUnique} done → ${MARKER}`)
       process.exit(0)
@@ -59,7 +59,7 @@ async function main() {
     attempts++
     if (await apiOk()) {
       console.log(`[resume] attempt ${attempts}: missing ${missing}/${total}; sweeping`)
-      const st = run('stages/02-validate.mjs')
+      const st = run('pipeline/validate/validate.mjs')
       if (st !== 0) console.log(`[resume] sweep exit ${st}; retrying`)
     } else {
       console.log(`[resume] API limited; retry in ${every}s`)

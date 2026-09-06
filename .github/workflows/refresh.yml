@@ -1,9 +1,11 @@
 # Daily refresh of the dsh-insights snapshot (CI 定时刷新)
 #
-# - Default run (schedule): light refresh — lists / downloads / analyze /
-#   site / export / diff, then commits new snapshot when changed.
-# - Manual `workflow_dispatch` with mode=full: runs the entire pipeline
-#   (discover → validate → …) before refreshing.
+# - Daily (schedule 03:07 UTC): `pipeline daily` — lists / downloads /
+#   analyze / site / export / diff / pages, then commits new snapshot.
+# - Friday (schedule 03:07 UTC Fri): `pipeline friday` — daily + 内容层
+#   （letters diff 驱动 + 生态周报 + feed 重建），落地 PRODUCT-PLAN §4.3 周报节奏。
+# - Manual `workflow_dispatch` mode=full: `pipeline full`（discover →
+#   validate → 全量）；mode=friday 可手动补跑周报。
 # - Token: falls back to built-in GITHUB_TOKEN; set repo secret `DSH_GH_TOKEN`
 #   for a raised API budget.
 # - Commit step pulls with rebase so concurrent pushes never break the run.
@@ -12,16 +14,18 @@ name: refresh
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '7 3 * * *'
+    - cron: '7 3 * * 5'
   workflow_dispatch:
     inputs:
       mode:
-        description: 'refresh (light) or full pipeline'
+        description: 'refresh (daily) / friday (daily+周报) / full (全量管线)'
         required: true
         default: refresh
         type: choice
         options:
           - refresh
+          - friday
           - full
 
 permissions:
@@ -38,15 +42,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Full pipeline (optional)
+      - name: Full pipeline (manual mode=full)
         if: inputs.mode == 'full'
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
-        run: node bin/dsh-insights.mjs run
-      - name: Light refresh (lists/downloads/analyze/site/export/diff)
+        run: node bin/pipeline.mjs full
+      - name: Friday refresh (daily + letters + weekly)
+        if: inputs.mode == 'friday' || (github.event_name == 'schedule' && github.event.schedule == '7 3 * * 5')
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
-        run: node bin/refresh-extra.mjs
+        run: node bin/pipeline.mjs friday
+      - name: Daily refresh
+        if: inputs.mode != 'full' && inputs.mode != 'friday' && github.event.schedule != '7 3 * * 5'
+        env:
+          GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
+        run: node bin/pipeline.mjs daily
       - name: Commit snapshot changes
         run: |
           git config user.name 'github-actions[bot]'

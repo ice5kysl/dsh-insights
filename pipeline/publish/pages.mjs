@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 20 — multi-page static site generator (the "pages" layer on top of
+ * pipeline/publish · pages — multi-page static site generator (the "pages" layer on top of
  * the single-page dashboard from stage 4).
  *
  * Generates:
@@ -12,16 +12,16 @@
  *   site/llms.txt                                  agent navigation
  *
  * Zero-dependency; page chrome and Markdown rendering live in lib/page.mjs.
- * Run: node stages/20-pages.mjs   (after analyze/site/report/weekly stages)
+ * Run: node pipeline/publish/pages.mjs   (after analyze/site/report/weekly stages)
  *
  * @module dsh-insights/stage-20
  */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync, existsSync, statSync } from 'node:fs'
 import { join } from 'node:path'
-import { page, mdToHtml, mdTitle, escHtml } from '../lib/page.mjs'
+import { page, mdToHtml, mdTitle, escHtml } from '../../lib/page.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const SITE = join(ROOT, 'site')
 const ORIGIN = 'https://dsh-insights.com'
 
@@ -135,7 +135,7 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
 <h2>健康分（health-v1）</h2>
 <p>基分 25 + 加分项（manifest 清单 / README / 双语文档 / LICENSE / 构建产物 / client 导出 / npm 发布 / 版本同步 / 活跃度等）。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 72</span> <span class="grade C">C ≥ 52</span> <span class="grade D">D</span>。每项打分带证据；缺数据明说降级，不乱判。</p>
 <h2>校准</h2>
-<p>已知真/假插件编入校准集，每次快照跑回归（<code>stages/07-regress.mjs</code>），回归非 100% 则当周快照不发布。口径变更必须 bump 规则版本并写 changelog。</p>
+<p>已知真/假插件编入校准集，每次快照跑回归（<code>pipeline/validate/regress.mjs</code>），回归非 100% 则当周快照不发布。口径变更必须 bump 规则版本并写 changelog。</p>
 <h2>边界声明</h2>
 <p>启发式评估 ≠ 安全审计。不做社区评分/投票、不做安装托管交易、不做登录产品。深检（写面/消毒）为增量信号，单独标注。</p>
 <h2>可复核</h2>
@@ -165,7 +165,7 @@ ${items}
   // ---- llms.txt (agent navigation) ----------------------------------------
   written.push(out('llms.txt', `# dsh-insights
 
-DeepSeek Harness (dsh) 插件与生态洞察：全量权威集 + 客观健康分（A–D, health-v1）+ 生态周报 + 官方动态。启发式评估，非安全审计。
+DeepSeek Harness 全景观察站：插件健康（全量权威集 + 客观健康分 A–D）· 官方动态（dsh 官方 + DeepSeek 平台信号）· 生态趋势（生态周报）。启发式评估，非安全审计。
 
 ## 数据入口（稳定 URL，可直接抓取）
 - ${ORIGIN}/data/insights.json — 全量洞察快照（首选）

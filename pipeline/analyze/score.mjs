@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 8 — health scoring over the authoritative set (data/plugins.jsonl).
+ * pipeline/analyze · score — health scoring over the authoritative set (data/plugins.jsonl).
  *
  * M1: turns every validated plugin row into an explainable 0–100 health score
  * with an A–D grade, per-dimension breakdown and evidence for every deduction.
@@ -24,7 +24,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const SRC = join(ROOT, 'data', 'plugins.jsonl')
 const OUT = join(ROOT, 'data', 'scored.jsonl')
 const SUMMARY = join(ROOT, 'data', 'health.json')

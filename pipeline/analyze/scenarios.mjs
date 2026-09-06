@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 16 — scenario recommendations (D8) → data/scenarios.json
+ * pipeline/analyze · scenarios — scenario recommendations (D8) → data/scenarios.json
  *
  * Turns tags (LLM capabilityTags ∪ lexicon buckets) into answerable
  * "常用场景 → Top 候选" lists. Ranking is transparent & explainable —
@@ -22,7 +22,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const LLM = join(ROOT, 'data', 'llm.jsonl')
 const INS = join(ROOT, 'data', 'insights.json')
 const OUT = join(ROOT, 'data', 'scenarios.json')

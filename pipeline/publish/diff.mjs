@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 8 — snapshot diff vs previous baseline.
+ * pipeline/publish · diff — snapshot diff vs previous baseline.
  *   - if data/prev-plugin-ids.json exists: prints added/removed plugins,
  *     star risers, and writes data/last-diff.md
  *   - else: establishes the baseline (first snapshot) and notes so.
@@ -11,7 +11,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const PREV = join(ROOT, 'data', 'prev-plugin-ids.json')
 const OUT = join(ROOT, 'data', 'last-diff.md')
 

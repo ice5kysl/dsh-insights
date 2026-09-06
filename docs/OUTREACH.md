@@ -50,7 +50,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 
 ## 四、周报外发 SOP（ROADMAP M1 缺口，本节约定）
 
-1. **生成**：每周五 CI 跑 Stage 18 → `data/weekly/YYYY-Www.md` + `LATEST.md` + 站点 `/weekly/` + feed.xml 重建（机器生成全文）。
+1. **生成**：每周五 CI 跑 content/weekly → `data/weekly/YYYY-Www.md` + `LATEST.md` + 站点 `/weekly/` + feed.xml 重建（机器生成全文）。
 2. **review**（人，≤15 分钟）：核对数字与 movers 无异常；口径变更必须出现在"口径公告位"。
 3. **外发**（人，模板化）：LINUX DO + 本仓库 Discussions 各一帖，结构 = 本周 3 个数字 + 1 个 movers 看点 + 站点/RSS 链接；语气中立（数据说话，不拉踩）。
 4. **记录**：外发链接与反馈记 RESEARCH §决策日志；断更即警报（PRODUCT-DESIGN §红线：连续断更 2 期暂停新功能先修管线）。

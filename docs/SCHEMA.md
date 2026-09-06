@@ -3,7 +3,7 @@
 > 状态：v0.2 · 2026-09-06 · 数据契约：权威集/分桶/健康分的字段口径与规则 changelog
 > 文档地图：[VISION](./VISION.md)（为什么）→ [PRODUCT-PLAN](./PRODUCT-PLAN.md)（做什么/怎么做）→ [PRODUCT-DESIGN](./PRODUCT-DESIGN.md)（页面与指标）→ [ROADMAP](./ROADMAP.md)（什么时候）· [RESEARCH](./RESEARCH.md)（证据）· SCHEMA（数据契约）· [OUTREACH](./OUTREACH.md)（外发）
 
-快照由 `stages/02-validate.mjs` 产出，JSONL（每行一个对象，UTF-8）。行按来源分三类：
+快照由  产出，JSONL（每行一个对象，UTF-8）。行按来源分三类：
 
 ## `data/plugins.jsonl` — 权威集（有效插件）
 
@@ -69,7 +69,7 @@
 
 "有效/权威" = 仓库非 fork/归档 + 存在 `package.json` 且声明 `dsh.bundle.patch` + 该 patch 文件已提交。这是**下限**（manifest 未提交/纯 tarball 分发的会进 invalid 桶复核）。GitHub 搜索每查询 ≤1000 条、contents 列目录 ≤1000 条；完整宇宙需多轮/多源补充。
 
-## `health` — 健康分（`stages/08-score.mjs` → `data/scored.jsonl` + `data/health.json`）
+## `health` — 健康分（ → `data/scored.jsonl` + `data/health.json`）
 
 每条权威插件行附带 `health` 对象；`data/scored.jsonl` = plugins.jsonl 行 + `health`（join key `full_name`）；`data/health.json` 为聚合（grades/avg/median/topDeductions）。
 

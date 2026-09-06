@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 5 — export the authoritative set as CSV.
+ * pipeline/publish · export-csv — export the authoritative set as CSV.
  * Output: data/plugins.csv
  *
  * @module dsh-insights/stage-5
@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const SRC = join(ROOT, 'data', 'plugins.jsonl')
 
 const esc = (v) => {

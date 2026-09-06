@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 7 — fetch last-week npm downloads (via curl; node fetch to
+ * pipeline/collect · downloads — fetch last-week npm downloads (via curl; node fetch to
  * api.npmjs.org is blocked in some sandboxes).
  * Output: data/downloads.json { fetchedAt, map }
  *
@@ -11,7 +11,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { join } from 'node:path'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const CONC = Number(process.env.CONC || 12)
 
 function curl(name) {

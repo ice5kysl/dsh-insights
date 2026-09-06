@@ -56,14 +56,14 @@ dsh-insights.com
 - `/weekly/index.html`：存档列表（倒序）+ 订阅引导（RSS / 仓库 watch）
 - `/weekly/2026-W36.html`：单期页，双栏结构（M2 起）：官方动态 | 生态动态
 - 内容模块：本周新增/消失、movers（star 跳涨/新晋 A 级）、收录动态、优质未收录观察名单、口径变更公告位
-- 生成：Stage 18（已就绪），每周五 CI 自动跑 + commit + 重建 feed.xml
+- 生成：content/weekly（已就绪），每周五 CI 自动跑 + commit + 重建 feed.xml
 - **人只做 review 和外发**（LINUX DO / Discussions 发帖模板见外发 SOP）
 
 ### 2.4 `/dynamics/` 官方动态 + rc 雷达（M2）
 
 | 模块 | 内容 | 数据源 |
 |---|---|---|
-| 官方时间线 | release/rc 发布时间轴、docs 变更节奏 | data/dynamics/*.json（Stage 19） |
+| 官方时间线 | release/rc 发布时间轴、docs 变更节奏 | data/dynamics/*.json（collect/dynamics） |
 | 版本状态表 | latest / rc dist-tags、距上次发布天数 | npm registry |
 | **rc 兼容雷达** | 升级预警清单：受影响插件 + 需验证插件 + 依据 | 契约字段普查（M1 末）→ v0 声明对比 / v1 API 符号交集 |
 
@@ -86,9 +86,9 @@ dsh-insights.com
 | 频率 | workflow | 跑什么 | 产物 |
 |---|---|---|---|
 | 每日 03:00 | refresh.yml（现状） | lists → downloads → analyze → site → export → diff | 快照 commit |
-| 每周五 | refresh.yml 分支 | 上述 + Stage 18 周报 + feed.xml 重建 | 周报 commit |
+| 每周五 | refresh.yml 分支 | 上述 + content/weekly 周报 + feed.xml 重建 | 周报 commit |
 | M1 末起每日 | 同上 | 契约字段采集（02-validate 扩展） | eval.contract 入库 |
-| M2 起每日 | 同上 | Stage 19 官方动态快照 | data/dynamics/ |
+| M2 起每日 | 同上 | collect/dynamics 官方动态快照 | data/dynamics/ |
 | 每月 1 日 | 手动/定时 full | discover → validate 全量 | 候选池刷新 |
 | 分数变化时 | diff 驱动 | 对应插件的信件 + 徽章 + 插件页重生成 | 单页 commit |
 
@@ -141,9 +141,9 @@ dsh-insights.com
 
 ## 五、落地顺序（M1 内的执行序）
 
-1. `stages/20-pages.mjs` 多页生成骨架（page() 模板 + /weekly /about /data）
+1.  多页生成骨架（page() 模板 + /weekly /about /data）
 2. 域名接入（CNAME + HTTPS + github.io 301 + OG/favicon）
-3. 插件页全量生成（Stage 17 输出 → /p/ 路由）
+3. 插件页全量生成（content/letters 输出 → /p/ 路由）
 4. 周报第 1 期 + feed.xml
 5. 02-validate 契约字段普查（决定雷达路线）
 6. metrics.jsonl 自测量接入 CI

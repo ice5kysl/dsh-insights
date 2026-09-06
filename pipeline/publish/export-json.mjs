@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 9 — public JSON export (agent-readable contract) → data/insights.json
+ * pipeline/publish · export-json — public JSON export (agent-readable contract) → data/insights.json
  *
  * Stable, machine-readable view over the scored authoritative set. Intended as
  * the public data URL of the product (site/CI will serve it), shaped so an
@@ -13,9 +13,9 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { scoreAll, RULE_VERSION } from './08-score.mjs'
+import { scoreAll, RULE_VERSION } from '../analyze/score.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const SRC = join(ROOT, 'data', 'plugins.jsonl')
 const OUT = join(ROOT, 'data', 'insights.json')
 

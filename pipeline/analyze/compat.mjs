@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 11 — compatibility enrichment (M3 groundwork) → data/compat.json
+ * pipeline/analyze · compat — compatibility enrichment (M3 groundwork) → data/compat.json
  *
  * Builds the raw material for the plugin ↔ dsh-version compatibility matrix
  * WITHOUT touching the running validator (registry-only reads, no GitHub
@@ -22,9 +22,9 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { NPM } from '../lib/api.mjs'
+import { NPM } from '../../lib/api.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const SRC = join(ROOT, 'data', 'plugins.jsonl')
 const OUT = join(ROOT, 'data', 'compat.json')
 

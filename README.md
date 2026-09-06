@@ -1,7 +1,7 @@
-# dsh-insights — DSH 插件与生态洞察
+# dsh-insights — DeepSeek Harness 全景观察站
 
 > **对外站点：https://dsh-insights.com** · 本仓库 = 管线 + 站点 + 开放数据（ice5kysl/dsh-insights）
-> 全量索引 → 真伪校验 → 健康评分 → 收录矩阵 → 「致作者的信」→ 生态周报 · 零依赖 Node · 开放可复核
+> **插件健康 · 官方动态 · 生态趋势**：全量索引 → 真伪校验 → 健康评分 → 收录矩阵 → 「致作者的信」→ 生态周报 →（M2）官方动态快照 + rc 兼容雷达 · 零依赖 Node · 开放可复核
 >
 > 文档：[Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [产品规划](./docs/PRODUCT-PLAN.md) · [产品设计](./docs/PRODUCT-DESIGN.md) · [调研证据库](./docs/RESEARCH.md) · [数据 Schema](./docs/SCHEMA.md) · [外发 SOP](./docs/OUTREACH.md) · 每插件体检工具 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)
 
@@ -10,8 +10,8 @@
 dsh-insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层）：
 
 - **L1 插件洞察**：对全量候选做真伪判定 → 权威集（manifest 门禁）→ 健康分（A–D/0–100，带证据）→ 收录渠道矩阵与「优质未收录」榜 → 打分明细/同类分位。
-- **L2 官方动态（规划中）**：官方 releases/rc 节奏、docs 与内置能力演进、**rc 兼容雷达**（升级预警）。
-- **L3 生态报告**：「致作者的信」（每插件，Stage 17）与「生态周报」（周更，Stage 18），面向社区与 dsh 官方。
+- **L2 官方动态（规划中）**：dsh 官方 releases/rc 节奏、docs 与内置能力演进、**rc 兼容雷达**（升级预警）+ DeepSeek 平台官方信号（模型/API 发布，同属可观测公开信号）。
+- **L3 生态报告**：「致作者的信」（每插件，content/letters）与「生态周报」（周更，content/weekly），面向社区与 dsh 官方。
 
 它不是第 N 个插件目录/市场，而是让已有目录、市场、agent 与 dsh 官方**有据可依**的数据与观测源。健康分口径与体检工具见 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)。
 
@@ -34,39 +34,54 @@ dsh-insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层
 | `data/weekly/*.md` · `last-diff.md` | 生态周报 · 快照 diff |
 | `site/` | 多页静态站（仪表盘 + 周报存档 + /p/ 插件页 + /data + /about + feed.xml，零依赖） |
 
-## 管线（Stage 地图）
+## 管线（分层 · pipeline/<层>/）
 
 ```
-00-lists 收录渠道   01-discover 多源发现  01b-npm-map npm→repo  02-validate 真伪→权威集/分桶(断点续跑)
-03-analyze 聚合+评分/分类/渠道(→enrich)  04-site 仪表盘+抽屉  05-export CSV
-06-deep 限量深检(写面/消毒)  07-downloads npm 周下载  07-regress rc 回归  08-score/diff 评分/快照diff
-09-export-json  11-enrich-compat  12-badges  13-history  14-overlap  15-llm-tags  16-scenarios
-17-report 「致作者的信」  18-weekly 生态周报  20-pages 多页站点(weekly/p/data/about/feed)   （Stage 19 官方动态快照 · M2）
-bin: dsh-insights(run) · query · report · weekly · export-suggested · refresh-extra · resume-validate …
+collect 采集     discover 多源发现 · npm-map npm→repo · lists 收录渠道 · downloads npm 周下载
+                 └─ dynamics（M2：dsh 官方 + DeepSeek 平台信号快照）
+validate 校验    validate 真伪→权威集/分桶(断点续跑) · regress 校准回归(硬门禁) · deep 限量深检(写面/消毒)
+analyze 分析     analyze 聚合+评分/分类/渠道(→enrich) · score 健康分 · compat 兼容信号
+                 history 快照历史 · overlap 重叠族 · llm-tags LLM标注 · scenarios 场景推荐
+publish 发布     site 仪表盘 · pages 多页站(weekly/p/data/about/feed) · export-csv · export-json(agent契约)
+                 badges 徽章 · diff 快照diff
+content 内容     letters 「致作者的信」 · weekly 生态周报
 ```
+
+统一编排器 `bin/pipeline.mjs`（管线单一事实来源）：
+
+```
+node bin/pipeline.mjs daily      # CI 每日轻量（collect 增量 + 发布层）
+node bin/pipeline.mjs friday     # daily + 内容层（信件 + 周报）—— CI 每周五
+node bin/pipeline.mjs snapshot   # 分析 + 发布全链
+node bin/pipeline.mjs full       # 全量：发现 → 校验 → snapshot
+node bin/pipeline.mjs --only score,badges / --from analyze / --dry
+```
+
+层与产品三层的关系：collect/validate/analyze = L1 数据底座；content = L3；L2 官方动态（M2）落在 collect/dynamics → publish /dynamics 页 → 周报双栏。
+bin: pipeline(编排) · dsh-insights(run，别名) · query · export-suggested · badge · resume-validate · llm-catchup · progress
 
 ## 快速开始
 
 ```bash
-GITHUB_TOKEN="$(gh auth token)" node bin/dsh-insights.mjs run   # 全量：发现→校验→analyze→site
-npm run lists && npm run downloads && npm run analyze && npm run site && npm run export && npm run diff  # 轻量 refresh
+GITHUB_TOKEN="$(gh auth token)" node bin/pipeline.mjs full      # 全量：发现→校验→snapshot
+node bin/pipeline.mjs daily                                     # 轻量 refresh（= CI 每日）
 npm run report                      # 生成默认「致作者的信」（自荐 2 插件）
-node stages/17-report.mjs owner/repo  # 指定插件写信
+node pipeline/content/letters.mjs owner/repo  # 指定插件写信
 npm run weekly                      # 生成生态周报（data/weekly/）
 node bin/query.mjs --sort stars --top 10   # 查询
 ```
 
-断点续跑：`data/state/done.ids`；限速自动退避；CI：`.github/workflows/refresh.yml`（默认轻量 / 手动 full）已启用。
+断点续跑：`data/state/done.ids`；限速自动退避；CI：`.github/workflows/refresh.yml`（每日 daily / 周五 friday 含周报 / 手动 full）已启用。
 
 ## Status（2026-09-06）
 
 - [x] 发现+校验：canonical 2875 全量验证 → **权威集 2113**（0 重复）
 - [x] 仪表盘（KPI/按周新增/质量分级/功能分类/收录覆盖/优质未收录榜/全表+详情抽屉/打分明细/LLM 解读）
-- [x] 健康评分与致作者的信（Stage 17）、生态周报（Stage 18）生成器 + 样例
+- [x] 健康评分与致作者的信（content/letters）、生态周报（content/weekly）生成器 + 样例
 - [x] npm 周下载入库（CI 已跑通）；快照 diff 基线；人工点评种子 5 条
-- [x] **dsh-insights.com 已上线**（Pages 自定义域 + HTTPS 强制 + www 301）；站点多页化（Stage 20：周报/插件页/开放数据/方法论/RSS）
+- [x] **dsh-insights.com 已上线**（Pages 自定义域 + HTTPS 强制 + www 301）；站点多页化（publish/pages：周报/插件页/开放数据/方法论/RSS）
 - [ ] M1 剩余：信件全量生成（2113 页）+ 契约字段普查 + 周报外发 SOP
-- [ ] M2：Stage 19 官方动态快照器 + rc 兼容雷达（见 ROADMAP）
+- [ ] M2：collect/dynamics 官方动态快照器 + rc 兼容雷达（见 ROADMAP）
 
 ## 方法论与边界
 

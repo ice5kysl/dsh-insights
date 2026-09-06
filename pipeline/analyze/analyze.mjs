@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 3 — aggregate analysis over the authoritative set (+ deep sampling).
+ * pipeline/analyze · analyze — aggregate analysis over the authoritative set (+ deep sampling).
  * Also computes per-plugin heuristic quality score/grade and a functional
  * category, persisted to data/enrich.json for the site & drawer.
  *
@@ -15,7 +15,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const PLUGINS = process.argv[2] || join(ROOT, 'data', 'plugins.jsonl')
 
 function readRows(f) {

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 1 — discover candidate plugins from multiple sources.
+ * pipeline/collect · discover — discover candidate plugins from multiple sources.
  *
  * Sources (deduped by owner/repo, or by npm name):
  *   1. GitHub topic search: `topic:dsh-plugin`, `topic:deepseek-harness`
@@ -15,9 +15,9 @@
 
 import { writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { ghSearch, ghSearchAll, ghApi, NPM, raw } from '../lib/api.mjs'
+import { ghSearch, ghSearchAll, ghApi, NPM, raw } from '../../lib/api.mjs'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const OUT = process.argv[2] || join(ROOT, 'data', 'candidates-all.jsonl')
 const LIMIT_REPO_SOURCE = Number(process.env.LIMIT || 0)
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage 12 — generate all health badges → site/badge/<owner>/<repo>.svg
+ * pipeline/publish · badges — generate all health badges → site/badge/<owner>/<repo>.svg
  *
  * Turns every plugin in data/insights.json into a static SVG badge so the
  * GitHub Pages site can serve hotlinkable URLs:
@@ -15,7 +15,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const ROOT = join(import.meta.dirname, '..')
+const ROOT = join(import.meta.dirname, '..', '..')
 const SRC = join(ROOT, 'data', 'insights.json')
 const OUT_DIR = join(ROOT, 'site', 'badge')
 
