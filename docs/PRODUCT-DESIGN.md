@@ -1,4 +1,4 @@
-# dsh-insights · 产品设计（站点结构与指标体系）
+# DSH Insights · 产品设计（站点结构与指标体系）
 
 > 状态：v0.2 · 2026-09-06 · 本文回答三个问题：产品由哪些页面/模块组成、各呈现什么、如何更新；以及用什么样的指标体系衡量业务。
 > 文档地图：[VISION](./VISION.md)（为什么）→ [PRODUCT-PLAN](./PRODUCT-PLAN.md)（做什么/怎么做）→ PRODUCT-DESIGN（页面与指标）→ [ROADMAP](./ROADMAP.md)（什么时候）· [RESEARCH](./RESEARCH.md)（证据）· [SCHEMA](./SCHEMA.md)（数据契约）· [OUTREACH](./OUTREACH.md)（外发）

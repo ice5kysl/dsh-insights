@@ -146,7 +146,7 @@ function main() {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DeepSeek Harness 全景观察站 · dsh-insights.com</title>
+<title>DSH Insights · DeepSeek Harness 全景观察站</title>
 <meta name="description" content="DeepSeek Harness (dsh) 插件生态全量索引、评估与分析仪表盘">
 <style>
 :root{
@@ -333,7 +333,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="#top"><span class="mark">d</span>dsh-insights<small>DeepSeek Harness 全景观察站</small></a>
+  <a class="brand" href="#top"><span class="mark">d</span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
   <nav class="nav"><a href="./" class="here">仪表盘</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="about/">方法论</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <div class="subnav"><div class="wrap">
@@ -342,7 +342,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 
 <header class="hero" id="top"><div class="wrap">
   <p class="kicker">DeepSeek Harness Plugin Ecosystem</p>
-  <h1>DeepSeek Harness 全景观察站 · dsh-insights</h1>
+  <h1>DSH Insights · DeepSeek Harness 全景观察站</h1>
   <p class="lede">多源发现 → manifest 真伪校验 → 元数据评估（npm / 文档 / 构建产物 / 活跃度）→ 生态洞察。启发式评估，非安全审计。</p>
   <div class="meta"><span>快照 <b>${date}</b></span><span>最近一周新增 <b class="mono">+${lastWeek}</b></span><span><a href="https://github.com/ice5kysl/dsh-insights/blob/main/README.md" target="_blank">方法论 ↗</a></span></div>
   <div class="bignum"><b class="count mono" data-v="${t.authoritative ?? 0}">0</b><span>权威插件<br>通过 dsh.bundle manifest 校验</span></div>
@@ -363,7 +363,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   ${funnelHtml ? `<div class="panel" style="margin-bottom:14px">
     <div class="p-h"><h3>覆盖漏斗 · ${cov.authoritative} 与 ${uni.toLocaleString()} 的关系</h3><span class="p-sub">分桶复核 ${invalidTotal}：${bucketsTxt}</span></div>
     ${funnelHtml}
-    <p class="p-sub" style="margin-top:10px">topic 是「打标即入」的原始宇宙——含蹭标、无关仓库、fork、monorepo 子路径与已删除仓库；权威集是 manifest 门禁逐条核验后的下限口径。<b>不是收录不全，是过滤后的可信子集</b>；纯 tarball 分发等边界形态进分桶人工复核。口径详见 <a href="about/">方法论</a>。</p>
+    <p class="p-sub" style="margin-top:10px">topic 是「打标即入」的原始宇宙——含蹭标、无关仓库、fork、monorepo 子路径与已删除仓库；权威集是 manifest 门禁逐条核验后的可信子集，<b>校验按 API 预算滚动推进（断点续跑），权威集随快照持续扩大</b>。纯 tarball 分发等边界形态进分桶人工复核。口径详见 <a href="about/">方法论</a>。</p>
   </div>` : ''}
   <div class="panel" style="margin-bottom:14px">
     <div class="p-h"><h3>权威集新增 · 按周</h3><span class="p-sub">按仓库创建时间归属到周一 · 最近 ${wkArr.length} 周</span></div>

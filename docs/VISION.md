@@ -1,4 +1,4 @@
-# dsh-insights · 产品愿景（Vision）
+# DSH Insights · 产品愿景（Vision）
 
 > 状态：**v0.2 · 2026-09-06** · 取代 v0.1 草案 · 对外品牌与域名：**dsh-insights.com** · 引擎仓库：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
 > 文档地图：VISION（为什么）→ [PRODUCT-PLAN](./PRODUCT-PLAN.md)（做什么/怎么做）→ [PRODUCT-DESIGN](./PRODUCT-DESIGN.md)（页面与指标）→ [ROADMAP](./ROADMAP.md)（什么时候）· [RESEARCH](./RESEARCH.md)（证据，数字均实测标注 [V]）· [SCHEMA](./SCHEMA.md)（数据契约）· [OUTREACH](./OUTREACH.md)（外发）
@@ -90,4 +90,4 @@ DSH 的哲学是 "Everything is a Plugin"；我们的回答是：**Every plugin 
 - O4 dsh-insights.com 托管方案（Pages 自定义域 + CNAME；触发点出现后再评估独立站/DB，见 ROADMAP M4）。
 
 ---
-*本文件随规划演进更新；站点/报告署名统一为 dsh-insights。*
+*本文件随规划演进更新；站点/报告署名统一为 DSH Insights。*

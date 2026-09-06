@@ -1,4 +1,4 @@
-# dsh-insights · 生态调研证据库（Research）
+# DSH Insights · 生态调研证据库（Research）
 
 > 状态：v0.2 · 2026-09-06 · 证据库与决策日志：VISION/PRODUCT-PLAN 的数据底稿
 > 文档地图：[VISION](./VISION.md)（为什么）→ [PRODUCT-PLAN](./PRODUCT-PLAN.md)（做什么/怎么做）→ [PRODUCT-DESIGN](./PRODUCT-DESIGN.md)（页面与指标）→ [ROADMAP](./ROADMAP.md)（什么时候）· RESEARCH（证据）· [SCHEMA](./SCHEMA.md)（数据契约）· [OUTREACH](./OUTREACH.md)（外发）

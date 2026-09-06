@@ -85,7 +85,7 @@ ${weeklyList || '<p class="lede">暂无周报。</p>'}`,
     const body = `<p class="crumb">致作者的信 · ${escHtml(owner)}/${escHtml(repo)}</p>
 <div class="article">${mdToHtml(md)}</div>`
     written.push(out(`p/${owner}/${repo}/index.html`, page({
-      title, desc: `${owner}/${repo} 的健康体检与改进建议（dsh-insights 自动生成）`,
+      title, desc: `${owner}/${repo} 的健康体检与改进建议（DSH Insights 自动生成）`,
       base: '../../../', here: null, body, og: { type: 'article' },
     })))
   }
@@ -112,7 +112,7 @@ ${weeklyList || '<p class="lede">暂无周报。</p>'}`,
     cards.push(`<div class="card"><b>${escHtml(desc)}</b><code>/data/${f}</code><p>${kb} KB · <a href="${f}">下载</a> · <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">schema</a></p></div>`)
   }
   written.push(out('data/index.html', page({
-    title: '开放数据', desc: 'dsh-insights 开放数据集：稳定 URL、可复核口径、CC BY 4.0。',
+    title: '开放数据', desc: 'DSH Insights 开放数据集：稳定 URL、可复核口径、CC BY 4.0。',
     base: '../', here: 'data/',
     body: `<p class="crumb">Open Data</p><h1 class="pagetitle">开放数据</h1>
 <p class="lede">全量、可复核、持续更新。URL 稳定（公布即不变更），agent 可直接抓取，无需登录。使用请注明出处（CC BY 4.0）。</p>
@@ -126,7 +126,7 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
 
   // ---- /about/ methodology ------------------------------------------------
   written.push(out('about/index.html', page({
-    title: '方法论', desc: 'dsh-insights 评估口径、规则阈值、校准与边界声明。',
+    title: '方法论', desc: 'DSH Insights 评估口径、规则阈值、校准与边界声明。',
     base: '../', here: 'about/',
     body: `<p class="crumb">Methodology</p><h1 class="pagetitle">方法论与边界</h1>
 <p class="lede">我们把口径公开到可以被反驳的程度——这是策展人和官方敢引用我们的前提。</p>
@@ -134,7 +134,7 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
 <h2>权威集门禁</h2>
 <p>非 fork / 非归档 · <code>package.json</code> 声明 <code>dsh.bundle.patch</code> · patch 文件已提交。这是下限口径：纯 tarball 分发的插件会进入分桶人工复核（<code>invalid.jsonl</code>）。</p>
 <h2>覆盖与完整性（为什么权威集 ≪ topic 总数）</h2>
-<p>GitHub <code>topic:dsh-plugin</code> 是官方唯一发现机制，<b>打标即入、零门槛</b>——其中混有大量蹭标、无关仓库、fork、monorepo 子路径与已删除仓库。我们的漏斗：<b>topic 宇宙（≈13.6k，首页漏斗实时口径）→ 多源候选（topic 分片全量抓取 + 策展目录 + npm 映射，去重）→ manifest 门禁逐条校验 → 权威集 + 分桶</b>。权威集是「货真价实可按官方 bundle 形态安装」的下限子集；<code>no-dsh-bundle</code> / <code>no-package.json</code> 桶里的候选可能是插件但形态非标，留待人工复核而不是混入权威集。<b>覆盖率数字本身也公开</b>（首页覆盖漏斗），这就是我们对「完整性」的回答方式：不报大数，报可核验的数。</p>
+<p>GitHub <code>topic:dsh-plugin</code> 是官方唯一发现机制，<b>打标即入、零门槛</b>——其中混有大量蹭标、无关仓库、fork、monorepo 子路径与已删除仓库。我们的漏斗：<b>topic 宇宙（≈13.7k，首页漏斗实时口径）→ 多源候选（topic 分片全量抓取 + 策展目录 + npm 映射，去重）→ manifest 门禁逐条校验 → 权威集 + 分桶</b>。权威集是「货真价实可按官方 bundle 形态安装」的下限子集；<code>no-dsh-bundle</code> / <code>no-package.json</code> 桶里的候选可能是插件但形态非标，留待人工复核而不是混入权威集。校验按 API 预算<b>滚动推进、断点续跑</b>，权威集随每次快照扩大——<b>覆盖率数字本身也公开</b>（首页覆盖漏斗），这就是我们对「完整性」的回答方式：不报大数，报可核验的数。</p>
 <h2>健康分（health-v2）</h2>
 <p>100 起扣 · warn −5 / fail −20 · 纯客观信号（manifest 规范 / npm 发布与版本一致 / README 与中文文档 / LICENSE / dsh-plugin topic / 活跃度），星数不进分。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。每条扣分带证据；探测不到的数据不虚构、不扣分（missing 明示）。规则全文与 changelog 见 <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">SCHEMA §health</a>。</p>
 <h2>校准</h2>
@@ -156,7 +156,7 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
   written.push(out('feed.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-  <title>dsh-insights · DSH 插件生态周报</title>
+  <title>DSH Insights · DSH 生态周报</title>
   <link>${ORIGIN}/weekly/</link>
   <description>DeepSeek Harness 插件生态周报：每周五自动生成，数据可复核。</description>
   <language>zh-CN</language>
@@ -166,7 +166,7 @@ ${items}
 `))
 
   // ---- llms.txt (agent navigation) ----------------------------------------
-  written.push(out('llms.txt', `# dsh-insights
+  written.push(out('llms.txt', `# DSH Insights
 
 DeepSeek Harness 全景观察站：插件健康（全量权威集 + 客观健康分 A–D）· 官方动态（dsh 官方 + DeepSeek 平台信号）· 生态趋势（生态周报）。启发式评估，非安全审计。
 

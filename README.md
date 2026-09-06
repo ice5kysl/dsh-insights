@@ -1,4 +1,4 @@
-# dsh-insights — DeepSeek Harness 全景观察站
+# DSH Insights — DeepSeek Harness 全景观察站
 
 > **对外站点：https://dsh-insights.com** · 本仓库 = 管线 + 站点 + 开放数据（ice5kysl/dsh-insights）
 > **插件健康 · 官方动态 · 生态趋势**：全量索引 → 真伪校验 → 健康评分 → 收录矩阵 → 「致作者的信」→ 生态周报 →（M2）官方动态快照 + rc 兼容雷达 · 零依赖 Node · 开放可复核
@@ -7,7 +7,7 @@
 
 ## 是什么
 
-dsh-insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层）：
+DSH Insights 是 DeepSeek Harness 的**生态与动态全景观察站**（三层）：
 
 - **L1 插件洞察**：对全量候选做真伪判定 → 权威集（manifest 门禁）→ 健康分（A–D/0–100，带证据）→ 收录渠道矩阵与「优质未收录」榜 → 打分明细/同类分位。
 - **L2 官方动态（规划中）**：dsh 官方 releases/rc 节奏、docs 与内置能力演进、**rc 兼容雷达**（升级预警）+ DeepSeek 平台官方信号（模型/API 发布，同属可观测公开信号）。

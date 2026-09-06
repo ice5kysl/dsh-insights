@@ -17,7 +17,7 @@ import { PATHS, readJsonl, readJson, byFullName } from '../../lib/data.mjs'
 
 const OUT_DIR = PATHS.reportsDir
 mkdirSync(OUT_DIR, { recursive: true })
-const BRAND = 'DeepSeek Harness 全景观察站（dsh-insights.com）'
+const BRAND = 'DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）'
 const FOOTER = [
   '---',
   '',

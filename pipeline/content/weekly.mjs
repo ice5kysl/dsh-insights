@@ -99,7 +99,7 @@ if (diff) {
 L.push('---')
 L.push('')
 L.push('> 数据来源：GitHub 公开元数据 + npm registry；评估为启发式（非安全审计）。完整数据集 data/plugins.jsonl / csv，站点 https://dsh-insights.com/')
-L.push('> 周报与"致作者的信"由 dsh-insights 自动生成，欢迎转载（保留出处即可）。')
+L.push('> 周报与"致作者的信"由 DSH Insights 自动生成，欢迎转载（保留出处即可）。')
 L.push('')
 
 const file = join(W, `${wk}-dsh-生态周报.md`)

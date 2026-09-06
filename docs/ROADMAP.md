@@ -1,4 +1,4 @@
-# dsh-insights · 路线图（Roadmap）
+# DSH Insights · 路线图（Roadmap）
 
 > 状态：**v0.2 · 2026-09-06** · 取代 v0.1 · 当前处于 **M1 收口期**。
 > 文档地图：[VISION](./VISION.md)（为什么）→ [PRODUCT-PLAN](./PRODUCT-PLAN.md)（做什么/怎么做）→ [PRODUCT-DESIGN](./PRODUCT-DESIGN.md)（页面与指标）→ ROADMAP（什么时候）· [RESEARCH](./RESEARCH.md)（证据）· [SCHEMA](./SCHEMA.md)（数据契约）· [OUTREACH](./OUTREACH.md)（外发）
@@ -19,7 +19,7 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 
 - [x] 品牌与域名：对外 `dsh-insights.com`（已购）；引擎仓库 `dsh-insights`；文档 VISION/ROADMAP v0.2 定稿（本次）。
 - [x] **域名接入**：Pages 自定义域 + CNAME（dsh-insights.com / www）+ HTTPS 强制；旧 github.io 由项目页自动跳转到自定义域。（2026-09-06）
-- [ ] **站点品牌化**：标题/副标/页脚统一 dsh-insights；hero 文案覆盖"插件 + 官方 + 生态"；补 favicon/OG 元信息（社交分享）。
+- [ ] **站点品牌化**：标题/副标/页脚统一 DSH Insights；hero 文案覆盖"插件 + 官方 + 生态"；补 favicon/OG 元信息（社交分享）。
 - [ ] **「致作者的信」产品化**（content/letters 已跑通）：默认全量生成（2113）；报告站路由 `/p/<owner>/<repo>`；后续接入"变化对比"（对上一期快照报分数/名次变化）。
 - [ ] **生态周报对外**（content/weekly 已跑通）：固定节奏（每周五）+ 站点周报页 + `data/weekly/LATEST.md`。
 - [ ] **校准与口径**：健康分规则版本化 + changelog；seeds 回归接入 snapshot（沿用 v0.1 M1 口径）。

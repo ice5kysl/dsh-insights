@@ -189,7 +189,7 @@ function render(a) {
   const L = []
   L.push('# dsh 插件生态快照分析报告')
   L.push('')
-  L.push(`> 权威集 ${a.totals.authoritative} 个插件 · 生成于 ${(a.generatedAt || '').slice(0, 10)} · 由 dsh-insights 管线生成`)
+  L.push(`> 权威集 ${a.totals.authoritative} 个插件 · 生成于 ${(a.generatedAt || '').slice(0, 10)} · 由 DSH Insights 管线生成`)
   L.push('')
   L.push('## 总览')
   L.push(`- 权威集规模：**${a.totals.authoritative}**`)
