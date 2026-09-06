@@ -14,6 +14,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { PATHS, SITE, readJsonl, readJson, loadEnrichMap, byFullName, loadPlugins } from '../../lib/data.mjs'
+import { stripEmoji, icon } from '../../lib/page.mjs'
 
 const OUT = join(SITE, 'dashboard', 'index.html')
 
@@ -34,6 +35,12 @@ function main() {
     console.error(`[site] 快照混代：plugins.jsonl ${plugins.length} 行 vs enrich.json ${enMap.size} 条——请先重跑 analyze 再发布`)
     process.exit(1)
   }
+  // B2：对外契约 insights.json 同样纳入混代守卫（badge/agent 消费它，混代=新插件徽章 404）
+  const insightsTotal = readJson(PATHS.insights, {})?.meta?.total
+  if (insightsTotal != null && insightsTotal !== plugins.length) {
+    console.error(`[site] 快照混代：plugins.jsonl ${plugins.length} 行 vs insights.json meta.total ${insightsTotal}——请重跑 export-json（snapshot）再发布`)
+    process.exit(1)
+  }
   const llmMap = byFullName(readJsonl(PATHS.llm))
   const byStars = plugins.slice().sort((x, y) => (y.stars || 0) - (x.stars || 0))
   const t = a.totals || {}
@@ -47,7 +54,7 @@ function main() {
     r.full_name, r.html_url || '', r.stars || 0, (r.created_at || '').slice(0, 10),
     r.npm?.published ? (r.npm.latest || '✓') : '', r.metrics?.hasZhDocs ? 1 : 0,
     r.files?.libIndex && r.files?.libClient ? 1 : 0, (r.pushed_at && (Date.now() - new Date(r.pushed_at).getTime()) < 7 * 86400000) ? 1 : 0,
-    (r.description || '').slice(0, 110),
+    stripEmoji(r.description || '').slice(0, 110),
     enMap.get(r.full_name)?.grade || '',
     enMap.get(r.full_name)?.score ?? 0,
     (r.pushed_at || '').slice(0, 10),
@@ -194,6 +201,7 @@ function main() {
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="7fc5eb24-1687-4827-9775-5326d957b46a"></script>
+<script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})()</script>
 <style>
 :root{
   --bg:#fafafa;--card:#ffffff;--ink:#18181b;--mut:#71717a;--faint:#a1a1aa;--line:#e4e4e7;--track:#f4f4f5;--track2:#e4e4e7;
@@ -201,9 +209,13 @@ function main() {
   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
   --ease:cubic-bezier(.16,1,.3,1)
 }
-@media(prefers-color-scheme:dark){
-  :root{--bg:#09090b;--card:#101012;--ink:#f4f4f5;--mut:#a1a1aa;--faint:#71717a;--line:#26262a;--track:#17171a;--track2:#27272a;--accent:#60a5fa}
-}
+:root[data-theme=dark]{--bg:#09090b;--card:#101012;--ink:#f4f4f5;--mut:#a1a1aa;--faint:#71717a;--line:#26262a;--track:#17171a;--track2:#27272a;--accent:#60a5fa}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#09090b;--card:#101012;--ink:#f4f4f5;--mut:#a1a1aa;--faint:#71717a;--line:#26262a;--track:#17171a;--track2:#27272a;--accent:#60a5fa}}
+.theme{border:1px solid var(--line);background:var(--card);color:var(--mut);border-radius:7px;padding:4px 7px;height:26px;cursor:pointer;display:inline-flex;align-items:center;margin-left:6px}
+.theme:hover{color:var(--ink)}
+.theme .t-sun{display:none}
+:root[data-theme=dark] .theme .t-sun{display:inline-flex}
+:root[data-theme=dark] .theme .t-moon{display:none}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
@@ -235,7 +247,7 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .hero{border-bottom:1px solid var(--line);padding:56px 0 36px;background:var(--card)}
 .kicker{font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
 .hero h1{margin:0;font-size:clamp(26px,4vw,36px);font-weight:700;letter-spacing:-.03em;line-height:1.15;max-width:22ch}
-.hero .lede{margin:12px 0 0;color:var(--mut);font-size:14.5px;max-width:880px}
+.hero .lede{margin:12px 0 0;color:var(--mut);font-size:14.5px;max-width:1100px}
 .hero .meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12.5px;color:var(--mut)}
 .hero .meta b{color:var(--ink);font-weight:600}
 .bignum{margin-top:34px;display:flex;align-items:baseline;gap:14px}
@@ -304,6 +316,10 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 .cards table th,.cards table td{white-space:nowrap}
 .cards .ptable td:first-child{max-width:220px;overflow:hidden;text-overflow:ellipsis}
+.cards .panel{min-width:0}
+.cards .ptable{table-layout:fixed;width:100%}
+.cards .ptable td{overflow:hidden;text-overflow:ellipsis;max-width:0}
+.cards .ptable th:first-child,.cards .ptable td:first-child{width:44%;max-width:none}
 .cards .ptable td:nth-child(2).pick-cat{max-width:96px;overflow:hidden;text-overflow:ellipsis;color:var(--mut)}
 .ptable th,.ptable td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
 .ptable th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;user-select:none;background:var(--card);position:sticky;top:0;z-index:1}
@@ -345,9 +361,6 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}
 .pager button:hover:not(:disabled){border-color:var(--ink)}
 .pager button:disabled{opacity:.35;cursor:default}
 .pager #info{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:11.5px}
-.datalinks{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
-.datalinks a{font-size:12px;border:1px solid var(--line);color:var(--mut);background:var(--card);border-radius:8px;padding:5px 11px}
-.datalinks a:hover{color:var(--ink);border-color:var(--ink);text-decoration:none}
 
 /* ---- drawer ---- */
 .scrim{position:fixed;inset:0;background:rgba(9,9,11,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
@@ -392,16 +405,16 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><rect x="16" y="34" width="8" height="14" rx="2" fill="var(--bg)"/><rect x="28" y="25" width="8" height="23" rx="2" fill="var(--bg)"/><rect x="40" y="14" width="8" height="34" rx="2" fill="var(--accent)"/></svg></span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
-  <nav class="nav"><a href="/">首页</a><a href="./" class="here">仪表盘</a><a href="/plugins/">插件库</a><a href="/dynamics/">动态</a><a href="/scenarios/">场景</a><a href="/authors/">作者</a><a href="/weekly/">周报</a><a href="/data/">开放数据</a><a href="/badge/">徽章</a><a href="/about/">关于</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
+  <nav class="nav"><a href="/">首页</a><a href="./" class="here">插件</a><a href="/scenarios/">场景</a><a href="/weekly/">周报</a><a href="/dynamics/">动态</a><a href="/authors/">作者</a><a href="/badge/">徽章</a><a href="/data/">开放数据</a><a href="/about/">关于</a><button class="theme" id="themeBtn" aria-label="切换深浅色" title="深 / 浅色切换"><span class="t-moon">${icon('moon', 13)}</span><span class="t-sun">${icon('sun', 13)}</span></button><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <div class="subnav"><div class="wrap">
-  <a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="/plugins/">插件库</a>
+  <a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a>
 </div></div>
 
 <header class="hero" id="top"><div class="wrap">
-  <p class="kicker">DeepSeek Harness Plugin Ecosystem</p>
-  <h1>DSH Insights · DeepSeek Harness 全景观察站</h1>
+  <p class="kicker">Plugins · 客观索引与评分</p>
+  <h1>插件生态全景</h1>
   <p class="lede">多源发现 → manifest 真伪校验 → 元数据评估（npm / 文档 / 构建产物 / 活跃度）→ 生态洞察。启发式评估，非安全审计。</p>
   <div class="meta"><span>快照 <b>${date}</b></span><span>最近一周新增 <b class="mono">+${lastWeek}</b></span><span><a href="https://github.com/ice5kysl/dsh-insights/blob/main/README.md" target="_blank">方法论 ↗</a></span></div>
   <div class="bignum"><b class="count mono" data-v="${t.authoritative ?? 0}">0</b><span>权威插件<br>通过 dsh.bundle manifest 校验</span></div>
@@ -409,7 +422,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
     ${stat((d.publishPct != null ? d.publishPct + '%' : '—'), 'npm 发布率', (pub.published ?? 0) + ' 已发布 · ' + (pub.stale ?? 0) + ' 滞后')}
     ${stat((d.zhPct != null ? d.zhPct + '%' : '—'), 'i18n 双语（中/英检出）', (doc.both ?? 0) + ' 份双语文档')}
     ${stat((t.active7Pct ?? 0) + '%', '近 7 天活跃', '以周为基准的生态活跃信号 · 30 天 ' + (t.active30Pct ?? 0) + '%')}
-    ${stat(a.quality?.avgScore ?? '—', '平均质量分', 'A+B ' + (a.quality?.gradePct ?? 0) + '%')}
+    ${stat(a.quality?.avgScore ?? '—', '平均质量分', 'S+A ' + (a.quality?.gradePctSA ?? a.quality?.gradePct ?? 0) + '%')}
     ${stat(a.channels ? a.channels.coveredPct + '%' : '—', 'curated 收录率', (a.channels?.covered ?? 0) + ' 已进 awesome/imsai')}
     ${stat(doc.none ?? 0, '无 README', '建议补充基本文档')}
   </div>
@@ -457,7 +470,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="sec-h"><span class="sec-n">02</span><h2>质量分布</h2><p class="sub">启发式评分 · 功能分类 · 各场景首选</p></div>
   <div class="cards">
     <div class="panel">
-      <h3>质量分级</h3><p class="p-sub">平均分 ${a.quality?.avgScore ?? 0} · A+B ${a.quality?.gradePct ?? 0}%</p>
+      <h3>质量分级</h3><p class="p-sub">平均分 ${a.quality?.avgScore ?? 0} · S+A ${a.quality?.gradePctSA ?? a.quality?.gradePct ?? 0}%</p>
       ${gradesHtml}
     </div>
     <div class="panel">
@@ -525,11 +538,6 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
     <tbody id="tb"></tbody>
   </table></div>
   <div class="pager"><button id="prev">‹ 上一页</button><span id="info"></span><button id="next">下一页 ›</button></div>
-  <div class="datalinks">
-    <a href="../data/plugins.jsonl" target="_blank">⬇ plugins.jsonl</a>
-    <a href="../data/plugins.csv" target="_blank">⬇ plugins.csv</a>
-    <a href="../data/invalid.jsonl" target="_blank">⬇ invalid.jsonl（噪声分桶）</a>
-  </div>
 </section>
 
 <footer>
@@ -694,69 +702,33 @@ document.addEventListener('click',function(ev){ var tr=ev.target.closest('tr'); 
 
 readHash();
 draw();
+(function(){var b=document.getElementById('themeBtn');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement;var d=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=d;try{localStorage.setItem('theme',d)}catch(e){}})})();
 </script>
 </body>
 </html>`
   mkdirSync(join(SITE, 'dashboard'), { recursive: true })
   writeFileSync(OUT, html)
 
-  // ---- /plugins/ 独立插件库页：复用同一 head/导航/browse/script（表格与抽屉零拷贝） ----
-  const headEnd = html.indexOf('</head>') + 7
-  const head = html.slice(0, headEnd)
-    .replace('<title>DSH Insights · DeepSeek Harness 全景观察站</title>', '<title>插件库 · DSH Insights</title>')
-    .replace('</head>', '<style>section[id]{scroll-margin-top:70px}</style>\n</head>')
-  const tbStart = html.indexOf('<div class="topbar">')
-  const tbEnd = html.indexOf('<div class="subnav">')
-  const topbar = html.slice(tbStart, tbEnd)
-    .replace('href="./" class="here">仪表盘', 'href="/dashboard/">仪表盘')
-    .replace('href="/plugins/">插件库', 'href="./" class="here">插件库')
-  const browseStart = html.indexOf('<section class="sec" id="browse">')
-  const scriptStart = html.lastIndexOf('<script>')
-  // browse 段 + footer + </main> + scrim + drawer（抽屉标记必须带上，否则抽屉代码空引用）
-  const browse = html.slice(browseStart, scriptStart)
-  const script = html.slice(scriptStart, html.indexOf('</script>', scriptStart) + 9)
-  const pluginsHtml = head + '\n<body>\n' + topbar + '\n<main class="wrap">' + browse + script + '\n</body>\n</html>'
+  // ---- /plugins/ → /dashboard/#browse 永久跳转（已并入「插件」页，2026-09-06） ----
+  // 旧 URL 已被外发/README 引用过，保留为 0 秒跳转页而不是 404。
+  const pluginsHtml = `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="refresh" content="0;url=/dashboard/#browse">
+<link rel="canonical" href="/dashboard/">
+<title>插件库 · DSH Insights</title>
+<meta name="robots" content="noindex">
+</head>
+<body style="margin:0;background:#fafafa;color:#18181b;font:14px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh">
+<p>已并入「插件」页——正在跳转 <a href="/dashboard/#browse">/dashboard/#browse</a> ……</p>
+</body>
+</html>
+`
   mkdirSync(join(SITE, 'plugins'), { recursive: true })
   writeFileSync(join(SITE, 'plugins', 'index.html'), pluginsHtml)
-  console.log('[site] + plugins/index.html（独立插件库页）')
-  // ---- per-plugin detail file for the drawer (keeps index.html light) ----
-  const detail = plugins.map((r) => ({
-    full_name: r.full_name,
-    url: r.html_url || '',
-    stars: r.stars || 0,
-    forks: r.forks || 0,
-    created: r.created_at || '',
-    pushed: r.pushed_at || '',
-    branch: r.default_branch || '',
-    source: r.source || '',
-    license: r.license || null,
-    topics: r.topics || [],
-    desc: (r.description || '').slice(0, 300),
-    pkgName: r.pkgName || null,
-    version: r.version || null,
-    dshPlatform: r.eval?.dshPlatform || null,
-    hasClientExport: Boolean(r.eval?.hasClientExport),
-    files: {
-      cp: Boolean(r.files?.cordisPatch), idx: Boolean(r.files?.libIndex), cli: Boolean(r.files?.libClient),
-      rd: Boolean(r.files?.readme), zh: Boolean(r.files?.readmeZh), lic: Boolean(r.files?.license),
-    },
-    ageDays: r.metrics?.ageDays ?? 0,
-    active30: Boolean(r.metrics?.active30),
-    score: enMap.get(r.full_name)?.score ?? null,
-    grade: enMap.get(r.full_name)?.grade ?? null,
-    category: enMap.get(r.full_name)?.category || null,
-    channels: { aw: enMap.get(r.full_name)?.inAwesome ? 1 : 0, im: enMap.get(r.full_name)?.inImsai ? 1 : 0 },
-    weekly: enMap.get(r.full_name)?.weekly ?? null,
-    llm: llmMap.get(r.full_name) ?? null,
-    parts: (enMap.get(r.full_name)?.drops || []).map((d) => ({ label: d.label, v: -(SEVP[d.sev] || 5) })),
-    dims: enMap.get(r.full_name)?.dimScores || {},
-    npm: r.npm || { published: false },
-  }))
-  writeFileSync(join(SITE, 'plugins-detail.json'), JSON.stringify(detail))
-  const cats = {}
-  for (const pl of byStars) { const cat = enMap.get(pl.full_name)?.category; if (cat) (cats[cat] ??= []).push(pl.full_name) }
-  writeFileSync(join(SITE, 'plugins-cats.json'), JSON.stringify({ generatedAt: new Date().toISOString(), cats }) + '\n')
-  console.log(`[site] ${plugins.length} rows → site/index.html (${(html.length / 1024).toFixed(0)} KB) + plugins-detail.json (${(JSON.stringify(detail).length / 1024).toFixed(0)} KB) + plugins-cats.json (${(JSON.stringify(cats).length / 1024).toFixed(0)} KB)`)
+  console.log(`[site] ${plugins.length} rows → dashboard/index.html (${(html.length / 1024).toFixed(0)} KB) + plugins/index.html（跳转页，插件库已并入 /dashboard/#browse）`)
 }
 
 main()

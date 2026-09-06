@@ -5,13 +5,15 @@
  *
  * Generates:
  *   site/weekly/<slug>.html + weekly/index.html   from data/weekly/*.md
- *   site/p/<owner>/<repo>/index.html              from data/reports/*.md
+ *   site/p/<owner>/<repo>/index.html              full authoritative set (plugins.jsonl ⨝ enrich.json)
  *   site/dynamics/index.html                       official dynamics (L2)
  *   site/scenarios/index.html                      scenario bundle recommendations
  *   site/about/index.html                          about / methodology / metrics
  *   site/data/index.html                           open-data index (+ copies data files)
  *   site/feed.xml                                  RSS for the weekly
  *   site/llms.txt                                  agent navigation
+ *
+ * 「致作者的信」为外发邮件/PR 物料（data/reports/，letters.mjs 生成），不上 /p/ 页。
  *
  * Zero-dependency; page chrome and Markdown rendering live in lib/page.mjs.
  * Run: node pipeline/publish/pages.mjs   (after analyze/site/report/weekly stages)
@@ -21,7 +23,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync, existsSync, statSync } from 'node:fs'
 import { join } from 'node:path'
-import { page, mdToHtml, mdTitle, escHtml } from '../../lib/page.mjs'
+import { page, mdToHtml, mdTitle, escHtml, icon, stripEmoji } from '../../lib/page.mjs'
 import { DATA, SITE, PATHS, loadPlugins, byFullName, readJsonl } from '../../lib/data.mjs'
 
 const ORIGIN = 'https://dsh-insights.com'
@@ -60,6 +62,7 @@ function main() {
     const body = `<p class="crumb">生态周报 · ${slug}</p>
 <div class="article">${mdToHtml(md)}</div>`
     written.push(out(`weekly/${slug}.html`, page({
+      og: { type: 'article', url: `${ORIGIN}/weekly/${slug}.html` },
       title, desc: 'DSH 插件生态周报（自动生成 · 数据可复核）',
       base: '../', here: 'weekly/', body, og: { type: 'article' },
     })))
@@ -156,47 +159,49 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
 </script>`,
   })))
 
-  // ---- plugin detail pages (/p/<owner>/<repo>/) —— 完整插件详情页（信件为其中一节） --
+  // ---- plugin detail pages (/p/<owner>/<repo>/) —— 对全量权威集生成（客观数据页） --
+  // 「致作者的信」是外发邮件/PR 物料（data/reports/，letters.mjs 照常生成），不再上页。
+  // 无 enrich 行的新入库插件也生成：等级/扣分/同类优雅降级为「评分待生成」。
   const enrichAll = JSON.parse(read('enrich.json') || '[]')
   const enBy = new Map(enrichAll.map((x) => [x.full_name, x]))
   const plugAll = loadPlugins()
-  const plugByP = byFullName(plugAll)
   const llmBy = byFullName(readJsonl(PATHS.llm))
   const deepBy = byFullName(readJsonl(PATHS.deep))
   const dlMap = (JSON.parse(read('downloads.json') || '{}').map) || {}
   const dimLabel = { eng: '工程质量', docs: '文档完整性', discover: '可发现性', maint: '维护活跃' }
-  const reportFiles = existsSync(PATHS.reportsDir)
-    ? readdirSync(PATHS.reportsDir).filter((f) => f.endsWith('.md')) : []
+  const okIco = `<span style="display:inline-block;vertical-align:-2px;color:var(--ok)">${icon('check', 13)}</span>`
+  const warnIco = `<span style="display:inline-block;vertical-align:-2px;color:var(--warn)">${icon('alert', 13)}</span>`
   let pWrote = 0
-  for (const f of reportFiles) {
-    const md = read('reports', f)
-    if (!md) continue
-    const [owner, repo] = f.replace(/\.md$/, '').split('__')
+  for (const r of plugAll) {
+    const owner = r.owner, repo = r.repo
     if (!owner || !repo) continue
-    const full = `${owner}/${repo}`
-    const r = plugByP.get(full) || {}
+    const full = r.full_name || `${owner}/${repo}`
     const en = enBy.get(full) || {}
+    const hasScore = en.grade != null
     const llm = llmBy.get(full)
     const deep = deepBy.get(full)
     const dl = r.pkgName ? dlMap[r.pkgName]?.d ?? null : null
     const peers = en.category
       ? enrichAll.filter((x) => x.category === en.category && x.full_name !== full)
           .sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 5) : []
-    const dimRows = Object.entries(dimLabel).map(([k, label]) => {
-      const v = en.dimScores?.[k]
-      return `<div class="dimrow"><span>${label}</span><div class="dimt"><i style="width:${v == null ? 0 : v}%"></i></div><b>${v == null ? '—' : v}</b></div>`
-    }).join('')
-    const dropsRows = (en.drops || []).map((d) => `<div class="scrow"><a style="cursor:default">${escHtml(d.label)}</a><span class="meta">${d.sev === 'fail' ? 'fail −20' : d.sev === 'major' ? '−10' : d.sev === 'minor' ? '−2' : '−5'}</span></div>`).join('')
+    const dimRows = hasScore
+      ? Object.entries(dimLabel).map(([k, label]) => {
+          const v = en.dimScores?.[k]
+          return `<div class="dimrow"><span>${label}</span><div class="dimt"><i style="width:${v == null ? 0 : v}%"></i></div><b>${v == null ? '—' : v}</b></div>`
+        }).join('')
+      : ''
+    const dropsRows = hasScore
+      ? (en.drops || []).map((d) => `<div class="scrow"><a style="cursor:default">${escHtml(d.label)}</a><span class="meta">${d.sev === 'fail' ? 'fail −20' : d.sev === 'major' ? '−10' : d.sev === 'minor' ? '−2' : '−5'}</span></div>`).join('')
+      : ''
     const peersHtml = peers.map((p) => `<div class="scrow"><a href="/p/${escHtml(p.full_name)}/">${escHtml(p.full_name)}</a><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}</span></div>`).join('')
-    const title = mdTitle(md, `${owner}/${repo}`)
     const body = `<p class="crumb">插件详情 · ${escHtml(full)}</p>
 <div style="display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:6px">
   <img src="https://github.com/${escHtml(owner)}.png?size=80" width="56" height="56" style="border-radius:14px" alt="">
   <div style="flex:1;min-width:260px">
     <h1 class="pagetitle" style="margin-bottom:4px">${escHtml(repo)} <span style="color:var(--faint);font-weight:400;font-size:16px">${escHtml(owner)}</span></h1>
-    <p class="lede" style="margin-bottom:10px;max-width:none">${escHtml(r.description || '（无描述）')}</p>
+    <p class="lede" style="margin-bottom:10px;max-width:none">${escHtml(stripEmoji(r.description) || '（无描述）')}</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-      ${en.grade ? `<span class="grade ${en.grade}" style="font-size:15px;min-width:30px;padding:3px 10px">${en.grade}</span><b class="mono" style="font-size:15px">${en.score ?? '—'}/100</b>` : ''}
+      ${hasScore ? `<span class="grade ${en.grade}" style="font-size:15px;min-width:30px;padding:3px 10px">${en.grade}</span><b class="mono" style="font-size:15px">${en.score ?? '—'}/100</b>` : '<span class="pill">评分待生成</span>'}
       ${en.category ? `<span class="pill">${escHtml(en.category)}</span>` : ''}
       <a class="wkbtn" href="https://github.com/${escHtml(full)}" target="_blank">GitHub ↗</a>
       ${r.npm?.published ? `<a class="wkbtn" href="https://www.npmjs.com/package/${escHtml(r.pkgName)}" target="_blank">npm ${escHtml(r.npm.latest || '')} ↗</a>` : ''}
@@ -212,32 +217,31 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
   <div class="card"><b>${dl != null ? dl.toLocaleString() + '/周' : '—'}</b><p>npm 周下载</p></div>
 </div>
 <div class="sc-cols" style="margin-top:16px">
-  <div class="card" style="margin:0"><b>评分维度（六维框架）</b>${dimRows}<p style="font-size:11px;color:var(--faint);margin-top:10px">安全卫生（深检抽样）与采用度只展示不进分；兼容性随 rc 雷达上线。口径见 <a href="/about/">关于·指标体系</a>。</p></div>
-  <div class="card" style="margin:0"><b>扣分明细（health-v4）</b>${dropsRows || '<p style="color:var(--ok);font-size:13px;margin-top:8px">无扣分项 ✓</p>'}${(en.missing || []).length ? `<p style="font-size:11px;color:var(--faint);margin-top:8px">未探测（不扣分）：${escHtml(en.missing.join('、'))}</p>` : ''}</div>
+  <div class="card" style="margin:0"><b>评分维度（六维框架）</b>${dimRows || '<p style="color:var(--faint);font-size:13px;margin-top:8px">评分待生成（新入库，下个评分快照补齐）</p>'}<p style="font-size:11px;color:var(--faint);margin-top:10px">安全卫生（深检抽样）与采用度只展示不进分；兼容性随 rc 雷达上线。口径见 <a href="/about/">关于·指标体系</a>。</p></div>
+  <div class="card" style="margin:0"><b>扣分明细（health-v4）</b>${dropsRows || (hasScore ? '<p style="color:var(--ok);font-size:13px;margin-top:8px">无扣分项 ✓</p>' : '<p style="color:var(--faint);font-size:13px;margin-top:8px">评分待生成（新入库，下个评分快照补齐）</p>')}${hasScore && (en.missing || []).length ? `<p style="font-size:11px;color:var(--faint);margin-top:8px">未探测（不扣分）：${escHtml(en.missing.join('、'))}</p>` : ''}</div>
 </div>
 <div class="sc-cols" style="margin-top:14px">
   <div class="card" style="margin:0"><b>收录 / 发布</b>
-    <p style="font-size:13px;margin-top:8px">${en.inAwesome ? '✅ awesome-dsh-plugin' : '— awesome 未收录'} · ${en.inImsai ? '✅ imsai' : '— imsai 未收录'}</p>
+    <p style="font-size:13px;margin-top:8px">${en.inAwesome ? okIco + ' awesome-dsh-plugin' : '— awesome 未收录'} · ${en.inImsai ? okIco + ' imsai' : '— imsai 未收录'}</p>
     <p style="font-size:13px;color:var(--mut)">${r.npm?.published ? `npm <b>${escHtml(r.pkgName)}@${escHtml(r.npm.latest || '')}</b>（${r.npm.versions ?? '?'} 个版本 · 最近发布 ${escHtml((r.npm.latestTime || '').slice(0, 10))}）` : '未发布 npm（仅仓库安装）'}</p>
-    ${(r.npm?.published && r.version && r.npm.latest !== r.version) ? `<p style="font-size:12.5px;color:var(--warn)">⚠ 版本滞后：仓库 ${escHtml(r.version)} vs npm ${escHtml(r.npm.latest)}</p>` : ''}
+    ${(r.npm?.published && r.version && r.npm.latest !== r.version) ? `<p style="font-size:12.5px;color:var(--warn)">${warnIco} 版本滞后：仓库 ${escHtml(r.version)} vs npm ${escHtml(r.npm.latest)}</p>` : ''}
     <p style="font-size:12.5px;margin-top:10px"><b>徽章接入</b>：<code style="font-size:11.5px">https://dsh-insights.com/badge/${escHtml(full)}.svg</code> · <a href="/badge/">接入指南 ↗</a></p>
   </div>
   <div class="card" style="margin:0"><b>LLM 解读</b>${llm ? `<p style="font-size:13px;margin-top:8px">${escHtml(llm.summaryZh || llm.summaryEn || '—')}</p>${(llm.capabilityTags || []).length ? `<p style="margin-top:8px">${llm.capabilityTags.map((t) => `<span class="pill">${escHtml(t)}</span>`).join('')}</p>` : ''}${(llm.claims || []).length ? `<p style="font-size:12px;color:var(--mut);margin-top:8px">README 宣称：${escHtml(llm.claims.slice(0, 4).join('；'))}</p>` : ''}` : '<p style="color:var(--faint);font-size:13px;margin-top:8px">未标注 · 待 LLM 标注轮</p>'}${deep ? `<p style="font-size:12.5px;margin-top:10px;border-top:1px solid var(--line);padding-top:8px"><b>深检（写面/消毒，非审计）</b>：${escHtml(deep.verdict)} · 写面 ${deep.writeCount} 处 · ${deep.sanitized ? '有消毒器' : '无消毒器'}</p>` : ''}</div>
 </div>
 ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">同类插件（${escHtml(en.category)}）</h2><div class="card">${peersHtml}</div>` : ''}
-<h2 style="font-size:16px;margin:26px 0 8px">致作者的信</h2>
-<div class="article">${mdToHtml(md)}</div>`
+<p style="margin-top:18px;font-size:12px;color:var(--faint)">数据有误或已更新？<a href="https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml">申请重检</a>（Actions 手动触发，输入 owner/repo，约半小时生效） · <a href="https://github.com/ice5kysl/dsh-insights/issues/new/choose">申诉 / 纠错</a></p>`
     const html = page({
-      title: `${repo} · 插件详情 · DSH Insights`, desc: `${full} 的健康分、维度画像、扣分明细与改进建议（DSH Insights 自动生成）`,
-      base: '../../../', here: 'plugins/', body, og: { type: 'article', title: `${full} · ${en.grade || ''} ${en.score ?? ''}/100 · DSH Insights` },
+      title: `${repo} · 插件详情 · DSH Insights`, desc: `${full} 的健康分、维度画像、扣分明细与客观数据（DSH Insights 自动生成）`,
+      base: '../../../', here: 'dashboard/', body, og: { type: 'article', title: `${full} · ${hasScore ? `${en.grade} ${en.score}/100 · ` : ''}DSH Insights`, url: `${ORIGIN}/p/${full}/` },
     })
-    // diff 驱动：内容不变不重写（全量 4k+ 页避免每日 churn）
+    // diff 驱动：内容不变不重写（全量页避免每日 churn）
     const fp = join(SITE, 'p', owner, repo, 'index.html')
     if (existsSync(fp) && readFileSync(fp, 'utf8') === html) continue
     written.push(out(`p/${owner}/${repo}/index.html`, html))
     pWrote++
   }
-  if (reportFiles.length) console.log(`[pages] /p/ ${pWrote} changed / ${reportFiles.length} letter pages`)
+  console.log(`[pages] /p/ ${pWrote} written / ${plugAll.length} plugin pages（全量权威集，信件已退出页面）`)
 
   // ---- /data/ open-data index (+ copy public datasets) -------------------
   const DATASETS = [
@@ -320,7 +324,11 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
   // ---- /scenarios/ 场景组合推荐 -------------------------------------------
   const scenarios = (JSON.parse(read('scenarios.json') || '{"scenarios":[]}')).scenarios || []
   const plugBy = byFullName(loadPlugins())
-  const scRow = (p, extra) => `<div class="scrow"><a href="${escHtml(p.url)}" target="_blank" title="${escHtml(p.full_name)}">${escHtml(p.full_name)}</a><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}${p.npm ? ' · npm ' + escHtml(p.npm) : ''}${p.active ? ' · 活跃' : ''}${extra || ''}</span></div>`
+  // B6：主链接落站内 /p/ 详情页（存在时），GitHub 降为 ↗ 次链接——场景页从「出口页」变「中转页」
+  const scRow = (p, extra) => {
+    const inSite = existsSync(join(SITE, 'p', ...String(p.full_name).split('/'), 'index.html'))
+    return `<div class="scrow"><a href="${inSite ? '/p/' + escHtml(p.full_name) + '/' : escHtml(p.url)}"${inSite ? '' : ' target="_blank"'} title="${escHtml(p.full_name)}">${escHtml(p.full_name)}</a>${inSite ? ` <a href="${escHtml(p.url)}" target="_blank" style="font-size:11px;color:var(--faint)" title="GitHub 仓库">↗</a>` : ''}<span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}${p.npm ? ' · npm ' + escHtml(p.npm) : ''}${p.active ? ' · 活跃' : ''}${extra || ''}</span></div>`
+  }
   const scCards = scenarios.filter((s) => (s.plugins || []).length).map((s) => {
     const withAge = s.plugins.map((p) => ({ ...p, created: (plugBy.get(p.full_name)?.created_at || '').slice(0, 10) }))
     const best = withAge.slice(0, 5)
@@ -340,7 +348,31 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
     base: '../', here: 'scenarios/',
     body: `<p class="crumb">Scenarios</p><h1 class="pagetitle">场景组合推荐</h1>
 <p class="lede">从「我要做什么」出发，而不是从「哪个星多」出发。每个场景给出健康分最高、npm 已发布、近期活跃的一组候选与备选——<b>客观信号排序，不接"最佳"叙事，不做付费置顶</b>。覆盖 ${scenarios.reduce((n, s) => n + (s.plugins || []).length, 0)} 个推荐位，随每日快照刷新。</p>
-<div>${scCards || '<div class="card"><b>数据积累中</b><p>场景数据随 LLM 标注覆盖逐步补齐。</p></div>'}</div>
+<div class="sc-layout">
+<div class="sc-main">${scCards || '<div class="card"><b>数据积累中</b><p>场景数据随 LLM 标注覆盖逐步补齐。</p></div>'}</div>
+<aside class="sc-toc" id="sc-toc">${scenarios.filter((s) => (s.plugins || []).length).map((s) => `<a href="#sc-${escHtml(s.id)}" data-t="sc-${escHtml(s.id)}">${escHtml(s.zh)}</a>`).join('')}</aside>
+</div>
+<style>
+.sc-layout{display:grid;grid-template-columns:minmax(0,1fr) 208px;gap:28px;align-items:start}
+.sc-toc{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:8px}
+.sc-toc a{display:block;padding:7px 10px;border-radius:8px;color:var(--mut);font-size:12.5px;line-height:1.4}
+.sc-toc a:hover{background:var(--track);color:var(--ink);text-decoration:none}
+.sc-toc a.on{background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent);font-weight:650}
+@media(max-width:960px){.sc-layout{grid-template-columns:1fr}.sc-toc{position:static;max-height:none;display:flex;overflow-x:auto;gap:4px;padding:6px}.sc-toc a{white-space:nowrap;flex:none}}
+</style>
+<script>
+(function(){
+  var toc=document.getElementById('sc-toc'); if(!toc)return;
+  var links=[].slice.call(toc.querySelectorAll('a'));
+  var secs=links.map(function(a){return document.getElementById(a.dataset.t)}).filter(Boolean);
+  if(!secs.length)return;
+  function spy(){ var y=window.scrollY+120, cur=secs[0];
+    secs.forEach(function(s){ if(s.offsetTop<=y)cur=s });
+    links.forEach(function(a){ a.classList.toggle('on', a.dataset.t===cur.id) });
+  }
+  window.addEventListener('scroll',spy,{passive:true}); spy();
+})();
+</script>
 <h2 style="font-size:16px;margin:28px 0 8px">排序口径</h2>
 <p class="lede">场景归属 = LLM 能力标签 ∪ 词汇桶（标注"LLM 生成，人工抽查"）；场景内排序 = 健康分 → npm 已发布 → 近 30 天活跃，星数仅作展示不参与排序。同样的数据在 <a href="../data/insights.json">/data/insights.json</a> 开放，agent 可直接消费。</p>`,
   })))
@@ -357,7 +389,7 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
       return `<tr><td>${escHtml(tag)}</td><td class="mono">${escHtml(v)}</td><td>${ver ? escHtml((ver.time || '').slice(0, 10)) + '（' + daysSince(ver.time) + ' 天前）' : '—'}</td></tr>`
     }).join('')
     const relRows = (dsh.releases || []).map((r) => `<div style="padding:10px 2px;border-bottom:1px solid var(--line)">
-<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><a href="https://github.com/${escHtml(dsh.repo)}/releases/tag/${escHtml(r.tag)}" target="_blank" style="font-weight:600;color:var(--ink)">${escHtml(r.tag)}</a>${r.breaking ? ' <span class="pill" style="color:var(--warn);border-color:var(--warn)">breaking?</span>' : ''}<span style="color:var(--faint);font:12px var(--mono);white-space:nowrap;flex:none">${r.prerelease ? 'pre-release' : 'release'} · ${escHtml((r.published_at || '').slice(0, 10))}${(r.added || r.fixed) ? ` · ${r.added} 新增/${r.fixed} 修复` : ''}</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="display:inline-flex;align-items:center;gap:8px;min-width:0"><a href="https://github.com/${escHtml(dsh.repo)}/releases/tag/${escHtml(r.tag)}" target="_blank" style="font-weight:600;color:var(--ink)">${escHtml(r.tag)}</a>${r.breaking ? '<span class="pill" style="margin:0;flex:none;color:var(--warn);border-color:var(--warn)">breaking?</span>' : ''}</span><span style="color:var(--faint);font:12px var(--mono);white-space:nowrap;flex:none">${r.prerelease ? 'pre-release' : 'release'} · ${escHtml((r.published_at || '').slice(0, 10))}${(r.added || r.fixed) ? ` · ${r.added} 新增/${r.fixed} 修复` : ''}</span></div>
 ${r.summary ? `<div style="color:var(--mut);font-size:12.5px;margin-top:4px">${escHtml(r.summary)}</div>` : ''}
 </div>`).join('')
     const platRows = (dyn.platform || []).filter((p) => !p.error).map((p) => `<div class="listrow"><a href="https://github.com/${escHtml(p.repo)}" target="_blank">${escHtml(p.repo)}</a><span class="meta">★${(p.stars || 0).toLocaleString()} · push ${escHtml((p.pushed_at || '').slice(0, 10))}${p.latestRelease ? ' · ' + escHtml(p.latestRelease.tag) : ''}</span></div>`).join('')
@@ -508,9 +540,17 @@ ${platRows}
 <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">${boardCards}</div>
 ${graphSec}
 <h2 style="font-size:16px;margin:28px 0 8px">作者库（全量 ${authors.length}）</h2>
-<table class="ptable" id="atable" style="width:100%;margin-top:8px">
+<div style="display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap">
+  <input id="aq" placeholder="搜索作者 / 组织名…" style="flex:1;min-width:200px;max-width:320px;padding:7px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font-size:13px">
+  <span id="ainfo" style="font:12px var(--mono);color:var(--mut)"></span>
+  <button class="wkbtn" id="aprev">‹ 上一页</button>
+  <button class="wkbtn" id="anext">下一页 ›</button>
+</div>
+<div style="overflow:auto;max-height:70vh;border:1px solid var(--line);border-radius:12px;margin-top:10px">
+<table class="ptable" id="atable" style="width:100%">
 <thead><tr><th class="num">#</th><th>作者</th><th class="num" data-k="num">插件</th><th class="num" data-k="num">A/B</th><th class="num" data-k="num">均分</th><th class="num" data-k="num">★合计</th><th class="num" data-k="num">npm</th><th class="num" data-k="num">收录</th><th class="num" data-k="str">最近活跃</th><th>代表插件</th><th>主分类</th></tr></thead>
 <tbody>${authorRows}</tbody></table>
+</div>
 <p class="lede" style="margin-top:14px">口径：作者 = 仓库 owner（个人或组织）；收录 = 进 awesome/imsai 渠道数；均分 = 其全部插件健康分均值。点表头排序。数据随每日快照刷新。</p>
 <style>
 .ptable{border-collapse:collapse;font-size:12.5px}
@@ -523,16 +563,30 @@ ${graphSec}
 <script>
 (function(){
   var tb=document.getElementById('atable'); if(!tb)return;
-  var ths=tb.querySelectorAll('th'), tbody=tb.querySelector('tbody'), desc=true, col=-1;
+  var tbody=tb.querySelector('tbody'), all=[].slice.call(tbody.querySelectorAll('tr'));
+  var q=document.getElementById('aq'), info=document.getElementById('ainfo');
+  var ths=tb.querySelectorAll('th'), desc=true, col=-1, page=0, PER=100;
+  function view(){ var s=(q.value||'').toLowerCase(); return all.filter(function(r){ return !s||r.children[1].textContent.toLowerCase().indexOf(s)>=0 }) }
+  function draw(){
+    var rows=view(), pages=Math.max(1,Math.ceil(rows.length/PER));
+    if(page>=pages)page=pages-1; if(page<0)page=0;
+    var slice=rows.slice(page*PER,(page+1)*PER);
+    all.forEach(function(r){ r.style.display='none' });
+    slice.forEach(function(r){ r.style.display='' });
+    slice.forEach(function(r,j){ r.children[0].textContent=page*PER+j+1 });
+    info.textContent=rows.length+' 位 · 第 '+(page+1)+'/'+pages+' 页';
+  }
+  q.addEventListener('input',function(){ page=0; draw() });
+  document.getElementById('aprev').onclick=function(){ if(page>0){page--;draw()} };
+  document.getElementById('anext').onclick=function(){ page++;draw() };
   ths.forEach(function(th,i){ th.addEventListener('click',function(){
     var numeric=i>=2&&i<=8; desc=(col===i)?!desc:true; col=i;
-    var rows=[].slice.call(tbody.querySelectorAll('tr'));
-    rows.sort(function(a,b){ var x=a.children[i],y=b.children[i];
+    all.sort(function(a,b){ var x=a.children[i],y=b.children[i];
       if(numeric){ var vx=parseFloat((x.getAttribute('data-v')||x.textContent).replace(/[^0-9.\\-]/g,''))||0, vy=parseFloat((y.getAttribute('data-v')||y.textContent).replace(/[^0-9.\\-]/g,''))||0; return desc?vy-vx:vx-vy }
       var sx=x.textContent,sy=y.textContent; return desc?sx.localeCompare(sy):sy.localeCompare(sx) });
-    rows.forEach(function(r){ tbody.appendChild(r) });
-    tbody.querySelectorAll('tr').forEach(function(r,j){ r.children[0].textContent=j+1 });
+    page=0; draw();
   }) });
+  draw();
 })();
 </script>`,
   })))
@@ -555,7 +609,7 @@ ${graphSec}
 ${badgeExHtml}
 
 <h2 style="font-size:16px;margin:28px 0 8px">如何解读</h2>
-<p class="lede">徽章显示「等级 · 分数」：100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。评的是六维框架中的计分四维（工程质量 / 文档完整性 / 可发现性 / 维护活跃），每条扣分都带证据、可在插件页和仪表盘抽屉里逐项核查——<b>分数的意义不在于高低，在于可复核</b>。框架全文见 <a href="../about/">关于 · 指标体系</a>。</p>
+<p class="lede">徽章显示「等级 · 分数」：100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。评的是六维框架中的计分四维（工程质量 / 文档完整性 / 可发现性 / 维护活跃），每条扣分都带证据、可在插件页上逐项核查——<b>分数的意义不在于高低，在于可复核</b>。框架全文见 <a href="../about/">关于 · 指标体系</a>。</p>
 
 <h2 style="font-size:16px;margin:28px 0 8px">为什么值得挂</h2>
 <p class="lede">对作者：潜在用户装前 10 秒的信任凭证；分数提升是看得见的修复回报；徽章链回插件页，带来反链与同类定位。对生态：目录与市场装不下所有插件，但每个 README 都可以挂分数——徽章是让「信得过」在生态里自传播的钩子。我们不做排名、不做安全审计，只提供客观信号。</p>
@@ -597,66 +651,99 @@ ${badgeExHtml}
 </script>`,
   })))
 
-  // ---- / 首页（全站汇总门户） ----------------------------------------------
+  // ---- / 首页（全站汇总门户 · 激活版：搜索直达 + KPI + 最新入库 + 场景速配） ----
   const an0 = JSON.parse(read('analysis.json') || '{}')
   const t0 = an0.totals || {}
   const cov0 = an0.coverage || {}
   const gr0 = an0.quality?.grades || {}
+  const dist0 = an0.distribution || {}
   const dyn0 = JSON.parse(read('dynamics.json') || 'null')
   const latestRel = dyn0?.dsh?.releases?.[0]
   const distTags = dyn0?.dsh?.npm?.distTags || {}
   const latestWk = weekly[0]
   const wkBullets = latestWk ? (latestWk.md.split('## 本期速览')[1] || '').split('\n').filter((l) => l.startsWith('- ')).slice(0, 5).map((l) => mdToHtml(l)).join('') : ''
-  const navCard = (href, icon, name, desc, stat) => `<a class="card" href="${href}" style="text-decoration:none;color:inherit;display:block"><b>${icon} ${name}</b><p>${desc}</p><p style="color:var(--accent);font:600 12px var(--mono);margin-top:8px">${stat}</p></a>`
+  const saN = (gr0.S ?? 0) + (gr0.A ?? 0)
+  const saPct = t0.authoritative ? Math.round((saN / t0.authoritative) * 1000) / 10 : null
+  const fresh6 = [...plugAll].sort((a, b) => (b.created_at || '').localeCompare(a.created_at || '')).slice(0, 6)
+  const freshCards = fresh6.map((p) => `<a class="card" href="/p/${escHtml(p.full_name)}/" style="text-decoration:none;color:inherit;display:block" title="${escHtml(p.full_name)}">
+<b style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--mono);font-size:12.5px">${escHtml(p.full_name)}</b>
+<p>★ ${p.stars || 0} · 入库 ${escHtml((p.created_at || '').slice(0, 10))}</p>
+<p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(stripEmoji(p.description).slice(0, 64) || '（无描述）')}</p></a>`).join('')
+  const sceneCards = scenarios.slice(0, 6).map((s) => `<a class="card" href="scenarios/#sc-${escHtml(s.id)}" style="text-decoration:none;color:inherit;display:block"><b>${escHtml(s.zh)}</b><p>${(s.plugins || []).length} 个推荐位 · ${s.candidates ?? '?'} 候选</p><p style="color:var(--accent);font:600 12px var(--mono);margin-top:8px">看质量首选 →</p></a>`).join('')
+  const ico = (name, size = 15) => `<span style="display:inline-block;vertical-align:-2px">${icon(name, size)}</span>`
+  const navCard = (href, ic, name, desc, stat) => `<a class="card" href="${href}" style="text-decoration:none;color:inherit;display:block"><b>${ico(ic)} ${name}</b><p>${desc}</p><p style="color:var(--accent);font:600 12px var(--mono);margin-top:8px">${stat}</p></a>`
   written.push(out('index.html', page({
     title: 'DSH Insights · DeepSeek Harness 全景观察站', desc: '插件健康 · 官方动态 · 生态趋势——全量、客观、可复核的 DSH 生态观测。',
     base: './', here: '',
     body: `
-<div style="padding:56px 0 28px;border-bottom:1px solid var(--line)">
-  <svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><rect x="16" y="34" width="8" height="14" rx="2" fill="var(--bg)"/><rect x="28" y="25" width="8" height="23" rx="2" fill="var(--bg)"/><rect x="40" y="14" width="8" height="34" rx="2" fill="var(--accent)"/></svg>
-  <h1 class="pagetitle" style="font-size:clamp(30px,4.6vw,44px);margin-top:20px">DSH Insights</h1>
-  <p class="lede" style="font-size:16px;margin-bottom:6px">DeepSeek Harness <b>全景观察站</b>：插件健康 · 官方动态 · 生态趋势</p>
-  <p class="lede">对 ${(cov0.topicUniverse?.count || 0).toLocaleString()} 个 topic 仓库做全量发现，manifest 门禁逐条校验出权威集，六维框架客观评分（可复核、非安全审计）。开放数据 + 生态周报 + 官方动态雷达，面向插件作者、使用者和 dsh 官方。</p>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:22px">
-    <a class="wkbtn" style="background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600" href="plugins/">浏览插件库（${(t0.authoritative || 0).toLocaleString()} 个权威插件）→</a>
+<div style="padding:48px 0 28px;border-bottom:1px solid var(--line)">
+  <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg>
+  <h1 class="pagetitle" style="font-size:clamp(30px,4.6vw,44px);margin-top:18px">DSH Insights</h1>
+  <p class="lede" style="font-size:16px;margin-bottom:6px">DeepSeek Harness Plugin Ecosystem · <b>全景观察站</b> — 插件健康 · 官方动态 · 生态趋势</p>
+  <p class="lede">全量发现 → manifest 门禁逐条校验 → 六维框架客观评分（可复核、非安全审计）。开放数据 + 生态周报 + 官方动态雷达，面向插件作者、使用者和 dsh 官方。</p>
+  <div class="hnum"><b class="count mono" data-v="${t0.authoritative ?? 0}">0</b><span>权威插件<br>manifest 门禁逐条校验 · 断点续跑滚动扩大</span></div>
+  <div class="hmeta"><span>快照 <b class="mono">${escHtml((an0.generatedAt || '').slice(0, 10))}</b></span><span>多源候选 <b class="mono">${(cov0.candidates ?? 14081).toLocaleString()}</b></span><span>topic 宇宙 <b class="mono">${(cov0.topicUniverse?.count ?? 0).toLocaleString()}</b></span><span>S+A <b class="mono">${saN}</b></span><span>周报 <b class="mono">${weekly.length} 期</b></span></div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:22px;max-width:760px">
+    <span style="color:var(--faint);flex:none">${icon('search', 17)}</span>
+    <input id="home-q" type="text" placeholder="搜索 ${(t0.authoritative || 0).toLocaleString()}+ 插件…" autocomplete="off"
+      style="flex:1;min-width:220px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px;outline:none;background:var(--card);color:var(--ink)">
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+    <a class="wkbtn" style="background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600" href="dashboard/#browse">浏览插件库（${(t0.authoritative || 0).toLocaleString()} 个权威插件）→</a>
     <a class="wkbtn" href="weekly/">读生态周报</a>
     <a class="wkbtn" href="feed.xml">订阅 RSS</a>
     <a class="wkbtn" href="badge/">作者接入徽章</a>
   </div>
 </div>
+<style>
+.hnum{margin-top:30px;display:flex;align-items:baseline;gap:14px}
+.hnum .count{font-size:clamp(46px,6vw,66px);font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--ink)}
+.hnum>span{color:var(--mut);font-size:13px;line-height:1.55}
+.hmeta{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;color:var(--faint);font-size:12.5px}
+.hmeta b{color:var(--mut);font-weight:600}
+</style>
+<script>(function(){document.querySelectorAll('.count[data-v]').forEach(function(el){var v=+el.dataset.v,s0=null,d=900;function step(ts){if(!s0)s0=ts;var p=Math.min(1,(ts-s0)/d),e2=1-Math.pow(1-p,3);el.textContent=Math.round(v*e2).toLocaleString('en-US');if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)})})()</script>
 <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:22px">
   <div class="card"><b class="mono" style="font-size:22px">${(t0.authoritative || 0).toLocaleString()}</b><p>权威插件（manifest 门禁）</p></div>
-  <div class="card"><b class="mono" style="font-size:22px;color:#7c3aed">${gr0.S ?? 0}</b><p>S 级（≥95 分）插件</p></div>
+  <div class="card"><b class="mono" style="font-size:22px;color:#7c3aed">${saN}<span style="font-size:13px;color:var(--mut)"> · ${saPct != null ? saPct + '%' : '—'}</span></b><p>S+A 级（≥90 分）及占比</p></div>
+  <div class="card"><b class="mono" style="font-size:22px">${(t0.active7Pct ?? 0)}%</b><p>近 7 天活跃（30 天 ${t0.active30Pct ?? '—'}%）</p></div>
+  <div class="card"><b class="mono" style="font-size:22px">${dist0.publishPct ?? '—'}%</b><p>npm 发布率（${(dist0.publish?.published ?? 0).toLocaleString()} 已发布）</p></div>
   <div class="card"><b class="mono" style="font-size:22px">${(cov0.candidates || 0).toLocaleString()}</b><p>多源候选（topic∪策展∪npm）</p></div>
-  <div class="card"><b class="mono" style="font-size:22px">${(an0.authorStats?.total || 0).toLocaleString()}</b><p>作者/组织</p></div>
   <div class="card"><b class="mono" style="font-size:22px">${weekly.length}</b><p>周报期数（每周五更新）</p></div>
 </div>
+<h2 style="font-size:16px;margin:30px 0 10px">最新入库 <span style="color:var(--faint);font-weight:400;font-size:12px">按仓库创建时间 · 每日快照刷新</span></h2>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">${freshCards}</div>
 <div class="sc-cols" style="margin-top:26px">
-  <div class="card" style="margin:0"><b>📮 本周速览 · ${latestWk ? escHtml(latestWk.slug) : ''}</b>
+  <div class="card" style="margin:0"><b>${ico('mail')} 本周速览 · ${latestWk ? escHtml(latestWk.slug) : ''}</b>
     ${latestWk ? `<div class="article" style="font-size:13px">${wkBullets}</div><p style="margin-top:10px"><a href="weekly/#${latestWk.slug}">读全文（可导出 Markdown/PDF/图片）→</a></p>` : '<p>生成中</p>'}
   </div>
-  <div class="card" style="margin:0"><b>🛰 官方动态</b>
+  <div class="card" style="margin:0"><b>${ico('radar')} 官方动态</b>
     ${latestRel ? `<p style="margin-top:8px;font-size:13px">最新 release：<a href="https://github.com/deepseek-ai/DeepSeek-Harness/releases/tag/${escHtml(latestRel.tag)}" target="_blank"><b>${escHtml(latestRel.tag)}</b></a>（${escHtml((latestRel.published_at || '').slice(0, 10))}${latestRel.breaking ? ' · <span style="color:var(--warn)">含 breaking 说明</span>' : ''}）</p>${latestRel.summary ? `<p style="font-size:12.5px;color:var(--mut);margin-top:6px">${escHtml(latestRel.summary)}</p>` : ''}` : ''}
     <p style="font-size:12.5px;color:var(--mut);margin-top:8px">npm dist-tags：${Object.entries(distTags).map(([k, v]) => `${k}=${v}`).join(' · ')}</p>
     <p style="margin-top:10px"><a href="dynamics/">官方动态与 rc 兼容信号 →</a></p>
   </div>
 </div>
+<h2 style="font-size:16px;margin:30px 0 10px">场景速配 <span style="color:var(--faint);font-weight:400;font-size:12px">从「我要做什么」出发 · <a href="scenarios/">全部 ${scenarios.length} 个场景 →</a></span></h2>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">${sceneCards}</div>
 <h2 style="font-size:16px;margin:30px 0 10px">全站导览</h2>
 <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
-  ${navCard('plugins/', '🔌', '插件库', '全量权威插件：搜索/筛选/排序，点进详情页看评分与扣分明细', `${(t0.authoritative || 0).toLocaleString()} 个 · 六维评分`)}
-  ${navCard('dashboard/', '📊', '仪表盘', '生态趋势多线图 · 覆盖漏斗 · 质量分布 · 榜单', `均分 ${an0.quality?.avgScore ?? '—'} · S+A ${(gr0.S ?? 0) + (gr0.A ?? 0)} 个`)}
-  ${navCard('scenarios/', '🧩', '场景组合推荐', '从「我要做什么」出发选插件：质量首选 + 新入场', '22 个场景')}
-  ${navCard('authors/', '👥', '作者榜', '生态里的重要人物：榜单 + 协作关系图', `${(an0.authorStats?.total || 0).toLocaleString()} 位`)}
-  ${navCard('dynamics/', '🛰', '官方动态', 'dsh releases/dist-tags · DeepSeek 平台 · rc 兼容信号', latestRel ? escHtml(latestRel.tag) : '—')}
-  ${navCard('weekly/', '📮', '生态周报', '双栏阅读器 · 可导出 Markdown/PDF/图片 · RSS', `${weekly.length} 期 · 每周五`)}
-  ${navCard('data/', '📦', '开放数据', '稳定 JSON URL · agent 可读 · CC BY 4.0', 'insights.json 等 11 个数据集')}
-  ${navCard('badge/', '🏅', '健康徽章', '把客观评分带进 README：一页接入指南', 'health-v4 · 每日刷新')}
-  ${navCard('about/', '🔍', '关于 · 指标体系', '方法论全公开：权威集门禁 · 六维框架 · 校准回归', '可复核到每条扣分')}
+  ${navCard('dashboard/', 'plugin', '插件', '生态全景一站看：趋势 · 质量分布 · 榜单 + 全量插件库（搜索/筛选/排序，点进详情看扣分明细）', `${(t0.authoritative || 0).toLocaleString()} 个 · 均分 ${an0.quality?.avgScore ?? '—'} · S+A ${saN}`)}
+  ${navCard('scenarios/', 'tag', '场景组合推荐', '从「我要做什么」出发选插件：质量首选 + 新入场', `${scenarios.length} 个场景`)}
+  ${navCard('weekly/', 'mail', '生态周报', '双栏阅读器 · 可导出 Markdown/PDF/图片 · RSS', `${weekly.length} 期 · 每周五`)}
+  ${navCard('dynamics/', 'radar', '官方动态', 'dsh releases/dist-tags · DeepSeek 平台 · rc 兼容信号', latestRel ? escHtml(latestRel.tag) : '—')}
+  ${navCard('authors/', 'users', '作者榜', '生态里的重要人物：榜单 + 协作关系图', `${(an0.authorStats?.total || 0).toLocaleString()} 位`)}
+  ${navCard('badge/', 'star', '健康徽章', '把客观评分带进 README：一页接入指南', 'health-v4 · 每日刷新')}
+  ${navCard('data/', 'database', '开放数据', '稳定 JSON URL · agent 可读 · CC BY 4.0', 'insights.json 等 11 个数据集')}
+  ${navCard('about/', 'book', '关于 · 指标体系', '方法论全公开：权威集门禁 · 六维框架 · 校准回归', '可复核到每条扣分')}
 </div>
 <script>
-// 旧锚点兼容：/#browse?… → /plugins/；/#overview 等仪表盘区块 → /dashboard/
+// 首页搜索：回车直达仪表盘插件库（#browse?q=… 由 dashboard 脚本解析）
+(function(){ var q=document.getElementById('home-q'); if(!q)return;
+  q.addEventListener('keydown',function(ev){ if(ev.key!=='Enter')return;
+    var v=q.value.trim(); if(v) location.href='/dashboard/#browse?q='+encodeURIComponent(v); }); })();
+// 旧锚点兼容：/#browse?… 与 /#overview 等仪表盘区块 → /dashboard/
 (function(){ var h=location.hash||'';
-  if(h.indexOf('#browse')===0){ location.replace('/plugins/'+h) }
+  if(h.indexOf('#browse')===0){ location.replace('/dashboard/'+h) }
   else if(/^#(overview|quality|rank)/.test(h)){ location.replace('/dashboard/'+h) } })();
 </script>`,
   })))
@@ -675,7 +762,7 @@ ${badgeExHtml}
 <h2>覆盖与完整性（为什么权威集 ≪ topic 总数）</h2>
 <p>GitHub <code>topic:dsh-plugin</code> 是官方唯一发现机制，<b>打标即入、零门槛</b>——其中混有大量蹭标、无关仓库、fork、monorepo 子路径与已删除仓库。我们的漏斗：<b>topic 宇宙（≈13.7k，首页漏斗实时口径）→ 多源候选（topic 分片全量抓取 + 策展目录 + npm 映射，去重）→ manifest 门禁逐条校验 → 权威集 + 分桶</b>。权威集是「货真价实可按官方 bundle 形态安装」的下限子集；<code>no-dsh-bundle</code> / <code>no-package.json</code> 桶里的候选可能是插件但形态非标，留待人工复核而不是混入权威集。校验按 API 预算<b>滚动推进、断点续跑</b>，权威集随每次快照扩大——<b>覆盖率数字本身也公开</b>（首页覆盖漏斗），这就是我们对「完整性」的回答方式：不报大数，报可核验的数。</p>
 <h2>插件评估指标体系（六维框架 v1）</h2>
-<p>每个插件从六个维度考察：<b>计分四维</b>进入总分（100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2，health-v3 区分度重构），<b>展示两维</b>只呈现不进分，<b>兼容性</b>为预留维度。阈值：<span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>；插件详情抽屉可见各维度子分（dimScores）。</p>
+<p>每个插件从六个维度考察：<b>计分四维</b>进入总分（100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2，health-v3 区分度重构），<b>展示两维</b>只呈现不进分，<b>兼容性</b>为预留维度。阈值：<span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>；插件详情页可见各维度子分（dimScores）。</p>
 <table>
 <tr><th>维度</th><th>指标项</th><th>计分处理</th></tr>
 <tr><td>工程质量</td><td>client 导出 · main=lib 布局 · files 白名单 · npm 发布 · 版本一致</td><td><b>计分</b></td></tr>
@@ -732,6 +819,24 @@ ${items}
 `))
 
   // llms.txt：单一来源为仓库根 llms.txt（pages.yml 部署时拷入 public/），此处不再生成（P2-1）
+
+  // ---- robots.txt + sitemap.xml（B4：SEO 地基；lastmod 用快照日保持确定性） ----
+  const snapAt = String(JSON.parse(read('analysis.json') || '{}').generatedAt || new Date().toISOString()).slice(0, 10)
+  written.push(out('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${ORIGIN}/sitemap.xml\n`))
+  const walkHtml = (dir, prefix = '') => {
+    const files = []
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      if (e.isDirectory()) files.push(...walkHtml(join(dir, e.name), prefix + e.name + '/'))
+      else if (e.name.endsWith('.html')) files.push(prefix + e.name)
+    }
+    return files
+  }
+  const smLocs = walkHtml(SITE).sort().map((p) => `${ORIGIN}/${p.replace(/(^|\/)index\.html$/, '')}`)
+  written.push(out('sitemap.xml',
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    smLocs.map((loc) => `  <url><loc>${loc}</loc><lastmod>${snapAt}</lastmod></url>`).join('\n') +
+    `\n</urlset>\n`))
+  console.log(`[pages] robots.txt + sitemap.xml（${smLocs.length} URLs）`)
 
   console.log(`[pages] ${written.length} 个产物：`)
   for (const w of written) console.log('  -', w)
