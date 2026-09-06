@@ -230,7 +230,7 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .hero{border-bottom:1px solid var(--line);padding:56px 0 36px;background:var(--card)}
 .kicker{font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
 .hero h1{margin:0;font-size:clamp(26px,4vw,36px);font-weight:700;letter-spacing:-.03em;line-height:1.15;max-width:22ch}
-.hero .lede{margin:12px 0 0;color:var(--mut);font-size:14.5px;max-width:68ch}
+.hero .lede{margin:12px 0 0;color:var(--mut);font-size:14.5px;max-width:880px}
 .hero .meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12.5px;color:var(--mut)}
 .hero .meta b{color:var(--ink);font-weight:600}
 .bignum{margin-top:34px;display:flex;align-items:baseline;gap:14px}

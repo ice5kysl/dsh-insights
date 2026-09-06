@@ -37,6 +37,21 @@ async function treeSignals(owner, repo, branch) {
   return null
 }
 
+
+/** 并发安全落盘：重读当前文件，把本次处理出的信号合并进去（不吞掉 sweep 的新增行） */
+function saveMerged() {
+  const fresh = readFileSync(PATHS.plugins, 'utf8').split('\n').filter(Boolean)
+    .map((l) => { try { return JSON.parse(l) } catch { return null } }).filter(Boolean)
+  const sigBy = new Map()
+  for (const r of rows) if (r.files && r.files.hasTests != null) sigBy.set((r.full_name || '').toLowerCase(), r.files)
+  for (const f of fresh) {
+    const sig = sigBy.get((f.full_name || '').toLowerCase())
+    if (sig) { if (!f.files) f.files = {}; Object.assign(f.files, sig) }
+  }
+  writeFileSync(PATHS.plugins + '.tmp', fresh.map((x) => JSON.stringify(x)).join('\n') + '\n')
+  renameSync(PATHS.plugins + '.tmp', PATHS.plugins)
+}
+
 async function main() {
   const rows = readFileSync(PATHS.plugins, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
   const todo = rows.filter((r) => r.files && r.files.hasTests == null)
@@ -51,13 +66,9 @@ async function main() {
     if (sig) Object.assign(r.files, sig)
     else failed++
     if (done % 200 === 0) console.log(`[backfill-tree] ${done}/${todo.length}（failed ${failed}）`)
-    if (done % 500 === 0) {
-      writeFileSync(PATHS.plugins + '.tmp', rows.map((x) => JSON.stringify(x)).join('\n') + '\n')
-      renameSync(PATHS.plugins + '.tmp', PATHS.plugins)
-      console.log(`[backfill-tree] checkpoint saved @${done}`)
-    }
+    if (done % 500 === 0) { saveMerged(); console.log(`[backfill-tree] checkpoint merged @${done}`) }
   }
-  writeFileSync(PATHS.plugins, rows.map((r) => JSON.stringify(r)).join('\n') + '\n')
+  saveMerged()
   console.log(`[backfill-tree] done：${done - failed} 行已回填，${failed} 行拉取失败（保持缺失不扣分）`)
 }
 
