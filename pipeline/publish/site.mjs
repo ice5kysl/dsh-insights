@@ -41,38 +41,60 @@ function main() {
   ])
   const dataJson = JSON.stringify(rows).replace(/</g, '\\u003c')
 
-  // ---- weekly area chart (inline SVG, hover handled client-side) ------
-  const wkArr = Object.entries(t.byWeek || {}).sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).slice(-20)
-  const wkMax = Math.max(1, ...wkArr.map(([, c]) => c))
-  const CW = 960, CH = 200, PT = 12, PR = 6, PB = 26, PL = 34
+  // ---- weekly multi-line chart (inline SVG, hover handled client-side) --
+  const wkGrade = t.byWeekGrades || {}
+  const wkCand = a.coverage?.candidatesByWeek || {}
+  const wkPresent = [...new Set([...Object.keys(t.byWeek || {}), ...Object.keys(wkCand), ...Object.keys(wkGrade.A || {}), ...Object.keys(wkGrade.B || {})])].sort()
+  // 连续周轴：以最近一个有数据的周一为终点，向前补零 20 周
+  const wkKeys = []
+  if (wkPresent.length) {
+    const pad = (x) => String(x).padStart(2, '0')
+    const end = new Date(wkPresent[wkPresent.length - 1])
+    for (let i = 19; i >= 0; i--) {
+      const d = new Date(end.getTime() - i * 7 * 86400000)
+      wkKeys.push(d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()))
+    }
+  }
+  const SERIES = [
+    { key: 'cand', label: '候选新增', color: '#a1a1aa', data: wkCand },
+    { key: 'auth', label: '权威集新增', color: 'var(--ink)', data: t.byWeek || {} },
+    { key: 'ga', label: 'A 级新增', color: 'var(--ok)', data: wkGrade.A || {} },
+    { key: 'gb', label: 'B 级新增', color: 'var(--accent)', data: wkGrade.B || {} },
+  ]
+  const CW = 960, CH = 210, PT = 12, PR = 6, PB = 26, PL = 34
   const iw = CW - PL - PR, ih = CH - PT - PB
-  const wkPts = wkArr.map(([k, c], i) => ({
-    k: k.slice(5), c,
-    x: +(PL + (wkArr.length > 1 ? (i / (wkArr.length - 1)) * iw : iw / 2)).toFixed(1),
-    y: +(PT + ih - (c / wkMax) * ih).toFixed(1),
-  }))
-  const linePath = wkPts.map((p, i) => (i ? 'L' : 'M') + p.x + ' ' + p.y).join(' ')
-  const areaPath = wkPts.length ? linePath + ' L' + wkPts[wkPts.length - 1].x + ' ' + (PT + ih) + ' L' + wkPts[0].x + ' ' + (PT + ih) + ' Z' : ''
+  const xOf = (i) => +(PL + (wkKeys.length > 1 ? (i / (wkKeys.length - 1)) * iw : iw / 2)).toFixed(1)
+  const wkRows = wkKeys.map((k, i) => {
+    const r = { k: k.slice(5), full: k, x: xOf(i) }
+    for (const s of SERIES) r[s.key] = s.data[k] || 0
+    return r
+  })
+  const wkMax = Math.max(1, ...wkRows.flatMap((r) => SERIES.map((s) => r[s.key])))
+  const yOf = (v) => +(PT + ih - (v / wkMax) * ih).toFixed(1)
+  for (const r of wkRows) for (const s of SERIES) r[s.key + 'Y'] = yOf(r[s.key])
   const gridLines = [0, 1, 2, 3].map((i) => {
     const y = PT + (ih * i) / 3
     const v = Math.round(wkMax * (1 - i / 3))
     return '<line x1="' + PL + '" y1="' + y + '" x2="' + (CW - PR) + '" y2="' + y + '" class="grid"/>' +
       '<text x="' + (PL - 6) + '" y="' + (y + 3) + '" class="gly">' + v + '</text>'
   }).join('')
-  const xLabels = wkPts.length
-    ? [wkPts[0], wkPts[Math.floor(wkPts.length / 2)], wkPts[wkPts.length - 1]]
+  const xLabels = wkRows.length
+    ? [wkRows[0], wkRows[Math.floor(wkRows.length / 2)], wkRows[wkRows.length - 1]]
         .map((p) => '<text x="' + p.x + '" y="' + (CH - 8) + '" class="glx" text-anchor="middle">' + p.k + '</text>').join('')
     : ''
-  const areaSvg = wkPts.length
+  const seriesPaths = SERIES.map((s) => {
+    const d = wkRows.map((r, i) => (i ? 'L' : 'M') + r.x + ' ' + r[s.key + 'Y']).join(' ')
+    return '<path d="' + d + '" class="line" style="stroke:' + s.color + '"' + (s.key === 'cand' ? ' stroke-dasharray="4 3"' : '') + '/>'
+  }).join('')
+  const seriesDots = SERIES.map((s) => '<circle id="ch-dot-' + s.key + '" r="3" class="dot" style="display:none;stroke:' + s.color + '"/>').join('')
+  const legendHtml = SERIES.map((s) => '<span class="chlg"><i style="background:' + s.color + '"></i>' + s.label + '</span>').join('')
+  const areaSvg = wkRows.length
     ? '<svg viewBox="0 0 ' + CW + ' ' + CH + '" style="width:100%;height:auto;display:block">' +
-      gridLines + xLabels +
-      '<path d="' + areaPath + '" class="area"/>' +
-      '<path d="' + linePath + '" class="line"/>' +
-      '<circle id="ch-dot" r="3.5" class="dot" style="display:none"/>' +
+      gridLines + xLabels + seriesPaths + seriesDots +
       '<line id="ch-x" class="cross" style="display:none" y1="' + PT + '" y2="' + (PT + ih) + '"/>' +
       '</svg>'
     : '<div class="dim">数据积累中…</div>'
-  const lastWeek = wkArr.length ? wkArr[wkArr.length - 1][1] : 0
+  const lastWeek = wkRows.length ? wkRows[wkRows.length - 1].auth : 0
 
   // ---- donuts ----------------------------------------------------------
   const donut = (parts, size = 118, sw = 21) => {
@@ -244,7 +266,10 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .chartbox .line{fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
 .chartbox .dot{fill:var(--card);stroke:var(--ink);stroke-width:2}
 .chartbox .cross{stroke:var(--faint);stroke-width:1;stroke-dasharray:3 3}
-.ch-tip{position:absolute;top:0;transform:translate(-50%,-118%);background:var(--ink);color:var(--bg);font:600 11.5px/1 var(--mono);padding:6px 9px;border-radius:7px;pointer-events:none;white-space:nowrap;display:none}
+.ch-tip{position:absolute;top:0;transform:translateX(-50%);background:var(--ink);color:var(--bg);font:600 11.5px/1.6 var(--mono);padding:7px 10px;border-radius:7px;pointer-events:none;display:none;min-width:132px}
+.ch-tip i{vertical-align:-1px}
+.chlg{display:inline-flex;align-items:center;gap:5px;margin-left:12px;font-size:11.5px}
+.chlg i{display:inline-block;width:9px;height:9px;border-radius:2.5px}
 
 /* ---- tables ---- */
 table{width:100%;border-collapse:collapse;font-size:12.5px}
@@ -334,7 +359,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 <body>
 <div class="topbar"><div class="wrap">
   <a class="brand" href="#top"><span class="mark">d</span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
-  <nav class="nav"><a href="./" class="here">仪表盘</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="about/">方法论</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <nav class="nav"><a href="./" class="here">仪表盘</a><a href="scenarios/">场景</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="about/">关于</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <div class="subnav"><div class="wrap">
   <a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a>
@@ -366,7 +391,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
     <p class="p-sub" style="margin-top:10px">topic 是「打标即入」的原始宇宙——含蹭标、无关仓库、fork、monorepo 子路径与已删除仓库；权威集是 manifest 门禁逐条核验后的可信子集，<b>校验按 API 预算滚动推进（断点续跑），权威集随快照持续扩大</b>。纯 tarball 分发等边界形态进分桶人工复核。口径详见 <a href="about/">方法论</a>。</p>
   </div>` : ''}
   <div class="panel" style="margin-bottom:14px">
-    <div class="p-h"><h3>权威集新增 · 按周</h3><span class="p-sub">按仓库创建时间归属到周一 · 最近 ${wkArr.length} 周</span></div>
+    <div class="p-h"><h3>生态新增 · 按周</h3><span class="p-sub">按仓库创建时间归属到周一 · 最近 ${wkRows.length} 周 · ${legendHtml}</span></div>
     <div class="chartbox" id="chart-week">${areaSvg}<div class="ch-tip" id="ch-tip"></div></div>
   </div>
   <div class="cards">
@@ -476,7 +501,8 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 
 <script>
 const ROWS=${dataJson};
-const WKPTS=${JSON.stringify(wkPts)};
+const WKS=${JSON.stringify(wkRows)};
+const WSERIES=${JSON.stringify(SERIES.map((s) => ({ key: s.key, label: s.label, color: s.color })))};
 const $=s=>document.querySelector(s);
 let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
 
@@ -494,29 +520,32 @@ let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
   });
 })();
 
-// ---- weekly area chart hover ----
+// ---- weekly multi-line chart hover ----
 (function(){
-  var box=$('#chart-week'); if(!box||!WKPTS.length)return;
-  var dot=$('#ch-dot'),cross=$('#ch-x'),tip=$('#ch-tip');
-  var CW2=960,CH2=200;
-  function onPoint(clientX,clientY){
+  var box=$('#chart-week'); if(!box||!WKS.length)return;
+  var cross=$('#ch-x'),tip=$('#ch-tip');
+  var CW2=960,CH2=210;
+  function hide(){ cross.style.display='none'; tip.style.display='none';
+    WSERIES.forEach(function(s){ $('#ch-dot-'+s.key).style.display='none' }) }
+  function onPoint(clientX){
     var r=box.getBoundingClientRect();
     var ratio=(clientX-r.left)/r.width;
-    var i=Math.round(ratio*(WKPTS.length-1));
-    i=Math.max(0,Math.min(WKPTS.length-1,i));
-    var p=WKPTS[i];
-    dot.style.display='';cross.style.display='';tip.style.display='';
-    dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y);
+    var i=Math.round(ratio*(WKS.length-1));
+    i=Math.max(0,Math.min(WKS.length-1,i));
+    var p=WKS[i];
+    cross.style.display='';tip.style.display='';
     cross.setAttribute('x1',p.x);cross.setAttribute('x2',p.x);
-    tip.textContent=p.k+' · +'+p.c;
+    WSERIES.forEach(function(s){ var d=$('#ch-dot-'+s.key); d.style.display=''; d.setAttribute('cx',p.x); d.setAttribute('cy',p[s.key+'Y']) });
+    tip.innerHTML='<b>'+p.full+'</b>'+WSERIES.map(function(s){
+      return '<div><i style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;background:'+s.color+'"></i>'+s.label+' <b style="margin-left:6px">+'+p[s.key]+'</b></div>' }).join('');
     var left=p.x/CW2*r.width;
-    left=Math.max(34,Math.min(r.width-34,left));
+    left=Math.max(70,Math.min(r.width-70,left));
     tip.style.left=left+'px';
-    tip.style.top=(p.y/CH2*r.height)+'px';
+    tip.style.top='8px';
   }
-  box.addEventListener('mousemove',function(ev){ onPoint(ev.clientX,ev.clientY) });
-  box.addEventListener('touchmove',function(ev){ if(ev.touches[0])onPoint(ev.touches[0].clientX,ev.touches[0].clientY) },{passive:true});
-  box.addEventListener('mouseleave',function(){dot.style.display='none';cross.style.display='none';tip.style.display='none'});
+  box.addEventListener('mousemove',function(ev){ onPoint(ev.clientX) });
+  box.addEventListener('touchmove',function(ev){ if(ev.touches[0])onPoint(ev.touches[0].clientX) },{passive:true});
+  box.addEventListener('mouseleave',hide);
 })();
 
 // ---- global tooltip ([data-tip]) ----

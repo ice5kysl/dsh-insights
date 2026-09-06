@@ -6,7 +6,8 @@
  * Generates:
  *   site/weekly/<slug>.html + weekly/index.html   from data/weekly/*.md
  *   site/p/<owner>/<repo>/index.html              from data/reports/*.md
- *   site/about/index.html                          methodology / rules / boundaries
+ *   site/scenarios/index.html                      scenario bundle recommendations
+ *   site/about/index.html                          about / methodology / metrics
  *   site/data/index.html                           open-data index (+ copies data files)
  *   site/feed.xml                                  RSS for the weekly
  *   site/llms.txt                                  agent navigation
@@ -124,13 +125,32 @@ ${weeklyList || '<p class="lede">暂无周报。</p>'}`,
 curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
   })))
 
-  // ---- /about/ methodology ------------------------------------------------
+  // ---- /scenarios/ 场景组合推荐 -------------------------------------------
+  const scenarios = (JSON.parse(read('scenarios.json') || '{"scenarios":[]}')).scenarios || []
+  const scCards = scenarios.filter((s) => (s.plugins || []).length).map((s) => {
+    const rows = s.plugins.map((p) => `<div class="listrow"><a href="${escHtml(p.url)}" target="_blank">${escHtml(p.full_name)}</a><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}${p.npm ? ' · npm ' + escHtml(p.npm) : ''}${p.active ? ' · 活跃' : ''}</span></div>`).join('')
+    const reasons = [...new Set(s.plugins.flatMap((p) => p.reasons || []))].slice(0, 3).join('；')
+    return `<div class="card"><b>${escHtml(s.zh)} <span style="color:var(--faint);font-weight:400;font-size:11.5px">${escHtml(s.en)}</span></b><p>${s.candidates} 个候选 · 按健康分/npm/活跃排序${reasons ? ' · ' + escHtml(reasons) : ''}</p>${rows}</div>`
+  }).join('\n')
+  written.push(out('scenarios/index.html', page({
+    title: '场景组合推荐', desc: '按使用场景挑选 dsh 插件组合：客观信号排序、每场景给备选、理由可展开。',
+    base: '../', here: 'scenarios/',
+    body: `<p class="crumb">Scenarios</p><h1 class="pagetitle">场景组合推荐</h1>
+<p class="lede">从「我要做什么」出发，而不是从「哪个星多」出发。每个场景给出健康分最高、npm 已发布、近期活跃的一组候选与备选——<b>客观信号排序，不接"最佳"叙事，不做付费置顶</b>。覆盖 ${scenarios.reduce((n, s) => n + (s.plugins || []).length, 0)} 个推荐位，随每日快照刷新。</p>
+<div class="cards">${scCards || '<div class="card"><b>数据积累中</b><p>场景数据随 LLM 标注覆盖逐步补齐。</p></div>'}</div>
+<h2 style="font-size:16px;margin:28px 0 8px">排序口径</h2>
+<p class="lede">场景归属 = LLM 能力标签 ∪ 词汇桶（标注"LLM 生成，人工抽查"）；场景内排序 = 健康分 → npm 已发布 → 近 30 天活跃，星数仅作展示不参与排序。同样的数据在 <a href="../data/insights.json">/data/insights.json</a> 开放，agent 可直接消费。</p>`,
+  })))
+
+  // ---- /about/ 关于 · 方法论与指标体系 --------------------------------------
   written.push(out('about/index.html', page({
-    title: '方法论', desc: 'DSH Insights 评估口径、规则阈值、校准与边界声明。',
+    title: '关于', desc: 'DSH Insights 是什么、指标体系、评估口径与边界声明。',
     base: '../', here: 'about/',
-    body: `<p class="crumb">Methodology</p><h1 class="pagetitle">方法论与边界</h1>
+    body: `<p class="crumb">About</p><h1 class="pagetitle">关于 · 方法论与指标体系</h1>
 <p class="lede">我们把口径公开到可以被反驳的程度——这是策展人和官方敢引用我们的前提。</p>
 <div class="article">
+<h2>关于 DSH Insights</h2>
+<p>DeepSeek Harness 的<b>生态与动态全景观察站</b>，三层：L1 插件洞察（真伪判定 → 权威集 → 健康分 → 收录矩阵）、L2 官方动态（releases/rc 节奏 + rc 兼容雷达，建设中）、L3 生态报告（「致作者的信」与生态周报）。我们不做目录、不做市场、不做榜单——只提供可引用、可复核的数据与观测，<b>被生态吸收而非与之竞争</b>。独立个人项目，与 DeepSeek 官方无隶属关系；数据、规则、管线全部开源（<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>），发现误判请提 issue。</p>
 <h2>权威集门禁</h2>
 <p>非 fork / 非归档 · <code>package.json</code> 声明 <code>dsh.bundle.patch</code> · patch 文件已提交。这是下限口径：纯 tarball 分发的插件会进入分桶人工复核（<code>invalid.jsonl</code>）。</p>
 <h2>覆盖与完整性（为什么权威集 ≪ topic 总数）</h2>
@@ -139,10 +159,22 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
 <p>100 起扣 · warn −5 / fail −20 · 纯客观信号（manifest 规范 / npm 发布与版本一致 / README 与中文文档 / LICENSE / dsh-plugin topic / 活跃度），星数不进分。阈值：<span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。每条扣分带证据；探测不到的数据不虚构、不扣分（missing 明示）。规则全文与 changelog 见 <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">SCHEMA §health</a>。</p>
 <h2>校准</h2>
 <p>已知真/假插件编入校准集，每次快照跑回归（<code>pipeline/validate/regress.mjs</code>），回归非 100% 则当周快照不发布。口径变更必须 bump 规则版本并写 changelog。</p>
+<h2>指标体系（我们怎么衡量自己）</h2>
+<p>北极星：<b>数据/报告被生态采纳</b>——目录、市场或 dsh 官方引用我们的分数、观测或兼容预警。围绕它六组指标：</p>
+<table>
+<tr><th>组</th><th>回答的问题</th><th>关键指标</th></tr>
+<tr><td>A 覆盖</td><td>做得全不全</td><td>权威集数量 · topic 全量覆盖率 · 候选池新鲜度</td></tr>
+<tr><td>B 新鲜度</td><td>更新勤不勤</td><td>快照滞后 ≤7 天（CI 每日则 ≤1 天）· CI 成功率</td></tr>
+<tr><td>C 公信力</td><td>分数信不信</td><td>校准回归通过率（目标 100%）· 争议工单数与解决时长 · 缺数据标注率</td></tr>
+<tr><td>D 内容运转</td><td>引擎转不转</td><td>周报连续外发期数（断更即警报）· 信件覆盖率 · 作者反馈数</td></tr>
+<tr><td>E 触达</td><td>有没有被看见</td><td>徽章部署仓库数 · repo ★ / 转载 · 站点访问</td></tr>
+<tr><td>F 采纳</td><td>北极星的计数</td><td>引用/集成我们数据的目录·市场数 · rc 预警被 PR 采纳次数 · 官方触点记录</td></tr>
+</table>
+<p>红线：周报连续断更 2 期 → 内容产品线停新功能先修管线；校准回归非 100% → 当周快照不发布；采纳指标长期为 0 → 触发 go/pivot/kill 复盘。完整口径见 <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/PRODUCT-DESIGN.md" target="_blank">PRODUCT-DESIGN §四</a>。</p>
 <h2>边界声明</h2>
 <p>启发式评估 ≠ 安全审计。不做社区评分/投票、不做安装托管交易、不做登录产品。深检（写面/消毒）为增量信号，单独标注。</p>
 <h2>可复核</h2>
-<p>数据、规则、管线全部开源：<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>。发现误判请提 issue —— 争议工单本身是公信力指标（见指标体系 C2）。</p>
+<p>数据、规则、管线全部开源：<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>。发现误判请提 issue —— 争议工单本身是公信力指标（见上表 C 组）。</p>
 </div>`,
   })))
 
@@ -178,9 +210,10 @@ DeepSeek Harness 全景观察站：插件健康（全量权威集 + 客观健康
 
 ## 页面
 - ${ORIGIN}/ — 仪表盘（人类可读）
+- ${ORIGIN}/scenarios/ — 场景组合推荐（按场景选插件）
 - ${ORIGIN}/weekly/ — 周报存档
 - ${ORIGIN}/p/<owner>/<repo>/ — 单插件健康报告
-- ${ORIGIN}/about/ — 方法论与口径
+- ${ORIGIN}/about/ — 关于 · 方法论与指标体系
 - ${ORIGIN}/data/ — 数据集索引与许可（CC BY 4.0）
 
 ## 源仓库

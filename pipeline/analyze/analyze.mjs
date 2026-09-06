@@ -73,6 +73,7 @@ function analyze(rows) {
   const lib = { index: 0, client: 0, both: 0 }
   const topics = {}
   const stars = []
+  const gradeWk = {}
   const channels = readChannels()
   const dlDoc = readJson(PATHS.downloads)
   const dlMap = dlDoc?.map || {}
@@ -91,6 +92,8 @@ function analyze(rows) {
         const pad = (n) => String(n).padStart(2, '0')
         const wk = monday.getFullYear() + '-' + pad(monday.getMonth() + 1) + '-' + pad(monday.getDate())
         byWeek[wk] = (byWeek[wk] || 0) + 1
+        const g = (healthBy.get(r.full_name) || {}).grade || 'D'
+        ;(gradeWk[g] ??= {})[wk] = ((gradeWk[g] ??= {})[wk] || 0) + 1
       }
     }
     if (r.npm?.published) {
@@ -130,11 +133,22 @@ function analyze(rows) {
   } catch { validated = n }
   const bucketAgg = {}
   for (const r of readJsonl(PATHS.invalid)) bucketAgg[r.reason || '?'] = (bucketAgg[r.reason || '?'] || 0) + 1
+  const weekOf = (iso) => {
+    const dt = new Date(iso)
+    if (Number.isNaN(dt.getTime())) return null
+    const day = dt.getDay()
+    const monday = new Date(dt.getTime() - ((day + 6) % 7) * 86400000)
+    const pad = (x) => String(x).padStart(2, '0')
+    return monday.getFullYear() + '-' + pad(monday.getMonth() + 1) + '-' + pad(monday.getDate())
+  }
+  const candByWeek = {}
+  for (const c of candRows) { const w = weekOf(c.created_at); if (w) candByWeek[w] = (candByWeek[w] || 0) + 1 }
   const coverage = {
     // topic 宇宙总量：GitHub search `topic:dsh-plugin` total_count（官方零门槛打标即入，含蹭标/无关/fork/子路径噪音）。
     // 数值定期由 discover 全量抓取时刷新（见 data/discover-meta.json）；缺省用 RESEARCH 2026-09-05 实测。
     topicUniverse: readJson(join(DATA, 'discover-meta.json'))?.topicTotal ?? { count: 13592, at: '2026-09-05' },
     candidates,
+    candidatesByWeek: candByWeek,
     validated,
     authoritative: n,
     invalidBuckets: Object.entries(bucketAgg).sort((a, b) => b[1] - a[1]).map(([reason, count]) => ({ reason, count })),
@@ -164,6 +178,7 @@ function analyze(rows) {
       ageGate1: ageOk, ageGate1Pct: pct(ageOk, n),
       byMonth,
       byWeek,
+      byWeekGrades: gradeWk,
     },
     distribution: { publish, docs, lib, publishPct: pct(publish.published, n), zhPct: pct(docs.both, n) },
     npmStaleTop: staleTop,
