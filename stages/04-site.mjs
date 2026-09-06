@@ -223,6 +223,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 
 /* ---- tables ---- */
 table{width:100%;border-collapse:collapse;font-size:12.5px}
+.cards table th,.cards table td.num{white-space:nowrap}
 .ptable th,.ptable td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
 .ptable th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;user-select:none;background:var(--card);position:sticky;top:0;z-index:1}
 .ptable th:hover{color:var(--ink)}
@@ -307,7 +308,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 <body>
 <div class="topbar"><div class="wrap">
   <a class="brand" href="#top"><span class="mark">d</span>dsh-insights<small>DSH 插件与生态洞察</small></a>
-  <nav class="nav"><a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a><a class="gh" href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">GitHub ↗</a></nav>
+  <nav class="nav"><a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a><a href="weekly/">周报</a><a href="data/">数据</a><a href="about/">方法论</a><a class="gh" href="https://github.com/ice5kysl/dsh-plugin-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 
 <header class="hero" id="top"><div class="wrap">
@@ -509,10 +510,12 @@ function syncHash(){
   const p=new URLSearchParams();
   if(q)p.set('q',q);if(npm)p.set('npm',npm);if(zh)p.set('zh','1');if(act)p.set('act','1');if(gr)p.set('gr',gr);
   const s=p.toString();
-  history.replaceState(null,'','#browse'+(s?'?'+s:''));
+  // only pin a hash when filters are active — a bare #browse would make
+  // reloads/native fragment navigation jump past the hero for no reason
+  history.replaceState(null,'',s?'#browse?'+s:location.pathname+location.search);
 }
 function readHash(){
-  if(location.hash.indexOf('#browse')!==0)return;
+  if(location.hash.indexOf('#browse?')!==0)return;
   const p=new URLSearchParams(location.hash.split('?')[1]||'');
   q=p.get('q')||'';npm=p.get('npm')||'';zh=p.get('zh')?'1':'';act=p.get('act')?'1':'';gr=p.get('gr')||'';
   $('#q').value=q;
@@ -520,7 +523,7 @@ function readHash(){
   document.querySelectorAll('[data-zh]').forEach(x=>x.classList.toggle('on',zh==='1'));
   document.querySelectorAll('[data-active]').forEach(x=>x.classList.toggle('on',act==='1'));
   document.querySelectorAll('.gchip').forEach(x=>x.classList.toggle('on',x.dataset.gr===gr&&gr!==''));
-  setTimeout(()=>{const el=document.getElementById('browse');if(el)el.scrollIntoView()},60);
+  setTimeout(()=>{const el=document.getElementById('browse');if(el)el.scrollIntoView({behavior:'instant',block:'start'})},60);
 }
 $('#q').addEventListener('input',ev=>{q=ev.target.value;page=0;draw()});
 document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
