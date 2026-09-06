@@ -1,8 +1,19 @@
-# dsh-plugin-insights
+# dsh-insights
 
-DeepSeek Harness (dsh) 插件生态的质量数据层：全量客观健康分（A–D，health-v1），非安全审计。
+DeepSeek Harness (dsh) 插件与生态洞察：全量权威集 + 客观健康分（A–D, health-v1）+ 生态周报 + 官方动态。启发式评估，非安全审计。
 
-Machine-readable dataset (agent-friendly): /data/insights.json
-Human dashboard: / (index.html)
-Methodology & rules: https://github.com/ice5kysl/dsh-plugin-insights/blob/main/docs/schema.md
-Full snapshot & history: https://github.com/ice5kysl/dsh-plugin-insights (data/ directory)
+## 数据入口（稳定 URL，可直接抓取）
+- https://dsh-insights.com/data/insights.json — 全量洞察快照（首选）
+- https://dsh-insights.com/data/plugins.jsonl — 权威集（一行一插件）
+- https://dsh-insights.com/data/enrich.json — 每插件评分/分类/渠道
+- https://dsh-insights.com/feed.xml — 生态周报 RSS
+
+## 页面
+- https://dsh-insights.com/ — 仪表盘（人类可读）
+- https://dsh-insights.com/weekly/ — 周报存档
+- https://dsh-insights.com/p/<owner>/<repo>/ — 单插件健康报告
+- https://dsh-insights.com/about/ — 方法论与口径
+- https://dsh-insights.com/data/ — 数据集索引与许可（CC BY 4.0）
+
+## 源仓库
+- https://github.com/ice5kysl/dsh-plugin-insights（管线 + 完整历史快照）

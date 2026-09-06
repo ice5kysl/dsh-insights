@@ -26,7 +26,9 @@ jobs:
         run: |
           mkdir -p public/data
           cp -r site/. public/ 2>/dev/null || true
-          cp data/insights.json data/health.json data/analysis.json public/data/ 2>/dev/null || true
+          for f in insights.json health.json analysis.json plugins.jsonl enrich.json downloads.json listed.json; do
+            cp "data/$f" public/data/ 2>/dev/null || true
+          done
           test -f llms.txt && cp llms.txt public/ || true
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

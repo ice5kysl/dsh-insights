@@ -31,7 +31,8 @@
     "lists": "node stages/00-lists.mjs",
     "downloads": "node stages/07-downloads.mjs",
     "diff": "node stages/08-diff.mjs",
-    "refresh": "npm run lists && npm run downloads && npm run analyze && npm run site && npm run export && npm run diff",
+    "refresh": "npm run lists && npm run downloads && npm run analyze && npm run site && npm run export && npm run diff && npm run pages",
+    "pages": "node stages/20-pages.mjs",
     "suggest": "node bin/export-suggested.mjs",
     "report": "node stages/17-report.mjs",
     "weekly": "node stages/18-weekly.mjs"
