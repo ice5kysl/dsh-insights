@@ -173,6 +173,9 @@ function main() {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DSH Insights · DeepSeek Harness 全景观察站</title>
 <meta name="description" content="DeepSeek Harness (dsh) 插件生态全量索引、评估与分析仪表盘">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 :root{
   --bg:#fafafa;--card:#ffffff;--ink:#18181b;--mut:#71717a;--faint:#a1a1aa;--line:#e4e4e7;--track:#f4f4f5;--track2:#e4e4e7;
@@ -202,7 +205,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 section[id],div[id="browse"]{scroll-margin-top:108px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:14px;color:var(--ink);white-space:nowrap}
 .brand:hover{text-decoration:none}
-.mark{width:22px;height:22px;border-radius:6px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:700 12px/1 var(--mono)}
+.mark{width:22px;height:22px;display:inline-flex;flex:none}
 .brand small{color:var(--faint);font-weight:400;font-size:12px}
 .nav{display:flex;align-items:center;gap:2px}
 .nav a{color:var(--mut);font-size:13px;padding:5px 10px;border-radius:7px}
@@ -366,7 +369,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="#top"><span class="mark">d</span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
+  <a class="brand" href="#top"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M10 32 Q32 14 54 32 Q32 50 10 32 Z" fill="none" stroke="var(--bg)" stroke-width="4" stroke-linejoin="round"/><path d="M19 32 h6 l4 -8 l6 16 l4 -8 h6" fill="none" stroke="var(--bg)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
   <nav class="nav"><a href="./" class="here">仪表盘</a><a href="dynamics/">动态</a><a href="scenarios/">场景</a><a href="authors/">作者</a><a href="weekly/">周报</a><a href="data/">开放数据</a><a href="badge/">徽章</a><a href="about/">关于</a><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <div class="subnav"><div class="wrap">
