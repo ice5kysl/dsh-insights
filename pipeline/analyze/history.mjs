@@ -11,14 +11,14 @@
 
 import { pathToFileURL } from 'node:url'
 import { scoreAll } from './score.mjs'
-import { PATHS, readJsonl, readJson, writeJson } from '../../lib/data.mjs'
+import { PATHS, readJson, writeJson, loadPlugins } from '../../lib/data.mjs'
 
 const PLUGINS = PATHS.plugins
 const OUT = PATHS.history
 const FORMAT = 'history-v1'
 
 function main() {
-  const rows = readJsonl(PLUGINS)
+  const rows = loadPlugins()
   const { out, summary } = scoreAll(rows)
   const date = new Date().toISOString().slice(0, 10)
   const history = readJson(OUT, { format: FORMAT, entries: [] })
@@ -27,7 +27,7 @@ function main() {
     return
   }
   const plugins = {}
-  for (const r of out) plugins[r.full_name] = { score: r.health.score, grade: r.health.grade }
+  for (const r of out) plugins[r.full_name] = { score: r.health.score, grade: r.health.grade, stars: r.stars || 0 }
   history.entries.push({
     date,
     total: summary.total,

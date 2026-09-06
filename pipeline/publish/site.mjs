@@ -24,6 +24,16 @@ function main() {
   const plugins = loadPlugins()
   const a = readJson(PATHS.analysis, {})
   const enMap = loadEnrichMap()
+  // P1-1 单一快照约束：禁止发布混代产物（plugins 与 analysis/enrich 必须同代）
+  const expected = a.totals?.authoritative
+  if (expected != null && expected !== plugins.length) {
+    console.error(`[site] 快照混代：plugins.jsonl ${plugins.length} 行 vs analysis.json authoritative ${expected}——请先重跑 analyze 再发布`)
+    process.exit(1)
+  }
+  if (enMap.size && enMap.size !== plugins.length) {
+    console.error(`[site] 快照混代：plugins.jsonl ${plugins.length} 行 vs enrich.json ${enMap.size} 条——请先重跑 analyze 再发布`)
+    process.exit(1)
+  }
   const llmMap = byFullName(readJsonl(PATHS.llm))
   const byStars = plugins.slice().sort((x, y) => (y.stars || 0) - (x.stars || 0))
   const t = a.totals || {}

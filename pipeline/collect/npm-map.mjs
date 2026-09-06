@@ -19,7 +19,7 @@ import { join } from 'node:path'
 import { NPM, raw, sleep } from '../../lib/api.mjs'
 import { DATA, PATHS, readJsonl } from '../../lib/data.mjs'
 
-const FULL = process.argv[2] || join(DATA, 'candidates-full.jsonl')
+const FULL = process.argv[2] || PATHS.candidatesAll
 const ALL = PATHS.candidatesAll
 
 function githubFromUrl(url) {

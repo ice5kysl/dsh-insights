@@ -57,7 +57,7 @@ const STEPS = [
 ]
 
 const DAILY = ['lists', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'pages']
-const SNAPSHOT = ['analyze', 'score', 'history', 'overlap', 'export-csv', 'export-json', 'badges', 'site', 'pages']
+const SNAPSHOT = ['analyze', 'score', 'history', 'export-csv', 'export-json', 'overlap', 'scenarios', 'badges', 'site', 'pages']
 const CONTENT = ['letters', 'weekly', 'pages']
 const PROFILES = {
   daily: DAILY,
@@ -82,14 +82,13 @@ let steps
 if (only) {
   const unknown = only.filter((s) => !scriptOf.has(s))
   if (unknown.length) { console.error(`unknown step(s): ${unknown.join(', ')}\navailable: ${canonicalOrder.join(', ')}`); process.exit(2) }
-  steps = canonicalOrder.filter((s) => only.includes(s))
+  steps = only
 } else {
   if (!profile || !PROFILES[profile]) {
     console.error(`usage: node bin/pipeline.mjs <${Object.keys(PROFILES).join('|')}> [--only a,b] [--from step] [--dry]`)
     process.exit(2)
   }
-  const wanted = new Set(PROFILES[profile])
-  steps = canonicalOrder.filter((s) => wanted.has(s))
+  steps = PROFILES[profile].filter((s) => scriptOf.has(s))
 }
 if (from) {
   const i = steps.indexOf(from)

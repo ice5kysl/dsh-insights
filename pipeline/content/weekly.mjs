@@ -7,9 +7,9 @@
  * shareable zh-CN report with numbers, movers, signals, and calls to action.
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
-import { PATHS, readJson, readJsonl } from '../../lib/data.mjs'
+import { PATHS, readJson, readJsonl, loadPlugins } from '../../lib/data.mjs'
 
 const W = PATHS.weeklyDir
 mkdirSync(W, { recursive: true })
@@ -19,8 +19,37 @@ const enrich = readJson(PATHS.enrich, [])
 const dyn = readJson(PATHS.dynamics)
 const invalid = readJsonl(PATHS.invalid).length
 const llmCount = readJsonl(PATHS.llm).length
-let diff = null
-try { diff = readFileSync(PATHS.lastDiff, 'utf8') } catch { /* ok */ }
+// P0-4/P2-20：不信任落盘的 last-diff.md（日滚基线会让周报失真），
+// 现场用 history.json 重算「本周 diff」：基线 = 距今 ≥7 天中最近一条（无则最早一条并注明）。
+const plugins = loadPlugins()
+function weeklyDiff() {
+  const entries = readJson(PATHS.history)?.entries || []
+  if (!entries.length) return null
+  const target = Date.now() - 7 * 86400000
+  const older = entries.filter((e) => new Date(e.date).getTime() <= target)
+  const base = older.length ? older[older.length - 1] : entries[0]
+  const prev = base.plugins || {}
+  const cur = new Map(plugins.map((r) => [r.full_name, r]))
+  const added = [...cur.keys()].filter((k) => !(k in prev))
+  const removed = Object.keys(prev).filter((k) => !cur.has(k))
+  const risers = [...cur.entries()]
+    .filter(([k, r]) => (k in prev) && prev[k].stars != null && (r.stars || 0) > prev[k].stars)
+    .map(([k, r]) => ({ id: k, from: prev[k].stars || 0, to: r.stars || 0 }))
+    .sort((a, b) => (b.to - b.from) - (a.to - a.from)).slice(0, 10)
+  const L = []
+  L.push(`## 本周快照 Diff（基线 ${base.date}）`)
+  L.push('')
+  L.push(`- 当前权威插件：**${cur.size}**（基线 ${Object.keys(prev).length} · ${base.date}）`)
+  L.push(`- 新增 ${added.length} · 消失 ${removed.length}`)
+  if (added.length) { L.push(''); L.push(`### 新增（Top ${Math.min(15, added.length)}，按 ★）`)
+    for (const id of added.map((id) => cur.get(id)).sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 15)) L.push(`- ${id.full_name} ★${id.stars || 0}${id.npm?.published ? ' (npm ✓)' : ''}`) }
+  if (removed.length) { L.push(''); L.push(`### 消失（Top ${Math.min(10, removed.length)}）`)
+    for (const id of removed.slice(0, 10)) L.push(`- ${id}`) }
+  if (risers.length) { L.push(''); L.push('### star 涨幅榜（同基线）')
+    for (const r of risers) L.push(`- ${r.id}：${r.from} → ${r.to}（+${r.to - r.from}）`) }
+  return { md: L.join('\n'), added: added.length, removed: removed.length }
+}
+const diff = weeklyDiff()
 const reviews = readJsonl(PATHS.reviews).length
 
 function isoWeek(d) {
@@ -105,7 +134,7 @@ obs.push(`质量两级分化仍在：A 级 ${q.grades?.A ?? 0} 个 vs D 级 ${q.
 obs.push(`功能分类上「${(analysis.categories || [])[0]?.category}」最拥挤（${(analysis.categories || [])[0]?.count} 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。`)
 obs.push(`${analysis.distribution?.docs?.none ?? 0} 个插件没有 README、${analysis.distribution?.publish?.unpublished ?? 0} 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。`)
 obs.push(`curated 收录仍集中于少数头部（${ch ? ch.covered : '?'}/${t.authoritative}），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。`)
-if (diff && diff.includes('新增')) obs.push('本期相对上期有新增/消失/star 变动，见下方 diff 摘要。')
+if (diff && (diff.added || diff.removed)) obs.push(`本周新增 ${diff.added} / 消失 ${diff.removed}，见文末「本周快照 Diff」。`)
 for (const o of obs) L.push(`- ${o}`)
 L.push('')
 L.push('## 优质未收录 · 建议收录（Top 8，供作者与目录维护者）')
@@ -121,7 +150,7 @@ L.push('')
 if (diff) {
   L.push('---')
   L.push('')
-  L.push(diff)
+  L.push(diff.md)
   L.push('')
 }
 L.push('---')
