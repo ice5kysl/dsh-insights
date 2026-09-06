@@ -125,6 +125,7 @@ function analyze(rows) {
 
   // ---- 作者维度（owner 聚合：谁是生态重要人物） ----------------------------
   const enBy = new Map(enrich.map((x) => [x.full_name, x]))
+  const prevStar = new Map((readJson(PATHS.prevIds, []) || []).map((x) => [x.id, x.stars || 0]))
   const authorAgg = new Map()
   for (const r of rows) {
     const o = r.owner || (r.full_name || '').split('/')[0]
@@ -132,15 +133,18 @@ function analyze(rows) {
     const h = healthBy.get(r.full_name) || { score: 0, grade: 'D' }
     const e = enBy.get(r.full_name) || {}
     let a0 = authorAgg.get(o)
-    if (!a0) { a0 = { owner: o, plugins: 0, stars: 0, grades: { A: 0, B: 0, C: 0, D: 0 }, npm: 0, covered: 0, lastPush: '', topPlugin: null, topStars: -1, scoreSum: 0, cats: {} }; authorAgg.set(o, a0) }
+    if (!a0) { a0 = { owner: o, plugins: 0, stars: 0, grades: { A: 0, B: 0, C: 0, D: 0 }, npm: 0, covered: 0, lastPush: '', topPlugin: null, topStars: -1, scoreSum: 0, cats: {}, firstCreated: r.created_at || '', delta: 0 }; authorAgg.set(o, a0) }
     a0.plugins++
     a0.stars += r.stars || 0
     a0.grades[h.grade] = (a0.grades[h.grade] || 0) + 1
     a0.scoreSum += h.score
     if (r.npm?.published) a0.npm++
     if (e.covered) a0.covered++
+    if ((r.created_at || '') < a0.firstCreated) a0.firstCreated = r.created_at || ''
     if ((r.pushed_at || '') > a0.lastPush) a0.lastPush = r.pushed_at || ''
     if ((r.stars || 0) > a0.topStars) { a0.topStars = r.stars || 0; a0.topPlugin = r.full_name }
+    const ps = prevStar.get(r.full_name)
+    if (ps != null && (r.stars || 0) > ps) a0.delta += (r.stars || 0) - ps
     const c0 = e.category || '其它'
     a0.cats[c0] = (a0.cats[c0] || 0) + 1
   }
@@ -148,6 +152,8 @@ function analyze(rows) {
     owner: a0.owner, plugins: a0.plugins, stars: a0.stars, grades: a0.grades,
     ab: (a0.grades.A || 0) + (a0.grades.B || 0),
     npm: a0.npm, covered: a0.covered, lastPush: (a0.lastPush || '').slice(0, 10),
+    firstCreated: (a0.firstCreated || '').slice(0, 10),
+    delta: a0.delta,
     avg: Math.round((a0.scoreSum / Math.max(1, a0.plugins)) * 10) / 10,
     topPlugin: a0.topPlugin, topStars: a0.topStars,
     topCat: Object.entries(a0.cats).sort((x, y) => y[1] - x[1])[0]?.[0] || null,

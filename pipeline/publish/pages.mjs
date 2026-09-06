@@ -180,6 +180,87 @@ ${platRows}
   const an = JSON.parse(read('analysis.json') || '{}')
   const authors = an.authors || []
   const ast = an.authorStats || {}
+  const byStars = [...authors].sort((x, y) => y.stars - x.stars).slice(0, 10)
+  const byRiser = [...authors].filter((a) => a.delta > 0).sort((x, y) => y.delta - x.delta).slice(0, 10)
+  const byNew = [...authors].sort((x, y) => (y.firstCreated || '').localeCompare(x.firstCreated || '')).slice(0, 10)
+  const byProlific = [...authors].sort((x, y) => y.plugins - x.plugins).slice(0, 10)
+  const miniList = (rows, val) => rows.length
+    ? rows.map((a, i) => `<div class="listrow"><a href="https://github.com/${escHtml(a.owner)}" target="_blank" title="${escHtml(a.owner)}"><span style="color:var(--faint);font-family:var(--mono);font-size:11px;margin-right:6px">${i + 1}</span>${escHtml(a.owner)}</a><span class="meta">${val(a)}</span></div>`).join('')
+    : '<p class="lede" style="margin:8px 0">数据积累中（较上一快照暂无变化）</p>'
+  const boardCards = [
+    ['★ 最多 star 榜', '作者全部插件 ★ 合计', miniList(byStars, (a) => `★${a.stars.toLocaleString()}`)],
+    ['最新飙升榜', '较上一快照 ★ 增量（日更）', miniList(byRiser, (a) => `+${a.delta}`)],
+    ['最新榜', '首次出现插件的时间', miniList(byNew, (a) => escHtml(a.firstCreated || '—'))],
+    ['多产榜', '权威集插件数', miniList(byProlific, (a) => `${a.plugins} 个 · A/B ${a.ab}`)],
+  ].map(([t, sub, html]) => `<div class="card"><b>${t}</b><p>${sub}</p>${html}</div>`).join('\n')
+
+  // 作者协作关系图（Top 200 ★ 插件 contributors 采样）
+  const graph = JSON.parse(read('authors-graph.json') || 'null')
+  const graphSec = graph && graph.nodes?.length ? `
+<h2 style="font-size:16px;margin:28px 0 8px">协作关系图 · 关键节点人物</h2>
+<p class="lede">同一插件的贡献者之间连边（采样：★ Top ${graph.sampledPlugins} 权威插件，${graph.nodes.length} 人 · ${graph.links.length} 条边）。节点大小 = 关联插件数与 ★ 量级，边粗细 = 共享插件数与流行度——<b>居中的大节点就是生态的关键节点人物</b>。悬停看详情，点击访问主页。采集于 ${escHtml((graph.fetchedAt || '').slice(0, 10))}。</p>
+<div class="card" style="padding:8px"><div id="gwrap" style="position:relative"><svg id="gnet" viewBox="0 0 920 540" style="width:100%;height:auto;display:block"></svg><div id="gtip2" style="position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font:11.5px var(--mono);padding:6px 10px;border-radius:7px;display:none;max-width:260px;z-index:5"></div></div></div>
+<script>
+(function(){
+  var G=${JSON.stringify({ nodes: graph.nodes.slice(0, 60), links: graph.links })};
+  var keep=new Set(G.nodes.map(function(n){return n.id}));
+  var links=G.links.filter(function(l){return keep.has(l.source)&&keep.has(l.target)&&l.weight>=1.5}).slice(0,160);
+  var nodes=G.nodes.map(function(n,i){ var a=i/G.nodes.length*2*Math.PI;
+    return {id:n.id,plugins:n.plugins,stars:n.stars,repos:n.repos,
+      x:460+200*Math.cos(a),y:270+170*Math.sin(a),vx:0,vy:0,
+      r:4+Math.sqrt(n.plugins)*2.2+Math.log10(n.stars+1)*1.6} });
+  var idx={}; nodes.forEach(function(n,i){idx[n.id]=i});
+  var E=links.map(function(l){return {s:idx[l.source],t:idx[l.target],w:l.weight,repos:l.repos}}).filter(function(l){return l.s!=null&&l.t!=null});
+  var W=920,H=540;
+  for(var it=0;it<300;it++){
+    for(var i=0;i<nodes.length;i++){var a=nodes[i];
+      for(var j=i+1;j<nodes.length;j++){var b=nodes[j];
+        var dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy+0.01,d=Math.sqrt(d2);
+        var f=Math.min(60,1400/d2);
+        a.vx+=dx/d*f*0.5;a.vy+=dy/d*f*0.5;b.vx-=dx/d*f*0.5;b.vy-=dy/d*f*0.5 }}
+    E.forEach(function(e){var a=nodes[e.s],b=nodes[e.t];
+      var dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy+0.01);
+      var f=(d-70-e.w*4)*0.02*Math.min(3,e.w);
+      a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f });
+    nodes.forEach(function(n){n.vx+=(W/2-n.x)*0.002;n.vy+=(H/2-n.y)*0.002;
+      n.vx*=0.82;n.vy*=0.82;n.x+=n.vx;n.y+=n.vy;
+      n.x=Math.max(20,Math.min(W-20,n.x));n.y=Math.max(20,Math.min(H-20,n.y)) });
+  }
+  var svg=document.getElementById('gnet'),tip=document.getElementById('gtip2'),ns='http://www.w3.org/2000/svg';
+  var deg={}; E.forEach(function(e){deg[e.s]=(deg[e.s]||0)+1;deg[e.t]=(deg[e.t]||0)+1});
+  var adj={}; E.forEach(function(e){(adj[e.s]=adj[e.s]||[]).push(e.t);(adj[e.t]=adj[e.t]||[]).push(e.s)});
+  var eEls=E.map(function(e){var l=document.createElementNS(ns,'line');
+    l.setAttribute('x1',nodes[e.s].x);l.setAttribute('y1',nodes[e.s].y);
+    l.setAttribute('x2',nodes[e.t].x);l.setAttribute('y2',nodes[e.t].y);
+    l.setAttribute('stroke','var(--faint)');l.setAttribute('stroke-opacity','0.35');
+    l.setAttribute('stroke-width',Math.max(0.6,Math.min(4,e.w/2)));
+    svg.appendChild(l);return l});
+  var nEls=nodes.map(function(n,i){var c=document.createElementNS(ns,'circle');
+    c.setAttribute('cx',n.x);c.setAttribute('cy',n.y);c.setAttribute('r',n.r);
+    c.setAttribute('fill','var(--accent)');c.setAttribute('fill-opacity','0.85');
+    c.style.cursor='pointer';
+    var t=document.createElementNS(ns,'text');
+    t.setAttribute('x',n.x);t.setAttribute('y',n.y+n.r+11);
+    t.setAttribute('text-anchor','middle');t.setAttribute('style','font:10px var(--mono);fill:var(--mut)');
+    t.textContent=n.id.length>14?n.id.slice(0,13)+'…':n.id;
+    c.addEventListener('mouseenter',function(ev){focus(i,true,ev)});
+    c.addEventListener('mouseleave',function(){focus(i,false)});
+    c.addEventListener('click',function(){window.open('https://github.com/'+n.id,'_blank')});
+    svg.appendChild(c);svg.appendChild(t);return {c:c,t:t}});
+  function focus(i,on,ev){var nbr={};nbr[i]=1;(adj[i]||[]).forEach(function(j){nbr[j]=1});
+    nEls.forEach(function(el,j){el.c.setAttribute('fill-opacity',on?(nbr[j]?0.95:0.12):0.85);
+      el.t.setAttribute('style','font:10px var(--mono);fill:'+(on&&!nbr[j]?'var(--faint)':'var(--mut)')+';fill-opacity:'+(on&&!nbr[j]?'0.25':'1'))});
+    eEls.forEach(function(l,k){var e=E[k];var hot=(e.s===i||e.t===i);
+      l.setAttribute('stroke',hot?'var(--accent)':'var(--faint)');
+      l.setAttribute('stroke-opacity',on?(hot?0.9:0.06):0.35)});
+    if(on){var n=nodes[i];var co=(adj[i]||[]).slice(0,6).map(function(j){return nodes[j].id}).join('、');
+      tip.innerHTML='<b>'+n.id+'</b> · 插件 '+n.plugins+' · ★'+n.stars.toLocaleString()+(co?'<br>协作：'+co:'');
+      tip.style.display='block';
+      tip.style.left=Math.min(W-270,Math.max(4,(n.x/W)*document.getElementById('gwrap').clientWidth+14))+'px';
+      tip.style.top=Math.max(4,(n.y/H)*document.getElementById('gwrap').clientWidth*540/920-10)+'px'}
+    else tip.style.display='none'}
+})();
+</script>` : ''
   const authorRows = authors.map((a, i) => `<tr>
 <td class="num">${i + 1}</td>
 <td><a href="https://github.com/${escHtml(a.owner)}" target="_blank">${escHtml(a.owner)}</a></td>
@@ -194,19 +275,17 @@ ${platRows}
 <td>${escHtml(a.topCat || '—')}</td>
 </tr>`).join('\n')
   written.push(out('authors/index.html', page({
-    title: '作者榜', desc: 'DSH 插件生态的作者与组织：插件数、质量、影响力、代表插件全表。',
+    title: '作者榜', desc: 'DSH 插件生态的作者与组织：榜单、协作关系图与全量作者库。',
     base: '../', here: 'authors/',
-    body: `<p class="crumb">Authors</p><h1 class="pagetitle">作者榜 · 生态里的重要人物</h1>
-<p class="lede">按仓库 owner（个人或组织）聚合：${ast.total ?? '—'} 位作者，其中 ${ast.multi ?? '—'} 位多产（≥2 个插件），Top 10 作者产出占权威集 ${ast.top10Share ?? '—'}%。默认按 A/B 级插件数排序（点表头切换）；★ 只作展示信号，不参与质量分。</p>
-<div class="cards">
-  <div class="card"><b>${ast.total ?? '—'}</b><p>作者/组织总数</p></div>
-  <div class="card"><b>${ast.multi ?? '—'}</b><p>多产作者（≥2 插件）</p></div>
-  <div class="card"><b>${ast.top10Share ?? '—'}%</b><p>Top 10 作者产出占比</p></div>
-</div>
-<table class="ptable" id="atable" style="width:100%;margin-top:14px">
+    body: `<p class="crumb">Authors</p><h1 class="pagetitle">作者 · 生态里的重要人物</h1>
+<p class="lede">${ast.total ?? '—'} 位作者/组织构成这个生态：${ast.multi ?? '—'} 位多产（≥2 个插件），Top 10 作者产出占权威集 ${ast.top10Share ?? '—'}%。榜单按客观信号排序（★ 只作展示，不进质量分）。</p>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${boardCards}</div>
+${graphSec}
+<h2 style="font-size:16px;margin:28px 0 8px">作者库（全量 ${authors.length}）</h2>
+<table class="ptable" id="atable" style="width:100%;margin-top:8px">
 <thead><tr><th class="num">#</th><th>作者</th><th class="num" data-k="num">插件</th><th class="num" data-k="num">A/B</th><th class="num" data-k="num">均分</th><th class="num" data-k="num">★合计</th><th class="num" data-k="num">npm</th><th class="num" data-k="num">收录</th><th class="num" data-k="str">最近活跃</th><th>代表插件</th><th>主分类</th></tr></thead>
 <tbody>${authorRows}</tbody></table>
-<p class="lede" style="margin-top:14px">口径：作者 = 仓库 owner（个人或组织，GitHub 不区分展示）；收录 = 进 awesome/imsai 渠道数；均分 = 其全部插件健康分均值。数据随每日快照刷新。</p>
+<p class="lede" style="margin-top:14px">口径：作者 = 仓库 owner（个人或组织）；收录 = 进 awesome/imsai 渠道数；均分 = 其全部插件健康分均值。点表头排序。数据随每日快照刷新。</p>
 <style>
 .ptable{border-collapse:collapse;font-size:12.5px}
 .ptable th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
