@@ -147,7 +147,7 @@ function main() {
   const staleRows = (a.npmStaleTop || []).map((s2) =>
     `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${s2.repoVersion} → ${s2.npmLatest}</td></tr>`).join('')
   const starRows = (a.topByStars || []).map((s2) =>
-    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td>${s2.published ? '<span class="ok">npm ✓</span>' : '<span class="dim">—</span>'}</td><td>${s2.zh ? '<span class="ok">i18n·中英 ✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
+    `<tr><td><a href="https://github.com/${esc(s2.repo)}" target="_blank" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td class="num">${s2.published ? '<span class="ok" title="npm 已发布">✓</span>' : '<span class="dim">—</span>'}</td><td class="num">${s2.zh ? '<span class="ok" title="中/双语文档">✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
     '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num"><span class="grade ' + esc(e.grade) + '">' + esc(e.grade) + '</span></td><td class="num mono">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('')
   const authorRows = (a.authors || []).slice(0, 10).map((au) =>
@@ -449,7 +449,7 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="cards">
     <div class="panel">
       <h3>Star 榜 Top 10</h3><p class="p-sub">社区关注度最高的权威插件</p>
-      <table class="ptable"><thead><tr><th>仓库</th><th class="num">★</th><th>npm</th><th>i18n·中英</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+      <table class="ptable"><thead><tr><th>仓库</th><th class="num">★</th><th class="num">npm</th><th class="num">i18n</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
     <div class="panel">
       <h3>npm 版本滞后榜</h3><p class="p-sub">仓库已领先于 npm 发布 · Top 10</p>

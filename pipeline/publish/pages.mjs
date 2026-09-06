@@ -129,7 +129,7 @@ curl ${ORIGIN}/feed.xml          # 周报 RSS</code></pre>`,
   // ---- /scenarios/ 场景组合推荐 -------------------------------------------
   const scenarios = (JSON.parse(read('scenarios.json') || '{"scenarios":[]}')).scenarios || []
   const scCards = scenarios.filter((s) => (s.plugins || []).length).map((s) => {
-    const rows = s.plugins.map((p) => `<div class="listrow"><a href="${escHtml(p.url)}" target="_blank">${escHtml(p.full_name)}</a><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}${p.npm ? ' · npm ' + escHtml(p.npm) : ''}${p.active ? ' · 活跃' : ''}</span></div>`).join('')
+    const rows = s.plugins.map((p) => `<div class="scrow"><a href="${escHtml(p.url)}" target="_blank" title="${escHtml(p.full_name)}">${escHtml(p.full_name)}</a><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}${p.npm ? ' · npm ' + escHtml(p.npm) : ''}${p.active ? ' · 活跃' : ''}</span></div>`).join('')
     const reasons = [...new Set(s.plugins.flatMap((p) => p.reasons || []))].slice(0, 3).join('；')
     return `<div class="card"><b>${escHtml(s.zh)} <span style="color:var(--faint);font-weight:400;font-size:11.5px">${escHtml(s.en)}</span></b><p>${s.candidates} 个候选 · 按健康分/npm/活跃排序${reasons ? ' · ' + escHtml(reasons) : ''}</p>${rows}</div>`
   }).join('\n')
