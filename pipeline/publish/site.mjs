@@ -273,8 +273,8 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 
 /* ---- tables ---- */
 table{width:100%;border-collapse:collapse;font-size:12.5px}
-.cards table th,.cards table td.num{white-space:nowrap}
-.cards .ptable td{max-width:260px;overflow:hidden;text-overflow:ellipsis}
+.cards table th,.cards table td{white-space:nowrap}
+.cards .ptable td:first-child{max-width:260px;overflow:hidden;text-overflow:ellipsis}
 .ptable th,.ptable td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
 .ptable th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;user-select:none;background:var(--card);position:sticky;top:0;z-index:1}
 .ptable th:hover{color:var(--ink)}
@@ -442,15 +442,15 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="cards">
     <div class="panel">
       <h3>Star 榜 Top 10</h3><p class="p-sub">社区关注度最高的权威插件</p>
-      <table><thead><tr><th style="text-align:left">仓库</th><th style="text-align:right">★</th><th>npm</th><th>i18n·中英</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+      <table class="ptable"><thead><tr><th>仓库</th><th class="num">★</th><th>npm</th><th>i18n·中英</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
     <div class="panel">
       <h3>npm 版本滞后榜</h3><p class="p-sub">仓库已领先于 npm 发布 · Top 10</p>
-      <table><thead><tr><th style="text-align:left">仓库</th><th style="text-align:right">★</th><th style="text-align:right">仓库 → npm</th></tr></thead><tbody>${staleRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+      <table class="ptable"><thead><tr><th>仓库</th><th class="num">★</th><th class="num">仓库 → npm</th></tr></thead><tbody>${staleRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
     </div>
     <div class="panel">
       <h3>优质未收录 · 建议收录</h3><p class="p-sub">A/B 级 · 已发布 npm · 尚未进 awesome/imsai · Top 10</p>
-      <table><thead><tr><th style="text-align:left">仓库</th><th style="text-align:right">质量</th><th style="text-align:right">★</th><th>npm / 周下载</th></tr></thead><tbody>
+      <table class="ptable"><thead><tr><th>仓库</th><th class="num">质量</th><th class="num">★</th><th>npm / 周下载</th></tr></thead><tbody>
       ${suggestedHtml || '<tr><td class="dim">暂无（请先跑 00-lists + analyze）</td></tr>'}
       </tbody></table>
     </div>
