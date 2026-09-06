@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 4507 个插件 · 生成于 2026-09-06 · 由 DSH Insights 管线生成
+> 权威集 4787 个插件 · 生成于 2026-09-06 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**4507**
-- 近 7 天活跃：1187（26.3%）· 近 30 天：4507（100%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：4502（99.9%）
+- 权威集规模：**4787**
+- 近 7 天活跃：1213（25.3%）· 近 30 天：4787（100%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：4782（99.9%）
 
 ## 发布与文档
-- npm 已发布 2201 / 未发布 2306 / 已发布但版本滞后 615
-- 有 README 4490 · 中英双语/中文 1770 · 中文 README 文件 415 · 无 README 17
-- lib/index.js 2103 · lib/client.js 1681 · 双产物 1504
+- npm 已发布 2332 / 未发布 2455 / 已发布但版本滞后 647
+- 有 README 4770 · 中英双语/中文 1935 · 中文 README 文件 425 · 无 README 17
+- lib/index.js 2293 · lib/client.js 1758 · 双产物 1578
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 757 · imsai 236 · 至少一个渠道 988（21.9%） · 未收录 3519
+- awesome-dsh-plugin 757 · imsai 236 · 至少一个渠道 988（20.6%） · 未收录 3799
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A
@@ -39,28 +39,28 @@
 - bowenliang123/dsh-context：31332
 - Han-1413141/dsh-cost-meter：18196
 - Creakono/dsh-cost-meter：18196
+- AnakinCao/dsh-cost-meter：18196
 - ysr666/dsh-vision-router：13687
 - shaobeichen/dsh-pocket：13036
 - RevolutionLA/dsh-dream-skin：9994
-- omdsh-dev/dsh-mnemon：9682
 
 ## 质量评分（启发式）
-- 平均分 83.3 · A+B 占比 81.8%
-- S 311 · A 689 · B 2997 · C 508 · D 2
+- 平均分 83 · A+B 占比 81.6%
+- S 315 · A 708 · B 3196 · C 566 · D 2
 
 ## 功能分类（启发式 Top 12）
-- 其它：1279
-- 模型 / 代理：499
-- 文件浏览 / 预览：462
-- 会话管理：423
-- 状态 / 监控 / 用量：359
-- 侧栏 / 工作区：280
-- 工具 / 效率：275
-- 搜索 / 命令面板：272
-- 主题 / 视觉美化：200
-- 消息 / 协作集成：176
-- 开发 / 数据：147
-- 记忆 / 知识：135
+- 其它：1387
+- 模型 / 代理：514
+- 文件浏览 / 预览：509
+- 会话管理：441
+- 状态 / 监控 / 用量：375
+- 侧栏 / 工作区：294
+- 工具 / 效率：288
+- 搜索 / 命令面板：280
+- 主题 / 视觉美化：210
+- 消息 / 协作集成：184
+- 开发 / 数据：160
+- 记忆 / 知识：145
 
 ## 月度新增（按仓库创建）
 - 2021-06：1
@@ -73,22 +73,22 @@
 - 2026-05：13
 - 2026-06：16
 - 2026-07：27
-- 2026-08：4384
+- 2026-08：4664
 - 2026-09：44
 
 ## Top topics
-- `dsh-plugin` × 4423
-- `deepseek-harness` × 2924
-- `dsh` × 2014
-- `deepseek` × 659
-- `dsh-plugins` × 557
-- `cordis` × 513
-- `plugin` × 358
-- `typescript` × 216
-- `ai-agent` × 189
-- `dsh-plugin-market` × 179
-- `ai-agents` × 168
-- `deepseek-harness-plugin` × 166
+- `dsh-plugin` × 4703
+- `deepseek-harness` × 3135
+- `dsh` × 2100
+- `deepseek` × 685
+- `dsh-plugins` × 573
+- `cordis` × 534
+- `plugin` × 374
+- `typescript` × 221
+- `ai-agent` × 199
+- `dsh-plugin-market` × 184
+- `ai-agents` × 173
+- `deepseek-harness-plugin` × 172
 
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |
