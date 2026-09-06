@@ -83,7 +83,8 @@ for (const wk of weeksFrom(startWk, currentWk)) {
   }
 
   const L = []
-  L.push(`# DSH 插件生态周报 · ${wk}（回填特刊）`)
+  const fmtD = (x) => `${x.getUTCFullYear()}/${String(x.getUTCMonth() + 1).padStart(2, '0')}/${String(x.getUTCDate()).padStart(2, '0')}`
+  L.push(`# DSH 插件生态周报 · ${wk}（${fmtD(ws)}～${fmtD(new Date(we.getTime() - 86400000))}· 回填特刊）`)
   L.push('')
   L.push(`> 回填于 ${new Date().toISOString().slice(0, 10)} · 覆盖 ${ws.toISOString().slice(0, 10)} → ${we.toISOString().slice(0, 10)} · 由 DSH Insights（dsh-insights.com）重建`)
   L.push('>')

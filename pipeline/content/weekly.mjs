@@ -32,6 +32,16 @@ function isoWeek(d) {
   const week = 1 + Math.round(((date - first) / 86400000 - 3 + ((first.getUTCDay() + 6) % 7)) / 7)
   return `${year}-W${String(week).padStart(2, '0')}`
 }
+// ISO 周 → [周一, 周日]（标题展示用 YYYY/MM/DD）
+function weekLabel(isoWk) {
+  const m = isoWk.match(/^(\d{4})-W(\d{2})$/)
+  const d = new Date(Date.UTC(+m[1], 0, 4))
+  const day = d.getUTCDay() || 7
+  d.setUTCDate(d.getUTCDate() - day + 1 + (+m[2] - 1) * 7)
+  const fmt = (x) => `${x.getUTCFullYear()}/${String(x.getUTCMonth() + 1).padStart(2, '0')}/${String(x.getUTCDate()).padStart(2, '0')}`
+  const sun = new Date(d.getTime() + 6 * 86400000)
+  return `${fmt(d)}～${fmt(sun)}`
+}
 const stamp = new Date()
 const wk = isoWeek(stamp.toISOString().slice(0, 10))
 const t = analysis.totals || {}
@@ -39,7 +49,7 @@ const q = analysis.quality || {}
 const ch = analysis.channels
 const dl = analysis.downloads
 const L = []
-L.push(`# DSH 插件生态周报 · ${wk}`)
+L.push(`# DSH 插件生态周报 · ${wk}（${weekLabel(wk)}）`)
 L.push('')
 L.push(`> 数据快照 ${(analysis.generatedAt || '').slice(0, 10)} · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)`)
 L.push('')
