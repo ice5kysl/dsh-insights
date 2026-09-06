@@ -51,6 +51,7 @@ const STEPS = [
   ['badges',      'pipeline/publish/badges.mjs'],
   ['site',        'pipeline/publish/site.mjs'],
   ['diff',        'pipeline/publish/diff.mjs'],
+  ['refresh',     'pipeline/collect/refresh.mjs'],
   ['pages',       'pipeline/publish/pages.mjs'],
   ['letters',     'pipeline/content/letters.mjs'],
   ['weekly',      'pipeline/content/weekly.mjs'],
@@ -61,7 +62,9 @@ const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'expor
 const CONTENT = ['letters', 'weekly', 'pages']
 const PROFILES = {
   daily: DAILY,
-  friday: [...new Set(['author-graph', ...DAILY, 'metrics', ...CONTENT])],
+  // pages 必须在 letters/weekly 之后（当天内容当天上线）——从 DAILY 摘出放到内容层之后，勿用 Set 去重（会把 pages 留在 DAILY 位置）
+  // refresh（Tier 0 元数据合并）在 analyze 之前跑：本周活跃度/飙升榜用新鲜数据；discover 周度重爬供其消费（search 配额独立）
+  friday: ['lists', 'discover', 'refresh', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'author-graph', 'metrics', 'letters', 'weekly', 'pages'],
   snapshot: SNAPSHOT,
   full: ['lists', 'discover', 'npm-map', 'downloads', 'validate', ...SNAPSHOT, 'diff'],
   content: CONTENT,

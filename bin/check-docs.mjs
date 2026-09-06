@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * bin/check-docs — 文档数字对账（P0-8 根治）。
+ * bin/check-docs — 文档数字对账（P0-8 根治；双语版）。
  *
- * 校验 README 数据产出表中的权威集/分桶数字与 data/analysis.json 一致，
+ * 校验 README.md（EN，默认）与 README.zh-CN.md 中的权威集/分桶数字与 data/analysis.json 一致，
  * 不一致即非 0 退出（逼着快照后同步文档）。历史叙述（带时点标注）不受限。
  *
- * Run: node bin/check-docs.mjs   （npm run check:docs）
+ * Run: node bin/check-docs.mjs
  */
 
 import { readFileSync } from 'node:fs'
@@ -16,17 +16,21 @@ const expected = a?.totals?.authoritative
 const invalid = a?.coverage?.invalidUnique
 if (!expected) { console.error('[check-docs] analysis.json 缺失或不含 totals.authoritative'); process.exit(1) }
 
-const readme = readFileSync('README.md', 'utf8')
 const fmt = (n) => n.toLocaleString('en-US')
 let fail = 0
-const check = (label, want, re) => {
-  const m = readme.match(re)
-  if (!m) { console.error(`[check-docs] README 未找到${label}数字锚点`); fail = 1; return }
-  if (m[1] !== fmt(want)) { console.error(`[check-docs] ${label}：README=${m[1]} vs analysis.json=${fmt(want)}`); fail = 1 }
-  else console.log(`[check-docs] ${label} ✓ ${fmt(want)}`)
+for (const file of ['README.md', 'README.zh-CN.md']) {
+  let txt
+  try { txt = readFileSync(file, 'utf8') } catch { console.error(`[check-docs] ${file} 不存在（跳过）`); fail = 1; continue }
+  const check = (label, want, re) => {
+    const m = txt.match(re)
+    if (!m) { console.error(`[check-docs] ${file} 未找到${label}锚点`); fail = 1; return }
+    const got = m[1] || m[2]
+    if (got !== fmt(want)) { console.error(`[check-docs] ${file} ${label}：README=${got} vs analysis.json=${fmt(want)}`); fail = 1 }
+    else console.log(`[check-docs] ${file} ${label} ✓ ${fmt(want)}`)
+  }
+  check('权威集', expected, /\*\*(?:Authoritative set|权威集)\s*([\d,]+)\*\*/)
+  if (invalid != null) check('分桶', invalid, /分桶\s*([\d,]+)|([\d,]+)\s*noise buckets/)
 }
-check('权威集', expected, /\*\*权威集\s*([\d,]+)\*\*/)
-if (invalid != null) check('分桶', invalid, /分桶\s*([\d,]+)/)
 
 if (fail) { console.error('[check-docs] 不一致——请按 analysis.json 更新 README（数字带口径与时点）'); process.exit(1) }
 console.log('[check-docs] README 数字与 analysis.json 一致')

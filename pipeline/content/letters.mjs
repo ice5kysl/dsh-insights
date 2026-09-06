@@ -18,10 +18,12 @@ import { PATHS, readJsonl, readJson, byFullName, loadPlugins } from '../../lib/d
 const OUT_DIR = PATHS.reportsDir
 mkdirSync(OUT_DIR, { recursive: true })
 const BRAND = 'DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）'
+// 快照日期取 analysis.json 的 generatedAt（数据不变则信件不变）；缺失时才退回当天（否则 diff 驱动失效，每周五全量重写）
+const SNAP = String(readJson(PATHS.analysis, {}).generatedAt ?? new Date().toISOString()).slice(0, 10)
 const FOOTER = [
   '---',
   '',
-  `> 由 ${BRAND} 自动生成 · 数据快照 ${new Date().toISOString().slice(0, 10)}`,
+  `> 由 ${BRAND} 自动生成 · 数据快照 ${SNAP}`,
   '> 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 每插件体检 [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health) · 示例页 https://dsh-insights.com/',
   '> 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。',
   '',
@@ -111,7 +113,7 @@ function render(full) {
   const L = []
   L.push(`# 致 ${name} 的作者：一期一会 · 体检与建议`)
   L.push('')
-  L.push(`> ${full} · 第 1 期（数据快照 ${new Date().toISOString().slice(0, 10)}）`)
+  L.push(`> ${full} · 第 1 期（数据快照 ${SNAP}）`)
   L.push('')
   L.push(`你好！我是 **${BRAND}** 的自动观测员。这封信聊聊 ${name} 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。`)
   L.push('')

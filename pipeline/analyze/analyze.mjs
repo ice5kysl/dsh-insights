@@ -240,6 +240,8 @@ function analyze(rows) {
       grades: gradeAgg,
       avgScore: n ? Math.round((scoreSum / n) * 10) / 10 : 0,
       gradePct: pct((gradeAgg.A || 0) + (gradeAgg.B || 0), n),
+      // S+A 占比（对外叙事口径：值得优先看）；A+B 因分布偏高（B 档 ~66%）不再作为对外主打
+      gradePctSA: pct((gradeAgg.S || 0) + (gradeAgg.A || 0), n),
     },
     categories: Object.entries(catAgg).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([cat, count]) => ({ category: cat, count })),
     authors,
@@ -282,7 +284,7 @@ function render(a) {
     L.push('')
   }
   L.push('## 质量评分（启发式）')
-  L.push(`- 平均分 ${a.quality.avgScore} · A+B 占比 ${a.quality.gradePct}%`)
+  L.push(`- 平均分 ${a.quality.avgScore} · S+A 占比 ${a.quality.gradePctSA}%（值得优先看；A+B ${a.quality.gradePct}%）`)
   L.push(`- S ${a.quality.grades.S ?? 0} · A ${a.quality.grades.A} · B ${a.quality.grades.B} · C ${a.quality.grades.C} · D ${a.quality.grades.D}`)
   L.push('')
   L.push('## 功能分类（启发式 Top 12）')
@@ -319,7 +321,7 @@ function main() {
   const a = analyze(rows)
   writeJson(PATHS.analysis, a, true)
   writeFileSync(PATHS.reportMd, render(a))
-  console.log(`[analyze] ${rows.length} plugins → analysis.json + report.md + enrich.json (avg ${a.quality.avgScore} / A+B ${a.quality.gradePct}%)`)
+  console.log(`[analyze] ${rows.length} plugins → analysis.json + report.md + enrich.json (avg ${a.quality.avgScore} / S+A ${a.quality.gradePctSA}%)`)
 }
 
 main()

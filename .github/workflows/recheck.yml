@@ -1,0 +1,48 @@
+# 作者触发单插件重检（零后端「申请重检」）：/p/ 页指引作者到此手动触发
+# 流程：validateOne 单插件（无视断点）→ snapshot 全链对齐派生产物 → commit（pages 经 workflow_run 接力部署）
+name: recheck
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: 'owner/repo（要重检的插件仓库，如 ice5kysl/dsh-workspace-kit）'
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh # 与 refresh.yml 同组排队，避免并发写 data/
+  cancel-in-progress: false
+
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+
+      - name: Revalidate single plugin
+        env:
+          GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
+        run: node bin/recheck.mjs "${{ github.event.inputs.repo }}"
+
+      - name: Rebuild derived artifacts
+        env:
+          GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
+        run: node bin/pipeline.mjs snapshot
+
+      - name: Commit
+        run: |
+          git config user.name "dsh-insights-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A data site
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "chore(recheck): ${{ github.event.inputs.repo }}"
+          git pull --rebase --autostash origin main
+          git push
