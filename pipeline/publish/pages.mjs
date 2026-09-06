@@ -232,6 +232,65 @@ ${platRows}
 </script>`,
   })))
 
+  // ---- /badge/ 健康徽章 ---------------------------------------------------
+  const badgeEx = [
+    ['omdsh-dev/DSH-better-sidebar', 'A · 100/100'],
+    ['zhu1090093659/dsh-web', 'B · 85/100'],
+    ['ConsoleSun/Gemini-Eyes', 'C · 70/100'],
+  ]
+  const badgeExHtml = badgeEx.map(([f, note]) => `<div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)"><img src="../badge/${f}.svg" alt="${f} badge" style="height:22px"><span style="font-size:12px;color:var(--mut)"><a href="https://github.com/${f}" target="_blank">${f}</a> · ${note}</span></div>`).join('')
+  written.push(out('badge/index.html', page({
+    title: '健康徽章', desc: '把 DSH Insights 客观健康分带进你的 README：徽章的价值、解读与接入方法。',
+    base: '../', here: 'badge/',
+    body: `<p class="crumb">Badge</p><h1 class="pagetitle">健康徽章 · 把分数带进 README</h1>
+<p class="lede">一枚 SVG 徽章 = 你插件的客观健康分，随每日快照自动刷新。对作者是信任信号与修复指引，对生态是分数走出本站的最小分发单元。</p>
+
+<h2 style="font-size:16px;margin:28px 0 8px">长什么样（真实样例，实时渲染）</h2>
+${badgeExHtml}
+
+<h2 style="font-size:16px;margin:28px 0 8px">如何解读</h2>
+<p class="lede">徽章显示「等级 · 分数」：100 起扣，warn −5 / fail −20，阈值 <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。评的是六维框架中的计分四维（工程质量 / 文档完整性 / 可发现性 / 维护活跃），每条扣分都带证据、可在插件页和仪表盘抽屉里逐项核查——<b>分数的意义不在于高低，在于可复核</b>。框架全文见 <a href="../about/">关于 · 指标体系</a>。</p>
+
+<h2 style="font-size:16px;margin:28px 0 8px">为什么值得挂</h2>
+<p class="lede">对作者：潜在用户装前 10 秒的信任凭证；分数提升是看得见的修复回报；徽章链回插件页，带来反链与同类定位。对生态：目录与市场装不下所有插件，但每个 README 都可以挂分数——徽章是让「信得过」在生态里自传播的钩子。我们不做排名、不做安全审计，只提供客观信号。</p>
+
+<h2 style="font-size:16px;margin:28px 0 8px">接入（输入你的仓库，自动生成）</h2>
+<div class="card" style="max-width:720px">
+  <b>你的插件仓库</b>
+  <p><input id="brepo" placeholder="owner/repo，如 ice5kysl/dsh-workspace-kit" style="width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font:13px var(--mono);background:var(--bg);color:var(--ink)"></p>
+  <div id="bprev" style="margin:10px 0;min-height:26px"><span style="color:var(--faint);font-size:12.5px">输入后预览徽章</span></div>
+  <b style="font-size:12.5px">写法一 · 徽章 + 链接插件页（推荐）</b>
+  <pre style="margin:8px 0"><code id="bcode1">[![DSH Insights health](https://dsh-insights.com/badge/owner/repo.svg)](https://dsh-insights.com/p/owner/repo/)</code></pre>
+  <b style="font-size:12.5px">写法二 · 纯徽章</b>
+  <pre style="margin:8px 0"><code id="bcode2">![DSH Insights health](https://dsh-insights.com/badge/owner/repo.svg)</code></pre>
+  <p style="margin-top:8px"><button id="bcopy" style="padding:6px 14px;border:1px solid var(--line);border-radius:8px;background:var(--track);color:var(--ink);font-size:12.5px;cursor:pointer">复制写法一</button> <span id="bcopied" style="font-size:12px;color:var(--ok)"></span></p>
+</div>
+
+<h2 style="font-size:16px;margin:28px 0 8px">说明与边界</h2>
+<p class="lede">徽章内容随每日快照自动更新（GitHub 图片缓存最长一天）；分数掉档不需要你改任何代码。启发式评估 ≠ 安全审计；徽章 404 = 仓库不在当前权威集（可能是门禁未过或校验未覆盖，可到 <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">仓库</a> 提 issue 查询/申诉）。想先本地自查，可用我们的体检工具：<code>npx --yes github:ice5kysl/dsh-plugin-health &lt;owner/repo&gt;</code>。</p>
+<script>
+(function(){
+  var inp=document.getElementById('brepo'),prev=document.getElementById('bprev'),
+      c1=document.getElementById('bcode1'),c2=document.getElementById('bcode2'),
+      btn=document.getElementById('bcopy'),ok=document.getElementById('bcopied');
+  function norm(v){ v=(v||'').trim().replace(/^https?:\\/\\/github\\.com\\//,'').replace(/\\/+$/,''); return /^[\\w.-]+\\/[\\w.-]+$/.test(v)?v:null }
+  function upd(){ var r=norm(inp.value);
+    if(!r){ prev.innerHTML='<span style="color:var(--faint);font-size:12.5px">输入后预览徽章</span>'; return }
+    prev.textContent='';
+    var img=document.createElement('img');
+    img.src='../badge/'+r+'.svg'; img.style.height='22px'; img.alt=r+' badge';
+    img.onerror=function(){ prev.innerHTML='<span style="font-size:12px;color:var(--warn)">该仓库暂未收录权威集（徽章 404）——可能门禁未过或校验未覆盖</span>' };
+    prev.appendChild(img);
+    c1.textContent='[![DSH Insights health](https://dsh-insights.com/badge/'+r+'.svg)](https://dsh-insights.com/p/'+r+'/)'
+    c2.textContent='![DSH Insights health](https://dsh-insights.com/badge/'+r+'.svg)' }
+  inp.addEventListener('input',upd);
+  btn.addEventListener('click',function(){
+    (navigator.clipboard?navigator.clipboard.writeText(c1.textContent):Promise.reject()).then(function(){ ok.textContent='已复制 ✓' }).catch(function(){ ok.textContent='请手动复制' });
+    setTimeout(function(){ ok.textContent='' },2000) });
+})();
+</script>`,
+  })))
+
   // ---- /about/ 关于 · 方法论与指标体系 --------------------------------------
   written.push(out('about/index.html', page({
     title: '关于', desc: 'DSH Insights 是什么、指标体系、评估口径与边界声明。',
