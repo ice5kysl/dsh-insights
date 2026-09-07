@@ -9,6 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="../logo.svg">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="7fc5eb24-1687-4827-9775-5326d957b46a"></script>
+<meta name="en-title" content="About · DSH Insights">
 
 <meta property="og:title" content="关于">
 <meta property="og:description" content="DSH Insights 是什么、指标体系、评估口径与边界声明。">
@@ -18,6 +19,7 @@
 <meta name="twitter:title" content="关于">
 <meta name="twitter:description" content="DSH Insights 是什么、指标体系、评估口径与边界声明。">
 <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})()</script>
+<script>(function(){try{var q=new URLSearchParams(location.search).get('lang');if(q==='zh'||q==='en')localStorage.setItem('lang',q);var l=localStorage.getItem('lang');if(l!=='zh'&&l!=='en')l=((navigator.language||'zh')+'').toLowerCase().indexOf('zh')===0?'zh':'en';var d=document.documentElement;d.dataset.lang=l;d.lang=l==='en'?'en':'zh-CN'}catch(e){}})()</script>
 <style>
 :root{
   --bg:#fafafa;--card:#ffffff;--ink:#18181b;--mut:#71717a;--faint:#a1a1aa;--line:#e4e4e7;--track:#f4f4f5;
@@ -94,18 +96,23 @@ h1.pagetitle{margin:0 0 8px;font-size:clamp(22px,3.4vw,30px);font-weight:700;let
 .wkbtn:hover{border-color:var(--faint);color:var(--ink);text-decoration:none}
 .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:11.5px;color:var(--mut);margin:0 6px 6px 0}
 footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+:root[data-lang=en] [data-lang-block=zh]{display:none}
+:root:not([data-lang=en]) [data-lang-block=en]{display:none}
+.lang{min-width:30px;justify-content:center;font:600 11px var(--mono);letter-spacing:.04em}
 </style>
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="../"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
-  <nav class="nav"><a href="../">首页</a><a href="../dashboard/">插件</a><a href="../scenarios/">场景</a><a href="../weekly/">周报</a><a href="../dynamics/">动态</a><a href="../authors/">作者</a><a href="../badge/">徽章</a><a href="../data/">开放数据</a><a href="../about/" class="here">关于</a><button class="theme" id="themeBtn" aria-label="切换深浅色" title="深 / 浅色切换"><span class="t-moon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span class="t-sun"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button><a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <a class="brand" href="../"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small><span data-en="The DeepSeek Harness Observatory">DeepSeek Harness 全景观察站</span></small></a>
+  <nav class="nav"><a href="../"><span data-en="Home">首页</span></a><a href="../dashboard/"><span data-en="Plugins">插件</span></a><a href="../scenarios/"><span data-en="Scenarios">场景</span></a><a href="../weekly/"><span data-en="Weekly">周报</span></a><a href="../insights/"><span data-en="Insights">洞察</span></a><a href="../dynamics/"><span data-en="Dynamics">动态</span></a><a href="../authors/"><span data-en="Authors">作者</span></a><a href="../badge/"><span data-en="Badge">徽章</span></a><a href="../data/"><span data-en="Open Data">开放数据</span></a><a href="../about/" class="here"><span data-en="About">关于</span></a><button class="theme lang" id="langBtn" title="切换到 English" data-en-title="Switch to 中文" aria-label="切换到 English" data-en-aria="Switch to 中文">EN</button><button class="theme" id="themeBtn" title="切换深浅色" data-en-title="Toggle dark / light" aria-label="切换深浅色" data-en-aria="Toggle dark / light"><span class="t-moon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span class="t-sun"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button><a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <main class="wrap">
 <div class="content">
-<p class="crumb">About</p><h1 class="pagetitle">关于 · 方法论与指标体系</h1>
-<p class="lede">我们把口径公开到可以被反驳的程度——这是策展人和官方敢引用我们的前提。</p>
+<p class="crumb">About</p><h1 class="pagetitle"><span data-en="About · Methodology &amp; Metrics">关于 · 方法论与指标体系</span></h1>
+<p class="lede"><span data-en="We publish our definitions to the point where they can be falsified — that is the precondition for curators and the dsh team to cite us.">我们把口径公开到可以被反驳的程度——这是策展人和官方敢引用我们的前提。</span></p>
 <div class="article">
+<div data-lang-block="zh">
 <h2>关于 DSH Insights</h2>
 <p>DeepSeek Harness 的<b>生态与动态全景观察站</b>，三层：L1 插件洞察（真伪判定 → 权威集 → 健康分 → 收录矩阵）、L2 官方动态（releases/rc 节奏 + rc 兼容雷达，建设中）、L3 生态报告（「致作者的信」与生态周报）。我们不做目录、不做市场、不做榜单——只提供可引用、可复核的数据与观测，<b>被生态吸收而非与之竞争</b>。独立个人项目，与 DeepSeek 官方无隶属关系；数据、规则、管线全部开源（<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>），发现误判请提 issue。</p>
 <h2>权威集门禁</h2>
@@ -145,13 +152,74 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 <p>本站使用 <a href="https://umami.is" target="_blank">Umami</a>（开源、无 cookie、不收集个人信息）统计页面访问与来源，用于衡量产品发展（指标体系 E 组）；同时每周将覆盖/内容/触达指标记入 <code>data/metrics.jsonl</code> 公开于仓库。不使用任何其他跟踪。</p>
 <h2>可复核</h2>
 <p>数据、规则、管线全部开源：<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>。发现误判请提 issue —— 争议工单本身是公信力指标（见上表 C 组）。</p>
+</div><div data-lang-block="en">
+<h2>About DSH Insights</h2>
+<p>An <b>ecosystem and dynamics observatory</b> for DeepSeek Harness (DSH), in three layers: L1 plugin insights (authenticity check → authoritative set → health score → listing matrix), L2 official dynamics (release/rc cadence + an rc compatibility radar, under construction), and L3 ecosystem reports (letters to authors and the weekly ecosystem report). We don't build a directory, a marketplace, or a leaderboard — we provide citable, verifiable data and observations, <b>meant to be absorbed by the ecosystem rather than compete with it</b>. This is an independent personal project with no affiliation to DeepSeek; the data, rules, and pipeline are all open source (<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>) — please open an issue if you spot a misjudgment.</p>
+<h2>The Authoritative Set Gate</h2>
+<p>Not a fork, not archived · <code>package.json</code> declares <code>dsh.bundle.patch</code> · the patch file is committed. This is a lower-bound definition: plugins distributed as pure tarballs fall into bucketed manual review (<code>invalid.jsonl</code>).</p>
+<h2>Coverage & Completeness (why the authoritative set ≪ the topic total)</h2>
+<p>GitHub's <code>topic:dsh-plugin</code> is the official discovery mechanism — <b>tag and you're in, zero barrier</b> — so it is full of tag squatters, unrelated repos, forks, monorepo subpaths, and deleted repos. Our coverage funnel: <b>topic universe (≈13.7k; see the live funnel on the home page) → multi-source candidates (full topic shard crawl + curated lists + npm mapping, deduplicated) → item-by-item manifest-gate verification → authoritative set + buckets</b>. The authoritative set is the lower-bound subset that is "genuinely installable in the official bundle form"; candidates in the <code>no-dsh-bundle</code> / <code>no-package.json</code> buckets may be plugins in a non-standard shape, held for manual review rather than mixed into the authoritative set. Verification <b>rolls forward within an API budget and is resumable</b>, so the authoritative set grows with every snapshot — <b>and the coverage numbers themselves are public</b> (the coverage funnel on the home page). That is how we answer "completeness": not with a big number, but with a verifiable one.</p>
+<h2>Plugin Evaluation Metrics (six-dimension framework v1)</h2>
+<p>Every plugin is examined on six dimensions: <b>four scored dimensions</b> feed the total (start at 100 · fail −20 / major −10 / moderate −5 / minor −2; differentiation reworked in health-v3), <b>two display dimensions</b> are shown but never scored, and <b>compatibility</b> is a reserved dimension. Quality grades: <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>; per-dimension subscores (dimScores) are visible on each plugin's detail page.</p>
+<table>
+<tr><th>Dimension</th><th>Signals</th><th>Scoring</th></tr>
+<tr><td>Engineering quality</td><td>client export · main=lib layout · files whitelist · published to npm · version consistency</td><td><b>Scored</b></td></tr>
+<tr><td>Docs completeness</td><td>README (the only fail-level signal) · Chinese/bilingual docs · LICENSE</td><td><b>Scored</b></td></tr>
+<tr><td>Discoverability</td><td>dsh-plugin topic (scored) · curated listings (display only)</td><td><b>Partially scored</b></td></tr>
+<tr><td>Maintenance activity</td><td>repo age · no commits in 30 days (new repos with npm ≥2 versions are exempt)</td><td><b>Scored</b></td></tr>
+<tr><td>Safety hygiene</td><td>write surface / render sanitization (deep-scan sampling; heuristic ≠ audit)</td><td>Incremental signal, <b>not scored</b></td></tr>
+<tr><td>Adoption</td><td>★ · npm weekly downloads · listing channels</td><td><b>Display only</b> (gameable/pollutable)</td></tr>
+<tr><td>Compatibility</td><td>engines.dsh declaration (only ~1% of plugins declare it) · API symbols × rc changelog (M2 radar)</td><td>Reserved, not yet measured</td></tr>
+</table>
+<p>Principles: purely objective signals · stars never scored · what cannot be probed is never fabricated or deducted (missing is shown explicitly) · every deduction carries evidence · community ratings will never be introduced. Full rules and changelog: <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">SCHEMA §health</a>.</p>
+<h2>Calibration</h2>
+<p>Known genuine/fake plugins are compiled into a calibration set; every snapshot runs a regression (<code>pipeline/validate/regress.mjs</code>), and if the regression is not 100% the week's snapshot is not published. Any definition change must bump the rule version and be recorded in the changelog.</p>
+<h2>Metrics (how we measure ourselves)</h2>
+<p>North star: <b>our data/reports being adopted by the ecosystem</b> — directories, marketplaces, or the dsh team citing our scores, observations, or compatibility warnings. Around it, six metric groups:</p>
+<table>
+<tr><th>Group</th><th>Question it answers</th><th>Key metrics</th></tr>
+<tr><td>A Coverage</td><td>Are we complete?</td><td>authoritative set size · full topic coverage rate · candidate pool freshness</td></tr>
+<tr><td>B Freshness</td><td>Do we update often?</td><td>snapshot lag ≤7 days (≤1 day with daily CI) · CI success rate</td></tr>
+<tr><td>C Credibility</td><td>Are scores trusted?</td><td>calibration regression pass rate (target 100%) · dispute issues and time-to-resolution · missing-data annotation rate</td></tr>
+<tr><td>D Content engine</td><td>Is the engine running?</td><td>consecutive weekly issues (a gap is an alert) · letter coverage · author feedback count</td></tr>
+<tr><td>E Reach</td><td>Are we seen?</td><td>repos deploying the badge · repo ★ / reposts · site visits</td></tr>
+<tr><td>F Adoption</td><td>The north star, counted</td><td>directories/marketplaces citing or integrating our data · rc warnings accepted via PR · official touchpoints</td></tr>
+</table>
+<p>Red lines: two consecutive missed weekly issues → the content line stops new features and fixes the pipeline first; calibration regression below 100% → the week's snapshot is not published; adoption stuck at zero long-term → triggers a go/pivot/kill review. Full definitions: <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/PRODUCT-DESIGN.md" target="_blank">PRODUCT-DESIGN §4</a>.</p>
+<h2>Boundary Statement</h2>
+<p>Heuristic evaluation ≠ security audit. No community ratings or voting, no install hosting or transactions, no logged-in product. The deep scan (write surface / sanitization) is an incremental signal and is labeled separately.</p>
+<h2>Site Analytics (privacy disclosure)</h2>
+<p>This site uses <a href="https://umami.is" target="_blank">Umami</a> (open source, cookieless, collects no personal information) to measure page visits and referrers — it feeds metric group E above. Coverage/content/reach metrics are also appended weekly to <code>data/metrics.jsonl</code>, public in the repo. No other tracking of any kind.</p>
+<h2>Verifiability</h2>
+<p>Data, rules, and pipeline are all open source: <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>. If you spot a misjudgment, open an issue — dispute tickets are themselves a credibility metric (group C above).</p>
+</div>
 </div>
 </div>
 <footer>
-  <span>由 <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">DSH Insights</a> 管线自动生成</span>
-  <span>零依赖 · 启发式评估，非安全审计 · 数据 CC BY 4.0 / 代码 MIT</span>
+  <span><span data-en="Built by">由</span> <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">DSH Insights</a> <span data-en="pipeline, generated automatically">管线自动生成</span></span>
+  <span><span data-en="Zero-dependency · heuristic evaluation, not a security audit · data CC BY 4.0 / code MIT">零依赖 · 启发式评估，非安全审计 · 数据 CC BY 4.0 / 代码 MIT</span></span>
 </footer>
 </main>
 <script>(function(){var b=document.getElementById('themeBtn');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement;var d=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=d;try{localStorage.setItem('theme',d)}catch(e){}})})()</script>
+<script>(function(){
+var D=document.documentElement;
+function cur(){return D.dataset.lang==='en'?'en':'zh'}
+window.__lang=cur;
+window.__t=function(zh,en){return cur()==='en'?en:zh};
+window.__setLang=function(l){try{localStorage.setItem('lang',l)}catch(e){}D.dataset.lang=l;D.lang=l==='en'?'en':'zh-CN';apply();try{document.dispatchEvent(new CustomEvent('langchange',{detail:l}))}catch(e){}};
+function apply(){
+  var l=cur(),en=l==='en';
+  document.querySelectorAll('[data-en]').forEach(function(el){if(el.dataset.zh===undefined)el.dataset.zh=el.textContent;el.textContent=en?el.dataset.en:el.dataset.zh});
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){if(el.dataset.zhPh===undefined)el.dataset.zhPh=el.getAttribute('placeholder')||'';el.setAttribute('placeholder',en?el.dataset.enPh:el.dataset.zhPh)});
+  document.querySelectorAll('[data-en-title]').forEach(function(el){if(el.dataset.zhTitle===undefined)el.dataset.zhTitle=el.getAttribute('title')||'';el.setAttribute('title',en?el.dataset.enTitle:el.dataset.zhTitle)});
+  document.querySelectorAll('[data-en-aria]').forEach(function(el){if(el.dataset.zhAria===undefined)el.dataset.zhAria=el.getAttribute('aria-label')||'';el.setAttribute('aria-label',en?el.dataset.enAria:el.dataset.zhAria)});
+  var mt=document.querySelector('meta[name=en-title]');
+  if(mt){if(!D.dataset.zhTitle)D.dataset.zhTitle=document.title;document.title=en?mt.getAttribute('content'):D.dataset.zhTitle}
+  var b=document.getElementById('langBtn');if(b)b.textContent=en?'中':'EN';
+}
+apply();
+var b=document.getElementById('langBtn');
+if(b)b.addEventListener('click',function(){window.__setLang(cur()==='en'?'zh':'en')});
+})()</script>
 </body>
 </html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>dsh-status-bar · 插件详情 · DSH Insights · DSH Insights</title>
+<meta name="description" content="OuYangxin12/dsh-status-bar 的健康分、维度画像、扣分明细与客观数据（DSH Insights 自动生成）">
+<link rel="icon" href="../../../favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="../../../logo.svg">
+<link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="7fc5eb24-1687-4827-9775-5326d957b46a"></script>
+<meta name="en-title" content="dsh-status-bar · Plugin · DSH Insights · DSH Insights">
+<link rel="canonical" href="https://dsh-insights.com/p/OuYangxin12/dsh-status-bar/">
+<meta property="og:url" content="https://dsh-insights.com/p/OuYangxin12/dsh-status-bar/">
+<meta property="og:title" content="OuYangxin12/dsh-status-bar · C 66/100 · DSH Insights">
+<meta property="og:description" content="OuYangxin12/dsh-status-bar 的健康分、维度画像、扣分明细与客观数据（DSH Insights 自动生成）">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://dsh-insights.com/og.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OuYangxin12/dsh-status-bar · C 66/100 · DSH Insights">
+<meta name="twitter:description" content="OuYangxin12/dsh-status-bar 的健康分、维度画像、扣分明细与客观数据（DSH Insights 自动生成）">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})()</script>
+<script>(function(){try{var q=new URLSearchParams(location.search).get('lang');if(q==='zh'||q==='en')localStorage.setItem('lang',q);var l=localStorage.getItem('lang');if(l!=='zh'&&l!=='en')l=((navigator.language||'zh')+'').toLowerCase().indexOf('zh')===0?'zh':'en';var d=document.documentElement;d.dataset.lang=l;d.lang=l==='en'?'en':'zh-CN'}catch(e){}})()</script>
+<style>
+:root{
+  --bg:#fafafa;--card:#ffffff;--ink:#18181b;--mut:#71717a;--faint:#a1a1aa;--line:#e4e4e7;--track:#f4f4f5;
+  --accent:#2563eb;--ok:#059669;--warn:#d97706;--err:#dc2626;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace
+}
+:root[data-theme=dark]{--bg:#09090b;--card:#101012;--ink:#f4f4f5;--mut:#a1a1aa;--faint:#71717a;--line:#26262a;--track:#17171a;--accent:#60a5fa}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#09090b;--card:#101012;--ink:#f4f4f5;--mut:#a1a1aa;--faint:#71717a;--line:#26262a;--track:#17171a;--accent:#60a5fa}}
+.theme{border:1px solid var(--line);background:var(--card);color:var(--mut);border-radius:7px;padding:4px 7px;height:26px;cursor:pointer;display:inline-flex;align-items:center}
+.theme:hover{color:var(--ink)}
+.theme .t-sun{display:none}
+:root[data-theme=dark] .theme .t-sun{display:inline-flex}
+:root[data-theme=dark] .theme .t-moon{display:none}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1400px;margin:0 auto;padding:0 28px}
+.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+[id]{scroll-margin-top:70px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:14px;color:var(--ink);white-space:nowrap}
+.brand:hover{text-decoration:none}
+.mark{width:22px;height:22px;display:inline-flex;flex:none}
+.brand small{color:var(--faint);font-weight:400;font-size:12px}
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{color:var(--mut);font-size:13px;padding:5px 10px;border-radius:7px}
+.nav a:hover{color:var(--ink);background:var(--track);text-decoration:none}
+.nav a.here{color:var(--ink);font-weight:650}
+@media(max-width:720px){.brand small{display:none}.topbar .wrap{flex-wrap:wrap;height:auto;padding:6px 28px;row-gap:2px}.nav{overflow-x:auto;width:100%;padding-bottom:4px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{padding:5px 7px;font-size:12.5px;white-space:nowrap;flex:none}}
+main.wrap{padding:48px 28px 8px}
+.article{max-width:1100px}
+.crumb{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+h1.pagetitle{margin:0 0 8px;font-size:clamp(22px,3.4vw,30px);font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.lede{color:var(--mut);font-size:14px;margin:0 0 28px;max-width:1100px}
+.article h1{font-size:22px;margin:34px 0 10px;letter-spacing:-.02em}
+.article h2{font-size:18px;margin:30px 0 8px;letter-spacing:-.01em}
+.article h3{font-size:15px;margin:24px 0 6px}
+.article h4{font-size:13.5px;margin:20px 0 6px}
+.article p{margin:10px 0}
+.article ul,.article ol{margin:10px 0;padding-left:22px}
+.article li{margin:4px 0}
+.article blockquote{margin:14px 0;padding:10px 14px;border-left:3px solid var(--line);color:var(--mut);background:var(--track);border-radius:0 8px 8px 0;font-size:13px}
+.article code{font:12.5px var(--mono);background:var(--track);border-radius:5px;padding:1px 5px}
+.article pre{background:var(--track);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow:auto;font-size:12.5px}
+.article pre code{background:none;padding:0}
+.article table{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0}
+.article th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;text-align:left}
+.article th,.article td{padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.article hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.article strong{font-weight:650}
+.grade{display:inline-block;min-width:22px;text-align:center;font:700 11px/1.5 var(--mono);border-radius:5px;padding:1px 6px;border:1px solid}
+.grade.S{color:#7c3aed;background:color-mix(in srgb,#7c3aed 9%,transparent);border-color:color-mix(in srgb,#7c3aed 32%,transparent)}
+.grade.A{color:var(--ok);background:color-mix(in srgb,var(--ok) 9%,transparent);border-color:color-mix(in srgb,var(--ok) 32%,transparent)}
+.grade.B{color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,transparent);border-color:color-mix(in srgb,var(--accent) 32%,transparent)}
+.grade.C{color:var(--warn);background:color-mix(in srgb,var(--warn) 10%,transparent);border-color:color-mix(in srgb,var(--warn) 35%,transparent)}
+.grade.D{color:var(--err);background:color-mix(in srgb,var(--err) 9%,transparent);border-color:color-mix(in srgb,var(--err) 32%,transparent)}
+.listrow{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.listrow a{font-weight:600;color:var(--ink);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:bottom}
+.listrow a:hover{color:var(--accent)}
+.listrow .meta{color:var(--faint);font:12px var(--mono);white-space:nowrap;flex:none}
+.scrow{display:flex;flex-direction:column;gap:1px;padding:9px 2px;border-bottom:1px solid var(--line)}
+.scsec{padding:22px 0 6px;border-top:1px solid var(--line)}
+.sc-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.sc-cols{grid-template-columns:1fr}}
+.scrow a{font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scrow a:hover{color:var(--accent)}
+.scrow .meta{color:var(--faint);font:11.5px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:16px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card b{display:block;font-size:13px;margin-bottom:4px}
+.card code{font:12px var(--mono);color:var(--accent);word-break:break-all}
+.card p{margin:6px 0 0;font-size:12px;color:var(--mut)}
+.wkbtn{display:inline-block;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut)}
+.wkbtn:hover{border-color:var(--faint);color:var(--ink);text-decoration:none}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:11.5px;color:var(--mut);margin:0 6px 6px 0}
+footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+:root[data-lang=en] [data-lang-block=zh]{display:none}
+:root:not([data-lang=en]) [data-lang-block=en]{display:none}
+.lang{min-width:30px;justify-content:center;font:600 11px var(--mono);letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../../../"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small><span data-en="The DeepSeek Harness Observatory">DeepSeek Harness 全景观察站</span></small></a>
+  <nav class="nav"><a href="../../../"><span data-en="Home">首页</span></a><a href="../../../dashboard/" class="here"><span data-en="Plugins">插件</span></a><a href="../../../scenarios/"><span data-en="Scenarios">场景</span></a><a href="../../../weekly/"><span data-en="Weekly">周报</span></a><a href="../../../insights/"><span data-en="Insights">洞察</span></a><a href="../../../dynamics/"><span data-en="Dynamics">动态</span></a><a href="../../../authors/"><span data-en="Authors">作者</span></a><a href="../../../badge/"><span data-en="Badge">徽章</span></a><a href="../../../data/"><span data-en="Open Data">开放数据</span></a><a href="../../../about/"><span data-en="About">关于</span></a><button class="theme lang" id="langBtn" title="切换到 English" data-en-title="Switch to 中文" aria-label="切换到 English" data-en-aria="Switch to 中文">EN</button><button class="theme" id="themeBtn" title="切换深浅色" data-en-title="Toggle dark / light" aria-label="切换深浅色" data-en-aria="Toggle dark / light"><span class="t-moon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span class="t-sun"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button><a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+</div></div>
+<main class="wrap">
+<div class="content">
+<p class="crumb"><span data-en="Plugin">插件详情</span> · OuYangxin12/dsh-status-bar</p>
+<div style="display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:6px">
+  <img src="https://github.com/OuYangxin12.png?size=80" width="56" height="56" style="border-radius:14px" alt="">
+  <div style="flex:1;min-width:260px">
+    <h1 class="pagetitle" style="margin-bottom:4px">dsh-status-bar <span style="color:var(--faint);font-weight:400;font-size:16px">OuYangxin12</span></h1>
+    <p class="lede" style="margin-bottom:10px;max-width:none">Live execution status bar for the DeepSeek Harness web GUI: real-time activity + event-driven LLM achievement summaries with expandable detail reports.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <span class="grade C" style="font-size:15px;min-width:30px;padding:3px 10px">C</span><b class="mono" style="font-size:15px">66/100</b>
+      <span class="pill">状态 / 监控 / 用量</span>
+      <a class="wkbtn" href="https://github.com/OuYangxin12/dsh-status-bar" target="_blank">GitHub ↗</a>
+      
+      <a class="wkbtn" href="https://github.com/OuYangxin12" target="_blank"><span data-en="Author ↗">作者主页 ↗</span></a>
+    </div>
+  </div>
+</div>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr))">
+  <div class="card"><b>★ 0</b><p>GitHub stars</p></div>
+  <div class="card"><b>0</b><p>forks</p></div>
+  <div class="card"><b>2026-09-06</b><p><span data-en="Created">创建于</span></p></div>
+  <div class="card"><b>2026-09-06</b><p><span data-en="Last push">最近 push</span></p></div>
+  <div class="card"><b>—</b><p><span data-en="npm weekly downloads">npm 周下载</span></p></div>
+</div>
+<div class="sc-cols" style="margin-top:16px">
+  <div class="card" style="margin:0"><b><span data-en="Scoring dimensions (six-dimension framework)">评分维度（六维框架）</span></b><div class="dimrow"><span><span data-en="Engineering quality">工程质量</span></span><div class="dimt"><i style="width:78%"></i></div><b>78</b></div><div class="dimrow"><span><span data-en="Docs completeness">文档完整性</span></span><div class="dimt"><i style="width:93%"></i></div><b>93</b></div><div class="dimrow"><span><span data-en="Discoverability">可发现性</span></span><div class="dimt"><i style="width:100%"></i></div><b>100</b></div><div class="dimrow"><span><span data-en="Maintenance activity">维护活跃</span></span><div class="dimt"><i style="width:95%"></i></div><b>95</b></div><p style="font-size:11px;color:var(--faint);margin-top:10px"><span data-en="Safety hygiene (deep-scan sampling) and adoption are display-only, never scored; compatibility arrives with the rc radar. Definitions:">安全卫生（深检抽样）与采用度只展示不进分；兼容性随 rc 雷达上线。口径见</span> <a href="/about/"><span data-en="About · Metrics">关于·指标体系</span></a></p></div>
+  <div class="card" style="margin:0"><b><span data-en="Deductions (health-v4)">扣分明细（health-v4）</span></b><div class="scrow"><a style="cursor:default">exports[&quot;./client&quot;] 缺失（Web 客户端入口）</a><span class="meta">−5</span></div><div class="scrow"><a style="cursor:default">未发布到 npm（无法一键安装，核心可用性）</a><span class="meta">−10</span></div><div class="scrow"><a style="cursor:default">无中文文档（生态惯例 zh/双语）</a><span class="meta">−5</span></div><div class="scrow"><a style="cursor:default">无测试目录/测试文件（工程成熟度）</a><span class="meta">−5</span></div><div class="scrow"><a style="cursor:default">无 CI workflow（.github/workflows）</a><span class="meta">−2</span></div><div class="scrow"><a style="cursor:default">无 docs/ 目录（文档深度不足）</a><span class="meta">−2</span></div><div class="scrow"><a style="cursor:default">仓库不足 1 天（存活未知）</a><span class="meta">−5</span></div></div>
+</div>
+<div class="sc-cols" style="margin-top:14px">
+  <div class="card" style="margin:0"><b><span data-en="Listing / Publishing">收录 / 发布</span></b>
+    <p style="font-size:13px;margin-top:8px">— <span data-en="not in awesome">awesome 未收录</span> · — <span data-en="not in imsai">imsai 未收录</span></p>
+    <p style="font-size:13px;color:var(--mut)"><span data-en="Not on npm (repo install only)">未发布 npm（仅仓库安装）</span></p>
+    
+    <p style="font-size:12.5px;margin-top:10px"><b><span data-en="Badge">徽章接入</span></b>：<code style="font-size:11.5px">https://dsh-insights.com/badge/OuYangxin12/dsh-status-bar.svg</code> · <a href="/badge/"><span data-en="Setup guide ↗">接入指南 ↗</span></a></p>
+  </div>
+  <div class="card" style="margin:0"><b><span data-en="LLM Summary">LLM 解读</span></b><p style="color:var(--faint);font-size:13px;margin-top:8px"><span data-en="Not annotated yet · pending an LLM annotation round">未标注 · 待 LLM 标注轮</span></p></div>
+</div>
+<h2 style="font-size:16px;margin:26px 0 8px"><span data-en="Similar plugins (状态 / 监控 / 用量)">同类插件（状态 / 监控 / 用量）</span></h2><div class="card"><div class="scrow"><a href="/p/ccch1mneyyy/dsh-TUI/">ccch1mneyyy/dsh-TUI</a><span class="meta"><span class="grade B">B</span> 83 · ★2837</span></div><div class="scrow"><a href="/p/MeteorNOX/DeepSeek-Balance-Whale-Widget/">MeteorNOX/DeepSeek-Balance-Whale-Widget</a><span class="meta"><span class="grade S">S</span> 95 · ★1727</span></div><div class="scrow"><a href="/p/vlln/whale-girl/">vlln/whale-girl</a><span class="meta"><span class="grade B">B</span> 89 · ★311</span></div><div class="scrow"><a href="/p/QCYTSN/dsh-dafeiyu/">QCYTSN/dsh-dafeiyu</a><span class="meta"><span class="grade B">B</span> 88 · ★300</span></div><div class="scrow"><a href="/p/zh667/TokenLedger/">zh667/TokenLedger</a><span class="meta"><span class="grade B">B</span> 79 · ★194</span></div></div>
+<p style="margin-top:18px;font-size:12px;color:var(--faint)"><span data-en="Data wrong or outdated? ">数据有误或已更新？</span><a href="https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml"><span data-en="Request a re-check">申请重检</span></a><span data-en=" (manual Actions trigger; enter owner/repo; takes effect in ~30 min)">（Actions 手动触发，输入 owner/repo，约半小时生效）</span> · <a href="https://github.com/ice5kysl/dsh-insights/issues/new/choose"><span data-en="Appeal / correction">申诉 / 纠错</span></a></p>
+</div>
+<footer>
+  <span><span data-en="Built by">由</span> <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">DSH Insights</a> <span data-en="pipeline, generated automatically">管线自动生成</span></span>
+  <span><span data-en="Zero-dependency · heuristic evaluation, not a security audit · data CC BY 4.0 / code MIT">零依赖 · 启发式评估，非安全审计 · 数据 CC BY 4.0 / 代码 MIT</span></span>
+</footer>
+</main>
+<script>(function(){var b=document.getElementById('themeBtn');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement;var d=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=d;try{localStorage.setItem('theme',d)}catch(e){}})})()</script>
+<script>(function(){
+var D=document.documentElement;
+function cur(){return D.dataset.lang==='en'?'en':'zh'}
+window.__lang=cur;
+window.__t=function(zh,en){return cur()==='en'?en:zh};
+window.__setLang=function(l){try{localStorage.setItem('lang',l)}catch(e){}D.dataset.lang=l;D.lang=l==='en'?'en':'zh-CN';apply();try{document.dispatchEvent(new CustomEvent('langchange',{detail:l}))}catch(e){}};
+function apply(){
+  var l=cur(),en=l==='en';
+  document.querySelectorAll('[data-en]').forEach(function(el){if(el.dataset.zh===undefined)el.dataset.zh=el.textContent;el.textContent=en?el.dataset.en:el.dataset.zh});
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){if(el.dataset.zhPh===undefined)el.dataset.zhPh=el.getAttribute('placeholder')||'';el.setAttribute('placeholder',en?el.dataset.enPh:el.dataset.zhPh)});
+  document.querySelectorAll('[data-en-title]').forEach(function(el){if(el.dataset.zhTitle===undefined)el.dataset.zhTitle=el.getAttribute('title')||'';el.setAttribute('title',en?el.dataset.enTitle:el.dataset.zhTitle)});
+  document.querySelectorAll('[data-en-aria]').forEach(function(el){if(el.dataset.zhAria===undefined)el.dataset.zhAria=el.getAttribute('aria-label')||'';el.setAttribute('aria-label',en?el.dataset.enAria:el.dataset.zhAria)});
+  var mt=document.querySelector('meta[name=en-title]');
+  if(mt){if(!D.dataset.zhTitle)D.dataset.zhTitle=document.title;document.title=en?mt.getAttribute('content'):D.dataset.zhTitle}
+  var b=document.getElementById('langBtn');if(b)b.textContent=en?'中':'EN';
+}
+apply();
+var b=document.getElementById('langBtn');
+if(b)b.addEventListener('click',function(){window.__setLang(cur()==='en'?'zh':'en')});
+})()</script>
+</body>
+</html>

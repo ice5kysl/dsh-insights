@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSH 生态洞察 · 2026-W37（2026/09/07～2026/09/13） · DSH Insights</title>
+<meta name="description" content="DSH 生态阶段性洞察报告（规则信号 grounding + DeepSeek 分析 · 中英双语）">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="../logo.svg">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="7fc5eb24-1687-4827-9775-5326d957b46a"></script>
+<meta name="en-title" content="DSH Ecosystem Insights · 2026-W37 · DSH Insights">
+<link rel="canonical" href="https://dsh-insights.com/insights/2026-W37.html">
+<meta property="og:url" content="https://dsh-insights.com/insights/2026-W37.html">
+<meta property="og:title" content="DSH 生态洞察 · 2026-W37（2026/09/07～2026/09/13）">
+<meta property="og:description" content="DSH 生态阶段性洞察报告（规则信号 grounding + DeepSeek 分析 · 中英双语）">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://dsh-insights.com/og.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DSH 生态洞察 · 2026-W37（2026/09/07～2026/09/13）">
+<meta name="twitter:description" content="DSH 生态阶段性洞察报告（规则信号 grounding + DeepSeek 分析 · 中英双语）">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})()</script>
+<script>(function(){try{var q=new URLSearchParams(location.search).get('lang');if(q==='zh'||q==='en')localStorage.setItem('lang',q);var l=localStorage.getItem('lang');if(l!=='zh'&&l!=='en')l=((navigator.language||'zh')+'').toLowerCase().indexOf('zh')===0?'zh':'en';var d=document.documentElement;d.dataset.lang=l;d.lang=l==='en'?'en':'zh-CN'}catch(e){}})()</script>
+<style>
+:root{
+  --bg:#fafafa;--card:#ffffff;--ink:#18181b;--mut:#71717a;--faint:#a1a1aa;--line:#e4e4e7;--track:#f4f4f5;
+  --accent:#2563eb;--ok:#059669;--warn:#d97706;--err:#dc2626;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace
+}
+:root[data-theme=dark]{--bg:#09090b;--card:#101012;--ink:#f4f4f5;--mut:#a1a1aa;--faint:#71717a;--line:#26262a;--track:#17171a;--accent:#60a5fa}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#09090b;--card:#101012;--ink:#f4f4f5;--mut:#a1a1aa;--faint:#71717a;--line:#26262a;--track:#17171a;--accent:#60a5fa}}
+.theme{border:1px solid var(--line);background:var(--card);color:var(--mut);border-radius:7px;padding:4px 7px;height:26px;cursor:pointer;display:inline-flex;align-items:center}
+.theme:hover{color:var(--ink)}
+.theme .t-sun{display:none}
+:root[data-theme=dark] .theme .t-sun{display:inline-flex}
+:root[data-theme=dark] .theme .t-moon{display:none}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1400px;margin:0 auto;padding:0 28px}
+.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+[id]{scroll-margin-top:70px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:14px;color:var(--ink);white-space:nowrap}
+.brand:hover{text-decoration:none}
+.mark{width:22px;height:22px;display:inline-flex;flex:none}
+.brand small{color:var(--faint);font-weight:400;font-size:12px}
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{color:var(--mut);font-size:13px;padding:5px 10px;border-radius:7px}
+.nav a:hover{color:var(--ink);background:var(--track);text-decoration:none}
+.nav a.here{color:var(--ink);font-weight:650}
+@media(max-width:720px){.brand small{display:none}.topbar .wrap{flex-wrap:wrap;height:auto;padding:6px 28px;row-gap:2px}.nav{overflow-x:auto;width:100%;padding-bottom:4px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{padding:5px 7px;font-size:12.5px;white-space:nowrap;flex:none}}
+main.wrap{padding:48px 28px 8px}
+.article{max-width:1100px}
+.crumb{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+h1.pagetitle{margin:0 0 8px;font-size:clamp(22px,3.4vw,30px);font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.lede{color:var(--mut);font-size:14px;margin:0 0 28px;max-width:1100px}
+.article h1{font-size:22px;margin:34px 0 10px;letter-spacing:-.02em}
+.article h2{font-size:18px;margin:30px 0 8px;letter-spacing:-.01em}
+.article h3{font-size:15px;margin:24px 0 6px}
+.article h4{font-size:13.5px;margin:20px 0 6px}
+.article p{margin:10px 0}
+.article ul,.article ol{margin:10px 0;padding-left:22px}
+.article li{margin:4px 0}
+.article blockquote{margin:14px 0;padding:10px 14px;border-left:3px solid var(--line);color:var(--mut);background:var(--track);border-radius:0 8px 8px 0;font-size:13px}
+.article code{font:12.5px var(--mono);background:var(--track);border-radius:5px;padding:1px 5px}
+.article pre{background:var(--track);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow:auto;font-size:12.5px}
+.article pre code{background:none;padding:0}
+.article table{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0}
+.article th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;text-align:left}
+.article th,.article td{padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.article hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.article strong{font-weight:650}
+.grade{display:inline-block;min-width:22px;text-align:center;font:700 11px/1.5 var(--mono);border-radius:5px;padding:1px 6px;border:1px solid}
+.grade.S{color:#7c3aed;background:color-mix(in srgb,#7c3aed 9%,transparent);border-color:color-mix(in srgb,#7c3aed 32%,transparent)}
+.grade.A{color:var(--ok);background:color-mix(in srgb,var(--ok) 9%,transparent);border-color:color-mix(in srgb,var(--ok) 32%,transparent)}
+.grade.B{color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,transparent);border-color:color-mix(in srgb,var(--accent) 32%,transparent)}
+.grade.C{color:var(--warn);background:color-mix(in srgb,var(--warn) 10%,transparent);border-color:color-mix(in srgb,var(--warn) 35%,transparent)}
+.grade.D{color:var(--err);background:color-mix(in srgb,var(--err) 9%,transparent);border-color:color-mix(in srgb,var(--err) 32%,transparent)}
+.listrow{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.listrow a{font-weight:600;color:var(--ink);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:bottom}
+.listrow a:hover{color:var(--accent)}
+.listrow .meta{color:var(--faint);font:12px var(--mono);white-space:nowrap;flex:none}
+.scrow{display:flex;flex-direction:column;gap:1px;padding:9px 2px;border-bottom:1px solid var(--line)}
+.scsec{padding:22px 0 6px;border-top:1px solid var(--line)}
+.sc-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.sc-cols{grid-template-columns:1fr}}
+.scrow a{font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scrow a:hover{color:var(--accent)}
+.scrow .meta{color:var(--faint);font:11.5px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:16px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card b{display:block;font-size:13px;margin-bottom:4px}
+.card code{font:12px var(--mono);color:var(--accent);word-break:break-all}
+.card p{margin:6px 0 0;font-size:12px;color:var(--mut)}
+.wkbtn{display:inline-block;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut)}
+.wkbtn:hover{border-color:var(--faint);color:var(--ink);text-decoration:none}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:11.5px;color:var(--mut);margin:0 6px 6px 0}
+footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+:root[data-lang=en] [data-lang-block=zh]{display:none}
+:root:not([data-lang=en]) [data-lang-block=en]{display:none}
+.lang{min-width:30px;justify-content:center;font:600 11px var(--mono);letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="../"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small><span data-en="The DeepSeek Harness Observatory">DeepSeek Harness 全景观察站</span></small></a>
+  <nav class="nav"><a href="../"><span data-en="Home">首页</span></a><a href="../dashboard/"><span data-en="Plugins">插件</span></a><a href="../scenarios/"><span data-en="Scenarios">场景</span></a><a href="../weekly/"><span data-en="Weekly">周报</span></a><a href="../insights/" class="here"><span data-en="Insights">洞察</span></a><a href="../dynamics/"><span data-en="Dynamics">动态</span></a><a href="../authors/"><span data-en="Authors">作者</span></a><a href="../badge/"><span data-en="Badge">徽章</span></a><a href="../data/"><span data-en="Open Data">开放数据</span></a><a href="../about/"><span data-en="About">关于</span></a><button class="theme lang" id="langBtn" title="切换到 English" data-en-title="Switch to 中文" aria-label="切换到 English" data-en-aria="Switch to 中文">EN</button><button class="theme" id="themeBtn" title="切换深浅色" data-en-title="Toggle dark / light" aria-label="切换深浅色" data-en-aria="Toggle dark / light"><span class="t-moon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span class="t-sun"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button><a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+</div></div>
+<main class="wrap">
+<div class="content">
+<p class="crumb"><span data-en="Insights">生态洞察</span> · 2026-W37</p><div class="article"><div data-lang-block="zh"><h1>DSH 生态洞察 · 2026-W37（2026/09/07～2026/09/13）</h1><blockquote>由 DSH Insights 管线 + DeepSeek（deepseek-v4-pro）生成 · 数据快照 2026-09-07 · 启发式评估，非安全审计<br>Generated by the DSH Insights pipeline + DeepSeek (deepseek-v4-pro) · snapshot 2026-09-07 · heuristic evaluation, not a security audit</blockquote><h2>核心结论</h2><ol><li>生态规模破万但质量与活跃分化明显：authoritative 10,189，7 日活跃 2,707（26.6%），中位 stars 仅为 1，均分 79.3。</li><li>规模增长需剔除批量账号水分：最大账号 uckkk 独占 1,285 个插件（13%），其均分 75，对生态规模与质量结构造成干扰。</li><li>发布与分发纪律薄弱：已发布插件仅 4,273（41.9%），而高星仓库中 yjh051108/dsh-routing-suite（7,080 stars）、zhu1090093659/dsh-web（6,887 stars）等仍未发布。</li><li>npm 版本滞后风险存在：10 个插件仓库版本领先 npm 发布版本，安装侧拿到旧代码。</li><li>官方 breaking 发布密集：本周 5 个发布中 3 个含 breaking 变更，插件作者需立即适配。</li></ol><h2>生态健康度评估</h2><p>总体判断：规模快速扩张，但质量分布重心偏低、活跃度偏弱，生态仍处早期高波动阶段。</p><p>规模：authoritative 10,189，全部来自 30 日活跃口径（100%），但 7 日活跃仅 26.6%。按周分布看，2026-08-10/08-17/08-24/08-31 新增量分别为 3,897、3,983、1,471、698，近两周明显回落；月度分布中 2026-08 达 9,569，2026-09 截至快照仅 541（部分月份）。weeklyDiff 基线为 2026-09-05，累计 added 8,250、removed 0，因基线距今仅 2 天，该数值不可解读为周环比，只能视为相对基线的累计变化。</p><p>质量分布：S 248（2.4%）、A 804（7.9%）、B 5,799（56.9%）、C 3,303（32.4%）、D 35（0.3%）；均分 79.3，中位 stars 1。B/C 合计占 89.3%，长尾明显，高质量头部稀缺。</p><p>活跃度：7 日活跃 26.6%，说明大量插件最近 7 天无更新或使用；topByStars 中高星仓库 unpublished 比例高，用户可能 star 但无法直接安装。</p><h2>质量与风险</h2><p>分级结构：S/A 合计仅 10.3%，B/C 占 89.3%，D 级 35 个。quality drops 常见 manifest.no-client-export（Web 客户端入口缺失，warn 级）、eng.no-tests、eng.no-ci、docs.no-docs-dir 等，反映工程化成熟度普遍不足。</p><p>文档与发布纪律：readme 覆盖率 99.7%（10,162/10,189），但中文文档覆盖率仅 48%（zhPct 48），与生态双语惯例存在差距。已发布插件占比 41.9%（4,273/10,189），stale 1,214；topByStars 中 unpublished 高星仓库包括 dsh-routing-suite（7080）、dsh-web（6887）、modlens（3868）等，存在分发断层。</p><p>npm 滞后：npmStaleTop 显示 Aegis 仓库版本 2.9.6 vs npm 0.1.0、sandbase-harness 0.3.8 vs 0.0.1、graph-memory 1.6.0-beta.13 vs 1.5.8 等，部分可能涉及抢注/错配。本周共 10 个插件存在此问题。weeklyDiff 记录 10 个降级，如 superdesigndev/superdesign-skill 80→69、YuJunZhiXue/dsh-purge 90→78 等，反映质量波动。</p><h2>异常与应对</h2><p>逐条处理 signals：</p><ol><li>dominant-owner（low）：最大账号 uckkk 独占 1,285 个插件（13%）、均分 75。  </li></ol><p>   可能原因：假设为模板化批量生成或单一账号聚合导入。      影响面：拉高生态规模数字、稀释质量分布、干扰增长解读。      应对建议：DSH 官方应对该账号进行审计与标识，在统计中单独剔除或标注；生态用户解读规模时应使用去重后的质量指标。</p><ol><li>npm-stale（low）：10 个插件仓库版本领先 npm 发布版本。  </li></ol><p>   可能原因：假设为发布流程未自动化、CI 未触发 npm publish，或存在抢注/错配。      影响面：用户安装到旧版本，可能缺失修复与新功能，安全风险累积。      应对建议：插件作者应配置 tag 触发自动发布，并核对 npm 账号所有权；官方可提供标准 publish workflow 模板。</p><ol><li>breaking-release（high）：dsh 官方本周发布 5 个版本，其中 3 个含 breaking 变更（v0.1.3-alpha.1、v0.1.2-rc.1、v0.1.2-alpha.3）。  </li></ol><p>   可能原因：假设为主版本快速迭代期 API 结构调整。      影响面：现有插件可能不兼容，用户升级后出现功能失效。      应对建议：插件作者立即对照 changelog 回归测试，必要时发兼容更新；官方应提供迁移指南与弃用窗口；用户建议固定 dsh 版本，待适配完成后再升级。</p><h2>下一阶段重点与建议</h2><p>插件作者：  </p><ul><li>补齐 exports[&quot;./client&quot;] 以支持 Web 客户端；若暂无 Web 计划应在 manifest 中显式声明。  </li><li>增加中文文档（zh/ 或 README 双语）；提升 discoverability 与合规。  </li><li>建立 tag 触发的 npm 自动发布，消除 repo/npm 版本漂移；引入基础 CI 与测试。  </li><li>关注官方 breaking 发布，参与 alpha/rc 测试反馈，提前适配。</li></ul><p>生态用户：  </p><ul><li>优先选择已发布（published）且 S/A 级插件；安装前核对 npm 版本与仓库版本是否一致。  </li><li>对高星但 unpublished 仓库保持谨慎，确认可安装性与维护状态。  </li><li>遇到 breaking 升级时查看插件是否声明兼容 dsh 版本，必要时回退到稳定版。</li></ul><p>DSH 官方：  </p><ul><li>审计 uckkk 等批量账号，建立规模化账号标识机制，避免规模指标失真。  </li><li>提供 npm 发布与 CI 模板，降低发布门槛；对抢注/错配问题建立申诉与检测机制。  </li><li>控制 breaking 发布节奏，至少提供迁移指南与弃用周期；加强 plugin 兼容性验证。  </li><li>改进发现机制：将 suggested 中高评分但无下载的插件纳入推荐池（如 TsFreddie/dsh-compaction-instant、Simon314620/dsh-turn-index 等）。</li></ul><h2>官方动态解读</h2><p>dsh 仓库 stars 213,472，最近推送 2026-09-04；最新 release dsh-v0.1.3-alpha.1 标记为 breaking。结合 signals 中的 5 个发布、3 个 breaking，生态正处于快速迭代期，API 稳定性风险上升。平台侧 DeepSeek-V3（104,436 stars）、DeepSeek-R1（92,019 stars）、awesome-deepseek-integration（39,037 stars）等持续领先，为插件生态提供流量与场景。官方需平衡迭代速度与生态兼容性，否则高 breaking 频率会抑制插件作者投入。建议官方建立插件兼容性测试套件与版本迁移指引，并定期发布 breakage 报告。</p></div><div data-lang-block="en"><h1>DSH Ecosystem Insights · 2026-W37（2026/09/07～2026/09/13）</h1><blockquote>由 DSH Insights 管线 + DeepSeek（deepseek-v4-pro）生成 · 数据快照 2026-09-07 · 启发式评估，非安全审计<br>Generated by the DSH Insights pipeline + DeepSeek (deepseek-v4-pro) · snapshot 2026-09-07 · heuristic evaluation, not a security audit</blockquote><h2>Key Conclusions</h2><ol><li>The ecosystem has crossed 10k plugins but quality and activity are uneven: 10,189 authoritative, 7-day active 2,707 (26.6%), median stars 1, average score 79.3.</li><li>Growth must be adjusted for a dominant account: uckkk holds 1,285 plugins (13%) with avg score 75, inflating scale metrics.</li><li>Publishing discipline is weak: only 4,273 (41.9%) published; top-starred repos like yjh051108/dsh-routing-suite (7,080 stars) and zhu1090093659/dsh-web (6,887 stars) remain unpublished.</li><li>npm version lag exists: 10 plugins have repo version ahead of npm, meaning users get old builds.</li><li>Official breaking releases are dense: 3 of 5 releases this week contain breaking changes; plugin authors must adapt.</li></ol><h2>Ecosystem Health Assessment</h2><p>Overall: rapid expansion but quality skews low and activity is relatively weak; early-stage volatility.</p><p>Scale: authoritative 10,189, 30-day active 100%, but 7-day active only 26.6%. Weekly creation counts: 2026-08-10:3,897; 08-17:3,983; 08-24:1,471; 08-31:698; recent two weeks declining. Monthly: August 9,569; September (partial) 541. weeklyDiff baseDate 2026-09-05 added 8,250, removed 0; due to 2-day baseline, not a standard weekly delta.</p><p>Quality distribution: S 248 (2.4%), A 804 (7.9%), B 5,799 (56.9%), C 3,303 (32.4%), D 35 (0.3%); avg 79.3, median stars 1; B/C combined 89.3%.</p><p>Activity: 7-day active 26.6%; many high-star repos unpublished.</p><h2>Quality &amp; Risks</h2><p>Grade structure: S/A combined 10.3%, B/C 89.3%, D 35. Drops commonly include manifest.no-client-export, eng.no-tests, eng.no-ci, docs.no-docs-dir.</p><p>Docs &amp; publishing: readme coverage 99.7%, but Chinese doc coverage 48%; published 41.9%, stale 1,214; top unpublished high-star repos indicate distribution gap.</p><p>npm lag: examples: Aegis repo 2.9.6 vs npm 0.1.0; sandbase-harness 0.3.8 vs 0.0.1; graph-memory 1.6.0-beta.13 vs 1.5.8; total 10 plugins.</p><h2>Anomalies &amp; Response</h2><p>Signal 1 dominant-owner (low): uckkk 1,285 plugins (13%), avg 75. Hypothesis: template batch generation; impact: inflated scale, diluted quality; response: audit and annotate; exclude from headline metrics.</p><p>Signal 2 npm-stale (low): 10 repo versions ahead of npm. Hypothesis: no automated publish, possible squatting; impact: users get old code; response: tag-triggered publish, ownership check.</p><p>Signal 3 breaking-release (high): dsh released 5 versions, 3 breaking (v0.1.3-alpha.1, v0.1.2-rc.1, v0.1.2-alpha.3). Hypothesis: rapid API iteration; impact: compatibility breaks; response: authors test against changelog; official provide migration guide; users pin versions.</p><h2>Next Phase Priorities &amp; Recommendations</h2><p>For plugin authors: add client export, Chinese docs, automated publish/CI, adapt to breaking releases.</p><p>For users: prefer published S/A plugins, check npm version drift, pin dsh version.</p><p>For official: audit bulk accounts, provide templates, manage breaking cadence, surface suggested plugins.</p><h2>Official Dynamics Interpretation</h2><p>dsh stars 213,472, latest release v0.1.3-alpha.1 breaking. Platform repos strong. Fast iteration vs compatibility. Recommend compatibility test suite and breakage reports.</p></div></div>
+</div>
+<footer>
+  <span><span data-en="Built by">由</span> <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">DSH Insights</a> <span data-en="pipeline, generated automatically">管线自动生成</span></span>
+  <span><span data-en="Zero-dependency · heuristic evaluation, not a security audit · data CC BY 4.0 / code MIT">零依赖 · 启发式评估，非安全审计 · 数据 CC BY 4.0 / 代码 MIT</span></span>
+</footer>
+</main>
+<script>(function(){var b=document.getElementById('themeBtn');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement;var d=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=d;try{localStorage.setItem('theme',d)}catch(e){}})})()</script>
+<script>(function(){
+var D=document.documentElement;
+function cur(){return D.dataset.lang==='en'?'en':'zh'}
+window.__lang=cur;
+window.__t=function(zh,en){return cur()==='en'?en:zh};
+window.__setLang=function(l){try{localStorage.setItem('lang',l)}catch(e){}D.dataset.lang=l;D.lang=l==='en'?'en':'zh-CN';apply();try{document.dispatchEvent(new CustomEvent('langchange',{detail:l}))}catch(e){}};
+function apply(){
+  var l=cur(),en=l==='en';
+  document.querySelectorAll('[data-en]').forEach(function(el){if(el.dataset.zh===undefined)el.dataset.zh=el.textContent;el.textContent=en?el.dataset.en:el.dataset.zh});
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){if(el.dataset.zhPh===undefined)el.dataset.zhPh=el.getAttribute('placeholder')||'';el.setAttribute('placeholder',en?el.dataset.enPh:el.dataset.zhPh)});
+  document.querySelectorAll('[data-en-title]').forEach(function(el){if(el.dataset.zhTitle===undefined)el.dataset.zhTitle=el.getAttribute('title')||'';el.setAttribute('title',en?el.dataset.enTitle:el.dataset.zhTitle)});
+  document.querySelectorAll('[data-en-aria]').forEach(function(el){if(el.dataset.zhAria===undefined)el.dataset.zhAria=el.getAttribute('aria-label')||'';el.setAttribute('aria-label',en?el.dataset.enAria:el.dataset.zhAria)});
+  var mt=document.querySelector('meta[name=en-title]');
+  if(mt){if(!D.dataset.zhTitle)D.dataset.zhTitle=document.title;document.title=en?mt.getAttribute('content'):D.dataset.zhTitle}
+  var b=document.getElementById('langBtn');if(b)b.textContent=en?'中':'EN';
+}
+apply();
+var b=document.getElementById('langBtn');
+if(b)b.addEventListener('click',function(){window.__setLang(cur()==='en'?'zh':'en')});
+})()</script>
+</body>
+</html>

@@ -9,6 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="../logo.svg">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="7fc5eb24-1687-4827-9775-5326d957b46a"></script>
+<meta name="en-title" content="Health Badge · DSH Insights">
 
 <meta property="og:title" content="健康徽章">
 <meta property="og:description" content="把 DSH Insights 客观健康分带进你的 README：徽章的价值、解读与接入方法。">
@@ -18,6 +19,7 @@
 <meta name="twitter:title" content="健康徽章">
 <meta name="twitter:description" content="把 DSH Insights 客观健康分带进你的 README：徽章的价值、解读与接入方法。">
 <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})()</script>
+<script>(function(){try{var q=new URLSearchParams(location.search).get('lang');if(q==='zh'||q==='en')localStorage.setItem('lang',q);var l=localStorage.getItem('lang');if(l!=='zh'&&l!=='en')l=((navigator.language||'zh')+'').toLowerCase().indexOf('zh')===0?'zh':'en';var d=document.documentElement;d.dataset.lang=l;d.lang=l==='en'?'en':'zh-CN'}catch(e){}})()</script>
 <style>
 :root{
   --bg:#fafafa;--card:#ffffff;--ink:#18181b;--mut:#71717a;--faint:#a1a1aa;--line:#e4e4e7;--track:#f4f4f5;
@@ -94,68 +96,94 @@ h1.pagetitle{margin:0 0 8px;font-size:clamp(22px,3.4vw,30px);font-weight:700;let
 .wkbtn:hover{border-color:var(--faint);color:var(--ink);text-decoration:none}
 .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:11.5px;color:var(--mut);margin:0 6px 6px 0}
 footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+:root[data-lang=en] [data-lang-block=zh]{display:none}
+:root:not([data-lang=en]) [data-lang-block=en]{display:none}
+.lang{min-width:30px;justify-content:center;font:600 11px var(--mono);letter-spacing:.04em}
 </style>
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="../"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
-  <nav class="nav"><a href="../">首页</a><a href="../dashboard/">插件</a><a href="../scenarios/">场景</a><a href="../weekly/">周报</a><a href="../dynamics/">动态</a><a href="../authors/">作者</a><a href="../badge/" class="here">徽章</a><a href="../data/">开放数据</a><a href="../about/">关于</a><button class="theme" id="themeBtn" aria-label="切换深浅色" title="深 / 浅色切换"><span class="t-moon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span class="t-sun"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button><a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <a class="brand" href="../"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small><span data-en="The DeepSeek Harness Observatory">DeepSeek Harness 全景观察站</span></small></a>
+  <nav class="nav"><a href="../"><span data-en="Home">首页</span></a><a href="../dashboard/"><span data-en="Plugins">插件</span></a><a href="../scenarios/"><span data-en="Scenarios">场景</span></a><a href="../weekly/"><span data-en="Weekly">周报</span></a><a href="../insights/"><span data-en="Insights">洞察</span></a><a href="../dynamics/"><span data-en="Dynamics">动态</span></a><a href="../authors/"><span data-en="Authors">作者</span></a><a href="../badge/" class="here"><span data-en="Badge">徽章</span></a><a href="../data/"><span data-en="Open Data">开放数据</span></a><a href="../about/"><span data-en="About">关于</span></a><button class="theme lang" id="langBtn" title="切换到 English" data-en-title="Switch to 中文" aria-label="切换到 English" data-en-aria="Switch to 中文">EN</button><button class="theme" id="themeBtn" title="切换深浅色" data-en-title="Toggle dark / light" aria-label="切换深浅色" data-en-aria="Toggle dark / light"><span class="t-moon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span class="t-sun"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button><a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <main class="wrap">
 <div class="content">
-<p class="crumb">Badge</p><h1 class="pagetitle">健康徽章 · 把分数带进 README</h1>
-<p class="lede">一枚 SVG 徽章 = 你插件的客观健康分，随每日快照自动刷新。对作者是信任信号与修复指引，对生态是分数走出本站的最小分发单元。</p>
+<p class="crumb">Badge</p><h1 class="pagetitle"><span data-en="Health Badge · Bring the Score into Your README">健康徽章 · 把分数带进 README</span></h1>
+<p class="lede"><span data-en="One SVG badge = your plugin's objective health score, auto-refreshed with the daily snapshot. For authors it is a trust signal and a repair guide; for the ecosystem it is the smallest distribution unit that carries scores beyond this site.">一枚 SVG 徽章 = 你插件的客观健康分，随每日快照自动刷新。对作者是信任信号与修复指引，对生态是分数走出本站的最小分发单元。</span></p>
 
-<h2 style="font-size:16px;margin:28px 0 8px">长什么样（真实样例，实时渲染）</h2>
+<h2 style="font-size:16px;margin:28px 0 8px"><span data-en="What It Looks Like (live examples, rendered in real time)">长什么样（真实样例，实时渲染）</span></h2>
 <div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)"><img src="../badge/omdsh-dev/DSH-better-sidebar.svg" alt="omdsh-dev/DSH-better-sidebar badge" style="height:22px"><span style="font-size:12px;color:var(--mut)"><a href="https://github.com/omdsh-dev/DSH-better-sidebar" target="_blank">omdsh-dev/DSH-better-sidebar</a> · S · 100/100</span></div><div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)"><img src="../badge/zhu1090093659/dsh-web.svg" alt="zhu1090093659/dsh-web badge" style="height:22px"><span style="font-size:12px;color:var(--mut)"><a href="https://github.com/zhu1090093659/dsh-web" target="_blank">zhu1090093659/dsh-web</a> · B · 83/100</span></div><div style="display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)"><img src="../badge/ConsoleSun/Gemini-Eyes.svg" alt="ConsoleSun/Gemini-Eyes badge" style="height:22px"><span style="font-size:12px;color:var(--mut)"><a href="https://github.com/ConsoleSun/Gemini-Eyes" target="_blank">ConsoleSun/Gemini-Eyes</a> · C · 64/100</span></div>
 
-<h2 style="font-size:16px;margin:28px 0 8px">如何解读</h2>
-<p class="lede">徽章显示「等级 · 分数」：100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。评的是六维框架中的计分四维（工程质量 / 文档完整性 / 可发现性 / 维护活跃），每条扣分都带证据、可在插件页上逐项核查——<b>分数的意义不在于高低，在于可复核</b>。框架全文见 <a href="../about/">关于 · 指标体系</a>。</p>
+<h2 style="font-size:16px;margin:28px 0 8px"><span data-en="How to Read It">如何解读</span></h2>
+<div class="lede"><div data-lang-block="zh">徽章显示「等级 · 分数」：100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>。评的是六维框架中的计分四维（工程质量 / 文档完整性 / 可发现性 / 维护活跃），每条扣分都带证据、可在插件页上逐项核查——<b>分数的意义不在于高低，在于可复核</b>。框架全文见 <a href="../about/">关于 · 指标体系</a>。</div><div data-lang-block="en">The badge shows "grade · score": start at 100 and deduct in four tiers (fail −20 / major −10 / moderate −5 / minor −2). Thresholds: <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>. It scores the four scored dimensions of the six-dimension framework (engineering quality / docs completeness / discoverability / maintenance activity); every deduction carries evidence and can be verified item by item on the plugin page — <b>the value of a score is not how high it is, but that it can be verified</b>. Full framework: <a href="../about/">About · Metrics</a>.</div></div>
 
-<h2 style="font-size:16px;margin:28px 0 8px">为什么值得挂</h2>
-<p class="lede">对作者：潜在用户装前 10 秒的信任凭证；分数提升是看得见的修复回报；徽章链回插件页，带来反链与同类定位。对生态：目录与市场装不下所有插件，但每个 README 都可以挂分数——徽章是让「信得过」在生态里自传播的钩子。我们不做排名、不做安全审计，只提供客观信号。</p>
+<h2 style="font-size:16px;margin:28px 0 8px"><span data-en="Why It Is Worth Adding">为什么值得挂</span></h2>
+<p class="lede"><span data-en="For authors: a 10-second trust signal before a potential user installs; every score improvement is a visible payoff for a fix; the badge links back to the plugin page, bringing backlinks and peer positioning. For the ecosystem: directories and marketplaces cannot hold every plugin, but every README can carry a score — the badge is the hook that lets &quot;trustworthy&quot; propagate on its own. We do not rank, we do not audit security; we provide objective signals.">对作者：潜在用户装前 10 秒的信任凭证；分数提升是看得见的修复回报；徽章链回插件页，带来反链与同类定位。对生态：目录与市场装不下所有插件，但每个 README 都可以挂分数——徽章是让「信得过」在生态里自传播的钩子。我们不做排名、不做安全审计，只提供客观信号。</span></p>
 
-<h2 style="font-size:16px;margin:28px 0 8px">接入（输入你的仓库，自动生成）</h2>
+<h2 style="font-size:16px;margin:28px 0 8px"><span data-en="Setup (enter your repo; snippets are generated automatically)">接入（输入你的仓库，自动生成）</span></h2>
 <div class="card" style="max-width:720px">
-  <b>你的插件仓库</b>
-  <p><input id="brepo" placeholder="owner/repo，如 ice5kysl/dsh-workspace-kit" style="width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font:13px var(--mono);background:var(--bg);color:var(--ink)"></p>
-  <div id="bprev" style="margin:10px 0;min-height:26px"><span style="color:var(--faint);font-size:12.5px">输入后预览徽章</span></div>
-  <b style="font-size:12.5px">写法一 · 徽章 + 链接插件页（推荐）</b>
+  <b><span data-en="Your plugin repo">你的插件仓库</span></b>
+  <p><input id="brepo" placeholder="owner/repo，如 ice5kysl/dsh-workspace-kit" data-en-ph="owner/repo, e.g. ice5kysl/dsh-workspace-kit" style="width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font:13px var(--mono);background:var(--bg);color:var(--ink)"></p>
+  <div id="bprev" style="margin:10px 0;min-height:26px"><span style="color:var(--faint);font-size:12.5px"><span data-en="Enter a repo to preview the badge">输入后预览徽章</span></span></div>
+  <b style="font-size:12.5px"><span data-en="Option 1 · badge linked to the plugin page (recommended)">写法一 · 徽章 + 链接插件页（推荐）</span></b>
   <pre style="margin:8px 0"><code id="bcode1">[![DSH Insights health](https://dsh-insights.com/badge/owner/repo.svg)](https://dsh-insights.com/p/owner/repo/)</code></pre>
-  <b style="font-size:12.5px">写法二 · 纯徽章</b>
+  <b style="font-size:12.5px"><span data-en="Option 2 · badge only">写法二 · 纯徽章</span></b>
   <pre style="margin:8px 0"><code id="bcode2">![DSH Insights health](https://dsh-insights.com/badge/owner/repo.svg)</code></pre>
-  <p style="margin-top:8px"><button id="bcopy" style="padding:6px 14px;border:1px solid var(--line);border-radius:8px;background:var(--track);color:var(--ink);font-size:12.5px;cursor:pointer">复制写法一</button> <span id="bcopied" style="font-size:12px;color:var(--ok)"></span></p>
+  <p style="margin-top:8px"><button id="bcopy" style="padding:6px 14px;border:1px solid var(--line);border-radius:8px;background:var(--track);color:var(--ink);font-size:12.5px;cursor:pointer"><span data-en="Copy option 1">复制写法一</span></button> <span id="bcopied" style="font-size:12px;color:var(--ok)"></span></p>
 </div>
 
-<h2 style="font-size:16px;margin:28px 0 8px">说明与边界</h2>
-<p class="lede">徽章内容随每日快照自动更新（GitHub 图片缓存最长一天）；分数掉档不需要你改任何代码。启发式评估 ≠ 安全审计；徽章 404 = 仓库不在当前权威集（可能是门禁未过或校验未覆盖，可到 <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">仓库</a> 提 issue 查询/申诉）。想先本地自查，可用我们的体检工具：<code>npx --yes github:ice5kysl/dsh-plugin-health &lt;owner/repo&gt;</code>。</p>
+<h2 style="font-size:16px;margin:28px 0 8px"><span data-en="Notes &amp; Boundaries">说明与边界</span></h2>
+<div class="lede"><div data-lang-block="zh">徽章内容随每日快照自动更新（GitHub 图片缓存最长一天）；分数掉档不需要你改任何代码。启发式评估 ≠ 安全审计；徽章 404 = 仓库不在当前权威集（可能是门禁未过或校验未覆盖，可到 <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">仓库</a> 提 issue 查询/申诉）。想先本地自查，可用我们的体检工具：<code>npx --yes github:ice5kysl/dsh-plugin-health &lt;owner/repo&gt;</code>。</div><div data-lang-block="en">Badge content updates automatically with the daily snapshot (GitHub image caching may lag up to a day); a grade drop requires no code change on your side. Heuristic evaluation ≠ security audit; a badge 404 means the repo is not in the current authoritative set (the gate may not have passed, or validation has not covered it — open an issue on the <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">repo</a> to ask or appeal). To self-check locally first, use our health tool: <code>npx --yes github:ice5kysl/dsh-plugin-health &lt;owner/repo&gt;</code>.</div></div>
 <script>
 (function(){
+  var __t=window.__t||function(zh,en){return document.documentElement.dataset.lang==='en'?en:zh};
   var inp=document.getElementById('brepo'),prev=document.getElementById('bprev'),
       c1=document.getElementById('bcode1'),c2=document.getElementById('bcode2'),
       btn=document.getElementById('bcopy'),ok=document.getElementById('bcopied');
   function norm(v){ v=(v||'').trim().replace(/^https?:\/\/github\.com\//,'').replace(/\/+$/,''); return /^[\w.-]+\/[\w.-]+$/.test(v)?v:null }
   function upd(){ var r=norm(inp.value);
-    if(!r){ prev.innerHTML='<span style="color:var(--faint);font-size:12.5px">输入后预览徽章</span>'; return }
+    if(!r){ prev.innerHTML='<span style="color:var(--faint);font-size:12.5px">'+__t('输入后预览徽章','Enter a repo to preview the badge')+'</span>'; return }
     prev.textContent='';
     var img=document.createElement('img');
     img.src='../badge/'+r+'.svg'; img.style.height='22px'; img.alt=r+' badge';
-    img.onerror=function(){ prev.innerHTML='<span style="font-size:12px;color:var(--warn)">该仓库暂未收录权威集（徽章 404）——可能门禁未过或校验未覆盖</span>' };
+    img.onerror=function(){ prev.innerHTML='<span style="font-size:12px;color:var(--warn)">'+__t('该仓库暂未收录权威集（徽章 404）——可能门禁未过或校验未覆盖','This repo is not in the authoritative set yet (badge 404) — the gate may not have passed, or validation has not covered it')+'</span>' };
     prev.appendChild(img);
     c1.textContent='[![DSH Insights health](https://dsh-insights.com/badge/'+r+'.svg)](https://dsh-insights.com/p/'+r+'/)'
     c2.textContent='![DSH Insights health](https://dsh-insights.com/badge/'+r+'.svg)' }
   inp.addEventListener('input',upd);
+  document.addEventListener('langchange',function(){ if(!norm(inp.value))upd() });
   btn.addEventListener('click',function(){
-    (navigator.clipboard?navigator.clipboard.writeText(c1.textContent):Promise.reject()).then(function(){ ok.textContent='已复制 ✓' }).catch(function(){ ok.textContent='请手动复制' });
+    (navigator.clipboard?navigator.clipboard.writeText(c1.textContent):Promise.reject()).then(function(){ ok.textContent=__t('已复制 ✓','Copied ✓') }).catch(function(){ ok.textContent=__t('请手动复制','Copy manually') });
     setTimeout(function(){ ok.textContent='' },2000) });
 })();
 </script>
 </div>
 <footer>
-  <span>由 <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">DSH Insights</a> 管线自动生成</span>
-  <span>零依赖 · 启发式评估，非安全审计 · 数据 CC BY 4.0 / 代码 MIT</span>
+  <span><span data-en="Built by">由</span> <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">DSH Insights</a> <span data-en="pipeline, generated automatically">管线自动生成</span></span>
+  <span><span data-en="Zero-dependency · heuristic evaluation, not a security audit · data CC BY 4.0 / code MIT">零依赖 · 启发式评估，非安全审计 · 数据 CC BY 4.0 / 代码 MIT</span></span>
 </footer>
 </main>
 <script>(function(){var b=document.getElementById('themeBtn');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement;var d=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=d;try{localStorage.setItem('theme',d)}catch(e){}})})()</script>
+<script>(function(){
+var D=document.documentElement;
+function cur(){return D.dataset.lang==='en'?'en':'zh'}
+window.__lang=cur;
+window.__t=function(zh,en){return cur()==='en'?en:zh};
+window.__setLang=function(l){try{localStorage.setItem('lang',l)}catch(e){}D.dataset.lang=l;D.lang=l==='en'?'en':'zh-CN';apply();try{document.dispatchEvent(new CustomEvent('langchange',{detail:l}))}catch(e){}};
+function apply(){
+  var l=cur(),en=l==='en';
+  document.querySelectorAll('[data-en]').forEach(function(el){if(el.dataset.zh===undefined)el.dataset.zh=el.textContent;el.textContent=en?el.dataset.en:el.dataset.zh});
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){if(el.dataset.zhPh===undefined)el.dataset.zhPh=el.getAttribute('placeholder')||'';el.setAttribute('placeholder',en?el.dataset.enPh:el.dataset.zhPh)});
+  document.querySelectorAll('[data-en-title]').forEach(function(el){if(el.dataset.zhTitle===undefined)el.dataset.zhTitle=el.getAttribute('title')||'';el.setAttribute('title',en?el.dataset.enTitle:el.dataset.zhTitle)});
+  document.querySelectorAll('[data-en-aria]').forEach(function(el){if(el.dataset.zhAria===undefined)el.dataset.zhAria=el.getAttribute('aria-label')||'';el.setAttribute('aria-label',en?el.dataset.enAria:el.dataset.zhAria)});
+  var mt=document.querySelector('meta[name=en-title]');
+  if(mt){if(!D.dataset.zhTitle)D.dataset.zhTitle=document.title;document.title=en?mt.getAttribute('content'):D.dataset.zhTitle}
+  var b=document.getElementById('langBtn');if(b)b.textContent=en?'中':'EN';
+}
+apply();
+var b=document.getElementById('langBtn');
+if(b)b.addEventListener('click',function(){window.__setLang(cur()==='en'?'zh':'en')});
+})()</script>
 </body>
 </html>

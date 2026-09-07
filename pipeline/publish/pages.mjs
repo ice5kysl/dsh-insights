@@ -193,7 +193,7 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
       base: '../', here: 'insights/',
       body: `<p class="crumb">Insights</p><h1 class="pagetitle">${t('生态洞察', 'Ecosystem Insights')}</h1>
 <p class="lede">${t('每周五随管线生成：规则引擎先从数据检出异常信号，再由 DeepSeek 撰写分析结论、异常应对与分角色建议。数字全部来自落盘数据，LLM 只负责解释与判断。中英双语，点右上角切换。', 'Generated every Friday with the pipeline: a rules engine detects anomaly signals from the data first, then DeepSeek writes the analysis, mitigations and per-role recommendations. All numbers come from on-disk data — the LLM only interprets. Bilingual zh/en via the top-right switcher.')}</p>
-<div class="cards">${insights.map((r) => `<a class="card" href="./${r.slug}.html" style="text-decoration:none;color:inherit"><b>${escHtml(r.title)}<span style="color:var(--faint);font-weight:400;font-size:12px"> · ${escHtml(r.model)}</span></b><p>${t('信号', 'Signals')} ${r.signals} · ${escHtml(r.range)}</p></a>`).join('')}</div>
+<div class="cards">${insights.map((r) => `<a class="card" href="./${r.slug}.html" style="text-decoration:none;color:inherit"><b>${t(r.title, r.titleEn)}<span style="color:var(--faint);font-weight:400;font-size:12px"> · ${escHtml(r.model)}</span></b><p>${t('信号', 'Signals')} ${r.signals} · ${escHtml(r.range)}</p></a>`).join('')}</div>
 <h2 style="margin:34px 0 10px;font-size:18px;letter-spacing:-.01em">${t('最新一期', 'Latest issue')}</h2>
 <div class="article">${latest.bodyHtml}</div>`,
     })))

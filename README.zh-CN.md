@@ -28,7 +28,7 @@
 
 | file | 说明 |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | **权威集 9,141** + 分桶 3,642（0 重复 · 硬门禁 · 2026-09-06 快照，校验滚动扩大中） |
+| `data/plugins.jsonl` · `invalid.jsonl` | **权威集 10,189** + 分桶 3,916（0 重复 · 硬门禁 · 2026-09-06 快照，校验滚动扩大中） |
 | `data/insights.json` + `insights.schema.json` | agent 契约（稳定 URL，schema 只增不改） |
 | `data/analysis.json` · `enrich.json` · `plugins.csv` | 聚合 / 每插件评分+渠道 / 表格 |
 | `data/dynamics.json` · `metrics.jsonl` | 官方动态快照 · 产品自测量指标 |
@@ -73,7 +73,7 @@ CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周五在 job 内
 
 ## Status（2026-09-06）
 
-- [x] 全量爬取+校验：候选 14,331 → **权威集 9,141**（0 重复硬门禁；断点续跑滚动扩大）
+- [x] 全量爬取+校验：候选 14,331 → **权威集 10,189**（0 重复硬门禁；断点续跑滚动扩大）
 - [x] 站点上线（自定义域/深浅色/搜索/SEO 地基/统计）；/p/ 详情页覆盖全量；周报双栏阅读器（MD/PDF/PNG 导出）
 - [x] 健康分 v4（新增 S 级）+ 校准回归进 snapshot 门禁；审计 48 项闭环（`docs/AUDIT-2026-09-06.md`）
 - [x] 元数据刷新回路（Tier 0）挂入周五；信件日期冻结（diff 驱动页面）

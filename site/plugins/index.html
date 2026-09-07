@@ -6,9 +6,31 @@
 <meta http-equiv="refresh" content="0;url=/dashboard/#browse">
 <link rel="canonical" href="/dashboard/">
 <title>插件库 · DSH Insights</title>
+<meta name="en-title" content="Plugin Directory · DSH Insights">
 <meta name="robots" content="noindex">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('lang');if(q==='zh'||q==='en')localStorage.setItem('lang',q);var l=localStorage.getItem('lang');if(l!=='zh'&&l!=='en')l=((navigator.language||'zh')+'').toLowerCase().indexOf('zh')===0?'zh':'en';var d=document.documentElement;d.dataset.lang=l;d.lang=l==='en'?'en':'zh-CN'}catch(e){}})()</script>
 </head>
 <body style="margin:0;background:#fafafa;color:#18181b;font:14px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh">
-<p>已并入「插件」页——正在跳转 <a href="/dashboard/#browse">/dashboard/#browse</a> ……</p>
+<p><span data-en="Merged into the Plugins page — redirecting">已并入「插件」页——正在跳转</span> <a href="/dashboard/#browse">/dashboard/#browse</a> ……</p>
+<script>(function(){
+var D=document.documentElement;
+function cur(){return D.dataset.lang==='en'?'en':'zh'}
+window.__lang=cur;
+window.__t=function(zh,en){return cur()==='en'?en:zh};
+window.__setLang=function(l){try{localStorage.setItem('lang',l)}catch(e){}D.dataset.lang=l;D.lang=l==='en'?'en':'zh-CN';apply();try{document.dispatchEvent(new CustomEvent('langchange',{detail:l}))}catch(e){}};
+function apply(){
+  var l=cur(),en=l==='en';
+  document.querySelectorAll('[data-en]').forEach(function(el){if(el.dataset.zh===undefined)el.dataset.zh=el.textContent;el.textContent=en?el.dataset.en:el.dataset.zh});
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){if(el.dataset.zhPh===undefined)el.dataset.zhPh=el.getAttribute('placeholder')||'';el.setAttribute('placeholder',en?el.dataset.enPh:el.dataset.zhPh)});
+  document.querySelectorAll('[data-en-title]').forEach(function(el){if(el.dataset.zhTitle===undefined)el.dataset.zhTitle=el.getAttribute('title')||'';el.setAttribute('title',en?el.dataset.enTitle:el.dataset.zhTitle)});
+  document.querySelectorAll('[data-en-aria]').forEach(function(el){if(el.dataset.zhAria===undefined)el.dataset.zhAria=el.getAttribute('aria-label')||'';el.setAttribute('aria-label',en?el.dataset.enAria:el.dataset.zhAria)});
+  var mt=document.querySelector('meta[name=en-title]');
+  if(mt){if(!D.dataset.zhTitle)D.dataset.zhTitle=document.title;document.title=en?mt.getAttribute('content'):D.dataset.zhTitle}
+  var b=document.getElementById('langBtn');if(b)b.textContent=en?'中':'EN';
+}
+apply();
+var b=document.getElementById('langBtn');
+if(b)b.addEventListener('click',function(){window.__setLang(cur()==='en'?'zh':'en')});
+})()</script>
 </body>
 </html>
