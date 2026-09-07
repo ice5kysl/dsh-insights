@@ -919,6 +919,7 @@ ${badgeExHtml}
 <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
   ${navCard('dashboard/', 'plugin', t('插件', 'Plugins'), t('生态全景一站看：趋势 · 质量分布 · 榜单 + 全量插件库（搜索/筛选/排序，点进详情看扣分明细）', 'The ecosystem in one place: trends · quality distribution · leaderboards + the full directory (search/filter/sort; open a detail page for deductions)'), t(`${(t0.authoritative || 0).toLocaleString()} 个 · 均分 ${an0.quality?.avgScore ?? '—'} · S+A ${saN}`, `${(t0.authoritative || 0).toLocaleString()} plugins · avg ${an0.quality?.avgScore ?? '—'} · S+A ${saN}`))}
   ${navCard('scenarios/', 'tag', t('场景组合推荐', 'Scenario Picks'), t('从「我要做什么」出发选插件：质量首选 + 新入场', 'Pick plugins by "what I want to do": top picks + new arrivals'), t(`${scenarios.length} 个场景`, `${scenarios.length} scenarios`))}
+  ${navCard('kit/', 'radar', t('生态助手插件', 'The Kit'), t('把观察站装进 DSH：插件体检 · 装前查验 · 场景发现 · 作者自检', 'The observatory inside DSH: checkup · pre-install check · scenario picks · author self-check'), 'dsh-insights-kit')}
   ${navCard('weekly/', 'mail', t('生态周报', 'Weekly'), t('双栏阅读器 · 可导出 Markdown/PDF/图片 · RSS', 'Two-pane reader · export Markdown/PDF/PNG · RSS'), t(`${weekly.length} 期 · 每周五`, `${weekly.length} issues · every Friday`))}
   ${navCard('dynamics/', 'radar', t('官方动态', 'Dynamics'), t('dsh releases/dist-tags · DeepSeek 平台 · rc 兼容信号', 'dsh releases/dist-tags · DeepSeek platform · rc compatibility signal'), latestRel ? escHtml(latestRel.tag) : '—')}
   ${navCard('authors/', 'users', t('作者榜', 'Authors'), t('生态里的重要人物：榜单 + 协作关系图', 'Key people of the ecosystem: leaderboards + collaboration graph'), t(`${(an0.authorStats?.total || 0).toLocaleString()} 位`, `${(an0.authorStats?.total || 0).toLocaleString()} authors`))}
@@ -1055,6 +1056,38 @@ ${langBlock(`
     body: `<p class="crumb">Changelog</p><h1 class="pagetitle">${t('更新日志', 'Changelog')}</h1>
 <p class="lede">${t('产品版本与阶段性发布记录（随 git tag 发布）。每日数据快照的滚动更新不在此列——那是管线常态。', 'Product versions and milestone releases (tagged in git). Daily rolling data snapshots are not listed here — that is the pipeline norm.')}</p>
 ${relHtml || `<p class="lede">${t('暂无发布记录', 'No releases yet')}</p>`}`,
+  })))
+
+  // ---- /kit/ 生态助手插件（dsh-insights-kit）介绍与使用指南 -------------------
+  const kitCaps = [
+    ['我的插件体检', 'My Plugins Checkup', '列出你已安装的插件，逐个标注健康等级与分数；npm 有新版本时提醒升级；dsh 官方发布 breaking 版本时给出适配预警；低分插件给出同类更优替代。', 'Lists your installed plugins with health grades and scores, warns when npm has newer versions, alerts on official breaking releases, and points to better alternatives for low-grade plugins.'],
+    ['装前查验', 'Pre-install Check', '输入插件名（或粘贴 GitHub 链接）→ 健康卡：S–D 等级、百分制分数、四维子分、逐条扣分明细，一键跳到完整详情页。', 'Type a plugin name (or paste a GitHub link) → a health card: S–D grade, 0–100 score, four dimension sub-scores, and itemized deductions, with a link to the full detail page.'],
+    ['场景发现', 'Scenario Picks', '从「我想做什么」出发浏览 22 个场景的推荐插件——按健康分客观排序，不卖「最好」叙事。', 'Browse picks across 22 scenarios starting from "what I want to do" — ranked by objective health score, no "best" narrative for sale.'],
+    ['作者自检', 'Author Self-check', '选择本地插件目录，按 health-v5 规则书现场体检：manifest / 文档 / 工程成熟度 + 只读面安全扫描（写文件、子进程、未消毒渲染），每条扣分附修复指引，并预览你的健康徽章。', 'Point at a local plugin directory for a live check against the health-v5 rulebook: manifest / docs / engineering maturity plus a read-only-surface scan (file writes, subprocesses, unsanitized rendering). Every deduction comes with fix guidance, and you can preview your health badge.'],
+  ]
+  written.push(out('kit/index.html', page({
+    title: '生态助手插件', titleEn: 'The Kit', desc: 'dsh-insights-kit：装在 DSH 里的生态助手——插件体检、装前查验、场景发现、作者自检。',
+    base: '../', here: null,
+    body: `<p class="crumb">Kit</p><h1 class="pagetitle">dsh-insights-kit <span style="color:var(--faint);font-weight:400;font-size:16px">${t('生态助手插件', 'the ecosystem assistant')}</span></h1>
+<p class="lede">${t('把 DSH Insights 的数据装进 DeepSeek Harness：侧栏「✦ 生态」一个入口，服务两类人——帮用户做「装什么、留什么、升不升」的决策，帮作者在发布前打磨作品。瘦客户端，数据全部来自本站的开放数据集。', 'DSH Insights inside DeepSeek Harness: one sidebar entry ("✦ 生态") serving two audiences — helping users decide what to install, keep and upgrade, and helping authors polish their plugins before release. A thin client over this site\u2019s open datasets.')}</p>
+<div class="cards">${kitCaps.map(([zh, en, dzh, den]) => `<div class="card"><b>${t(zh, en)}</b><p>${t(dzh, den)}</p></div>`).join('')}</div>
+<h2 style="font-size:16px;margin:28px 0 8px">${t('安装', 'Install')}</h2>
+<div class="article">${langBlock(
+`<p><b>方式一 · npm（v0.1.0 审核中）</b>：<code>npm install dsh-insights-kit</code> 后在 DSH web profile 启用。</p><p><b>方式二 · 源码</b>：<code>git clone https://github.com/ice5kysl/dsh-insights-kit</code>，然后 <code>bash scripts/install-personal.sh</code>（构建并装入个人 DSH）。</p><p>装好后点左侧栏底部的 <b>✦ 生态</b> 按钮打开面板。</p>`,
+`<p><b>Option 1 · npm (v0.1.0 under review)</b>: <code>npm install dsh-insights-kit</code>, then enable it in the DSH web profile.</p><p><b>Option 2 · source</b>: <code>git clone https://github.com/ice5kysl/dsh-insights-kit</code>, then <code>bash scripts/install-personal.sh</code> (builds and installs into your personal DSH).</p><p>After install, click the <b>✦ 生态</b> button at the bottom of the sidebar to open the panel.</p>`
+)}</div>
+<h2 style="font-size:16px;margin:28px 0 8px">${t('隐私与数据', 'Privacy & Data')}</h2>
+<div class="article">${langBlock(
+`<p>插件本身零后端：生态数据只读自 <a href="../data/">dsh-insights.com 开放数据集</a>（CC BY 4.0，host 面缓存 6 小时）；「作者自检」的目录扫描<b>只读且不出本机</b>（宿主 loopback 信任门，与官方 /api 同姿态）。不收集任何使用数据。</p>`,
+`<p>The plugin has no backend of its own: ecosystem data is read-only from the <a href="../data/">dsh-insights.com open datasets</a> (CC BY 4.0, cached 6h by the host face); the author self-check scans directories <b>read-only and never leaves your machine</b> (the host loopback trust gate, same posture as the official /api). No usage data is collected.</p>`
+)}</div>
+<h2 style="font-size:16px;margin:28px 0 8px">${t('相关', 'Related')}</h2>
+<div class="cards">
+  <a class="card" href="https://github.com/ice5kysl/dsh-insights-kit" target="_blank" style="text-decoration:none;color:inherit"><b>GitHub ↗</b><p>${t('源码、issue、安装脚本', 'Source, issues, install scripts')}</p></a>
+  <a class="card" href="https://github.com/ice5kysl/dsh-plugin-health" target="_blank" style="text-decoration:none;color:inherit"><b>dsh-plugin-health CLI ↗</b><p>${t('同一规则书的命令行形态，面向 CI / 自动化 pre-publish 门禁', 'The same rulebook as a CLI, for CI / automated pre-publish gates')}</p></a>
+  <a class="card" href="../badge/" style="text-decoration:none;color:inherit"><b>${t('健康徽章', 'Health Badge')}</b><p>${t('自检通过后，把徽章挂进你的 README', 'After your self-check passes, put the badge in your README')}</p></a>
+</div>
+<p class="lede" style="margin-top:14px">${t('dogfooding 说明：本插件按 DSH 官方 bundle 规范开发，同样被 DSH Insights 管线收录与评分——你可以在', 'Dogfooding note: this plugin is built to the official DSH bundle spec and is itself indexed and scored by the DSH Insights pipeline — you can watch its own grade on')} <a href="https://github.com/ice5kysl/dsh-insights-kit" target="_blank">${t('它的仓库与（即将上线的）详情页', 'its repo and (soon) its own detail page')}</a>${t('上看到它自己的等级。', '.')}</p>`,
   })))
 
   // ---- feed.xml (weekly RSS) ----------------------------------------------
