@@ -552,7 +552,7 @@ ${I18N_CSS}
 
 <footer>
   <span>${t('由', 'Built by')} <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">dsh-insights</a> ${t('管线自动生成', 'pipeline, generated automatically')} · ${date}</span>
-  <span>${t('零依赖 · GitHub API + npm · 启发式评估，非安全审计', 'Zero-dependency · GitHub API + npm · heuristic evaluation, not a security audit')}</span>
+  <span>${t('零依赖 · GitHub API + npm · 启发式评估，非安全审计', 'Zero-dependency · GitHub API + npm · heuristic evaluation, not a security audit')} · <a href="/changelog/">${t('更新日志', 'Changelog')}</a></span>
 </footer>
 </main>
 
