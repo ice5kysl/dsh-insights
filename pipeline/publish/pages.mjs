@@ -213,6 +213,9 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
   const llmBy = byFullName(readJsonl(PATHS.llm))
   const deepBy = byFullName(readJsonl(PATHS.deep))
   const dlMap = (JSON.parse(read('downloads.json') || '{}').map) || {}
+  const compatDoc = JSON.parse(read('compat.json') || '{}')
+  const compatBy = new Map((compatDoc.plugins || []).map((p) => [p.pkgName, p]))
+  const dshLatest = compatDoc.officialDsh?.latest || ''
   const dimLabel = { eng: t('工程质量', 'Engineering quality'), docs: t('文档完整性', 'Docs completeness'), discover: t('可发现性', 'Discoverability'), maint: t('维护活跃', 'Maintenance activity') }
   const okIco = `<span style="display:inline-block;vertical-align:-2px;color:var(--ok)">${icon('check', 13)}</span>`
   const warnIco = `<span style="display:inline-block;vertical-align:-2px;color:var(--warn)">${icon('alert', 13)}</span>`
@@ -226,6 +229,12 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
     const llm = llmBy.get(full)
     const deep = deepBy.get(full)
     const dl = r.pkgName ? dlMap[r.pkgName]?.d ?? null : null
+    const compat = r.pkgName ? compatBy.get(r.pkgName) || null : null
+    const compatLine = !r.npm?.published ? '' : compat?.enginesDsh
+      ? `<p style="font-size:12.5px;color:var(--mut)" title="${t('启发式信号（npm registry 探测），非运行时测试', 'Heuristic signal (npm registry probe), not a runtime test')}">${t('dsh 兼容', 'dsh compat')}：engines.dsh <b>${escHtml(compat.enginesDsh)}</b>${dshLatest ? ` · ${t('官方 latest', 'official latest')} <code>${escHtml(dshLatest)}</code>` : ''}</p>`
+      : compat?.dshPeers?.length
+        ? `<p style="font-size:12.5px;color:var(--mut)" title="${t('启发式信号（npm registry 探测），非运行时测试', 'Heuristic signal (npm registry probe), not a runtime test')}">${t('dsh 兼容：未声明 engines.dsh · peers', 'dsh compat: no engines.dsh · peers')} ${compat.dshPeers.slice(0, 2).map((p) => `${escHtml(p.name)} ${escHtml(p.range)}`).join(' · ')}${compat.dshPeers.length > 2 ? t(` 等 ${compat.dshPeers.length} 项`, ` (+${compat.dshPeers.length - 2} more)`) : ''}</p>`
+        : `<p style="font-size:12.5px;color:var(--mut)">${t('dsh 兼容：未声明（engines.dsh / peers 均无）——建议在 package.json 加 "engines": {"dsh": "^x.y.z"}', 'dsh compat: undeclared (no engines.dsh / peers) — add "engines": {"dsh": "^x.y.z"} to package.json')}</p>`
     const peers = en.category
       ? enrichAll.filter((x) => x.category === en.category && x.full_name !== full)
           .sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 5) : []
@@ -262,13 +271,14 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
   <div class="card"><b>${dl != null ? dl.toLocaleString() + t('/周', '/wk') : '—'}</b><p>${t('npm 周下载', 'npm weekly downloads')}</p></div>
 </div>
 <div class="sc-cols" style="margin-top:16px">
-  <div class="card" style="margin:0"><b>${t('评分维度（六维框架）', 'Scoring dimensions (six-dimension framework)')}</b>${dimRows || `<p style="color:var(--faint);font-size:13px;margin-top:8px">${t('评分待生成（新入库，下个评分快照补齐）', 'Score pending (newly indexed; filled in the next scoring snapshot)')}</p>`}<p style="font-size:11px;color:var(--faint);margin-top:10px">${t('安全卫生（深检抽样）与采用度只展示不进分；兼容性随 rc 雷达上线。口径见', 'Safety hygiene (deep-scan sampling) and adoption are display-only, never scored; compatibility arrives with the rc radar. Definitions:')} <a href="/about/">${t('关于·指标体系', 'About · Metrics')}</a></p></div>
+  <div class="card" style="margin:0"><b>${t('评分维度（六维框架）', 'Scoring dimensions (six-dimension framework)')}</b>${dimRows || `<p style="color:var(--faint);font-size:13px;margin-top:8px">${t('评分待生成（新入库，下个评分快照补齐）', 'Score pending (newly indexed; filled in the next scoring snapshot)')}</p>`}<p style="font-size:11px;color:var(--faint);margin-top:10px">${t('安全卫生（深检抽样）、采用度与兼容性（engines.dsh/peers 探测）只展示不进分。口径见', 'Safety hygiene (deep-scan sampling), adoption and compatibility (engines.dsh/peers probe) are display-only, never scored. Definitions:')} <a href="/about/">${t('关于·指标体系', 'About · Metrics')}</a></p></div>
   <div class="card" style="margin:0"><b>${t('扣分明细（health-v4）', 'Deductions (health-v4)')}</b>${dropsRows || (hasScore ? `<p style="color:var(--ok);font-size:13px;margin-top:8px">${t('无扣分项 ✓', 'No deductions ✓')}</p>` : `<p style="color:var(--faint);font-size:13px;margin-top:8px">${t('评分待生成（新入库，下个评分快照补齐）', 'Score pending (newly indexed; filled in the next scoring snapshot)')}</p>`)}${hasScore && (en.missing || []).length ? `<p style="font-size:11px;color:var(--faint);margin-top:8px">${t('未探测（不扣分）：', 'Not probed (no deduction): ')}${escHtml(en.missing.join('、'))}</p>` : ''}</div>
 </div>
 <div class="sc-cols" style="margin-top:14px">
   <div class="card" style="margin:0"><b>${t('收录 / 发布', 'Listing / Publishing')}</b>
     <p style="font-size:13px;margin-top:8px">${en.inAwesome ? okIco + ' awesome-dsh-plugin' : '— ' + t('awesome 未收录', 'not in awesome')} · ${en.inImsai ? okIco + ' imsai' : '— ' + t('imsai 未收录', 'not in imsai')}</p>
     <p style="font-size:13px;color:var(--mut)">${r.npm?.published ? `npm <b>${escHtml(r.pkgName)}@${escHtml(r.npm.latest || '')}</b>${t(`（${r.npm.versions ?? '?'} 个版本 · 最近发布 ${escHtml((r.npm.latestTime || '').slice(0, 10))}）`, ` (${r.npm.versions ?? '?'} versions · latest ${(r.npm.latestTime || '').slice(0, 10)})`)}` : t('未发布 npm（仅仓库安装）', 'Not on npm (repo install only)')}</p>
+    ${compatLine}
     ${(r.npm?.published && r.version && r.npm.latest !== r.version) ? `<p style="font-size:12.5px;color:var(--warn)">${warnIco} ${t(`版本滞后：仓库 ${escHtml(r.version)} vs npm ${escHtml(r.npm.latest)}`, `Version lag: repo ${escHtml(r.version)} vs npm ${escHtml(r.npm.latest)}`)}</p>` : ''}
     <p style="font-size:12.5px;margin-top:10px"><b>${t('徽章接入', 'Badge')}</b>：<code style="font-size:11.5px">https://dsh-insights.com/badge/${escHtml(full)}.svg</code> · <a href="/badge/">${t('接入指南 ↗', 'Setup guide ↗')}</a></p>
   </div>
