@@ -431,18 +431,12 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
 )}</div>`,
   })))
 
-  // ---- /dynamics/ 动态：插件动态（新入库/版本升级/活跃更新）+ 官方动态（L2） ------
+  // ---- /dynamics/ 动态：统一时间线 feed（tag 筛选 + 按日分组） ----------------
   const dyn = JSON.parse(read('dynamics.json') || 'null')
-  const nowMs = Date.now(), d7ms = 7 * 86400000
-  const createdRecently = (r) => r.created_at && nowMs - new Date(r.created_at).getTime() < d7ms
-  const pushedRecently = (r) => r.pushed_at && nowMs - new Date(r.pushed_at).getTime() < d7ms
-  const gradeOf = (fn) => { const g = enBy.get(fn)?.grade; return g ? `<span class="grade ${g}">${g}</span> ` : '' }
-  const dynRow = (r, meta) => `<div class="listrow"><a href="/p/${escHtml(r.full_name)}/">${gradeOf(r.full_name)}${escHtml(r.full_name)}</a><span class="meta">${meta}</span></div>`
-  const newRows = plugAll.filter(createdRecently).sort((a, b) => (b.stars || 0) - (a.stars || 0))
-  const activeRows = plugAll.filter((r) => pushedRecently(r) && !createdRecently(r)).sort((a, b) => (b.stars || 0) - (a.stars || 0))
-  // 版本升级：相邻两期 history 快照的 version diff（history 自 2026-09-07 起记录 version，首日为空态）
+  const nowMs = Date.now(), d30ms = 30 * 86400000
+  // 版本升级：相邻两期 history 快照的 version diff（history 自 2026-09-07 起记录 version，首日为空）
   const hEntries = JSON.parse(read('history.json') || '{}').entries || []
-  const hPrev = hEntries[hEntries.length - 2]
+  const hLast = hEntries[hEntries.length - 1], hPrev = hEntries[hEntries.length - 2]
   const upRows = []
   if (hPrev?.plugins) {
     for (const r of plugAll) {
@@ -451,56 +445,124 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
     }
     upRows.sort((a, b) => (b.r.stars || 0) - (a.r.stars || 0))
   }
-  const dynCard = (title, sub, rowsHtml, emptyZh, emptyEn) =>
-    `<div class="card"><b>${title}</b><p>${sub}</p>${rowsHtml || `<p class="lede" style="margin:8px 0">${t(emptyZh, emptyEn)}</p>`}</div>`
-  const pluginDynHtml = `<h2 style="font-size:16px;margin:6px 0 8px">${t('插件动态', 'Plugin Dynamics')}</h2>
-<div class="lede">${langBlock(
-  '权威集插件的可观测动向：新入库、版本升级（相邻快照 diff）、近 7 天活跃更新。每日随快照滚动。',
-  'Observable movement across the authoritative set: new arrivals, version upgrades (diffed between consecutive snapshots), and pushes in the last 7 days. Refreshed daily.'
-)}</div>
-<div class="cards">
-  ${dynCard(t('新入库 · 近 7 天', 'New Arrivals · 7d'), t(`共 ${newRows.length} 个 · 按 ★`, `${newRows.length} total · by ★`), newRows.slice(0, 12).map((r) => dynRow(r, `★${r.stars || 0} · ${(r.created_at || '').slice(0, 10)}`)).join(''), '近 7 天暂无新入库', 'No new arrivals in the last 7 days')}
-  ${dynCard(t('版本升级 · 较上一快照', 'Upgraded · vs prev snapshot'), upRows.length ? t(`${upRows.length} 个插件版本变化`, `${upRows.length} version changes`) : t('首日基线建立中，明日起可见', 'Baseline being established; visible from tomorrow'), upRows.slice(0, 12).map((u) => dynRow(u.r, `${escHtml(u.from)} → ${escHtml(u.to)}`)).join(''), '较上一快照暂无版本变化', 'No version changes since the previous snapshot')}
-  ${dynCard(t('活跃更新 · 近 7 天', 'Recently Active · 7d'), t(`共 ${activeRows.length} 个有 push · 按 ★`, `${activeRows.length} pushed · by ★`), activeRows.slice(0, 12).map((r) => dynRow(r, `${r.version ? escHtml(r.version) + ' · ' : ''}★${r.stars || 0} · ${(r.pushed_at || '').slice(0, 10)}`)).join(''), '近 7 天暂无更新', 'No pushes in the last 7 days')}
-</div>`
-  let dynBody = ''
+  // 事件汇聚：插件新入库 / 版本升级 / 活跃更新 / 官方 release（含 breaking）/ 平台仓库
+  const evs = []
+  for (const r of plugAll) {
+    const g = enBy.get(r.full_name)?.grade
+    if (r.created_at && nowMs - new Date(r.created_at).getTime() < d30ms) {
+      evs.push({ d: r.created_at, tag: 'new', title: r.full_name, url: `/p/${r.full_name}/`, meta: `★${r.stars || 0}`, grade: g })
+    } else if (r.pushed_at && nowMs - new Date(r.pushed_at).getTime() < d30ms) {
+      evs.push({ d: r.pushed_at, tag: 'update', title: r.full_name, url: `/p/${r.full_name}/`, meta: `${r.version ? escHtml(r.version) + ' · ' : ''}★${r.stars || 0}`, grade: g })
+    }
+  }
+  for (const u of upRows) evs.push({ d: hLast.date + 'T00:00:00Z', tag: 'upgrade', title: u.r.full_name, url: `/p/${u.r.full_name}/`, meta: `${escHtml(u.from)} → ${escHtml(u.to)}`, grade: enBy.get(u.r.full_name)?.grade })
+  const dsh0 = dyn?.dsh || {}
+  for (const r of dsh0.releases || []) {
+    evs.push({ d: r.published_at, tag: r.breaking ? 'breaking' : 'official', title: r.tag, url: `https://github.com/${dsh0.repo}/releases/tag/${r.tag}`, meta: escHtml(r.summary || (r.prerelease ? 'pre-release' : 'release')), ext: 1 })
+  }
+  for (const p of (dyn?.platform || []).filter((p) => !p.error && p.pushed_at)) {
+    evs.push({ d: p.pushed_at, tag: 'platform', title: p.repo, url: `https://github.com/${p.repo}`, meta: `★${(p.stars || 0).toLocaleString()}${p.latestRelease ? ' · ' + escHtml(p.latestRelease.tag) : ''}`, ext: 1 })
+  }
+  evs.sort((a, b) => new Date(b.d) - new Date(a.d))
+  const FEED_CAP = 400
+  // 少量高价值事件（官方/breaking/平台/升级）不被海量新入库挤出窗口
+  const PRIORITY = new Set(['official', 'breaking', 'platform', 'upgrade'])
+  const feedPriority = evs.filter((e) => PRIORITY.has(e.tag))
+  const feed = [...feedPriority, ...evs.filter((e) => !PRIORITY.has(e.tag)).slice(0, Math.max(0, FEED_CAP - feedPriority.length))]
+    .sort((a, b) => new Date(b.d) - new Date(a.d))
+
+  const TAGS = [
+    ['new', '新插件', 'New plugin', 'var(--accent)'],
+    ['upgrade', '版本升级', 'Upgrade', 'var(--ok)'],
+    ['update', '活跃更新', 'Update', 'var(--faint)'],
+    ['official', '官方发布', 'Official', 'var(--ink)'],
+    ['breaking', 'Breaking', 'Breaking', 'var(--err)'],
+    ['platform', '平台仓库', 'Platform', '#7c3aed'],
+  ]
+  const tagOf = Object.fromEntries(TAGS.map(([k, zh, en, c]) => [k, { zh, en, c }]))
+  const tagCount = Object.fromEntries(TAGS.map(([k]) => [k, 0]))
+  for (const e of feed) tagCount[e.tag] = (tagCount[e.tag] || 0) + 1
+
+  const chip = (key, zh, en, n) => `<button class="fchip${key === 'all' ? ' on' : ''}" data-f="${key}">${t(zh, en)} <span class="n">${n}</span></button>`
+  const chips = chip('all', '全部', 'All', feed.length) + TAGS.filter(([k]) => tagCount[k]).map(([k, zh, en]) => chip(k, zh, en, tagCount[k])).join('')
+
+  const feedRows = []
+  let lastDay = ''
+  for (const e of feed) {
+    const day = (e.d || '').slice(0, 10)
+    if (day !== lastDay) {
+      feedRows.push(`<div class="fday" data-day="${day}">${day}</div>`)
+      lastDay = day
+    }
+    const tg = tagOf[e.tag] || { zh: e.tag, en: e.tag, c: 'var(--faint)' }
+    feedRows.push(`<div class="frow" data-tag="${e.tag}" data-day="${day}">
+<span class="ftag" style="color:${tg.c};border-color:${tg.c}">${t(tg.zh, tg.en)}</span>
+<a href="${e.url}"${e.ext ? ' target="_blank"' : ''}>${e.grade ? `<span class="grade ${e.grade}">${e.grade}</span> ` : ''}${escHtml(e.title)}</a>
+<span class="meta">${e.meta}</span>
+</div>`)
+  }
+
+  // 官方状态参考卡（dist-tags / rc 信号 / 仓库卡）
+  let officialRef = ''
   if (dyn) {
-    const dsh = dyn.dsh || {}
-    const npm = dsh.npm || {}
+    const npm = dsh0.npm || {}
     const daysSince = (iso) => iso ? Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 86400000)) : null
     const distRows = Object.entries(npm.distTags || {}).map(([tag, v]) => {
       const ver = (npm.versions || []).find((x) => x.version === v)
       return `<tr><td>${escHtml(tag)}</td><td class="mono">${escHtml(v)}</td><td>${ver ? t(`${escHtml((ver.time || '').slice(0, 10))}（${daysSince(ver.time)} 天前）`, `${(ver.time || '').slice(0, 10)} (${daysSince(ver.time)}d ago)`) : '—'}</td></tr>`
     }).join('')
-    const relRows = (dsh.releases || []).map((r) => `<div style="padding:10px 2px;border-bottom:1px solid var(--line)">
-<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="display:inline-flex;align-items:center;gap:8px;min-width:0"><a href="https://github.com/${escHtml(dsh.repo)}/releases/tag/${escHtml(r.tag)}" target="_blank" style="font-weight:600;color:var(--ink)">${escHtml(r.tag)}</a>${r.breaking ? '<span class="pill" style="margin:0;flex:none;color:var(--warn);border-color:var(--warn)">breaking?</span>' : ''}</span><span style="color:var(--faint);font:12px var(--mono);white-space:nowrap;flex:none">${r.prerelease ? 'pre-release' : 'release'} · ${escHtml((r.published_at || '').slice(0, 10))}${(r.added || r.fixed) ? ' · ' + t(`${r.added} 新增/${r.fixed} 修复`, `${r.added} added/${r.fixed} fixed`) : ''}</span></div>
-${r.summary ? `<div style="color:var(--mut);font-size:12.5px;margin-top:4px">${escHtml(r.summary)}</div>` : ''}
-</div>`).join('')
-    const platRows = (dyn.platform || []).filter((p) => !p.error).map((p) => `<div class="listrow"><a href="https://github.com/${escHtml(p.repo)}" target="_blank">${escHtml(p.repo)}</a><span class="meta">★${(p.stars || 0).toLocaleString()} · push ${escHtml((p.pushed_at || '').slice(0, 10))}${p.latestRelease ? ' · ' + escHtml(p.latestRelease.tag) : ''}</span></div>`).join('')
     const cs = dyn.compatSignal
-    dynBody = `<p class="crumb">Dynamics</p><h1 class="pagetitle">${t('动态', 'Dynamics')}</h1>
-<p class="lede">${t('插件生态与官方两条线的可观测公开信号：插件侧（新入库 / 版本升级 / 活跃更新）+ 官方侧（releases / dist-tags / rc 兼容），每日随快照刷新。不做新闻舆情。', 'Observable public signals on two tracks: the plugin side (new arrivals / version upgrades / recent activity) and the official side (releases / dist-tags / rc compatibility), refreshed daily. No news or sentiment tracking.')}</p>
-${pluginDynHtml}
-<h2 style="font-size:16px;margin:30px 0 8px">${t('官方动态 · dsh 官方与 DeepSeek 平台', 'Official Dynamics · dsh & DeepSeek Platform')}</h2>
-<p class="lede">${t(`采集于 ${escHtml((dyn.fetchedAt || '').slice(0, 16).replace('T', ' '))} UTC。`, `Collected at ${(dyn.fetchedAt || '').slice(0, 16).replace('T', ' ')} UTC.`)}</p>
+    officialRef = `<h2 style="font-size:16px;margin:30px 0 8px">${t('官方状态 · dist-tags 与 rc 兼容', 'Official Status · dist-tags & rc Compatibility')}</h2>
 <div class="cards">
-  <div class="card"><b>${t('DeepSeek Harness（dsh 官方）', 'DeepSeek Harness (official)')}</b><code>${escHtml(dsh.repo)}</code><p>★${(dsh.stars || 0).toLocaleString()} · ${t('最近 push', 'last push')} ${escHtml((dsh.pushed_at || '').slice(0, 10))} · ${escHtml(dsh.description || '')}</p></div>
+  <div class="card"><b>${t('DeepSeek Harness（dsh 官方）', 'DeepSeek Harness (official)')}</b><code>${escHtml(dsh0.repo)}</code><p>★${(dsh0.stars || 0).toLocaleString()} · ${t('最近 push', 'last push')} ${escHtml((dsh0.pushed_at || '').slice(0, 10))} · ${escHtml(dsh0.description || '')}</p></div>
   <div class="card"><b>npm dist-tags</b><code>@deepseek-ai/dsh</code><table style="width:100%;font-size:12.5px;margin-top:8px"><tr><th align="left">tag</th><th align="left">${t('版本', 'Version')}</th><th align="left">${t('发布时间', 'Published')}</th></tr>${distRows}</table></div>
   <div class="card"><b>${t('rc 兼容信号（雷达 v0 前置普查）', 'rc Compatibility Signal (pre-radar v0 survey)')}</b>${langBlock(
-    `<p>已探测 ${cs ? cs.pluginsProbed : '—'} 个 npm 插件：声明 <code>engines.dsh</code> 的仅 <b>${cs ? cs.declaringEngines : '—'}</b> 个，声明 dsh peer 依赖的 ${cs ? cs.declaringPeers : '—'} 个。<br>声明率太低 → 「声明 vs 最新 rc」的雷达 v0 不成立，主线走 v1（插件 API 符号 × rc changelog 交集，M2）。当前最新 rc：<b>${escHtml((npm.distTags || {}).latest || '—')}</b>，升级前请到 <a href="https://github.com/${escHtml(dsh.repo)}/releases" target="_blank">releases</a> 核对 breaking 说明。</p>`,
-    `<p>${cs ? cs.pluginsProbed : '—'} npm plugins probed: only <b>${cs ? cs.declaringEngines : '—'}</b> declare <code>engines.dsh</code>, and ${cs ? cs.declaringPeers : '—'} declare a dsh peer dependency.<br>The declaration rate is too low for a "declared vs latest rc" radar v0, so the main line is v1 (plugin API symbols × rc changelog intersection, M2). Current latest rc: <b>${escHtml((npm.distTags || {}).latest || '—')}</b> — check the breaking notes in <a href="https://github.com/${escHtml(dsh.repo)}/releases" target="_blank">releases</a> before upgrading.</p>`
+    `<p>已探测 ${cs ? cs.pluginsProbed : '—'} 个 npm 插件：声明 <code>engines.dsh</code> 的仅 <b>${cs ? cs.declaringEngines : '—'}</b> 个，声明 dsh peer 依赖的 ${cs ? cs.declaringPeers : '—'} 个。<br>声明率太低 → 「声明 vs 最新 rc」的雷达 v0 不成立，主线走 v1（插件 API 符号 × rc changelog 交集，M2）。当前最新 rc：<b>${escHtml((npm.distTags || {}).latest || '—')}</b>，升级前请到 <a href="https://github.com/${escHtml(dsh0.repo)}/releases" target="_blank">releases</a> 核对 breaking 说明。</p>`,
+    `<p>${cs ? cs.pluginsProbed : '—'} npm plugins probed: only <b>${cs ? cs.declaringEngines : '—'}</b> declare <code>engines.dsh</code>, and ${cs ? cs.declaringPeers : '—'} declare a dsh peer dependency.<br>The declaration rate is too low for a "declared vs latest rc" radar v0, so the main line is v1 (plugin API symbols × rc changelog intersection, M2). Current latest rc: <b>${escHtml((npm.distTags || {}).latest || '—')}</b> — check the breaking notes in <a href="https://github.com/${escHtml(dsh0.repo)}/releases" target="_blank">releases</a> before upgrading.</p>`
   )}</div>
 </div>
-<h2 style="font-size:16px;margin:28px 0 8px">${t(`dsh 官方 releases（最近 ${(dsh.releases || []).length} 个）`, `Official dsh releases (latest ${(dsh.releases || []).length})`)}</h2>
-${relRows || `<p class="lede">${t('暂无', 'No data yet')}</p>`}
-<h2 style="font-size:16px;margin:28px 0 8px">${t('DeepSeek 平台官方仓库', 'DeepSeek Platform Official Repos')}</h2>
-${platRows}
-<p class="lede" style="margin-top:18px">${escHtml(dyn.note || '')}</p>`
+<p class="lede" style="margin-top:6px">${t(`官方信号采集于 ${escHtml((dyn.fetchedAt || '').slice(0, 16).replace('T', ' '))} UTC。`, `Official signals collected at ${(dyn.fetchedAt || '').slice(0, 16).replace('T', ' ')} UTC.`)} ${escHtml(dyn.note || '')}</p>`
   }
+
+  const dynBody = `<p class="crumb">Dynamics</p><h1 class="pagetitle">${t('动态', 'Dynamics')}</h1>
+<p class="lede">${t('生态时间线：插件新入库 / 版本升级 / 活跃更新 + 官方 release 与平台仓库动向，按日分组、可按类型筛选。近 30 天窗口，每日随快照滚动。', 'The ecosystem timeline: plugin arrivals / version upgrades / recent activity plus official releases and platform repos, grouped by day and filterable by type. Rolling 30-day window, refreshed daily.')}</p>
+<div class="fchips" id="fchips">${chips}</div>
+<div class="card" style="padding:6px 14px" id="feed">${feedRows.join('') || `<p class="lede" style="margin:10px 0">${t('近 30 天暂无动态', 'No events in the last 30 days')}</p>`}</div>
+${evs.length > FEED_CAP ? `<p class="lede" style="margin-top:8px">${t(`仅显示最近 ${FEED_CAP} 条（共 ${evs.length} 条）`, `Showing the latest ${FEED_CAP} of ${evs.length} events`)}</p>` : ''}
+${officialRef}
+<style>
+.fchips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.fchip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut)}
+.fchip:hover{border-color:var(--faint);color:var(--ink)}
+.fchip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.fchip.on .n{color:var(--bg);opacity:.7}
+.fchip .n{font:11px var(--mono);opacity:.6;margin-left:2px}
+.frow{display:flex;align-items:baseline;gap:10px;padding:8px 2px;border-bottom:1px solid var(--line)}
+.frow:last-child{border-bottom:none}
+.frow .ftag{flex:none;font:600 10.5px var(--mono);letter-spacing:.04em;border:1px solid;border-radius:5px;padding:0 6px;line-height:1.7;min-width:52px;text-align:center}
+.frow a{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;color:var(--ink)}
+.frow a:hover{color:var(--accent)}
+.frow .meta{color:var(--faint);font:11.5px var(--mono);white-space:nowrap;flex:none;max-width:40%;overflow:hidden;text-overflow:ellipsis}
+.fday{position:sticky;top:56px;background:var(--bg);font:600 11.5px var(--mono);letter-spacing:.06em;color:var(--faint);padding:12px 2px 6px;border-bottom:1px solid var(--line)}
+</style>
+<script>
+(function(){
+  var chips=document.querySelectorAll('#fchips .fchip');
+  function apply(f){
+    document.querySelectorAll('#feed .frow').forEach(function(r){ r.style.display=(f==='all'||r.dataset.tag===f)?'':'none' });
+    document.querySelectorAll('#feed .fday').forEach(function(d){
+      var any=false, n=d.nextElementSibling;
+      while(n && n.classList.contains('frow')){ if(n.style.display!=='none'){any=true;break} n=n.nextElementSibling }
+      d.style.display=any?'':'none';
+    });
+  }
+  chips.forEach(function(c){ c.addEventListener('click',function(){ chips.forEach(function(x){x.classList.remove('on')}); c.classList.add('on'); apply(c.dataset.f) }) });
+})();
+</script>`
   written.push(out('dynamics/index.html', page({
-    title: '动态', titleEn: 'Dynamics', desc: 'DSH 生态可观测动态：插件新入库/版本升级/活跃更新 + dsh 官方 releases、dist-tags、rc 兼容信号。',
+    title: '动态', titleEn: 'Dynamics', desc: 'DSH 生态时间线：插件新入库/版本升级/活跃更新 + dsh 官方 releases 与 DeepSeek 平台动向，按日分组可筛选。',
     base: '../', here: 'dynamics/',
-    body: dynBody || `<p class="crumb">Dynamics</p><h1 class="pagetitle">${t('动态', 'Dynamics')}</h1>${pluginDynHtml}<p class="lede">${t('官方动态数据采集中，下个快照上线。', 'Official dynamics are being collected; they will go live with the next snapshot.')}</p>`,
+    body: dynBody,
   })))
 
   // ---- /authors/ 作者榜 ----------------------------------------------------
