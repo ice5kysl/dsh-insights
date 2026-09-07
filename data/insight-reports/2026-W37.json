@@ -1,20 +1,20 @@
 {
   "week": "2026-W37",
   "range": "2026/09/07～2026/09/13",
-  "generatedAt": "2026-09-07T02:22:12.219Z",
+  "generatedAt": "2026-09-07T07:25:46.681Z",
   "model": "deepseek-v4-pro",
   "usage": {
-    "prompt_tokens": 6052,
-    "completion_tokens": 9611,
-    "total_tokens": 15663,
+    "prompt_tokens": 6305,
+    "completion_tokens": 8831,
+    "total_tokens": 15136,
     "prompt_tokens_details": {
-      "cached_tokens": 384
+      "cached_tokens": 256
     },
     "completion_tokens_details": {
-      "reasoning_tokens": 6840
+      "reasoning_tokens": 5355
     },
-    "prompt_cache_hit_tokens": 384,
-    "prompt_cache_miss_tokens": 5668
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 6049
   },
   "title": {
     "zh": "DSH 生态洞察 · 2026-W37",
@@ -25,6 +25,7 @@
       "kind": "dominant-owner",
       "severity": "low",
       "fact": "最大账号 uckkk 独占 1285 个插件（占全生态 13%）、均分 75——模板批量号拉高规模数字，解读增长时需剔除水分",
+      "factEn": "Largest account uckkk alone holds 1285 plugins (13% of the ecosystem), avg score 75 — template batch account inflates scale numbers",
       "data": {
         "owner": "uckkk",
         "count": 1285,
@@ -35,6 +36,7 @@
       "kind": "npm-stale",
       "severity": "low",
       "fact": "10 个插件仓库版本领先 npm 发布版本——安装侧拿到的是旧版",
+      "factEn": "10 plugins have repo versions ahead of npm — installs get outdated builds",
       "data": {
         "count": 10
       }
@@ -43,6 +45,7 @@
       "kind": "breaking-release",
       "severity": "high",
       "fact": "dsh 官方本周发布 5 个版本，其中 3 个含 breaking 变更（dsh-v0.1.3-alpha.1, dsh-v0.1.2-rc.1, dsh-v0.1.2-alpha.3）——插件作者需评估适配",
+      "factEn": "dsh shipped 5 releases this week, 3 with breaking changes (dsh-v0.1.3-alpha.1, dsh-v0.1.2-rc.1, dsh-v0.1.2-alpha.3) — plugin authors must adapt",
       "data": {
         "releases": [
           "dsh-v0.1.3-alpha.1",
