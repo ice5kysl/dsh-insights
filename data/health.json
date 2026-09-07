@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-09-07T02:27:24.178Z",
-  "ruleVersion": "health-v4",
+  "generatedAt": "2026-09-07T12:19:18.130Z",
+  "ruleVersion": "health-v5",
   "total": 10189,
   "grades": {
     "S": 248,
-    "A": 804,
-    "B": 5799,
-    "C": 3303,
-    "D": 35
+    "A": 787,
+    "B": 4875,
+    "C": 3030,
+    "D": 1249
   },
-  "avg": 79.3,
-  "median": 78,
+  "avg": 76,
+  "median": 77,
   "topDeductions": [
     {
       "code": "manifest.no-client-export",
@@ -48,19 +48,19 @@
       "pct": 37.9
     },
     {
+      "code": "maint.single-push",
+      "count": 2664,
+      "pct": 26.1
+    },
+    {
       "code": "repo.sparse-topics",
       "count": 1884,
       "pct": 18.5
     },
     {
-      "code": "npm.version-drift",
-      "count": 1214,
-      "pct": 11.9
-    },
-    {
-      "code": "npm.single-release",
-      "count": 1178,
-      "pct": 11.6
+      "code": "discover.batch-import",
+      "count": 1285,
+      "pct": 12.6
     }
   ]
 }
