@@ -277,6 +277,7 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .sec-h .sub{margin:0;color:var(--faint);font-size:12.5px}
 .sec-n{font:600 11px/1 var(--mono);color:var(--faint);letter-spacing:.06em}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+#rank .cards{grid-template-columns:repeat(auto-fit,minmax(480px,1fr))}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
 .panel h3{margin:0;font-size:13.5px;font-weight:650}
 .panel .p-sub{color:var(--faint);font-size:11.5px;margin:3px 0 14px}
