@@ -3,7 +3,7 @@
  * pipeline/content · weekly-backfill — 回填 dsh 发布以来的历史周报（一次性/幂等）。
  *
  * dsh 首发于 2026-08-10（@deepseek-ai/dsh 0.0.1-rc.1，W33）。本脚本为
- * 缺失的历史周生成"回填特刊"：当周新增候选/权威插件（按 created_at 归属）、
+ * 缺失的历史周生成补档：当周新增候选/权威插件（按 created_at 归属）、
  * 当周诞生插件龙虎榜、官方版本时间线、当周队列质量概况。
  *
  * 诚实口径（每期刊头明示）：星数/下载/健康分为**当前快照**值，非当周历史值
@@ -84,11 +84,11 @@ for (const wk of weeksFrom(startWk, currentWk)) {
 
   const L = []
   const fmtD = (x) => `${x.getUTCFullYear()}/${String(x.getUTCMonth() + 1).padStart(2, '0')}/${String(x.getUTCDate()).padStart(2, '0')}`
-  L.push(`# DSH 插件生态周报 · ${wk}（${fmtD(ws)}～${fmtD(new Date(we.getTime() - 86400000))}· 回填特刊）`)
+  L.push(`# DSH 插件生态周报 · ${wk}（${fmtD(ws)}～${fmtD(new Date(we.getTime() - 86400000))}）`)
   L.push('')
-  L.push(`> 回填于 ${new Date().toISOString().slice(0, 10)} · 覆盖 ${ws.toISOString().slice(0, 10)} → ${we.toISOString().slice(0, 10)} · 由 DSH Insights（dsh-insights.com）重建`)
+  L.push(`> 历史补档 · 补档于 ${new Date().toISOString().slice(0, 10)} · 覆盖 ${ws.toISOString().slice(0, 10)} → ${we.toISOString().slice(0, 10)} · 由 DSH Insights（dsh-insights.com）重建`)
   L.push('>')
-  L.push('> **口径说明**：本期为历史回填——「新增」按仓库创建时间归属；星数、健康分、下载为**当前快照**值（时间层快照自 2026-09-05 起才开始累积），仅用于定位，不代表当周读数。')
+  L.push('> **口径说明**：本期为历史补档——「新增」按仓库创建时间归属；星数、健康分、下载为**当前快照**值（时间层快照自 2026-09-05 起才开始累积），仅用于定位，不代表当周读数。')
   L.push('')
   L.push('## 本期速览')
   L.push('')
@@ -115,7 +115,7 @@ for (const wk of weeksFrom(startWk, currentWk)) {
   L.push('')
   L.push('---')
   L.push('')
-  L.push('> 回填特刊由 DSH Insights 基于创建时间重建 · 正式周报自 2026-W36 起每周五自动发布：https://dsh-insights.com/weekly/')
+  L.push('> 本期为历史补档，由 DSH Insights 基于仓库创建时间重建 · 正式周报自 2026-W36 起每周五自动发布：https://dsh-insights.com/weekly/')
   writeFileSync(f, L.join('\n') + '\n')
   made++
   console.log(`[backfill] ${wk} ✓（新增候选 ${newCands.length} / 权威 ${newPlugins.length} / 官方版本 ${versions.length}）`)
