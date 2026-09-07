@@ -176,14 +176,19 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
     const title = mdTitle(mdZh, `DSH 生态洞察 · ${slug}`)
     const titleEn = meta.title?.en || `DSH Ecosystem Insights · ${slug}`
     const bodyHtml = langBlock(mdToHtml(mdZh), mdEn ? mdToHtml(mdEn) : '<p><i>English edition pending.</i></p>')
+    // 重点关注盒：由规则引擎信号确定性生成（不依赖 LLM 排版），high 黄底凸显
+    const sevLabel = { high: t('高', 'HIGH'), mid: t('中', 'MID'), low: t('低', 'LOW') }
+    const sigBox = (meta.signals || []).length
+      ? `<div class="sigbox"><b>${t('重点关注', 'Key signals')} · ${meta.signals.length} ${t('个异常信号', 'anomaly signals')}</b>${meta.signals.map((s) => `<div class="sig ${escHtml(s.severity || 'low')}"><span class="sev">${sevLabel[s.severity] || s.severity}</span>${t(s.fact, s.factEn || s.fact)}</div>`).join('')}</div>`
+      : ''
     written.push(out(`insights/${slug}.html`, page({
       og: { type: 'article', url: `${ORIGIN}/insights/${slug}.html` },
       title, titleEn,
       desc: 'DSH 生态阶段性洞察报告（规则信号 grounding + DeepSeek 分析 · 中英双语）',
       base: '../', here: 'insights/',
-      body: `<p class="crumb">${t('生态洞察', 'Insights')} · ${slug}</p><div class="article">${bodyHtml}</div>`,
+      body: `<p class="crumb">${t('生态洞察', 'Insights')} · ${slug}</p>${sigBox}<div class="article">${bodyHtml}</div>`,
     })))
-    insights.push({ slug, title, titleEn, range: meta.range || '', model: meta.model || '', signals: (meta.signals || []).length, bodyHtml })
+    insights.push({ slug, title, titleEn, range: meta.range || '', model: meta.model || '', signals: (meta.signals || []).length, bodyHtml, sigBox })
   }
   if (insights.length) {
     const latest = insights[0]
@@ -195,7 +200,7 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
 <p class="lede">${t('每周五随管线生成：规则引擎先从数据检出异常信号，再由 DeepSeek 撰写分析结论、异常应对与分角色建议。数字全部来自落盘数据，LLM 只负责解释与判断。中英双语，点右上角切换。', 'Generated every Friday with the pipeline: a rules engine detects anomaly signals from the data first, then DeepSeek writes the analysis, mitigations and per-role recommendations. All numbers come from on-disk data — the LLM only interprets. Bilingual zh/en via the top-right switcher.')}</p>
 <div class="cards">${insights.map((r) => `<a class="card" href="./${r.slug}.html" style="text-decoration:none;color:inherit"><b>${t(r.title, r.titleEn)}<span style="color:var(--faint);font-weight:400;font-size:12px"> · ${escHtml(r.model)}</span></b><p>${t('信号', 'Signals')} ${r.signals} · ${escHtml(r.range)}</p></a>`).join('')}</div>
 <h2 style="margin:34px 0 10px;font-size:18px;letter-spacing:-.01em">${t('最新一期', 'Latest issue')}</h2>
-<div class="article">${latest.bodyHtml}</div>`,
+${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
     })))
   }
 

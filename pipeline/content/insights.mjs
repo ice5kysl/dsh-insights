@@ -96,7 +96,7 @@ if (baseEntry?.plugins) {
   diff = { baseDate: baseEntry.date, added: added.length, removed: removed.length, risers, downgrades }
   const gapDays = Math.round((now - new Date(baseEntry.date).getTime()) / dayMs)
   if (gapDays < 5 || gapDays > 10) diff.caveat = `基线 ${baseEntry.date} 距今 ${gapDays} 天，非标准 7 天周 diff——added/removed 是相对该基线的累计变化，不得表述为「本周新增」`
-  if (removed.length > added.length) signals.push({ kind: 'shrink', severity: 'high', fact: `本周权威集净减少（+${added} / −${removed}）——仓库删除/私有化或校验口径变化的信号`, data: { added: added.length, removed: removed.length } })
+  if (removed.length > added.length) signals.push({ kind: 'shrink', severity: 'high', fact: `本周权威集净减少（+${added} / −${removed}）——仓库删除/私有化或校验口径变化的信号`, factEn: `Authoritative set shrank this week (+${added} / −${removed}) — repos deleted/renamed or a gate change`, data: { added: added.length, removed: removed.length } })
 }
 
 // 增长异常：本周新增 vs metrics 历史的周新增均值
@@ -105,7 +105,7 @@ if (diff && prevMetrics.length >= 2) {
   const adds = prevMetrics.map((m, i, arr) => (i === 0 ? null : m.authoritative - arr[i - 1].authoritative)).filter((x) => x != null)
   const mean = adds.reduce((a, b) => a + b, 0) / adds.length
   if (mean > 0 && (diff.added > mean * 2.5 || diff.added < mean * 0.3)) {
-    signals.push({ kind: 'growth-anomaly', severity: 'mid', fact: `本周新增 ${diff.added}，近 ${adds.length} 周均值 ${mean.toFixed(0)}——${diff.added > mean ? '突增，可能有批量导入/刷库' : '骤降，发现或收录链路需核查'}`, data: { added: diff.added, mean } })
+    signals.push({ kind: 'growth-anomaly', severity: 'mid', fact: `本周新增 ${diff.added}，近 ${adds.length} 周均值 ${mean.toFixed(0)}——${diff.added > mean ? '突增，可能有批量导入/刷库' : '骤降，发现或收录链路需核查'}`, factEn: `${diff.added} new this week vs ${mean.toFixed(0)} weekly average — ${diff.added > mean ? 'a spike; possible batch import/farming' : 'a sharp drop; check discovery/intake'}`, data: { added: diff.added, mean } })
   }
 }
 
@@ -129,19 +129,19 @@ const clusters = [...byOwner.entries()]
   })
   .sort((a, b) => b.count - a.count)
 for (const c of clusters.filter((c) => c.count >= 8 && ((c.avg != null && c.avg < 60) || c.noReadme / c.count > 0.8)).slice(0, 5)) {
-  signals.push({ kind: 'owner-cluster', severity: 'mid', fact: `账号 ${c.owner} 有 ${c.count} 个插件${c.avg != null ? `、均分仅 ${c.avg}` : '（尚未评分）'}${c.noReadme ? `、${c.noReadme} 个无 README` : ''}——疑似批量刷库/模板复制`, data: c })
+  signals.push({ kind: 'owner-cluster', severity: 'mid', fact: `账号 ${c.owner} 有 ${c.count} 个插件${c.avg != null ? `、均分仅 ${c.avg}` : '（尚未评分）'}${c.noReadme ? `、${c.noReadme} 个无 README` : ''}——疑似批量刷库/模板复制`, factEn: `Account ${c.owner} holds ${c.count} plugins${c.avg != null ? `, avg score only ${c.avg}` : ' (unscored)'}${c.noReadme ? `, ${c.noReadme} without README` : ''} — suspected template farming`, data: c })
 }
 
 // 头部账号集中度：单一账号占比过高本身是生态结构风险（模板批量号）
 const top1 = clusters[0]
 if (top1 && top1.count / plugins.length >= 0.05) {
-  signals.push({ kind: 'dominant-owner', severity: 'low', fact: `最大账号 ${top1.owner} 独占 ${top1.count} 个插件（占全生态 ${Math.round((top1.count / plugins.length) * 100)}%）${top1.avg != null ? `、均分 ${top1.avg}` : ''}——模板批量号拉高规模数字，解读增长时需剔除水分`, data: { owner: top1.owner, count: top1.count, avg: top1.avg } })
+  signals.push({ kind: 'dominant-owner', severity: 'low', fact: `最大账号 ${top1.owner} 独占 ${top1.count} 个插件（占全生态 ${Math.round((top1.count / plugins.length) * 100)}%）${top1.avg != null ? `、均分 ${top1.avg}` : ''}——模板批量号拉高规模数字，解读增长时需剔除水分`, factEn: `Largest account ${top1.owner} alone holds ${top1.count} plugins (${Math.round((top1.count / plugins.length) * 100)}% of the ecosystem)${top1.avg != null ? `, avg score ${top1.avg}` : ''} — template batch account inflates scale numbers`, data: { owner: top1.owner, count: top1.count, avg: top1.avg } })
 }
 
 // 活跃度与失活
 const stale90 = plugins.filter((p) => p.pushed_at && now - new Date(p.pushed_at).getTime() > 90 * dayMs).length
 const stalePct = Math.round((stale90 / plugins.length) * 100)
-if (stalePct >= 40) signals.push({ kind: 'stale', severity: 'mid', fact: `${stalePct}% 的插件超过 90 天未更新（${stale90}/${plugins.length}）——生态失活比例偏高`, data: { stale90, total: plugins.length } })
+if (stalePct >= 40) signals.push({ kind: 'stale', severity: 'mid', fact: `${stalePct}% 的插件超过 90 天未更新（${stale90}/${plugins.length}）——生态失活比例偏高`, factEn: `${stalePct}% of plugins untouched for 90+ days (${stale90}/${plugins.length}) — elevated abandonment ratio`, data: { stale90, total: plugins.length } })
 
 // 下载集中度
 const dls = plugins.filter((p) => p.weekly > 0)
@@ -149,17 +149,17 @@ if (dls.length >= 10) {
   const sum = dls.reduce((a, p) => a + p.weekly, 0)
   const top10 = [...dls].sort((a, b) => b.weekly - a.weekly).slice(0, 10).reduce((a, p) => a + p.weekly, 0)
   const share = Math.round((top10 / sum) * 100)
-  if (share >= 70) signals.push({ kind: 'concentration', severity: 'low', fact: `周下载 Top10 占全部已发布插件下载的 ${share}%——流量高度集中，长尾曝光困难`, data: { share, sum } })
+  if (share >= 70) signals.push({ kind: 'concentration', severity: 'low', fact: `周下载 Top10 占全部已发布插件下载的 ${share}%——流量高度集中，长尾曝光困难`, factEn: `Top 10 plugins take ${share}% of all weekly downloads — heavy concentration, long tail gets little exposure`, data: { share, sum } })
 }
 
 // npm 滞后
 const staleNpm = (analysis.npmStaleTop || []).length
-if (staleNpm >= 10) signals.push({ kind: 'npm-stale', severity: 'low', fact: `${staleNpm} 个插件仓库版本领先 npm 发布版本——安装侧拿到的是旧版`, data: { count: staleNpm } })
+if (staleNpm >= 10) signals.push({ kind: 'npm-stale', severity: 'low', fact: `${staleNpm} 个插件仓库版本领先 npm 发布版本——安装侧拿到的是旧版`, factEn: `${staleNpm} plugins have repo versions ahead of npm — installs get outdated builds`, data: { count: staleNpm } })
 
 // 官方动态：本周新 release（含 breaking）
 const rels = (dyn?.dsh?.releases || []).filter((r) => r.published_at && now - new Date(r.published_at).getTime() <= 7 * dayMs)
 const breaking = rels.filter((r) => r.breaking)
-if (breaking.length) signals.push({ kind: 'breaking-release', severity: 'high', fact: `dsh 官方本周发布 ${rels.length} 个版本，其中 ${breaking.length} 个含 breaking 变更（${breaking.map((r) => r.tag).join(', ')}）——插件作者需评估适配`, data: { releases: rels.map((r) => r.tag) } })
+if (breaking.length) signals.push({ kind: 'breaking-release', severity: 'high', fact: `dsh 官方本周发布 ${rels.length} 个版本，其中 ${breaking.length} 个含 breaking 变更（${breaking.map((r) => r.tag).join(', ')}）——插件作者需评估适配`, factEn: `dsh shipped ${rels.length} releases this week, ${breaking.length} with breaking changes (${breaking.map((r) => r.tag).join(', ')}) — plugin authors must adapt`, data: { releases: rels.map((r) => r.tag) } })
 
 /* ------------------------------------------------------------------ *
  * 2) 数据包（bounded，喂给 LLM 的全部事实）
@@ -195,12 +195,17 @@ const prompt = `你是 DeepSeek Harness（DSH，Everything is a Plugin）插件�
 - 写作风格：结论先行、专业克制、面向插件作者/生态用户/DSH 官方三类读者。
 
 ## 结构（zh_md 与 en_md 都按此结构）
-1. 核心结论（3–5 条，每条一句话 + 数据支撑）
+1. 核心结论（3–5 条，每条一行：- **一句话结论**：数据支撑…）
 2. 生态健康度评估（规模/增长/质量分布/活跃度，给出本期总体判断）
 3. 质量与风险（分级结构、文档与发布纪律、npm 滞后等）
 4. 异常与应对（逐条处理 signals；无 signals 则写本期无显著异常并说明监测口径）
 5. 下一阶段重点与建议（分角色：插件作者 / 生态用户 / DSH 官方，各 2–4 条可执行建议）
 6. 官方动态解读（dsh release 与 DeepSeek 平台动向对生态的影响）
+
+## 格式约束（我们的渲染器是极简 markdown，必须遵守）
+- 每个异常信号用 ### 三级标题（标题含信号名与 severity），下面固定三条**各自独占一行**的 bullet：- **可能原因（假设）**：…、- **影响面**：…、- **应对建议**：…。严禁把多个要点续行揉进同一个列表项或段落。
+- 所有列表项单行写完；段落之间留空行；不要在列表项内换行续写。
+- 关键数字、结论性判断用 **加粗** 凸显（渲染时会重点标出）。
 
 ## 输出
 严格 JSON（不要 markdown 代码围栏）：
@@ -251,8 +256,9 @@ const withRange = (title) => /\d{4}[/.-]\d{2}/.test(title || '') ? title : `${ti
 const titleZh = withRange(report.title_zh || `DSH 生态洞察 · ${wk}`)
 const titleEn = withRange(report.title_en || `DSH Ecosystem Insights · ${wk}`)
 
-const head = () => `> 由 DSH Insights 管线 + DeepSeek（${model}）生成 · 数据快照 ${pack.snapshot} · 启发式评估，非安全审计\n> Generated by the DSH Insights pipeline + DeepSeek (${model}) · snapshot ${pack.snapshot} · heuristic evaluation, not a security audit\n\n`
-writeFileSync(join(OUT, `${wk}.md`), `# ${titleZh}\n\n${head()}${stripH1(report.zh_md)}\n`)
-writeFileSync(join(OUT, `${wk}.en.md`), `# ${titleEn}\n\n${head()}${stripH1(report.en_md)}\n`)
+const headZh = `> 由 DSH Insights 管线 + DeepSeek（${model}）生成 · 数据快照 ${pack.snapshot} · 启发式评估，非安全审计\n\n`
+const headEn = `> Generated by the DSH Insights pipeline + DeepSeek (${model}) · snapshot ${pack.snapshot} · heuristic evaluation, not a security audit\n\n`
+writeFileSync(join(OUT, `${wk}.md`), `# ${titleZh}\n\n${headZh}${stripH1(report.zh_md)}\n`)
+writeFileSync(join(OUT, `${wk}.en.md`), `# ${titleEn}\n\n${headEn}${stripH1(report.en_md)}\n`)
 writeFileSync(join(OUT, `${wk}.json`), JSON.stringify({ week: wk, range: pack.range, generatedAt: new Date().toISOString(), model, usage: doc.usage || null, title: { zh: report.title_zh, en: report.title_en }, signals }, null, 2))
 console.log(`[insights] → ${OUT}/${wk}.{md,en.md,json} · signals=${signals.length} · tokens=${doc.usage?.total_tokens ?? '?'}`)

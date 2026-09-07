@@ -96,6 +96,14 @@ h1.pagetitle{margin:0 0 8px;font-size:clamp(22px,3.4vw,30px);font-weight:700;let
 .wkbtn{display:inline-block;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut)}
 .wkbtn:hover{border-color:var(--faint);color:var(--ink);text-decoration:none}
 .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:11.5px;color:var(--mut);margin:0 6px 6px 0}
+.sigbox{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:14px 16px;margin:0 0 22px}
+.sigbox>b{display:block;font-size:13px;margin-bottom:6px}
+.sig{padding:9px 12px;border-radius:8px;font-size:12.5px;line-height:1.55;margin:6px 0;border-left:3px solid var(--line);background:var(--track)}
+.sig.high{background:#fef9c3;border-color:#eab308;color:#713f12}
+.sig.mid{background:color-mix(in srgb,#d97706 9%,transparent);border-color:var(--warn)}
+.sig .sev{font:700 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-right:8px;opacity:.75}
+:root[data-theme=dark] .sig.high{background:color-mix(in srgb,#eab308 15%,transparent);color:#fde68a}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .sig.high{background:color-mix(in srgb,#eab308 15%,transparent);color:#fde68a}}
 footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
 :root[data-lang=en] [data-lang-block=zh]{display:none}
