@@ -14,7 +14,7 @@
  *
  * 层（pipeline/<layer>/）：
  *   collect 采集 → validate 校验（含校准回归）→ analyze 分析
- *   → publish 发布（站点/数据/徽章/diff）→ content 内容（信件/周报）
+ *   → publish 发布（站点/数据/徽章/diff）→ content 内容（信件/周报/LLM 洞察）
  *   L2 官方动态（M2）：collect/dynamics.mjs → publish /dynamics 页 → 周报双栏
  *
  * 手动/特殊（不进默认 profile，用 --only 调用）：
@@ -57,19 +57,21 @@ const STEPS = [
   ['pages',       'pipeline/publish/pages.mjs'],
   ['letters',     'pipeline/content/letters.mjs'],
   ['weekly',      'pipeline/content/weekly.mjs'],
+  ['insights',    'pipeline/content/insights.mjs'],
 ]
 
 const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'pages']
 // 每小时增量纳新：daily 去掉 downloads/dynamics（重 API、日频足够），其余同构
 const HOURLY = ['lists', 'discover-incr', 'validate', 'analyze', 'site', 'export-csv', 'diff', 'pages']
 const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'overlap', 'scenarios', 'badges', 'site', 'pages']
-const CONTENT = ['letters', 'weekly', 'pages']
+const CONTENT = ['letters', 'weekly', 'insights', 'pages']
 const PROFILES = {
   hourly: HOURLY,
   daily: DAILY,
-  // pages 必须在 letters/weekly 之后（当天内容当天上线）——从 DAILY 摘出放到内容层之后，勿用 Set 去重（会把 pages 留在 DAILY 位置）
+  // pages 必须在 letters/weekly/insights 之后（当天内容当天上线）——从 DAILY 摘出放到内容层之后，勿用 Set 去重（会把 pages 留在 DAILY 位置）
   // refresh（Tier 0 元数据合并）在 analyze 之前跑：本周活跃度/飙升榜用新鲜数据；discover 周度重爬供其消费（search 配额独立）
-  friday: ['lists', 'discover', 'refresh', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'author-graph', 'metrics', 'letters', 'weekly', 'pages'],
+  // insights（LLM 洞察，需 DEEPSEEK_API_KEY；缺 key 自动跳过不失败）
+  friday: ['lists', 'discover', 'refresh', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'author-graph', 'metrics', 'letters', 'weekly', 'insights', 'pages'],
   snapshot: SNAPSHOT,
   full: ['lists', 'discover', 'npm-map', 'downloads', 'validate', ...SNAPSHOT, 'diff'],
   content: CONTENT,
