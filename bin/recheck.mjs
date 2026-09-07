@@ -12,7 +12,7 @@ import { readFileSync, writeFileSync, renameSync } from 'node:fs'
 import { PATHS, readJsonl } from '../lib/data.mjs'
 import { validateOne } from '../pipeline/validate/validate.mjs'
 
-const TERMINAL = new Set(['no-signal', 'fork', 'archived', 'repo-gone', 'no-package.json', 'package-parse', 'no-dsh-bundle', 'patch-missing'])
+const TERMINAL = new Set(['no-signal', 'fork', 'archived', 'repo-gone', 'no-package.json', 'package-parse', 'no-dsh-bundle', 'patch-missing', 'empty-repo'])
 const PLUGINS_PATH = process.env.DSH_RECHECK_PLUGINS || PATHS.plugins
 const INVALID_PATH = process.env.DSH_RECHECK_INVALID || PATHS.invalid
 const atomic = (path, content) => { const tmp = path + '.tmp'; writeFileSync(tmp, content); renameSync(tmp, path) }

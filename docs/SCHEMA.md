@@ -50,7 +50,7 @@
 ## `data/invalid.jsonl` — 被拒/噪声（reason 分桶）
 
 ```jsonc
-{ "valid": false, "reason": "no-signal|fork|archived|repo-gone|repo-http403|tree-failed|no-package.json|package-parse|no-dsh-bundle|patch-missing|patch-fetch",
+{ "valid": false, "reason": "no-signal|fork|archived|repo-gone|empty-repo|repo-http403|tree-failed|no-package.json|package-parse|no-dsh-bundle|patch-missing|patch-fetch",
   "owner": "…", "repo": "…", "source": "…", "checkedAt": "…" }
 ```
 
