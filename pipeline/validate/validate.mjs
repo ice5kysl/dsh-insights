@@ -106,6 +106,7 @@ async function validateOne(c) {
     m = metaR.body
     if (m.fork) return { ok: false, reason: 'fork' }
     if (m.archived) return { ok: false, reason: 'archived' }
+    if (!m.size) return { ok: false, reason: 'empty-repo' } // 空仓库刷 topic（无任何 commit，tree 必 404）——终态进分桶
     branch = m.default_branch || branch || 'main'
     if (!tree) tree = await repoTreeFiles(c.owner, c.name, branch)
     if (!tree) return { ok: false, reason: 'tree-failed', record: { owner: c.owner, repo: c.name } }
