@@ -297,6 +297,7 @@ ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（
     ['analysis.json', '聚合统计（仪表盘数据源）', 'Aggregate stats (dashboard data source)'],
     ['health.json', '健康分聚合（分级分布/均分/top 扣分）', 'Health score aggregates (grade distribution / average / top deductions)'],
     ['dynamics.json', '官方动态快照（dsh releases/dist-tags/DeepSeek 平台）', 'Official dynamics snapshot (dsh releases / dist-tags / DeepSeek platform)'],
+    ['compat.json', 'dsh 版本兼容信号（engines.dsh / peers 探测）', 'dsh version compat signals (engines.dsh / peers probe)'],
     ['scenarios.json', '场景组合推荐（插件 ↔ 场景映射）', 'Scenario picks (plugin ↔ scenario mapping)'],
     ['plugins.csv', '权威集表格（25 列，Excel 友好）', 'Authoritative set as a table (25 columns, Excel-friendly)'],
     ['downloads.json', 'npm 周下载（CI 更新）', 'npm weekly downloads (updated by CI)'],
@@ -926,7 +927,7 @@ ${badgeExHtml}
   ${navCard('dynamics/', 'radar', t('官方动态', 'Dynamics'), t('dsh releases/dist-tags · DeepSeek 平台 · rc 兼容信号', 'dsh releases/dist-tags · DeepSeek platform · rc compatibility signal'), latestRel ? escHtml(latestRel.tag) : '—')}
   ${navCard('authors/', 'users', t('作者榜', 'Authors'), t('生态里的重要人物：榜单 + 协作关系图', 'Key people of the ecosystem: leaderboards + collaboration graph'), t(`${(an0.authorStats?.total || 0).toLocaleString()} 位`, `${(an0.authorStats?.total || 0).toLocaleString()} authors`))}
   ${navCard('badge/', 'star', t('健康徽章', 'Badge'), t('把客观评分带进 README：一页接入指南', 'Bring the objective score into your README: a one-page setup guide'), t('health-v5 · 每日刷新', 'health-v5 · refreshed daily'))}
-  ${navCard('data/', 'database', t('开放数据', 'Open Data'), t('稳定 JSON URL · agent 可读 · CC BY 4.0', 'Stable JSON URLs · agent-friendly · CC BY 4.0'), t('insights.json 等 11 个数据集', '11 datasets incl. insights.json'))}
+  ${navCard('data/', 'database', t('开放数据', 'Open Data'), t('稳定 JSON URL · agent 可读 · CC BY 4.0', 'Stable JSON URLs · agent-friendly · CC BY 4.0'), t('insights.json 等 13 个数据集', '13 datasets incl. insights.json'))}
   ${navCard('about/', 'book', t('关于 · 指标体系', 'About · Metrics'), t('方法论全公开：权威集门禁 · 六维框架 · 校准回归', 'Methodology in the open: authoritative-set gate · six-dimension framework · calibration regression'), t('可复核到每条扣分', 'Every deduction is verifiable'))}
 </div>
 <script>
