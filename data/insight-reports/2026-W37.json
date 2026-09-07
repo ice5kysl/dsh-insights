@@ -1,0 +1,57 @@
+{
+  "week": "2026-W37",
+  "range": "2026/09/07～2026/09/13",
+  "generatedAt": "2026-09-07T01:40:21.162Z",
+  "model": "deepseek-v4-pro",
+  "usage": {
+    "prompt_tokens": 6045,
+    "completion_tokens": 8714,
+    "total_tokens": 14759,
+    "prompt_tokens_details": {
+      "cached_tokens": 384
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 5816
+    },
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 5661
+  },
+  "title": {
+    "zh": "DSH 生态洞察 · 2026-W37",
+    "en": "DSH Ecosystem Insights · 2026-W37"
+  },
+  "signals": [
+    {
+      "kind": "dominant-owner",
+      "severity": "low",
+      "fact": "最大账号 uckkk 独占 1285 个插件（占全生态 13%）、均分 75——模板批量号拉高规模数字，解读增长时需剔除水分",
+      "data": {
+        "owner": "uckkk",
+        "count": 1285,
+        "avg": 75
+      }
+    },
+    {
+      "kind": "npm-stale",
+      "severity": "low",
+      "fact": "10 个插件仓库版本领先 npm 发布版本——安装侧拿到的是旧版",
+      "data": {
+        "count": 10
+      }
+    },
+    {
+      "kind": "breaking-release",
+      "severity": "high",
+      "fact": "dsh 官方本周发布 5 个版本，其中 3 个含 breaking 变更（dsh-v0.1.3-alpha.1, dsh-v0.1.2-rc.1, dsh-v0.1.2-alpha.3）——插件作者需评估适配",
+      "data": {
+        "releases": [
+          "dsh-v0.1.3-alpha.1",
+          "dsh-v0.1.2-rc.1",
+          "dsh-v0.1.2-alpha.5",
+          "dsh-v0.1.2-alpha.4",
+          "dsh-v0.1.2-alpha.3"
+        ]
+      }
+    }
+  ]
+}

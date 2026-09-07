@@ -21,7 +21,7 @@
 
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
-import { DATA, PATHS, readJson, readJsonl, loadPlugins } from '../../lib/data.mjs'
+import { DATA, PATHS, readJson, readJsonl } from '../../lib/data.mjs'
 
 const DRY = process.argv.includes('--dry')
 const key = process.env.DEEPSEEK_API_KEY || process.env.LLM_API_KEY || ''
@@ -51,7 +51,20 @@ function weekLabel(isoWk) {
 const analysis = readJson(PATHS.analysis)
 const dyn = readJson(PATHS.dynamics)
 const scenarios = readJson(join(DATA, 'scenarios.json'), null)
-const plugins = loadPlugins()
+// 内容层用宽松读法（last-wins 去重）：collect 层的瞬时重复不该阻塞报告生成；
+// analyze/site 等正确性敏感环节仍走 loadPlugins 的 0 重复硬门禁。
+const plugins = [...readJsonl(PATHS.plugins).reduce((m, r) => {
+  const k = (r.full_name || '').toLowerCase()
+  if (k) m.set(k, r)
+  return m
+}, new Map()).values()]
+// 分数在 data/insights.json（score 步骤产物），plugins.jsonl 行不带 score
+const scoreOf = new Map((readJson(join(DATA, 'insights.json'), {})?.plugins || [])
+  .map((p) => [(p.full_name || '').toLowerCase(), p]))
+for (const p of plugins) {
+  const s = scoreOf.get((p.full_name || '').toLowerCase())
+  if (s) { p.score = s.score ?? s.health?.score; p.grade = s.grade ?? s.health?.grade }
+}
 const history = readJson(PATHS.history)?.entries || []
 const metricsRows = readJsonl(join(DATA, 'metrics.jsonl'))
 const wk = isoWeek(new Date().toISOString().slice(0, 10))
@@ -80,7 +93,9 @@ if (baseEntry?.plugins) {
   const downgrades = [...cur.entries()]
     .filter(([k, r]) => k in prev && prev[k].score != null && (r.score ?? 100) < prev[k].score - 10)
     .map(([k, r]) => ({ id: k, from: prev[k].score, to: r.score })).slice(0, 10)
-  diff = { baseDate: base.date, added: added.length, removed: removed.length, risers, downgrades }
+  diff = { baseDate: baseEntry.date, added: added.length, removed: removed.length, risers, downgrades }
+  const gapDays = Math.round((now - new Date(baseEntry.date).getTime()) / dayMs)
+  if (gapDays < 5 || gapDays > 10) diff.caveat = `基线 ${baseEntry.date} 距今 ${gapDays} 天，非标准 7 天周 diff——added/removed 是相对该基线的累计变化，不得表述为「本周新增」`
   if (removed.length > added.length) signals.push({ kind: 'shrink', severity: 'high', fact: `本周权威集净减少（+${added} / −${removed}）——仓库删除/私有化或校验口径变化的信号`, data: { added: added.length, removed: removed.length } })
 }
 
@@ -104,10 +119,23 @@ for (const p of plugins) {
 }
 const clusters = [...byOwner.entries()]
   .filter(([, ps]) => ps.length >= 5)
-  .map(([o, ps]) => ({ owner: o, count: ps.length, avg: Math.round(ps.reduce((a, p) => a + (p.score ?? 0), 0) / ps.length), noReadme: ps.filter((p) => !p.readmeBytes).length }))
+  .map(([o, ps]) => {
+    const scored = ps.filter((p) => p.score != null)
+    return {
+      owner: o, count: ps.length, scored: scored.length,
+      avg: scored.length ? Math.round(scored.reduce((a, p) => a + p.score, 0) / scored.length) : null,
+      noReadme: ps.filter((p) => !(p.files?.readmeBytes > 0)).length,
+    }
+  })
   .sort((a, b) => b.count - a.count)
-for (const c of clusters.filter((c) => c.count >= 8 && c.avg < 60).slice(0, 5)) {
-  signals.push({ kind: 'owner-cluster', severity: 'mid', fact: `账号 ${c.owner} 有 ${c.count} 个插件、均分仅 ${c.avg}${c.noReadme ? `、${c.noReadme} 个无 README` : ''}——疑似批量刷库/模板复制`, data: c })
+for (const c of clusters.filter((c) => c.count >= 8 && ((c.avg != null && c.avg < 60) || c.noReadme / c.count > 0.8)).slice(0, 5)) {
+  signals.push({ kind: 'owner-cluster', severity: 'mid', fact: `账号 ${c.owner} 有 ${c.count} 个插件${c.avg != null ? `、均分仅 ${c.avg}` : '（尚未评分）'}${c.noReadme ? `、${c.noReadme} 个无 README` : ''}——疑似批量刷库/模板复制`, data: c })
+}
+
+// 头部账号集中度：单一账号占比过高本身是生态结构风险（模板批量号）
+const top1 = clusters[0]
+if (top1 && top1.count / plugins.length >= 0.05) {
+  signals.push({ kind: 'dominant-owner', severity: 'low', fact: `最大账号 ${top1.owner} 独占 ${top1.count} 个插件（占全生态 ${Math.round((top1.count / plugins.length) * 100)}%）${top1.avg != null ? `、均分 ${top1.avg}` : ''}——模板批量号拉高规模数字，解读增长时需剔除水分`, data: { owner: top1.owner, count: top1.count, avg: top1.avg } })
 }
 
 // 活跃度与失活
@@ -176,7 +204,10 @@ const prompt = `你是 DeepSeek Harness（DSH，Everything is a Plugin）插件�
 
 ## 输出
 严格 JSON（不要 markdown 代码围栏）：
-{"title_zh":"…（含周数，如 DSH 生态洞察 · ${wk}）","title_en":"…","zh_md":"…完整中文报告 markdown（1200–1800 字）…","en_md":"…full English edition in markdown, not a translation summary but a standalone report…"}
+{"title_zh":"…（含周数，如 DSH 生态洞察 · ${wk}，不要再带日期范围）","title_en":"…","zh_md":"…完整中文报告 markdown（1200–1800 字；正文从第一个 ## 小节开始，不要重复报告标题，不要再写 H1）…","en_md":"…full English edition in markdown, not a translation summary but a standalone report; start from the first ## section, no H1…"}
+
+## 数据包字段注意
+- weeklyDiff.baseDate 是 diff 的实际基线日期；若带 caveat 字段，必须按 caveat 的口径表述（相对基线的累计变化），并写明基线日期，严禁写成「本周新增/本周环比」。
 
 ## 数据包
 ${JSON.stringify(pack)}`
@@ -214,8 +245,14 @@ try { report = JSON.parse(content.replace(/^```(?:json)?|```$/gm, '').trim()) } 
 }
 if (!report.zh_md || !report.en_md) { console.error('[insights] 输出缺 zh_md/en_md 字段'); process.exit(1) }
 
-const head = (title) => `> 由 DSH Insights 管线 + DeepSeek（${model}）生成 · 数据快照 ${pack.snapshot} · 启发式评估，非安全审计\n\n`
-writeFileSync(join(OUT, `${wk}.md`), `# ${report.title_zh || `DSH 生态洞察 · ${wk}`}（${pack.range}）\n\n${head()}${report.zh_md.trim()}\n`)
-writeFileSync(join(OUT, `${wk}.en.md`), `# ${report.title_en || `DSH Ecosystem Insights · ${wk}`} (${pack.range})\n\n${head()}${report.en_md.trim()}\n`)
+// 防御性清洗：模型偶尔在正文重复 H1 标题——剥掉，标题由落盘头统一生成
+const stripH1 = (md) => md.trim().replace(/^#\s+[^\n]+\n+/, '')
+const withRange = (title) => /\d{4}[/.-]\d{2}/.test(title || '') ? title : `${title}（${pack.range}）`
+const titleZh = withRange(report.title_zh || `DSH 生态洞察 · ${wk}`)
+const titleEn = withRange(report.title_en || `DSH Ecosystem Insights · ${wk}`)
+
+const head = () => `> 由 DSH Insights 管线 + DeepSeek（${model}）生成 · 数据快照 ${pack.snapshot} · 启发式评估，非安全审计\n> Generated by the DSH Insights pipeline + DeepSeek (${model}) · snapshot ${pack.snapshot} · heuristic evaluation, not a security audit\n\n`
+writeFileSync(join(OUT, `${wk}.md`), `# ${titleZh}\n\n${head()}${stripH1(report.zh_md)}\n`)
+writeFileSync(join(OUT, `${wk}.en.md`), `# ${titleEn}\n\n${head()}${stripH1(report.en_md)}\n`)
 writeFileSync(join(OUT, `${wk}.json`), JSON.stringify({ week: wk, range: pack.range, generatedAt: new Date().toISOString(), model, usage: doc.usage || null, title: { zh: report.title_zh, en: report.title_en }, signals }, null, 2))
 console.log(`[insights] → ${OUT}/${wk}.{md,en.md,json} · signals=${signals.length} · tokens=${doc.usage?.total_tokens ?? '?'}`)
