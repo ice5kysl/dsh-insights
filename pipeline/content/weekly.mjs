@@ -36,21 +36,57 @@ function weeklyDiff() {
     .filter(([k, r]) => (k in prev) && prev[k].stars != null && (r.stars || 0) > prev[k].stars)
     .map(([k, r]) => ({ id: k, from: prev[k].stars || 0, to: r.stars || 0 }))
     .sort((a, b) => (b.to - b.from) - (a.to - a.from)).slice(0, 10)
+  const addedTop = added.map((id) => cur.get(id)).sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 15)
   const L = []
   L.push(`## 本周快照 Diff（基线 ${base.date}）`)
   L.push('')
   L.push(`- 当前权威插件：**${cur.size}**（基线 ${Object.keys(prev).length} · ${base.date}）`)
   L.push(`- 新增 ${added.length} · 消失 ${removed.length}`)
   if (added.length) { L.push(''); L.push(`### 新增（Top ${Math.min(15, added.length)}，按 ★）`)
-    for (const id of added.map((id) => cur.get(id)).sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 15)) L.push(`- ${id.full_name} ★${id.stars || 0}${id.npm?.published ? ' (npm ✓)' : ''}`) }
+    for (const id of addedTop) L.push(`- ${id.full_name} ★${id.stars || 0}${id.npm?.published ? ' (npm ✓)' : ''}`) }
   if (removed.length) { L.push(''); L.push(`### 消失（Top ${Math.min(10, removed.length)}）`)
     for (const id of removed.slice(0, 10)) L.push(`- ${id}`) }
   if (risers.length) { L.push(''); L.push('### star 涨幅榜（同基线）')
     for (const r of risers) L.push(`- ${r.id}：${r.from} → ${r.to}（+${r.to - r.from}）`) }
-  return { md: L.join('\n'), added: added.length, removed: removed.length }
+  return { md: L.join('\n'), added: added.length, removed: removed.length, addedTop: addedTop.slice(0, 8).map((r) => ({ id: r.full_name, stars: r.stars || 0, npm: !!r.npm?.published })), risers: risers.slice(0, 5) }
 }
 const diff = weeklyDiff()
 const reviews = readJsonl(PATHS.reviews).length
+
+// ---- 编者按（LLM，可选）：事实编年之上的一段编辑视角；缺 key/失败自动跳过 ----
+async function editorial() {
+  const key = process.env.DEEPSEEK_API_KEY || ''
+  if (!key) return null
+  const model = process.env.WEEKLY_LLM_MODEL || 'deepseek-v4-flash'
+  const facts = {
+    week: wk, range: weekLabel(wk),
+    authoritative: (analysis.totals || {}).authoritative, grades: (analysis.quality || {}).grades, avgScore: (analysis.quality || {}).avgScore,
+    publishPct: analysis.distribution?.publishPct, active7Pct: (analysis.totals || {}).active7Pct,
+    diff: diff && { base: undefined, added: diff.added, removed: diff.removed, addedTop: diff.addedTop, risers: diff.risers },
+    topByStars: (analysis.topByStars || []).slice(0, 5),
+    downloadsTop: (analysis.downloads?.top || []).slice(0, 5).map((s) => ({ id: s.full_name, weekly: s.weekly })),
+    releases: (dyn?.dsh?.releases || []).slice(0, 3).map((r) => ({ tag: r.tag, at: (r.published_at || '').slice(0, 10), breaking: !!r.breaking })),
+  }
+  const prompt = `你是「DSH 插件生态周报」的编辑。基于以下本周事实（JSON），写一段「编者按」：
+- 3–5 条 bullet，每条一行：以一个**加粗的判断短语**开头（5–15 字，是具体的判断内容本身，严禁出现「一句话判断」这类占位字样），后接支撑（点名具体插件/作者/版本 + 数字）。禁止复述统计数字本身，要给编辑视角的判断（什么值得注意、为什么、意味着什么）。
+- 最后单独一行写一句「本周基调」收尾（一句话，不用 bullet）。
+- 只许使用给定事实，禁止编造。中文。直接输出 markdown（bullet + 收尾行），不要标题、不要代码围栏。
+
+事实：${JSON.stringify(facts)}`
+  try {
+    const r = await fetch(`${process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com'}/chat/completions`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` },
+      body: JSON.stringify({ model, messages: [{ role: 'user', content: prompt }], temperature: 0.4, max_tokens: 10000 }),
+      signal: AbortSignal.timeout(120000),
+    })
+    if (!r.ok) { console.error(`[weekly] 编者按 LLM HTTP ${r.status} —— 跳过`); return null }
+    const doc = await r.json()
+    const md = (doc.choices?.[0]?.message?.content || '').replace(/^```(?:markdown)?|```$/gm, '').trim()
+    if (!md) console.error('[weekly] 编者按 LLM 返回空内容（推理模型可能吃光了 max_tokens）—— 跳过')
+    return md || null
+  } catch (e) { console.error(`[weekly] 编者按 LLM 失败（${e.message}）—— 跳过`); return null }
+}
 
 function isoWeek(d) {
   const date = new Date(d + 'T00:00:00Z')
@@ -80,11 +116,18 @@ const t = analysis.totals || {}
 const q = analysis.quality || {}
 const ch = analysis.channels
 const dl = analysis.downloads
+const editorialMd = await editorial()
 const L = []
 L.push(`# DSH 插件生态周报 · ${wk}（${weekLabel(wk)}）`)
 L.push('')
 L.push(`> 数据快照 ${(analysis.generatedAt || '').slice(0, 10)} · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)`)
 L.push('')
+if (editorialMd) {
+  L.push('## 编者按（DeepSeek 生成）')
+  L.push('')
+  L.push(editorialMd)
+  L.push('')
+}
 L.push('## 本期速览')
 L.push('')
 L.push(`- 权威插件 **${t.authoritative}** 个（通过 dsh.bundle manifest 校验；另有 ${invalid} 个被拒/噪声分桶）`)
