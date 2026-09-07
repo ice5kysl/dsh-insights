@@ -431,7 +431,7 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
 )}</div>`,
   })))
 
-  // ---- /dynamics/ 动态：统一时间线 feed（tag 筛选 + 按日分组） ----------------
+  // ---- /dynamics/ 动态：feed 时间线（侧栏标签筛选 + 按日分组 + 叙事行） --------
   const dyn = JSON.parse(read('dynamics.json') || 'null')
   const nowMs = Date.now(), d30ms = 30 * 86400000
   // 版本升级：相邻两期 history 快照的 version diff（history 自 2026-09-07 起记录 version，首日为空）
@@ -449,19 +449,20 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
   const evs = []
   for (const r of plugAll) {
     const g = enBy.get(r.full_name)?.grade
+    const owner = (r.full_name || '').split('/')[0]
     if (r.created_at && nowMs - new Date(r.created_at).getTime() < d30ms) {
-      evs.push({ d: r.created_at, tag: 'new', title: r.full_name, url: `/p/${r.full_name}/`, meta: `★${r.stars || 0}`, grade: g })
+      evs.push({ d: r.created_at, tag: 'new', actor: owner, obj: r.full_name, url: `/p/${r.full_name}/`, sub: stripEmoji(r.description || '').slice(0, 80) || `★${r.stars || 0}`, grade: g })
     } else if (r.pushed_at && nowMs - new Date(r.pushed_at).getTime() < d30ms) {
-      evs.push({ d: r.pushed_at, tag: 'update', title: r.full_name, url: `/p/${r.full_name}/`, meta: `${r.version ? escHtml(r.version) + ' · ' : ''}★${r.stars || 0}`, grade: g })
+      evs.push({ d: r.pushed_at, tag: 'update', actor: owner, obj: r.full_name, url: `/p/${r.full_name}/`, sub: `${r.version ? escHtml(r.version) + ' · ' : ''}★${r.stars || 0}`, grade: g })
     }
   }
-  for (const u of upRows) evs.push({ d: hLast.date + 'T00:00:00Z', tag: 'upgrade', title: u.r.full_name, url: `/p/${u.r.full_name}/`, meta: `${escHtml(u.from)} → ${escHtml(u.to)}`, grade: enBy.get(u.r.full_name)?.grade })
+  for (const u of upRows) evs.push({ d: hLast.date + 'T00:00:00Z', tag: 'upgrade', actor: (u.r.full_name || '').split('/')[0], obj: u.r.full_name, url: `/p/${u.r.full_name}/`, sub: `${escHtml(u.from)} → ${escHtml(u.to)}`, grade: enBy.get(u.r.full_name)?.grade })
   const dsh0 = dyn?.dsh || {}
   for (const r of dsh0.releases || []) {
-    evs.push({ d: r.published_at, tag: r.breaking ? 'breaking' : 'official', title: r.tag, url: `https://github.com/${dsh0.repo}/releases/tag/${r.tag}`, meta: escHtml(r.summary || (r.prerelease ? 'pre-release' : 'release')), ext: 1 })
+    evs.push({ d: r.published_at, tag: r.breaking ? 'breaking' : 'official', actor: (dsh0.repo || '').split('/')[0], obj: r.tag, url: `https://github.com/${dsh0.repo}/releases/tag/${r.tag}`, sub: escHtml((r.summary || (r.prerelease ? 'pre-release' : 'release')).slice(0, 90)), ext: 1 })
   }
   for (const p of (dyn?.platform || []).filter((p) => !p.error && p.pushed_at)) {
-    evs.push({ d: p.pushed_at, tag: 'platform', title: p.repo, url: `https://github.com/${p.repo}`, meta: `★${(p.stars || 0).toLocaleString()}${p.latestRelease ? ' · ' + escHtml(p.latestRelease.tag) : ''}`, ext: 1 })
+    evs.push({ d: p.pushed_at, tag: 'platform', actor: p.repo.split('/')[0], obj: p.repo, url: `https://github.com/${p.repo}`, sub: `★${(p.stars || 0).toLocaleString()}${p.latestRelease ? ' · ' + escHtml(p.latestRelease.tag) : ''}`, ext: 1 })
   }
   evs.sort((a, b) => new Date(b.d) - new Date(a.d))
   const FEED_CAP = 400
@@ -472,19 +473,27 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
     .sort((a, b) => new Date(b.d) - new Date(a.d))
 
   const TAGS = [
-    ['new', '新插件', 'New plugin', 'var(--accent)'],
-    ['upgrade', '版本升级', 'Upgrade', 'var(--ok)'],
-    ['update', '活跃更新', 'Update', 'var(--faint)'],
-    ['official', '官方发布', 'Official', 'var(--ink)'],
-    ['breaking', 'Breaking', 'Breaking', 'var(--err)'],
-    ['platform', '平台仓库', 'Platform', '#7c3aed'],
+    ['new', '新插件', 'New plugin', 'var(--accent)', '发布了新插件', 'published a new plugin'],
+    ['upgrade', '版本升级', 'Upgrade', 'var(--ok)', '升级了', 'upgraded'],
+    ['update', '活跃更新', 'Update', 'var(--faint)', '更新了', 'updated'],
+    ['official', '官方发布', 'Official', 'var(--ink)', '发布了', 'released'],
+    ['breaking', 'Breaking', 'Breaking', 'var(--err)', '发布了含 breaking 的', 'shipped a breaking release'],
+    ['platform', '平台仓库', 'Platform', '#7c3aed', '更新了平台仓库', 'updated'],
   ]
-  const tagOf = Object.fromEntries(TAGS.map(([k, zh, en, c]) => [k, { zh, en, c }]))
+  const tagOf = Object.fromEntries(TAGS.map(([k, zh, en, c, vzh, ven]) => [k, { zh, en, c, vzh, ven }]))
   const tagCount = Object.fromEntries(TAGS.map(([k]) => [k, 0]))
   for (const e of feed) tagCount[e.tag] = (tagCount[e.tag] || 0) + 1
 
-  const chip = (key, zh, en, n) => `<button class="fchip${key === 'all' ? ' on' : ''}" data-f="${key}">${t(zh, en)} <span class="n">${n}</span></button>`
-  const chips = chip('all', '全部', 'All', feed.length) + TAGS.filter(([k]) => tagCount[k]).map(([k, zh, en]) => chip(k, zh, en, tagCount[k])).join('')
+  const relTime = (d) => {
+    const m = Math.max(1, Math.round((nowMs - new Date(d).getTime()) / 60000))
+    if (m < 60) return t(`${m} 分钟前`, `${m}m ago`)
+    const h = Math.round(m / 60)
+    if (h < 24) return t(`${h} 小时前`, `${h}h ago`)
+    return t(`${Math.round(h / 24)} 天前`, `${Math.round(h / 24)}d ago`)
+  }
+
+  const sideBtn = (key, zh, en, n, on) => `<button class="fside${on ? ' on' : ''}" data-f="${key}"><span>${t(zh, en)}</span><span class="n">${n}</span></button>`
+  const sideHtml = sideBtn('all', '全部动态', 'All', feed.length, true) + TAGS.filter(([k]) => tagCount[k]).map(([k, zh, en]) => sideBtn(k, zh, en, tagCount[k], false)).join('')
 
   const feedRows = []
   let lastDay = ''
@@ -494,11 +503,15 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
       feedRows.push(`<div class="fday" data-day="${day}">${day}</div>`)
       lastDay = day
     }
-    const tg = tagOf[e.tag] || { zh: e.tag, en: e.tag, c: 'var(--faint)' }
+    const tg = tagOf[e.tag] || { zh: e.tag, en: e.tag, c: 'var(--faint)', vzh: e.tag, ven: e.tag }
     feedRows.push(`<div class="frow" data-tag="${e.tag}" data-day="${day}">
-<span class="ftag" style="color:${tg.c};border-color:${tg.c}">${t(tg.zh, tg.en)}</span>
-<a href="${e.url}"${e.ext ? ' target="_blank"' : ''}>${e.grade ? `<span class="grade ${e.grade}">${e.grade}</span> ` : ''}${escHtml(e.title)}</a>
-<span class="meta">${e.meta}</span>
+<i class="fdot" style="background:${tg.c}"></i>
+<img class="fav" src="https://github.com/${escHtml(e.actor)}.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
+<div class="fbody">
+  <div class="fline"><a class="fwho" href="https://github.com/${escHtml(e.actor)}" target="_blank">${escHtml(e.actor)}</a><span class="fverb">${t(tg.vzh, tg.ven)}</span><a class="fobj" href="${e.url}"${e.ext ? ' target="_blank"' : ''}>${e.grade ? `<span class="grade ${e.grade}">${e.grade}</span> ` : ''}${escHtml(e.obj)}</a></div>
+  ${e.sub ? `<div class="fsub">${e.sub}</div>` : ''}
+</div>
+<span class="ftime" title="${escHtml((e.d || '').slice(0, 16).replace('T', ' '))} UTC">${relTime(e.d)}</span>
 </div>`)
   }
 
@@ -525,29 +538,39 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
   }
 
   const dynBody = `<p class="crumb">Dynamics</p><h1 class="pagetitle">${t('动态', 'Dynamics')}</h1>
-<p class="lede">${t('生态时间线：插件新入库 / 版本升级 / 活跃更新 + 官方 release 与平台仓库动向，按日分组、可按类型筛选。近 30 天窗口，每日随快照滚动。', 'The ecosystem timeline: plugin arrivals / version upgrades / recent activity plus official releases and platform repos, grouped by day and filterable by type. Rolling 30-day window, refreshed daily.')}</p>
-<div class="fchips" id="fchips">${chips}</div>
-<div class="card" style="padding:6px 14px" id="feed">${feedRows.join('') || `<p class="lede" style="margin:10px 0">${t('近 30 天暂无动态', 'No events in the last 30 days')}</p>`}</div>
+<p class="lede">${t('生态时间线：谁在什么时候做了什么——插件新入库 / 版本升级 / 活跃更新 + 官方 release 与平台仓库动向。近 30 天窗口，每日随快照滚动。', 'The ecosystem timeline: who did what and when — plugin arrivals / version upgrades / recent activity plus official releases and platform repos. Rolling 30-day window, refreshed daily.')}</p>
+<div class="flayout">
+<aside class="fsidebar" id="fside">${sideHtml}</aside>
+<div class="fmain card" id="feed">${feedRows.join('') || `<p class="lede" style="margin:10px 0">${t('近 30 天暂无动态', 'No events in the last 30 days')}</p>`}</div>
+</div>
 ${evs.length > FEED_CAP ? `<p class="lede" style="margin-top:8px">${t(`仅显示最近 ${FEED_CAP} 条（共 ${evs.length} 条）`, `Showing the latest ${FEED_CAP} of ${evs.length} events`)}</p>` : ''}
 ${officialRef}
 <style>
-.fchips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
-.fchip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--mut)}
-.fchip:hover{border-color:var(--faint);color:var(--ink)}
-.fchip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.fchip.on .n{color:var(--bg);opacity:.7}
-.fchip .n{font:11px var(--mono);opacity:.6;margin-left:2px}
-.frow{display:flex;align-items:baseline;gap:10px;padding:8px 2px;border-bottom:1px solid var(--line)}
+.flayout{display:grid;grid-template-columns:188px minmax(0,1fr);gap:24px;align-items:start}
+.fsidebar{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:6px}
+.fside{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:none;padding:8px 10px;border-radius:8px;cursor:pointer;color:var(--mut);font-size:12.5px;text-align:left}
+.fside:hover{background:var(--track);color:var(--ink)}
+.fside.on{background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent);font-weight:650}
+.fside .n{font:11px var(--mono);opacity:.6}
+.fmain{padding:4px 16px}
+.frow{display:flex;align-items:flex-start;gap:10px;padding:10px 2px;border-bottom:1px solid var(--line)}
 .frow:last-child{border-bottom:none}
-.frow .ftag{flex:none;font:600 10.5px var(--mono);letter-spacing:.04em;border:1px solid;border-radius:5px;padding:0 6px;line-height:1.7;min-width:52px;text-align:center}
-.frow a{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;color:var(--ink)}
-.frow a:hover{color:var(--accent)}
-.frow .meta{color:var(--faint);font:11.5px var(--mono);white-space:nowrap;flex:none;max-width:40%;overflow:hidden;text-overflow:ellipsis}
-.fday{position:sticky;top:56px;background:var(--bg);font:600 11.5px var(--mono);letter-spacing:.06em;color:var(--faint);padding:12px 2px 6px;border-bottom:1px solid var(--line)}
+.fdot{flex:none;width:7px;height:7px;border-radius:50%;margin-top:8px}
+.fav{flex:none;border-radius:50%;margin-top:2px}
+.fbody{flex:1;min-width:0}
+.fline{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;line-height:1.5}
+.fwho{font-weight:650;color:var(--ink)}
+.fverb{color:var(--mut);font-size:12.5px}
+.fobj{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.fobj:hover{color:var(--accent)}
+.fsub{color:var(--faint);font-size:12px;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ftime{flex:none;color:var(--faint);font:11.5px var(--mono);white-space:nowrap;margin-top:3px}
+.fday{position:sticky;top:56px;background:var(--card);font:600 11.5px var(--mono);letter-spacing:.06em;color:var(--faint);padding:12px 2px 6px;border-bottom:1px solid var(--line);z-index:2}
+@media(max-width:860px){.flayout{grid-template-columns:1fr}.fsidebar{position:static;max-height:none;display:flex;overflow-x:auto;gap:4px}.fside{white-space:nowrap;flex:none;width:auto;gap:6px}}
 </style>
 <script>
 (function(){
-  var chips=document.querySelectorAll('#fchips .fchip');
+  var btns=document.querySelectorAll('#fside .fside');
   function apply(f){
     document.querySelectorAll('#feed .frow').forEach(function(r){ r.style.display=(f==='all'||r.dataset.tag===f)?'':'none' });
     document.querySelectorAll('#feed .fday').forEach(function(d){
@@ -556,7 +579,7 @@ ${officialRef}
       d.style.display=any?'':'none';
     });
   }
-  chips.forEach(function(c){ c.addEventListener('click',function(){ chips.forEach(function(x){x.classList.remove('on')}); c.classList.add('on'); apply(c.dataset.f) }) });
+  btns.forEach(function(c){ c.addEventListener('click',function(){ btns.forEach(function(x){x.classList.remove('on')}); c.classList.add('on'); apply(c.dataset.f) }) });
 })();
 </script>`
   written.push(out('dynamics/index.html', page({
