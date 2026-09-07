@@ -247,7 +247,8 @@ section[id],div[id="browse"]{scroll-margin-top:108px}
 .nav a{color:var(--mut);font-size:13px;padding:5px 10px;border-radius:7px}
 .nav a:hover{color:var(--ink);background:var(--track);text-decoration:none}
 .nav a.gh{border:1px solid var(--line);margin-left:6px}
-@media(max-width:720px){.brand small{display:none}.topbar .wrap{flex-wrap:wrap;height:auto;padding:6px 28px;row-gap:2px}.nav{overflow-x:auto;width:100%;padding-bottom:4px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{padding:5px 7px;font-size:12.5px;white-space:nowrap;flex:none}}
+.menubtn{display:none}
+@media(max-width:720px){.brand small{display:none}.topbar .wrap{flex-wrap:wrap;height:auto;min-height:52px;padding:0 20px;row-gap:0}.menubtn{display:inline-flex;margin-left:auto}.nav{display:none;flex-basis:100%;flex-direction:column;align-items:stretch;gap:2px;padding:10px 0 14px;border-top:1px solid var(--line)}.topbar.open .nav{display:flex}.nav a{padding:9px 12px;font-size:14px}.nav a.gh{margin-left:0;margin-top:8px}.nav .theme{align-self:flex-start;margin-top:8px}.subnav{top:52px}}
 
 /* ---- hero ---- */
 .hero{border-bottom:1px solid var(--line);padding:56px 0 36px;background:var(--card)}
@@ -413,6 +414,7 @@ ${I18N_CSS}
 <body>
 <div class="topbar"><div class="wrap">
   <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small>${t('DeepSeek Harness 全景观察站', 'The DeepSeek Harness Observatory')}</small></a>
+  <button class="theme menubtn" id="menuBtn" ${titleAttr('菜单', 'Menu')} aria-expanded="false">${icon('menu', 15)}</button>
   <nav class="nav"><a href="/">${t('首页', 'Home')}</a><a href="./" class="here">${t('插件', 'Plugins')}</a><a href="/weekly/">${t('报告', 'Reports')}</a><a href="/dynamics/">${t('动态', 'Dynamics')}</a><a href="/data/">${t('资源', 'Resources')}</a><a href="/about/">${t('关于', 'About')}</a><button class="theme lang" id="langBtn" ${titleAttr('切换到 English', 'Switch to 中文')}>EN</button><button class="theme" id="themeBtn" ${titleAttr('深 / 浅色切换', 'Toggle dark / light')}><span class="t-moon">${icon('moon', 13)}</span><span class="t-sun">${icon('sun', 13)}</span></button><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <div class="subnav"><div class="wrap">
@@ -721,6 +723,7 @@ readHash();
 draw();
 document.addEventListener('langchange',function(){ draw() });
 (function(){var b=document.getElementById('themeBtn');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement;var d=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=d;try{localStorage.setItem('theme',d)}catch(e){}})})();
+(function(){var t=document.querySelector('.topbar'),b=document.getElementById('menuBtn');if(!t||!b)return;b.addEventListener('click',function(){var o=t.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false')})})();
 </script>
 ${I18N_BODY}
 </body>
