@@ -60,12 +60,12 @@ const plugins = [...readJsonl(PATHS.plugins).reduce((m, r) => {
   if (k) m.set(k, r)
   return m
 }, new Map()).values()]
-// 分数在 data/insights.json（score 步骤产物），plugins.jsonl 行不带 score
-const scoreOf = new Map((readJson(join(DATA, 'insights.json'), {})?.plugins || [])
-  .map((p) => [(p.full_name || '').toLowerCase(), p]))
+// 分数/分类/周下载在 enrich.json（analyze 产物）；plugins.jsonl 行不带 score
+const enrich = readJson(join(DATA, 'enrich.json'), [])
+const enBy = new Map(enrich.map((e) => [(e.full_name || '').toLowerCase(), e]))
 for (const p of plugins) {
-  const s = scoreOf.get((p.full_name || '').toLowerCase())
-  if (s) { p.score = s.score ?? s.health?.score; p.grade = s.grade ?? s.health?.grade }
+  const e = enBy.get((p.full_name || '').toLowerCase())
+  if (e) { p.score = e.score; p.grade = e.grade; p.weekly = e.weekly ?? p.weekly; p.category = e.category }
 }
 const history = readJson(PATHS.history)?.entries || []
 const metricsRows = readJsonl(join(DATA, 'metrics.jsonl'))
@@ -164,7 +164,67 @@ const breaking = rels.filter((r) => r.breaking)
 if (breaking.length) signals.push({ kind: 'breaking-release', severity: 'high', fact: `dsh 官方本周发布 ${rels.length} 个版本，其中 ${breaking.length} 个含 breaking 变更（${breaking.map((r) => r.tag).join(', ')}）——插件作者需评估适配`, factEn: `dsh shipped ${rels.length} releases this week, ${breaking.length} with breaking changes (${breaking.map((r) => r.tag).join(', ')}) — plugin authors must adapt`, data: { releases: rels.map((r) => r.tag) } })
 
 /* ------------------------------------------------------------------ *
- * 2) 数据包（bounded，喂给 LLM 的全部事实）
+ * 2) 深度交叉分析（确定性计算：四象限/队列趋势/作者格局/主题地图）
+ * ------------------------------------------------------------------ */
+const brief = (p) => ({
+  name: p.full_name, stars: p.stars || 0, grade: p.grade || '—', score: p.score ?? null,
+  weekly: p.weekly ?? null, category: p.category || null,
+  desc: String(p.description || '').replace(/\s+/g, ' ').slice(0, 70),
+})
+const scored = plugins.filter((p) => p.score != null)
+
+// 头部插件（深潜素材：LLM 点名分析用）
+const topPlugins = [...plugins].sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 10).map(brief)
+const topDownloads = plugins.filter((p) => (p.weekly || 0) > 0).sort((a, b) => b.weekly - a.weekly).slice(0, 8).map(brief)
+
+// 质量 × 采用度四象限：高质低用 = 被低估的宝藏；低质高用 = 用户风险点
+const gems = scored.filter((p) => p.score >= 85 && (p.stars || 0) < 30)
+  .sort((a, b) => b.score - a.score).slice(0, 8).map(brief)
+const risks = scored.filter((p) => p.score < 65 && ((p.stars || 0) >= 100 || (p.weekly || 0) >= 500))
+  .sort((a, b) => (b.stars || 0) + (b.weekly || 0) - ((a.stars || 0) + (a.weekly || 0))).slice(0, 8).map(brief)
+
+// 周创建队列质量趋势：生态在变好还是变水（近 10 个有数据的周）
+const cohorts = new Map()
+for (const p of scored) {
+  if (!p.created_at) continue
+  const d = new Date(p.created_at)
+  const day = (d.getUTCDay() + 6) % 7
+  d.setUTCDate(d.getUTCDate() - day)
+  const key = d.toISOString().slice(0, 10)
+  if (!cohorts.has(key)) cohorts.set(key, { n: 0, sum: 0 })
+  const c = cohorts.get(key); c.n++; c.sum += p.score
+}
+const cohortTrend = [...cohorts.entries()].sort((a, b) => a[0].localeCompare(b[0])).slice(-10)
+  .map(([week, c]) => ({ week, plugins: c.n, avgScore: Math.round((c.sum / c.n) * 10) / 10 }))
+
+// 主题地图：LLM 能力标签 + 分类分布（带平均分，看哪些类别卷/哪些类别优质）
+const llmRows = readJsonl(PATHS.llm)
+const tagCount = new Map()
+for (const r of llmRows) for (const tg of r.capabilityTags || []) tagCount.set(tg, (tagCount.get(tg) || 0) + 1)
+const topTags = [...tagCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15).map(([tag, n]) => ({ tag, plugins: n }))
+const catStat = new Map()
+for (const p of scored) {
+  const c = p.category || '未分类'
+  if (!catStat.has(c)) catStat.set(c, { n: 0, sum: 0 })
+  const s = catStat.get(c); s.n++; s.sum += p.score
+}
+const categoryMap = [...catStat.entries()].sort((a, b) => b[1].n - a[1].n).slice(0, 12)
+  .map(([category, s]) => ({ category, plugins: s.n, avgScore: Math.round((s.sum / s.n) * 10) / 10 }))
+
+// 作者格局：集中度 / 头部作者 / 关键连接者 / 高质作者
+const authorRows = analysis.authors || []
+const topAuthorsByStars = [...authorRows].sort((a, b) => b.stars - a.stars).slice(0, 8)
+  .map((a) => ({ owner: a.owner, plugins: a.plugins, stars: a.stars, avg: a.avg, topPlugin: a.topPlugin }))
+const topAuthorsProlific = [...authorRows].filter((a) => a.owner !== 'uckkk').sort((a, b) => b.plugins - a.plugins).slice(0, 6)
+  .map((a) => ({ owner: a.owner, plugins: a.plugins, stars: a.stars, avg: a.avg }))
+const qualityAuthors = authorRows.filter((a) => a.plugins >= 3 && a.avg >= 85).sort((a, b) => b.avg - a.avg).slice(0, 6)
+  .map((a) => ({ owner: a.owner, plugins: a.plugins, avg: a.avg, stars: a.stars }))
+const graphNodes = (readJson(join(DATA, 'authors-graph.json'), {})?.nodes || [])
+const connectors = [...graphNodes].sort((a, b) => (b.plugins * Math.log10(b.stars + 10)) - (a.plugins * Math.log10(a.stars + 10))).slice(0, 8)
+  .map((n) => ({ id: n.id, plugins: n.plugins, stars: n.stars }))
+
+/* ------------------------------------------------------------------ *
+ * 3) 数据包（bounded，喂给 LLM 的全部事实）
  * ------------------------------------------------------------------ */
 const t0 = analysis.totals || {}
 const q = analysis.quality || {}
@@ -186,6 +246,16 @@ const pack = {
     platform: (dyn.platform || []).filter((p) => !p.error).map((p) => ({ repo: p.repo, stars: p.stars, latest: p.latestRelease?.tag })),
   },
   weeklyDiff: diff,
+  // 深度交叉分析层
+  topPlugins, topDownloads,
+  quadrant: { gems, risks, note: 'gems=score≥85 且 stars<30（高质低用）；risks=score<65 且 stars≥100 或 weekly≥500（低质高用）' },
+  cohortTrend: { note: '按仓库创建周分桶的平均健康分趋势——判断生态在变优质还是变水', weeks: cohortTrend },
+  themeMap: { note: 'capabilityTags 来自 LLM 能力标注（覆盖率见 llmCoverage）；categoryMap 为规则分类分布带平均分', llmCoverage: `${llmRows.length}/${plugins.length}`, topTags, categoryMap },
+  authors: {
+    stats: analysis.authorStats,
+    note: 'authorStats: total=作者总数, multi=多插件作者, top10Share=头部10位作者的star占比%；connectors=协作图关键节点（按 插件数×log(stars) 排序）',
+    topByStars: topAuthorsByStars, prolific: topAuthorsProlific, quality: qualityAuthors, connectors,
+  },
   signals,
 }
 
@@ -196,13 +266,23 @@ const prompt = `你是 DeepSeek Harness（DSH，Everything is a Plugin）插件�
 - 数据包里的 signals 是规则引擎已检出的异常/风险，必须逐条给出：可能原因（假设要标注为假设）、影响面、解决方案或应对建议。
 - 写作风格：结论先行、专业克制、面向插件作者/生态用户/DSH 官方三类读者。
 
+## 报告定位（最重要）
+这是**洞察报告，不是统计月报**。读者已经能在仪表盘上看到数字——你的价值是给出数字之外的判断：
+- **禁止复述单个统计量**（如"共有 X 个插件，B 级占 Y%"这种任何生态都成立的废话）。
+- **每个小节必须点名**：至少 2 个具体的插件名或作者名 + 数据 + 你的判断（为什么是它、意味着什么）。
+- **每个小节必须给出 so-what**：这个发现对插件作者/生态用户/DSH 官方意味着什么。
+- 鼓励交叉分析：把两个以上维度放在一起看出模式（如"高 star 却未发布 npm""队列平均分在降""头部作者集中但贡献者网络稀疏"）。
+
 ## 结构（zh_md 与 en_md 都按此结构）
-1. 核心结论（3–5 条 bullet，每条一行：- **一句话结论**：数据支撑…）
-2. 生态健康度评估：**必须用一个 markdown 表格**（| 维度 | 本期数值 | 解读 | 三列），逐行覆盖：规模、增长、质量分布、活跃度（7 日/30 日）、npm 发布率、文档覆盖；表格之后只允许 1–2 句总体判断
-3. 质量与风险：**用 bullet 列表**，每条一个风险点：- **风险点**：数据 + 影响；禁止长段落
-4. 异常与应对（逐条处理 signals；无 signals 则写本期无显著异常并说明监测口径）
-5. 下一阶段重点与建议（分角色：插件作者 / 生态用户 / DSH 官方，各 2–4 条可执行建议 bullet）
-6. 官方动态解读（bullet 列表，每条一个观察 + 对生态的影响）
+1. 核心结论（3–5 条 bullet，每条一行：- **一句话洞察**：数据支撑…——必须是判断，不是统计）
+2. 头部插件深潜：从 topPlugins / topDownloads 中挑 3–5 个**有故事可讲**的插件，每个一个 bullet：- **名字**：它是什么（据 desc/category 概括）+ 数据（stars/grade/weekly）+ 为什么值得关注（赢在何处/风险何在）
+3. 作者格局：基于 authors 数据——集中度（top10Share/multi）、点名 2–4 个作者（头部/多产/高质/连接者各取有代表性的）、点明批量号（uckkk）对作者榜的污染；判断这个生态是"社区驱动"还是"流量驱动"
+4. 质量 × 采用度交叉发现：quadrant.gems 挑 2–3 个"被低估的宝藏"（为什么值得收录/关注），quadrant.risks 挑 2–3 个"低质高用"（用户面临什么风险）
+5. 生态主题地图：基于 themeMap——这个生态在造什么（聚类叙述 3–5 个主题带代表插件）、哪些方向拥挤（categoryMap 里插件多但平均分低的）、哪些方向是空白机会
+6. 生态健康度评估：**必须用一个 markdown 表格**（| 维度 | 本期数值 | 解读 | 三列），逐行覆盖：规模、增长、质量分布、活跃度（7 日/30 日）、npm 发布率、文档覆盖；另起一行解读 cohortTrend：最近几周的新插件队列平均分在涨还是在跌，说明什么
+7. 异常与应对（逐条处理 signals；无 signals 则写本期无显著异常并说明监测口径）
+8. 下一阶段重点与建议（分角色：插件作者 / 生态用户 / DSH 官方，各 2–4 条可执行建议 bullet，要具体到动作，不要口号）
+9. 官方动态解读（bullet 列表，每条一个观察 + 对生态的影响）
 
 ## 格式约束（我们的渲染器是极简 markdown，必须遵守）
 - **除各小节末尾 1–2 句的判断外，全文禁止超过 2 行的连续段落**——数据密集内容一律用表格或 bullet。
@@ -213,7 +293,7 @@ const prompt = `你是 DeepSeek Harness（DSH，Everything is a Plugin）插件�
 
 ## 输出
 严格 JSON（不要 markdown 代码围栏）：
-{"title_zh":"…（含周数，如 DSH 生态洞察 · ${wk}，不要再带日期范围）","title_en":"…","zh_md":"…完整中文报告 markdown（1200–1800 字；正文从第一个 ## 小节开始，不要重复报告标题，不要再写 H1）…","en_md":"…full English edition in markdown, not a translation summary but a standalone report; start from the first ## section, no H1…"}
+{"title_zh":"…（含周数，如 DSH 生态洞察 · ${wk}，不要再带日期范围）","title_en":"…","zh_md":"…完整中文报告 markdown（1800–2600 字；正文从第一个 ## 小节开始，不要重复报告标题，不要再写 H1）…","en_md":"…full English edition in markdown, not a translation summary but a standalone report; start from the first ## section, no H1…"}
 
 ## 数据包字段注意
 - weeklyDiff.baseDate 是 diff 的实际基线日期；若带 caveat 字段，必须按 caveat 的口径表述（相对基线的累计变化），并写明基线日期，严禁写成「本周新增/本周环比」。
@@ -240,7 +320,7 @@ const r = await fetch(`${base}/chat/completions`, {
     messages: [{ role: 'user', content: prompt }],
     response_format: { type: 'json_object' },
     temperature: 0.3,
-    max_tokens: 16000,
+    max_tokens: 24000,
   }),
   signal: AbortSignal.timeout(300000),
 })
