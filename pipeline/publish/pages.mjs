@@ -814,8 +814,8 @@ ${badgeExHtml}
 
 <h2 style="font-size:16px;margin:28px 0 8px">${t('说明与边界', 'Notes & Boundaries')}</h2>
 <div class="lede">${langBlock(
-  '徽章内容随每日快照自动更新（GitHub 图片缓存最长一天）；分数掉档不需要你改任何代码。启发式评估 ≠ 安全审计；徽章 404 = 仓库不在当前权威集（可能是门禁未过或校验未覆盖，可到 <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">仓库</a> 提 issue 查询/申诉）。想先本地自查，可装 <a href="../kit/">dsh-insights-kit</a>（<code>npm install dsh-insights-kit</code> 后在 DSH web profile 启用），侧栏「✦ 生态」→「作者自检」指向本地插件目录，按同一套规则现场体检，每条扣分附修复指引。',
-  'Badge content updates automatically with the daily snapshot (GitHub image caching may lag up to a day); a grade drop requires no code change on your side. Heuristic evaluation ≠ security audit; a badge 404 means the repo is not in the current authoritative set (the gate may not have passed, or validation has not covered it — open an issue on the <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">repo</a> to ask or appeal). To self-check locally first, install <a href="../kit/">dsh-insights-kit</a> (<code>npm install dsh-insights-kit</code>, then enable it in the DSH web profile), open the sidebar "✦ 生态" → "Author Self-check", point it at your local plugin directory, and it runs the same rulebook live — every deduction comes with fix guidance.'
+  '徽章内容随每日快照自动更新（GitHub 图片缓存最长一天）；分数掉档不需要你改任何代码。启发式评估 ≠ 安全审计；徽章 404 = 仓库不在当前权威集（可能是门禁未过或校验未覆盖，可到 <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">仓库</a> 提 issue 查询/申诉）。想先本地自查，可用 <a href="../kit/">dsh-insights-kit</a> 自带的命令行：<code>npx dsh-insights-kit selfcheck &lt;插件目录&gt;</code>——按同一套规则现场体检，每条扣分附修复指引，退出码可直接做 CI 门禁。',
+  'Badge content updates automatically with the daily snapshot (GitHub image caching may lag up to a day); a grade drop requires no code change on your side. Heuristic evaluation ≠ security audit; a badge 404 means the repo is not in the current authoritative set (the gate may not have passed, or validation has not covered it — open an issue on the <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">repo</a> to ask or appeal). To self-check locally first, use the CLI bundled with <a href="../kit/">dsh-insights-kit</a>: <code>npx dsh-insights-kit selfcheck &lt;plugin-dir&gt;</code> — the same rulebook, every deduction with fix guidance, and an exit code you can gate CI on.'
 )}</div>
 <script>
 (function(){
@@ -1064,7 +1064,7 @@ ${relHtml || `<p class="lede">${t('暂无发布记录', 'No releases yet')}</p>`
     ['我的插件体检', 'My Plugins Checkup', '列出你已安装的插件，逐个标注健康等级与分数；npm 有新版本时提醒升级；dsh 官方发布 breaking 版本时给出适配预警；低分插件给出同类更优替代。', 'Lists your installed plugins with health grades and scores, warns when npm has newer versions, alerts on official breaking releases, and points to better alternatives for low-grade plugins.'],
     ['装前查验', 'Pre-install Check', '输入插件名（或粘贴 GitHub 链接）→ 健康卡：S–D 等级、百分制分数、四维子分、逐条扣分明细，一键跳到完整详情页。', 'Type a plugin name (or paste a GitHub link) → a health card: S–D grade, 0–100 score, four dimension sub-scores, and itemized deductions, with a link to the full detail page.'],
     ['场景发现', 'Scenario Picks', '从「我想做什么」出发浏览 22 个场景的推荐插件——按健康分客观排序，不卖「最好」叙事。', 'Browse picks across 22 scenarios starting from "what I want to do" — ranked by objective health score, no "best" narrative for sale.'],
-    ['作者自检', 'Author Self-check', '选择本地插件目录，按 health-v5 规则书现场体检：manifest / 文档 / 工程成熟度 + 只读面安全扫描（写文件、子进程、未消毒渲染），每条扣分附修复指引，并预览你的健康徽章。', 'Point at a local plugin directory for a live check against the health-v5 rulebook: manifest / docs / engineering maturity plus a read-only-surface scan (file writes, subprocesses, unsanitized rendering). Every deduction comes with fix guidance, and you can preview your health badge.'],
+    ['作者自检（CLI）', 'Author Self-check (CLI)', '随包附带的命令行：npx dsh-insights-kit selfcheck <目录>，按 health-v5 规则书体检本地插件目录（manifest / 文档 / 工程成熟度 + 只读面安全扫描），每条扣分附修复指引；退出码可直接当 CI pre-publish 门禁。', 'A CLI ships with the package: npx dsh-insights-kit selfcheck <dir> runs the health-v5 rulebook against a local plugin directory (manifest / docs / engineering maturity plus a read-only-surface scan), every deduction with fix guidance; the exit code doubles as a CI pre-publish gate.'],
   ]
   written.push(out('kit/index.html', page({
     title: '生态助手插件', titleEn: 'The Kit', desc: 'dsh-insights-kit：装在 DSH 里的生态助手——插件体检、装前查验、场景发现、作者自检。',
@@ -1079,8 +1079,8 @@ ${relHtml || `<p class="lede">${t('暂无发布记录', 'No releases yet')}</p>`
 )}</div>
 <h2 style="font-size:16px;margin:28px 0 8px">${t('隐私与数据', 'Privacy & Data')}</h2>
 <div class="article">${langBlock(
-`<p>插件本身零后端：生态数据只读自 <a href="../data/">dsh-insights.com 开放数据集</a>（CC BY 4.0，host 面缓存 6 小时）；「作者自检」的目录扫描<b>只读且不出本机</b>（宿主 loopback 信任门，与官方 /api 同姿态）。不收集任何使用数据。</p>`,
-`<p>The plugin has no backend of its own: ecosystem data is read-only from the <a href="../data/">dsh-insights.com open datasets</a> (CC BY 4.0, cached 6h by the host face); the author self-check scans directories <b>read-only and never leaves your machine</b> (the host loopback trust gate, same posture as the official /api). No usage data is collected.</p>`
+`<p>插件本身零后端：生态数据只读自 <a href="../data/">dsh-insights.com 开放数据集</a>（CC BY 4.0，host 面缓存 6 小时）；「作者自检」是随包的本地 CLI（<code>npx dsh-insights-kit selfcheck</code>），目录扫描<b>只读且不出本机</b>。不收集任何使用数据。</p>`,
+`<p>The plugin has no backend of its own: ecosystem data is read-only from the <a href="../data/">dsh-insights.com open datasets</a> (CC BY 4.0, cached 6h by the host face); the author self-check is a local CLI shipped with the package (<code>npx dsh-insights-kit selfcheck</code>) — directory scans are <b>read-only and never leave your machine</b>. No usage data is collected.</p>`
 )}</div>
 <h2 style="font-size:16px;margin:28px 0 8px">${t('相关', 'Related')}</h2>
 <div class="cards">
