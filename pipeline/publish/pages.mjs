@@ -1067,7 +1067,7 @@ ${relHtml || `<p class="lede">${t('暂无发布记录', 'No releases yet')}</p>`
   ]
   written.push(out('kit/index.html', page({
     title: '生态助手插件', titleEn: 'The Kit', desc: 'dsh-insights-kit：装在 DSH 里的生态助手——插件体检、装前查验、场景发现、作者自检。',
-    base: '../', here: null,
+    base: '../', here: 'kit/',
     body: `<p class="crumb">Kit</p><h1 class="pagetitle">dsh-insights-kit <span style="color:var(--faint);font-weight:400;font-size:16px">${t('生态助手插件', 'the ecosystem assistant')}</span></h1>
 <p class="lede">${t('把 DSH Insights 的数据装进 DeepSeek Harness：侧栏「✦ 生态」一个入口，服务两类人——帮用户做「装什么、留什么、升不升」的决策，帮作者在发布前打磨作品。瘦客户端，数据全部来自本站的开放数据集。', 'DSH Insights inside DeepSeek Harness: one sidebar entry ("✦ 生态") serving two audiences — helping users decide what to install, keep and upgrade, and helping authors polish their plugins before release. A thin client over this site\u2019s open datasets.')}</p>
 <div class="cards">${kitCaps.map(([zh, en, dzh, den]) => `<div class="card"><b>${t(zh, en)}</b><p>${t(dzh, den)}</p></div>`).join('')}</div>

@@ -105,6 +105,13 @@ h1.pagetitle{margin:0 0 8px;font-size:clamp(22px,3.4vw,30px);font-weight:700;let
 .sig .sev{font:700 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-right:8px;opacity:.75}
 :root[data-theme=dark] .sig.high{background:color-mix(in srgb,#eab308 15%,transparent);color:#fde68a}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .sig.high{background:color-mix(in srgb,#eab308 15%,transparent);color:#fde68a}}
+.subbar{border-bottom:1px solid var(--line);background:var(--bg)}
+.subbar .wrap{display:flex;gap:2px;padding:0 28px;height:38px;align-items:center;overflow-x:auto;scrollbar-width:none}
+.subbar .wrap::-webkit-scrollbar{display:none}
+.subbar a{color:var(--mut);font-size:12.5px;padding:4px 10px;border-radius:7px;white-space:nowrap;flex:none}
+.subbar a:hover{color:var(--ink);background:var(--track);text-decoration:none}
+.subbar a.here{color:var(--ink);font-weight:650;background:var(--track)}
+@media(max-width:720px){.subbar .wrap{padding:0 20px}}
 footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
 :root[data-lang=en] [data-lang-block=zh]{display:none}
@@ -115,8 +122,9 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 <body>
 <div class="topbar"><div class="wrap">
   <a class="brand" href="../"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small><span data-en="The DeepSeek Harness Observatory">DeepSeek Harness 全景观察站</span></small></a>
-  <nav class="nav"><a href="../"><span data-en="Home">首页</span></a><a href="../dashboard/"><span data-en="Plugins">插件</span></a><a href="../scenarios/"><span data-en="Scenarios">场景</span></a><a href="../weekly/"><span data-en="Weekly">周报</span></a><a href="../insights/"><span data-en="Insights">洞察</span></a><a href="../dynamics/" class="here"><span data-en="Dynamics">动态</span></a><a href="../authors/"><span data-en="Authors">作者</span></a><a href="../badge/"><span data-en="Badge">徽章</span></a><a href="../data/"><span data-en="Open Data">开放数据</span></a><a href="../about/"><span data-en="About">关于</span></a><button class="theme lang" id="langBtn" title="切换到 English" data-en-title="Switch to 中文" aria-label="切换到 English" data-en-aria="Switch to 中文">EN</button><button class="theme" id="themeBtn" title="切换深浅色" data-en-title="Toggle dark / light" aria-label="切换深浅色" data-en-aria="Toggle dark / light"><span class="t-moon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span class="t-sun"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button><a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <nav class="nav"><a href="../"><span data-en="Home">首页</span></a><a href="../dashboard/"><span data-en="Plugins">插件</span></a><a href="../weekly/"><span data-en="Reports">报告</span></a><a href="../dynamics/" class="here"><span data-en="Dynamics">动态</span></a><a href="../data/"><span data-en="Resources">资源</span></a><a href="../about/"><span data-en="About">关于</span></a><button class="theme lang" id="langBtn" title="切换到 English" data-en-title="Switch to 中文" aria-label="切换到 English" data-en-aria="Switch to 中文">EN</button><button class="theme" id="themeBtn" title="切换深浅色" data-en-title="Toggle dark / light" aria-label="切换深浅色" data-en-aria="Toggle dark / light"><span class="t-moon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span class="t-sun"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button><a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
+
 <main class="wrap">
 <div class="content">
 <p class="crumb">Dynamics</p><h1 class="pagetitle"><span data-en="Dynamics">动态</span></h1>
@@ -130,7 +138,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/TYEclipse" target="_blank">TYEclipse</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/TYEclipse/dsh-probstat/"><span class="grade C">C</span> TYEclipse/dsh-probstat</a></div>
   <div class="fsub">Deterministic probability & statistical inference math for DeepSeek Harness: dis</div>
 </div>
-<span class="ftime" title="2026-09-06 22:01 UTC"><span data-en="16h ago">16 小时前</span></span>
+<span class="ftime" title="2026-09-06 22:01 UTC"><span data-en="18h ago">18 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/GooDAnDReaDY.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -138,7 +146,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/GooDAnDReaDY" target="_blank">GooDAnDReaDY</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/GooDAnDReaDY/dsh-session-control/"><span class="grade B">B</span> GooDAnDReaDY/dsh-session-control</a></div>
   <div class="fsub">Session management for the DeepSeek Harness sidebar: pin conversations, search t</div>
 </div>
-<span class="ftime" title="2026-09-06 21:51 UTC"><span data-en="16h ago">16 小时前</span></span>
+<span class="ftime" title="2026-09-06 21:51 UTC"><span data-en="18h ago">18 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/chy007-fun.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -146,7 +154,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/chy007-fun" target="_blank">chy007-fun</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/chy007-fun/dsh-token-hud/"><span class="grade B">B</span> chy007-fun/dsh-token-hud</a></div>
   <div class="fsub">DSH Web global real-time Token HUD: draggable floating window with live tok/s, c</div>
 </div>
-<span class="ftime" title="2026-09-06 18:52 UTC"><span data-en="19h ago">19 小时前</span></span>
+<span class="ftime" title="2026-09-06 18:52 UTC"><span data-en="21h ago">21 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/JunNanLYS.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -154,7 +162,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/JunNanLYS" target="_blank">JunNanLYS</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/JunNanLYS/dsh-input-markdown/"><span class="grade C">C</span> JunNanLYS/dsh-input-markdown</a></div>
   <div class="fsub">See your markdown rendered live as you type in the DeepSeek Harness (dsh) web co</div>
 </div>
-<span class="ftime" title="2026-09-06 18:12 UTC"><span data-en="20h ago">20 小时前</span></span>
+<span class="ftime" title="2026-09-06 18:12 UTC"><span data-en="21h ago">21 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/NattoCB.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -162,7 +170,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/NattoCB" target="_blank">NattoCB</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/NattoCB/dsh-widget-center/"><span class="grade C">C</span> NattoCB/dsh-widget-center</a></div>
   <div class="fsub">DSH plugin: native macOS desktop widget center — shares quote tickers & notes me</div>
 </div>
-<span class="ftime" title="2026-09-06 17:38 UTC"><span data-en="21h ago">21 小时前</span></span>
+<span class="ftime" title="2026-09-06 17:38 UTC"><span data-en="22h ago">22 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/tr1v3r.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -170,7 +178,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/tr1v3r" target="_blank">tr1v3r</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/tr1v3r/dsh-quote-followup/"><span class="grade B">B</span> tr1v3r/dsh-quote-followup</a></div>
   <div class="fsub">Quote selected conversation content into a targeted follow-up turn for DeepSeek </div>
 </div>
-<span class="ftime" title="2026-09-06 17:38 UTC"><span data-en="21h ago">21 小时前</span></span>
+<span class="ftime" title="2026-09-06 17:38 UTC"><span data-en="22h ago">22 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/emuco.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -178,7 +186,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/emuco" target="_blank">emuco</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/emuco/dsh-project-env/"><span class="grade C">C</span> emuco/dsh-project-env</a></div>
   <div class="fsub">Per-project runtime environments for DeepSeek Harness: auto-adopt or create a pr</div>
 </div>
-<span class="ftime" title="2026-09-06 17:33 UTC"><span data-en="21h ago">21 小时前</span></span>
+<span class="ftime" title="2026-09-06 17:33 UTC"><span data-en="22h ago">22 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/grloper.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -186,7 +194,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/grloper" target="_blank">grloper</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/grloper/dsh-deep-research/"><span class="grade C">C</span> grloper/dsh-deep-research</a></div>
   <div class="fsub">Kestrel - a research engine that can't cite what a source never said. Citations </div>
 </div>
-<span class="ftime" title="2026-09-06 17:03 UTC"><span data-en="21h ago">21 小时前</span></span>
+<span class="ftime" title="2026-09-06 17:03 UTC"><span data-en="23h ago">23 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/johnhom1024.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -194,7 +202,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/johnhom1024" target="_blank">johnhom1024</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/johnhom1024/dsh-loopback-bridge/"><span class="grade B">B</span> johnhom1024/dsh-loopback-bridge</a></div>
   <div class="fsub">Unlock DSH Web settings and credentials when you open the UI from a LAN IP or pu</div>
 </div>
-<span class="ftime" title="2026-09-06 16:38 UTC"><span data-en="22h ago">22 小时前</span></span>
+<span class="ftime" title="2026-09-06 16:38 UTC"><span data-en="23h ago">23 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/xiaono1.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -202,7 +210,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/xiaono1" target="_blank">xiaono1</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/xiaono1/dsh-ov-memory/"><span class="grade C">C</span> xiaono1/dsh-ov-memory</a></div>
   <div class="fsub">把 OpenViking 持久记忆接入 DeepSeek Harness（DSH）的插件：自动召回、会话镜像与阈值提交、离线出站队列重放、自研 MCP 工具桥与</div>
 </div>
-<span class="ftime" title="2026-09-06 16:26 UTC"><span data-en="22h ago">22 小时前</span></span>
+<span class="ftime" title="2026-09-06 16:26 UTC"><span data-en="23h ago">23 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/lokih1028.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -210,7 +218,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/lokih1028" target="_blank">lokih1028</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/lokih1028/dsh-plugin-canvas-pro/"><span class="grade C">C</span> lokih1028/dsh-plugin-canvas-pro</a></div>
   <div class="fsub">Canvas-Pro artifact drawer for DeepSeek Harness with eight model tools for HTML,</div>
 </div>
-<span class="ftime" title="2026-09-06 16:15 UTC"><span data-en="22h ago">22 小时前</span></span>
+<span class="ftime" title="2026-09-06 16:15 UTC"><span data-en="23h ago">23 小时前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/jsoncode.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -218,7 +226,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/jsoncode" target="_blank">jsoncode</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/jsoncode/dsh-listen-npm/"><span class="grade C">C</span> jsoncode/dsh-listen-npm</a></div>
   <div class="fsub">监听查看设置的npm包的下载情况</div>
 </div>
-<span class="ftime" title="2026-09-06 15:32 UTC"><span data-en="23h ago">23 小时前</span></span>
+<span class="ftime" title="2026-09-06 15:32 UTC"><span data-en="1d ago">1 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/loyalchiiina.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -226,7 +234,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/loyalchiiina" target="_blank">loyalchiiina</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/loyalchiiina/dsh-todo-float-ball/"><span class="grade C">C</span> loyalchiiina/dsh-todo-float-ball</a></div>
   <div class="fsub">Floating progress ball for DeepSeek Harness (DSH): keeps the AI agent's todo_wri</div>
 </div>
-<span class="ftime" title="2026-09-06 15:12 UTC"><span data-en="23h ago">23 小时前</span></span>
+<span class="ftime" title="2026-09-06 15:12 UTC"><span data-en="1d ago">1 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/chen6896qqwee.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -234,7 +242,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/chen6896qqwee" target="_blank">chen6896qqwee</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/chen6896qqwee/dsh-workflow-console/"><span class="grade D">D</span> chen6896qqwee/dsh-workflow-console</a></div>
   <div class="fsub">Workflow Console plugin for DeepSeek Harness: sidebar speed-rail for plan/execut</div>
 </div>
-<span class="ftime" title="2026-09-06 15:09 UTC"><span data-en="23h ago">23 小时前</span></span>
+<span class="ftime" title="2026-09-06 15:09 UTC"><span data-en="1d ago">1 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/lirui1024k.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -554,7 +562,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/kristol07" target="_blank">kristol07</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/kristol07/dsh-version-inventory/"><span class="grade A">A</span> kristol07/dsh-version-inventory</a></div>
   <div class="fsub">Show the running DeepSeek Harness version and every mounted plugin's package ver</div>
 </div>
-<span class="ftime" title="2026-09-06 03:24 UTC"><span data-en="1d ago">1 天前</span></span>
+<span class="ftime" title="2026-09-06 03:24 UTC"><span data-en="2d ago">2 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/chuxindd.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -562,7 +570,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/chuxindd" target="_blank">chuxindd</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/chuxindd/dsh-context-enhancement/"><span class="grade B">B</span> chuxindd/dsh-context-enhancement</a></div>
   <div class="fsub">适用于 DeepSeek Harness 的单会话上下文增强工具，力求化解会话在触发 /compact 上下文压缩后损失信息过多，导致前后表现“判若两人”的技术</div>
 </div>
-<span class="ftime" title="2026-09-06 03:12 UTC"><span data-en="1d ago">1 天前</span></span>
+<span class="ftime" title="2026-09-06 03:12 UTC"><span data-en="2d ago">2 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/clclyzybzjsq.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -570,7 +578,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/clclyzybzjsq" target="_blank">clclyzybzjsq</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/clclyzybzjsq/dsh-btw/"><span class="grade B">B</span> clclyzybzjsq/dsh-btw</a></div>
   <div class="fsub">enables /btw commands in deepseek-harness (similar to /btw in claude code)</div>
 </div>
-<span class="ftime" title="2026-09-06 02:49 UTC"><span data-en="1d ago">1 天前</span></span>
+<span class="ftime" title="2026-09-06 02:49 UTC"><span data-en="2d ago">2 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-06">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/OuYangxin12.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1106,7 +1114,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/yailPeralta" target="_blank">yailPeralta</a><span class="fverb"><span data-en="updated">更新了</span></span><a class="fobj" href="/p/yailPeralta/ast-mcp-server/"><span class="grade B">B</span> yailPeralta/ast-mcp-server</a></div>
   <div class="fsub">0.13.1 · ★4</div>
 </div>
-<span class="ftime" title="2026-09-05 03:34 UTC"><span data-en="2d ago">2 天前</span></span>
+<span class="ftime" title="2026-09-05 03:34 UTC"><span data-en="3d ago">3 天前</span></span>
 </div><div class="frow" data-tag="update" data-day="2026-09-05">
 <i class="fdot" style="background:var(--faint)"></i>
 <img class="fav" src="https://github.com/oukeming64-tech.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1114,7 +1122,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/oukeming64-tech" target="_blank">oukeming64-tech</a><span class="fverb"><span data-en="updated">更新了</span></span><a class="fobj" href="/p/oukeming64-tech/codex-skills/"><span class="grade B">B</span> oukeming64-tech/codex-skills</a></div>
   <div class="fsub">0.1.0 · ★1</div>
 </div>
-<span class="ftime" title="2026-09-05 03:30 UTC"><span data-en="2d ago">2 天前</span></span>
+<span class="ftime" title="2026-09-05 03:30 UTC"><span data-en="3d ago">3 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-05">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/xi-kari.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1122,7 +1130,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/xi-kari" target="_blank">xi-kari</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/xi-kari/dsh-amphoreus/"><span class="grade S">S</span> xi-kari/dsh-amphoreus</a></div>
   <div class="fsub">翁法罗斯 × DSH：黄金裔席位工作区与画布工作台（基于 DeepSeek Harness 构建，非官方）</div>
 </div>
-<span class="ftime" title="2026-09-05 03:21 UTC"><span data-en="2d ago">2 天前</span></span>
+<span class="ftime" title="2026-09-05 03:21 UTC"><span data-en="3d ago">3 天前</span></span>
 </div><div class="frow" data-tag="update" data-day="2026-09-05">
 <i class="fdot" style="background:var(--faint)"></i>
 <img class="fav" src="https://github.com/huaweicloud.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1130,7 +1138,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/huaweicloud" target="_blank">huaweicloud</a><span class="fverb"><span data-en="updated">更新了</span></span><a class="fobj" href="/p/huaweicloud/huaweicloud-devkit/"><span class="grade A">A</span> huaweicloud/huaweicloud-devkit</a></div>
   <div class="fsub">1.1.0 · ★44</div>
 </div>
-<span class="ftime" title="2026-09-05 03:07 UTC"><span data-en="2d ago">2 天前</span></span>
+<span class="ftime" title="2026-09-05 03:07 UTC"><span data-en="3d ago">3 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-05">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/tianjiqx.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1138,7 +1146,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/tianjiqx" target="_blank">tianjiqx</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/tianjiqx/dsh-runtime-observability/"><span class="grade C">C</span> tianjiqx/dsh-runtime-observability</a></div>
   <div class="fsub">DeepSeek Harness 运行时可观测性插件。基于 OpenTelemetry 采集事件循环、内存、CPU、工作负载与子代理生命周期指标；支持断路器、E</div>
 </div>
-<span class="ftime" title="2026-09-05 03:05 UTC"><span data-en="2d ago">2 天前</span></span>
+<span class="ftime" title="2026-09-05 03:05 UTC"><span data-en="3d ago">3 天前</span></span>
 </div><div class="frow" data-tag="update" data-day="2026-09-05">
 <i class="fdot" style="background:var(--faint)"></i>
 <img class="fav" src="https://github.com/mnemon-dev.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1146,7 +1154,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/mnemon-dev" target="_blank">mnemon-dev</a><span class="fverb"><span data-en="updated">更新了</span></span><a class="fobj" href="/p/mnemon-dev/mnemon/"><span class="grade B">B</span> mnemon-dev/mnemon</a></div>
   <div class="fsub">0.1.0 · ★557</div>
 </div>
-<span class="ftime" title="2026-09-05 02:54 UTC"><span data-en="2d ago">2 天前</span></span>
+<span class="ftime" title="2026-09-05 02:54 UTC"><span data-en="3d ago">3 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-05">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/po-et.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1154,7 +1162,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/po-et" target="_blank">po-et</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/po-et/dsh-session-guard/"><span class="grade B">B</span> po-et/dsh-session-guard</a></div>
   <div class="fsub">Per-session advisory locks that stop two dsh processes from corrupting one sessi</div>
 </div>
-<span class="ftime" title="2026-09-05 02:52 UTC"><span data-en="2d ago">2 天前</span></span>
+<span class="ftime" title="2026-09-05 02:52 UTC"><span data-en="3d ago">3 天前</span></span>
 </div><div class="frow" data-tag="update" data-day="2026-09-05">
 <i class="fdot" style="background:var(--faint)"></i>
 <img class="fav" src="https://github.com/TuringCorp-net.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1978,7 +1986,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/DAIZHISEN" target="_blank">DAIZHISEN</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/DAIZHISEN/dsh-prompt-enhance/"><span class="grade B">B</span> DAIZHISEN/dsh-prompt-enhance</a></div>
   <div class="fsub">A DSH web plugin: a star button that rewrites drafts into clearer prompts, combi</div>
 </div>
-<span class="ftime" title="2026-09-04 04:03 UTC"><span data-en="3d ago">3 天前</span></span>
+<span class="ftime" title="2026-09-04 04:03 UTC"><span data-en="4d ago">4 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-04">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/dugujun3-cloud.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1986,7 +1994,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/dugujun3-cloud" target="_blank">dugujun3-cloud</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/dugujun3-cloud/dshos-dock/"><span class="grade B">B</span> dugujun3-cloud/dshos-dock</a></div>
   <div class="fsub">Workspace-OS status bar for DeepSeek Harness (DSH): task counts, latest run even</div>
 </div>
-<span class="ftime" title="2026-09-04 03:49 UTC"><span data-en="3d ago">3 天前</span></span>
+<span class="ftime" title="2026-09-04 03:49 UTC"><span data-en="4d ago">4 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-04">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/zingzheng.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -1994,7 +2002,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/zingzheng" target="_blank">zingzheng</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/zingzheng/dsh-gb/"><span class="grade B">B</span> zingzheng/dsh-gb</a></div>
   <div class="fsub">把手机变成 DSH 的语音遥控外设</div>
 </div>
-<span class="ftime" title="2026-09-04 03:34 UTC"><span data-en="3d ago">3 天前</span></span>
+<span class="ftime" title="2026-09-04 03:34 UTC"><span data-en="4d ago">4 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-04">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/ZF3373.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -2002,7 +2010,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/ZF3373" target="_blank">ZF3373</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/ZF3373/dsh-algo-trainer/"><span class="grade C">C</span> ZF3373/dsh-algo-trainer</a></div>
   <div class="fsub">ICPC competitive programming training plugin for DeepSeek Harness — sync, analys</div>
 </div>
-<span class="ftime" title="2026-09-04 03:12 UTC"><span data-en="3d ago">3 天前</span></span>
+<span class="ftime" title="2026-09-04 03:12 UTC"><span data-en="4d ago">4 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-04">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/HeShen-1.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -2010,7 +2018,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/HeShen-1" target="_blank">HeShen-1</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/HeShen-1/deepseek-whale-wallpaper/"><span class="grade A">A</span> HeShen-1/deepseek-whale-wallpaper</a></div>
   <div class="fsub">Live dot-matrix whale wallpaper plugin for the DeepSeek Harness (dsh) web UI — 1</div>
 </div>
-<span class="ftime" title="2026-09-04 02:49 UTC"><span data-en="3d ago">3 天前</span></span>
+<span class="ftime" title="2026-09-04 02:49 UTC"><span data-en="4d ago">4 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-04">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/Yinxe.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -2898,7 +2906,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/gbeta" target="_blank">gbeta</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/gbeta/dsh-stock-quote/"><span class="grade C">C</span> gbeta/dsh-stock-quote</a></div>
   <div class="fsub">DSH web plugin: collapsible draggable A-share quote widget (沪深300 + individual s</div>
 </div>
-<span class="ftime" title="2026-09-03 03:31 UTC"><span data-en="4d ago">4 天前</span></span>
+<span class="ftime" title="2026-09-03 03:31 UTC"><span data-en="5d ago">5 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-03">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/february2015.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -2906,7 +2914,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/february2015" target="_blank">february2015</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/february2015/dsh-subagent-pi-plus/"><span class="grade B">B</span> february2015/dsh-subagent-pi-plus</a></div>
   <div class="fsub">Pi true-gateway plugin for DeepSeek Harness (DSH): /pi-lock direct connection to</div>
 </div>
-<span class="ftime" title="2026-09-03 03:22 UTC"><span data-en="4d ago">4 天前</span></span>
+<span class="ftime" title="2026-09-03 03:22 UTC"><span data-en="5d ago">5 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-03">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/RayzPub.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -2914,7 +2922,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/RayzPub" target="_blank">RayzPub</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/RayzPub/dsh-plugin-garmin/"><span class="grade B">B</span> RayzPub/dsh-plugin-garmin</a></div>
   <div class="fsub">dsh-plugin-garmin 是专为佳明表盘开发的 DeepSeek Harness (dsh) 插件。用户只需在聊天窗口中通过自然语言对话，即可完成针对</div>
 </div>
-<span class="ftime" title="2026-09-03 03:06 UTC"><span data-en="4d ago">4 天前</span></span>
+<span class="ftime" title="2026-09-03 03:06 UTC"><span data-en="5d ago">5 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-03">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/aijunjiang.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -2922,7 +2930,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/aijunjiang" target="_blank">aijunjiang</a><span class="fverb"><span data-en="published a new plugin">发布了新插件</span></span><a class="fobj" href="/p/aijunjiang/dsh-plugin-vision/"><span class="grade B">B</span> aijunjiang/dsh-plugin-vision</a></div>
   <div class="fsub">Give your DSH agent eyes via any OpenAI-compatible vision model - 11 provider pr</div>
 </div>
-<span class="ftime" title="2026-09-03 03:01 UTC"><span data-en="4d ago">4 天前</span></span>
+<span class="ftime" title="2026-09-03 03:01 UTC"><span data-en="5d ago">5 天前</span></span>
 </div><div class="frow" data-tag="new" data-day="2026-09-03">
 <i class="fdot" style="background:var(--accent)"></i>
 <img class="fav" src="https://github.com/TangYT.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -3290,7 +3298,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/deepseek-ai" target="_blank">deepseek-ai</a><span class="fverb"><span data-en="updated">更新了平台仓库</span></span><a class="fobj" href="https://github.com/deepseek-ai/DeepSeek-OCR" target="_blank">deepseek-ai/DeepSeek-OCR</a></div>
   <div class="fsub">★23,870</div>
 </div>
-<span class="ftime" title="2026-01-27 03:45 UTC"><span data-en="223d ago">223 天前</span></span>
+<span class="ftime" title="2026-01-27 03:45 UTC"><span data-en="224d ago">224 天前</span></span>
 </div><div class="fday" data-day="2025-11-11">2025-11-11</div><div class="frow" data-tag="platform" data-day="2025-11-11">
 <i class="fdot" style="background:#7c3aed"></i>
 <img class="fav" src="https://github.com/deepseek-ai.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
@@ -3306,7 +3314,7 @@ footer{margin:40px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
   <div class="fline"><a class="fwho" href="https://github.com/deepseek-ai" target="_blank">deepseek-ai</a><span class="fverb"><span data-en="updated">更新了平台仓库</span></span><a class="fobj" href="https://github.com/deepseek-ai/DeepSeek-V3" target="_blank">deepseek-ai/DeepSeek-V3</a></div>
   <div class="fsub">★104,436 · v1.0.0</div>
 </div>
-<span class="ftime" title="2025-08-28 03:24 UTC"><span data-en="375d ago">375 天前</span></span>
+<span class="ftime" title="2025-08-28 03:24 UTC"><span data-en="376d ago">376 天前</span></span>
 </div><div class="fday" data-day="2025-06-27">2025-06-27</div><div class="frow" data-tag="platform" data-day="2025-06-27">
 <i class="fdot" style="background:#7c3aed"></i>
 <img class="fav" src="https://github.com/deepseek-ai.png?size=40" width="22" height="22" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
