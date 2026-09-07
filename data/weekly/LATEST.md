@@ -1,52 +1,52 @@
 # DSH 插件生态周报 · 2026-W36（2026/08/31～2026/09/06）
 
-> 数据快照 2026-09-06 · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
+> 数据快照 2026-09-07 · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
 
 ## 本期速览
 
-- 权威插件 **4160** 个（通过 dsh.bundle manifest 校验；另有 2353 个被拒/噪声分桶）
-- 近 7 天活跃 27.4%（30 天 100%）· 可过收录门禁（仓库≥1天）99.9%
-- npm 发布率 48.8%（已发布 2031 / 版本滞后 562）
-- 中英/双语文档率 38.3% · 平均质量分 84.5（A+B 84.2%）
-- curated 收录覆盖 23.8%（988 个已进 awesome/imsai）
+- 权威插件 **10189** 个（通过 dsh.bundle manifest 校验；另有 3916 个被拒/噪声分桶）
+- 近 7 天活跃 26.5%（30 天 100%）· 可过收录门禁（仓库≥1天）99.4%
+- npm 发布率 41.9%（已发布 4273 / 版本滞后 1214）
+- 中英/双语文档率 48% · 平均质量分 79.3（S+A 10.3%）
+- curated 收录覆盖 9.8%（1000 个已进 awesome/imsai）
 - npm 周下载样本 Top 15 合计 449292
-- LLM 能力标注进度：1823/4160
+- LLM 能力标注进度：1823/10189
 
 ## 官方动态（dsh × DeepSeek 平台）
 
-- dsh 官方仓库 ★213,198 · 最近 push 2026-09-04
+- dsh 官方仓库 ★213,472 · 最近 push 2026-09-04
 - npm dist-tags：latest=0.1.2-rc.1 · alpha=0.1.2-alpha.5 · next=0.1.2-rc.1
-- 最新 release：dsh-v0.1.3-alpha.1（pre-release · 2026-09-04 · ⚠️ 含 breaking 说明）
+- 最新 release：dsh-v0.1.3-alpha.1（pre-release · 2026-09-04 · 含 breaking 说明）
 - 最近 8 个 release 中 5 个含 breaking/迁移关键词——升级前请核对 releases 说明
 - rc 兼容信号：latest=0.1.2-rc.1；已探测 184 个 npm 插件，仅 2 个声明 engines.dsh（声明率过低，雷达走 v1 API 符号路线）
-- DeepSeek 平台：DeepSeek-V3 ★104,437 · v1.0.0；DeepSeek-R1 ★92,022 · v1.0.0
+- DeepSeek 平台：DeepSeek-V3 ★104,436 · v1.0.0；DeepSeek-R1 ★92,019 · v1.0.0；awesome-deepseek-integration ★39,037；DeepSeek-Coder ★24,235；DeepSeek-OCR ★23,870；Janus ★17,764；FlashMLA ★12,901；3FS ★10,185
 - 详见站点「动态」页：https://dsh-insights.com/dynamics/
 
 ## 增长与榜单
 
 | 仓库 | ★ | npm | 中/双语 |
 |---|---|---|---|
-| yjh051108/dsh-routing-suite | 7080 | — | ✅ |
-| zhu1090093659/dsh-web | 6887 | — | ✅ |
-| liustack/modlens | 3868 | — | ✅ |
-| omdsh-dev/DSH-better-sidebar | 3339 | ✅ | ✅ |
-| dsh-market/dsh-market | 3196 | ✅ | ✅ |
-| ccch1mneyyy/dsh-TUI | 2837 | — | ✅ |
-| MeteorNOX/DeepSeek-Balance-Whale-Widget | 1727 | ✅ | ✅ |
-| NanmiCoder/dsh-agent-teams | 1372 | — | ✅ |
+| yjh051108/dsh-routing-suite | 7080 | — | ✓ |
+| zhu1090093659/dsh-web | 6887 | — | ✓ |
+| liustack/modlens | 3868 | — | ✓ |
+| omdsh-dev/DSH-better-sidebar | 3339 | ✓ | ✓ |
+| dsh-market/dsh-market | 3196 | ✓ | ✓ |
+| ccch1mneyyy/dsh-TUI | 2837 | — | ✓ |
+| MeteorNOX/DeepSeek-Balance-Whale-Widget | 1727 | ✓ | ✓ |
+| NanmiCoder/dsh-agent-teams | 1372 | — | ✓ |
 
 ### 周下载 Top 10（已发布样本）
 
 - dsh-market/dsh-market：**128104**/周
+- KokuYu-sysu/dsh-market-desktop：**128104**/周
 - omdsh-dev/DSH-better-sidebar：**97317**/周
 - dream-num/dsh-univer-office：**34192**/周
 - bowenliang123/dsh-context：**31332**/周
 - Han-1413141/dsh-cost-meter：**18196**/周
 - Creakono/dsh-cost-meter：**18196**/周
+- AnakinCao/dsh-cost-meter：**18196**/周
 - ysr666/dsh-vision-router：**13687**/周
 - shaobeichen/dsh-pocket：**13036**/周
-- RevolutionLA/dsh-dream-skin：**9994**/周
-- omdsh-dev/dsh-mnemon：**9682**/周
 
 ### npm 版本滞后（仓库领先于发布）Top 5
 
@@ -58,22 +58,22 @@
 
 ## 信号与观察（启发式）
 
-- 质量两级分化仍在：A 级 736 个 vs D 级 2 个（C 级是主体 274），生态"能跑但文档/发布不齐"的中段插件占比最高。
-- 功能分类上「其它」最拥挤（1166 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
-- 17 个插件没有 README、2129 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
-- curated 收录仍集中于少数头部（988/4160），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
-- 本周新增 2221 / 消失 0，见文末「本周快照 Diff」。
+- 质量两级分化仍在：A 级 804 个 vs D 级 35 个（C 级是主体 3303），生态"能跑但文档/发布不齐"的中段插件占比最高。
+- 功能分类上「其它」最拥挤（3869 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
+- 27 个插件没有 README、5916 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
+- curated 收录仍集中于少数头部（1000/10189），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
+- 本周新增 8250 / 消失 0，见文末「本周快照 Diff」。
 
 ## 优质未收录 · 建议收录（Top 8，供作者与目录维护者）
 
+- TsFreddie/dsh-compaction-instant（A，★14）
+- Simon314620/dsh-turn-index（A，★3）
+- DGPisces/dsh-openai-oauth（A，★5）
+- hrhgit/dsh-model-manager（A，★0）
+- spoon-man569/dsh-token-price（A，★3，周下载 174）
+- PaRr0tBoY/dsh-toc-and-rewind（A，★1）
+- belowthetree/dsh-mcp-setting（A，★0）
 - spacexun2/dsh-worktime-board（A，★6）
-- Ultronen/dsh-liquid-glass（A，★4）
-- sfyyy/dsh-vision-bridge（A，★6）
-- THEWOLFWALKER/dsh-notifier（A，★87）
-- LX2000WASD/dsh-web-plugin-manager（A，★67）
-- fandc520/dsh-comfyui（A，★51）
-- huaweicloud/huaweicloud-devkit（A，★44）
-- WSL043/dsh-codex-subscription（A，★42）
 
 ## 本期动作 & 社区行动
 
@@ -85,12 +85,16 @@
 
 ## 本周快照 Diff（基线 2026-09-05）
 
-- 当前权威插件：**4160**（基线 1939 · 2026-09-05）
-- 新增 2221 · 消失 0
+- 当前权威插件：**10189**（基线 1939 · 2026-09-05）
+- 新增 8250 · 消失 0
 
 ### 新增（Top 15，按 ★）
+- plolpl789/dsh-raw-html-v2 ★16
+- abiddotdev/dsh-visualizer ★12 (npm ✓)
 - xmanrui/dsh-feishu ★10
 - better-er/dsh-tool-autoexpand ★10 (npm ✓)
+- shaoshi20/dshscan ★10 (npm ✓)
+- Kytolly/dsh-evolve-in-git ★10
 - mafeis/dsh-net-proxy ★9
 - Victor-770/dsh-commandcode-provider ★9 (npm ✓)
 - SherUnlocked-4869/dsh-plugin-msg-nav ★9
@@ -100,10 +104,6 @@
 - huermi/dsh-deepseek-web-adapter ★9
 - litestartup-com/dsh-api-gateway ★9 (npm ✓)
 - dawnliming/dsh-chinese-mode ★9
-- Yuer6327/NoLetMe ★9 (npm ✓)
-- tokentopo-ai/dsh-octo ★8
-- v587d/dsh-opencode-go-usage ★8 (npm ✓)
-- Yuuz12/dsh-webui-auth ★8 (npm ✓)
 
 ---
 

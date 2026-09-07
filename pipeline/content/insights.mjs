@@ -24,6 +24,8 @@ import { join } from 'node:path'
 import { DATA, PATHS, readJson, readJsonl } from '../../lib/data.mjs'
 
 const DRY = process.argv.includes('--dry')
+const wkArgIdx = process.argv.indexOf('--week')
+const WK_OVERRIDE = wkArgIdx >= 0 && /^\d{4}-W\d{2}$/.test(process.argv[wkArgIdx + 1] || '') ? process.argv[wkArgIdx + 1] : null
 const key = process.env.DEEPSEEK_API_KEY || process.env.LLM_API_KEY || ''
 const base = process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com'
 const model = process.env.INSIGHTS_MODEL || 'deepseek-v4-pro'
@@ -67,7 +69,7 @@ for (const p of plugins) {
 }
 const history = readJson(PATHS.history)?.entries || []
 const metricsRows = readJsonl(join(DATA, 'metrics.jsonl'))
-const wk = isoWeek(new Date().toISOString().slice(0, 10))
+const wk = WK_OVERRIDE || isoWeek(new Date().toISOString().slice(0, 10))
 
 /* ------------------------------------------------------------------ *
  * 1) 确定性信号计算（规则化异常检测，LLM 的 grounding 事实源）
