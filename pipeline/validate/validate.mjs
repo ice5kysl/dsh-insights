@@ -120,9 +120,10 @@ async function validateOne(c) {
     topics: c.topics || [], description: c.description || '',
     license: c.license ?? null,
   }
+  const canonical = meta.full_name || `${c.owner}/${c.name}`
   const record = {
-    kind: 'repo', owner: c.owner, repo: c.name,
-    full_name: meta.full_name || `${c.owner}/${c.name}`,
+    kind: 'repo', owner: canonical.split('/')[0], repo: canonical.split('/')[1],
+    full_name: canonical,
     html_url: meta.html_url || `https://github.com/${meta.full_name}`,
     stars: meta.stargazers_count ?? 0, forks: meta.forks_count ?? 0,
     created_at: meta.created_at, pushed_at: meta.pushed_at,
