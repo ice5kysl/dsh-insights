@@ -881,6 +881,7 @@ ${badgeExHtml}
   </div>
   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
     <a class="wkbtn" style="background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600" href="dashboard/#browse">${t(`浏览插件库（${(t0.authoritative || 0).toLocaleString()} 个权威插件）→`, `Browse the directory (${(t0.authoritative || 0).toLocaleString()} authoritative plugins) →`)}</a>
+    <a class="wkbtn" style="border-color:var(--accent);color:var(--accent);font-weight:600" href="kit/">${t('✦ 生态助手插件', '✦ The Kit')}</a>
     <a class="wkbtn" href="weekly/">${t('读生态周报', 'Read the Weekly')}</a>
     <a class="wkbtn" href="feed.xml">${t('订阅 RSS', 'Subscribe via RSS')}</a>
     <a class="wkbtn" href="badge/">${t('作者接入徽章', 'Badge Setup for Authors')}</a>
@@ -924,7 +925,7 @@ ${badgeExHtml}
   ${navCard('weekly/', 'mail', t('生态周报', 'Weekly'), t('双栏阅读器 · 可导出 Markdown/PDF/图片 · RSS', 'Two-pane reader · export Markdown/PDF/PNG · RSS'), t(`${weekly.length} 期 · 每周五`, `${weekly.length} issues · every Friday`))}
   ${navCard('dynamics/', 'radar', t('官方动态', 'Dynamics'), t('dsh releases/dist-tags · DeepSeek 平台 · rc 兼容信号', 'dsh releases/dist-tags · DeepSeek platform · rc compatibility signal'), latestRel ? escHtml(latestRel.tag) : '—')}
   ${navCard('authors/', 'users', t('作者榜', 'Authors'), t('生态里的重要人物：榜单 + 协作关系图', 'Key people of the ecosystem: leaderboards + collaboration graph'), t(`${(an0.authorStats?.total || 0).toLocaleString()} 位`, `${(an0.authorStats?.total || 0).toLocaleString()} authors`))}
-  ${navCard('badge/', 'star', t('健康徽章', 'Badge'), t('把客观评分带进 README：一页接入指南', 'Bring the objective score into your README: a one-page setup guide'), t('health-v4 · 每日刷新', 'health-v4 · refreshed daily'))}
+  ${navCard('badge/', 'star', t('健康徽章', 'Badge'), t('把客观评分带进 README：一页接入指南', 'Bring the objective score into your README: a one-page setup guide'), t('health-v5 · 每日刷新', 'health-v5 · refreshed daily'))}
   ${navCard('data/', 'database', t('开放数据', 'Open Data'), t('稳定 JSON URL · agent 可读 · CC BY 4.0', 'Stable JSON URLs · agent-friendly · CC BY 4.0'), t('insights.json 等 11 个数据集', '11 datasets incl. insights.json'))}
   ${navCard('about/', 'book', t('关于 · 指标体系', 'About · Metrics'), t('方法论全公开：权威集门禁 · 六维框架 · 校准回归', 'Methodology in the open: authoritative-set gate · six-dimension framework · calibration regression'), t('可复核到每条扣分', 'Every deduction is verifiable'))}
 </div>
