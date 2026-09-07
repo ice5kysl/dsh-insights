@@ -5,6 +5,7 @@
  *   node bin/pipeline.mjs <profile> [--only a,b] [--from step] [--dry]
  *
  * Profiles:
+ *   hourly    CI 每小时增量纳新（discover-incr + validate + 发布层；不跑 downloads/dynamics 等重 API 步骤）
  *   daily     CI 每日轻量刷新（collect 增量的低成本部分 + 发布层）
  *   friday    daily + 内容层（信件 diff 驱动 + 生态周报）—— 每周五 CI
  *   snapshot  分析 + 发布全链（评分/导出/徽章/历史/重叠）
@@ -59,9 +60,12 @@ const STEPS = [
 ]
 
 const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'pages']
+// 每小时增量纳新：daily 去掉 downloads/dynamics（重 API、日频足够），其余同构
+const HOURLY = ['lists', 'discover-incr', 'validate', 'analyze', 'site', 'export-csv', 'diff', 'pages']
 const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'overlap', 'scenarios', 'badges', 'site', 'pages']
 const CONTENT = ['letters', 'weekly', 'pages']
 const PROFILES = {
+  hourly: HOURLY,
   daily: DAILY,
   // pages 必须在 letters/weekly 之后（当天内容当天上线）——从 DAILY 摘出放到内容层之后，勿用 Set 去重（会把 pages 留在 DAILY 位置）
   // refresh（Tier 0 元数据合并）在 analyze 之前跑：本周活跃度/飙升榜用新鲜数据；discover 周度重爬供其消费（search 配额独立）
