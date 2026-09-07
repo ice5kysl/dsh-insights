@@ -2,6 +2,15 @@
 
 > 数据快照 2026-09-07 · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
 
+## 编者按（DeepSeek 生成）
+
+- **头部高星仍是未发布**：`yjh051108/dsh-routing-suite`（7080★）与`zhu1090093659/dsh-web`（6887★）均未发布，说明高关注仍押在期待而非可用性上。
+- **新增插件星标普遍偏低**：`plolpl789/dsh-raw-html-v2`仅16★便居新增榜首，新入场者需靠更细分的功能切入。
+- **市场工具包揽下载前二**：`dsh-market/dsh-market`与`KokuYu-sysu/dsh-market-desktop`同以128104周下载并列，生态基础设施正成为最大流量入口。
+- **核心版本连续破坏性更新**：`dsh-v0.1.3-alpha.1`（09-04）与`dsh-v0.1.2-rc.1`（09-03）均标breaking，官方在快速重塑协议但尚不稳定。
+
+本周基调：高关注与正式发布之间存在断层，官方正用破坏性更新试图弥合。
+
 ## 本期速览
 
 - 权威插件 **10189** 个（通过 dsh.bundle manifest 校验；另有 3916 个被拒/噪声分桶）
