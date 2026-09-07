@@ -431,8 +431,38 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
 )}</div>`,
   })))
 
-  // ---- /dynamics/ 官方动态（L2） -------------------------------------------
+  // ---- /dynamics/ 动态：插件动态（新入库/版本升级/活跃更新）+ 官方动态（L2） ------
   const dyn = JSON.parse(read('dynamics.json') || 'null')
+  const nowMs = Date.now(), d7ms = 7 * 86400000
+  const createdRecently = (r) => r.created_at && nowMs - new Date(r.created_at).getTime() < d7ms
+  const pushedRecently = (r) => r.pushed_at && nowMs - new Date(r.pushed_at).getTime() < d7ms
+  const gradeOf = (fn) => { const g = enBy.get(fn)?.grade; return g ? `<span class="grade ${g}">${g}</span> ` : '' }
+  const dynRow = (r, meta) => `<div class="listrow"><a href="/p/${escHtml(r.full_name)}/">${gradeOf(r.full_name)}${escHtml(r.full_name)}</a><span class="meta">${meta}</span></div>`
+  const newRows = plugAll.filter(createdRecently).sort((a, b) => (b.stars || 0) - (a.stars || 0))
+  const activeRows = plugAll.filter((r) => pushedRecently(r) && !createdRecently(r)).sort((a, b) => (b.stars || 0) - (a.stars || 0))
+  // 版本升级：相邻两期 history 快照的 version diff（history 自 2026-09-07 起记录 version，首日为空态）
+  const hEntries = JSON.parse(read('history.json') || '{}').entries || []
+  const hPrev = hEntries[hEntries.length - 2]
+  const upRows = []
+  if (hPrev?.plugins) {
+    for (const r of plugAll) {
+      const pv = hPrev.plugins[r.full_name]?.version
+      if (pv && r.version && pv !== r.version) upRows.push({ r, from: pv, to: r.version })
+    }
+    upRows.sort((a, b) => (b.r.stars || 0) - (a.r.stars || 0))
+  }
+  const dynCard = (title, sub, rowsHtml, emptyZh, emptyEn) =>
+    `<div class="card"><b>${title}</b><p>${sub}</p>${rowsHtml || `<p class="lede" style="margin:8px 0">${t(emptyZh, emptyEn)}</p>`}</div>`
+  const pluginDynHtml = `<h2 style="font-size:16px;margin:6px 0 8px">${t('插件动态', 'Plugin Dynamics')}</h2>
+<div class="lede">${langBlock(
+  '权威集插件的可观测动向：新入库、版本升级（相邻快照 diff）、近 7 天活跃更新。每日随快照滚动。',
+  'Observable movement across the authoritative set: new arrivals, version upgrades (diffed between consecutive snapshots), and pushes in the last 7 days. Refreshed daily.'
+)}</div>
+<div class="cards">
+  ${dynCard(t('新入库 · 近 7 天', 'New Arrivals · 7d'), t(`共 ${newRows.length} 个 · 按 ★`, `${newRows.length} total · by ★`), newRows.slice(0, 12).map((r) => dynRow(r, `★${r.stars || 0} · ${(r.created_at || '').slice(0, 10)}`)).join(''), '近 7 天暂无新入库', 'No new arrivals in the last 7 days')}
+  ${dynCard(t('版本升级 · 较上一快照', 'Upgraded · vs prev snapshot'), upRows.length ? t(`${upRows.length} 个插件版本变化`, `${upRows.length} version changes`) : t('首日基线建立中，明日起可见', 'Baseline being established; visible from tomorrow'), upRows.slice(0, 12).map((u) => dynRow(u.r, `${escHtml(u.from)} → ${escHtml(u.to)}`)).join(''), '较上一快照暂无版本变化', 'No version changes since the previous snapshot')}
+  ${dynCard(t('活跃更新 · 近 7 天', 'Recently Active · 7d'), t(`共 ${activeRows.length} 个有 push · 按 ★`, `${activeRows.length} pushed · by ★`), activeRows.slice(0, 12).map((r) => dynRow(r, `${r.version ? escHtml(r.version) + ' · ' : ''}★${r.stars || 0} · ${(r.pushed_at || '').slice(0, 10)}`)).join(''), '近 7 天暂无更新', 'No pushes in the last 7 days')}
+</div>`
   let dynBody = ''
   if (dyn) {
     const dsh = dyn.dsh || {}
@@ -448,8 +478,11 @@ ${r.summary ? `<div style="color:var(--mut);font-size:12.5px;margin-top:4px">${e
 </div>`).join('')
     const platRows = (dyn.platform || []).filter((p) => !p.error).map((p) => `<div class="listrow"><a href="https://github.com/${escHtml(p.repo)}" target="_blank">${escHtml(p.repo)}</a><span class="meta">★${(p.stars || 0).toLocaleString()} · push ${escHtml((p.pushed_at || '').slice(0, 10))}${p.latestRelease ? ' · ' + escHtml(p.latestRelease.tag) : ''}</span></div>`).join('')
     const cs = dyn.compatSignal
-    dynBody = `<p class="crumb">Official Dynamics</p><h1 class="pagetitle">${t('官方动态', 'Official Dynamics')}</h1>
-<p class="lede">${t(`dsh 官方与 DeepSeek 平台的可观测公开信号（releases / dist-tags / 仓库活动），每日随快照刷新。不做新闻舆情。采集于 ${escHtml((dyn.fetchedAt || '').slice(0, 16).replace('T', ' '))} UTC。`, `Observable public signals from the dsh team and the DeepSeek platform (releases / dist-tags / repo activity), refreshed with the daily snapshot. No news or sentiment tracking. Collected at ${(dyn.fetchedAt || '').slice(0, 16).replace('T', ' ')} UTC.`)}</p>
+    dynBody = `<p class="crumb">Dynamics</p><h1 class="pagetitle">${t('动态', 'Dynamics')}</h1>
+<p class="lede">${t('插件生态与官方两条线的可观测公开信号：插件侧（新入库 / 版本升级 / 活跃更新）+ 官方侧（releases / dist-tags / rc 兼容），每日随快照刷新。不做新闻舆情。', 'Observable public signals on two tracks: the plugin side (new arrivals / version upgrades / recent activity) and the official side (releases / dist-tags / rc compatibility), refreshed daily. No news or sentiment tracking.')}</p>
+${pluginDynHtml}
+<h2 style="font-size:16px;margin:30px 0 8px">${t('官方动态 · dsh 官方与 DeepSeek 平台', 'Official Dynamics · dsh & DeepSeek Platform')}</h2>
+<p class="lede">${t(`采集于 ${escHtml((dyn.fetchedAt || '').slice(0, 16).replace('T', ' '))} UTC。`, `Collected at ${(dyn.fetchedAt || '').slice(0, 16).replace('T', ' ')} UTC.`)}</p>
 <div class="cards">
   <div class="card"><b>${t('DeepSeek Harness（dsh 官方）', 'DeepSeek Harness (official)')}</b><code>${escHtml(dsh.repo)}</code><p>★${(dsh.stars || 0).toLocaleString()} · ${t('最近 push', 'last push')} ${escHtml((dsh.pushed_at || '').slice(0, 10))} · ${escHtml(dsh.description || '')}</p></div>
   <div class="card"><b>npm dist-tags</b><code>@deepseek-ai/dsh</code><table style="width:100%;font-size:12.5px;margin-top:8px"><tr><th align="left">tag</th><th align="left">${t('版本', 'Version')}</th><th align="left">${t('发布时间', 'Published')}</th></tr>${distRows}</table></div>
@@ -465,9 +498,9 @@ ${platRows}
 <p class="lede" style="margin-top:18px">${escHtml(dyn.note || '')}</p>`
   }
   written.push(out('dynamics/index.html', page({
-    title: '官方动态', titleEn: 'Official Dynamics', desc: 'dsh 官方与 DeepSeek 平台的可观测动态：releases、dist-tags、rc 兼容信号。',
+    title: '动态', titleEn: 'Dynamics', desc: 'DSH 生态可观测动态：插件新入库/版本升级/活跃更新 + dsh 官方 releases、dist-tags、rc 兼容信号。',
     base: '../', here: 'dynamics/',
-    body: dynBody || `<p class="crumb">Official Dynamics</p><h1 class="pagetitle">${t('官方动态', 'Official Dynamics')}</h1><p class="lede">${t('数据采集中，下个快照上线。', 'Data is being collected; it will go live with the next snapshot.')}</p>`,
+    body: dynBody || `<p class="crumb">Dynamics</p><h1 class="pagetitle">${t('动态', 'Dynamics')}</h1>${pluginDynHtml}<p class="lede">${t('官方动态数据采集中，下个快照上线。', 'Official dynamics are being collected; they will go live with the next snapshot.')}</p>`,
   })))
 
   // ---- /authors/ 作者榜 ----------------------------------------------------

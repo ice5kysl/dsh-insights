@@ -27,7 +27,7 @@ function main() {
     return
   }
   const plugins = {}
-  for (const r of out) plugins[r.full_name] = { score: r.health.score, grade: r.health.grade, stars: r.stars || 0 }
+  for (const r of out) plugins[r.full_name] = { score: r.health.score, grade: r.health.grade, stars: r.stars || 0, version: r.version || null }
   history.entries.push({
     date,
     total: summary.total,
