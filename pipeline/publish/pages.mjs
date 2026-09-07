@@ -297,6 +297,7 @@ ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（
     ['analysis.json', '聚合统计（仪表盘数据源）', 'Aggregate stats (dashboard data source)'],
     ['health.json', '健康分聚合（分级分布/均分/top 扣分）', 'Health score aggregates (grade distribution / average / top deductions)'],
     ['dynamics.json', '官方动态快照（dsh releases/dist-tags/DeepSeek 平台）', 'Official dynamics snapshot (dsh releases / dist-tags / DeepSeek platform)'],
+    ['scenarios.json', '场景组合推荐（插件 ↔ 场景映射）', 'Scenario picks (plugin ↔ scenario mapping)'],
     ['plugins.csv', '权威集表格（25 列，Excel 友好）', 'Authoritative set as a table (25 columns, Excel-friendly)'],
     ['downloads.json', 'npm 周下载（CI 更新）', 'npm weekly downloads (updated by CI)'],
     ['listed.json', '收录渠道清单（awesome / imsai）', 'Listing channels (awesome / imsai)'],
