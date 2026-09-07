@@ -54,6 +54,7 @@ jobs:
         if: inputs.mode != 'full'
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: |
           if [ "${{ inputs.mode }}" = "friday" ] || { [ "${{ github.event_name }}" = "schedule" ] && [ "$(date -u +%H)" != "03" ]; }; then
             if [ "${{ inputs.mode }}" = "friday" ]; then

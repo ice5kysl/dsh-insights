@@ -1,0 +1,221 @@
+#!/usr/bin/env node
+/**
+ * pipeline/content · insights — LLM 阶段性生态洞察报告（DeepSeek）
+ *
+ * 与周报的分工：周报是事实编年（数字罗列），洞察是分析判断（结论/建议/异常应对）。
+ * 方法：本脚本先用确定性规则算出「数据包 + 异常信号」，再交给 LLM 写成报告——
+ * 所有数字来自落盘数据，LLM 只负责解释与判断，不允许编造数字。
+ *
+ * 输出（幂等，同周覆盖重写）：
+ *   data/insight-reports/YYYY-Www.md      中文报告
+ *   data/insight-reports/YYYY-Www.en.md   English edition
+ *   data/insight-reports/YYYY-Www.json    meta + signals（页面/审计用）
+ *
+ * 环境：DEEPSEEK_API_KEY（必需，缺省则跳过不失败）· INSIGHTS_MODEL（默认
+ * deepseek-v4-pro；deepseek-v4-flash 可降本）· DEEPSEEK_BASE_URL。
+ *
+ *   node pipeline/content/insights.mjs --dry   # 只看数据包与信号，不调 API
+ *
+ * @module dsh-insights/content/insights
+ */
+
+import { writeFileSync, mkdirSync } from 'node:fs'
+import { join } from 'node:path'
+import { DATA, PATHS, readJson, readJsonl, loadPlugins } from '../../lib/data.mjs'
+
+const DRY = process.argv.includes('--dry')
+const key = process.env.DEEPSEEK_API_KEY || process.env.LLM_API_KEY || ''
+const base = process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com'
+const model = process.env.INSIGHTS_MODEL || 'deepseek-v4-pro'
+
+const OUT = join(DATA, 'insight-reports')
+mkdirSync(OUT, { recursive: true })
+
+function isoWeek(d) {
+  const date = new Date(d + 'T00:00:00Z')
+  const day = (date.getUTCDay() + 6) % 7
+  date.setUTCDate(date.getUTCDate() - day + 3)
+  const first = new Date(Date.UTC(date.getUTCFullYear(), 0, 4))
+  const week = 1 + Math.round(((date - first) / 86400000 - 3 + ((first.getUTCDay() + 6) % 7)) / 7)
+  return `${date.getUTCFullYear()}-W${String(week).padStart(2, '0')}`
+}
+function weekLabel(isoWk) {
+  const m = isoWk.match(/^(\d{4})-W(\d{2})$/)
+  const d = new Date(Date.UTC(+m[1], 0, 4))
+  const day = d.getUTCDay() || 7
+  d.setUTCDate(d.getUTCDate() - day + 1 + (+m[2] - 1) * 7)
+  const fmt = (x) => `${x.getUTCFullYear()}/${String(x.getUTCMonth() + 1).padStart(2, '0')}/${String(x.getUTCDate()).padStart(2, '0')}`
+  return `${fmt(d)}～${fmt(new Date(d.getTime() + 6 * 86400000))}`
+}
+
+const analysis = readJson(PATHS.analysis)
+const dyn = readJson(PATHS.dynamics)
+const scenarios = readJson(join(DATA, 'scenarios.json'), null)
+const plugins = loadPlugins()
+const history = readJson(PATHS.history)?.entries || []
+const metricsRows = readJsonl(join(DATA, 'metrics.jsonl'))
+const wk = isoWeek(new Date().toISOString().slice(0, 10))
+
+/* ------------------------------------------------------------------ *
+ * 1) 确定性信号计算（规则化异常检测，LLM 的 grounding 事实源）
+ * ------------------------------------------------------------------ */
+const signals = []
+const now = Date.now()
+const dayMs = 86400000
+
+// 周 diff（与周报同基线逻辑：距今 ≥7 天中最近一条 history）
+const target = now - 7 * dayMs
+const older = history.filter((e) => new Date(e.date).getTime() <= target)
+const baseEntry = older.length ? older[older.length - 1] : history[0]
+let diff = null
+if (baseEntry?.plugins) {
+  const prev = baseEntry.plugins
+  const cur = new Map(plugins.map((r) => [r.full_name, r]))
+  const added = [...cur.keys()].filter((k) => !(k in prev))
+  const removed = Object.keys(prev).filter((k) => !cur.has(k))
+  const risers = [...cur.entries()]
+    .filter(([k, r]) => k in prev && prev[k].stars != null && (r.stars || 0) > prev[k].stars)
+    .map(([k, r]) => ({ id: k, delta: (r.stars || 0) - (prev[k].stars || 0) }))
+    .sort((a, b) => b.delta - a.delta).slice(0, 10)
+  const downgrades = [...cur.entries()]
+    .filter(([k, r]) => k in prev && prev[k].score != null && (r.score ?? 100) < prev[k].score - 10)
+    .map(([k, r]) => ({ id: k, from: prev[k].score, to: r.score })).slice(0, 10)
+  diff = { baseDate: base.date, added: added.length, removed: removed.length, risers, downgrades }
+  if (removed.length > added.length) signals.push({ kind: 'shrink', severity: 'high', fact: `本周权威集净减少（+${added} / −${removed}）——仓库删除/私有化或校验口径变化的信号`, data: { added: added.length, removed: removed.length } })
+}
+
+// 增长异常：本周新增 vs metrics 历史的周新增均值
+const prevMetrics = metricsRows.slice(-5, -1)
+if (diff && prevMetrics.length >= 2) {
+  const adds = prevMetrics.map((m, i, arr) => (i === 0 ? null : m.authoritative - arr[i - 1].authoritative)).filter((x) => x != null)
+  const mean = adds.reduce((a, b) => a + b, 0) / adds.length
+  if (mean > 0 && (diff.added > mean * 2.5 || diff.added < mean * 0.3)) {
+    signals.push({ kind: 'growth-anomaly', severity: 'mid', fact: `本周新增 ${diff.added}，近 ${adds.length} 周均值 ${mean.toFixed(0)}——${diff.added > mean ? '突增，可能有批量导入/刷库' : '骤降，发现或收录链路需核查'}`, data: { added: diff.added, mean } })
+  }
+}
+
+// owner 集群：低质量批量账号（spam 刷库模式）
+const byOwner = new Map()
+for (const p of plugins) {
+  const o = p.owner || p.full_name?.split('/')[0]
+  if (!o) continue
+  if (!byOwner.has(o)) byOwner.set(o, [])
+  byOwner.get(o).push(p)
+}
+const clusters = [...byOwner.entries()]
+  .filter(([, ps]) => ps.length >= 5)
+  .map(([o, ps]) => ({ owner: o, count: ps.length, avg: Math.round(ps.reduce((a, p) => a + (p.score ?? 0), 0) / ps.length), noReadme: ps.filter((p) => !p.readmeBytes).length }))
+  .sort((a, b) => b.count - a.count)
+for (const c of clusters.filter((c) => c.count >= 8 && c.avg < 60).slice(0, 5)) {
+  signals.push({ kind: 'owner-cluster', severity: 'mid', fact: `账号 ${c.owner} 有 ${c.count} 个插件、均分仅 ${c.avg}${c.noReadme ? `、${c.noReadme} 个无 README` : ''}——疑似批量刷库/模板复制`, data: c })
+}
+
+// 活跃度与失活
+const stale90 = plugins.filter((p) => p.pushed_at && now - new Date(p.pushed_at).getTime() > 90 * dayMs).length
+const stalePct = Math.round((stale90 / plugins.length) * 100)
+if (stalePct >= 40) signals.push({ kind: 'stale', severity: 'mid', fact: `${stalePct}% 的插件超过 90 天未更新（${stale90}/${plugins.length}）——生态失活比例偏高`, data: { stale90, total: plugins.length } })
+
+// 下载集中度
+const dls = plugins.filter((p) => p.weekly > 0)
+if (dls.length >= 10) {
+  const sum = dls.reduce((a, p) => a + p.weekly, 0)
+  const top10 = [...dls].sort((a, b) => b.weekly - a.weekly).slice(0, 10).reduce((a, p) => a + p.weekly, 0)
+  const share = Math.round((top10 / sum) * 100)
+  if (share >= 70) signals.push({ kind: 'concentration', severity: 'low', fact: `周下载 Top10 占全部已发布插件下载的 ${share}%——流量高度集中，长尾曝光困难`, data: { share, sum } })
+}
+
+// npm 滞后
+const staleNpm = (analysis.npmStaleTop || []).length
+if (staleNpm >= 10) signals.push({ kind: 'npm-stale', severity: 'low', fact: `${staleNpm} 个插件仓库版本领先 npm 发布版本——安装侧拿到的是旧版`, data: { count: staleNpm } })
+
+// 官方动态：本周新 release（含 breaking）
+const rels = (dyn?.dsh?.releases || []).filter((r) => r.published_at && now - new Date(r.published_at).getTime() <= 7 * dayMs)
+const breaking = rels.filter((r) => r.breaking)
+if (breaking.length) signals.push({ kind: 'breaking-release', severity: 'high', fact: `dsh 官方本周发布 ${rels.length} 个版本，其中 ${breaking.length} 个含 breaking 变更（${breaking.map((r) => r.tag).join(', ')}）——插件作者需评估适配`, data: { releases: rels.map((r) => r.tag) } })
+
+/* ------------------------------------------------------------------ *
+ * 2) 数据包（bounded，喂给 LLM 的全部事实）
+ * ------------------------------------------------------------------ */
+const t0 = analysis.totals || {}
+const q = analysis.quality || {}
+const pack = {
+  week: wk, range: weekLabel(wk), snapshot: (analysis.generatedAt || '').slice(0, 10),
+  totals: t0,
+  grades: q.grades, avgScore: q.avgScore, medianStars: analysis.medianStars,
+  distribution: analysis.distribution,
+  categories: (analysis.categories || []).slice(0, 10),
+  topByStars: (analysis.topByStars || []).slice(0, 8),
+  downloadsTop: (analysis.downloads?.top || []).slice(0, 10),
+  npmStaleTop: (analysis.npmStaleTop || []).slice(0, 5),
+  suggested: (analysis.suggested || []).slice(0, 8),
+  coverage: analysis.coverage && { topicUniverse: analysis.coverage.topicUniverse?.count, candidates: analysis.coverage.candidates, authoritative: t0.authoritative },
+  scenarios: scenarios?.scenarios?.slice(0, 8)?.map((s) => ({ id: s.id, plugins: s.plugins?.length })) ?? null,
+  dynamics: dyn && {
+    dshStars: dyn.dsh?.stars, dshPushed: (dyn.dsh?.pushed_at || '').slice(0, 10),
+    latestRelease: (dyn.dsh?.releases || [])[0] && { tag: dyn.dsh.releases[0].tag, at: (dyn.dsh.releases[0].published_at || '').slice(0, 10), breaking: !!dyn.dsh.releases[0].breaking },
+    platform: (dyn.platform || []).filter((p) => !p.error).map((p) => ({ repo: p.repo, stars: p.stars, latest: p.latestRelease?.tag })),
+  },
+  weeklyDiff: diff,
+  signals,
+}
+
+const prompt = `你是 DeepSeek Harness（DSH，Everything is a Plugin）插件生态的首席分析师，为 DSH Insights 观察站（dsh-insights.com）撰写阶段性生态洞察报告（${wk}，${pack.range}）。
+
+## 硬规则
+- 只允许使用下面数据包中的数字与事实；禁止编造任何数字、插件名或事件。数据缺失就明说缺失。
+- 数据包里的 signals 是规则引擎已检出的异常/风险，必须逐条给出：可能原因（假设要标注为假设）、影响面、解决方案或应对建议。
+- 写作风格：结论先行、专业克制、面向插件作者/生态用户/DSH 官方三类读者。
+
+## 结构（zh_md 与 en_md 都按此结构）
+1. 核心结论（3–5 条，每条一句话 + 数据支撑）
+2. 生态健康度评估（规模/增长/质量分布/活跃度，给出本期总体判断）
+3. 质量与风险（分级结构、文档与发布纪律、npm 滞后等）
+4. 异常与应对（逐条处理 signals；无 signals 则写本期无显著异常并说明监测口径）
+5. 下一阶段重点与建议（分角色：插件作者 / 生态用户 / DSH 官方，各 2–4 条可执行建议）
+6. 官方动态解读（dsh release 与 DeepSeek 平台动向对生态的影响）
+
+## 输出
+严格 JSON（不要 markdown 代码围栏）：
+{"title_zh":"…（含周数，如 DSH 生态洞察 · ${wk}）","title_en":"…","zh_md":"…完整中文报告 markdown（1200–1800 字）…","en_md":"…full English edition in markdown, not a translation summary but a standalone report…"}
+
+## 数据包
+${JSON.stringify(pack)}`
+
+/* ------------------------------------------------------------------ *
+ * 3) 调用 DeepSeek 并落盘
+ * ------------------------------------------------------------------ */
+if (DRY) {
+  console.log(`[insights] dry-run · week=${wk} model=${model} key=${key ? 'set' : 'MISSING'}`)
+  console.log(`[insights] prompt bytes=${Buffer.byteLength(prompt)} · signals=${signals.length}`)
+  for (const s of signals) console.log(`  - [${s.severity}] ${s.kind}: ${s.fact}`)
+  process.exit(0)
+}
+if (!key) { console.error('[insights] DEEPSEEK_API_KEY 未配置 —— 跳过（不阻断管线）'); process.exit(0) }
+
+const r = await fetch(`${base}/chat/completions`, {
+  method: 'POST',
+  headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` },
+  body: JSON.stringify({
+    model,
+    messages: [{ role: 'user', content: prompt }],
+    response_format: { type: 'json_object' },
+    temperature: 0.3,
+    max_tokens: 16000,
+  }),
+  signal: AbortSignal.timeout(300000),
+})
+if (!r.ok) { console.error(`[insights] API HTTP ${r.status}: ${(await r.text()).slice(0, 300)}`); process.exit(1) }
+const doc = await r.json()
+const content = doc.choices?.[0]?.message?.content || ''
+let report
+try { report = JSON.parse(content.replace(/^```(?:json)?|```$/gm, '').trim()) } catch (e) {
+  console.error(`[insights] JSON parse failed: ${e.message}; content head: ${content.slice(0, 200)}`)
+  process.exit(1)
+}
+if (!report.zh_md || !report.en_md) { console.error('[insights] 输出缺 zh_md/en_md 字段'); process.exit(1) }
+
+const head = (title) => `> 由 DSH Insights 管线 + DeepSeek（${model}）生成 · 数据快照 ${pack.snapshot} · 启发式评估，非安全审计\n\n`
+writeFileSync(join(OUT, `${wk}.md`), `# ${report.title_zh || `DSH 生态洞察 · ${wk}`}（${pack.range}）\n\n${head()}${report.zh_md.trim()}\n`)
+writeFileSync(join(OUT, `${wk}.en.md`), `# ${report.title_en || `DSH Ecosystem Insights · ${wk}`} (${pack.range})\n\n${head()}${report.en_md.trim()}\n`)
+writeFileSync(join(OUT, `${wk}.json`), JSON.stringify({ week: wk, range: pack.range, generatedAt: new Date().toISOString(), model, usage: doc.usage || null, title: { zh: report.title_zh, en: report.title_en }, signals }, null, 2))
+console.log(`[insights] → ${OUT}/${wk}.{md,en.md,json} · signals=${signals.length} · tokens=${doc.usage?.total_tokens ?? '?'}`)
