@@ -952,13 +952,13 @@ ${langBlock(`
 <h2>覆盖与完整性（为什么权威集 ≪ topic 总数）</h2>
 <p>GitHub <code>topic:dsh-plugin</code> 是官方唯一发现机制，<b>打标即入、零门槛</b>——其中混有大量蹭标、无关仓库、fork、monorepo 子路径与已删除仓库。我们的漏斗：<b>topic 宇宙（≈13.7k，首页漏斗实时口径）→ 多源候选（topic 分片全量抓取 + 策展目录 + npm 映射，去重）→ manifest 门禁逐条校验 → 权威集 + 分桶</b>。权威集是「货真价实可按官方 bundle 形态安装」的下限子集；<code>no-dsh-bundle</code> / <code>no-package.json</code> 桶里的候选可能是插件但形态非标，留待人工复核而不是混入权威集。校验按 API 预算<b>滚动推进、断点续跑</b>，权威集随每次快照扩大——<b>覆盖率数字本身也公开</b>（首页覆盖漏斗），这就是我们对「完整性」的回答方式：不报大数，报可核验的数。</p>
 <h2>插件评估指标体系（六维框架 v1）</h2>
-<p>每个插件从六个维度考察：<b>计分四维</b>进入总分（100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2，health-v3 区分度重构），<b>展示两维</b>只呈现不进分，<b>兼容性</b>为预留维度。阈值：<span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>；插件详情页可见各维度子分（dimScores）。</p>
+<p>每个插件从六个维度考察：<b>计分四维</b>进入总分（100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2，当前 health-v5），<b>展示两维</b>只呈现不进分，<b>兼容性</b>为预留维度。阈值：<span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>；插件详情页可见各维度子分（dimScores）。</p>
 <table>
 <tr><th>维度</th><th>指标项</th><th>计分处理</th></tr>
 <tr><td>工程质量</td><td>client 导出 · main=lib 布局 · files 白名单 · npm 发布 · 版本一致</td><td><b>计分</b></td></tr>
 <tr><td>文档完整性</td><td>README（唯一的 fail 级）· 中文/双语文档 · LICENSE</td><td><b>计分</b></td></tr>
-<tr><td>可发现性</td><td>dsh-plugin topic（计分）· 策展收录（只展示）</td><td><b>部分计分</b></td></tr>
-<tr><td>维护活跃</td><td>仓库年龄 · 30 天无提交（npm ≥2 版本豁免新仓规则）</td><td><b>计分</b></td></tr>
+<tr><td>可发现性</td><td>dsh-plugin topic（计分）· 批量模板导入账号（计分）· 策展收录（只展示）</td><td><b>部分计分</b></td></tr>
+<tr><td>维护活跃</td><td>仓库年龄 · 30 天无提交 · 一次性导入无维护（npm ≥2 版本豁免）</td><td><b>计分</b></td></tr>
 <tr><td>安全卫生</td><td>写面 / 渲染消毒（深检抽样，启发式≠审计）</td><td>增量信号，<b>不进总分</b></td></tr>
 <tr><td>采用度</td><td>★ · npm 周下载 · 收录渠道</td><td><b>只展示不进分</b>（可刷/污染）</td></tr>
 <tr><td>兼容性</td><td>engines.dsh 声明（实测仅 ~1% 插件声明）· API 符号 × rc changelog（M2 雷达）</td><td>预留，暂缺测</td></tr>
@@ -983,7 +983,7 @@ ${langBlock(`
 <h2>站点统计（隐私披露）</h2>
 <p>本站使用 <a href="https://umami.is" target="_blank">Umami</a>（开源、无 cookie、不收集个人信息）统计页面访问与来源，用于衡量产品发展（指标体系 E 组）；同时每周将覆盖/内容/触达指标记入 <code>data/metrics.jsonl</code> 公开于仓库。不使用任何其他跟踪。</p>
 <h2>可复核</h2>
-<p>数据、规则、管线全部开源：<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>。发现误判请提 issue —— 争议工单本身是公信力指标（见上表 C 组）。</p>
+<p>数据、规则、管线全部开源：<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>。发现误判请提 issue —— 争议工单本身是公信力指标（见上表 C 组）。产品版本与发布记录见<a href="../changelog/">更新日志</a>。</p>
 `, `
 <h2>About DSH Insights</h2>
 <p>An <b>ecosystem and dynamics observatory</b> for DeepSeek Harness (DSH), in three layers: L1 plugin insights (authenticity check → authoritative set → health score → listing matrix), L2 official dynamics (release/rc cadence + an rc compatibility radar, under construction), and L3 ecosystem reports (letters to authors and the weekly ecosystem report). We don't build a directory, a marketplace, or a leaderboard — we provide citable, verifiable data and observations, <b>meant to be absorbed by the ecosystem rather than compete with it</b>. This is an independent personal project with no affiliation to DeepSeek; the data, rules, and pipeline are all open source (<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>) — please open an issue if you spot a misjudgment.</p>
@@ -992,13 +992,13 @@ ${langBlock(`
 <h2>Coverage & Completeness (why the authoritative set ≪ the topic total)</h2>
 <p>GitHub's <code>topic:dsh-plugin</code> is the official discovery mechanism — <b>tag and you're in, zero barrier</b> — so it is full of tag squatters, unrelated repos, forks, monorepo subpaths, and deleted repos. Our coverage funnel: <b>topic universe (≈13.7k; see the live funnel on the home page) → multi-source candidates (full topic shard crawl + curated lists + npm mapping, deduplicated) → item-by-item manifest-gate verification → authoritative set + buckets</b>. The authoritative set is the lower-bound subset that is "genuinely installable in the official bundle form"; candidates in the <code>no-dsh-bundle</code> / <code>no-package.json</code> buckets may be plugins in a non-standard shape, held for manual review rather than mixed into the authoritative set. Verification <b>rolls forward within an API budget and is resumable</b>, so the authoritative set grows with every snapshot — <b>and the coverage numbers themselves are public</b> (the coverage funnel on the home page). That is how we answer "completeness": not with a big number, but with a verifiable one.</p>
 <h2>Plugin Evaluation Metrics (six-dimension framework v1)</h2>
-<p>Every plugin is examined on six dimensions: <b>four scored dimensions</b> feed the total (start at 100 · fail −20 / major −10 / moderate −5 / minor −2; differentiation reworked in health-v3), <b>two display dimensions</b> are shown but never scored, and <b>compatibility</b> is a reserved dimension. Quality grades: <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>; per-dimension subscores (dimScores) are visible on each plugin's detail page.</p>
+<p>Every plugin is examined on six dimensions: <b>four scored dimensions</b> feed the total (start at 100 · fail −20 / major −10 / moderate −5 / minor −2; currently health-v5), <b>two display dimensions</b> are shown but never scored, and <b>compatibility</b> is a reserved dimension. Quality grades: <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>; per-dimension subscores (dimScores) are visible on each plugin's detail page.</p>
 <table>
 <tr><th>Dimension</th><th>Signals</th><th>Scoring</th></tr>
 <tr><td>Engineering quality</td><td>client export · main=lib layout · files whitelist · published to npm · version consistency</td><td><b>Scored</b></td></tr>
 <tr><td>Docs completeness</td><td>README (the only fail-level signal) · Chinese/bilingual docs · LICENSE</td><td><b>Scored</b></td></tr>
-<tr><td>Discoverability</td><td>dsh-plugin topic (scored) · curated listings (display only)</td><td><b>Partially scored</b></td></tr>
-<tr><td>Maintenance activity</td><td>repo age · no commits in 30 days (new repos with npm ≥2 versions are exempt)</td><td><b>Scored</b></td></tr>
+<tr><td>Discoverability</td><td>dsh-plugin topic (scored) · batch template-import accounts (scored) · curated listings (display only)</td><td><b>Partially scored</b></td></tr>
+<tr><td>Maintenance activity</td><td>repo age · no commits in 30 days · one-shot import with no maintenance (npm ≥2 versions exempt)</td><td><b>Scored</b></td></tr>
 <tr><td>Safety hygiene</td><td>write surface / render sanitization (deep-scan sampling; heuristic ≠ audit)</td><td>Incremental signal, <b>not scored</b></td></tr>
 <tr><td>Adoption</td><td>★ · npm weekly downloads · listing channels</td><td><b>Display only</b> (gameable/pollutable)</td></tr>
 <tr><td>Compatibility</td><td>engines.dsh declaration (only ~1% of plugins declare it) · API symbols × rc changelog (M2 radar)</td><td>Reserved, not yet measured</td></tr>
@@ -1023,9 +1023,37 @@ ${langBlock(`
 <h2>Site Analytics (privacy disclosure)</h2>
 <p>This site uses <a href="https://umami.is" target="_blank">Umami</a> (open source, cookieless, collects no personal information) to measure page visits and referrers — it feeds metric group E above. Coverage/content/reach metrics are also appended weekly to <code>data/metrics.jsonl</code>, public in the repo. No other tracking of any kind.</p>
 <h2>Verifiability</h2>
-<p>Data, rules, and pipeline are all open source: <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>. If you spot a misjudgment, open an issue — dispute tickets are themselves a credibility metric (group C above).</p>
+<p>Data, rules, and pipeline are all open source: <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>. If you spot a misjudgment, open an issue — dispute tickets are themselves a credibility metric (group C above). Product versions and releases: <a href="../changelog/">Changelog</a>.</p>
 `)}
 </div>`,
+  })))
+
+  // ---- /changelog/ 产品版本与发布记录 ---------------------------------------
+  const changelog = JSON.parse(read('changelog.json') || '{"releases":[]}')
+  const typeMeta = {
+    feat: ['功能', 'Feature', 'var(--accent)'],
+    fix: ['修复', 'Fix', 'var(--warn)'],
+    data: ['数据', 'Data', 'var(--ok)'],
+    ci: ['管线', 'Pipeline', '#7c3aed'],
+    breaking: ['Breaking', 'Breaking', 'var(--err)'],
+  }
+  const relHtml = (changelog.releases || []).map((r) => `
+<div class="card" style="margin:14px 0">
+  <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+    <b style="font:700 17px var(--mono)">${escHtml(r.version)}</b>
+    <span style="color:var(--faint);font:12px var(--mono)">${escHtml(r.date)}</span>
+    <span style="font-weight:650">${t(r.title?.zh || '', r.title?.en || '')}</span>
+  </div>
+  ${r.summary ? `<p style="color:var(--mut);font-size:13px;margin:8px 0 4px">${t(r.summary.zh, r.summary.en)}</p>` : ''}
+  <div>${(r.items || []).map((it) => { const m = typeMeta[it.type] || typeMeta.feat
+    return `<div class="listrow" style="padding:9px 2px"><span style="display:inline-flex;gap:8px;align-items:baseline;min-width:0;flex:1"><span class="pill" style="margin:0;flex:none;color:${m[2]};border-color:${m[2]}">${t(m[0], m[1])}</span><span>${t(it.zh, it.en)}</span></span></div>` }).join('')}</div>
+</div>`).join('')
+  written.push(out('changelog/index.html', page({
+    title: '更新日志', titleEn: 'Changelog', desc: 'DSH Insights 产品版本与阶段性发布记录（随 git tag 发布）。',
+    base: '../', here: null,
+    body: `<p class="crumb">Changelog</p><h1 class="pagetitle">${t('更新日志', 'Changelog')}</h1>
+<p class="lede">${t('产品版本与阶段性发布记录（随 git tag 发布）。每日数据快照的滚动更新不在此列——那是管线常态。', 'Product versions and milestone releases (tagged in git). Daily rolling data snapshots are not listed here — that is the pipeline norm.')}</p>
+${relHtml || `<p class="lede">${t('暂无发布记录', 'No releases yet')}</p>`}`,
   })))
 
   // ---- feed.xml (weekly RSS) ----------------------------------------------
