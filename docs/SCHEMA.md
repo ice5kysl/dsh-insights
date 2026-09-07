@@ -112,9 +112,10 @@
 }
 ```
 
-**规则（RULE_VERSION=health-v4；升版必须在此加 changelog）**
+**规则（RULE_VERSION=health-v5；升版必须在此加 changelog）**
 
 Changelog：
+- health-v5 (2026-09-07)：**反模板农场**——新增 `maint.single-push`（major −10：创建≈最后 push <1h 且仓库 ≥7 天，一次性导入后再无维护；npm ≥2 版本豁免）、`discover.batch-import`（warn −5：同账号 ≥20 个权威插件且 ≥70% 一次性仓库）。背景：uckkk 独占 1,285 个插件（13%），其 88% 仓库 push-created<1h（全生态 31%）、均分 75 却有 317 个 B 级；v5 后该账号均分 61、958 个落 D 级。实测分布 S248/A787/B4875/C3030/D1249，区分度改善。
 - health-v4 (2026-09-06)：新增 **S 级（≥95）**——v3 下 A(≥90) 占 28% 仍偏宽，S 档（实测 10.0%）给真正卓越的插件出头空间；阈值成为 S≥95 · A≥90 · B≥75 · C≥60 · D<60。
 - health-v3 (2026-09-06)：**区分度重构**——扣分从一刀切 −5/−20 改为四档（fail −20 / major −10 / warn −5 / minor −2）；`npm.unpublished` 升 major（无法一键安装是核心可用性）；`not-lib-main`/`no-files-whitelist` 降 minor；新增 7 条：`docs.no-description`、`repo.sparse-topics`、`npm.single-release`、`npm.release-stale`（>90 天）、`eng.no-tests`、`eng.no-ci`、`docs.no-docs-dir`、`docs.tiny-readme`（<400B）。树探测信号（tests/CI/docsDir/readmeBytes）随 backfill 逐步生效（缺失不扣分）。背景：v2 分布 A+B 99.6% 无区分度。
 - health-v2 (2026-09-05)：`activity.too-young` 收窄——仅当插件 npm 发布版本 <2 时生效（有 ≥2 个发布版本 = 有存活证据，常见于仓库重建/迁移；刚建仓且只发 1 版仍警告）。
@@ -123,6 +124,8 @@ Changelog：
 |---|---|---|
 | docs.no-readme | fail −20 | 无 README |
 | npm.unpublished | major −10 | 未发布 npm（无法一键安装，核心可用性） |
+| maint.single-push | major −10 | 创建≈最后 push（<1h）且仓库 ≥7 天（一次性导入再无维护；npm ≥2 版本豁免） |
+| discover.batch-import | warn −5 | 同账号 ≥20 个权威插件且 ≥70% 一次性仓库（批量模板导入） |
 | manifest.no-client-export | warn −5 | `exports["./client"]` 缺失（注：TUI/CLI 类插件可能本无 web client，见 caveat） |
 | npm.version-drift | warn −5 | npm `latest` ≠ 仓库 `version`（含同名抢注/错配可能，evidence 双侧给出） |
 | npm.release-stale | warn −5 | npm 最近发布距今 >90 天 |

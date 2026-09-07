@@ -25,7 +25,7 @@
 import { pathToFileURL } from 'node:url'
 import { PATHS, readJsonl, writeJson, loadPlugins } from '../../lib/data.mjs'
 
-export const RULE_VERSION = 'health-v4'
+export const RULE_VERSION = 'health-v5'
 
 /**
  * 评估指标体系 v1（docs/SCHEMA.md §health 有完整定义与说明）。
@@ -51,6 +51,8 @@ const DIM_OF = {
   'repo.sparse-topics': 'discover',
   'activity.too-young': 'maint',
   'activity.dormant': 'maint',
+  'maint.single-push': 'maint',
+  'discover.batch-import': 'discover',
   'npm.single-release': 'maint',
   'npm.release-stale': 'maint',
   'eng.no-tests': 'eng',
@@ -79,6 +81,8 @@ export const RULES = {
   'repo.no-dsh-topic': { sev: 'warn', label: '未打 dsh-plugin topic（可发现性）' },
   'activity.too-young': { sev: 'warn', label: '仓库不足 1 天（存活未知）' },
   'activity.dormant': { sev: 'warn', label: '超 30 天无提交（维护停滞风险）' },
+  'maint.single-push': { sev: 'major', label: '一次性导入后再无维护（创建≈最后 push，且仓库 ≥7 天）' },
+  'discover.batch-import': { sev: 'warn', label: '批量模板导入账号（同账号 ≥20 个一次性仓库，质量信号稀释）' },
   'eng.no-tests': { sev: 'warn', label: '无测试目录/测试文件（工程成熟度）' },
   // minor −2
   'manifest.not-lib-main': { sev: 'minor', label: 'main 不是 lib/index.js（产物布局非常规）' },
@@ -90,7 +94,32 @@ export const RULES = {
   'docs.tiny-readme': { sev: 'minor', label: 'README 过短（<400 字节，信息量不足）' },
 }
 
-export function scoreOne(r) {
+/** 一次性导入判定：创建≈最后 push（<1h）且仓库已存活 ≥7 天（给新仓留观察期） */
+export const isSinglePush = (r) => Boolean(
+  r.created_at && r.pushed_at &&
+  (new Date(r.pushed_at).getTime() - new Date(r.created_at).getTime()) < 3600_000 &&
+  (Date.now() - new Date(r.created_at).getTime()) >= 7 * 86400_000
+)
+
+/** 批量模板导入账号：≥20 个权威插件且 ≥70% 是一次性仓库（uckkk 模式） */
+export function batchImportOwners(rows) {
+  const byOwner = new Map()
+  for (const r of rows) {
+    const o = (r.full_name || '').split('/')[0]
+    if (!o) continue
+    if (!byOwner.has(o)) byOwner.set(o, [])
+    byOwner.get(o).push(r)
+  }
+  const out = new Map()
+  for (const [o, rs] of byOwner) {
+    if (rs.length < 20) continue
+    const sp = rs.filter(isSinglePush).length
+    if (sp / rs.length >= 0.7) out.set(o, { count: rs.length, singlePush: sp })
+  }
+  return out
+}
+
+export function scoreOne(r, ctx = null) {
   const drops = []
   const missing = []
   const add = (code, evidence) => {
@@ -171,6 +200,11 @@ export function scoreOne(r) {
     if (met.ageGate1 === false && !matureShip) warn('activity.too-young', { ageDays: met.ageDays ?? null, npmVersions: npm?.versions ?? null })
     if (met.active30 === false) warn('activity.dormant', { idleDays: met.idleDays ?? null })
   } else missing.push('metrics')
+  // 一次性导入（uckkk 模板农场特征：88% 仓库 push-created<1h，全生态仅 31%）；
+  // matureShip 豁免：有 ≥2 个 npm 版本 = 有真实发布史（仓库重建/迁移的常见形态）
+  if (isSinglePush(r) && !matureShip) warn('maint.single-push', { created_at: r.created_at, pushed_at: r.pushed_at })
+  const owner = (r.full_name || '').split('/')[0]
+  if (ctx?.batchOwners?.has(owner)) warn('discover.batch-import', { owner, ownerPlugins: ctx.batchOwners.get(owner).count })
 
   const penalty = drops.reduce((s, d) => s + (SEV_PENALTY[d.sev] || 5), 0)
   const score = Math.max(0, 100 - penalty)
@@ -201,7 +235,8 @@ export function scoreOne(r) {
 }
 
 export function scoreAll(rows) {
-  const out = rows.map((r) => ({ ...r, health: scoreOne(r) }))
+  const batchOwners = batchImportOwners(rows)
+  const out = rows.map((r) => ({ ...r, health: scoreOne(r, { batchOwners }) }))
   const grades = { S: 0, A: 0, B: 0, C: 0, D: 0 }
   let sum = 0
   const dropCounter = {}
