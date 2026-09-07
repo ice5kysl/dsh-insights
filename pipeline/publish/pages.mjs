@@ -1042,7 +1042,7 @@ ${langBlock(`
   <title>DSH Insights · DSH 生态周报</title>
   <link>${ORIGIN}/weekly/</link>
   <atom:link href="${ORIGIN}/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>DeepSeek Harness 插件生态周报：每周五 CI 自动生成（历史期含回填特刊），数据可复核。</description>
+  <description>DeepSeek Harness 插件生态周报：每周五 CI 自动生成（W36 前为历史补档），数据可复核。</description>
   <language>zh-CN</language>
 ${items}
 </channel>
