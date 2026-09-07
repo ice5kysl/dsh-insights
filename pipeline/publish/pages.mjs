@@ -376,7 +376,8 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
   // B6：主链接落站内 /p/ 详情页（存在时），GitHub 降为 ↗ 次链接——场景页从「出口页」变「中转页」
   const scRow = (p, extra) => {
     const inSite = existsSync(join(SITE, 'p', ...String(p.full_name).split('/'), 'index.html'))
-    return `<div class="scrow"><a href="${inSite ? '/p/' + escHtml(p.full_name) + '/' : escHtml(p.url)}"${inSite ? '' : ' target="_blank"'} title="${escHtml(p.full_name)}">${escHtml(p.full_name)}</a>${inSite ? ` <a href="${escHtml(p.url)}" target="_blank" style="font-size:11px;color:var(--faint)" title="GitHub 仓库" data-en-title="GitHub repository">↗</a>` : ''}<span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}${p.npm ? ' · npm ' + escHtml(p.npm) : ''}${p.active ? ' · ' + t('活跃', 'Active') : ''}${extra || ''}</span></div>`
+    const desc = stripEmoji(plugBy.get(p.full_name)?.description || '').replace(/\s+/g, ' ').trim().slice(0, 72)
+    return `<div class="scrow"><div style="display:flex;align-items:baseline;gap:6px;min-width:0"><a href="${inSite ? '/p/' + escHtml(p.full_name) + '/' : escHtml(p.url)}"${inSite ? '' : ' target="_blank"'} title="${escHtml(p.full_name)}">${escHtml(p.full_name)}</a>${inSite ? ` <a href="${escHtml(p.url)}" target="_blank" style="font-size:11px;color:var(--faint);flex:none" title="GitHub 仓库" data-en-title="GitHub repository">↗</a>` : ''}</div><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}${p.npm ? ' · npm ' + escHtml(p.npm) : ''}${p.active ? ' · ' + t('活跃', 'Active') : ''}${extra || ''}</span>${desc ? `<span class="meta" style="color:var(--mut)">${escHtml(desc)}</span>` : ''}</div>`
   }
   const scCards = scenarios.filter((s) => (s.plugins || []).length).map((s) => {
     const withAge = s.plugins.map((p) => ({ ...p, created: (plugBy.get(p.full_name)?.created_at || '').slice(0, 10) }))
@@ -1073,8 +1074,8 @@ ${relHtml || `<p class="lede">${t('暂无发布记录', 'No releases yet')}</p>`
 <div class="cards">${kitCaps.map(([zh, en, dzh, den]) => `<div class="card"><b>${t(zh, en)}</b><p>${t(dzh, den)}</p></div>`).join('')}</div>
 <h2 style="font-size:16px;margin:28px 0 8px">${t('安装', 'Install')}</h2>
 <div class="article">${langBlock(
-`<p><b>方式一 · npm（v0.1.0 审核中）</b>：<code>npm install dsh-insights-kit</code> 后在 DSH web profile 启用。</p><p><b>方式二 · 源码</b>：<code>git clone https://github.com/ice5kysl/dsh-insights-kit</code>，然后 <code>bash scripts/install-personal.sh</code>（构建并装入个人 DSH）。</p><p>装好后点左侧栏底部的 <b>✦ 生态</b> 按钮打开面板。</p>`,
-`<p><b>Option 1 · npm (v0.1.0 under review)</b>: <code>npm install dsh-insights-kit</code>, then enable it in the DSH web profile.</p><p><b>Option 2 · source</b>: <code>git clone https://github.com/ice5kysl/dsh-insights-kit</code>, then <code>bash scripts/install-personal.sh</code> (builds and installs into your personal DSH).</p><p>After install, click the <b>✦ 生态</b> button at the bottom of the sidebar to open the panel.</p>`
+`<p><b>方式一 · npm</b>：<code>npm install dsh-insights-kit</code> 后在 DSH web profile 启用。</p><p><b>方式二 · 源码</b>：<code>git clone https://github.com/ice5kysl/dsh-insights-kit</code>，然后 <code>bash scripts/install-personal.sh</code>（构建并装入个人 DSH）。</p><p>装好后点左侧栏底部的 <b>✦ 生态</b> 按钮打开面板。</p>`,
+`<p><b>Option 1 · npm</b>: <code>npm install dsh-insights-kit</code>, then enable it in the DSH web profile.</p><p><b>Option 2 · source</b>: <code>git clone https://github.com/ice5kysl/dsh-insights-kit</code>, then <code>bash scripts/install-personal.sh</code> (builds and installs into your personal DSH).</p><p>After install, click the <b>✦ 生态</b> button at the bottom of the sidebar to open the panel.</p>`
 )}</div>
 <h2 style="font-size:16px;margin:28px 0 8px">${t('隐私与数据', 'Privacy & Data')}</h2>
 <div class="article">${langBlock(
@@ -1084,7 +1085,6 @@ ${relHtml || `<p class="lede">${t('暂无发布记录', 'No releases yet')}</p>`
 <h2 style="font-size:16px;margin:28px 0 8px">${t('相关', 'Related')}</h2>
 <div class="cards">
   <a class="card" href="https://github.com/ice5kysl/dsh-insights-kit" target="_blank" style="text-decoration:none;color:inherit"><b>GitHub ↗</b><p>${t('源码、issue、安装脚本', 'Source, issues, install scripts')}</p></a>
-  <a class="card" href="https://github.com/ice5kysl/dsh-plugin-health" target="_blank" style="text-decoration:none;color:inherit"><b>dsh-plugin-health CLI ↗</b><p>${t('同一规则书的命令行形态，面向 CI / 自动化 pre-publish 门禁', 'The same rulebook as a CLI, for CI / automated pre-publish gates')}</p></a>
   <a class="card" href="../badge/" style="text-decoration:none;color:inherit"><b>${t('健康徽章', 'Health Badge')}</b><p>${t('自检通过后，把徽章挂进你的 README', 'After your self-check passes, put the badge in your README')}</p></a>
 </div>
 <p class="lede" style="margin-top:14px">${t('dogfooding 说明：本插件按 DSH 官方 bundle 规范开发，同样被 DSH Insights 管线收录与评分——你可以在', 'Dogfooding note: this plugin is built to the official DSH bundle spec and is itself indexed and scored by the DSH Insights pipeline — you can watch its own grade on')} <a href="https://github.com/ice5kysl/dsh-insights-kit" target="_blank">${t('它的仓库与（即将上线的）详情页', 'its repo and (soon) its own detail page')}</a>${t('上看到它自己的等级。', '.')}</p>`,
