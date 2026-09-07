@@ -15,7 +15,7 @@ DSH Insights is the missing evaluation layer: **every plugin gets an honest, rep
 
 | Layer | What | Delivered as |
 |---|---|---|
-| **L1 · Plugin insights** | Authenticity gate (manifest) → authoritative set → health score **S–D / 0–100** (health-v4, per-deduction evidence) → channel coverage → "quality unlisted" list | Snapshot data + site + per-plugin pages + letters |
+| **L1 · Plugin insights** | Authenticity gate (manifest) → authoritative set → health score **S–D / 0–100** (health-v5, per-deduction evidence) → channel coverage → "quality unlisted" list | Snapshot data + site + per-plugin pages + letters |
 | **L2 · Official dynamics** (v0 live) | dsh releases/rc cadence, dist-tags, DeepSeek platform signals; rc compat radar (M2) | `/dynamics` + weekly official section |
 | **L3 · Ecosystem reports** | Weekly report (every Friday, CI-generated) + a "letter to the author" per plugin (outreach material) | `/weekly` + RSS + `data/reports/` |
 

@@ -5,7 +5,7 @@
 
 ## 一句话提案
 
-> 让 **DSH Insights 的健康分（health-v4）**成为权威目录与市场卡片上的可选质量字段/收录门槛——数据开源、规则透明、每周刷新、**纯客观、非安全审计**。不抢你们的收录权，只提供"卡片上那个分数"。
+> 让 **DSH Insights 的健康分（health-v5，提案时为 v4）**成为权威目录与市场卡片上的可选质量字段/收录门槛——数据开源、规则透明、每周刷新、**纯客观、非安全审计**。不抢你们的收录权，只提供"卡片上那个分数"。
 
 ## 背景（为什么现在提）
 
@@ -17,7 +17,7 @@
 
 1. **全量抓取**：`topic:dsh-plugin` created 时间窗分片全量（13,583 / 13,600，2026-09-05 实测），规避 GitHub 1000/查询封顶。
 2. **真伪判定**：manifest 门禁——非 fork/归档 + `package.json` 声明 `dsh.bundle.patch` + patch 文件已提交 → `data/plugins.jsonl`（权威集）。
-3. **健康分 health-v4**：纯客观 19 条规则（六维框架：工程质量/文档完整性/可发现性/维护活跃计分，安全卫生/采用度只展示），从 100 扣分四档（fail −20 / major −10 / warn −5 / minor −2），**每条扣分带证据值**，缺失数据不虚构不扣分，星数不进分。
+3. **健康分 health-v5**（提案时为 v4 19 条规则，现 21 条）：纯客观规则（六维框架：工程质量/文档完整性/可发现性/维护活跃计分，安全卫生/采用度只展示），从 100 扣分四档（fail −20 / major −10 / warn −5 / minor −2），**每条扣分带证据值**，缺失数据不虚构不扣分，星数不进分。
 4. **校准回归**：15 条已知真/假 seeds，`npm run regress` 每次跑批必过（当前 15/15）。
 5. 规则升版必须 bump `RULE_VERSION` + changelog（docs/SCHEMA.md §health）；已注明 TUI/CLI 类插件的 client-export 误伤 caveat 与申诉通道。
 
@@ -35,7 +35,7 @@
   "health": {
     "score": 100, "grade": "S",          // S≥95 · A≥90 · B≥75 · C≥60 · D<60
     "drops": [],                          // 扣分 code+证据见 insights.json / enrich.json
-    "ruleVersion": "health-v4"
+    "ruleVersion": "health-v5"
   }
 }
 ```
