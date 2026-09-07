@@ -15,6 +15,7 @@ import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { PATHS, SITE, readJsonl, readJson, loadEnrichMap, byFullName, loadPlugins } from '../../lib/data.mjs'
 import { stripEmoji, icon } from '../../lib/page.mjs'
+import { t, ph, titleAttr, langBlock, I18N_CSS, I18N_HEAD, I18N_BODY } from '../../lib/i18n.mjs'
 
 const OUT = join(SITE, 'dashboard', 'index.html')
 
@@ -43,7 +44,7 @@ function main() {
   }
   const llmMap = byFullName(readJsonl(PATHS.llm))
   const byStars = plugins.slice().sort((x, y) => (y.stars || 0) - (x.stars || 0))
-  const t = a.totals || {}
+  const totals = a.totals || {}
   const d = a.distribution || {}
   const pub = d.publish || {}
   const doc = d.docs || {}
@@ -62,9 +63,9 @@ function main() {
   const dataJson = JSON.stringify(rows).replace(/</g, '\\u003c')
 
   // ---- weekly multi-line chart (inline SVG, hover handled client-side) --
-  const wkGrade = t.byWeekGrades || {}
+  const wkGrade = totals.byWeekGrades || {}
   const wkCand = a.coverage?.candidatesByWeek || {}
-  const wkPresent = [...new Set([...Object.keys(t.byWeek || {}), ...Object.keys(wkCand), ...Object.keys(wkGrade.A || {}), ...Object.keys(wkGrade.B || {}), ...Object.keys(wkGrade.S || {})])].sort()
+  const wkPresent = [...new Set([...Object.keys(totals.byWeek || {}), ...Object.keys(wkCand), ...Object.keys(wkGrade.A || {}), ...Object.keys(wkGrade.B || {}), ...Object.keys(wkGrade.S || {})])].sort()
   // 连续周轴：以最近一个有数据的周一为终点，向前补零 20 周（UTC，P2-13）
   const wkKeys = []
   if (wkPresent.length) {
@@ -76,11 +77,11 @@ function main() {
     }
   }
   const SERIES = [
-    { key: 'cand', label: '候选新增', color: '#a1a1aa', data: wkCand },
-    { key: 'gs', label: 'S 级新增', color: '#7c3aed', data: wkGrade.S || {} },
-    { key: 'auth', label: '权威集新增', color: 'var(--ink)', data: t.byWeek || {} },
-    { key: 'ga', label: 'A 级新增', color: 'var(--ok)', data: wkGrade.A || {} },
-    { key: 'gb', label: 'B 级新增', color: 'var(--accent)', data: wkGrade.B || {} },
+    { key: 'cand', label: '候选新增', labelEn: 'New candidates', color: '#a1a1aa', data: wkCand },
+    { key: 'gs', label: 'S 级新增', labelEn: 'New S-grade', color: '#7c3aed', data: wkGrade.S || {} },
+    { key: 'auth', label: '权威集新增', labelEn: 'New authoritative', color: 'var(--ink)', data: totals.byWeek || {} },
+    { key: 'ga', label: 'A 级新增', labelEn: 'New A-grade', color: 'var(--ok)', data: wkGrade.A || {} },
+    { key: 'gb', label: 'B 级新增', labelEn: 'New B-grade', color: 'var(--accent)', data: wkGrade.B || {} },
   ]
   const CW = 960, CH = 210, PT = 12, PR = 6, PB = 26, PL = 34
   const iw = CW - PL - PR, ih = CH - PT - PB
@@ -108,13 +109,13 @@ function main() {
     return '<path d="' + d + '" class="line" style="stroke:' + s.color + '"' + (s.key === 'cand' ? ' stroke-dasharray="4 3"' : '') + '/>'
   }).join('')
   const seriesDots = SERIES.map((s) => '<circle id="ch-dot-' + s.key + '" r="3" class="dot" style="display:none;stroke:' + s.color + '"/>').join('')
-  const legendHtml = SERIES.map((s) => '<span class="chlg"><i style="background:' + s.color + '"></i>' + s.label + '</span>').join('')
+  const legendHtml = SERIES.map((s) => '<span class="chlg"><i style="background:' + s.color + '"></i>' + t(s.label, s.labelEn) + '</span>').join('')
   const areaSvg = wkRows.length
     ? '<svg viewBox="0 0 ' + CW + ' ' + CH + '" style="width:100%;height:auto;display:block">' +
       gridLines + xLabels + seriesPaths + seriesDots +
       '<line id="ch-x" class="cross" style="display:none" y1="' + PT + '" y2="' + (PT + ih) + '"/>' +
       '</svg>'
-    : '<div class="dim">数据积累中…</div>'
+    : `<div class="dim">${t('数据积累中…', 'Collecting data…')}</div>`
   const lastWeek = wkRows.length ? wkRows[wkRows.length - 1].auth : 0
 
   // ---- donuts ----------------------------------------------------------
@@ -125,24 +126,27 @@ function main() {
     let off = 0
     const segs = parts.map((p, i) => {
       const len = Math.max(0, (p.v / total) * circ)
-      const el = `<circle class="dseg" data-i="${i}" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${p.c}" stroke-width="${sw}" stroke-dasharray="${len.toFixed(1)} ${circ.toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" data-tip="${esc(p.label)} · ${p.v}（${Math.round((p.v / total) * 1000) / 10}%）"/>`
+      const el = `<circle class="dseg" data-i="${i}" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${p.c}" stroke-width="${sw}" stroke-dasharray="${len.toFixed(1)} ${circ.toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" data-tip="${esc(p.label)} · ${p.v}（${Math.round((p.v / total) * 1000) / 10}%）" data-tip-en="${esc(p.labelEn || p.label)} · ${p.v} (${Math.round((p.v / total) * 1000) / 10}%)"/>`
       off += len
       return el
     }).join('')
     return `<svg class="donut" data-total="${total}" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="flex:none">${segs}<circle cx="${size / 2}" cy="${size / 2}" r="${r * 0.72}" fill="var(--card)"/><text class="dnum" x="${size / 2}" y="${size / 2 + 3}">${total}</text><text class="dlab" x="${size / 2}" y="${size / 2 + 16}">总计</text></svg>`
   }
-  const donutPublish = donut([{ v: pub.published, c: 'var(--ink)', label: '已发布' }, { v: pub.unpublished, c: 'var(--track2)', label: '未发布' }])
+  const donutPublish = donut([{ v: pub.published, c: 'var(--ink)', label: '已发布', labelEn: 'Published' }, { v: pub.unpublished, c: 'var(--track2)', label: '未发布', labelEn: 'Unpublished' }])
   const donutDocs = donut([
-    { v: doc.both, c: '#18181b', label: '双语(EN+中文)' },
-    { v: Math.max(0, doc.zh - doc.both), c: '#52525b', label: '含中文' },
-    { v: Math.max(0, doc.readme - doc.zh), c: '#a1a1aa', label: '单语' },
-    { v: doc.none, c: '#e4e4e7', label: '无 README' },
+    { v: doc.both, c: '#18181b', label: '双语(EN+中文)', labelEn: 'Bilingual (EN+ZH)' },
+    { v: Math.max(0, doc.zh - doc.both), c: '#52525b', label: '含中文', labelEn: 'Has Chinese' },
+    { v: Math.max(0, doc.readme - doc.zh), c: '#a1a1aa', label: '单语', labelEn: 'Single-language' },
+    { v: doc.none, c: '#e4e4e7', label: '无 README', labelEn: 'No README' },
   ])
 
-  const bar = (label, count, max, color, title) =>
-    '<div class="hbar" data-tip="' + esc(title || `${label} · ${count}`) + '"><span class="hbar-l"' + (title ? ' title="' + esc(title) + '"' : '') + '>' + esc(label) + '</span>' +
-    '<div class="hbar-t"><div class="hbar-f" style="width:' + Math.max(2, Math.round((count / Math.max(1, max)) * 100)) + '%' + (color ? ';background:' + color : '') + '"></div></div>' +
-    '<span class="hbar-v">' + count + '</span></div>'
+  const bar = (label, count, max, color, title, en) => {
+    const tip = esc(title || `${label} · ${count}`)
+    const tipEn = en ? esc(en.tip || `${en.label} · ${count}`) : ''
+    return '<div class="hbar" data-tip="' + tip + '"' + (tipEn ? ' data-tip-en="' + tipEn + '"' : '') + '><span class="hbar-l"' + (title ? ' title="' + tip + '"' + (tipEn ? ' data-en-title="' + tipEn + '"' : '') : '') + '>' + (en ? t(label, en.label) : esc(label)) + '</span>' +
+      '<div class="hbar-t"><div class="hbar-f" style="width:' + Math.max(2, Math.round((count / Math.max(1, max)) * 100)) + '%' + (color ? ';background:' + color : '') + '"></div></div>' +
+      '<span class="hbar-v">' + count + '</span></div>'
+  }
 
   const topicBars = (a.topTopics || []).slice(0, 8).map((x) => bar(x.topic, x.count, (a.topTopics || [])[0]?.count || 1, null, x.topic)).join('')
 
@@ -153,10 +157,10 @@ function main() {
   const invalidTotal = (cov.invalidBuckets || []).reduce((s2, b) => s2 + b.count, 0)
   const bucketsTxt = (cov.invalidBuckets || []).slice(0, 5).map((b) => `${esc(b.reason)} ${b.count}`).join(' · ')
   const funnelHtml = uni ? [
-    bar('topic 宇宙', uni, uni, null, `topic:dsh-plugin 全量（${uniAt} 实测）· 官方打标即入、零门槛`),
-    bar('多源候选', cov.candidates || 0, uni, null, 'topic 分片全量 ∪ 策展目录 ∪ npm 映射（含未打 dsh-plugin topic 的仓库，故候选数可超过 topic 宇宙）· 去重'),
-    bar('完成校验', cov.validated || 0, uni, null, 'manifest 门禁逐条核验（断点续跑）'),
-    bar('权威集 ✓', cov.authoritative || 0, uni, 'var(--ok)', '非 fork/归档 + 声明 dsh.bundle.patch 且 patch 已提交'),
+    bar('topic 宇宙', uni, uni, null, `topic:dsh-plugin 全量（${uniAt} 实测）· 官方打标即入、零门槛`, { label: 'Topic universe', tip: `Full topic:dsh-plugin set (measured ${uniAt}) · official tag, zero barrier to entry` }),
+    bar('多源候选', cov.candidates || 0, uni, null, 'topic 分片全量 ∪ 策展目录 ∪ npm 映射（含未打 dsh-plugin topic 的仓库，故候选数可超过 topic 宇宙）· 去重', { label: 'Multi-source candidates', tip: 'Full topic shards ∪ curated lists ∪ npm mapping (includes repos without the dsh-plugin topic, so candidates can exceed the topic universe) · deduplicated' }),
+    bar('完成校验', cov.validated || 0, uni, null, 'manifest 门禁逐条核验（断点续跑）', { label: 'Validated', tip: 'Verified item by item through the manifest gate (resumable)' }),
+    bar('权威集 ✓', cov.authoritative || 0, uni, 'var(--ok)', '非 fork/归档 + 声明 dsh.bundle.patch 且 patch 已提交', { label: 'Authoritative ✓', tip: 'Not a fork/archived + declares dsh.bundle.patch with the patch committed' }),
   ].join('') : ''
 
   const gCol = { S: '#7c3aed', A: 'var(--ok)', B: 'var(--accent)', C: 'var(--warn)', D: 'var(--err)' }
@@ -168,7 +172,7 @@ function main() {
   const staleRows = (a.npmStaleTop || []).map((s2) =>
     `<tr><td><a href="/p/${esc(s2.repo)}/" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">${s2.stars}</td><td class="num warn mono">${esc(s2.repoVersion)} → ${esc(s2.npmLatest)}</td></tr>`).join('')
   const starRows = (a.topByStars || []).map((s2) =>
-    `<tr><td><a href="/p/${esc(s2.repo)}/" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td class="num">${s2.published ? '<span class="ok" title="npm 已发布">✓</span>' : '<span class="dim">—</span>'}</td><td class="num">${s2.zh ? '<span class="ok" title="中/双语文档">✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
+    `<tr><td><a href="/p/${esc(s2.repo)}/" title="${esc(s2.repo)}">${esc(s2.repo)}</a></td><td class="num mono">★ ${s2.stars}</td><td class="num">${s2.published ? '<span class="ok" title="npm 已发布" data-en-title="Published to npm">✓</span>' : '<span class="dim">—</span>'}</td><td class="num">${s2.zh ? '<span class="ok" title="中/双语文档" data-en-title="Chinese/bilingual docs">✓</span>' : '<span class="dim">—</span>'}</td></tr>`).join('')
   const suggestedHtml = (a.suggested || []).slice(0, 10).map((e) =>
     '<tr><td><a href="https://github.com/' + esc(e.full_name) + '" target="_blank">' + esc(e.full_name) + '</a></td><td class="num"><span class="grade ' + esc(e.grade) + '">' + esc(e.grade) + '</span></td><td class="num mono">★ ' + (e.stars || 0) + '</td><td class="ok">' + (e.weekly != null ? '⬇ ' + e.weekly : 'npm ✓') + '</td></tr>').join('')
   const authorRows = (a.authors || []).slice(0, 10).map((au) =>
@@ -192,6 +196,7 @@ function main() {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DSH Insights · DeepSeek Harness 全景观察站</title>
+<meta name="en-title" content="DSH Insights · The DeepSeek Harness Observatory">
 <meta name="description" content="DeepSeek Harness (dsh) 插件生态全量索引、评估与分析仪表盘">
 <meta property="og:title" content="DSH Insights · DeepSeek Harness 全景观察站">
 <meta property="og:description" content="插件健康 · 官方动态 · 生态趋势——全量、客观、可复核的 DSH 生态观测。">
@@ -202,6 +207,7 @@ function main() {
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="7fc5eb24-1687-4827-9775-5326d957b46a"></script>
 <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})()</script>
+${I18N_HEAD}
 <style>
 :root{
   --bg:#fafafa;--card:#ffffff;--ink:#18181b;--mut:#71717a;--faint:#a1a1aa;--line:#e4e4e7;--track:#f4f4f5;--track2:#e4e4e7;
@@ -401,148 +407,152 @@ table{width:100%;border-collapse:collapse;font-size:12.5px}
 
 footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+${I18N_CSS}
 </style>
 </head>
 <body>
 <div class="topbar"><div class="wrap">
-  <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small>DeepSeek Harness 全景观察站</small></a>
-  <nav class="nav"><a href="/">首页</a><a href="./" class="here">插件</a><a href="/scenarios/">场景</a><a href="/weekly/">周报</a><a href="/dynamics/">动态</a><a href="/authors/">作者</a><a href="/badge/">徽章</a><a href="/data/">开放数据</a><a href="/about/">关于</a><button class="theme" id="themeBtn" aria-label="切换深浅色" title="深 / 浅色切换"><span class="t-moon">${icon('moon', 13)}</span><span class="t-sun">${icon('sun', 13)}</span></button><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
+  <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="var(--ink)"/><path d="M25 16H16v32h9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 16h9v32h-9" fill="none" stroke="var(--bg)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="38.75" y="18" width="3.5" height="26" rx="1.75" fill="#4D6BFE"/><circle cx="30.5" cy="35" r="6.5" fill="none" stroke="#4D6BFE" stroke-width="3.5"/></svg></span>DSH Insights<small>${t('DeepSeek Harness 全景观察站', 'The DeepSeek Harness Observatory')}</small></a>
+  <nav class="nav"><a href="/">${t('首页', 'Home')}</a><a href="./" class="here">${t('插件', 'Plugins')}</a><a href="/scenarios/">${t('场景', 'Scenarios')}</a><a href="/weekly/">${t('周报', 'Weekly')}</a><a href="/insights/">${t('洞察', 'Insights')}</a><a href="/dynamics/">${t('动态', 'Dynamics')}</a><a href="/authors/">${t('作者', 'Authors')}</a><a href="/badge/">${t('徽章', 'Badge')}</a><a href="/data/">${t('开放数据', 'Open Data')}</a><a href="/about/">${t('关于', 'About')}</a><button class="theme lang" id="langBtn" ${titleAttr('切换到 English', 'Switch to 中文')}>EN</button><button class="theme" id="themeBtn" ${titleAttr('深 / 浅色切换', 'Toggle dark / light')}><span class="t-moon">${icon('moon', 13)}</span><span class="t-sun">${icon('sun', 13)}</span></button><a class="gh" href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub ↗</a></nav>
 </div></div>
 <div class="subnav"><div class="wrap">
-  <a href="#overview">趋势</a><a href="#quality">质量</a><a href="#rank">榜单</a><a href="#browse">插件库</a>
+  <a href="#overview">${t('趋势', 'Trends')}</a><a href="#quality">${t('质量', 'Quality')}</a><a href="#rank">${t('榜单', 'Leaderboards')}</a><a href="#browse">${t('插件库', 'Directory')}</a>
 </div></div>
 
 <header class="hero" id="top"><div class="wrap">
-  <p class="kicker">Plugins · 客观索引与评分</p>
-  <h1>插件生态全景</h1>
-  <p class="lede">多源发现 → manifest 真伪校验 → 元数据评估（npm / 文档 / 构建产物 / 活跃度）→ 生态洞察。启发式评估，非安全审计。</p>
-  <div class="meta"><span>快照 <b>${date}</b></span><span>最近一周新增 <b class="mono">+${lastWeek}</b></span><span><a href="https://github.com/ice5kysl/dsh-insights/blob/main/README.md" target="_blank">方法论 ↗</a></span></div>
-  <div class="bignum"><b class="count mono" data-v="${t.authoritative ?? 0}">0</b><span>权威插件<br>通过 dsh.bundle manifest 校验</span></div>
+  <p class="kicker">${t('Plugins · 客观索引与评分', 'Plugins · Objective Index & Scoring')}</p>
+  <h1>${t('插件生态全景', 'The Plugin Ecosystem, in Full')}</h1>
+  <p class="lede">${t('多源发现 → manifest 真伪校验 → 元数据评估（npm / 文档 / 构建产物 / 活跃度）→ 生态洞察。启发式评估，非安全审计。', 'Multi-source discovery → manifest authenticity checks → metadata evaluation (npm / docs / build artifacts / activity) → ecosystem insights. Heuristic evaluation, not a security audit.')}</p>
+  <div class="meta"><span>${t('快照', 'Snapshot')} <b>${date}</b></span><span>${t('最近一周新增', 'Added last week')} <b class="mono">+${lastWeek}</b></span><span><a href="https://github.com/ice5kysl/dsh-insights/blob/main/README.md" target="_blank">${t('方法论 ↗', 'Methodology ↗')}</a></span></div>
+  <div class="bignum"><b class="count mono" data-v="${totals.authoritative ?? 0}">0</b><span>${t('权威插件', 'Authoritative plugins')}<br>${t('通过 dsh.bundle manifest 校验', 'Verified via the dsh.bundle manifest gate')}</span></div>
   <div class="stats">
-    ${stat((d.publishPct != null ? d.publishPct + '%' : '—'), 'npm 发布率', (pub.published ?? 0) + ' 已发布 · ' + (pub.stale ?? 0) + ' 滞后')}
-    ${stat((d.zhPct != null ? d.zhPct + '%' : '—'), 'i18n 双语（中/英检出）', (doc.both ?? 0) + ' 份双语文档')}
-    ${stat((t.active7Pct ?? 0) + '%', '近 7 天活跃', '以周为基准的生态活跃信号 · 30 天 ' + (t.active30Pct ?? 0) + '%')}
-    ${stat(a.quality?.avgScore ?? '—', '平均质量分', 'S+A ' + (a.quality?.gradePctSA ?? a.quality?.gradePct ?? 0) + '%')}
-    ${stat(a.channels ? a.channels.coveredPct + '%' : '—', 'curated 收录率', (a.channels?.covered ?? 0) + ' 已进 awesome/imsai')}
-    ${stat(doc.none ?? 0, '无 README', '建议补充基本文档')}
+    ${stat((d.publishPct != null ? d.publishPct + '%' : '—'), t('npm 发布率', 'npm publish rate'), t(`${pub.published ?? 0} 已发布 · ${pub.stale ?? 0} 滞后`, `${pub.published ?? 0} published · ${pub.stale ?? 0} stale`))}
+    ${stat((d.zhPct != null ? d.zhPct + '%' : '—'), t('i18n 双语（中/英检出）', 'i18n bilingual (ZH/EN detected)'), t(`${doc.both ?? 0} 份双语文档`, `${doc.both ?? 0} bilingual docs`))}
+    ${stat((totals.active7Pct ?? 0) + '%', t('近 7 天活跃', 'Active in 7d'), t(`以周为基准的生态活跃信号 · 30 天 ${totals.active30Pct ?? 0}%`, `Weekly activity signal · 30d ${totals.active30Pct ?? 0}%`))}
+    ${stat(a.quality?.avgScore ?? '—', t('平均质量分', 'Avg health score'), 'S+A ' + (a.quality?.gradePctSA ?? a.quality?.gradePct ?? 0) + '%')}
+    ${stat(a.channels ? a.channels.coveredPct + '%' : '—', t('curated 收录率', 'Curated listing rate'), t(`${a.channels?.covered ?? 0} 已进 awesome/imsai`, `${a.channels?.covered ?? 0} in awesome/imsai`))}
+    ${stat(doc.none ?? 0, t('无 README', 'No README'), t('建议补充基本文档', 'Basic docs recommended'))}
   </div>
 </div></header>
 
 <main class="wrap">
 
 <section class="sec" id="overview">
-  <div class="sec-h"><span class="sec-n">01</span><h2>生态趋势</h2><p class="sub">增长节奏 · 发布与文档覆盖 · 热门话题</p></div>
+  <div class="sec-h"><span class="sec-n">01</span><h2>${t('生态趋势', 'Ecosystem Trends')}</h2><p class="sub">${t('增长节奏 · 发布与文档覆盖 · 热门话题', 'Growth pace · publishing & docs coverage · hot topics')}</p></div>
   ${funnelHtml ? `<div class="panel" style="margin-bottom:14px">
-    <div class="p-h"><h3>覆盖漏斗 · ${cov.authoritative} 与 ${uni.toLocaleString()} 的关系</h3><span class="p-sub">分桶复核 ${invalidTotal}：${bucketsTxt}</span></div>
+    <div class="p-h"><h3>${t(`覆盖漏斗 · ${cov.authoritative} 与 ${uni.toLocaleString()} 的关系`, `Coverage Funnel · ${cov.authoritative} vs ${uni.toLocaleString()}`)}</h3><span class="p-sub">${t(`分桶复核 ${invalidTotal}：${bucketsTxt}`, `${invalidTotal} in review buckets: ${bucketsTxt}`)}</span></div>
     ${funnelHtml}
-    <p class="p-sub" style="margin-top:10px">topic 是「打标即入」的原始宇宙——含蹭标、无关仓库、fork、monorepo 子路径与已删除仓库；权威集是 manifest 门禁逐条核验后的可信子集，<b>校验按 API 预算滚动推进（断点续跑），权威集随快照持续扩大</b>；候选池 = topic ∪ 策展 ∪ npm，含未打 topic 的仓库，故可能大于 topic 宇宙。纯 tarball 分发等边界形态进分桶人工复核。口径详见 <a href="about/">方法论</a>。</p>
+    <div class="p-sub" style="margin-top:10px">${langBlock(
+      'topic 是「打标即入」的原始宇宙——含蹭标、无关仓库、fork、monorepo 子路径与已删除仓库；权威集是 manifest 门禁逐条核验后的可信子集，<b>校验按 API 预算滚动推进（断点续跑），权威集随快照持续扩大</b>；候选池 = topic ∪ 策展 ∪ npm，含未打 topic 的仓库，故可能大于 topic 宇宙。纯 tarball 分发等边界形态进分桶人工复核。口径详见 <a href="about/">方法论</a>。',
+      'The topic universe is tag-and-you\'re-in raw data — it includes tag squatters, unrelated repos, forks, monorepo subpaths, and deleted repos. The authoritative set is the trusted subset verified item by item through the manifest gate; <b>verification rolls forward within an API budget (resumable), so the authoritative set grows with every snapshot</b>. The candidate pool = topic ∪ curated ∪ npm and includes repos without the topic, so it can exceed the topic universe. Edge cases such as pure tarball distribution go to bucketed manual review. Definitions: <a href="about/">Methodology</a>.'
+    )}</div>
   </div>` : ''}
   <div class="panel" style="margin-bottom:14px">
-    <div class="p-h"><h3>生态新增 · 按周</h3><span class="p-sub">按仓库创建时间归属到周一 · 最近 ${wkRows.length} 周 · ${legendHtml}</span></div>
+    <div class="p-h"><h3>${t('生态新增 · 按周', 'New Additions · Weekly')}</h3><span class="p-sub">${langBlock(`按仓库创建时间归属到周一 · 最近 ${wkRows.length} 周`, `Grouped by repo creation week (Mondays) · last ${wkRows.length} weeks`, 'span')} · ${legendHtml}</span></div>
     <div class="chartbox" id="chart-week">${areaSvg}<div class="ch-tip" id="ch-tip"></div></div>
   </div>
   <div class="cards">
     <div class="panel">
-      <h3>npm 发布分布</h3><p class="p-sub">已发布 vs 未发布 · 版本滞后 ${pub.stale ?? 0}</p>
+      <h3>${t('npm 发布分布', 'npm Publish Status')}</h3><p class="p-sub">${t(`已发布 vs 未发布 · 版本滞后 ${pub.stale ?? 0}`, `Published vs unpublished · ${pub.stale ?? 0} stale`)}</p>
       <div class="donutwrap">${donutPublish}<div class="legend">
-        <div class="dleg" data-i="0"><i style="background:var(--ink)"></i>已发布 <b>${pub.published ?? 0}</b></div>
-        <div class="dleg" data-i="1"><i style="background:var(--track2)"></i>未发布 <b>${pub.unpublished ?? 0}</b></div>
-        <div style="color:var(--warn)">版本滞后 ${pub.stale ?? 0}</div>
+        <div class="dleg" data-i="0"><i style="background:var(--ink)"></i>${t('已发布', 'Published')} <b>${pub.published ?? 0}</b></div>
+        <div class="dleg" data-i="1"><i style="background:var(--track2)"></i>${t('未发布', 'Unpublished')} <b>${pub.unpublished ?? 0}</b></div>
+        <div style="color:var(--warn)">${t(`版本滞后 ${pub.stale ?? 0}`, `${pub.stale ?? 0} stale`)}</div>
       </div></div>
     </div>
     <div class="panel">
-      <h3>i18n · 文档语言足迹</h3><p class="p-sub">按 README 检出：双语 / 含中文 / 单语 / 无 · 多语言(ja/ko/…)检测规划见 M1</p>
+      <h3>${t('i18n · 文档语言足迹', 'i18n · Doc Language Footprint')}</h3><p class="p-sub">${t('按 README 检出：双语 / 含中文 / 单语 / 无 · 多语言(ja/ko/…)检测规划见 M1', 'Detected from README: bilingual / has Chinese / single-language / none · multi-language (ja/ko/…) detection planned in M1')}</p>
       <div class="donutwrap">${donutDocs}<div class="legend">
-        <div class="dleg" data-i="0"><i style="background:#18181b"></i>双语(EN+中文) <b>${doc.both ?? 0}</b></div>
-        <div class="dleg" data-i="1"><i style="background:#52525b"></i>含中文（i18n 样本） <b>${Math.max(0, (doc.zh ?? 0) - (doc.both ?? 0))}</b></div>
-        <div class="dleg" data-i="2"><i style="background:#a1a1aa"></i>单语（基础 README） <b>${Math.max(0, (doc.readme ?? 0) - (doc.zh ?? 0))}</b></div>
-        <div class="dleg" data-i="3"><i style="background:#e4e4e7"></i>无 README <b>${doc.none ?? 0}</b></div>
+        <div class="dleg" data-i="0"><i style="background:#18181b"></i>${t('双语(EN+中文)', 'Bilingual (EN+ZH)')} <b>${doc.both ?? 0}</b></div>
+        <div class="dleg" data-i="1"><i style="background:#52525b"></i>${t('含中文（i18n 样本）', 'Has Chinese (i18n sample)')} <b>${Math.max(0, (doc.zh ?? 0) - (doc.both ?? 0))}</b></div>
+        <div class="dleg" data-i="2"><i style="background:#a1a1aa"></i>${t('单语（基础 README）', 'Single-language (basic README)')} <b>${Math.max(0, (doc.readme ?? 0) - (doc.zh ?? 0))}</b></div>
+        <div class="dleg" data-i="3"><i style="background:#e4e4e7"></i>${t('无 README', 'No README')} <b>${doc.none ?? 0}</b></div>
       </div></div>
     </div>
     <div class="panel">
-      <h3>Top topics</h3><p class="p-sub">仓库自声明 topic · Top 8</p>
-      ${topicBars || '<div class="dim">暂无</div>'}
+      <h3>Top topics</h3><p class="p-sub">${t('仓库自声明 topic · Top 8', 'Self-declared repo topics · Top 8')}</p>
+      ${topicBars || `<div class="dim">${t('暂无', 'No data yet')}</div>`}
     </div>
   </div>
 </section>
 
 <section class="sec" id="quality">
-  <div class="sec-h"><span class="sec-n">02</span><h2>质量分布</h2><p class="sub">启发式评分 · 功能分类 · 各场景首选</p></div>
+  <div class="sec-h"><span class="sec-n">02</span><h2>${t('质量分布', 'Quality Distribution')}</h2><p class="sub">${t('启发式评分 · 功能分类 · 各场景首选', 'Heuristic scoring · categories · top pick per scenario')}</p></div>
   <div class="cards">
     <div class="panel">
-      <h3>质量分级</h3><p class="p-sub">平均分 ${a.quality?.avgScore ?? 0} · S+A ${a.quality?.gradePctSA ?? a.quality?.gradePct ?? 0}%</p>
+      <h3>${t('质量分级', 'Quality Grades')}</h3><p class="p-sub">${t(`平均分 ${a.quality?.avgScore ?? 0} · S+A ${a.quality?.gradePctSA ?? a.quality?.gradePct ?? 0}%`, `Avg score ${a.quality?.avgScore ?? 0} · S+A ${a.quality?.gradePctSA ?? a.quality?.gradePct ?? 0}%`)}</p>
       ${gradesHtml}
     </div>
     <div class="panel">
-      <h3>功能分类</h3><p class="p-sub">按名称/描述归类 · Top 8</p>
+      <h3>${t('功能分类', 'Categories')}</h3><p class="p-sub">${t('按名称/描述归类 · Top 8', 'Grouped by name/description · Top 8')}</p>
       ${catsHtml}
     </div>
     <div class="panel">
-      <h3>场景推荐 · 各分类首选</h3><p class="p-sub">每个分类里质量/活跃度最高 · 点击行看详情</p>
-      <table class="ptable"><thead><tr><th>推荐</th><th>场景</th><th class="num">★</th><th class="num">质量</th></tr></thead><tbody>${topPickHtml || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+      <h3>${t('场景推荐 · 各分类首选', 'Scenario Picks · Top Pick by Category')}</h3><p class="p-sub">${t('每个分类里质量/活跃度最高 · 点击行看详情', 'Highest quality/activity per category · click a row for details')}</p>
+      <table class="ptable"><thead><tr><th>${t('推荐', 'Pick')}</th><th>${t('场景', 'Scenario')}</th><th class="num">★</th><th class="num">${t('质量', 'Grade')}</th></tr></thead><tbody>${topPickHtml || `<tr><td class="dim">${t('暂无', 'No data yet')}</td></tr>`}</tbody></table>
     </div>
   </div>
 </section>
 
 <section class="sec" id="rank">
-  <div class="sec-h"><span class="sec-n">03</span><h2>榜单</h2><p class="sub">社区关注 · 发布健康 · 值得收录</p></div>
+  <div class="sec-h"><span class="sec-n">03</span><h2>${t('榜单', 'Leaderboards')}</h2><p class="sub">${t('社区关注 · 发布健康 · 值得收录', 'Community attention · release health · worth listing')}</p></div>
   <div class="cards">
     <div class="panel">
-      <h3>Star 榜 Top 10</h3><p class="p-sub">社区关注度最高的权威插件</p>
-      <table class="ptable"><thead><tr><th>仓库</th><th class="num">★</th><th class="num">npm</th><th class="num">i18n</th></tr></thead><tbody>${starRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+      <h3>${t('Star 榜 Top 10', 'Top 10 by Stars')}</h3><p class="p-sub">${t('社区关注度最高的权威插件', 'Most-starred authoritative plugins')}</p>
+      <table class="ptable"><thead><tr><th>${t('仓库', 'Repository')}</th><th class="num">★</th><th class="num">npm</th><th class="num">i18n</th></tr></thead><tbody>${starRows || `<tr><td class="dim">${t('暂无', 'No data yet')}</td></tr>`}</tbody></table>
     </div>
     <div class="panel">
-      <h3>npm 版本滞后榜</h3><p class="p-sub">仓库已领先于 npm 发布 · Top 10</p>
-      <table class="ptable"><thead><tr><th>仓库</th><th class="num">★</th><th class="num">仓库 → npm</th></tr></thead><tbody>${staleRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+      <h3>${t('npm 版本滞后榜', 'npm Version Lag')}</h3><p class="p-sub">${t('仓库已领先于 npm 发布 · Top 10', 'Repo ahead of the npm release · Top 10')}</p>
+      <table class="ptable"><thead><tr><th>${t('仓库', 'Repository')}</th><th class="num">★</th><th class="num">${t('仓库 → npm', 'Repo → npm')}</th></tr></thead><tbody>${staleRows || `<tr><td class="dim">${t('暂无', 'No data yet')}</td></tr>`}</tbody></table>
     </div>
     <div class="panel">
-      <h3>优质未收录 · 建议收录</h3><p class="p-sub">A/B 级 · 已发布 npm · 尚未进 awesome/imsai · Top 10</p>
-      <table class="ptable"><thead><tr><th>仓库</th><th class="num">质量</th><th class="num">★</th><th>npm / 周下载</th></tr></thead><tbody>
-      ${suggestedHtml || '<tr><td class="dim">暂无（请先跑 00-lists + analyze）</td></tr>'}
+      <h3>${t('优质未收录 · 建议收录', 'Quality & Unlisted · Suggested')}</h3><p class="p-sub">${t('A/B 级 · 已发布 npm · 尚未进 awesome/imsai · Top 10', 'Grade A/B · published to npm · not yet in awesome/imsai · Top 10')}</p>
+      <table class="ptable"><thead><tr><th>${t('仓库', 'Repository')}</th><th class="num">${t('质量', 'Grade')}</th><th class="num">★</th><th>${t('npm / 周下载', 'npm / Weekly Downloads')}</th></tr></thead><tbody>
+      ${suggestedHtml || `<tr><td class="dim">${t('暂无（请先跑 00-lists + analyze）', 'None yet (run 00-lists + analyze first)')}</td></tr>`}
       </tbody></table>
     </div>
     <div class="panel">
-      <h3>作者榜 Top 10</h3><p class="p-sub">按 A/B 级插件数 · <a href="authors/">全部 ${a.authorStats?.total ?? ''} 位作者 →</a></p>
-      <table class="ptable"><thead><tr><th>作者</th><th class="num">插件</th><th class="num">A/B</th><th class="num">★合计</th></tr></thead><tbody>${authorRows || '<tr><td class="dim">暂无</td></tr>'}</tbody></table>
+      <h3>${t('作者榜 Top 10', 'Top 10 Authors')}</h3><p class="p-sub">${langBlock('按 A/B 级插件数', 'By A/B-grade plugin count', 'span')} · <a href="authors/">${t(`全部 ${a.authorStats?.total ?? ''} 位作者 →`, `All ${a.authorStats?.total ?? ''} authors →`)}</a></p>
+      <table class="ptable"><thead><tr><th>${t('作者', 'Author')}</th><th class="num">${t('插件', 'Plugins')}</th><th class="num">A/B</th><th class="num">${t('★合计', '★ Total')}</th></tr></thead><tbody>${authorRows || `<tr><td class="dim">${t('暂无', 'No data yet')}</td></tr>`}</tbody></table>
     </div>
   </div>
 </section>
 
 <section class="sec" id="browse">
-  <div class="sec-h"><span class="sec-n">04</span><h2>插件库</h2><p class="sub">搜索 / 筛选 / 排序 · 状态同步到 URL，可直接分享 · 已加载 ${plugins.length} 个</p></div>
+  <div class="sec-h"><span class="sec-n">04</span><h2>${t('插件库', 'Plugin Directory')}</h2><p class="sub">${t(`搜索 / 筛选 / 排序 · 状态同步到 URL，可直接分享 · 已加载 ${plugins.length} 个`, `Search / filter / sort · state synced to the URL, shareable · ${plugins.length} loaded`)}</p></div>
   <div class="toolbar">
-    <input type="text" id="q" placeholder="搜索仓库名 / 描述…" autocomplete="off">
-    <select id="f-gr" class="fsel" title="质量等级筛选">
-      <option value="">全部等级</option><option value="S">S 级</option><option value="A">A 级</option><option value="B">B 级</option><option value="C">C 级</option><option value="D">D 级</option>
+    <input type="text" id="q" ${ph('搜索仓库名 / 描述…', 'Search repo name / description…')} autocomplete="off">
+    <select id="f-gr" class="fsel" ${titleAttr('质量等级筛选', 'Filter by quality grade')}>
+      <option value="">${t('全部等级', 'All grades')}</option><option value="S">${t('S 级', 'Grade S')}</option><option value="A">${t('A 级', 'Grade A')}</option><option value="B">${t('B 级', 'Grade B')}</option><option value="C">${t('C 级', 'Grade C')}</option><option value="D">${t('D 级', 'Grade D')}</option>
     </select>
-    <select id="f-npm" class="fsel" title="npm 状态筛选">
-      <option value="">全部 npm</option><option value="pub">已发布</option><option value="unpub">未发布</option><option value="stale">版本滞后</option>
+    <select id="f-npm" class="fsel" ${titleAttr('npm 状态筛选', 'Filter by npm status')}>
+      <option value="">${t('全部 npm', 'All npm')}</option><option value="pub">${t('已发布', 'Published')}</option><option value="unpub">${t('未发布', 'Unpublished')}</option><option value="stale">${t('版本滞后', 'Stale')}</option>
     </select>
-    <button class="chip" data-zh="0">i18n·中英</button>
-    <button class="chip" data-active="1">近 7 天活跃</button>
-    <select id="f-sort" class="fsel" title="排序">
-      <option value="">默认（★ 降序）</option><option value="stars-asc">★ 最少</option><option value="new">最新创建</option><option value="old">最早创建</option><option value="active">最近活跃</option><option value="score">质量分</option><option value="name">名称 A→Z</option>
+    <button class="chip" data-zh="0">${t('i18n·中英', 'i18n zh/en')}</button>
+    <button class="chip" data-active="1">${t('近 7 天活跃', 'Active in 7d')}</button>
+    <select id="f-sort" class="fsel" ${titleAttr('排序', 'Sort')}>
+      <option value="">${t('默认（★ 降序）', 'Default (★ desc)')}</option><option value="stars-asc">${t('★ 最少', '★ fewest')}</option><option value="new">${t('最新创建', 'Newest')}</option><option value="old">${t('最早创建', 'Oldest')}</option><option value="active">${t('最近活跃', 'Recently active')}</option><option value="score">${t('质量分', 'Score')}</option><option value="name">${t('名称 A→Z', 'Name A→Z')}</option>
     </select>
-    <details class="cols"><summary>列 ▾</summary><div class="menu">
-      <label><input type="checkbox" checked data-col="created">创建日期</label>
-      <label><input type="checkbox" checked data-col="zh">i18n·中英</label>
-      <label><input type="checkbox" checked data-col="lib">双产物</label>
-      <label><input type="checkbox" checked data-col="act">活跃</label>
+    <details class="cols"><summary>${t('列 ▾', 'Columns ▾')}</summary><div class="menu">
+      <label><input type="checkbox" checked data-col="created">${t('创建日期', 'Created')}</label>
+      <label><input type="checkbox" checked data-col="zh">${t('i18n·中英', 'i18n zh/en')}</label>
+      <label><input type="checkbox" checked data-col="lib">${t('双产物', 'Dual artifacts')}</label>
+      <label><input type="checkbox" checked data-col="act">${t('活跃', 'Active')}</label>
     </div></details>
   </div>
   <div class="tbl-wrap">
   <table class="ptable">
     <thead><tr>
-      <th data-k="0">仓库</th><th data-k="2" class="num">★</th><th data-k="3" class="c-created">创建</th><th data-k="4">npm</th><th data-k="5" class="c-zh">i18n·中英</th><th data-k="6" class="c-lib">双产物</th><th data-k="7" class="c-act">活跃</th><th>质量</th><th>描述</th>
+      <th data-k="0">${t('仓库', 'Repository')}</th><th data-k="2" class="num">★</th><th data-k="3" class="c-created">${t('创建', 'Created')}</th><th data-k="4">npm</th><th data-k="5" class="c-zh">${t('i18n·中英', 'i18n zh/en')}</th><th data-k="6" class="c-lib">${t('双产物', 'Dual artifacts')}</th><th data-k="7" class="c-act">${t('活跃', 'Active')}</th><th>${t('质量', 'Grade')}</th><th>${t('描述', 'Description')}</th>
     </tr></thead>
     <tbody id="tb"></tbody>
   </table></div>
-  <div class="pager"><button id="prev">‹ 上一页</button><span id="info"></span><button id="next">下一页 ›</button></div>
+  <div class="pager"><button id="prev">${t('‹ 上一页', '‹ Prev')}</button><span id="info"></span><button id="next">${t('下一页 ›', 'Next ›')}</button></div>
 </section>
 
 <footer>
-  <span>由 <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">dsh-insights</a> 管线自动生成 · ${date}</span>
-  <span>零依赖 · GitHub API + npm · 启发式评估，非安全审计</span>
+  <span>${t('由', 'Built by')} <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">dsh-insights</a> ${t('管线自动生成', 'pipeline, generated automatically')} · ${date}</span>
+  <span>${t('零依赖 · GitHub API + npm · 启发式评估，非安全审计', 'Zero-dependency · GitHub API + npm · heuristic evaluation, not a security audit')}</span>
 </footer>
 </main>
 
@@ -550,8 +560,11 @@ footer{margin:36px 0 48px;padding-top:18px;border-top:1px solid var(--line);colo
 <script>
 const ROWS=${dataJson};
 const WKS=${JSON.stringify(wkRows).replace(/</g, '\\u003c')};
-const WSERIES=${JSON.stringify(SERIES.map((s) => ({ key: s.key, label: s.label, color: s.color }))).replace(/</g, '\\u003c')};
+const WSERIES=${JSON.stringify(SERIES.map((s) => ({ key: s.key, label: s.label, labelEn: s.labelEn, color: s.color }))).replace(/</g, '\\u003c')};
 const $=s=>document.querySelector(s);
+// i18n helpers — I18N_BODY loads after this script, so fall back to :root[data-lang] (set by I18N_HEAD in <head>)
+var __lang=window.__lang||function(){return document.documentElement.dataset.lang==='en'?'en':'zh'};
+var __t=window.__t||function(zh,en){return __lang()==='en'?en:zh};
 let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
 
 // ---- count-up (hero number) ----
@@ -585,7 +598,7 @@ let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
     cross.setAttribute('x1',p.x);cross.setAttribute('x2',p.x);
     WSERIES.forEach(function(s){ var d=$('#ch-dot-'+s.key); d.style.display=''; d.setAttribute('cx',p.x); d.setAttribute('cy',p[s.key+'Y']) });
     tip.innerHTML='<b>'+p.full+'</b>'+WSERIES.map(function(s){
-      return '<div><i style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;background:'+s.color+'"></i>'+s.label+' <b style="margin-left:6px">+'+p[s.key]+'</b></div>' }).join('');
+      return '<div><i style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;background:'+s.color+'"></i>'+__t(s.label,s.labelEn)+' <b style="margin-left:6px">+'+p[s.key]+'</b></div>' }).join('');
     var left=p.x/CW2*r.width;
     left=Math.max(70,Math.min(r.width-70,left));
     tip.style.left=left+'px';
@@ -605,7 +618,7 @@ let q='',npm='',zh='',act='',gr='',sort=-1,desc=false,page=0,PAGE=120;
     tip.style.left=x+'px'; tip.style.top=y+'px' }
   document.addEventListener('mouseover',function(ev){
     var t=ev.target.closest&&ev.target.closest('[data-tip]');
-    if(!t)return; tip.textContent=t.getAttribute('data-tip'); tip.style.display='block'; move(ev);
+    if(!t)return; tip.textContent=(__lang()==='en'&&t.getAttribute('data-tip-en'))||t.getAttribute('data-tip'); tip.style.display='block'; move(ev);
   });
   document.addEventListener('mousemove',function(ev){ if(tip.style.display==='block')move(ev) });
   document.addEventListener('mouseout',function(ev){
@@ -624,9 +637,10 @@ document.querySelectorAll('.donutwrap').forEach(function(wrap){
     segs.forEach(function(s){ s.classList.toggle('sel',on&&s.getAttribute('data-i')===String(i)) });
     wrap.querySelectorAll('.dleg').forEach(function(l){ l.classList.toggle('sel',on&&l.getAttribute('data-i')===String(i)) });
     if(on){ var seg=svg.querySelector('.dseg[data-i="'+i+'"]');
-      var t=(seg.getAttribute('data-tip')||'').split(' · ');
-      dnum.textContent=t[1]?t[1].split('（')[0]:''; dlab.textContent=t[0]||''; }
-    else { dnum.textContent=total; dlab.textContent='总计' }
+      var raw=(__lang()==='en'&&seg.getAttribute('data-tip-en'))||seg.getAttribute('data-tip')||'';
+      var t=raw.split(' · ');
+      dnum.textContent=t[1]?t[1].split(/[（(]/)[0]:''; dlab.textContent=t[0]||''; }
+    else { dnum.textContent=total; dlab.textContent=__t('总计','Total') }
   }
   segs.forEach(function(s){
     s.addEventListener('mouseenter',function(){ sel(s.getAttribute('data-i'),true) });
@@ -636,6 +650,8 @@ document.querySelectorAll('.donutwrap').forEach(function(wrap){
     l.addEventListener('mouseenter',function(){ sel(l.getAttribute('data-i'),true) });
     l.addEventListener('mouseleave',function(){ sel(0,false) });
   });
+  dlab.textContent=__t('总计','Total');
+  document.addEventListener('langchange',function(){ if(!svg.classList.contains('has-sel'))dlab.textContent=window.__t('总计','Total') });
 });
 
 // ---- table ----
@@ -652,12 +668,13 @@ function draw(){
   const list=filtered(),pages=Math.ceil(list.length/PAGE)||1;
   page=Math.min(page,pages-1);
   const seg=list.slice(page*PAGE,(page+1)*PAGE);
-  $('#tb').innerHTML=seg.map(r=>'<tr data-repo="'+e(r[0])+'"><td><a href="/p/'+e(r[0])+'/">'+e(r[0])+'</a></td><td class="num mono">'+r[2]+'</td><td class="c-created mono" style="color:var(--mut)">'+r[3]+'</td><td>'+(r[4]?'<span class="ok mono">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td class="c-zh">'+(r[5]?'✓':'')+'</td><td class="c-lib">'+(r[6]?'✓':'')+'</td><td class="c-act">'+(r[7]?'✓':'')+'</td><td>'+(r[9]?'<span class="grade '+e(r[9])+'">'+e(r[9])+'</span>':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="9" class="dim" style="padding:24px;text-align:center">无匹配 — 试试放宽筛选条件</td></tr>';
-  $('#info').textContent='第 '+(page+1)+'/'+pages+' 页 · 共 '+list.length+' 条';
+  $('#tb').innerHTML=seg.map(r=>'<tr data-repo="'+e(r[0])+'"><td><a href="/p/'+e(r[0])+'/">'+e(r[0])+'</a></td><td class="num mono">'+r[2]+'</td><td class="c-created mono" style="color:var(--mut)">'+r[3]+'</td><td>'+(r[4]?'<span class="ok mono">'+e(r[4])+'</span>':'<span class="dim">—</span>')+'</td><td class="c-zh">'+(r[5]?'✓':'')+'</td><td class="c-lib">'+(r[6]?'✓':'')+'</td><td class="c-act">'+(r[7]?'✓':'')+'</td><td>'+(r[9]?'<span class="grade '+e(r[9])+'">'+e(r[9])+'</span>':'')+'</td><td class="desc">'+e(r[8])+'</td></tr>').join('')||'<tr><td colspan="9" class="dim" style="padding:24px;text-align:center">'+__t('无匹配 — 试试放宽筛选条件','No matches — try loosening the filters')+'</td></tr>';
+  $('#info').textContent=__t('第 '+(page+1)+'/'+pages+' 页 · 共 '+list.length+' 条','Page '+(page+1)+'/'+pages+' · '+list.length+' plugins');
   $('#prev').disabled=page===0;$('#next').disabled=page>=pages-1;
   document.querySelectorAll('.ptable th[data-k]').forEach(th=>{
-    const k=+th.dataset.k;const base=th.textContent.replace(/ [↑↓]$/,'');
-    th.innerHTML=e(base)+(sort===k?' <span class="arr">'+(desc?'↓':'↑')+'</span>':'');
+    const k=+th.dataset.k;
+    th.querySelectorAll('.arr').forEach(x=>x.remove());
+    if(sort===k){const s=document.createElement('span');s.className='arr';s.textContent=' '+(desc?'↓':'↑');th.appendChild(s)}
   });
   syncHash();
 }
@@ -702,8 +719,10 @@ document.addEventListener('click',function(ev){ var tr=ev.target.closest('tr'); 
 
 readHash();
 draw();
+document.addEventListener('langchange',function(){ draw() });
 (function(){var b=document.getElementById('themeBtn');if(!b)return;b.addEventListener('click',function(){var r=document.documentElement;var d=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=d;try{localStorage.setItem('theme',d)}catch(e){}})})();
 </script>
+${I18N_BODY}
 </body>
 </html>`
   mkdirSync(join(SITE, 'dashboard'), { recursive: true })
@@ -719,10 +738,13 @@ draw();
 <meta http-equiv="refresh" content="0;url=/dashboard/#browse">
 <link rel="canonical" href="/dashboard/">
 <title>插件库 · DSH Insights</title>
+<meta name="en-title" content="Plugin Directory · DSH Insights">
 <meta name="robots" content="noindex">
+${I18N_HEAD}
 </head>
 <body style="margin:0;background:#fafafa;color:#18181b;font:14px/1.7 -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh">
-<p>已并入「插件」页——正在跳转 <a href="/dashboard/#browse">/dashboard/#browse</a> ……</p>
+<p>${t('已并入「插件」页——正在跳转', 'Merged into the Plugins page — redirecting')} <a href="/dashboard/#browse">/dashboard/#browse</a> ……</p>
+${I18N_BODY}
 </body>
 </html>
 `
