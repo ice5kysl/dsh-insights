@@ -72,7 +72,10 @@ function weekLabel(isoWk) {
   return `${fmt(d)}～${fmt(sun)}`
 }
 const stamp = new Date()
-const wk = isoWeek(stamp.toISOString().slice(0, 10))
+const wkArgIdx = process.argv.indexOf('--week')
+const wk = wkArgIdx >= 0 && /^\d{4}-W\d{2}$/.test(process.argv[wkArgIdx + 1] || '')
+  ? process.argv[wkArgIdx + 1]
+  : isoWeek(stamp.toISOString().slice(0, 10))
 const t = analysis.totals || {}
 const q = analysis.quality || {}
 const ch = analysis.channels
