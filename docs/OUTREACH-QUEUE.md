@@ -5,16 +5,16 @@
 
 | # | 作者 | 代表插件 | 等级/分 | ★ | 分类 | 插件数 | 收录 |
 |---|---|---|---|---|---|---|---|
-| 1 | [omdsh-dev](https://github.com/omdsh-dev) | [DSH-better-sidebar](https://dsh-insights.com/p/omdsh-dev/DSH-better-sidebar/) | S · 100 | 3339 | 侧栏 / 工作区 | 6 | 未收录 |
-| 2 | [shanliuling](https://github.com/shanliuling) | [dsh-image-gen](https://dsh-insights.com/p/shanliuling/dsh-image-gen/) | S · 100 | 314 | 模型 / 代理 | 1 | 未收录 |
-| 3 | [RevolutionLA](https://github.com/RevolutionLA) | [dsh-dream-skin](https://dsh-insights.com/p/RevolutionLA/dsh-dream-skin/) | S · 100 | 142 | 状态 / 监控 / 用量 | 1 | 未收录 |
-| 4 | [pengyue-polaron](https://github.com/pengyue-polaron) | [deepseek-harness-genui](https://dsh-insights.com/p/pengyue-polaron/deepseek-harness-genui/) | S · 100 | 107 | 会话管理 | 1 | 未收录 |
-| 5 | [SiriLee](https://github.com/SiriLee) | [dsh-rewind](https://dsh-insights.com/p/SiriLee/dsh-rewind/) | S · 100 | 37 | 侧栏 / 工作区 | 3 | 未收录 |
-| 6 | [SenmuuuuW](https://github.com/SenmuuuuW) | [dsh-whale-report](https://dsh-insights.com/p/SenmuuuuW/dsh-whale-report/) | S · 100 | 31 | 状态 / 监控 / 用量 | 1 | 未收录 |
-| 7 | [Ultronen](https://github.com/Ultronen) | [dsh-archived-chats](https://dsh-insights.com/p/Ultronen/dsh-archived-chats/) | S · 100 | 18 | 搜索 / 命令面板 | 2 | 未收录 |
-| 8 | [Likenttt](https://github.com/Likenttt) | [garmin-connect-plugin-for-dsh](https://dsh-insights.com/p/Likenttt/garmin-connect-plugin-for-dsh/) | S · 100 | 11 | 文件浏览 / 预览 | 1 | 未收录 |
-| 9 | [lee259](https://github.com/lee259) | [dsh-workbench](https://dsh-insights.com/p/lee259/dsh-workbench/) | S · 100 | 6 | 侧栏 / 工作区 | 1 | 未收录 |
-| 10 | [chendefine](https://github.com/chendefine) | [dsh-web-fetch-playwright](https://dsh-insights.com/p/chendefine/dsh-web-fetch-playwright/) | S · 100 | 3 | 文件浏览 / 预览 | 5 | 未收录 |
+| 1 | [omdsh-dev](https://github.com/omdsh-dev/DSH-better-sidebar/issues/581) ✅ | [DSH-better-sidebar](https://dsh-insights.com/p/omdsh-dev/DSH-better-sidebar/) | S · 100 | 3339 | 侧栏 / 工作区 | 6 | 未收录 |
+| 2 | [shanliuling](https://github.com/shanliuling/dsh-image-gen/issues/34) ✅ | [dsh-image-gen](https://dsh-insights.com/p/shanliuling/dsh-image-gen/) | S · 100 | 314 | 模型 / 代理 | 1 | 未收录 |
+| 3 | [RevolutionLA](https://github.com/RevolutionLA/dsh-dream-skin/issues/47) ✅ | [dsh-dream-skin](https://dsh-insights.com/p/RevolutionLA/dsh-dream-skin/) | S · 100 | 142 | 状态 / 监控 / 用量 | 1 | 未收录 |
+| 4 | [pengyue-polaron](https://github.com/pengyue-polaron/deepseek-harness-genui/issues/11) ✅ | [deepseek-harness-genui](https://dsh-insights.com/p/pengyue-polaron/deepseek-harness-genui/) | S · 100 | 107 | 会话管理 | 1 | 未收录 |
+| 5 | [SiriLee](https://github.com/SiriLee/dsh-rewind/issues/19) ✅ | [dsh-rewind](https://dsh-insights.com/p/SiriLee/dsh-rewind/) | S · 100 | 37 | 侧栏 / 工作区 | 3 | 未收录 |
+| 6 | [SenmuuuuW](https://github.com/SenmuuuuW/dsh-whale-report/issues/6) ✅ | [dsh-whale-report](https://dsh-insights.com/p/SenmuuuuW/dsh-whale-report/) | S · 100 | 31 | 状态 / 监控 / 用量 | 1 | 未收录 |
+| 7 | [Ultronen](https://github.com/Ultronen/dsh-archived-chats/issues/37) ✅ | [dsh-archived-chats](https://dsh-insights.com/p/Ultronen/dsh-archived-chats/) | S · 100 | 18 | 搜索 / 命令面板 | 2 | 未收录 |
+| 8 | [Likenttt](https://github.com/Likenttt/garmin-connect-plugin-for-dsh/issues/1) ✅ | [garmin-connect-plugin-for-dsh](https://dsh-insights.com/p/Likenttt/garmin-connect-plugin-for-dsh/) | S · 100 | 11 | 文件浏览 / 预览 | 1 | 未收录 |
+| 9 | [lee259](https://github.com/lee259/dsh-workbench/issues/13) ✅ | [dsh-workbench](https://dsh-insights.com/p/lee259/dsh-workbench/) | S · 100 | 6 | 侧栏 / 工作区 | 1 | 未收录 |
+| 10 | [chendefine](https://github.com/chendefine/dsh-web-fetch-playwright/issues/4) ✅ | [dsh-web-fetch-playwright](https://dsh-insights.com/p/chendefine/dsh-web-fetch-playwright/) | S · 100 | 3 | 文件浏览 / 预览 | 5 | 未收录 |
 | 11 | [Uddoo](https://github.com/Uddoo) | [dsh-dashboard](https://dsh-insights.com/p/Uddoo/dsh-dashboard/) | S · 100 | 3 | 消息 / 协作集成 | 1 | 未收录 |
 | 12 | [banlanzs](https://github.com/banlanzs) | [dsh-web-enhanced](https://dsh-insights.com/p/banlanzs/dsh-web-enhanced/) | S · 100 | 3 | 侧栏 / 工作区 | 1 | 未收录 |
 | 13 | [g-yixuan](https://github.com/g-yixuan) | [dsh-sidenote](https://dsh-insights.com/p/g-yixuan/dsh-sidenote/) | S · 100 | 3 | 侧栏 / 工作区 | 1 | 未收录 |
@@ -25,6 +25,10 @@
 | 18 | [jianweideng0515-create](https://github.com/jianweideng0515-create) | [dsh-usage-stats](https://dsh-insights.com/p/jianweideng0515-create/dsh-usage-stats/) | S · 100 | 2 | 状态 / 监控 / 用量 | 1 | 未收录 |
 | 19 | [TecFancy](https://github.com/TecFancy) | [dsh-mobile](https://dsh-insights.com/p/TecFancy/dsh-mobile/) | S · 100 | 2 | 侧栏 / 工作区 | 2 | 未收录 |
 | 20 | [Shane-Jay](https://github.com/Shane-Jay) | [dsh-self-update](https://dsh-insights.com/p/Shane-Jay/dsh-self-update/) | S · 100 | 2 | 消息 / 协作集成 | 1 | 未收录 |
+
+## 发送记录
+
+- 2026-09-08 · 第 1 批 10 封已发（GitHub issue，见表中 ✅ 链接指向所发 issue；信件均含「观察员的额外视角」个性化建议 + 共建邀请段）
 
 ## 触达后动作
 - 回复积极 → 引导挂徽章（/badge/ 有接入指南与一键复制）
