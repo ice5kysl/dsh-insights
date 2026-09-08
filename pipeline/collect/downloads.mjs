@@ -5,7 +5,8 @@
  *
  * 失败纪律（P1-4）：
  *   - 失败计数 + 明细日志（前 10 个失败包名）
- *   - 成功率 < 50% 时 exit 1
+ *   - 成功率 < 50% 时：有旧数据兜底则降级为告警（不阻塞管线与 pages 接力部署）；
+ *     无旧数据可兜底才 exit 1（npm 对共享 CI 出口 IP 大面积断供时有发生，旧值可用时不应掀桌）
  *   - 与旧 downloads.json merge（新值覆盖同名键，失败的包保留旧值），绝不整覆写丢历史
  *
  * Output: data/downloads.json { fetchedAt, map }（map 值为 npm last-week 点数）
@@ -62,8 +63,9 @@ async function main() {
   const sum = Object.values(map).reduce((s, v) => s + v.d, 0)
   console.log(`[downloads] ok ${ok}/${names.length} (${Math.round(okRate * 1000) / 10}%) · 周下载合计 ${sum} → data/downloads.json`)
   if (names.length && okRate < OK_FLOOR) {
-    console.error(`[downloads] 成功率 ${Math.round(okRate * 1000) / 10}% < ${OK_FLOOR * 100}% —— 判定采集失败（已 merge 旧值，未丢历史）`)
-    process.exit(1)
+    const hasFallback = Object.keys(oldMap).length > 0
+    console.error(`[downloads] 成功率 ${Math.round(okRate * 1000) / 10}% < ${OK_FLOOR * 100}% —— ${hasFallback ? '有旧数据兜底，降级为告警（不阻塞管线）' : '无旧数据兜底，判定采集失败'}`)
+    if (!hasFallback) process.exit(1)
   }
 }
 
