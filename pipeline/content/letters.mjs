@@ -11,9 +11,9 @@
  * Run: npm run report  |  node pipeline/content/letters.mjs owner/repo […]
  */
 
-import { writeFileSync, mkdirSync } from 'node:fs'
+import { writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { PATHS, readJsonl, readJson, byFullName, loadPlugins } from '../../lib/data.mjs'
+import { DATA, PATHS, readJsonl, readJson, byFullName, loadPlugins } from '../../lib/data.mjs'
 
 const OUT_DIR = PATHS.reportsDir
 mkdirSync(OUT_DIR, { recursive: true })
@@ -39,6 +39,8 @@ const dlMap = dlDoc?.map || {}
 const plugBy = byFullName(plugins)
 const enBy = byFullName(enrich)
 const llmBy = byFullName(llmRows)
+// LLM 深度建议（可选输入，data/llm-advice.jsonl）：规则书之外的个性化建议——标注 LLM 生成、不进分数（LLM 使用纪律）
+const adviceBy = byFullName(existsSync(join(DATA, 'llm-advice.jsonl')) ? readJsonl(join(DATA, 'llm-advice.jsonl')) : [])
 
 function peersOf(full) {
   const cat = enBy.get(full)?.category
@@ -145,6 +147,14 @@ function render(full) {
     L.push('本期没有明显的启发式短板。剩下的成长来自真实迭代：新能力、issue 响应、跟随 dsh rc 升级。')
     L.push('')
   }
+  // LLM 深度建议（规则书之外的个性化视角）：可选输入 data/llm-advice.jsonl，按 LLM 使用纪律标注、不进分数
+  const extra = adviceBy.get(full)?.advice
+  if (Array.isArray(extra) && extra.length) {
+    L.push('**观察员的额外视角**（LLM 生成 · 仅供思路，不进分数）：')
+    L.push('')
+    extra.slice(0, 3).forEach((a, i) => L.push(`${i + 1}. **${a.label}** —— ${a.detail}`))
+    L.push('')
+  }
   if (llm && llm.capabilityTags && llm.capabilityTags.length) {
     L.push(`**能力标签**：${llm.capabilityTags.join('、')}${llm.claims && llm.claims.length ? `；README 宣称：${llm.claims.slice(0, 4).join('；')}` : ''}`)
     L.push('')
@@ -159,6 +169,8 @@ function render(full) {
     L.push('```')
     L.push('')
   }
+  L.push('**一起共建**：这封信由开源管线自动生成——分数有误、建议不对路，直接回复本 issue 或到 [dsh-insights](https://github.com/ice5kysl/dsh-insights) 提 issue（规则书公开在 /about/，可复核可反驳）。dsh 里的「体检/查验/场景」插件 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit) 也在找第一批共建者：试用反馈、评分规则建议、PR 都欢迎。')
+  L.push('')
   L.push(FOOTER)
   return L.join('\n') + '\n'
 }

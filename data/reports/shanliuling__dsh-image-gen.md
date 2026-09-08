@@ -1,10 +1,10 @@
 # 致 dsh-image-gen 的作者：一期一会 · 体检与建议
 
-> shanliuling/dsh-image-gen · 第 1 期（数据快照 2026-09-06）
+> shanliuling/dsh-image-gen · 第 1 期（数据快照 2026-09-08）
 
 你好！我是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）** 的自动观测员。这封信聊聊 dsh-image-gen 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
 
-**本期概览：S（100/100）· 在「模型 / 代理」类 499 个插件里超过 99% 的同类（同类中位 83）**
+**本期概览：S（100/100）· 在「模型 / 代理」类 953 个插件里超过 99% 的同类（同类中位 79）**
 
 - ★314 · AI image studio for DeepSeek Harness — generate, edit & compare images in chat, with 500+ prompts, gallery, multi-model workflows and ComfyUI.
 - npm：`dsh-image-gen@0.4.0`（18 个版本）
@@ -18,6 +18,11 @@
 1. **提交 awesome-dsh-plugin** —— 上架主目录（曝光+反链）。怎么做：data/plugins/<owner>__<repo>.yml 提 PR。
 2. **提交 imsai/deepseek1024** —— 覆盖另一主流渠道。怎么做：catalog/plugins JSON，一个 PR 一条。
 
+**观察员的额外视角**（LLM 生成 · 仅供思路，不进分数）：
+
+1. **声明 engines.dsh** —— 在 package.json 声明 engines.dsh（如 "^0.1.1"）后，你的兼容区间会进入 compat.json，用户升级 dsh 前即可看到兼容信号；这是生态刚立的约定，早声明的插件在详情页会展示更完整的兼容行。
+2. **把 500+ prompts 变成可检索资产** —— 提示词库是你的内容壁垒——单独导出成 JSON 或目录页，用户能检索、别人能引用；多模型 + ComfyUI 工作流是差异化卖点，README 里用一张「同提示词多模型对比图」比文字有说服力得多。
+
 **能力标签**：image-gen、image-edit、compare、gallery、comfyui、multi-model、prompts；README 宣称：500+ prompts；支持ComfyUI；支持multi-model workflows；支持gallery
 
 > 注：本期是基线首期。之后每期我们会对比上一期，告诉你分数/名次/收录/下载的**变化**。
@@ -28,9 +33,11 @@
 Add shanliuling/dsh-image-gen to the DSH plugin directory (category ui) — a standard Cordis "bundle" plugin targeting @deepseek-ai/dsh ≥ 0.1.1-rc.2, published as dsh-image-gen@0.4.0.
 ```
 
+**一起共建**：这封信由开源管线自动生成——分数有误、建议不对路，直接回复本 issue 或到 [dsh-insights](https://github.com/ice5kysl/dsh-insights) 提 issue（规则书公开在 /about/，可复核可反驳）。dsh 里的「体检/查验/场景」插件 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit) 也在找第一批共建者：试用反馈、评分规则建议、PR 都欢迎。
+
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-06
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-08
 > 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 作者自检 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit)（`npx dsh-insights-kit selfcheck <dir>`）· 示例页 https://dsh-insights.com/
 > 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。
 

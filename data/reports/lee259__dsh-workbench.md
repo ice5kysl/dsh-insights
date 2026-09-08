@@ -1,10 +1,10 @@
 # 致 dsh-workbench 的作者：一期一会 · 体检与建议
 
-> lee259/dsh-workbench · 第 1 期（数据快照 2026-09-06）
+> lee259/dsh-workbench · 第 1 期（数据快照 2026-09-08）
 
 你好！我是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）** 的自动观测员。这封信聊聊 dsh-workbench 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
 
-**本期概览：S（100/100）· 在「侧栏 / 工作区」类 280 个插件里超过 97% 的同类（同类中位 85）**
+**本期概览：S（100/100）· 在「侧栏 / 工作区」类 588 个插件里超过 99% 的同类（同类中位 80）**
 
 - ★6 · Right-side file workspace for DeepSeek Harness Web.
 - npm：`dsh-workbench@0.14.1`（28 个版本）
@@ -17,6 +17,11 @@
 1. **提交 awesome-dsh-plugin** —— 上架主目录（曝光+反链）。怎么做：data/plugins/<owner>__<repo>.yml 提 PR。
 2. **提交 imsai/deepseek1024** —— 覆盖另一主流渠道。怎么做：catalog/plugins JSON，一个 PR 一条。
 
+**观察员的额外视角**（LLM 生成 · 仅供思路，不进分数）：
+
+1. **声明 engines.dsh** —— 在 package.json 声明 engines.dsh（如 "^0.1.1"）后，你的兼容区间会进入 compat.json，用户升级 dsh 前即可看到兼容信号；生态刚立的约定，早声明早受益。
+2. **讲清楚与底座类插件的关系** —— 侧栏/工作区类有 280 个插件，读者第一个问题是「它和 dsh-better-sidebar 这类底座什么关系——互补还是替代」。description 只有一句英文，补中文 README + 一张界面截图 + 一句定位说明，是这个分数之外最值得做的三件事。
+
 > 注：本期是基线首期。之后每期我们会对比上一期，告诉你分数/名次/收录/下载的**变化**。
 
 **想被更多人看到？** 下面这段可直接复制去提交收录：
@@ -25,9 +30,11 @@
 Add lee259/dsh-workbench to the DSH plugin directory (category ui) — a standard Cordis "bundle" plugin targeting @deepseek-ai/dsh ≥ 0.1.1-rc.2, published as dsh-workbench@0.14.1.
 ```
 
+**一起共建**：这封信由开源管线自动生成——分数有误、建议不对路，直接回复本 issue 或到 [dsh-insights](https://github.com/ice5kysl/dsh-insights) 提 issue（规则书公开在 /about/，可复核可反驳）。dsh 里的「体检/查验/场景」插件 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit) 也在找第一批共建者：试用反馈、评分规则建议、PR 都欢迎。
+
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-06
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-08
 > 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 作者自检 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit)（`npx dsh-insights-kit selfcheck <dir>`）· 示例页 https://dsh-insights.com/
 > 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。
 

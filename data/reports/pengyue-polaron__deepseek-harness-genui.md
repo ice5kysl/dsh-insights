@@ -1,10 +1,10 @@
 # 致 deepseek-harness-genui 的作者：一期一会 · 体检与建议
 
-> pengyue-polaron/deepseek-harness-genui · 第 1 期（数据快照 2026-09-06）
+> pengyue-polaron/deepseek-harness-genui · 第 1 期（数据快照 2026-09-08）
 
 你好！我是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）** 的自动观测员。这封信聊聊 deepseek-harness-genui 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
 
-**本期概览：S（100/100）· 在「会话管理」类 423 个插件里超过 99% 的同类（同类中位 83）**
+**本期概览：S（100/100）· 在「会话管理」类 804 个插件里超过 99% 的同类（同类中位 80）**
 
 - ★107 · Task-specific React apps for DeepSeek Harness with state carried into the next Agent turn
 - npm：`dsh-plugin-genui@0.14.0`（5 个版本）
@@ -17,6 +17,11 @@
 1. **提交 awesome-dsh-plugin** —— 上架主目录（曝光+反链）。怎么做：data/plugins/<owner>__<repo>.yml 提 PR。
 2. **提交 imsai/deepseek1024** —— 覆盖另一主流渠道。怎么做：catalog/plugins JSON，一个 PR 一条。
 
+**观察员的额外视角**（LLM 生成 · 仅供思路，不进分数）：
+
+1. **声明 engines.dsh** —— 在 package.json 声明 engines.dsh（如 "^0.1.1"）后，你的兼容区间会进入 compat.json，用户升级 dsh 前即可看到兼容信号；生态刚立的约定，早声明的插件详情页会展示更完整的兼容行。
+2. **把核心叙事讲满** —— 「state carried into the next Agent turn」是整个会话管理类几乎没人做的方向，但 description 只有一句英文——补一段中文说明 + 一个最小动图示例（做一个表单 → 下一轮 Agent 直接用上表单数据），理解门槛会显著下降；这个定位值得占住。
+
 **能力标签**：react、apps、state；README 宣称：task-specific React apps；state carried to next Agent turn
 
 > 注：本期是基线首期。之后每期我们会对比上一期，告诉你分数/名次/收录/下载的**变化**。
@@ -27,9 +32,11 @@
 Add pengyue-polaron/deepseek-harness-genui to the DSH plugin directory (category ui) — a standard Cordis "bundle" plugin targeting @deepseek-ai/dsh ≥ 0.1.1-rc.2, published as dsh-plugin-genui@0.14.0.
 ```
 
+**一起共建**：这封信由开源管线自动生成——分数有误、建议不对路，直接回复本 issue 或到 [dsh-insights](https://github.com/ice5kysl/dsh-insights) 提 issue（规则书公开在 /about/，可复核可反驳）。dsh 里的「体检/查验/场景」插件 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit) 也在找第一批共建者：试用反馈、评分规则建议、PR 都欢迎。
+
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-06
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-08
 > 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 作者自检 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit)（`npx dsh-insights-kit selfcheck <dir>`）· 示例页 https://dsh-insights.com/
 > 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。
 
