@@ -55,4 +55,5 @@
 
 ## 发布记录
 
-- （待回填）
+- 2026-09-08 · GitHub Discussions（Announcements #1）：https://github.com/ice5kysl/dsh-insights/discussions/1 （已发，含本仓库 Discussions 开启）
+- 2026-09-08 · LINUX DO：（待发，需本人账号）
