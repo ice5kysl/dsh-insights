@@ -5,7 +5,9 @@
 
 ---
 
-## 帖 1 · LINUX DO（社区向，中文）
+## 帖 1 · V2EX「分享创造」/ LINUX DO（社区向，中文，两版通用）
+
+> 渠道说明：LINUX DO 为邀请制注册，暂无账号（已挂起，拿到邀请码后直接复用本帖）；当前首发渠道为 V2EX「分享创造」节点。
 
 **标题：DSH Insights：给 dsh 插件生态做了个「全量、可复核」的健康分观察站（附每周生态周报）**
 
@@ -49,7 +51,7 @@
 
 ## 发布后（5 分钟）
 
-1. 两个帖子的链接回填本文件顶部 + `docs/RESEARCH.md` §决策日志（「W37 外发：LINUX DO __ / Discussions __」）
+1. 两个帖子的链接回填本文件顶部 + `docs/RESEARCH.md` §决策日志（「W37 外发：V2EX __ / LINUX DO __ / Discussions __」）
 2. 周五 W37 周报帖发出后，带链接跟进 #4399
 3. Umami 面板标记发布日（之后看曲线）
 
@@ -57,4 +59,5 @@
 
 - 2026-09-08 · GitHub Discussions（Announcements #1）：https://github.com/ice5kysl/dsh-insights/discussions/1 （已发，含本仓库 Discussions 开启；定位=存档页，无分发价值）
 - 2026-09-08 · **官方 deepseek-harness Discussions「Show Your Plugins!」#5933**：https://github.com/deepseek-ai/deepseek-harness/discussions/5933 （主触达渠道——官方明言仅监控自家 Discussions）
-- 2026-09-08 · LINUX DO：（待发，需本人账号）
+- 2026-09-08 · V2EX「分享创造」：（待发，需本人账号，新号先完成手机验证）
+- 2026-09-08 · LINUX DO：（挂起，邀请制注册；拿到邀请码后复用帖 1）

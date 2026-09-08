@@ -46,9 +46,10 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 |---|---|---|---|
 | 2026-09-05（已做） | awesome-dsh-plugin org Discussions | 发集成提案（ZH/EN） | ✅ 已发 = **#4399**，待回复；W37 帖发出后带新数字跟进 |
 | 2026-09-08（已做） | 自荐 3 插件 README | 贴 health badge（新域名） | ✅ insights/workspace/file-explorer 三 kit，均 100 S |
-| **本周（启动周，见 §五）** | LINUX DO + Discussions + 作者 issue | 官宣帖 + 首批 10 封信 | 帖子发出 · 信件发出 ≥10 |
+| **本周（启动周，见 §五）** | V2EX「分享创造」+ 官方/本仓库 Discussions + 作者 issue | 官宣帖 + 首批 10 封信 | 帖子发出 · 信件发出 ≥10 |
 | 2026-09-08（已做） | **官方 deepseek-harness Discussions「Show Your Plugins!」** | 生态官宣（作者向：徽章/selfcheck/recheck + 开放数据） | ✅ 已发 = **#5933**；官方仅监控自家 Discussions，这是最直接的官方触达通道 |
-| **每周五（周报节奏）** | LINUX DO / GitHub Discussions / 中文 dsh 社区 | 发当期生态周报帖（模板见 §四）+ 站点周报页链接 | 连续外发期数（M2 ≥6，不断更） |
+| ~~LINUX DO~~（暂停） | linux.do | 官宣+周报帖 | ⚠️ 邀请制注册，无账号——待获得邀请码后激活（可在 V2EX/即刻发帖求邀请）；文案直接用 OUTREACH-POSTS-W37.md 帖 1 |
+| **每周五（周报节奏）** | V2EX / GitHub Discussions / 即刻（可选） | 发当期生态周报帖（模板见 §四）+ 站点周报页链接 | 连续外发期数（M2 ≥6，不断更） |
 | 全量新快照有亮点时 | deepseek-harness Discord / HN（可选） | "全量客观评分数据集"帖 + query CLI 演示 | 帖子互动 + repo ★ |
 | W37 帖发出后 | awesome org / dsh-market 跟进 | 每周数据 URL 更新 + 采纳谈判 | ≥1 家接入（M3 退出标准） |
 | 徽章热链稳定后 | 作者圈层 | 推动 Top 插件 README 挂 badge | 部署数见 §六目标 |
@@ -59,7 +60,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 
 1. **生成**：每周五 CI 跑 content/weekly → `data/weekly/YYYY-Www.md` + `LATEST.md` + 站点 `/weekly/` + feed.xml 重建（机器生成全文）。
 2. **review**（人，≤15 分钟）：核对数字与 movers 无异常；口径变更必须出现在"口径公告位"。
-3. **外发**（人，模板化）：LINUX DO + 本仓库 Discussions 各一帖，结构 = 本周 3 个数字 + 1 个 movers 看点 + 站点/RSS 链接；语气中立（数据说话，不拉踩）。
+3. **外发**（人，模板化）：V2EX「分享创造」+ 本仓库 Discussions 各一帖（LINUX DO 待邀请码激活后并入），结构 = 本周 3 个数字 + 1 个 movers 看点 + 站点/RSS 链接；语气中立（数据说话，不拉踩）。
 4. **记录**：外发链接与反馈记 RESEARCH §决策日志；断更即警报（PRODUCT-DESIGN §红线：连续断更 2 期暂停新功能先修管线）。
 
 ## 五、启动周作战表（W37 · 2026-09-08 起，不等周五）
@@ -67,7 +68,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 > 原则：周一启动用「全量快照 + 四周周报存量」做官宣，周五 W37 新周报做二次触达（同一帖下更新，不另开帖）。人每天投入 ≤40 分钟。
 
 ### D0（周二 09-08，今天）
-- [ ] **官宣帖发布**（人，30 分钟）：用 [OUTREACH-POSTS-W37.md](./OUTREACH-POSTS-W37.md) 帖 1（LINUX DO）与帖 2（Discussions 中英），占位符按 §四从最新 LATEST.md/health.json 填当前数字（权威集 10,190 · S+A 1,036 · npm 发布率 41.9%）。帖内必带三件套：/p/ 详情页示例（omdsh-dev/DSH-better-sidebar 100 分）、徽章接入一页（/badge/）、`dsh plugin add dsh-insights-kit` 安装指引（/kit/）。
+- [ ] **官宣帖发布**（人，30 分钟）：~~帖 2（Discussions）已发 #5933~~；剩余 V2EX「分享创造」一帖，用 [OUTREACH-POSTS-W37.md](./OUTREACH-POSTS-W37.md) 帖 1 的文案（数字已是当前快照：权威集 10,190 · S+A 1,036 · npm 发布率 41.9%）。帖内必带三件套：/p/ 详情页示例（omdsh-dev/DSH-better-sidebar 100 分）、徽章接入一页（/badge/）、`dsh plugin add dsh-insights-kit` 安装指引（/kit/）。V2EX 新号注意：先完成手机验证、挑「分享创造」节点，语气保持社区向。
 - [ ] **首批作者信 10 封**（人，40 分钟）：按 [OUTREACH-QUEUE.md](./OUTREACH-QUEUE.md) 前 10 位（omdsh-dev、shanliuling、RevolutionLA、pengyue-polaron、SiriLee、SenmuuuuW、Ultronen、Likenttt、lee259、chendefine），到对应仓库开 issue，正文 = `data/reports/<owner>__<repo>.md` 全文（已含新 CLI 页脚），标题「你的插件在 DSH Insights 的评分与改进建议」。发完在队列表勾记。
 - [ ] **提案 #4399 预热带数**：暂不回复，等 W37 帖链接出来一起跟（避免刷屏）。
 
@@ -99,7 +100,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 | 徽章部署仓库数 | 3（全自家） | ≥5 | ≥10 | ≥25 | GitHub 代码搜索计数 |
 | 作者信回复率 | —（未发） | ≥10%（10/20 封有回复） | ≥20% 累计 | ≥30% 累计 | 队列表人工勾记 |
 | 官宣+周报帖 | 0 帖 | 2 帖（官宣+W37） | 4 帖 | 6 帖（不断更） | 链接存档 RESEARCH |
-| LINUX DO 单帖阅读 | — | ≥300 | ≥500/帖 | ≥800/帖 | 帖子页计数 |
+| 社区帖单帖阅读（V2EX；LINUX DO 激活后并入） | — | ≥300 | ≥500/帖 | ≥800/帖 | 帖子页计数 |
 | dsh-insights repo ★ | 0 | ≥10 | ≥30 | ≥60 | gh api |
 | dsh-insights-kit npm 周下载 | 未统计 | ≥10 | ≥30 | ≥80 | downloads.json |
 | 目录/市场采纳 | #4399 待回复 | 跟进 1 次 | 有实质回复 | ≥1 家接入谈判中 | M2-INTEGRATION 状态 |
