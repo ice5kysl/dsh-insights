@@ -94,6 +94,7 @@
 - 2026-09-06：**改进清单立项**（docs/IMPROVEMENTS-2026-09-06.md）——最高优先：权威集元数据刷新回路（discover 每次全量已拿到新鲜 stars/pushed_at 但被丢弃，活跃度口径随冻结数据衰减）+ history 逐日累积（时间层资产不可回填）；另立评分区分度叙事、信件双语、GraphQL 批量校验等。
 - 2026-09-08：**官宣启动（不等周五）**——本仓库 Discussions 开启并发存档帖（[Announcements #1](https://github.com/ice5kysl/dsh-insights/discussions/1)）；**主触达走官方渠道**：deepseek-ai/deepseek-harness Discussions「Show Your Plugins!」[#5933](https://github.com/deepseek-ai/deepseek-harness/discussions/5933)（官方明言仅监控自家 Discussions）；LINUX DO 帖待本人账号发。OUTREACH 升 v0.3：作者自查 CLI 由已废弃的 dsh-plugin-health 全量切换为 `dsh-insights-kit selfcheck`（模板/文档/README/4,681 封信件页脚）；新增启动周作战表（D0–D7）与量化目标（北极星 = 徽章部署仓库数，4 周 ≥25）。三个自家 kit 全部 100 S 并挂新域名徽章；dsh-insights-kit 收入权威集（10,190）。
 - 2026-09-08：**版本纪律（用户两次提出「版本涨太快」后钉死）**——kit 系仓库（dsh-insights-kit 等）发版规则：① 先验证后发布，真实 profile 端到端验证必须在 `npm publish` 之前（0.6.0/0.6.1 同日连发即为反例：验证后发现 bundles 形态问题又补一发）；② 每个迭代只发一个版本，修复并入当次迭代不单独发；③ 长期停留 0.x：修复用 patch、成组新能力才用 minor，不追整数关口；④ 站点 changelog 同理按用户口径取低版本号。npm 不允许同版本重发，已发版本不撤销不掩饰，只约束以后。
+- 2026-09-09：**版本纪律收紧（同日 0.5.0→0.8.0 五连发，用户再次批评）**——原规则②被「同日连开多个迭代」钻了空子，补死：**同一仓库一天最多发一个版本**，当天的改动合并到一次发布里；增强/打磨已有能力的一律 patch（热挂载之于一键装卸就该是 0.7.1 而非 0.8.0）；minor 仅用于成组新能力且仍需遵守日频次上限；1.0.0 的时机由用户拍板。已发的中间版本（0.6.0/0.7.0）保留不撤销——启动日的试错痕迹也是历史。
 
 ## 来源
 
