@@ -2,7 +2,7 @@
 /**
  * pipeline/validate · deep — limited deep checks on selected plugins (clone + source scan).
  *
- * Heuristics (same spirit as dsh-plugin-health):
+ * Heuristics (same spirit as the dsh-insights-kit selfcheck rules):
  *   - filesystem writes / subprocess spawn / HTTP write verbs in src
  *   - sanitizer presence for HTML/Markdown rendering (DOMPurify etc.)
  * Targets (first available of each):

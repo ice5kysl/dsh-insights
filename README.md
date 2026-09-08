@@ -3,7 +3,7 @@
 > **Live: <https://dsh-insights.com>** · This repo = pipeline + site + open data ([ice5kysl/dsh-insights](https://github.com/ice5kysl/dsh-insights))
 > **Plugin health · Official dynamics · Ecosystem trends** — full-ecosystem indexing → authenticity gate → objective health scores (evidence attached) → channel coverage → letters to authors → weekly report → official-dynamics snapshots (+ rc compat radar, M2). Zero-dependency Node. Open and reproducible.
 >
-> **English (default)** · [简体中文](./README.zh-CN.md) · Docs: [Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [Product Plan](./docs/PRODUCT-PLAN.md) · [Product Design](./docs/PRODUCT-DESIGN.md) · [Research](./docs/RESEARCH.md) · [Schema](./docs/SCHEMA.md) · [Outreach](./docs/OUTREACH.md) · Per-plugin CLI [dsh-plugin-health](https://github.com/ice5kysl/dsh-plugin-health)
+> **English (default)** · [简体中文](./README.zh-CN.md) · Docs: [Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [Product Plan](./docs/PRODUCT-PLAN.md) · [Product Design](./docs/PRODUCT-DESIGN.md) · [Research](./docs/RESEARCH.md) · [Schema](./docs/SCHEMA.md) · [Outreach](./docs/OUTREACH.md) · Author self-check CLI: [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit) (`npx dsh-insights-kit selfcheck <dir>`)
 
 ## Why
 

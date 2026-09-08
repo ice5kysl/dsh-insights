@@ -45,7 +45,7 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 
 **目标**：分数与观测进入主目录/市场/官方的消费流（**被吸收，不竞争**），并升级为月度深度内容。
 
-- [ ] **作者侧徽章**：SVG 健康徽章（`![health A](…)`）+"怎么修"链接（沿用 dsh-plugin-health 口径）。
+- [ ] **作者侧徽章**：SVG 健康徽章（`![health A](…)`）+"怎么修"链接（health-v5 口径，与 dsh-insights-kit selfcheck 同规则书）。
 - [ ] **策展侧 pitch（两案并进）**：A 案 plugins.json `health` sidecar；B 案收录门槛（health ≥ B）。
 - [ ] **市场/agent 可读**：稳定 JSON URL、`llms.txt`/`robots.txt`、无登录墙。
 - [ ] **月度《dsh 演进报告》**：官方演进 + 生态规模/质量/缺口/兼容的月度汇编（面向官方与社区）。
