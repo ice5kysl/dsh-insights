@@ -867,11 +867,35 @@ ${badgeExHtml}
   const saN = (gr0.S ?? 0) + (gr0.A ?? 0)
   const saPct = t0.authoritative ? Math.round((saN / t0.authoritative) * 1000) / 10 : null
   const fresh6 = [...plugAll].sort((a, b) => (b.created_at || '').localeCompare(a.created_at || '')).slice(0, 6)
-  const freshCards = fresh6.map((p) => `<a class="card" href="/p/${escHtml(p.full_name)}/" style="text-decoration:none;color:inherit;display:block" title="${escHtml(p.full_name)}">
-<b style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--mono);font-size:12.5px">${escHtml(p.full_name)}</b>
+  const freshCards = fresh6.map((p) => { const fg = enBy.get(p.full_name)?.grade; return `<a class="card" href="/p/${escHtml(p.full_name)}/" style="text-decoration:none;color:inherit;display:block" title="${escHtml(p.full_name)}">
+<b style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--mono);font-size:12.5px">${fg ? `<span class="grade ${escHtml(fg)}">${escHtml(fg)}</span> ` : ''}${escHtml(p.full_name)}</b>
 <p>★ ${p.stars || 0} · ${t('入库', 'added')} ${escHtml((p.created_at || '').slice(0, 10))}</p>
-<p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(stripEmoji(p.description).slice(0, 64)) || t('（无描述）', '(No description)')}</p></a>`).join('')
-  const sceneCards = scenarios.slice(0, 6).map((s) => `<a class="card" href="scenarios/#sc-${escHtml(s.id)}" style="text-decoration:none;color:inherit;display:block"><b>${t(s.zh, s.en)}</b><p>${t(`${(s.plugins || []).length} 个推荐位 · ${s.candidates ?? '?'} 候选`, `${(s.plugins || []).length} picks · ${s.candidates ?? '?'} candidates`)}</p><p style="color:var(--accent);font:600 12px var(--mono);margin-top:8px">${t('看质量首选 →', 'See top picks →')}</p></a>`).join('')
+<p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(stripEmoji(p.description).slice(0, 64)) || t('（无描述）', '(No description)')}</p></a>` }).join('')
+  const sceneCards = scenarios.slice(0, 6).map((s) => {
+    const top = (s.plugins || [])[0]
+    return `<a class="card" href="scenarios/#sc-${escHtml(s.id)}" style="text-decoration:none;color:inherit;display:block"><b>${t(s.zh, s.en)}</b>${top ? `<p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--mono);font-size:12px"><span class="grade ${escHtml(top.grade)}">${escHtml(top.grade)}</span> ${escHtml(top.full_name)}</p>` : ''}<p>${t(`${(s.plugins || []).length} 个推荐位 · ${s.candidates ?? '?'} 候选`, `${(s.plugins || []).length} picks · ${s.candidates ?? '?'} candidates`)}</p><p style="color:var(--accent);font:600 12px var(--mono);margin-top:8px">${t('看质量首选 →', 'See top picks →')}</p></a>`
+  }).join('')
+  // ---- 首页栏目摘要：数字条 / 动态 feed / 榜单 / 作者榜（全部复用上文聚合，随小时级刷新变化）----
+  const d7ms = 7 * 86400000
+  const new7 = plugAll.filter((p) => p.created_at && nowMs - new Date(p.created_at).getTime() < d7ms).length
+  const act7 = plugAll.filter((p) => p.pushed_at && nowMs - new Date(p.pushed_at).getTime() < d7ms).length
+  const brk30 = (dyn0?.dsh?.releases || []).filter((r) => r.breaking && r.published_at && nowMs - new Date(r.published_at).getTime() < d30ms).length
+  const pulse = [
+    [new7, t('本周新入库', 'new this week')],
+    [act7, t('本周有提交', 'pushed this week')],
+    [upRows.length, t('最新快照版本升级', 'upgrades in latest diff')],
+    [brk30, t('30 天 BREAKING', 'BREAKING in 30d')],
+  ].map(([n, label]) => `<a href="dynamics/" style="text-decoration:none;color:inherit;flex:1;min-width:140px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card)"><b class="mono" style="font-size:20px">${n}</b> <span style="color:var(--mut);font-size:12px">${label}</span></a>`).join('')
+  const feedPeek = feed.slice(0, 8).map((e) => {
+    const tg = tagOf[e.tag] || { zh: e.tag, en: e.tag, c: 'var(--faint)' }
+    return `<div class="scrow"><div style="display:flex;align-items:baseline;gap:8px;min-width:0"><span style="flex:none;font:600 10.5px var(--mono);color:${tg.c};border:1px solid ${tg.c};border-radius:99px;padding:0 7px">${t(tg.zh, tg.en)}</span><a href="${e.url}"${e.ext ? ' target="_blank"' : ''}>${escHtml(e.obj)}</a><span style="flex:none;margin-left:auto;color:var(--faint);font:11px var(--mono)">${relTime(e.d)}</span></div>${e.sub ? `<span class="meta" style="color:var(--mut)">${e.sub}</span>` : ''}</div>`
+  }).join('')
+  const lbRow = (i, href, name, right, ext) => `<div class="scrow" style="flex-direction:row;align-items:baseline;gap:8px"><span class="mono" style="color:var(--faint);flex:none;width:16px">${i + 1}</span><a href="${href}"${ext ? ' target="_blank"' : ''}>${escHtml(name)}</a><span class="meta" style="margin-left:auto;flex:none">${right}</span></div>`
+  const topScore = [...enrichAll].filter((x) => typeof x.score === 'number').sort((a, b) => b.score - a.score || (b.stars || 0) - (a.stars || 0)).slice(0, 5)
+  const scoreRows = topScore.map((p, i) => lbRow(i, `/p/${escHtml(p.full_name)}/`, p.full_name, `<span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${(p.stars || 0).toLocaleString()}`)).join('')
+  const starRowsH = (an0.topByStars || []).slice(0, 5).map((s2, i) => lbRow(i, `/p/${escHtml(s2.repo)}/`, s2.repo, `★ ${(s2.stars || 0).toLocaleString()}${s2.published ? ' · npm' : ''}`)).join('')
+  const topAuthors = [...(an0.authors || [])].sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 5)
+  const authorRowsH = topAuthors.map((a2, i) => lbRow(i, 'authors/', a2.owner, `★${(a2.stars || 0).toLocaleString()} · ${t(`${a2.plugins} 个插件`, `${a2.plugins} plugins`)}`)).join('')
   const ico = (name, size = 15) => `<span style="display:inline-block;vertical-align:-2px">${icon(name, size)}</span>`
   const navCard = (href, ic, name, desc, stat) => `<a class="card" href="${href}" style="text-decoration:none;color:inherit;display:block"><b>${ico(ic)} ${name}</b><p>${desc}</p><p style="color:var(--accent);font:600 12px var(--mono);margin-top:8px">${stat}</p></a>`
   written.push(out('index.html', page({
@@ -914,11 +938,30 @@ ${badgeExHtml}
   <div class="card"><b class="mono" style="font-size:22px">${(cov0.candidates || 0).toLocaleString()}</b><p>${t('多源候选（topic∪策展∪npm）', 'Multi-source candidates (topic ∪ curated ∪ npm)')}</p></div>
   <div class="card"><b class="mono" style="font-size:22px">${weekly.length}</b><p>${t('周报期数（每周五更新）', 'Weekly issues (published Fridays)')}</p></div>
 </div>
-<h2 style="font-size:16px;margin:30px 0 10px">${t('最新入库', 'New Arrivals')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('按仓库创建时间 · 每日快照刷新', 'By repo creation date · refreshed with the daily snapshot')}</span></h2>
-<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">${freshCards}</div>
-<div class="sc-cols" style="margin-top:26px">
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${pulse}</div>
+<h2 style="font-size:16px;margin:30px 0 10px">${t('最新动态', 'Latest Activity')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('新插件 · 版本升级 · 官方发布 · 平台仓库', 'New plugins · upgrades · official releases · platform repos')} · <a href="dynamics/">${t('全部动态 →', 'All activity →')}</a></span></h2>
+<div class="sc-cols">
+  <div class="card" style="margin:0"><b>${ico('radar')} ${t('生态动态', 'Ecosystem Feed')}</b>${feedPeek || `<p style="color:var(--faint);font-size:12px">${t('暂无', 'None yet')}</p>`}
+    <p style="margin-top:10px"><a href="dynamics/">${t('按标签筛选的完整时间线 →', 'Full timeline with tag filters →')}</a></p>
+  </div>
   <div class="card" style="margin:0"><b>${ico('mail')} ${t('本周速览', 'This Week')} · ${latestWk ? escHtml(latestWk.slug) : ''}</b>
     ${latestWk ? `<div class="article" style="font-size:13px">${wkBullets}</div><p style="margin-top:10px"><a href="weekly/#${latestWk.slug}">${t('读全文（可导出 Markdown/PDF/图片）→', 'Read the full report (export Markdown/PDF/PNG) →')}</a></p>` : `<p>${t('生成中', 'Generating')}</p>`}
+  </div>
+</div>
+<h2 style="font-size:16px;margin:30px 0 10px">${t('榜单速览', 'Leaderboards')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('客观评分 · 社区关注', 'Objective score · community attention')} · <a href="dashboard/#rank">${t('完整榜单 →', 'Full leaderboards →')}</a></span></h2>
+<div class="sc-cols">
+  <div class="card" style="margin:0"><b>${ico('star')} ${t('质量首选（健康分）', 'Top by Health Score')}</b>${scoreRows}
+    <p style="margin-top:10px"><a href="dashboard/#rank">${t('发布健康 · 值得收录等更多榜单 →', 'More boards: release health, worth-listing →')}</a></p>
+  </div>
+  <div class="card" style="margin:0"><b>${ico('star')} ${t('社区关注（星数）', 'Most Starred')}</b>${starRowsH}
+    <p style="margin-top:10px"><a href="dashboard/#rank">${t('完整星榜 →', 'Full star board →')}</a></p>
+  </div>
+</div>
+<h2 style="font-size:16px;margin:30px 0 10px">${t('场景速配', 'Scenario Quick Picks')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('从「我要做什么」出发', 'Start from "what I want to do"')} · <a href="scenarios/">${t(`全部 ${scenarios.length} 个场景 →`, `All ${scenarios.length} scenarios →`)}</a></span></h2>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">${sceneCards}</div>
+<div class="sc-cols" style="margin-top:26px">
+  <div class="card" style="margin:0"><b>${ico('users')} ${t('活跃作者', 'Top Authors')}</b>${authorRowsH}
+    <p style="margin-top:10px"><a href="authors/">${t('作者榜与协作关系图 →', 'Author boards & collaboration graph →')}</a></p>
   </div>
   <div class="card" style="margin:0"><b>${ico('radar')} ${t('官方动态', 'Official Dynamics')}</b>
     ${latestRel ? `<p style="margin-top:8px;font-size:13px">${t('最新 release：', 'Latest release: ')}<a href="https://github.com/deepseek-ai/DeepSeek-Harness/releases/tag/${escHtml(latestRel.tag)}" target="_blank"><b>${escHtml(latestRel.tag)}</b></a>（${escHtml((latestRel.published_at || '').slice(0, 10))}${latestRel.breaking ? ' · <span style="color:var(--warn)">' + t('含 breaking 说明', 'includes breaking notes') + '</span>' : ''}）</p>${latestRel.summary ? `<p style="font-size:12.5px;color:var(--mut);margin-top:6px">${escHtml(latestRel.summary)}</p>` : ''}` : ''}
@@ -926,8 +969,8 @@ ${badgeExHtml}
     <p style="margin-top:10px"><a href="dynamics/">${t('官方动态与 rc 兼容信号 →', 'Official dynamics & rc compatibility signal →')}</a></p>
   </div>
 </div>
-<h2 style="font-size:16px;margin:30px 0 10px">${t('场景速配', 'Scenario Quick Picks')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('从「我要做什么」出发', 'Start from "what I want to do"')} · <a href="scenarios/">${t(`全部 ${scenarios.length} 个场景 →`, `All ${scenarios.length} scenarios →`)}</a></span></h2>
-<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">${sceneCards}</div>
+<h2 style="font-size:16px;margin:30px 0 10px">${t('最新入库', 'New Arrivals')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('按仓库创建时间 · 每日快照刷新', 'By repo creation date · refreshed with the daily snapshot')}</span></h2>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">${freshCards}</div>
 <h2 style="font-size:16px;margin:30px 0 10px">${t('全站导览', 'Site Map')}</h2>
 <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
   ${navCard('dashboard/', 'plugin', t('插件', 'Plugins'), t('生态全景一站看：趋势 · 质量分布 · 榜单 + 全量插件库（搜索/筛选/排序，点进详情看扣分明细）', 'The ecosystem in one place: trends · quality distribution · leaderboards + the full directory (search/filter/sort; open a detail page for deductions)'), t(`${(t0.authoritative || 0).toLocaleString()} 个 · 均分 ${an0.quality?.avgScore ?? '—'} · S+A ${saN}`, `${(t0.authoritative || 0).toLocaleString()} plugins · avg ${an0.quality?.avgScore ?? '—'} · S+A ${saN}`))}
