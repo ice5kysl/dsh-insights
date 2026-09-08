@@ -30,6 +30,7 @@
 
 - 2026-09-08 · 第 1 批 10 封已发（GitHub issue，见表中 ✅ 链接指向所发 issue；信件均含「观察员的额外视角」个性化建议 + 共建邀请段）
 - 2026-09-08 · 同日追加 **徽章 PR × 10**（README 顶部一行，引用对应 issue 作上下文，明示可自由关闭）：[DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar/pull/582) · [dsh-image-gen](https://github.com/shanliuling/dsh-image-gen/pull/35) · [dsh-dream-skin](https://github.com/RevolutionLA/dsh-dream-skin/pull/48) · [deepseek-harness-genui](https://github.com/pengyue-polaron/deepseek-harness-genui/pull/12) · [dsh-rewind](https://github.com/SiriLee/dsh-rewind/pull/20) · [dsh-whale-report](https://github.com/SenmuuuuW/dsh-whale-report/pull/7) · [dsh-archived-chats](https://github.com/Ultronen/dsh-archived-chats/pull/38) · [garmin-connect-plugin-for-dsh](https://github.com/Likenttt/garmin-connect-plugin-for-dsh/pull/2) · [dsh-workbench](https://github.com/lee259/dsh-workbench/pull/14) · [dsh-web-fetch-playwright](https://github.com/chendefine/dsh-web-fetch-playwright/pull/5)
+- 2026-09-08 · 首轮战果盘点（发出后 <24h）：**首枚徽章落地** —— lee259/dsh-workbench [PR#14](https://github.com/lee259/dsh-workbench/pull/14) 已合并（merge commit `344071e3`，徽章已上 README 顶行）；其余 9 PR 在途无回复，10 封 issue 暂 0 回复；官方 Discussions [#5933](https://github.com/deepseek-ai/deepseek-harness/discussions/5933) 1 upvote 0 评论。北极星指标（代码搜索 `dsh-insights.com/badge` 部署仓库）：**1**（不含自家仓库）
 
 ## 触达后动作
 - 回复积极 → 引导挂徽章（/badge/ 有接入指南与一键复制）
