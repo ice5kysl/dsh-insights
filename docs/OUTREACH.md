@@ -47,6 +47,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 | 2026-09-05（已做） | awesome-dsh-plugin org Discussions | 发集成提案（ZH/EN） | ✅ 已发 = **#4399**，待回复；W37 帖发出后带新数字跟进 |
 | 2026-09-08（已做） | 自荐 3 插件 README | 贴 health badge（新域名） | ✅ insights/workspace/file-explorer 三 kit，均 100 S |
 | **本周（启动周，见 §五）** | LINUX DO + Discussions + 作者 issue | 官宣帖 + 首批 10 封信 | 帖子发出 · 信件发出 ≥10 |
+| 2026-09-08（已做） | **官方 deepseek-harness Discussions「Show Your Plugins!」** | 生态官宣（作者向：徽章/selfcheck/recheck + 开放数据） | ✅ 已发 = **#5933**；官方仅监控自家 Discussions，这是最直接的官方触达通道 |
 | **每周五（周报节奏）** | LINUX DO / GitHub Discussions / 中文 dsh 社区 | 发当期生态周报帖（模板见 §四）+ 站点周报页链接 | 连续外发期数（M2 ≥6，不断更） |
 | 全量新快照有亮点时 | deepseek-harness Discord / HN（可选） | "全量客观评分数据集"帖 + query CLI 演示 | 帖子互动 + repo ★ |
 | W37 帖发出后 | awesome org / dsh-market 跟进 | 每周数据 URL 更新 + 采纳谈判 | ≥1 家接入（M3 退出标准） |

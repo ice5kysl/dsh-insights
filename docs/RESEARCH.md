@@ -92,7 +92,7 @@
 - 2026-09-06：**健康分 v3→v4 连续升版**——v3 区分度重构（四档扣分 fail−20/major−10/warn−5/minor−2 + 7 条新规则）；v4 新增 S 级（≥95）。分布 @4,160 快照：S 9.2% / A 17.7% / B 66.5% / C 6.6% / D 0.05%。
 - 2026-09-06：**内容与站点放量**——信件全量 4,681 封 + /p/ 全量详情页（diff 驱动）；站点改版：汇总门户、仪表盘/插件库分页、周报双栏阅读器（MD/PDF/PNG 导出）、作者协作图 v2、Umami 访问统计。
 - 2026-09-06：**改进清单立项**（docs/IMPROVEMENTS-2026-09-06.md）——最高优先：权威集元数据刷新回路（discover 每次全量已拿到新鲜 stars/pushed_at 但被丢弃，活跃度口径随冻结数据衰减）+ history 逐日累积（时间层资产不可回填）；另立评分区分度叙事、信件双语、GraphQL 批量校验等。
-- 2026-09-08：**官宣启动（不等周五）**——GitHub Discussions 官宣帖已发（[Announcements #1](https://github.com/ice5kysl/dsh-insights/discussions/1)，本仓库 Discussions 同日开启）；LINUX DO 帖待本人账号发。OUTREACH 升 v0.3：作者自查 CLI 由已废弃的 dsh-plugin-health 全量切换为 `dsh-insights-kit selfcheck`（模板/文档/README/4,681 封信件页脚）；新增启动周作战表（D0–D7）与量化目标（北极星 = 徽章部署仓库数，4 周 ≥25）。三个自家 kit 全部 100 S 并挂新域名徽章；dsh-insights-kit 收入权威集（10,190）。
+- 2026-09-08：**官宣启动（不等周五）**——本仓库 Discussions 开启并发存档帖（[Announcements #1](https://github.com/ice5kysl/dsh-insights/discussions/1)）；**主触达走官方渠道**：deepseek-ai/deepseek-harness Discussions「Show Your Plugins!」[#5933](https://github.com/deepseek-ai/deepseek-harness/discussions/5933)（官方明言仅监控自家 Discussions）；LINUX DO 帖待本人账号发。OUTREACH 升 v0.3：作者自查 CLI 由已废弃的 dsh-plugin-health 全量切换为 `dsh-insights-kit selfcheck`（模板/文档/README/4,681 封信件页脚）；新增启动周作战表（D0–D7）与量化目标（北极星 = 徽章部署仓库数，4 周 ≥25）。三个自家 kit 全部 100 S 并挂新域名徽章；dsh-insights-kit 收入权威集（10,190）。
 
 ## 来源
 

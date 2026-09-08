@@ -55,5 +55,6 @@
 
 ## 发布记录
 
-- 2026-09-08 · GitHub Discussions（Announcements #1）：https://github.com/ice5kysl/dsh-insights/discussions/1 （已发，含本仓库 Discussions 开启）
+- 2026-09-08 · GitHub Discussions（Announcements #1）：https://github.com/ice5kysl/dsh-insights/discussions/1 （已发，含本仓库 Discussions 开启；定位=存档页，无分发价值）
+- 2026-09-08 · **官方 deepseek-harness Discussions「Show Your Plugins!」#5933**：https://github.com/deepseek-ai/deepseek-harness/discussions/5933 （主触达渠道——官方明言仅监控自家 Discussions）
 - 2026-09-08 · LINUX DO：（待发，需本人账号）
