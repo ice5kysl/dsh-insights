@@ -342,6 +342,7 @@ ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（
     ['compat.json', 'dsh 版本兼容信号（engines.dsh / peers 探测）', 'dsh version compat signals (engines.dsh / peers probe)'],
     ['shell-seeds.json', 'shell 模块表 seed 词（dsh-web-frontend 全版本）', 'Shell module-table seed words (all dsh-web-frontend versions)'],
     ['compat-observed.json', '实测兼容矩阵（client require × shell 模块表）', 'Observed compat matrix (client requires × shell module table)'],
+    ['fixes.json', '已知修法案例库（按缺失模块索引的修复指引 + 真实案例）', 'Known-fix knowledge base (per-missing-module fix guidance + real cases)'],
     ['scenarios.json', '场景组合推荐（插件 ↔ 场景映射）', 'Scenario picks (plugin ↔ scenario mapping)'],
     ['plugins.csv', '权威集表格（25 列，Excel 友好）', 'Authoritative set as a table (25 columns, Excel-friendly)'],
     ['downloads.json', 'npm 周下载（CI 更新）', 'npm weekly downloads (updated by CI)'],

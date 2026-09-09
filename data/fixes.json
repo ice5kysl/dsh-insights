@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-09-10T00:00:00.000Z",
+  "note": "已知修法案例库：按缺失模块索引的手工维护修复指引 + 真实案例。Editorially maintained known-fix knowledge base keyed by missing module.",
+  "modules": {
+    "@deepseek-ai/dsh-client-runtime/client": {
+      "status": "never-seeded（15 个已发布 shell 的模块表都没有它）",
+      "fix": "迁移到 @deepseek-ai/dsh-client-store（0.1.2-alpha.2 起在模块表，导出同名 createSnapshotStore/defineStore，多数情况一行替换）；需要支持旧 shell 时 try/catch 兜底（注意：catch 里回退到 runtime 是死代码，更干净的做法是声明 engines.dsh >= 0.1.2-alpha.2）",
+      "cases": [
+        { "repo": "Fisfzy/dsh-ego-browser", "url": "https://github.com/Fisfzy/dsh-ego-browser/issues/32", "note": "main/v0.8.1 已迁移到 dsh-client-store，只差 npm publish" },
+        { "repo": "RevolutionLA/dsh-dream-skin", "url": "https://github.com/RevolutionLA/dsh-dream-skin/issues/47#issuecomment-5601034304", "note": "store-first + try/catch 兜底写法，在 ≥0.1.2-alpha.2 上加载正常" }
+      ]
+    },
+    "@deepseek-ai/dsh-client-ui-attachment": {
+      "status": "removed-in 0.1.0-rc.8（同批被移除的还有 web-react、schema-form）",
+      "fix": "静态打包进自己的 bundle（npm 上仍有 0.0.1-rc.x 可依赖，react 保持 external 避免双份）；辅助功能可 try/catch 降级；不再维护则移除",
+      "cases": [
+        { "repo": "ysr666/dsh-vision-router", "url": "https://github.com/ysr666/dsh-vision-router/issues/447", "note": "顶层裸 require ImageGallery，崩于 0.1.0-rc.8；周下载 7,631" }
+      ]
+    },
+    "@deepseek-ai/dsh-client-web-react": {
+      "status": "removed-in 0.1.0-rc.8",
+      "fix": "静态打包进自己的 bundle（react 必须保持 external）；或迁移到模块表内的 @deepseek-ai/dsh-client-ui-primitives",
+      "cases": []
+    },
+    "@deepseek-ai/dsh-client-schema-form": {
+      "status": "removed-in 0.1.0-rc.8",
+      "fix": "静态打包进自己的 bundle；或改用原生表单/ui-primitives 重实现",
+      "cases": []
+    }
+  }
+}

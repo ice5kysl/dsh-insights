@@ -69,6 +69,7 @@
 - `data/dynamics.json` — 官方动态快照（L2 v0：releases 摘要/dist-tags/平台仓库信号）。
 - `data/shell-seeds.json` — shell 模块表 seed 词（`pipeline/collect/shell-seeds.mjs`，daily）：`{generatedAt, pkg, distTags, versions:{[dsh-web-frontend 版本]: string[]}, failed:{[版本]: 错误}}`。
 - `data/compat-observed.json` — 实测兼容矩阵（`pipeline/analyze/compat-observed.mjs`，snapshot）：`{generatedAt, dshVersions, shellDistTags, note, stats, plugins:{[pkgName]: {repo, version, requires, results:{[shell 版本]: {status: ok|broken, missing?}}}}}`；判定口径与边界见文件内 note（静态分析、非运行时测试、动态 require 不测）。
+- `data/fixes.json` — 已知修法案例库（**手工维护的编辑性数据**，入 git）：`{generatedAt, note, modules:{[缺失模块]: {status, fix, cases:[{repo, url, note}]}}}`；dsh-why 的 R1 修法区消费（"已知修法"块），无管线产出方。
 - `data/metrics.jsonl` — 产品自测量指标（周五 CI append）。
 - `data/report.md` — 人类可读报告。
 - `data/last-diff.md` — 与**上一快照**的 diff（周报已不依赖它：weekly 生成时按 history 基线现场重算本周 diff）。
