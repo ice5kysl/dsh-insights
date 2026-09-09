@@ -14,7 +14,11 @@
  *   否则进 missing；missing 非空 → broken（该 shell 版本下 loader 启动即崩，
  *   即 0.1.2-rc.1 移除 @deepseek-ai/dsh-client-runtime 的事故形态）。
  *
- * 判定轴（dshVersions）：shell-seeds.json distTags 的 latest/next/alpha 去重。
+ * 判定轴（dshVersions）：shell-seeds.json distTags 的 latest/next/alpha 去重，
+ * 作为详情页展示矩阵。另有 verdict：跨 shell-seeds 全部已发布版本（semver 序）
+ * 的纯集合运算判定——ok（全部可加载）/ never（从发布起即崩）/ broken-since X
+ * （X 起崩，此前可用）/ supported-since X（X 起才可加载，shell 后来补了模块）/
+ * mixed（反复横跳，理论上不该出现）。outreach 话术与详情页「崩于何时」据此。
  * 没有 client bundle 的插件不进结果（不是 ok）；下载/解析失败跳过并计数。
  *
  * 提取器移植自 dsh-insights-kit src/host/shell.ts（extractRequires 排除模板串
@@ -57,6 +61,45 @@ export function extractRequires(bundleText) {
 /** 与 dsh-client-modules 一致："pkg/client" 形式的 require 解析到 "pkg"。 */
 export function stripClientSuffix(spec) {
   return spec.endsWith('/client') ? spec.slice(0, -'/client'.length) : spec
+}
+
+/** 精简 semver 比较：数值段逐位比，预发布段 tag 字典序（alpha < beta < rc）后比编号；正式版 > 预发布。 */
+export function compareShellVersions(a, b) {
+  const [ma, pa] = a.split('-'), [mb, pb] = b.split('-')
+  const na = ma.split('.').map(Number), nb = mb.split('.').map(Number)
+  for (let i = 0; i < 3; i++) if (na[i] !== nb[i]) return na[i] - nb[i]
+  if (!pa && !pb) return 0
+  if (!pa) return 1
+  if (!pb) return -1
+  const [ta, na2] = pa.split('.'), [tb, nb2] = pb.split('.')
+  if (ta !== tb) return ta < tb ? -1 : 1
+  return (Number(na2) || 0) - (Number(nb2) || 0)
+}
+
+/**
+ * 全版本判定：requires 在按 semver 排序的全部 shell 版本上逐一比对，
+ * 依 ok/broken 序列的形态分类。seed 变更史上只有单调删（0.1.0-rc.8）与单调加，
+ * 故正常只会出现 ok / never / broken-since / supported-since；mixed 如实记录。
+ */
+function verdictFor(requires, pkgName, allVersions, seedAll, knownPkgs) {
+  const okOn = [], brokenOn = []
+  for (const v of allVersions) {
+    const seed = seedAll.get(v)
+    const missing = requires.filter((spec) =>
+      !seed.has(spec) && stripClientSuffix(spec) !== pkgName && !knownPkgs.has(stripClientSuffix(spec)))
+    ;(missing.length ? brokenOn : okOn).push(v)
+  }
+  const total = allVersions.length
+  if (!brokenOn.length) return { cls: 'ok', total }
+  if (!okOn.length) return { cls: 'never', total }
+  // 严格前后缀判定，防止反复横跳被误分类（横跳落 mixed 如实呈现）
+  if (compareShellVersions(okOn[okOn.length - 1], brokenOn[0]) < 0) {
+    return { cls: 'broken-since', since: brokenOn[0], okUntil: okOn[okOn.length - 1], total }
+  }
+  if (compareShellVersions(brokenOn[brokenOn.length - 1], okOn[0]) < 0) {
+    return { cls: 'supported-since', since: okOn[0], total }
+  }
+  return { cls: 'mixed', okOn, brokenOn, total }
 }
 
 function tarballUrl(name, version) {
@@ -142,6 +185,9 @@ async function run() {
     .filter((v) => shells.versions[v])
   if (!dshVersions.length) { console.error('[compat-observed] shell-seeds distTags 无可判定版本'); process.exit(1) }
   const seedByVersion = new Map(dshVersions.map((v) => [v, new Set(shells.versions[v])]))
+  // verdict 判定轴：全部已发布 shell 版本（semver 序），纯集合运算，零额外网络
+  const allVersions = Object.keys(shells.versions).sort(compareShellVersions)
+  const seedAll = new Map(allVersions.map((v) => [v, new Set(shells.versions[v])]))
 
   // 图行近似：语料库全部已知插件包名
   const knownPkgs = new Set(insights.plugins.map((p) => p.pkgName).filter(Boolean))
@@ -188,7 +234,7 @@ async function run() {
             !seed.has(spec) && stripClientSuffix(spec) !== p.pkgName && !knownPkgs.has(stripClientSuffix(spec)))
           results[v] = missing.length ? { status: 'broken', missing } : { status: 'ok' }
         }
-        plugins[p.pkgName] = { repo: p.full_name, version: p.npm.latest, requires: probe.requires, results }
+        plugins[p.pkgName] = { repo: p.full_name, version: p.npm.latest, requires: probe.requires, results, verdict: verdictFor(probe.requires, p.pkgName, allVersions, seedAll, knownPkgs) }
       } else if (probe?.noClient) stats.noClient++
       if (++done % 200 === 0) {
         console.log(`[compat-observed] ${done}/${targets.length} (cached ${stats.cached} · fetched ${stats.fetched} · no-client ${stats.noClient} · failed ${stats.failed})`)
@@ -201,16 +247,28 @@ async function run() {
   writeJson(CACHE, cache)
 
   const brokenBy = Object.fromEntries(dshVersions.map((v) => [v, Object.values(plugins).filter((x) => x.results[v]?.status === 'broken').length]))
+  // verdict 汇总：broken-since / supported-since 按转折版本计数
+  const verdicts = { ok: 0, never: 0, 'broken-since': {}, 'supported-since': {}, mixed: 0 }
+  for (const x of Object.values(plugins)) {
+    const vd = x.verdict
+    if (!vd) continue
+    if (vd.cls === 'broken-since') verdicts['broken-since'][vd.since] = (verdicts['broken-since'][vd.since] || 0) + 1
+    else if (vd.cls === 'supported-since') verdicts['supported-since'][vd.since] = (verdicts['supported-since'][vd.since] || 0) + 1
+    else verdicts[vd.cls]++
+  }
   writeJson(PATHS.compatObserved, {
     generatedAt: new Date().toISOString(),
     dshVersions,
+    allShellVersions: allVersions,
     shellDistTags: tags,
-    note: '实测兼容 = 静态分析口径：提取插件 npm 最新版 client bundle 的 require("X") 字面量（模板串/动态 require 静态不可判定，不计入），逐 shell（@deepseek-ai/dsh-web-frontend）版本比对烘焙 seed 词表；strip 尾部 "/client" 后为插件自身包名或语料库已知插件包名（图行近似，未含 dsh 内置非 seed 包）也算可解析。非运行时测试；无 client bundle 的插件不在结果中。Observed compatibility = static analysis: literal require() specifiers of the plugin\'s latest npm client bundle (template/dynamic requires excluded) vs each shell build\'s baked seed-word table; a specifier whose trailing "/client" is stripped naming the plugin itself or any corpus-known plugin package (graph-row approximation; in-box non-seed dsh packages not included) also resolves. Not a runtime test; plugins without a client bundle are absent from results.',
+    note: '实测兼容 = 静态分析口径：提取插件 npm 最新版 client bundle 的 require("X") 字面量（模板串/动态 require 静态不可判定，不计入），逐 shell（@deepseek-ai/dsh-web-frontend）版本比对烘焙 seed 词表；strip 尾部 "/client" 后为插件自身包名或语料库已知插件包名（图行近似，未含 dsh 内置非 seed 包）也算可解析。非运行时测试；无 client bundle 的插件不在结果中。results 为 distTag 展示轴；verdict 为跨全部已发布 shell 版本的分类——ok 全部可加载 / never 从发布起即崩 / broken-since 某版本起崩（okUntil 之前可用）/ supported-since 某版本起才可加载 / mixed 反复横跳。Observed compatibility = static analysis: literal require() specifiers of the plugin\'s latest npm client bundle (template/dynamic requires excluded) vs each shell build\'s baked seed-word table; a specifier whose trailing "/client" is stripped naming the plugin itself or any corpus-known plugin package (graph-row approximation; in-box non-seed dsh packages not included) also resolves. Not a runtime test; plugins without a client bundle are absent from results. results covers the distTag display axis; verdict classifies across every published shell version.',
     stats: { targets: targets.length, observed: Object.keys(plugins).length, ...stats },
+    verdicts,
     plugins,
   }, true)
   if (stats.failed) console.error(`[compat-observed] 失败 ${stats.failed} 个（跳过不缓存）：${failedNames.slice(0, 5).join(' · ')}${failedNames.length > 5 ? ' …' : ''}`)
   console.log(`[compat-observed] ${Object.keys(plugins).length} plugins observed (no-client ${stats.noClient} · failed ${stats.failed}) · broken per shell: ${JSON.stringify(brokenBy)} → data/compat-observed.json`)
+  console.log(`[compat-observed] verdicts across ${allVersions.length} shell versions: ${JSON.stringify(verdicts)}`)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

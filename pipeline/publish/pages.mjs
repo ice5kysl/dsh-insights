@@ -252,9 +252,19 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
           return `<div class="scrow"><a style="cursor:default">${escHtml(v)}${tagStr ? ` <span style="color:var(--faint);font-weight:400;font-size:11px">${escHtml(tagStr)}</span>` : ''}</a><span class="meta" style="color:${ok ? 'var(--ok)' : 'var(--err)'};white-space:normal">${ok ? `✓ ${t('可加载', 'loadable')}` : `✗ ${t('无法加载（loader 启动即崩）', 'fails to load (loader crashes at boot)')}：${t('缺', 'missing')} ${(res.missing || []).map((m) => `<code>${escHtml(m)}</code>`).join(' ')}`}</span></div>`
         }).join('')
       : ''
+    // verdict 横幅：跨全部已发布 shell 版本的分类结论（崩于何时/从未可加载/自某版本起可加载）
+    const vd = obs?.verdict
+    const vdLine = !vd || vd.cls === 'ok' ? ''
+      : vd.cls === 'never'
+        ? `<p style="font-size:13px;color:var(--err);margin:2px 0 10px">✗ ${t(`全部 ${vd.total} 个已发布 shell 版本均无法加载——从发布起即崩，非新版本回归`, `fails to load on all ${vd.total} published shell versions — broken since birth, not a recent regression`)}</p>`
+        : vd.cls === 'broken-since'
+          ? `<p style="font-size:13px;color:var(--err);margin:2px 0 10px">✗ ${t(`崩于 shell ${escHtml(vd.since)}（${escHtml(vd.okUntil)} 及更早版本可加载）`, `broken since shell ${escHtml(vd.since)} (loadable on ${escHtml(vd.okUntil)} and earlier)`)}</p>`
+          : vd.cls === 'supported-since'
+            ? `<p style="font-size:13px;color:var(--warn);margin:2px 0 10px">▲ ${t(`shell ${escHtml(vd.since)} 起可加载——更早版本缺其所需模块`, `loadable since shell ${escHtml(vd.since)} — earlier shells lack its required modules`)}</p>`
+            : `<p style="font-size:13px;color:var(--warn);margin:2px 0 10px">~ ${t('各 shell 版本间表现反复，详见下行矩阵', 'flapping across shell versions, see matrix below')}</p>`
     const obsBlock = `<h2 style="font-size:16px;margin:26px 0 8px">${t('实测兼容', 'Observed Compatibility')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('client bundle × shell 模块表', 'client bundle × shell module table')}</span></h2>
 <div class="card">${obs
-      ? `${obsRows}<p style="font-size:11px;color:var(--faint);margin-top:10px">${t(`实测对象：npm ${escHtml(obs.version)} · 外部 require ${obs.requires.length} 个。口径：静态分析 client bundle 的 require 字面量，对比各 shell 版本烘焙的模块表（seed 词 ∪ 图行近似＝语料库已知插件包名，"/client" 后缀剥离后匹配）；非运行时测试，动态 require（含模板串）不在检测范围。`, `Measured: npm ${escHtml(obs.version)} · ${obs.requires.length} external requires. Method: static analysis of the client bundle's literal requires vs each shell build's baked module table (seed words ∪ graph-row approximation = corpus-known plugin package names, matched after stripping a "/client" suffix); not a runtime test — dynamic requires (incl. template strings) are out of scope.`)}</p>`
+      ? `${vdLine}${obsRows}<p style="font-size:11px;color:var(--faint);margin-top:10px">${t(`实测对象：npm ${escHtml(obs.version)} · 外部 require ${obs.requires.length} 个。口径：静态分析 client bundle 的 require 字面量，对比各 shell 版本烘焙的模块表（seed 词 ∪ 图行近似＝语料库已知插件包名，"/client" 后缀剥离后匹配）；非运行时测试，动态 require（含模板串）不在检测范围。`, `Measured: npm ${escHtml(obs.version)} · ${obs.requires.length} external requires. Method: static analysis of the client bundle's literal requires vs each shell build's baked module table (seed words ∪ graph-row approximation = corpus-known plugin package names, matched after stripping a "/client" suffix); not a runtime test — dynamic requires (incl. template strings) are out of scope.`)}</p>`
       : `<p style="color:var(--faint);font-size:13px;margin:4px 0">${t('暂无实测数据：该插件未发布 npm、无界面（client）bundle，或尚未被扫描覆盖。', 'No observed data: the plugin is not on npm, has no client (UI) bundle, or has not been scanned yet.')}</p>`}</div>`
     const peers = en.category
       ? enrichAll.filter((x) => x.category === en.category && x.full_name !== full)
