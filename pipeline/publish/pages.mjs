@@ -1049,7 +1049,7 @@ ${langBlock(`
 <tr><th>维度</th><th>指标项</th><th>计分处理</th></tr>
 <tr><td>工程质量</td><td>client 导出 · main=lib 布局 · files 白名单 · npm 发布 · 版本一致</td><td><b>计分</b></td></tr>
 <tr><td>文档完整性</td><td>README（唯一的 fail 级）· 中文/双语文档 · LICENSE</td><td><b>计分</b></td></tr>
-<tr><td>可发现性</td><td>dsh-plugin topic（计分）· 批量模板导入账号（计分）· 策展收录（只展示）</td><td><b>部分计分</b></td></tr>
+<tr><td>可发现性</td><td>dsh-plugin topic（计分）· 批量模板导入账号（计分）· 策展收录（只展示；awesome-dsh-plugin / imsai 均为民间社区目录，非官方渠道）</td><td><b>部分计分</b></td></tr>
 <tr><td>维护活跃</td><td>仓库年龄 · 30 天无提交 · 一次性导入无维护（npm ≥2 版本豁免）</td><td><b>计分</b></td></tr>
 <tr><td>安全卫生</td><td>写面 / 渲染消毒（深检抽样，启发式≠审计）</td><td>增量信号，<b>不进总分</b></td></tr>
 <tr><td>采用度</td><td>★ · npm 周下载 · 收录渠道</td><td><b>只展示不进分</b>（可刷/污染）</td></tr>

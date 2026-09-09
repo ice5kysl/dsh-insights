@@ -24,8 +24,6 @@
 
 > 后续：我们每周做一次全生态观测，下期会附上与本期对比的变化。**如果这类信件对你构成打扰，回复一声即可，我们此后不再发送到贵仓库。**
 
-> 关于收录：观测显示该插件尚未出现在社区目录中。如果希望被更多人发现，生态的主要入口是 awesome-dsh-plugin 与 imsai/deepseek1024——两者均为第三方社区目录，与我们没有隶属关系；是否提交、提交哪个，完全由你决定。
-
 这封信由开源管线自动生成——分数有误、建议不对路，直接回复本 issue 或到 [dsh-insights](https://github.com/ice5kysl/dsh-insights) 提 issue。我们也写了一个 dsh 内的自检小工具 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit)（`npx dsh-insights-kit selfcheck <dir>`），觉得有用可以试试，没用也请忽略。
 
 ---
