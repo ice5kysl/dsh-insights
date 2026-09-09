@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-09-09T07:19:29.148Z",
+  "fetchedAt": "2026-09-09T19:31:49.793Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 216679,
-    "forks": 25616,
-    "pushed_at": "2026-09-08T16:16:04Z",
+    "stars": 217357,
+    "forks": 25716,
+    "pushed_at": "2026-09-09T14:23:10Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.1.5-alpha.2",
+        "name": "v0.1.5-alpha.2",
+        "prerelease": true,
+        "published_at": "2026-09-09T14:23:10Z",
+        "breaking": true,
+        "summary": "右侧 Sidebar 新增常见文档类型预览，支持 Markdown、代码高亮、HTML、PDF 、图片 @imccyu, @Yifffan, @yixiangihsiang, @CreatixChu,",
+        "added": 4,
+        "fixed": 11
+      },
       {
         "tag": "dsh-v0.1.5-alpha.1",
         "name": "v0.1.5-alpha.1",
@@ -76,16 +86,6 @@
         "summary": "长会话右侧导航支持预览和跳转尚未载入的全部分页轮次",
         "added": 1,
         "fixed": 6
-      },
-      {
-        "tag": "dsh-v0.1.2-alpha.2",
-        "name": "v0.1.2-alpha.2",
-        "prerelease": true,
-        "published_at": "2026-08-30T13:52:14Z",
-        "breaking": true,
-        "summary": "界面新增显示连接异常状态，支持自动重试和立即重连",
-        "added": 3,
-        "fixed": 6
       }
     ],
     "npm": {
@@ -93,10 +93,14 @@
       "distTags": {
         "next": "0.1.2-rc.1",
         "latest": "0.1.2-rc.1",
-        "alpha": "0.1.5-alpha.1"
+        "alpha": "0.1.5-alpha.2"
       },
-      "modified": "2026-09-08T15:57:30.731Z",
+      "modified": "2026-09-09T14:41:16.219Z",
       "versions": [
+        {
+          "version": "0.1.5-alpha.2",
+          "time": "2026-09-09T14:41:15.754Z"
+        },
         {
           "version": "0.1.5-alpha.1",
           "time": "2026-09-08T15:57:30.560Z"
@@ -132,10 +136,6 @@
         {
           "version": "0.1.1-rc.1",
           "time": "2026-08-21T06:49:18.639Z"
-        },
-        {
-          "version": "0.1.0-rc.8",
-          "time": "2026-08-19T15:41:29.655Z"
         }
       ]
     }
@@ -143,8 +143,8 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104426,
-      "forks": 16733,
+      "stars": 104425,
+      "forks": 16732,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
       "latestRelease": {
@@ -161,7 +161,7 @@
     {
       "repo": "deepseek-ai/DeepSeek-R1",
       "stars": 91997,
-      "forks": 11689,
+      "forks": 11688,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
       "latestRelease": {
@@ -177,15 +177,15 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39066,
-      "forks": 4252,
+      "stars": 39071,
+      "forks": 4253,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepSeek-Coder",
-      "stars": 24241,
+      "stars": 24245,
       "forks": 2927,
       "pushed_at": "2025-11-11T06:44:56Z",
       "description": "DeepSeek Coder: Let the Code Write Itself",
@@ -193,7 +193,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 23871,
+      "stars": 23872,
       "forks": 2202,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
@@ -201,7 +201,7 @@
     },
     {
       "repo": "deepseek-ai/Janus",
-      "stars": 17763,
+      "stars": 17762,
       "forks": 2234,
       "pushed_at": "2025-02-01T07:58:29Z",
       "description": "Janus-Series: Unified Multimodal Understanding and Generation Models",
@@ -210,29 +210,52 @@
     {
       "repo": "deepseek-ai/FlashMLA",
       "stars": 12906,
-      "forks": 1146,
+      "forks": 1147,
       "pushed_at": "2026-07-28T06:18:26Z",
       "description": "FlashMLA: Efficient Multi-head Latent Attention Kernels",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/3FS",
-      "stars": 10190,
+      "stars": 10191,
       "forks": 1091,
       "pushed_at": "2026-05-07T09:31:54Z",
       "description": " A high-performance distributed file system designed to address the challenges of AI training and inference workloads. ",
       "latestRelease": null
     }
   ],
+  "models": [
+    {
+      "id": "deepseek-v4-flash",
+      "object": "model",
+      "owned_by": "deepseek",
+      "firstSeen": null,
+      "isNew": false
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "object": "model",
+      "owned_by": "deepseek",
+      "firstSeen": null,
+      "isNew": false
+    },
+    {
+      "id": "deepseek-v4-flash-vision-exp",
+      "object": "model",
+      "owned_by": "deepseek",
+      "firstSeen": null,
+      "isNew": false
+    }
+  ],
   "compatSignal": {
     "distTags": {
-      "alpha": "0.1.3-alpha.2",
+      "next": "0.1.2-rc.1",
       "latest": "0.1.2-rc.1",
-      "next": "0.1.2-rc.1"
+      "alpha": "0.1.5-alpha.1"
     },
-    "pluginsProbed": 3581,
-    "declaringEngines": 52,
-    "declaringPeers": 2387
+    "pluginsProbed": 3586,
+    "declaringEngines": 61,
+    "declaringPeers": 2393
   },
-  "note": "只含可观测公开信号（releases / dist-tags / repo 活动），不含新闻舆情；DeepSeek 模型发布可能先在官网/HuggingFace（GitHub 仓库动态自动纳入）。rc 兼容雷达 v0 依赖契约字段声明率，见 /about。"
+  "note": "只含可观测公开信号（releases / dist-tags / repo 活动 / API 模型清单），不含新闻舆情；DeepSeek 模型发布可能先在官网/HuggingFace（GitHub 仓库动态自动纳入，API 模型经 /models 端点探测）。rc 兼容雷达 v0 依赖契约字段声明率，见 /about。"
 }

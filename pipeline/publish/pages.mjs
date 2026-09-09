@@ -338,7 +338,7 @@ ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（
     ['enrich.json', '每插件评分 / 等级 / 分类 / 收录渠道', 'Per-plugin score / grade / category / listing channels'],
     ['analysis.json', '聚合统计（仪表盘数据源）', 'Aggregate stats (dashboard data source)'],
     ['health.json', '健康分聚合（分级分布/均分/top 扣分）', 'Health score aggregates (grade distribution / average / top deductions)'],
-    ['dynamics.json', '官方动态快照（dsh releases/dist-tags/DeepSeek 平台）', 'Official dynamics snapshot (dsh releases / dist-tags / DeepSeek platform)'],
+    ['dynamics.json', '官方动态快照（dsh releases/dist-tags/DeepSeek 平台/API 模型清单）', 'Official dynamics snapshot (dsh releases / dist-tags / DeepSeek platform / API model list)'],
     ['compat.json', 'dsh 版本兼容信号（engines.dsh / peers 探测）', 'dsh version compat signals (engines.dsh / peers probe)'],
     ['shell-seeds.json', 'shell 模块表 seed 词（dsh-web-frontend 全版本）', 'Shell module-table seed words (all dsh-web-frontend versions)'],
     ['compat-observed.json', '实测兼容矩阵（client require × shell 模块表）', 'Observed compat matrix (client requires × shell module table)'],
@@ -585,6 +585,21 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
 <p class="lede" style="margin-top:6px">${t(`官方信号采集于 ${escHtml((dyn.fetchedAt || '').slice(0, 16).replace('T', ' '))} UTC。`, `Official signals collected at ${(dyn.fetchedAt || '').slice(0, 16).replace('T', ' ')} UTC.`)} ${escHtml(dyn.note || '')}</p>`
   }
 
+  // DeepSeek API 模型清单（dynamics.models；无 key/探测失败时 carry 上次快照，首跑基线不标新）
+  const MULTIMODAL_RE = /vision|multimodal|omni|image/i
+  let modelsSec = ''
+  if (dyn?.models?.length) {
+    const d14ms = 14 * 86400000
+    const chip = (color, zh, en) => `<span style="flex:none;font:600 10.5px var(--mono);color:${color};border:1px solid ${color};border-radius:99px;padding:0 7px">${t(zh, en)}</span>`
+    const modelRows = dyn.models.map((m) => {
+      const fresh = m.firstSeen && nowMs - new Date(m.firstSeen).getTime() < d14ms
+      return `<div class="scrow" style="flex-direction:row;align-items:baseline;gap:8px"><code style="font-size:12.5px;overflow:hidden;text-overflow:ellipsis">${escHtml(m.id)}</code>${fresh ? chip('var(--accent)', '新', 'NEW') : ''}${MULTIMODAL_RE.test(m.id || '') ? chip('#7c3aed', '多模态', 'multimodal') : ''}<span class="meta" style="margin-left:auto;flex:none">${escHtml(m.owned_by || '—')}${m.firstSeen ? ` · ${m.firstSeen}` : ''}</span></div>`
+    }).join('')
+    modelsSec = `<h2 style="font-size:16px;margin:30px 0 8px">${t('DeepSeek API 模型', 'DeepSeek API Models')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t(`探测 api.deepseek.com /models · 当前 ${dyn.models.length} 个`, `probed via the api.deepseek.com /models endpoint · ${dyn.models.length} available`)}</span></h2>
+<div class="card">${modelRows}</div>
+<p class="lede" style="margin-top:6px">${t('「新」= 首次出现在清单中的时间（firstSeen）在近 14 天内；「多模态」= 按模型 id 关键词（vision/multimodal/omni/image）启发式判定。基线日之前已在架的模型不标新。', '"NEW" = first seen in the list within the last 14 days (firstSeen); "multimodal" = heuristic match on id keywords (vision/multimodal/omni/image). Models already listed before the monitoring baseline are not marked.')}</p>`
+  }
+
   const dynBody = `<p class="crumb">Dynamics</p><h1 class="pagetitle">${t('动态', 'Dynamics')}</h1>
 <p class="lede">${t('生态时间线：谁在什么时候做了什么——插件新入库 / 版本升级 / 活跃更新 + 官方 release 与平台仓库动向。近 30 天窗口，每日随快照滚动。', 'The ecosystem timeline: who did what and when — plugin arrivals / version upgrades / recent activity plus official releases and platform repos. Rolling 30-day window, refreshed daily.')}</p>
 <div class="flayout">
@@ -592,6 +607,7 @@ curl ${ORIGIN}/feed.xml          # ${t('周报 RSS', 'weekly RSS')}</code></pre>
 <div class="fmain card" id="feed">${feedRows.join('') || `<p class="lede" style="margin:10px 0">${t('近 30 天暂无动态', 'No events in the last 30 days')}</p>`}</div>
 </div>
 ${evs.length > FEED_CAP ? `<p class="lede" style="margin-top:8px">${t(`仅显示最近 ${FEED_CAP} 条（共 ${evs.length} 条）`, `Showing the latest ${FEED_CAP} of ${evs.length} events`)}</p>` : ''}
+${modelsSec}
 ${officialRef}
 <style>
 .flayout{display:grid;grid-template-columns:188px minmax(0,1fr);gap:24px;align-items:start}
@@ -1012,7 +1028,7 @@ ${badgeExHtml}
   ${navCard('scenarios/', 'tag', t('场景组合推荐', 'Scenario Picks'), t('从「我要做什么」出发选插件：质量首选 + 新入场', 'Pick plugins by "what I want to do": top picks + new arrivals'), t(`${scenarios.length} 个场景`, `${scenarios.length} scenarios`))}
   ${navCard('kit/', 'radar', t('生态助手插件', 'The Kit'), t('把观察站装进 DSH：插件体检 · 装前查验 · 场景发现 · 作者自检', 'The observatory inside DSH: checkup · pre-install check · scenario picks · author self-check'), 'dsh-insights-kit')}
   ${navCard('weekly/', 'mail', t('生态周报', 'Weekly'), t('双栏阅读器 · 可导出 Markdown/PDF/图片 · RSS', 'Two-pane reader · export Markdown/PDF/PNG · RSS'), t(`${weekly.length} 期 · 每周五`, `${weekly.length} issues · every Friday`))}
-  ${navCard('dynamics/', 'radar', t('官方动态', 'Dynamics'), t('dsh releases/dist-tags · DeepSeek 平台 · rc 兼容信号', 'dsh releases/dist-tags · DeepSeek platform · rc compatibility signal'), latestRel ? escHtml(latestRel.tag) : '—')}
+  ${navCard('dynamics/', 'radar', t('官方动态', 'Dynamics'), t('dsh releases/dist-tags · DeepSeek 平台 · API 模型清单 · rc 兼容信号', 'dsh releases/dist-tags · DeepSeek platform · API model list · rc compatibility signal'), latestRel ? escHtml(latestRel.tag) : '—')}
   ${navCard('authors/', 'users', t('作者榜', 'Authors'), t('生态里的重要人物：榜单 + 协作关系图', 'Key people of the ecosystem: leaderboards + collaboration graph'), t(`${(an0.authorStats?.total || 0).toLocaleString()} 位`, `${(an0.authorStats?.total || 0).toLocaleString()} authors`))}
   ${navCard('badge/', 'star', t('健康徽章', 'Badge'), t('把客观评分带进 README：一页接入指南', 'Bring the objective score into your README: a one-page setup guide'), t('health-v5 · 每日刷新', 'health-v5 · refreshed daily'))}
   ${navCard('data/', 'database', t('开放数据', 'Open Data'), t('稳定 JSON URL · agent 可读 · CC BY 4.0', 'Stable JSON URLs · agent-friendly · CC BY 4.0'), t('insights.json 等 13 个数据集', '13 datasets incl. insights.json'))}

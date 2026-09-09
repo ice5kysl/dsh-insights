@@ -15,7 +15,7 @@
 | 层 | 内容 | 交付 |
 |---|---|---|
 | **L1 插件洞察** | 真伪判定（manifest 门禁）→ 权威集 → 健康分 **S–D/0–100**（health-v5，逐条证据）→ 收录矩阵 → 「优质未收录」榜 | 数据快照 + 站点 + /p/ 详情页 + 信件 |
-| **L2 官方动态**（v0 已上线） | dsh releases/rc 节奏、dist-tags、DeepSeek 平台信号；rc 兼容雷达（M2） | /dynamics + 周报官方小节 |
+| **L2 官方动态**（v0 已上线） | dsh releases/rc 节奏、dist-tags、DeepSeek 平台信号、API 模型清单（/models 探测，新模型首见标记）；rc 兼容雷达（M2） | /dynamics + 周报官方小节 |
 | **L3 生态报告** | 生态周报（每周五 CI 生成）+ 每插件「致作者的信」（外发物料） | /weekly + RSS + data/reports/ |
 
 不是第 N 个目录/市场——让目录、市场、agent 与 dsh 官方**有据可依**的数据与观测源。
