@@ -10,7 +10,7 @@
  * @module dsh-insights/stage-9
  */
 
-import { writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { pathToFileURL } from 'node:url'
 import { PATHS, readJsonl, loadPlugins } from '../../lib/data.mjs'
 import { scoreAll, RULE_VERSION } from '../analyze/score.mjs'
@@ -19,8 +19,16 @@ function main() {
   const rows = loadPlugins()
   const { out: scored, summary } = scoreAll(rows)
   const byName = new Map(scored.map((s) => [s.full_name, s.health]))
+  // compat.json 每日全量探测 npm registry（npmLatest 是日频新鲜源）；plugins.jsonl 的
+  // npm.latest 只在首次验证时写入、此后不刷新。这里用前者覆盖后者，修「版本号定格」。
+  const compatLatest = new Map()
+  try {
+    const compat = JSON.parse(readFileSync(PATHS.compat, 'utf8'))
+    for (const p of compat?.plugins ?? []) if (p.pkgName && p.npmLatest) compatLatest.set(p.pkgName, p.npmLatest)
+  } catch { /* compat.json 缺失时退回 plugins.jsonl 口径 */ }
   const plugins = rows.map((r) => {
     const h = byName.get(r.full_name)
+    const latest = (r.pkgName && compatLatest.get(r.pkgName)) || r.npm?.latest || null
     return {
       full_name: r.full_name,
       url: r.html_url ?? (r.full_name ? `https://github.com/${r.full_name}` : null),
@@ -29,9 +37,7 @@ function main() {
       topics: Array.isArray(r.topics) ? r.topics.slice(0, 8) : [],
       pkgName: r.pkgName ?? null,
       version: r.version ?? null,
-      npm: r.npm
-        ? { published: r.npm.published ?? false, latest: r.npm.latest ?? null }
-        : { published: false, latest: null },
+      npm: { published: r.npm?.published ?? Boolean(latest), latest },
       description: (r.description || '').slice(0, 300),
       health: h
         ? { score: h.score, grade: h.grade, dimScores: h.dimScores || {}, drops: h.drops.map((d) => d.code) }

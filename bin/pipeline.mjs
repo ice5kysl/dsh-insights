@@ -62,7 +62,9 @@ const STEPS = [
   ['insights',    'pipeline/content/insights.mjs'],
 ]
 
-const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'shell-seeds', 'compat', 'analyze', 'site', 'export-csv', 'diff', 'pages']
+// daily 含 export-json（compat.json 的 npmLatest 日频新鲜源在此回灌 insights.json）与
+// compat-observed（实测矩阵：pkg@version 缓存入 git 后是增量成本，只为当天发新版的包重抓 tarball）
+const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'shell-seeds', 'compat', 'analyze', 'export-json', 'compat-observed', 'site', 'export-csv', 'diff', 'pages']
 // 每小时增量纳新：daily 去掉 downloads/dynamics（重 API、日频足够），其余同构
 const HOURLY = ['lists', 'discover-incr', 'validate', 'analyze', 'site', 'export-csv', 'diff', 'pages']
 // compat-observed（实测兼容矩阵）依赖 export-json 的 insights.json 与已落盘的 shell-seeds.json，且须先于 pages（详情页消费）

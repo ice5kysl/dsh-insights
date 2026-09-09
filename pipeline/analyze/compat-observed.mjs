@@ -37,7 +37,8 @@
  *
  * 网络礼节：并发 ≤8、每包 30s 超时；tarball URL 按 npm 惯例
  *   https://registry.npmjs.org/<name>/-/<basename>-<version>.tgz（scoped 取 / 后段）。
- * 增量：按 pkg@version 缓存提取结果于 data/state/compat-observed-cache.json
+ * 增量：按 pkg@version 缓存提取结果于 data/compat-observed-cache.json（data/ 根、入 git——
+ *   state/ 目录被 gitignore，放这里 CI 的 `git add data/` 才能带上缓存，daily 跑矩阵才是增量成本）
  * （gitignore 的 data/state/ 惯例），版本不变零网络。缓存条目含 requiresV2
  * （守卫上下文）；旧条目缺失时：全版本无 missing 的原位升级（守卫不影响全 ok
  * 结论），有 missing 的重抓 bundle 提取守卫，重抓失败沿用旧口径结论保底。
@@ -55,7 +56,7 @@ import { pathToFileURL } from 'node:url'
 import { NPM } from '../../lib/api.mjs'
 import { DATA, PATHS, readJson, writeJson } from '../../lib/data.mjs'
 
-const CACHE = join(DATA, 'state', 'compat-observed-cache.json')
+const CACHE = join(DATA, 'compat-observed-cache.json')
 const CONCURRENCY = 8
 const PER_PKG_TIMEOUT = 30_000
 
