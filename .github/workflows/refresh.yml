@@ -4,7 +4,7 @@
 #   小时），故按 UTC 日去重而非按小时：每个 UTC 日首个到达的 schedule run 跑
 #   daily（周五跑 friday：daily + 作者关系图 + metrics + 信件 + 周报），其余
 #   run 跑 `pipeline hourly`（增量纳新：discover-incr + validate + 发布层）。
-#   去重状态存 data/state/last-daily.txt，随快照提交闭环。
+#   去重状态存 data/last-daily.txt，随快照提交闭环。
 # - Manual `workflow_dispatch` mode=full: `pipeline full`（全量管线）。
 # - Token: falls back to built-in GITHUB_TOKEN; set repo secret `DSH_GH_TOKEN`
 #   for a raised API budget.
@@ -59,7 +59,7 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: |
           TODAY=$(date -u +%F)
-          LAST=$(cat data/state/last-daily.txt 2>/dev/null || echo never)
+          LAST=$(cat data/last-daily.txt 2>/dev/null || echo never)
           echo "today=$TODAY last-daily=$LAST"
           if [ "${{ inputs.mode }}" = "friday" ]; then
             echo "Friday profile (manual)"
@@ -70,11 +70,11 @@ jobs:
           elif [ "$(date -u +%u)" = "5" ]; then
             echo "Friday profile"
             node bin/pipeline.mjs friday
-            echo "$TODAY" > data/state/last-daily.txt
+            echo "$TODAY" > data/last-daily.txt
           else
             echo "Daily profile"
             node bin/pipeline.mjs daily
-            echo "$TODAY" > data/state/last-daily.txt
+            echo "$TODAY" > data/last-daily.txt
           fi
       - name: Commit snapshot changes
         run: |
