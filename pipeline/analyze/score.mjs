@@ -35,7 +35,7 @@ export const RULE_VERSION = 'health-v5'
 export const DIMS = {
   eng: { label: '工程质量', desc: 'bundle 规范与发布卫生' },
   docs: { label: '文档完整性', desc: '上手材料与许可' },
-  discover: { label: '可发现性', desc: '被找到的能力（topic/收录）' },
+  discover: { label: '可发现性', desc: '被找到的能力（topic/批量导入信号）' },
   maint: { label: '维护活跃', desc: '存活与持续维护信号' },
 }
 const DIM_OF = {

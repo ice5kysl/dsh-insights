@@ -511,7 +511,7 @@ ${I18N_CSS}
       <table class="ptable"><thead><tr><th>${t('仓库', 'Repository')}</th><th class="num">★</th><th class="num">${t('仓库 → npm', 'Repo → npm')}</th></tr></thead><tbody>${staleRows || `<tr><td class="dim">${t('暂无', 'No data yet')}</td></tr>`}</tbody></table>
     </div>
     <div class="panel">
-      <h3>${t('优质未收录 · 建议收录', 'Quality & Unlisted · Suggested')}</h3><p class="p-sub">${t('A/B 级 · 已发布 npm · 尚未进 awesome/imsai · Top 10', 'Grade A/B · published to npm · not yet in awesome/imsai · Top 10')}</p>
+      <h3>${t('优质但低曝光', 'Quality but Under-exposed')}</h3><p class="p-sub">${t('A/B 级 · 已发布 npm · 未被常见社区目录收录 · Top 10', 'Grade A/B · published to npm · not in common community directories · Top 10')}</p>
       <table class="ptable"><thead><tr><th>${t('仓库', 'Repository')}</th><th class="num">${t('质量', 'Grade')}</th><th class="num">★</th><th>${t('npm / 周下载', 'npm / Weekly Downloads')}</th></tr></thead><tbody>
       ${suggestedHtml || `<tr><td class="dim">${t('暂无（请先跑 00-lists + analyze）', 'None yet (run 00-lists + analyze first)')}</td></tr>`}
       </tbody></table>
