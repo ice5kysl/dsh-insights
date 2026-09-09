@@ -67,6 +67,8 @@
 - `data/enrich.json` — 每插件统一记录（health 分 + category + 收录渠道 + 周下载），见 §health。
 - `data/insights.json` — 对外 agent 契约（稳定 URL，schema 只增不改）；`data/insights.schema.json` 为其 JSON Schema。
 - `data/dynamics.json` — 官方动态快照（L2 v0：releases 摘要/dist-tags/平台仓库信号）。
+- `data/shell-seeds.json` — shell 模块表 seed 词（`pipeline/collect/shell-seeds.mjs`，daily）：`{generatedAt, pkg, distTags, versions:{[dsh-web-frontend 版本]: string[]}, failed:{[版本]: 错误}}`。
+- `data/compat-observed.json` — 实测兼容矩阵（`pipeline/analyze/compat-observed.mjs`，snapshot）：`{generatedAt, dshVersions, shellDistTags, note, stats, plugins:{[pkgName]: {repo, version, requires, results:{[shell 版本]: {status: ok|broken, missing?}}}}}`；判定口径与边界见文件内 note（静态分析、非运行时测试、动态 require 不测）。
 - `data/metrics.jsonl` — 产品自测量指标（周五 CI append）。
 - `data/report.md` — 人类可读报告。
 - `data/last-diff.md` — 与**上一快照**的 diff（周报已不依赖它：weekly 生成时按 history 基线现场重算本周 diff）。
@@ -94,7 +96,7 @@
 | 维护活跃 `maint` | 存活与持续维护信号 | 仓库年龄 <1 天 · >30 天无提交（pushed_at；npm ≥2 版本豁免 too-young） | **计分** |
 | 安全卫生 `safety` | 写面/消毒启发式（非审计） | 源文件写面（fs 写/子进程/HTTP 写动词）· 渲染消毒器（深检 deep.jsonl，抽样覆盖） | **增量信号，单独标注，不进总分**（覆盖不足，不虚构） |
 | 采用度 `adoption` | 社区使用与关注 | ★ · npm 周下载（downloads.json）· 收录渠道 | **只展示不进分**（可刷/monorepo 污染，见原则） |
-| 兼容性 `compat` | 与 dsh 版本匹配 | engines.dsh 声明（实测声明率 ~1%，不可用）· 深检 API 符号 × rc changelog（M2 雷达 v1） | **预留维度，暂缺测** |
+| 兼容性 `compat` | 与 dsh 版本匹配 | engines.dsh 声明（实测声明率 ~1%，不可用）· **实测矩阵**：client bundle require × shell seed 词表（compat-observed.json，静态分析口径） · 深检 API 符号 × rc changelog（M2 雷达 v1） | **预留维度，不进分**；实测矩阵在 /p/ 详情页只展示 |
 
 原则（维持）：纯客观信号；星数不进分；缺失不虚构不扣分（missing 明示）；社区评分/投票永不引入。`dimScores` = 各计分维度独立 100 起扣（与该维度内规则扣分同步），总分 = 全部计分规则合并起扣。
 

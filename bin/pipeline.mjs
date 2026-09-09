@@ -36,6 +36,7 @@ const STEPS = [
   ['npm-map',     'pipeline/collect/npm-map.mjs'],
   ['downloads',   'pipeline/collect/downloads.mjs'],
   ['dynamics',    'pipeline/collect/dynamics.mjs'],
+  ['shell-seeds', 'pipeline/collect/shell-seeds.mjs'],
   ['author-graph', 'pipeline/collect/author-graph.mjs'],
   ['validate',    'pipeline/validate/validate.mjs'],
   ['regress',     'pipeline/validate/regress.mjs'],
@@ -43,6 +44,7 @@ const STEPS = [
   ['analyze',     'pipeline/analyze/analyze.mjs'],
   ['score',       'pipeline/analyze/score.mjs'],
   ['compat',      'pipeline/analyze/compat.mjs'],
+  ['compat-observed', 'pipeline/analyze/compat-observed.mjs'],
   ['history',     'pipeline/analyze/history.mjs'],
   ['overlap',     'pipeline/analyze/overlap.mjs'],
   ['llm-tags',    'pipeline/analyze/llm-tags.mjs'],
@@ -60,10 +62,11 @@ const STEPS = [
   ['insights',    'pipeline/content/insights.mjs'],
 ]
 
-const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'compat', 'analyze', 'site', 'export-csv', 'diff', 'pages']
+const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'shell-seeds', 'compat', 'analyze', 'site', 'export-csv', 'diff', 'pages']
 // 每小时增量纳新：daily 去掉 downloads/dynamics（重 API、日频足够），其余同构
 const HOURLY = ['lists', 'discover-incr', 'validate', 'analyze', 'site', 'export-csv', 'diff', 'pages']
-const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'overlap', 'scenarios', 'badges', 'site', 'pages']
+// compat-observed（实测兼容矩阵）依赖 export-json 的 insights.json 与已落盘的 shell-seeds.json，且须先于 pages（详情页消费）
+const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'compat-observed', 'overlap', 'scenarios', 'badges', 'site', 'pages']
 const CONTENT = ['letters', 'weekly', 'insights', 'pages']
 const PROFILES = {
   hourly: HOURLY,

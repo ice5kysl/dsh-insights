@@ -29,10 +29,11 @@ Home (search + KPI + latest arrivals + scenario shortcuts) · [Dashboard](https:
 
 | File | What |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | **Authoritative set 10,189** + 3,916 noise buckets (0 duplicates · hard gate · 2026-09-06 snapshot, validation still rolling) |
+| `data/plugins.jsonl` · `invalid.jsonl` | **Authoritative set 10,190** + 3,916 noise buckets (0 duplicates · hard gate · 2026-09-06 snapshot, validation still rolling) |
 | `data/insights.json` + `insights.schema.json` | Agent contract (stable URL, additive-only schema) |
 | `data/analysis.json` · `enrich.json` · `plugins.csv` | Aggregates / per-plugin scores+channels / spreadsheet |
 | `data/dynamics.json` · `metrics.jsonl` | Official-dynamics snapshot · product self-metrics |
+| `data/compat.json` · `compat-observed.json` · `shell-seeds.json` | Declared compat signals (engines.dsh) · observed compat matrix (client requires × shell module table) · shell seed words |
 | `data/llm.jsonl` · `data/reports/*.md` · `data/weekly/*.md` | LLM capability tags · letters to authors · weekly issues |
 
 License: **code MIT · data CC BY 4.0** (attribution: dsh-insights.com). Repo metadata (descriptions etc.) remains © its original authors.
@@ -74,7 +75,7 @@ Start at 100, deduct per rule (fail −20 / major −10 / warn −5 / minor −2
 
 ## Status (2026-09-06)
 
-- [x] Full crawl + validation: 14,331 candidates → **10,189** authoritative (0-duplicate hard gate; resumable, still rolling)
+- [x] Full crawl + validation: 14,331 candidates → **10,190** authoritative (0-duplicate hard gate; resumable, still rolling)
 - [x] Site live (custom domain, dark/light, search, SEO basics, analytics); per-plugin pages for the full set; weekly reader with MD/PDF/PNG export
 - [x] Health v4 (S-grade added) + calibration regression in snapshot gate; audit backlog closed (see `docs/AUDIT-2026-09-06.md`)
 - [x] Metadata refresh loop (Tier 0) wired into Fridays; letters frozen to snapshot dates (diff-driven pages)

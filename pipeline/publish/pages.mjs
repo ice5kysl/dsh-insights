@@ -216,6 +216,12 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
   const compatDoc = JSON.parse(read('compat.json') || '{}')
   const compatBy = new Map((compatDoc.plugins || []).map((p) => [p.pkgName, p]))
   const dshLatest = compatDoc.officialDsh?.latest || ''
+  // 实测兼容矩阵（compat-observed.json）：pkgName → { version, requires, results }
+  const obsDoc = JSON.parse(read('compat-observed.json') || 'null')
+  const obsPlugins = obsDoc?.plugins || {}
+  const obsVersions = obsDoc?.dshVersions || []
+  const obsTagOf = {}
+  for (const [tag, ver] of Object.entries(obsDoc?.shellDistTags || {})) (obsTagOf[ver] ||= []).push(tag)
   const dimLabel = { eng: t('工程质量', 'Engineering quality'), docs: t('文档完整性', 'Docs completeness'), discover: t('可发现性', 'Discoverability'), maint: t('维护活跃', 'Maintenance activity') }
   const okIco = `<span style="display:inline-block;vertical-align:-2px;color:var(--ok)">${icon('check', 13)}</span>`
   const warnIco = `<span style="display:inline-block;vertical-align:-2px;color:var(--warn)">${icon('alert', 13)}</span>`
@@ -235,6 +241,21 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
       : compat?.dshPeers?.length
         ? `<p style="font-size:12.5px;color:var(--mut)" title="${t('启发式信号（npm registry 探测），非运行时测试', 'Heuristic signal (npm registry probe), not a runtime test')}">${t('dsh 兼容：未声明 engines.dsh · peers', 'dsh compat: no engines.dsh · peers')} ${compat.dshPeers.slice(0, 2).map((p) => `${escHtml(p.name)} ${escHtml(p.range)}`).join(' · ')}${compat.dshPeers.length > 2 ? t(` 等 ${compat.dshPeers.length} 项`, ` (+${compat.dshPeers.length - 2} more)`) : ''}</p>`
         : `<p style="font-size:12.5px;color:var(--mut)">${t('dsh 兼容：未声明（engines.dsh / peers 均无）——建议在 package.json 加 "engines": {"dsh": "^x.y.z"}', 'dsh compat: undeclared (no engines.dsh / peers) — add "engines": {"dsh": "^x.y.z"} to package.json')}</p>`
+    // 实测兼容区块：有记录按 shell 版本逐行 ✓/✗；无记录给诚实文案（未发布/无 client bundle/未扫到）
+    const obs = r.pkgName ? obsPlugins[r.pkgName] || null : null
+    const obsRows = obs
+      ? obsVersions.map((v) => {
+          const res = obs.results?.[v]
+          if (!res) return ''
+          const ok = res.status === 'ok'
+          const tagStr = (obsTagOf[v] || []).join(' · ')
+          return `<div class="scrow"><a style="cursor:default">${escHtml(v)}${tagStr ? ` <span style="color:var(--faint);font-weight:400;font-size:11px">${escHtml(tagStr)}</span>` : ''}</a><span class="meta" style="color:${ok ? 'var(--ok)' : 'var(--err)'};white-space:normal">${ok ? `✓ ${t('可加载', 'loadable')}` : `✗ ${t('无法加载（loader 启动即崩）', 'fails to load (loader crashes at boot)')}：${t('缺', 'missing')} ${(res.missing || []).map((m) => `<code>${escHtml(m)}</code>`).join(' ')}`}</span></div>`
+        }).join('')
+      : ''
+    const obsBlock = `<h2 style="font-size:16px;margin:26px 0 8px">${t('实测兼容', 'Observed Compatibility')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('client bundle × shell 模块表', 'client bundle × shell module table')}</span></h2>
+<div class="card">${obs
+      ? `${obsRows}<p style="font-size:11px;color:var(--faint);margin-top:10px">${t(`实测对象：npm ${escHtml(obs.version)} · 外部 require ${obs.requires.length} 个。口径：静态分析 client bundle 的 require 字面量，对比各 shell 版本烘焙的模块表（seed 词 ∪ 图行近似＝语料库已知插件包名，"/client" 后缀剥离后匹配）；非运行时测试，动态 require（含模板串）不在检测范围。`, `Measured: npm ${escHtml(obs.version)} · ${obs.requires.length} external requires. Method: static analysis of the client bundle's literal requires vs each shell build's baked module table (seed words ∪ graph-row approximation = corpus-known plugin package names, matched after stripping a "/client" suffix); not a runtime test — dynamic requires (incl. template strings) are out of scope.`)}</p>`
+      : `<p style="color:var(--faint);font-size:13px;margin:4px 0">${t('暂无实测数据：该插件未发布 npm、无界面（client）bundle，或尚未被扫描覆盖。', 'No observed data: the plugin is not on npm, has no client (UI) bundle, or has not been scanned yet.')}</p>`}</div>`
     const peers = en.category
       ? enrichAll.filter((x) => x.category === en.category && x.full_name !== full)
           .sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 5) : []
@@ -284,6 +305,7 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
   </div>
   <div class="card" style="margin:0"><b>${t('LLM 解读', 'LLM Summary')}</b>${llm ? `<p style="font-size:13px;margin-top:8px">${escHtml(llm.summaryZh || llm.summaryEn || '—')}</p>${(llm.capabilityTags || []).length ? `<p style="margin-top:8px">${llm.capabilityTags.map((t) => `<span class="pill">${escHtml(t)}</span>`).join('')}</p>` : ''}${(llm.claims || []).length ? `<p style="font-size:12px;color:var(--mut);margin-top:8px">${t('README 宣称：', 'README claims: ')}${escHtml(llm.claims.slice(0, 4).join('；'))}</p>` : ''}` : `<p style="color:var(--faint);font-size:13px;margin-top:8px">${t('未标注 · 待 LLM 标注轮', 'Not annotated yet · pending an LLM annotation round')}</p>`}${deep ? `<p style="font-size:12.5px;margin-top:10px;border-top:1px solid var(--line);padding-top:8px"><b>${t('深检（写面/消毒，非审计）', 'Deep scan (write surface/sanitization, not an audit)')}</b>：${escHtml(deep.verdict)} · ${t(`写面 ${deep.writeCount} 处`, `${deep.writeCount} write points`)} · ${deep.sanitized ? t('有消毒器', 'sanitizer present') : t('无消毒器', 'no sanitizer')}</p>` : ''}</div>
 </div>
+${obsBlock}
 ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（${escHtml(en.category)}）`, `Similar plugins (${escHtml(en.category)})`)}</h2><div class="card">${peersHtml}</div>` : ''}
 <p style="margin-top:18px;font-size:12px;color:var(--faint)">${t('数据有误或已更新？', 'Data wrong or outdated? ')}<a href="https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml">${t('申请重检', 'Request a re-check')}</a>${t('（Actions 手动触发，输入 owner/repo，约半小时生效）', ' (manual Actions trigger; enter owner/repo; takes effect in ~30 min)')} · <a href="https://github.com/ice5kysl/dsh-insights/issues/new/choose">${t('申诉 / 纠错', 'Appeal / correction')}</a></p>`
     const html = page({
@@ -308,6 +330,8 @@ ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（
     ['health.json', '健康分聚合（分级分布/均分/top 扣分）', 'Health score aggregates (grade distribution / average / top deductions)'],
     ['dynamics.json', '官方动态快照（dsh releases/dist-tags/DeepSeek 平台）', 'Official dynamics snapshot (dsh releases / dist-tags / DeepSeek platform)'],
     ['compat.json', 'dsh 版本兼容信号（engines.dsh / peers 探测）', 'dsh version compat signals (engines.dsh / peers probe)'],
+    ['shell-seeds.json', 'shell 模块表 seed 词（dsh-web-frontend 全版本）', 'Shell module-table seed words (all dsh-web-frontend versions)'],
+    ['compat-observed.json', '实测兼容矩阵（client require × shell 模块表）', 'Observed compat matrix (client requires × shell module table)'],
     ['scenarios.json', '场景组合推荐（插件 ↔ 场景映射）', 'Scenario picks (plugin ↔ scenario mapping)'],
     ['plugins.csv', '权威集表格（25 列，Excel 友好）', 'Authoritative set as a table (25 columns, Excel-friendly)'],
     ['downloads.json', 'npm 周下载（CI 更新）', 'npm weekly downloads (updated by CI)'],
