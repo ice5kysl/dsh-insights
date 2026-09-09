@@ -1,8 +1,10 @@
 # Daily refresh of the dsh-insights snapshot (CI 定时刷新)
 #
-# - 每小时 :23 一条 cron；job 内按 UTC 时间选择 profile：
-#   03 点小时跑 daily（周五跑 friday：daily + 作者关系图 + metrics + 信件 + 周报），
-#   其余小时跑 `pipeline hourly`（增量纳新：discover-incr + validate + 发布层）。
+# - 每小时 :23 一条 cron。GitHub schedule 投递不准点（实测可能整天落不进指定
+#   小时），故按 UTC 日去重而非按小时：每个 UTC 日首个到达的 schedule run 跑
+#   daily（周五跑 friday：daily + 作者关系图 + metrics + 信件 + 周报），其余
+#   run 跑 `pipeline hourly`（增量纳新：discover-incr + validate + 发布层）。
+#   去重状态存 data/state/last-daily.txt，随快照提交闭环。
 # - Manual `workflow_dispatch` mode=full: `pipeline full`（全量管线）。
 # - Token: falls back to built-in GITHUB_TOKEN; set repo secret `DSH_GH_TOKEN`
 #   for a raised API budget.
@@ -50,26 +52,29 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
         run: node bin/pipeline.mjs full
-      - name: Scheduled refresh (03 点小时 daily/周五 friday，其余小时 hourly)
+      - name: Scheduled refresh（每个 UTC 日首个 schedule run 跑 daily/周五 friday，其余 hourly）
         if: inputs.mode != 'full'
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: |
-          if [ "${{ inputs.mode }}" = "friday" ] || { [ "${{ github.event_name }}" = "schedule" ] && [ "$(date -u +%H)" != "03" ]; }; then
-            if [ "${{ inputs.mode }}" = "friday" ]; then
-              echo "Friday profile (manual)"
-              node bin/pipeline.mjs friday
-            else
-              echo "Hourly incremental profile"
-              node bin/pipeline.mjs hourly
-            fi
+          TODAY=$(date -u +%F)
+          LAST=$(cat data/state/last-daily.txt 2>/dev/null || echo never)
+          echo "today=$TODAY last-daily=$LAST"
+          if [ "${{ inputs.mode }}" = "friday" ]; then
+            echo "Friday profile (manual)"
+            node bin/pipeline.mjs friday
+          elif [ "${{ github.event_name }}" = "schedule" ] && [ "$LAST" = "$TODAY" ]; then
+            echo "Hourly incremental profile"
+            node bin/pipeline.mjs hourly
           elif [ "$(date -u +%u)" = "5" ]; then
             echo "Friday profile"
             node bin/pipeline.mjs friday
+            echo "$TODAY" > data/state/last-daily.txt
           else
             echo "Daily profile"
             node bin/pipeline.mjs daily
+            echo "$TODAY" > data/state/last-daily.txt
           fi
       - name: Commit snapshot changes
         run: |
