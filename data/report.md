@@ -4,7 +4,7 @@
 
 ## 总览
 - 权威集规模：**10190**
-- 近 7 天活跃：2027（19.9%）· 近 30 天：10190（100%）
+- 近 7 天活跃：1987（19.5%）· 近 30 天：10190（100%）
 - 仓库年龄 ≥ 1 天（可过收录门禁）：10129（99.4%）
 
 ## 发布与文档
@@ -33,20 +33,20 @@
 - f20880479-lab/dsh-peak-gate A
 
 ## npm 周下载 Top 10
-- dsh-market/dsh-market：128104
-- KokuYu-sysu/dsh-market-desktop：128104
-- omdsh-dev/DSH-better-sidebar：97317
-- dream-num/dsh-univer-office：34192
-- bowenliang123/dsh-context：31332
-- Han-1413141/dsh-cost-meter：18196
-- Creakono/dsh-cost-meter：18196
-- AnakinCao/dsh-cost-meter：18196
-- ysr666/dsh-vision-router：13687
-- shaobeichen/dsh-pocket：13036
+- dsh-market/dsh-market：71224
+- KokuYu-sysu/dsh-market-desktop：71224
+- omdsh-dev/DSH-better-sidebar：59166
+- dream-num/dsh-univer-office：30983
+- bowenliang123/dsh-context：22556
+- Han-1413141/dsh-cost-meter：14273
+- Creakono/dsh-cost-meter：14273
+- AnakinCao/dsh-cost-meter：14273
+- omdsh-dev/dsh-mnemon：9263
+- ysr666/dsh-vision-router：7631
 
 ## 质量评分（启发式）
 - 平均分 76 · S+A 占比 10.1%（值得优先看；A+B 55.3%）
-- S 250 · A 784 · B 4854 · C 3045 · D 1257
+- S 250 · A 784 · B 4853 · C 3046 · D 1257
 
 ## 功能分类（启发式 Top 12）
 - 其它：3869

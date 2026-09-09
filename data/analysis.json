@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-09T05:04:57.698Z",
+  "generatedAt": "2026-09-09T07:31:00.598Z",
   "totals": {
     "authoritative": 10190,
-    "active7": 2027,
-    "active7Pct": 19.9,
+    "active7": 1987,
+    "active7Pct": 19.5,
     "active30": 10190,
     "active30Pct": 100,
     "ageGate1": 10129,
@@ -74,7 +74,7 @@
         "2026-06-01": 1,
         "2026-05-25": 5,
         "2026-01-26": 1,
-        "2026-08-31": 383,
+        "2026-08-31": 382,
         "2026-07-27": 5,
         "2026-07-20": 1,
         "2021-06-14": 1,
@@ -115,7 +115,7 @@
         "2026-02-02": 1,
         "2026-08-24": 536,
         "2026-03-23": 1,
-        "2026-08-31": 218,
+        "2026-08-31": 219,
         "2026-04-06": 2,
         "2026-05-25": 7,
         "2026-06-22": 1,
@@ -336,7 +336,7 @@
     "covered": 991,
     "coveredPct": 9.7,
     "none": 9199,
-    "fetchedAt": "2026-09-09T04:48:10.713Z"
+    "fetchedAt": "2026-09-09T07:02:32.450Z"
   },
   "suggested": [
     {
@@ -997,7 +997,7 @@
       "inAwesome": false,
       "inImsai": false,
       "covered": false,
-      "weekly": 2783
+      "weekly": 2752
     },
     {
       "full_name": "Renzic-Stone/DSH-EasyRewrite",
@@ -1031,7 +1031,7 @@
     }
   ],
   "downloads": {
-    "fetchedAt": "2026-09-06T04:39:39.828Z",
+    "fetchedAt": "2026-09-09T07:19:23.375Z",
     "top": [
       {
         "full_name": "dsh-market/dsh-market",
@@ -1058,7 +1058,7 @@
         "inAwesome": false,
         "inImsai": true,
         "covered": true,
-        "weekly": 128104
+        "weekly": 71224
       },
       {
         "full_name": "KokuYu-sysu/dsh-market-desktop",
@@ -1093,7 +1093,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 128104
+        "weekly": 71224
       },
       {
         "full_name": "omdsh-dev/DSH-better-sidebar",
@@ -1114,7 +1114,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 97317
+        "weekly": 59166
       },
       {
         "full_name": "dream-num/dsh-univer-office",
@@ -1139,7 +1139,7 @@
         "inAwesome": false,
         "inImsai": true,
         "covered": true,
-        "weekly": 34192
+        "weekly": 30983
       },
       {
         "full_name": "bowenliang123/dsh-context",
@@ -1166,7 +1166,7 @@
         "inAwesome": false,
         "inImsai": true,
         "covered": true,
-        "weekly": 31332
+        "weekly": 22556
       },
       {
         "full_name": "Han-1413141/dsh-cost-meter",
@@ -1191,7 +1191,7 @@
         "inAwesome": true,
         "inImsai": false,
         "covered": true,
-        "weekly": 18196
+        "weekly": 14273
       },
       {
         "full_name": "Creakono/dsh-cost-meter",
@@ -1251,7 +1251,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 18196
+        "weekly": 14273
       },
       {
         "full_name": "AnakinCao/dsh-cost-meter",
@@ -1301,7 +1301,26 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 18196
+        "weekly": 14273
+      },
+      {
+        "full_name": "omdsh-dev/dsh-mnemon",
+        "stars": 331,
+        "score": 100,
+        "grade": "S",
+        "dimScores": {
+          "eng": 100,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
+        "drops": [],
+        "missing": [],
+        "category": "搜索 / 命令面板",
+        "inAwesome": false,
+        "inImsai": true,
+        "covered": true,
+        "weekly": 9263
       },
       {
         "full_name": "ysr666/dsh-vision-router",
@@ -1336,7 +1355,93 @@
         "inAwesome": false,
         "inImsai": true,
         "covered": true,
-        "weekly": 13687
+        "weekly": 7631
+      },
+      {
+        "full_name": "DDDMUC/dsh-free-search",
+        "stars": 127,
+        "score": 83,
+        "grade": "B",
+        "dimScores": {
+          "eng": 88,
+          "docs": 95,
+          "discover": 100,
+          "maint": 100
+        },
+        "drops": [
+          {
+            "code": "manifest.no-client-export",
+            "sev": "warn",
+            "label": "exports[\"./client\"] 缺失（Web 客户端入口）"
+          },
+          {
+            "code": "docs.zh-missing",
+            "sev": "warn",
+            "label": "无中文文档（生态惯例 zh/双语）"
+          },
+          {
+            "code": "eng.no-tests",
+            "sev": "warn",
+            "label": "无测试目录/测试文件（工程成熟度）"
+          },
+          {
+            "code": "eng.no-ci",
+            "sev": "minor",
+            "label": "无 CI workflow（.github/workflows）"
+          }
+        ],
+        "missing": [],
+        "category": "搜索 / 命令面板",
+        "inAwesome": true,
+        "inImsai": false,
+        "covered": true,
+        "weekly": 4725
+      },
+      {
+        "full_name": "RevolutionLA/dsh-dream-skin",
+        "stars": 142,
+        "score": 100,
+        "grade": "S",
+        "dimScores": {
+          "eng": 100,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
+        "drops": [],
+        "missing": [],
+        "category": "状态 / 监控 / 用量",
+        "inAwesome": false,
+        "inImsai": false,
+        "covered": false,
+        "weekly": 4209
+      },
+      {
+        "full_name": "MeteorNOX/DeepSeek-Balance-Whale-Widget",
+        "stars": 1727,
+        "score": 95,
+        "grade": "S",
+        "dimScores": {
+          "eng": 95,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
+        "drops": [
+          {
+            "code": "manifest.no-client-export",
+            "sev": "warn",
+            "label": "exports[\"./client\"] 缺失（Web 客户端入口）"
+          }
+        ],
+        "missing": [
+          "files"
+        ],
+        "category": "状态 / 监控 / 用量",
+        "inAwesome": true,
+        "inImsai": false,
+        "covered": true,
+        "weekly": 4083
       },
       {
         "full_name": "shaobeichen/dsh-pocket",
@@ -1361,7 +1466,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 13036
+        "weekly": 3974
       },
       {
         "full_name": "keman-ai/dsh-pocket",
@@ -1396,133 +1501,10 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 13036
-      },
-      {
-        "full_name": "RevolutionLA/dsh-dream-skin",
-        "stars": 142,
-        "score": 100,
-        "grade": "S",
-        "dimScores": {
-          "eng": 100,
-          "docs": 100,
-          "discover": 100,
-          "maint": 100
-        },
-        "drops": [],
-        "missing": [],
-        "category": "状态 / 监控 / 用量",
-        "inAwesome": false,
-        "inImsai": false,
-        "covered": false,
-        "weekly": 9994
-      },
-      {
-        "full_name": "omdsh-dev/dsh-mnemon",
-        "stars": 331,
-        "score": 100,
-        "grade": "S",
-        "dimScores": {
-          "eng": 100,
-          "docs": 100,
-          "discover": 100,
-          "maint": 100
-        },
-        "drops": [],
-        "missing": [],
-        "category": "搜索 / 命令面板",
-        "inAwesome": false,
-        "inImsai": true,
-        "covered": true,
-        "weekly": 9682
-      },
-      {
-        "full_name": "awesome-dsh-plugin/dsh-find-plugin",
-        "stars": 119,
-        "score": 83,
-        "grade": "B",
-        "dimScores": {
-          "eng": 90,
-          "docs": 93,
-          "discover": 100,
-          "maint": 100
-        },
-        "drops": [
-          {
-            "code": "manifest.no-client-export",
-            "sev": "warn",
-            "label": "exports[\"./client\"] 缺失（Web 客户端入口）"
-          },
-          {
-            "code": "docs.zh-missing",
-            "sev": "warn",
-            "label": "无中文文档（生态惯例 zh/双语）"
-          },
-          {
-            "code": "eng.no-tests",
-            "sev": "warn",
-            "label": "无测试目录/测试文件（工程成熟度）"
-          },
-          {
-            "code": "docs.no-docs-dir",
-            "sev": "minor",
-            "label": "无 docs/ 目录（文档深度不足）"
-          }
-        ],
-        "missing": [],
-        "category": "搜索 / 命令面板",
-        "inAwesome": false,
-        "inImsai": true,
-        "covered": true,
-        "weekly": 9292
-      },
-      {
-        "full_name": "graceen2331-prog/find-plugin",
-        "stars": 1,
-        "score": 81,
-        "grade": "B",
-        "dimScores": {
-          "eng": 88,
-          "docs": 93,
-          "discover": 100,
-          "maint": 100
-        },
-        "drops": [
-          {
-            "code": "manifest.no-client-export",
-            "sev": "warn",
-            "label": "exports[\"./client\"] 缺失（Web 客户端入口）"
-          },
-          {
-            "code": "npm.version-drift",
-            "sev": "warn",
-            "label": "npm latest 与仓库版本不一致（含抢注/错配可能）"
-          },
-          {
-            "code": "docs.zh-missing",
-            "sev": "warn",
-            "label": "无中文文档（生态惯例 zh/双语）"
-          },
-          {
-            "code": "eng.no-ci",
-            "sev": "minor",
-            "label": "无 CI workflow（.github/workflows）"
-          },
-          {
-            "code": "docs.no-docs-dir",
-            "sev": "minor",
-            "label": "无 docs/ 目录（文档深度不足）"
-          }
-        ],
-        "missing": [],
-        "category": "工具 / 效率",
-        "inAwesome": false,
-        "inImsai": false,
-        "covered": false,
-        "weekly": 9292
+        "weekly": 3974
       }
     ],
-    "sum": 449292
+    "sum": 290741
   },
   "deep": {
     "targets": 8,
@@ -1533,8 +1515,8 @@
   "quality": {
     "grades": {
       "A": 784,
-      "B": 4854,
-      "C": 3045,
+      "B": 4853,
+      "C": 3046,
       "D": 1257,
       "S": 250
     },
@@ -85190,27 +85172,6 @@
       "topCat": "会话管理"
     },
     {
-      "owner": "wjling",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-02",
-      "firstCreated": "2026-09-02",
-      "delta": 0,
-      "avg": 76,
-      "topPlugin": "wjling/dsh-vision-assist",
-      "topStars": 0,
-      "topCat": "其它"
-    },
-    {
       "owner": "ruanhaodong-tt",
       "plugins": 1,
       "stars": 0,
@@ -123158,6 +123119,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "wjling",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-02",
+      "firstCreated": "2026-09-02",
+      "delta": 0,
+      "avg": 66,
+      "topPlugin": "wjling/dsh-vision-assist",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
       "owner": "JingzeChen",
       "plugins": 1,
       "stars": 0,
@@ -123693,7 +123675,7 @@
       "count": 13694,
       "at": "2026-09-06T02:27:27.858Z"
     },
-    "candidates": 14354,
+    "candidates": 14362,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -123764,10 +123746,10 @@
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 245,
-      "2026-09-07": 190
+      "2026-09-07": 198
     },
     "validated": 14106,
-    "candidatesValidated": 1123,
+    "candidatesValidated": 1116,
     "authoritative": 10190,
     "invalidUnique": 3916,
     "invalidBuckets": [
