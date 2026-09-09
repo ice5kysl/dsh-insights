@@ -1,0 +1,12 @@
+# Issue 模板配置：大项目惯例——结构化表单 + contact_links 把能自助的分流掉
+blank_issues_enabled: true
+contact_links:
+  - name: 📖 评分规则与数据口径（先看这里）
+    url: https://dsh-insights.com/about/
+    about: 评分规则、扣分项、收录口径、更新频率全部公开，可复核可反驳。多数「为什么是这个分数」在这里就有答案。
+  - name: 🔄 自助重检（数据过期 / 刚发了新版）
+    url: https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml
+    about: 仓库已更新但页面没跟上 → Actions 页点 Run workflow，输入 owner/repo，约 30 分钟内生效，无需提 issue。
+  - name: 🩺 插件加载崩溃（打开 dsh web 红屏）
+    url: https://www.npmjs.com/package/dsh-insights-kit
+    about: 本机急救先跑 `npx dsh-insights-kit doctor`（离线诊断 + 一键隔离肇事插件）；确认是我们「实测兼容」数据判错了再回来提 issue。

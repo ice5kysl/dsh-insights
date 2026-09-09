@@ -1,0 +1,34 @@
+name: 分数申诉
+description: 认为健康分/等级判罚有误（如 client-export 对 TUI/CLI 形态误伤、zh-missing 对英文插件过苛）
+title: "[申诉] "
+labels: [appeal]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        规则与口径见 [关于页](https://dsh-insights.com/about/) 与 [docs/SCHEMA.md](https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md)。
+        申诉前建议先对照一遍规则书——如果规则本身不合理，也欢迎直接讨论规则（这会惠及所有插件，不只你一家）。
+        English is fine — we handle appeals in either language.
+  - type: input
+    id: repo
+    attributes:
+      label: 插件仓库
+      placeholder: owner/repo
+    validations:
+      required: true
+  - type: textarea
+    id: items
+    attributes:
+      label: 申诉的判罚项
+      description: 见详情页「扣分明细」，抄出你有异议的那几条即可
+      placeholder: 如：manifest.no-client-export（无 client 导出 −10）
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: 理由与证据
+      description: 越具体越好；链接比截图更好
+      placeholder: 例：本插件是纯 TUI 形态，无 web client，manifest.no-client-export 属形态误伤
+    validations:
+      required: true

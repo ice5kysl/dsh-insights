@@ -1,0 +1,38 @@
+name: 数据纠错
+description: 页面数据有误（npm 版本/收录状态/语言检测/实测兼容判定/链接失效/仓库已改名等）
+title: "[数据] "
+labels: [data]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        如果只是数据过期（仓库刚更新、页面没跟上），最快的路径是 [自助重检](https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml)（Run workflow → 输入 owner/repo，约 30 分钟生效），不用提 issue。
+        提 issue 适用于：数据本身判错了（比如「实测兼容」把你的插件标成无法加载，但实际能跑）。
+  - type: input
+    id: repo
+    attributes:
+      label: 插件仓库
+      placeholder: owner/repo
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: 出错的位置
+      options:
+        - 详情页（/p/ 评分或元数据）
+        - 实测兼容区块（加载判定有误）
+        - 榜单 / 首页
+        - 动态页（/dynamics/）
+        - 徽章（/badge/）
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: 实际情况与证据
+      description: 页面显示什么、实际是什么；附证据链接（npm 页/仓库链接/复现步骤）
+      placeholder: 如：/p/ 页「实测兼容」标无法加载，但我的 require 在 try/catch 里且 try 分支在当前 shell 可用
+    validations:
+      required: true
