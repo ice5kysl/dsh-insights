@@ -1,29 +1,16 @@
 # 快照 Diff · 2026-09-10
 
-- 当前权威插件：**10517**（上次 10483）
-- 新增 34 · 消失 0
+- 当前权威插件：**10524**（上次 10517）
+- 新增 7 · 消失 0
 
-## 新增（Top 20）
-- AcidGr/dsh-web-whale-maid ★1 (npm ✓)
-- tangjunyi1/dsh-remote-workspace ★1 
-- nagatoquin33/dsh-villager-hmm ★1 (npm ✓)
-- mabaoguo9527/dsh-file-explorer ★0 (npm ✓)
-- masquerator-coder/dsh-permission-gate ★0 
-- masknull/dsh-model-tester ★0 
-- Saknutella/dsh-thinking-quips ★0 
-- leeyoung1/dsh-web-search-opencode-go ★0 
-- wanghaixu-hai/dsh-effort-router ★0 
-- UnforgetMemory/um-dsh-azimg ★0 
-- nguyenduclong-ict/dsh-session-progress ★0 
-- TianJie52009/dsh-kaomoji ★0 (npm ✓)
-- StevenZha0/dsh-vae-theme ★0 
-- xytoki/dsh-cursor-agent ★0 (npm ✓)
-- masquerator-coder/dsh-memory-plus ★0 
-- LeeGuanWei-a/dsh-mini-games-lee ★0 
-- lmr233/dsh-git-update-notifier ★0 
-- Imnotndesh/dsh-peak-pricing-warning ★0 
-- catsenior507/dsh-tool-strict-check ★0 
-- Geighlord007/dsh-web-search-exa-dynamic ★0 
+## 新增（Top 7）
+- wig123/dsh-thread-tools ★0 
+- 2286893544/feishu-dsh-plugin ★0 
+- Beatther-c/dsh-api-client ★0 (npm ✓)
+- xiaomao49/dsh-model-probe ★0 (npm ✓)
+- Geighlord007/qp-exa-dynamic ★0 
+- coderHeJiyu/dsh-setting-manager ★0 
+- DDA-DIGITAL/dsh-web-lifecycle ★0 
 
 ## 消失（Top 0）
 
