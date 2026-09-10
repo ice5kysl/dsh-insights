@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-09-10T14:30:53.769Z",
+  "fetchedAt": "2026-09-10T18:32:52.437Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 218773,
-    "forks": 25859,
-    "pushed_at": "2026-09-10T14:27:07Z",
+    "stars": 218980,
+    "forks": 25881,
+    "pushed_at": "2026-09-10T15:06:56Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.1.5-rc.2",
+        "name": "v0.1.5-rc.2",
+        "prerelease": true,
+        "published_at": "2026-09-10T15:09:34Z",
+        "breaking": false,
+        "summary": "优化反馈提交体验：点赞和点踩均通过弹窗确认后提交，提交失败时保留已填写内容并给出提示。",
+        "added": 0,
+        "fixed": 0
+      },
       {
         "tag": "dsh-v0.1.5-rc.1",
         "name": "v0.1.5-rc.1",
@@ -76,27 +86,21 @@
         "summary": "修复从 `0.1.1-rc.2` 或 `0.1.2-alpha.3` 升级时，应用可能启动失败或者会话列表标题丢失的问题",
         "added": 0,
         "fixed": 4
-      },
-      {
-        "tag": "dsh-v0.1.2-alpha.4",
-        "name": "v0.1.2-alpha.4",
-        "prerelease": true,
-        "published_at": "2026-09-01T15:45:07Z",
-        "breaking": false,
-        "summary": "父 Agent 与可持续子 Agent 可通过 `send_message` 双向传递后续消息，取代单向 `report` 工具",
-        "added": 2,
-        "fixed": 0
       }
     ],
     "npm": {
       "pkg": "@deepseek-ai/dsh",
       "distTags": {
-        "latest": "0.1.5-rc.1",
         "alpha": "0.1.5-alpha.2",
-        "next": "0.1.5-rc.1"
+        "next": "0.1.5-rc.2",
+        "latest": "0.1.5-rc.1"
       },
-      "modified": "2026-09-10T03:47:28.222Z",
+      "modified": "2026-09-10T14:57:11.083Z",
       "versions": [
+        {
+          "version": "0.1.5-rc.2",
+          "time": "2026-09-10T14:57:10.790Z"
+        },
         {
           "version": "0.1.5-rc.1",
           "time": "2026-09-10T03:12:53.293Z"
@@ -132,10 +136,6 @@
         {
           "version": "0.1.2-alpha.2",
           "time": "2026-08-30T14:10:52.613Z"
-        },
-        {
-          "version": "0.1.1-rc.2",
-          "time": "2026-08-21T12:42:19.422Z"
         }
       ]
     }
@@ -143,8 +143,8 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104429,
-      "forks": 16731,
+      "stars": 104432,
+      "forks": 16732,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
       "latestRelease": {
@@ -160,7 +160,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-R1",
-      "stars": 91997,
+      "stars": 91999,
       "forks": 11685,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
@@ -177,15 +177,15 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39074,
-      "forks": 4251,
+      "stars": 39075,
+      "forks": 4250,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepSeek-Coder",
-      "stars": 24249,
+      "stars": 24250,
       "forks": 2925,
       "pushed_at": "2025-11-11T06:44:56Z",
       "description": "DeepSeek Coder: Let the Code Write Itself",
@@ -193,7 +193,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 23872,
+      "stars": 23873,
       "forks": 2202,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
@@ -209,7 +209,7 @@
     },
     {
       "repo": "deepseek-ai/FlashMLA",
-      "stars": 12911,
+      "stars": 12912,
       "forks": 1147,
       "pushed_at": "2026-09-10T05:33:42Z",
       "description": "FlashMLA: Efficient Multi-head Latent Attention Kernels",
