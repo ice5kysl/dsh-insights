@@ -1,9 +1,9 @@
 {
-  "fetchedAt": "2026-09-10T09:32:21.251Z",
+  "fetchedAt": "2026-09-10T09:49:15.026Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 218344,
-    "forks": 25826,
+    "stars": 218374,
+    "forks": 25829,
     "pushed_at": "2026-09-10T04:45:36Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
@@ -143,7 +143,7 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104428,
+      "stars": 104427,
       "forks": 16732,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
@@ -242,13 +242,13 @@
   ],
   "compatSignal": {
     "distTags": {
-      "next": "0.1.2-rc.1",
-      "latest": "0.1.2-rc.1",
-      "alpha": "0.1.5-alpha.2"
+      "latest": "0.1.5-rc.1",
+      "alpha": "0.1.5-alpha.2",
+      "next": "0.1.5-rc.1"
     },
-    "pluginsProbed": 3586,
-    "declaringEngines": 62,
-    "declaringPeers": 2394
+    "pluginsProbed": 3672,
+    "declaringEngines": 65,
+    "declaringPeers": 2456
   },
   "note": "只含可观测公开信号（releases / dist-tags / repo 活动 / API 模型清单），不含新闻舆情；DeepSeek 模型发布可能先在官网/HuggingFace（GitHub 仓库动态自动纳入，API 模型经 /models 端点探测）。rc 兼容雷达 v0 依赖契约字段声明率，见 /about。"
 }
