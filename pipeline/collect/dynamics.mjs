@@ -2,7 +2,8 @@
 /**
  * pipeline/collect · dynamics — 官方动态快照（L2）。
  *
- * 低成本（每次 <15 个 API 调用），只采可观测公开信号，不做舆情：
+ * 低成本（每次 <15 个 API 调用，进 CI hourly profile —— 官方发版当天小时内
+ * 追上；无变化的小时不写盘、零提交），只采可观测公开信号，不做舆情：
  *   - dsh 官方：repo meta（stars/pushed）+ 最近 releases（含 rc 标记与
  *     breaking 关键词命中）+ npm @deepseek-ai/dsh dist-tags 与发布时间线
  *   - DeepSeek 平台：官方仓库（模型/API 文档）meta + 最新 release
@@ -166,6 +167,15 @@ async function main() {
     models,
     compatSignal,
     note: '只含可观测公开信号（releases / dist-tags / repo 活动 / API 模型清单），不含新闻舆情；DeepSeek 模型发布可能先在官网/HuggingFace（GitHub 仓库动态自动纳入，API 模型经 /models 端点探测）。rc 兼容雷达 v0 依赖契约字段声明率，见 /about。',
+  }
+
+  // no-op 守卫（小时频运行）：除 fetchedAt 外内容无变化时跳过写入，让无变化的
+  // 小时保持零提交 —— 否则 fetchedAt 时间戳必然弄脏快照，每小时一条空 commit。
+  // fetchedAt 的语义因此是「最近一次观测到内容变化的时间」。
+  const stripFetchedAt = (d) => (d ? { ...d, fetchedAt: undefined } : d)
+  if (prev && JSON.stringify(stripFetchedAt(prev)) === JSON.stringify(stripFetchedAt(doc))) {
+    console.log('[dynamics] 内容无变化 —— 保留快照（fetchedAt 不动）')
+    return
   }
   writeJson(PATHS.dynamics, doc, true)
   console.log(`[dynamics] dsh releases ${dshReleases.length} · npm dist-tags ${JSON.stringify(dshNpm?.distTags || {})} · platform ${platform.filter((p) => !p.error).length}/${platform.length} · models ${models ? models.length : 'skip'} → ${PATHS.dynamics}`)
