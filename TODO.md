@@ -18,6 +18,11 @@
 - **A1/A4 时间不可逆项**：元数据刷新回路（discover 已免费拿到的新鲜 stars/pushed_at 现被丢弃，「近 7 天活跃」口径随冻结数据单调衰减）+ history 进 daily 逐日累积——时间层资产每停一天少一天。
 - 其余（站点 quick win / 评分区分度叙事 / 信件双语 / GraphQL 批量校验）见 IMPROVEMENTS 清单。
 
+## 兼容矩阵二期（2026-09-10 误报教训后）
+
+- **运行时回放工具（bin/compat-replay.mjs 待做）**：高危触达（指控某插件崩溃）发前必须过真实回放——scratch profile 装目标插件 → 起 dsh web → 抓 __DSH_BOOT__ + 批次脚本 → 本进程内用官方 ClientModuleSystem 回放启动序列（2026-09-10 已手工验证流程，/tmp/vr-replay.mjs 为原型）。
+- **tapIndex 建模（远期）**：host 侧 server index transform 目前只打 hostTransform 标记（判定加注仅供参考）；ysr666 建议至少把 WebServer tapIndex 纳入 client loader 模拟——需要先研究 tapIndex 的 wire 形态与变换语义。
+
 ## M2 进展（10 月）
 
 - [x] collect/dynamics 快照器 + `/dynamics` 页 + 周报官方小节（v0，2026-09-06 已上线）

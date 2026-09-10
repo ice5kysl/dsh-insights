@@ -248,11 +248,18 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
           const res = obs.results?.[v]
           if (!res) return ''
           const ok = res.status === 'ok'
+          const cond = res.status === 'conditional'
           const tagStr = (obsTagOf[v] || []).join(' · ')
-          return `<div class="scrow"><a style="cursor:default">${escHtml(v)}${tagStr ? ` <span style="color:var(--faint);font-weight:400;font-size:11px">${escHtml(tagStr)}</span>` : ''}</a><span class="meta" style="color:${ok ? 'var(--ok)' : 'var(--err)'};white-space:normal">${ok ? `✓ ${t('可加载', 'loadable')}` : `✗ ${t('无法加载（loader 启动即崩）', 'fails to load (loader crashes at boot)')}：${t('缺', 'missing')} ${(res.missing || []).map((m) => `<code>${escHtml(m)}</code>`).join(' ')}`}</span></div>`
+          const color = ok ? 'var(--ok)' : cond ? 'var(--warn)' : 'var(--err)'
+          const label = ok
+            ? `✓ ${t('可加载', 'loadable')}`
+            : cond
+              ? `◐ ${t('条件可解析', 'conditional')}：${(res.conditional || []).map((m) => `<code>${escHtml(m)}</code>`).join(' ')} ${t('为 shell 内置图行（批次时序通常可解析但无保证）——插件在 dsh.client.external 声明后可获确定性', '— shell built-in graph rows (batch timing usually resolves but is not guaranteed); declaring them in dsh.client.external makes it deterministic')}`
+              : `✗ ${t('无法加载（loader 启动即崩）', 'fails to load (loader crashes at boot)')}：${t('缺', 'missing')} ${(res.missing || []).map((m) => `<code>${escHtml(m)}</code>`).join(' ')}`
+          return `<div class="scrow"><a style="cursor:default">${escHtml(v)}${tagStr ? ` <span style="color:var(--faint);font-weight:400;font-size:11px">${escHtml(tagStr)}</span>` : ''}</a><span class="meta" style="color:${color};white-space:normal">${label}</span></div>`
         }).join('')
       : ''
-    // verdict 横幅：跨全部已发布 shell 版本的分类结论（崩于何时/从未可加载/自某版本起可加载）
+    // verdict 横幅：跨全部已发布 shell 版本的分类结论（崩于何时/从未可加载/自某版本起可加载/条件可解析）
     const vd = obs?.verdict
     const vdLine = !vd || vd.cls === 'ok' ? ''
       : vd.cls === 'never'
@@ -261,10 +268,12 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
           ? `<p style="font-size:13px;color:var(--err);margin:2px 0 10px">✗ ${t(`崩于 shell ${escHtml(vd.since)}（${escHtml(vd.okUntil)} 及更早版本可加载）`, `broken since shell ${escHtml(vd.since)} (loadable on ${escHtml(vd.okUntil)} and earlier)`)}</p>`
           : vd.cls === 'supported-since'
             ? `<p style="font-size:13px;color:var(--warn);margin:2px 0 10px">▲ ${t(`shell ${escHtml(vd.since)} 起可加载——更早版本缺其所需模块`, `loadable since shell ${escHtml(vd.since)} — earlier shells lack its required modules`)}</p>`
-            : `<p style="font-size:13px;color:var(--warn);margin:2px 0 10px">~ ${t('各 shell 版本间表现反复，详见下行矩阵', 'flapping across shell versions, see matrix below')}</p>`
+            : vd.cls === 'conditional'
+              ? `<p style="font-size:13px;color:var(--warn);margin:2px 0 10px">◐ ${t(`无崩溃版本，但 ${vd.conditional.length} 个版本为条件可解析（依赖 shell 内置图行的批次时序）`, `no broken versions, but conditional on ${vd.conditional.length} shell version(s) (built-in graph-row batch timing)`)}</p>`
+              : `<p style="font-size:13px;color:var(--warn);margin:2px 0 10px">~ ${t('各 shell 版本间表现反复，详见下行矩阵', 'flapping across shell versions, see matrix below')}</p>`
     const obsBlock = `<h2 style="font-size:16px;margin:26px 0 8px">${t('实测兼容', 'Observed Compatibility')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('client bundle × shell 模块表', 'client bundle × shell module table')}</span></h2>
 <div class="card">${obs
-      ? `${vdLine}${obsRows}<p style="font-size:11px;color:var(--faint);margin-top:10px">${t(`实测对象：npm ${escHtml(obs.version)} · 外部 require ${obs.requires.length} 个。口径：静态分析 client bundle 的 require 字面量，对比各 shell 版本烘焙的模块表（seed 词 ∪ 图行近似＝语料库已知插件包名，"/client" 后缀剥离后匹配）；try/catch 守卫感知——loader 的 require 为调用时解析，try 块缺失可由配对 catch 兜底（catch 可解析或为空仍判可加载）；非运行时测试，动态 require（含模板串）不在检测范围。`, `Measured: npm ${escHtml(obs.version)} · ${obs.requires.length} external requires. Method: static analysis of the client bundle's literal requires vs each shell build's baked module table (seed words ∪ graph-row approximation = corpus-known plugin package names, matched after stripping a "/client" suffix); try/catch guard-aware — the loader resolves require() at call time, so a miss inside a try is tolerated when its paired catch resolves (or is empty); not a runtime test — dynamic requires (incl. template strings) are out of scope.`)}</p>`
+      ? `${obs.hostTransform ? `<p style="font-size:12px;color:var(--warn);margin:2px 0 8px">⚠ ${t('该插件 host 侧使用 server 端 index 变换（tapIndex）改写模块面——以下静态判定可能不适用，仅供参考', 'This plugin rewrites the module surface via a server-side index transform (tapIndex) in its host half — the static verdicts below may not apply')}</p>` : ''}${vdLine}${obsRows}<p style="font-size:11px;color:var(--faint);margin-top:10px">${t(`实测对象：npm ${escHtml(obs.version)} · 外部 require ${obs.requires.length} 个。口径：静态分析 client bundle 中代码态的 require 字面量（注释/字符串内的不计；相对路径为 bundle 自带模块表就地服务，不计），逐 shell 版本对齐官方 loader 真实解析序——seed 词 ∪ 图行（shell 内置 client 包，分 immediate 确定可解析与 lazy 条件可解析）∪ 语料库已知插件包名；try/catch 守卫感知——loader 的 require 为调用时解析，try 块缺失可由配对 catch 兜底（catch 可解析或为空仍判可加载）；非运行时测试，动态 require（含模板串）不在检测范围。`, `Measured: npm ${escHtml(obs.version)} · ${obs.requires.length} external requires. Method: static analysis of code-state literal requires in the client bundle (comment/string contents excluded; relative paths are served by bundle-local module tables and excluded), classified per shell version against the official loader's real resolution order — seed words ∪ graph rows (built-in client packages: immediate = deterministic, lazy = conditional) ∪ corpus-known plugin package names; try/catch guard-aware — the loader resolves require() at call time, so a miss inside a try is tolerated when its paired catch resolves (or is empty); not a runtime test — dynamic requires (incl. template strings) are out of scope.`)}</p>`
       : `<p style="color:var(--faint);font-size:13px;margin:4px 0">${t('暂无实测数据：该插件未发布 npm、无界面（client）bundle，或尚未被扫描覆盖。', 'No observed data: the plugin is not on npm, has no client (UI) bundle, or has not been scanned yet.')}</p>`}</div>`
     const peers = en.category
       ? enrichAll.filter((x) => x.category === en.category && x.full_name !== full)
@@ -341,6 +350,7 @@ ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（
     ['dynamics.json', '官方动态快照（dsh releases/dist-tags/DeepSeek 平台/API 模型清单）', 'Official dynamics snapshot (dsh releases / dist-tags / DeepSeek platform / API model list)'],
     ['compat.json', 'dsh 版本兼容信号（engines.dsh / peers 探测）', 'dsh version compat signals (engines.dsh / peers probe)'],
     ['shell-seeds.json', 'shell 模块表 seed 词（dsh-web-frontend 全版本）', 'Shell module-table seed words (all dsh-web-frontend versions)'],
+    ['shell-rows.json', 'shell 图行清单（dsh 全版本：immediate/lazy）', 'Shell graph-row inventory (all dsh versions: immediate/lazy)'],
     ['compat-observed.json', '实测兼容矩阵（client require × shell 模块表）', 'Observed compat matrix (client requires × shell module table)'],
     ['fixes.json', '已知修法案例库（按缺失模块索引的修复指引 + 真实案例）', 'Known-fix knowledge base (per-missing-module fix guidance + real cases)'],
     ['scenarios.json', '场景组合推荐（插件 ↔ 场景映射）', 'Scenario picks (plugin ↔ scenario mapping)'],

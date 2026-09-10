@@ -69,7 +69,8 @@
 - `data/dynamics.json` — 官方动态快照（L2 v0：releases 摘要/dist-tags/平台仓库信号/API 模型清单）。`models` 字段为 DeepSeek `/models` 探测结果（`[{id, owned_by, …原样字段, firstSeen, isNew}]`；无 `DEEPSEEK_API_KEY` 或请求失败时保留上次快照，`firstSeen=null` 表示早于监控基线）。
 - `data/known-models.json` — API 模型首见状态（`{known: {id: firstSeenDate|null}}`，`pipeline/collect/dynamics.mjs` 维护；**必须留在 data/ 根目录**——`data/state/` 整目录被 gitignore，放那里 CI 提交不上）。
 - `data/shell-seeds.json` — shell 模块表 seed 词（`pipeline/collect/shell-seeds.mjs`，daily）：`{generatedAt, pkg, distTags, versions:{[dsh-web-frontend 版本]: string[]}, failed:{[版本]: 错误}}`。
-- `data/compat-observed.json` — 实测兼容矩阵（`pipeline/analyze/compat-observed.mjs`，snapshot）：`{generatedAt, dshVersions, shellDistTags, note, stats, plugins:{[pkgName]: {repo, version, requires, results:{[shell 版本]: {status: ok|broken, missing?}}}}}`；判定口径与边界见文件内 note（静态分析、非运行时测试、动态 require 不测）。
+- `data/shell-rows.json` — shell 图行清单（`pipeline/collect/shell-rows.mjs`，daily）：`{generatedAt, pkg, versions:{[dsh 版本]: {immediate: string[], lazy: string[]}}, failed}`；图行 = 安装树 dsh.client 包 ∩ 组合 roster，loader 的第三解析分支（工厂按包名注册）。
+- `data/compat-observed.json` — 实测兼容矩阵（`pipeline/analyze/compat-observed.mjs`，snapshot）：`{generatedAt, dshVersions, shellDistTags, note, stats, plugins:{[pkgName]: {repo, version, requires, results:{[shell 版本]: {status: ok|conditional|broken, missing?|conditional?}}, verdict:{cls: ok|never|conditional|broken-since|supported-since|mixed, conditional?}}}}`；判定口径与边界见文件内 note（静态分析、代码态提取、非运行时测试、动态 require 不测；conditional = 未声明的 lazy 图行，批次时序通常可解析）。
 - `data/fixes.json` — 已知修法案例库（**手工维护的编辑性数据**，入 git）：`{generatedAt, note, modules:{[缺失模块]: {status, fix, cases:[{repo, url, note}]}}}`；dsh-why 的 R1 修法区消费（"已知修法"块），无管线产出方。
 - `data/metrics.jsonl` — 产品自测量指标（周五 CI append）。
 - `data/report.md` — 人类可读报告。
