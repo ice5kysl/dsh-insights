@@ -5,7 +5,7 @@
  *   node bin/pipeline.mjs <profile> [--only a,b] [--from step] [--dry]
  *
  * Profiles:
- *   hourly    CI 每小时增量纳新（discover-incr + validate + dynamics + 发布层；不跑 downloads 等重 API 步骤）
+ *   hourly    CI 每小时增量纳新（discover-incr + validate + dynamics + 发布层；不跑 downloads/compat/compat-observed 等重 API 步骤）
  *   daily     CI 每日轻量刷新（collect 增量的低成本部分 + 发布层）
  *   friday    daily + 内容层（信件 diff 驱动 + 生态周报）—— 每周五 CI
  *   snapshot  分析 + 发布全链（评分/导出/徽章/历史/重叠）
@@ -68,8 +68,10 @@ const STEPS = [
 const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'shell-seeds', 'shell-rows', 'compat', 'analyze', 'export-json', 'compat-observed', 'site', 'export-csv', 'diff', 'pages']
 // 每小时增量纳新：daily 去掉 downloads（重 API、日频足够）；dynamics 轻量
 // （~20 次调用）进 hourly —— 官方发版/移动 dist-tag 当天小时内追上，配合
-// dsh-insights-kit 的 registry overlay 形成两级新鲜度
-const HOURLY = ['lists', 'discover-incr', 'validate', 'dynamics', 'analyze', 'site', 'export-csv', 'diff', 'pages']
+// dsh-insights-kit 的 registry overlay 形成两级新鲜度。export-json 必须
+// 同行：discover-incr/validate 让 plugins.jsonl 纳新后若不重导 insights.json，
+// site 的混代守卫（行数 vs meta.total）会拒绝发布 —— 纳新小时整 run 失败。
+const HOURLY = ['lists', 'discover-incr', 'validate', 'dynamics', 'analyze', 'export-json', 'site', 'export-csv', 'diff', 'pages']
 // compat-observed（实测兼容矩阵）依赖 export-json 的 insights.json、shell-seeds.json 与
 // shell-rows.json（图行清单），且须先于 pages（详情页消费）
 const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'compat-observed', 'overlap', 'scenarios', 'badges', 'site', 'pages']
