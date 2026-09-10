@@ -237,9 +237,9 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
     const dl = r.pkgName ? dlMap[r.pkgName]?.d ?? null : null
     const compat = r.pkgName ? compatBy.get(r.pkgName) || null : null
     const compatLine = !r.npm?.published ? '' : compat?.enginesDsh
-      ? `<p style="font-size:12.5px;color:var(--mut)" title="${t('启发式信号（npm registry 探测），非运行时测试', 'Heuristic signal (npm registry probe), not a runtime test')}">${t('dsh 兼容', 'dsh compat')}：engines.dsh <b>${escHtml(compat.enginesDsh)}</b>${dshLatest ? ` · ${t('官方 latest', 'official latest')} <code>${escHtml(dshLatest)}</code>` : ''}</p>`
+      ? `<p style="font-size:12.5px;color:var(--mut)" title="${t('启发式信号（npm registry 探测），非运行时测试；预发布按基础版本口径解读（非 npm semver 字面判定）', 'Heuristic signal (npm registry probe), not a runtime test; prereleases are read by base version, not literal npm semver')}">${t('dsh 兼容', 'dsh compat')}：engines.dsh <b>${escHtml(compat.enginesDsh)}</b>${dshLatest ? ` · ${t('官方 latest', 'official latest')} <code>${escHtml(dshLatest)}</code>` : ''}</p>`
       : compat?.dshPeers?.length
-        ? `<p style="font-size:12.5px;color:var(--mut)" title="${t('启发式信号（npm registry 探测），非运行时测试', 'Heuristic signal (npm registry probe), not a runtime test')}">${t('dsh 兼容：未声明 engines.dsh · peers', 'dsh compat: no engines.dsh · peers')} ${compat.dshPeers.slice(0, 2).map((p) => `${escHtml(p.name)} ${escHtml(p.range)}`).join(' · ')}${compat.dshPeers.length > 2 ? t(` 等 ${compat.dshPeers.length} 项`, ` (+${compat.dshPeers.length - 2} more)`) : ''}</p>`
+        ? `<p style="font-size:12.5px;color:var(--mut)" title="${t('启发式信号（npm registry 探测），非运行时测试；预发布按基础版本口径解读（非 npm semver 字面判定）', 'Heuristic signal (npm registry probe), not a runtime test; prereleases are read by base version, not literal npm semver')}">${t('dsh 兼容：未声明 engines.dsh · peers', 'dsh compat: no engines.dsh · peers')} ${compat.dshPeers.slice(0, 2).map((p) => `${escHtml(p.name)} ${escHtml(p.range)}`).join(' · ')}${compat.dshPeers.length > 2 ? t(` 等 ${compat.dshPeers.length} 项`, ` (+${compat.dshPeers.length - 2} more)`) : ''}</p>`
         : `<p style="font-size:12.5px;color:var(--mut)">${t('dsh 兼容：未声明（engines.dsh / peers 均无）——建议在 package.json 加 "engines": {"dsh": "^x.y.z"}', 'dsh compat: undeclared (no engines.dsh / peers) — add "engines": {"dsh": "^x.y.z"} to package.json')}</p>`
     // 实测兼容区块：有记录按 shell 版本逐行 ✓/✗；无记录给诚实文案（未发布/无 client bundle/未扫到）
     const obs = r.pkgName ? obsPlugins[r.pkgName] || null : null
@@ -348,7 +348,7 @@ ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（
     ['analysis.json', '聚合统计（仪表盘数据源）', 'Aggregate stats (dashboard data source)'],
     ['health.json', '健康分聚合（分级分布/均分/top 扣分）', 'Health score aggregates (grade distribution / average / top deductions)'],
     ['dynamics.json', '官方动态快照（dsh releases/dist-tags/DeepSeek 平台/API 模型清单）', 'Official dynamics snapshot (dsh releases / dist-tags / DeepSeek platform / API model list)'],
-    ['compat.json', 'dsh 版本兼容信号（engines.dsh / peers 探测）', 'dsh version compat signals (engines.dsh / peers probe)'],
+    ['compat.json', 'dsh 版本兼容信号（engines.dsh / peers 探测；预发布按基础版本口径解读）', 'dsh version compat signals (engines.dsh / peers probe; prereleases read by base version)'],
     ['shell-seeds.json', 'shell 模块表 seed 词（dsh-web-frontend 全版本）', 'Shell module-table seed words (all dsh-web-frontend versions)'],
     ['shell-rows.json', 'shell 图行清单（dsh 全版本：immediate/lazy）', 'Shell graph-row inventory (all dsh versions: immediate/lazy)'],
     ['compat-observed.json', '实测兼容矩阵（client require × shell 模块表）', 'Observed compat matrix (client requires × shell module table)'],
@@ -1083,6 +1083,7 @@ ${langBlock(`
 <tr><td>兼容性</td><td>engines.dsh 声明（实测仅 ~1% 插件声明）· API 符号 × rc changelog（M2 雷达）</td><td>预留，暂缺测</td></tr>
 </table>
 <p>原则：纯客观信号 · 星数不进分 · 探测不到的不虚构不扣分（missing 明示）· 每条扣分带证据 · 社区评分永不引入。规则全文与 changelog 见 <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">SCHEMA §health</a>。</p>
+<p><b>engines.dsh 展示口径</b>：详情页按 <code>package.json</code> 原文展示声明，预发布版本按「基础版本」解读（剥掉 -rc/-alpha 后缀再比较）——不做 npm semver 字面判定。原因：semver 字面语义下，预发布 comparator 只放行同三元组轨道，<code>&gt;=0.1.0-rc.6</code> 会把 0.1.1-rc.x / 0.1.2-rc.x 全判不兼容，与作者意图相反（实测案例：<a href="https://github.com/RevolutionLA/dsh-dream-skin/issues/47#issuecomment-5621165398" target="_blank">dsh-dream-skin#47</a>；插件作者侧的替代方案是运行时能力探测）。</p>
 <h2>校准</h2>
 <p>已知真/假插件编入校准集，每次快照跑回归（<code>pipeline/validate/regress.mjs</code>），回归非 100% 则当周快照不发布。口径变更必须 bump 规则版本并写 changelog。</p>
 <h2>指标体系（我们怎么衡量自己）</h2>
@@ -1123,6 +1124,7 @@ ${langBlock(`
 <tr><td>Compatibility</td><td>engines.dsh declaration (only ~1% of plugins declare it) · API symbols × rc changelog (M2 radar)</td><td>Reserved, not yet measured</td></tr>
 </table>
 <p>Principles: purely objective signals · stars never scored · what cannot be probed is never fabricated or deducted (missing is shown explicitly) · every deduction carries evidence · community ratings will never be introduced. Full rules and changelog: <a href="https://github.com/ice5kysl/dsh-insights/blob/main/docs/SCHEMA.md" target="_blank">SCHEMA §health</a>.</p>
+<p><b>engines.dsh display semantics</b>: detail pages show the declaration verbatim from <code>package.json</code>, and prerelease versions are read by <b>base version</b> (the -rc/-alpha suffix is stripped before comparing) — never as literal npm semver. Why: under literal semver a prerelease comparator only admits the same major.minor.patch track, so <code>&gt;=0.1.0-rc.6</code> rejects every 0.1.1-rc.x / 0.1.2-rc.x — the opposite of the author's intent (measured case: <a href="https://github.com/RevolutionLA/dsh-dream-skin/issues/47#issuecomment-5621165398" target="_blank">dsh-dream-skin#47</a>; runtime capability detection is the plugin-author-side alternative).</p>
 <h2>Calibration</h2>
 <p>Known genuine/fake plugins are compiled into a calibration set; every snapshot runs a regression (<code>pipeline/validate/regress.mjs</code>), and if the regression is not 100% the week's snapshot is not published. Any definition change must bump the rule version and be recorded in the changelog.</p>
 <h2>Metrics (how we measure ourselves)</h2>
