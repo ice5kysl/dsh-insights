@@ -8,8 +8,12 @@
  *     patch, lib/, README, LICENSE) + one package.json call
  *   - npm registry status only for manifest-bearing candidates (registry is
  *     not GitHub-rate-limited)
- *   - per-row try/catch + retries; rows that fail are NOT marked done and
- *     are retried on the next run (resumable via data/state/done.ids)
+ *   - per-row try/catch + retries; rows that fail transiently are NOT marked
+ *     done and are retried on the next run. Dedup has two layers: the
+ *     committed catalog itself (plugins.jsonl + invalid.jsonl → pre-skip
+ *     BEFORE any API call — the only layer that survives CI, since
+ *     data/state/done.ids is gitignored and every CI run starts fresh) and
+ *     done.ids as the local fast path.
  *
  * Outputs:
  *   data/plugins.jsonl   authoritative set
@@ -195,7 +199,19 @@ async function validateOne(c) {
 
 async function main() {
   const lines = readFileSync(CAND, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l))
-  const repos = lines.filter((c) => c.kind === 'repo' && c.id && !done.has(String(c.id).toLowerCase()))
+  // done.ids 在 CI 上不持久（data/state/ 被 gitignore，每次 run 全新克隆）——真正的
+  // 去重层是 plugins.jsonl + invalid.jsonl 落库行（seenRows，随仓库提交）。预跳过
+  // 必须在 validateOne 之前：dup 的 API 校验是纯浪费（2026-09-10  treadmill 事故——
+  // 每小时 run 从队首重复烧 budget，12.5k 积压永不前进，权威集三天不涨）。
+  const preSkipped = { done: 0, known: 0 }
+  const repos = lines.filter((c) => {
+    if (c.kind !== 'repo' || !c.id) return false
+    const id = String(c.id).toLowerCase()
+    if (done.has(id)) { preSkipped.done++; return false }
+    if (seenRows.has(id)) { preSkipped.known++; return false }
+    return true
+  })
+  if (preSkipped.known) console.error(`[validate] pre-skipped ${preSkipped.known} already-cataloged rows (free, no API) · ${preSkipped.done} via done.ids`)
   let processed = 0, valid = 0, transient = 0, transConsec = 0
   const conc = Math.max(1, CONCURRENCY)
   const queue = repos.slice()
