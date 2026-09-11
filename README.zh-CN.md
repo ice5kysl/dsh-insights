@@ -43,7 +43,7 @@
 collect    discover 分片全量爬取 · npm-map · lists 收录渠道 · downloads 周下载 · dynamics 官方动态 · refresh 元数据合并
 validate   validate 真伪→权威集/分桶(断点续跑) · regress 校准回归(硬门禁) · deep 限量深检(写面/消毒)
 analyze    analyze(→enrich) · score 健康分 · history 快照历史 · compat · overlap · llm-tags · scenarios
-publish    site 仪表盘 · pages 多页站(首页/p/weekly/dynamics/scenarios/authors/badge/data/about) · 导出 · badges · diff · db9-sync (旁路镜像到 db9, 无 DB9_TOKEN 自动跳过)
+publish    site 仪表盘 · pages 多页站(首页/p/weekly/dynamics/scenarios/authors/badge/data/about) · 导出 · badges · diff · db9-sync (旁路镜像 plugins/downloads/scores/compat-observations/llm-tags/metrics 到 db9, 无 DB9_TOKEN 自动跳过)
 content    letters 致作者的信 · weekly 生态周报
 ```
 
