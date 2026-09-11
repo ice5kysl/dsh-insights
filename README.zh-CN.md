@@ -43,7 +43,7 @@
 collect    discover 分片全量爬取 · npm-map · lists 收录渠道 · downloads 周下载 · dynamics 官方动态 · refresh 元数据合并
 validate   validate 真伪→权威集/分桶(断点续跑) · regress 校准回归(硬门禁) · deep 限量深检(写面/消毒)
 analyze    analyze(→enrich) · score 健康分 · history 快照历史 · compat · overlap · llm-tags · scenarios
-publish    site 仪表盘 · pages 多页站(首页/p/weekly/dynamics/scenarios/authors/badge/data/about) · 导出 · badges · diff · db9-sync (旁路镜像 plugins/downloads/scores/compat-observations/llm-tags/metrics/ecosystem-events/weekly-letters 到 db9, 无 DB9_TOKEN 自动跳过)
+publish    site 仪表盘 · pages 多页站(首页/p/weekly/dynamics/scenarios/authors/badge/data/about) · 导出 · badges · diff · db9-sync (旁路镜像 plugins/downloads/scores/compat-observations/llm-tags/metrics/ecosystem-events/weekly-letters 到 db9, 含插件级事件 diff: created/release/archived/first-publish, 无 DB9_TOKEN 自动跳过)
 content    letters 致作者的信 · weekly 生态周报
 ```
 
@@ -65,6 +65,7 @@ node bin/query.mjs --sort stars --top 10                     # 查询
 node bin/recheck.mjs owner/repo                              # 强制重验单插件
 node bin/check-docs.mjs                                      # README ↔ 数据对账
 node bin/backfill-events.mjs                                 # 一次性：db9 ecosystem_events 全量历史回填（幂等可重跑）
+node bin/backfill-plugin-events.mjs                          # 一次性：插件级事件回填（plugin_created / npm_first_publish）
 ```
 
 CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周五在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供作者在 Actions 手动触发本插件重检。

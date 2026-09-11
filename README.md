@@ -44,7 +44,7 @@ License: **code MIT · data CC BY 4.0** (attribution: dsh-insights.com). Repo me
 collect    discover (sharded full crawl) · npm-map · lists · downloads · dynamics · refresh (metadata merge)
 validate   validate (authenticity → set/buckets, resumable) · regress (calibration gate) · deep (sampled write-face/sanitizer)
 analyze    analyze (→ enrich) · score · history · compat · overlap · llm-tags · scenarios
-publish    site (dashboard) · pages (home/p/weekly/dynamics/scenarios/authors/badge/data/about) · exports · badges · diff · db9-sync (mirror plugins/downloads/scores/compat-observations/llm-tags/metrics/ecosystem-events/weekly-letters to db9, skipped without DB9_TOKEN)
+publish    site (dashboard) · pages (home/p/weekly/dynamics/scenarios/authors/badge/data/about) · exports · badges · diff · db9-sync (mirror plugins/downloads/scores/compat-observations/llm-tags/metrics/ecosystem-events/weekly-letters to db9, incl. plugin-level event diff: created/release/archived/first-publish; skipped without DB9_TOKEN)
 content    letters (outreach material) · weekly
 ```
 
@@ -66,6 +66,7 @@ node bin/query.mjs --sort stars --top 10                     # query the set
 node bin/recheck.mjs owner/repo                              # force re-validate one plugin
 node bin/check-docs.mjs                                      # README ↔ data reconciliation
 node bin/backfill-events.mjs                                 # one-off: backfill full release/npm history into db9 ecosystem_events (idempotent)
+node bin/backfill-plugin-events.mjs                          # one-off: backfill plugin-level events (plugin_created / npm_first_publish)
 ```
 
 CI (`.github/workflows/refresh.yml`): single cron 03:07 UTC, Friday profile switched in-job, concurrency-grouped; deploys via `workflow_run`. `recheck.yml` lets authors trigger a re-check of their plugin from Actions.

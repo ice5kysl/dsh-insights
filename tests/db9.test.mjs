@@ -6,7 +6,7 @@
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { lit, jsonLit, isEnabled, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, DEFAULT_SQL_URL } from '../lib/db9.mjs'
+import { lit, jsonLit, isEnabled, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, pluginCreatedEvent, diffPluginEvents, DEFAULT_SQL_URL } from '../lib/db9.mjs'
 import { releaseToEvent, npmTimeToEvents } from '../bin/backfill-events.mjs'
 
 test('lit: null/undefined → NULL', () => {
@@ -221,4 +221,77 @@ test('npmTimeToEvents: 跳过 created/modified 伪键与空时间', () => {
   assert.equal(events[0].occurred_at, '2026-07-02T00:00:00Z')
   assert.equal(events[0].payload.pkg, '@deepseek-ai/dsh')
   assert.deepEqual(npmTimeToEvents('p', null), [])
+})
+
+test('pluginCreatedEvent: occurred_at 用仓库 created_at，payload 截断大字段', () => {
+  const p = {
+    full_name: 'a/b', created_at: '2026-08-01T00:00:00Z', stars: 42,
+    description: 'x'.repeat(300), topics: Array.from({ length: 15 }, (_, i) => `t${i}`), pkgName: 'b',
+  }
+  const e = pluginCreatedEvent(p, '2026-09-12T00:00:00Z')
+  assert.equal(e.type, 'plugin_created')
+  assert.equal(e.key, 'a/b')
+  assert.equal(e.occurred_at, '2026-08-01T00:00:00Z')
+  assert.equal(e.payload.description.length, 200)
+  assert.equal(e.payload.topics.length, 10)
+  assert.equal(e.payload.stars, 42)
+})
+
+test('pluginCreatedEvent: 无 created_at 回退 now；无 full_name → null', () => {
+  const e = pluginCreatedEvent({ full_name: 'a/b' }, '2026-09-12T00:00:00Z')
+  assert.equal(e.occurred_at, '2026-09-12T00:00:00Z')
+  assert.deepEqual(e.payload.topics, [])
+  assert.equal(pluginCreatedEvent(null, '2026-09-12T00:00:00Z'), null)
+})
+
+test('diffPluginEvents: 新 full_name → plugin_created；version 变 → plugin_release', () => {
+  const oldMap = new Map([['a/b', { version: '1.0.0', archived: false, npmPublished: true }]])
+  const rows = [
+    { full_name: 'a/b', version: '1.1.0', archived: false, npm: { published: true }, pkgName: 'b' },
+    { full_name: 'c/d', version: '0.1.0', created_at: '2026-08-01T00:00:00Z' },
+  ]
+  const events = diffPluginEvents(oldMap, rows, '2026-09-12T00:00:00Z')
+  assert.equal(events.length, 2)
+  const rel = events.find((e) => e.type === 'plugin_release')
+  assert.equal(rel.key, 'a/b@1.1.0')
+  assert.deepEqual(rel.payload, { from: '1.0.0', to: '1.1.0' })
+  assert.equal(rel.occurred_at, '2026-09-12T00:00:00Z')
+  const created = events.find((e) => e.type === 'plugin_created')
+  assert.equal(created.key, 'c/d')
+  assert.equal(created.occurred_at, '2026-08-01T00:00:00Z')
+})
+
+test('diffPluginEvents: archived / npm published 迁移各产一条；无变化零事件', () => {
+  const oldMap = new Map([
+    ['a/b', { version: '1.0.0', archived: false, npmPublished: false }],
+    ['c/d', { version: '2.0.0', archived: true, npmPublished: true }],
+  ])
+  const rows = [
+    { full_name: 'a/b', version: '1.0.0', archived: true, npm: { published: true }, pkgName: 'b' },
+    { full_name: 'c/d', version: '2.0.0', archived: true, npm: { published: true }, pkgName: 'd' },
+  ]
+  const events = diffPluginEvents(oldMap, rows, '2026-09-12T00:00:00Z')
+  assert.equal(events.length, 2)
+  const arch = events.find((e) => e.type === 'plugin_archived')
+  assert.equal(arch.key, 'a/b')
+  assert.deepEqual(arch.payload, { archived: true })
+  const npm = events.find((e) => e.type === 'npm_first_publish')
+  assert.equal(npm.key, 'b')
+  assert.equal(npm.occurred_at, null) // 留给调用方拉 registry 补齐
+  assert.equal(npm.payload.full_name, 'a/b')
+  // 完全无变化 → 零事件
+  assert.deepEqual(diffPluginEvents(oldMap, [
+    { full_name: 'c/d', version: '2.0.0', archived: true, npm: { published: true }, pkgName: 'd' },
+  ], '2026-09-12T00:00:00Z'), [])
+})
+
+test('diffPluginEvents: 空 oldMap 只产 plugin_created（首灌无幽灵事件）；一侧 version 缺失不产 release', () => {
+  const rows = [
+    { full_name: 'a/b', version: '1.0.0', archived: true, created_at: '2026-08-01T00:00:00Z', npm: { published: true }, pkgName: 'b' },
+  ]
+  const events = diffPluginEvents(new Map(), rows, '2026-09-12T00:00:00Z')
+  assert.deepEqual(events.map((e) => e.type), ['plugin_created'])
+  // version 一侧为 null → 不判 release
+  const oldMap = new Map([['a/b', { version: null, archived: false, npmPublished: false }]])
+  assert.deepEqual(diffPluginEvents(oldMap, [{ full_name: 'a/b', version: '1.0.0' }], '2026-09-12T00:00:00Z'), [])
 })

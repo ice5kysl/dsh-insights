@@ -6,6 +6,8 @@
  *
  * 同步的表（各数据源失败互不影响：一个挂了其余照跑，最后汇总告警）：
  *   plugins             ← plugins.jsonl（valid 且 kind='repo'）+ enrich.json
+ *                         （upsert 前与库内存量 diff，向 ecosystem_events 追加插件级事件：
+ *                         plugin_created / plugin_release / plugin_archived / npm_first_publish）
  *   plugin_downloads    ← downloads.json（npm 周下载量）
  *   plugin_scores       ← history.json 全量回填 + enrich.json 按当天（UTC）增量（detail 存扣分细节）
  *   score_runs          ← history.json 每日汇总（total/grades/avg/median）
@@ -29,7 +31,7 @@
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { PATHS, DATA, readJson, readJsonl, loadPlugins, loadEnrichMap } from '../../lib/data.mjs'
-import { isEnabled, sql, lit, jsonLit, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord } from '../../lib/db9.mjs'
+import { isEnabled, sql, lit, jsonLit, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, diffPluginEvents } from '../../lib/db9.mjs'
 
 const BATCH = 200
 
@@ -229,13 +231,54 @@ async function upsertBatches(token, label, statement, rows) {
 const fmt = (label, r, total) =>
   `${label} ${r.ok}/${total}${r.failed ? `（失败 ${r.failed} 行）` : ''}`
 
+const eventRow = (e) => `(${[lit(e.type), lit(e.key), lit(e.occurred_at), jsonLit(e.payload), 'now()'].join(', ')})`
+
+/** npm registry time.created（裸 fetch：避免把 GitHub token 发往 npmjs.org，同 downloads.mjs 的理由）。 */
+async function npmCreated(pkgName) {
+  const url = `https://registry.npmjs.org/${String(pkgName).replace(/^@/, '%40')}`
+  const res = await fetch(url, { headers: { 'user-agent': 'dsh-insights' }, signal: AbortSignal.timeout(20000) })
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  const j = await res.json()
+  return j?.time?.created || null
+}
+
 async function syncPlugins(token) {
   await sql(token, CREATE_PLUGINS)
   // 与现有发布层同口径：只同步通过门禁的权威集（valid 且 kind='repo'）
   const plugins = loadPlugins().filter((p) => p.valid && p.kind === 'repo')
   const enrich = loadEnrichMap()
+
+  // 插件级事件 diff（upsert 前与 db9 现存量对比）：
+  // 旧行为空（新库首灌）只会产生 plugin_created —— 与 backfill-plugin-events 同键
+  // 同 occurred_at（仓库创建时间），ON CONFLICT 去重，无幽灵事件；其余三类都要求
+  // 旧行存在（version 变化 / archived false→true / npm published false→true）。
+  const now = new Date().toISOString()
+  const oldMap = new Map()
+  try {
+    const res = await sql(token, `SELECT full_name, version, archived, raw->'npm'->>'published' AS npm_published FROM plugins`)
+    for (const [fn, version, archived, npmPub] of res.rows) {
+      oldMap.set(fn, { version, archived: archived === true, npmPublished: npmPub === 'true' })
+    }
+  } catch (e) {
+    console.error(`[db9-sync] plugins 旧行读取失败（按空集 diff，仅产生幂等的 plugin_created）：${String(e?.message || e).slice(0, 120)}`)
+  }
+  const events = diffPluginEvents(oldMap, plugins, now)
+  // npm_first_publish 的 occurred_at 拉 registry time.created 补齐（日增量仅个位数包，失败回退 now）
+  for (const e of events) {
+    if (e.type === 'npm_first_publish' && !e.occurred_at) {
+      e.occurred_at = (await npmCreated(e.key).catch(() => null)) || now
+    }
+  }
+  let eventNote = ''
+  if (events.length) {
+    const er = await upsertBatches(token, 'ecosystem_events', UPSERT_EVENTS, events.map(eventRow))
+    const byType = {}
+    for (const e of events) byType[e.type] = (byType[e.type] || 0) + 1
+    eventNote = ` · 事件 ${er.ok}（${Object.entries(byType).map(([t, n]) => `${t}:${n}`).join('/')}）`
+  }
+
   const r = await upsertBatches(token, 'plugins', UPSERT_PLUGINS, plugins.map((p) => pluginRow(p, enrich)))
-  return fmt('plugins', r, plugins.length)
+  return fmt('plugins', r, plugins.length) + eventNote
 }
 
 async function syncDownloads(token) {
@@ -314,8 +357,7 @@ async function syncEcosystemEvents(token) {
   await sql(token, CREATE_EVENTS)
   const dynamics = readJson(PATHS.dynamics, null)
   const events = extractDynamicsEvents(dynamics)
-  const rows = events.map((e) =>
-    `(${[lit(e.type), lit(e.key), lit(e.occurred_at), jsonLit(e.payload), 'now()'].join(', ')})`)
+  const rows = events.map(eventRow)
   const r = await upsertBatches(token, 'ecosystem_events', UPSERT_EVENTS, rows)
   const types = [...new Set(events.map((e) => e.type))].sort().join('/')
   return `${fmt('ecosystem_events', r, events.length)}（${types}）`
