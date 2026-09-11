@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 10524 个插件 · 生成于 2026-09-10 · 由 DSH Insights 管线生成
+> 权威集 10534 个插件 · 生成于 2026-09-11 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**10524**
-- 近 7 天活跃：1590（15.1%）· 近 30 天：10524（100%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：10336（98.2%）
+- 权威集规模：**10534**
+- 近 7 天活跃：1585（15%）· 近 30 天：10534（100%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：10336（98.1%）
 
 ## 发布与文档
-- npm 已发布 4405 / 未发布 6119 / 已发布但版本滞后 1248
-- 有 README 10496 · 中英双语/中文 5045 · 中文 README 文件 807 · 无 README 28
-- lib/index.js 5661 · lib/client.js 3554 · 双产物 3182
+- npm 已发布 4412 / 未发布 6122 / 已发布但版本滞后 1248
+- 有 README 10506 · 中英双语/中文 5050 · 中文 README 文件 807 · 无 README 28
+- lib/index.js 5666 · lib/client.js 3558 · 双产物 3185
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 755 · imsai 252 · 至少一个渠道 1002（9.5%） · 未收录 9522
+- awesome-dsh-plugin 755 · imsai 259 · 至少一个渠道 1009（9.6%） · 未收录 9525
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A
@@ -33,34 +33,34 @@
 - f20880479-lab/dsh-peak-gate A
 
 ## npm 周下载 Top 10
-- dsh-market/dsh-market：71224
-- KokuYu-sysu/dsh-market-desktop：71224
-- omdsh-dev/DSH-better-sidebar：59166
-- dream-num/dsh-univer-office：30983
-- bowenliang123/dsh-context：22556
-- Han-1413141/dsh-cost-meter：14273
-- Creakono/dsh-cost-meter：14273
-- AnakinCao/dsh-cost-meter：14273
-- omdsh-dev/dsh-mnemon：9263
-- ysr666/dsh-vision-router：7631
+- dsh-market/dsh-market：58177
+- KokuYu-sysu/dsh-market-desktop：58177
+- omdsh-dev/DSH-better-sidebar：43309
+- dream-num/dsh-univer-office：26504
+- bowenliang123/dsh-context：15102
+- Han-1413141/dsh-cost-meter：8468
+- Creakono/dsh-cost-meter：8468
+- AnakinCao/dsh-cost-meter：8468
+- omdsh-dev/dsh-mnemon：6194
+- ysr666/dsh-vision-router：5799
 
 ## 质量评分（启发式）
 - 平均分 76 · S+A 占比 10.1%（值得优先看；A+B 55.2%）
-- S 256 · A 807 · B 5003 · C 3191 · D 1267
+- S 256 · A 810 · B 5009 · C 3192 · D 1267
 
 ## 功能分类（启发式 Top 12）
-- 其它：3971
+- 其它：3974
 - 模型 / 代理：991
-- 文件浏览 / 预览：908
+- 文件浏览 / 预览：910
 - 会话管理：841
-- 状态 / 监控 / 用量：727
+- 状态 / 监控 / 用量：729
 - 侧栏 / 工作区：612
 - 搜索 / 命令面板：569
-- 工具 / 效率：523
+- 工具 / 效率：524
 - 主题 / 视觉美化：412
-- 消息 / 协作集成：366
+- 消息 / 协作集成：367
 - 开发 / 数据：318
-- 记忆 / 知识：286
+- 记忆 / 知识：287
 
 ## 月度新增（按仓库创建）
 - 2021-06：1
@@ -74,13 +74,13 @@
 - 2026-06：16
 - 2026-07：27
 - 2026-08：9569
-- 2026-09：876
+- 2026-09：886
 
 ## Top topics
-- `dsh-plugin` × 10439
-- `deepseek-harness` × 6959
-- `dsh` × 3936
-- `deepseek` × 1163
+- `dsh-plugin` × 10449
+- `deepseek-harness` × 6968
+- `dsh` × 3944
+- `deepseek` × 1165
 - `dsh-plugins` × 1082
 - `cordis` × 992
 - `plugin` × 673
