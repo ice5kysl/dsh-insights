@@ -11,6 +11,7 @@
     "node": ">=20.11"
   },
   "scripts": {
+    "test": "node --test",
     "run": "node bin/dsh-insights.mjs",
     "pipeline": "node bin/pipeline.mjs",
     "discover": "node pipeline/collect/discover.mjs",

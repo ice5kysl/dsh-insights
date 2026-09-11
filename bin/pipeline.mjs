@@ -55,6 +55,7 @@ const STEPS = [
   ['export-json', 'pipeline/publish/export-json.mjs'],
   ['badges',      'pipeline/publish/badges.mjs'],
   ['site',        'pipeline/publish/site.mjs'],
+  ['db9-sync',    'pipeline/publish/db9-sync.mjs'],
   ['diff',        'pipeline/publish/diff.mjs'],
   ['refresh',     'pipeline/collect/refresh.mjs'],
   ['pages',       'pipeline/publish/pages.mjs'],
@@ -65,7 +66,7 @@ const STEPS = [
 
 // daily 含 export-json（compat.json 的 npmLatest 日频新鲜源在此回灌 insights.json）与
 // compat-observed（实测矩阵：pkg@version 缓存入 git 后是增量成本，只为当天发新版的包重抓 tarball）
-const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'shell-seeds', 'shell-rows', 'compat', 'analyze', 'export-json', 'compat-observed', 'site', 'export-csv', 'diff', 'pages']
+const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'shell-seeds', 'shell-rows', 'compat', 'analyze', 'export-json', 'compat-observed', 'site', 'export-csv', 'diff', 'db9-sync', 'pages']
 // 每小时增量纳新：daily 去掉 downloads（重 API、日频足够）；dynamics 轻量
 // （~20 次调用）进 hourly —— 官方发版/移动 dist-tag 当天小时内追上，配合
 // dsh-insights-kit 的 registry overlay 形成两级新鲜度。export-json 必须
@@ -82,9 +83,9 @@ const PROFILES = {
   // pages 必须在 letters/weekly/insights 之后（当天内容当天上线）——从 DAILY 摘出放到内容层之后，勿用 Set 去重（会把 pages 留在 DAILY 位置）
   // refresh（Tier 0 元数据合并）在 analyze 之前跑：本周活跃度/飙升榜用新鲜数据；discover 周度重爬供其消费（search 配额独立）
   // insights（LLM 洞察，需 DEEPSEEK_API_KEY；缺 key 自动跳过不失败）
-  friday: ['lists', 'discover', 'refresh', 'downloads', 'dynamics', 'compat', 'analyze', 'site', 'export-csv', 'diff', 'author-graph', 'metrics', 'letters', 'weekly', 'insights', 'pages'],
+  friday: ['lists', 'discover', 'refresh', 'downloads', 'dynamics', 'compat', 'analyze', 'site', 'export-csv', 'diff', 'author-graph', 'metrics', 'letters', 'weekly', 'insights', 'db9-sync', 'pages'],
   snapshot: SNAPSHOT,
-  full: ['lists', 'discover', 'npm-map', 'downloads', 'validate', ...SNAPSHOT, 'diff'],
+  full: ['lists', 'discover', 'npm-map', 'downloads', 'validate', ...SNAPSHOT, 'db9-sync', 'diff'],
   content: CONTENT,
 }
 

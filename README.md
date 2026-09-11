@@ -44,7 +44,7 @@ License: **code MIT · data CC BY 4.0** (attribution: dsh-insights.com). Repo me
 collect    discover (sharded full crawl) · npm-map · lists · downloads · dynamics · refresh (metadata merge)
 validate   validate (authenticity → set/buckets, resumable) · regress (calibration gate) · deep (sampled write-face/sanitizer)
 analyze    analyze (→ enrich) · score · history · compat · overlap · llm-tags · scenarios
-publish    site (dashboard) · pages (home/p/weekly/dynamics/scenarios/authors/badge/data/about) · exports · badges · diff
+publish    site (dashboard) · pages (home/p/weekly/dynamics/scenarios/authors/badge/data/about) · exports · badges · diff · db9-sync (mirror to db9, skipped without DB9_TOKEN)
 content    letters (outreach material) · weekly
 ```
 
