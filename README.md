@@ -65,6 +65,7 @@ GITHUB_TOKEN="$(gh auth token)" node bin/pipeline.mjs full   # first full run
 node bin/query.mjs --sort stars --top 10                     # query the set
 node bin/recheck.mjs owner/repo                              # force re-validate one plugin
 node bin/check-docs.mjs                                      # README ↔ data reconciliation
+node bin/backfill-events.mjs                                 # one-off: backfill full release/npm history into db9 ecosystem_events (idempotent)
 ```
 
 CI (`.github/workflows/refresh.yml`): single cron 03:07 UTC, Friday profile switched in-job, concurrency-grouped; deploys via `workflow_run`. `recheck.yml` lets authors trigger a re-check of their plugin from Actions.

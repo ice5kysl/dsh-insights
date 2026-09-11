@@ -64,6 +64,7 @@ GITHUB_TOKEN="$(gh auth token)" node bin/pipeline.mjs full   # 首次全量
 node bin/query.mjs --sort stars --top 10                     # 查询
 node bin/recheck.mjs owner/repo                              # 强制重验单插件
 node bin/check-docs.mjs                                      # README ↔ 数据对账
+node bin/backfill-events.mjs                                 # 一次性：db9 ecosystem_events 全量历史回填（幂等可重跑）
 ```
 
 CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周五在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供作者在 Actions 手动触发本插件重检。

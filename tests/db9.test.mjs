@@ -7,6 +7,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { lit, jsonLit, isEnabled, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, DEFAULT_SQL_URL } from '../lib/db9.mjs'
+import { releaseToEvent, npmTimeToEvents } from '../bin/backfill-events.mjs'
 
 test('lit: null/undefined → NULL', () => {
   assert.equal(lit(null), 'NULL')
@@ -171,4 +172,53 @@ test('letterToRecord: 无 week / 非对象 → null；缺省字段为 null', () 
   assert.equal(r.range, null)
   assert.equal(r.generatedAt, null)
   assert.deepEqual(r.extra, {})
+})
+
+test('releaseToEvent: 主仓库 → shell_release，platform 仓库 → platform_release（key=repo@tag）', () => {
+  const x = {
+    tag_name: 'dsh-v0.1.0',
+    name: 'v0.1.0',
+    prerelease: false,
+    published_at: '2026-08-01T00:00:00Z',
+    body: '* 新增路由预设\n* 修复安装器\n',
+  }
+  const shell = releaseToEvent('deepseek-ai/DeepSeek-Harness', x)
+  assert.equal(shell.type, 'shell_release')
+  assert.equal(shell.key, 'dsh-v0.1.0')
+  assert.equal(shell.occurred_at, '2026-08-01T00:00:00Z')
+  assert.equal(shell.payload.tag, 'dsh-v0.1.0')
+  assert.equal(shell.payload.summary, '新增路由预设')
+  assert.ok(shell.payload.added >= 1 && shell.payload.fixed >= 1)
+
+  const plat = releaseToEvent('deepseek-ai/DeepSeek-V3', { ...x, tag_name: 'v1.0.0' })
+  assert.equal(plat.type, 'platform_release')
+  assert.equal(plat.key, 'deepseek-ai/DeepSeek-V3@v1.0.0')
+})
+
+test('releaseToEvent: breaking 关键词命中（沿用 dynamics.mjs 口径）；无 tag/时间 → null', () => {
+  const hit = releaseToEvent('deepseek-ai/DeepSeek-Harness', {
+    tag_name: 'dsh-v0.2.0', published_at: '2026-08-02T00:00:00Z', body: 'Breaking: 移除旧配置格式',
+  })
+  assert.equal(hit.payload.breaking, true)
+  const miss = releaseToEvent('deepseek-ai/DeepSeek-Harness', {
+    tag_name: 'dsh-v0.2.1', published_at: '2026-08-03T00:00:00Z', body: '* 文档更新',
+  })
+  assert.equal(miss.payload.breaking, false)
+  assert.equal(releaseToEvent('deepseek-ai/DeepSeek-Harness', { tag_name: 'x' }), null)
+  assert.equal(releaseToEvent('deepseek-ai/DeepSeek-Harness', null), null)
+})
+
+test('npmTimeToEvents: 跳过 created/modified 伪键与空时间', () => {
+  const events = npmTimeToEvents('@deepseek-ai/dsh', {
+    created: '2026-07-01T00:00:00Z',
+    modified: '2026-09-10T14:57:11Z',
+    '0.0.1': '2026-07-02T00:00:00Z',
+    '0.1.0': '2026-08-01T00:00:00Z',
+    '0.1.1': null,
+  })
+  assert.deepEqual(events.map((e) => e.key), ['0.0.1', '0.1.0'])
+  assert.equal(events[0].type, 'npm_publish')
+  assert.equal(events[0].occurred_at, '2026-07-02T00:00:00Z')
+  assert.equal(events[0].payload.pkg, '@deepseek-ai/dsh')
+  assert.deepEqual(npmTimeToEvents('p', null), [])
 })
