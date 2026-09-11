@@ -58,6 +58,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          # 升级源 shell：大多数用户所在线，保持它在矩阵里才能回答「从 X 升上来会不会坏」；
+          # 0.1.5 稳定、用户迁移完成后移除
+          DSH_MATRIX_EXTRA_SHELLS: 0.1.2-rc.1
         run: |
           TODAY=$(date -u +%F)
           LAST=$(cat data/last-daily.txt 2>/dev/null || echo never)

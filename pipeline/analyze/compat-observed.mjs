@@ -472,9 +472,13 @@ async function run() {
   const shells = readJson(PATHS.shellSeeds)
   if (!shells?.versions || !Object.keys(shells.versions).length) { console.error('[compat-observed] data/shell-seeds.json 缺失——先跑 shell-seeds'); process.exit(1) }
 
-  // 判定轴：distTags latest/next/alpha 去重（须已有 seed 表）
+  // 判定轴：distTags latest/next/alpha 去重（须已有 seed 表），外加
+  // DSH_MATRIX_EXTRA_SHELLS 指定的「升级源」版本（如 0.1.2-rc.1——大多数用户
+  // 所在线；回答「我从 X 升上来会不会坏」需要 X 也在矩阵里，而 dist-tag 一移
+  // 它就会从判定轴消失）。逗号分隔，忽略无 seed 表的版本。
   const tags = shells.distTags || {}
-  const dshVersions = [...new Set(['latest', 'next', 'alpha'].map((k) => tags[k]).filter(Boolean))]
+  const extraShells = (process.env.DSH_MATRIX_EXTRA_SHELLS || '').split(',').map((s) => s.trim()).filter(Boolean)
+  const dshVersions = [...new Set([...['latest', 'next', 'alpha'].map((k) => tags[k]), ...extraShells].filter(Boolean))]
     .filter((v) => shells.versions[v])
   if (!dshVersions.length) { console.error('[compat-observed] shell-seeds distTags 无可判定版本'); process.exit(1) }
   const seedByVersion = new Map(dshVersions.map((v) => [v, new Set(shells.versions[v])]))
