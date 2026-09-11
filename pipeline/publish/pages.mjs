@@ -165,7 +165,7 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
 
   // ---- insights pages（LLM 阶段性生态洞察，中英双语成对块） ----------------
   const insightDir = join(DATA, 'insight-reports')
-  const insightFiles = existsSync(insightDir) ? readdirSync(insightDir).filter((f) => /^(?:\d{4}-W\d{2}|v[\w.-]+)\.md$/.test(f)).sort().reverse() : []
+  const insightFiles = existsSync(insightDir) ? readdirSync(insightDir).filter((f) => /^(?:\d{4}-W\d{2}|v[\w.-]+|\d{3}-[\w.-]+)\.md$/.test(f)).sort().reverse() : []
   const insights = []
   for (const f of insightFiles) {
     const slug = f.replace(/\.md$/, '')
