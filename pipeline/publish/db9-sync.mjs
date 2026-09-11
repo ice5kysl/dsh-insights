@@ -13,6 +13,10 @@
  *                         ON CONFLICT 不更新 observed_at，保留首次观察时间）
  *   plugin_llm_tags     ← llm.jsonl（同 full_name 多行取 taggedAt 最新；重打标全量覆盖）
  *   project_metrics     ← metrics.jsonl（整行原样存 payload）
+ *   ecosystem_events    ← dynamics.json（只抽带时间戳的客观事件：shell_release /
+ *                         npm_publish / platform_release / api_model_first_seen；
+ *                         append-only：冲突只更新 payload，occurred_at/first_seen 不动）
+ *   weekly_letters      ← insight-reports/<week>.json（周报元数据；正文 md 不入库）
  *
  * 失败纪律（对齐 collect/downloads.mjs）：
  *   - 无 DB9_TOKEN → 打印跳过说明，exit 0
@@ -22,9 +26,10 @@
  * @module dsh-insights/stage-db9-sync
  */
 
+import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { PATHS, DATA, readJson, readJsonl, loadPlugins, loadEnrichMap } from '../../lib/data.mjs'
-import { isEnabled, sql, lit, jsonLit, splitPkgVersion, latestBy } from '../../lib/db9.mjs'
+import { isEnabled, sql, lit, jsonLit, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord } from '../../lib/db9.mjs'
 
 const BATCH = 200
 
@@ -112,6 +117,24 @@ const CREATE_METRICS = `CREATE TABLE IF NOT EXISTS project_metrics (
   payload JSONB
 )`
 
+const CREATE_EVENTS = `CREATE TABLE IF NOT EXISTS ecosystem_events (
+  type TEXT,
+  key TEXT,
+  occurred_at TIMESTAMPTZ,
+  payload JSONB,
+  first_seen TIMESTAMPTZ,
+  PRIMARY KEY (type, key)
+)`
+
+const CREATE_LETTERS = `CREATE TABLE IF NOT EXISTS weekly_letters (
+  week TEXT PRIMARY KEY,
+  range TEXT,
+  generated_at TIMESTAMPTZ,
+  model TEXT,
+  usage JSONB,
+  extra JSONB
+)`
+
 // first_seen 只在首次插入时写；冲突时除 first_seen 外全部更新为 EXCLUDED 值。
 const UPSERT_PLUGINS = `INSERT INTO plugins (
   full_name, owner, repo, kind, pkg_name, version, description, license, html_url, default_branch,
@@ -161,6 +184,18 @@ ON CONFLICT (full_name) DO UPDATE SET
 const UPSERT_METRICS = `INSERT INTO project_metrics (date, payload)
 VALUES %s
 ON CONFLICT (date) DO UPDATE SET payload = EXCLUDED.payload`
+
+// append-only 语义：事件发生过就是发生过——冲突只刷新 payload，
+// occurred_at（客观发生时间）与 first_seen（首见时间）都不动，重复 sync 不产生新行。
+const UPSERT_EVENTS = `INSERT INTO ecosystem_events (type, key, occurred_at, payload, first_seen)
+VALUES %s
+ON CONFLICT (type, key) DO UPDATE SET payload = EXCLUDED.payload`
+
+const UPSERT_LETTERS = `INSERT INTO weekly_letters (week, range, generated_at, model, usage, extra)
+VALUES %s
+ON CONFLICT (week) DO UPDATE SET
+  range = EXCLUDED.range, generated_at = EXCLUDED.generated_at, model = EXCLUDED.model,
+  usage = EXCLUDED.usage, extra = EXCLUDED.extra`
 
 function pluginRow(p, enrich) {
   const e = enrich.get(p.full_name) || {}
@@ -275,6 +310,29 @@ async function syncMetrics(token) {
   return fmt('project_metrics', r, all.length)
 }
 
+async function syncEcosystemEvents(token) {
+  await sql(token, CREATE_EVENTS)
+  const dynamics = readJson(PATHS.dynamics, null)
+  const events = extractDynamicsEvents(dynamics)
+  const rows = events.map((e) =>
+    `(${[lit(e.type), lit(e.key), lit(e.occurred_at), jsonLit(e.payload), 'now()'].join(', ')})`)
+  const r = await upsertBatches(token, 'ecosystem_events', UPSERT_EVENTS, rows)
+  const types = [...new Set(events.map((e) => e.type))].sort().join('/')
+  return `${fmt('ecosystem_events', r, events.length)}（${types}）`
+}
+
+async function syncWeeklyLetters(token) {
+  await sql(token, CREATE_LETTERS)
+  const dir = join(DATA, 'insight-reports')
+  let files = []
+  try { files = readdirSync(dir).filter((f) => f.endsWith('.json')).sort() } catch { files = [] }
+  const records = files.map((f) => letterToRecord(readJson(join(dir, f), null))).filter(Boolean)
+  const rows = records.map((r) =>
+    `(${[lit(r.week), lit(r.range), lit(r.generatedAt), lit(r.model), jsonLit(r.usage), jsonLit(r.extra)].join(', ')})`)
+  const r = await upsertBatches(token, 'weekly_letters', UPSERT_LETTERS, rows)
+  return fmt('weekly_letters', r, records.length)
+}
+
 async function main() {
   if (!isEnabled()) {
     console.log('[db9-sync] 未配置 DB9_TOKEN，跳过 db9 同步（旁路存储，不影响管线）')
@@ -288,6 +346,8 @@ async function main() {
     ['compat', syncCompatObservations],
     ['llm-tags', syncLlmTags],
     ['metrics', syncMetrics],
+    ['events', syncEcosystemEvents],
+    ['letters', syncWeeklyLetters],
   ]
   const summaries = []
   let failedSources = 0
