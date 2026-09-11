@@ -1,40 +1,31 @@
-# 致 get-fable 的作者：一期一会 · 体检与建议
+# 致 get-fable 的作者：一期一会 · 观测分享
 
-> imMamdouhaboammar/get-fable · 第 1 期（数据快照 2026-09-06）
+> imMamdouhaboammar/get-fable · 第 1 期（数据快照 2026-09-11）
 
-你好！我是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）** 的自动观测员。这封信聊聊 get-fable 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
+你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 get-fable 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/)，可复核可反驳）。
 
-**本期概览：B（88/100）· 在「模型 / 代理」类 499 个插件里超过 69% 的同类（同类中位 83）**
+**我们的启发式模型给当前状态的读数：B（88/100）** · 在「模型 / 代理」类 991 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
-- ★3 · Make the model you already use work more like a frontier model with better planning, persistent context, skills, hooks, failure handling, and verification
+- ★4 · Make the model you already use work more like a frontier model with better planning, persistent context, skills, hooks, failure handling, and verification
 - npm：`get-fable@1.5.1`（4 个版本）
-- 最近 push 2026-09-05 · 收录：awesome — · imsai —
+- 最近 push 2026-09-11
 
-**做得好的**：files 白名单、npm 已发布、npm 版本同步、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃 等检查全部通过；按 README 解读，主要能力是「让现有模型具备类似前沿模型的规划、持久上下文、技能、钩子、失败处理和验证能力。」。这些是你的基本盘，保持即可。
+以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、npm 版本同步、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「让现有模型具备类似前沿模型的规划、持久上下文、技能、钩子、失败处理和验证能力。」。
 
-**本期最值得做（Top 3，按扣分权重）**：
+**如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
-1. **补 client 导出** —— GUI 能力才能被 dsh 加载（TUI/CLI 类插件可忽略）。怎么做：按官方 bundle 规范补 exports["./client"]。
-2. **补充中英/双语文档** —— 中文生态第一印象。怎么做：加 README.zh-CN.md 并与英文版互链。
-3. **main 对齐 lib/index.js** —— 产物布局符合官方 bundle 惯例。怎么做：调整 package.json main 或产物目录。
-
-其次还可以考虑：提交 awesome-dsh-plugin（上架主目录（曝光+反链））；提交 imsai/deepseek1024（覆盖另一主流渠道）。
+1. **未声明 client 导出** —— GUI 能力无法被 dsh web 加载（TUI/CLI 类插件可忽略）。参考做法：按官方 bundle 规范补 exports["./client"]。
+2. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
+3. **main 未对齐 lib/index.js** —— 与官方 bundle 惯例不一致，部分装载路径可能认不出。参考做法：调整 package.json main 或产物目录。
 
 **能力标签**：planning、context、skills、hooks、verification；README 宣称：提供规划能力；支持持久上下文；内置技能系统；支持钩子机制
 
-> 注：本期是基线首期。之后每期我们会对比上一期，告诉你分数/名次/收录/下载的**变化**。
+> 后续：我们每周做一次全生态观测，下期会附上与本期对比的变化。**如果这类信件对你构成打扰，回复一声即可，我们此后不再发送到贵仓库。**
 
-**想被更多人看到？** 下面这段可直接复制去提交收录：
-
-```text
-Add imMamdouhaboammar/get-fable to the DSH plugin directory (category ui) — a standard Cordis "bundle" plugin targeting @deepseek-ai/dsh ≥ 0.1.1-rc.2, published as get-fable@1.5.1.
-```
+这封信由开源管线自动生成——分数有误、建议不对路，直接回复本 issue 或到 [dsh-insights](https://github.com/ice5kysl/dsh-insights) 提 issue。我们也写了一个 dsh 内的自检小工具 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit)（`npx dsh-insights-kit selfcheck <dir>`），觉得有用可以试试，没用也请忽略。
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-06
-> 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 作者自检 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit)（`npx dsh-insights-kit selfcheck <dir>`）· 示例页 https://dsh-insights.com/
-> 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。
-
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-11
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

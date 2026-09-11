@@ -4,7 +4,7 @@
 
 ## 总览
 - 权威集规模：**10534**
-- 近 7 天活跃：1585（15%）· 近 30 天：10534（100%）
+- 近 7 天活跃：2513（23.9%）· 近 30 天：10534（100%）
 - 仓库年龄 ≥ 1 天（可过收录门禁）：10336（98.1%）
 
 ## 发布与文档
@@ -13,7 +13,7 @@
 - lib/index.js 5666 · lib/client.js 3558 · 双产物 3185
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 755 · imsai 259 · 至少一个渠道 1009（9.6%） · 未收录 9525
+- awesome-dsh-plugin 755 · imsai 261 · 至少一个渠道 1011（9.6%） · 未收录 9523
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A
@@ -45,8 +45,8 @@
 - ysr666/dsh-vision-router：5799
 
 ## 质量评分（启发式）
-- 平均分 76 · S+A 占比 10.1%（值得优先看；A+B 55.2%）
-- S 256 · A 810 · B 5009 · C 3192 · D 1267
+- 平均分 76.1 · S+A 占比 10.2%（值得优先看；A+B 55.8%）
+- S 256 · A 817 · B 5065 · C 3139 · D 1257
 
 ## 功能分类（启发式 Top 12）
 - 其它：3974
@@ -77,46 +77,46 @@
 - 2026-09：886
 
 ## Top topics
-- `dsh-plugin` × 10449
-- `deepseek-harness` × 6968
-- `dsh` × 3944
-- `deepseek` × 1165
-- `dsh-plugins` × 1082
-- `cordis` × 992
-- `plugin` × 673
-- `typescript` × 401
-- `dsh-plugin-market` × 372
+- `dsh-plugin` × 10272
+- `deepseek-harness` × 6857
+- `dsh` × 3859
+- `deepseek` × 1147
+- `dsh-plugins` × 1073
+- `cordis` × 980
+- `plugin` × 659
+- `typescript` × 390
+- `dsh-plugin-market` × 362
 - `deepseek-harness-plugin` × 361
-- `ai-agent` × 311
-- `ai-agents` × 287
+- `ai-agent` × 307
+- `ai-agents` × 278
 
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |
 |---|---|---|---|
-| yjh051108/dsh-routing-suite | 7080 | — | ✅ |
-| zhu1090093659/dsh-web | 6887 | — | ✅ |
-| liustack/modlens | 3868 | — | ✅ |
-| omdsh-dev/DSH-better-sidebar | 3339 | ✅ | ✅ |
-| dsh-market/dsh-market | 3196 | ✅ | ✅ |
-| ccch1mneyyy/dsh-TUI | 2837 | — | ✅ |
-| MeteorNOX/DeepSeek-Balance-Whale-Widget | 1727 | ✅ | ✅ |
-| NanmiCoder/dsh-agent-teams | 1372 | — | ✅ |
-| bowenliang123/dsh-context | 1286 | ✅ | ✅ |
-| superdesigndev/treg | 1190 | — | — |
+| zhu1090093659/dsh-web | 7387 | — | ✅ |
+| yjh051108/dsh-routing-suite | 7167 | — | ✅ |
+| liustack/modlens | 3944 | — | ✅ |
+| dsh-market/dsh-market | 3651 | ✅ | ✅ |
+| MeteorNOX/DeepSeek-Balance-Whale-Widget | 2122 | ✅ | ✅ |
+| superdesigndev/treg | 1352 | — | — |
+| bowenliang123/dsh-context | 1333 | ✅ | ✅ |
+| xmanrui/dsh-im | 1263 | — | ✅ |
+| GanyuanRan/Aegis | 1179 | ✅ | ✅ |
+| ysr666/dsh-vision-router | 1095 | ✅ | — |
 
 ## npm 版本滞后榜（仓库新于发布）
 | repo | ★ | 仓库版本 → npm |
 |---|---|---|
-| GanyuanRan/Aegis | 1167 | 2.9.6 → 0.1.0 |
+| GanyuanRan/Aegis | 1179 | 2.9.6 → 0.1.0 |
 | sandbaseai/sandbase-harness | 642 | 0.3.8 → 0.0.1 |
-| adoresever/graph-memory | 592 | 1.6.0-beta.13 → 1.5.8 |
-| FSMargoo/dsh-at-file | 502 | 0.7.0 → 0.6.3 |
-| Han-1413141/dsh-cost-meter | 254 | 1.7.12 → 1.7.10 |
-| zh667/TokenLedger | 194 | 0.1.1-blue.0 → 0.1.0 |
-| tinqiao-oss/engramory | 186 | 0.2.4 → 0.2.3 |
+| adoresever/graph-memory | 614 | 1.6.0-beta.13 → 1.5.8 |
+| FSMargoo/dsh-at-file | 510 | 0.7.0 → 0.6.3 |
+| zh667/TokenLedger | 197 | 0.1.1-blue.0 → 0.1.0 |
+| tinqiao-oss/engramory | 189 | 0.2.4 → 0.2.3 |
+| weijiafu14/pi2dsh | 188 | 0.23.0 → 0.24.0 |
 | seriousz158/dsh-memory | 184 | 0.9.2 → 0.8.1 |
-| weijiafu14/pi2dsh | 181 | 0.23.0 → 0.24.0 |
-| kingOfSoySauce/dsh-liang-skin | 162 | 0.1.7 → 0.1.6 |
+| kingOfSoySauce/dsh-liang-skin | 181 | 0.1.7 → 0.1.6 |
+| theBigGavin/marketingdashboard | 166 | 1.4.0 → 0.1.0 |
 
 ## 深检抽样（写面 / 消毒）
 - 抽样 8 个：只读/无写面 1 · 检出写面 7 · 渲染带消毒 5

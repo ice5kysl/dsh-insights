@@ -1,38 +1,29 @@
-# 致 dsh-skill-hub 的作者：一期一会 · 体检与建议
+# 致 dsh-skill-hub 的作者：一期一会 · 观测分享
 
-> cheshireez/dsh-skill-hub · 第 1 期（数据快照 2026-09-06）
+> cheshireez/dsh-skill-hub · 第 1 期（数据快照 2026-09-11）
 
-你好！我是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）** 的自动观测员。这封信聊聊 dsh-skill-hub 当前的状态，以及本期最值得动手的几件事——数据先行，绝无恭维。
+你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-skill-hub 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/)，可复核可反驳）。
 
-**本期概览：A（93/100）· 在「搜索 / 命令面板」类 272 个插件里超过 88% 的同类（同类中位 85）**
+**我们的启发式模型给当前状态的读数：A（93/100）** · 在「搜索 / 命令面板」类 569 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
-- ★13 · DeepSeek Harness（dsh）Web GUI 技能中枢：浏览/搜索完整本地技能目录、启用/禁用、查看正文、排查诊断、新建技能，基于官方 ctx.skills 注册表。 In-GUI skill hub for dsh: browse, search, enable/disable, inspect, dia
+- ★19 · DeepSeek Harness（dsh）Web GUI 技能中枢：浏览/搜索完整本地技能目录、启用/禁用、查看正文、排查诊断、新建技能，基于官方 ctx.skills 注册表。 In-GUI skill hub for dsh: browse, search, enable/disable, inspect, dia
 - npm：`dsh-skill-hub@0.3.7`（16 个版本）
-- 最近 push 2026-09-04 · 收录：awesome — · imsai —
+- 最近 push 2026-09-11
 
-**做得好的**：client 导出齐备、产物布局规范、files 白名单、npm 已发布、npm 版本同步、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃 等检查全部通过；按 README 解读，主要能力是「DSH Web GUI 技能中枢：浏览/搜索、启用/禁用、查看/诊断和新建技能，基于官方 ctx.skills 注册表。」。这些是你的基本盘，保持即可。
+以下几项检查未发现问题（仅作记录）：client 导出齐备、产物布局规范、files 白名单、npm 已发布、npm 版本同步、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「DSH Web GUI 技能中枢：浏览/搜索、启用/禁用、查看/诊断和新建技能，基于官方 ctx.skills 注册表。」。
 
-**本期最值得做（Top 3，按扣分权重）**：
+**如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
-1. **补充中英/双语文档** —— 中文生态第一印象。怎么做：加 README.zh-CN.md 并与英文版互链。
-2. **提交 awesome-dsh-plugin** —— 上架主目录（曝光+反链）。怎么做：data/plugins/<owner>__<repo>.yml 提 PR。
-3. **提交 imsai/deepseek1024** —— 覆盖另一主流渠道。怎么做：catalog/plugins JSON，一个 PR 一条。
+1. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
 
 **能力标签**：skills、registry、search、toggle、inspect、diagnose、scaffold、gui；README 宣称：基于官方 ctx.skills 注册表；浏览/搜索完整本地技能目录；启用/禁用本地技能；查看技能正文
 
-> 注：本期是基线首期。之后每期我们会对比上一期，告诉你分数/名次/收录/下载的**变化**。
+> 后续：我们每周做一次全生态观测，下期会附上与本期对比的变化。**如果这类信件对你构成打扰，回复一声即可，我们此后不再发送到贵仓库。**
 
-**想被更多人看到？** 下面这段可直接复制去提交收录：
-
-```text
-Add cheshireez/dsh-skill-hub to the DSH plugin directory (category ui) — a standard Cordis "bundle" plugin targeting @deepseek-ai/dsh ≥ 0.1.1-rc.2, published as dsh-skill-hub@0.3.7.
-```
+这封信由开源管线自动生成——分数有误、建议不对路，直接回复本 issue 或到 [dsh-insights](https://github.com/ice5kysl/dsh-insights) 提 issue。我们也写了一个 dsh 内的自检小工具 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit)（`npx dsh-insights-kit selfcheck <dir>`），觉得有用可以试试，没用也请忽略。
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-06
-> 开源管线 [dsh-insights](https://github.com/ice5kysl/dsh-insights) · 作者自检 [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit)（`npx dsh-insights-kit selfcheck <dir>`）· 示例页 https://dsh-insights.com/
-> 我们每周还产出**全生态周报**（data/weekly/）——想让你的插件进『优质未收录』观察名单，或想投稿/上榜，欢迎来仓库提 issue/PR。
-
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-11
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 
