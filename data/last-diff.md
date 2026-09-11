@@ -1,29 +1,20 @@
 # 快照 Diff · 2026-09-11
 
-- 当前权威插件：**10789**（上次 10765）
-- 新增 24 · 消失 0
+- 当前权威插件：**10800**（上次 10789）
+- 新增 11 · 消失 0
 
-## 新增（Top 20）
-- yangzqq/dsh-mdvault ★1 (npm ✓)
-- log-li/dsh-peakrate ★1 (npm ✓)
-- huiyeo/dsh-plugin-mermaid-preview ★1 
-- dxxCaO/dsh-self-improvement ★1 
-- zheng1/dsh-acp-replay ★0 (npm ✓)
-- kexuejin/dsh-browser-bsk ★0 (npm ✓)
-- gongyijie85/dsh-design-audit ★0 (npm ✓)
-- YpipaQ/dsh-skills-mcp-cli-manager ★0 (npm ✓)
-- shuiiiiimu/dsh-stock-portfolio ★0 
-- kexuejin/dsh-accounts-ui ★0 
-- printz1/dsh-notify ★0 (npm ✓)
-- Huuuuung/dsh-artifact-index ★0 (npm ✓)
-- openplancc/dsh-fuse ★0 
-- temidayoxyz/deep-browser ★0 
-- Ringo-P-GIT/dsh-reqsys ★0 
-- kllilizxc/dsh-worka ★0 
-- ice-ai-lab/dsh-plugin-pi-ui ★0 
-- singei8/DSH-TOKEN-feiyong ★0 
-- nguyenduclong-ict/dsh-plugin-custom-css ★0 
-- QDchuan/dsh-github-toolkit ★0 
+## 新增（Top 11）
+- shinzarou-eng/dsh-codebase-chat ★1 (npm ✓)
+- lcestou/dsh-oh-my-claude ★1 (npm ✓)
+- Dragonk/dsh-locale-pl ★0 
+- shxiaooo/dsh-account-quota ★0 
+- 1032740078/dsh-web-url-view ★0 
+- zzdhsxk/dsh-session-migration-repair ★0 
+- zjuatri/dsh-browser-plugin ★0 
+- joinsnow-star/dsh-agentic-proxy ★0 (npm ✓)
+- SiriusWJ/dsh-rp-tools ★0 
+- Mauit06/dsh-jinhsi-skin ★0 
+- liutian11451-png/dsh-plugin-compact-button ★0 
 
 ## 消失（Top 0）
 
