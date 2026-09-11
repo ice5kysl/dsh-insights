@@ -1,29 +1,29 @@
 # 快照 Diff · 2026-09-11
 
-- 当前权威插件：**10765**（上次 10534）
-- 新增 231 · 消失 0
+- 当前权威插件：**10789**（上次 10765）
+- 新增 24 · 消失 0
 
 ## 新增（Top 20）
-- LiPu-jpg/Openwrite ★711 (npm ✓)
-- WongYuYe/dsh-composer-recall ★0 (npm ✓)
-- sanqiPanax/jieyaTool ★0 
-- TNJ2026/promptaflow ★3 
-- xlennart/dsh-goal-mode-enhance ★4 
-- sunshine-lang/dsh-plugin-template ★6 
-- xlennart/dsh-side-chat ★3 (npm ✓)
-- lucasx001/dsh-skin-claude-code ★2 (npm ✓)
-- GuZhengSVT/dsh-WeCom-notify ★3 
-- Voyage-He/dsh-background-image ★1 (npm ✓)
-- cofy-x/dsh-cron ★4 (npm ✓)
-- yunuo110/dsh-gitbash ★7 
-- a1073097082/dsh-model-search ★5 (npm ✓)
-- dove-a/dsh-chat-window-fold ★0 (npm ✓)
-- Khellendros97/dsh-better-plan-reviewer ★0 (npm ✓)
-- Minglink/dsh-infinite-gen-4 ★1299 
-- Kalospacer/dsh-model-capabilities ★2 
-- JularDepick/dsh-wakatime-plugin ★0 
-- Cyning12/SpecWave ★7 (npm ✓)
-- TikaFlow/dsh-model-fix ★1 
+- yangzqq/dsh-mdvault ★1 (npm ✓)
+- log-li/dsh-peakrate ★1 (npm ✓)
+- huiyeo/dsh-plugin-mermaid-preview ★1 
+- dxxCaO/dsh-self-improvement ★1 
+- zheng1/dsh-acp-replay ★0 (npm ✓)
+- kexuejin/dsh-browser-bsk ★0 (npm ✓)
+- gongyijie85/dsh-design-audit ★0 (npm ✓)
+- YpipaQ/dsh-skills-mcp-cli-manager ★0 (npm ✓)
+- shuiiiiimu/dsh-stock-portfolio ★0 
+- kexuejin/dsh-accounts-ui ★0 
+- printz1/dsh-notify ★0 (npm ✓)
+- Huuuuung/dsh-artifact-index ★0 (npm ✓)
+- openplancc/dsh-fuse ★0 
+- temidayoxyz/deep-browser ★0 
+- Ringo-P-GIT/dsh-reqsys ★0 
+- kllilizxc/dsh-worka ★0 
+- ice-ai-lab/dsh-plugin-pi-ui ★0 
+- singei8/DSH-TOKEN-feiyong ★0 
+- nguyenduclong-ict/dsh-plugin-custom-css ★0 
+- QDchuan/dsh-github-toolkit ★0 
 
 ## 消失（Top 0）
 
