@@ -59,6 +59,8 @@
 
 **给用户**:升级兼容风险实测为零,放心升;升级前先 `node --version`(< 24.21 会静默失败,升 Node 即解)。
 
+**关于本站**:DSH Insights(dsh-insights.com)是一个独立的 dsh 生态观察站:插件健康评级、实测兼容矩阵、修法案例库与定期的生态报告,数据、规则与管线全部开源,每条结论可回溯到原始数据。插件作者可以在详情页核对每一项评分依据、免费领取 README 健康徽章;本文的全部数字同样来自它的公开快照。
+
 ---
 
 *数据与方法:兼容矩阵 = 最新版 tarball 的 client bundle 静态 require 提取 × shell 模块表三态判定(ok/conditional/broken),全缓存、每日增量;下载为 npm 周窗口;类目为六维评估体系的分类信号。原始数据:/data/compat-observed.json、/data/downloads.json、/data/fixes.json。DSH Insights 为独立观察站,与 DeepSeek 官方无隶属关系;判断部分基于启发式数据,欢迎反驳(提 issue 即可)。*
