@@ -49,6 +49,8 @@ catch { store = require('@deepseek-ai/dsh-client-runtime/client') } // ✗ 死�
 
 <details><summary>English</summary>
 
+(每段独立成行、代码块用围栏、列表用 -;与中文版结构一一对应)
+
 We're [DSH Insights](https://dsh-insights.com), an independent observatory of the dsh plugin ecosystem, sharing observable data with plugin authors.
 
 **Finding**: {{repo}}'s client bundle requires `@deepseek-ai/dsh-client-runtime/client` — a package that exists on npm but has never been seeded into any released dsh shell's module table, so the loader can never resolve it (any version). It most likely came from a circulating compatibility snippet (`try dsh-client-store / catch dsh-client-runtime`). If it's inside that try/catch: your plugin loads fine on dsh ≥ 0.1.2-alpha.2, and the catch branch is dead code — but our conservative compatibility matrix flags {{pkg}} broken, which misleads users checking before upgrades. If it's a bare require, it crashes everywhere and is even more worth removing.
