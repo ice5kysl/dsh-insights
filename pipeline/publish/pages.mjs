@@ -1042,6 +1042,7 @@ ${badgeExHtml}
   ${navCard('authors/', 'users', t('作者榜', 'Authors'), t('生态里的重要人物：榜单 + 协作关系图', 'Key people of the ecosystem: leaderboards + collaboration graph'), t(`${(an0.authorStats?.total || 0).toLocaleString()} 位`, `${(an0.authorStats?.total || 0).toLocaleString()} authors`))}
   ${navCard('badge/', 'star', t('健康徽章', 'Badge'), t('把客观评分带进 README：一页接入指南', 'Bring the objective score into your README: a one-page setup guide'), t('health-v5 · 每日刷新', 'health-v5 · refreshed daily'))}
   ${navCard('data/', 'database', t('开放数据', 'Open Data'), t('稳定 JSON URL · agent 可读 · CC BY 4.0', 'Stable JSON URLs · agent-friendly · CC BY 4.0'), t('insights.json 等 13 个数据集', '13 datasets incl. insights.json'))}
+  ${navCard('v015/', 'chart', t('v0.1.5 生态影响实测报告', 'The v0.1.5 Release, Measured'), t('2431 插件兼容实测 · Node 门槛 · 1522 插件收编带', '2431-plugin compat matrix · Node gate · 1,522-plugin absorption zone'), t('全新观察报告', 'New impact report'))}
   ${navCard('about/', 'book', t('关于 · 指标体系', 'About · Metrics'), t('方法论全公开：权威集门禁 · 六维框架 · 校准回归', 'Methodology in the open: authoritative-set gate · six-dimension framework · calibration regression'), t('可复核到每条扣分', 'Every deduction is verifiable'))}
 </div>
 <script>
@@ -1054,6 +1055,52 @@ ${badgeExHtml}
   if(h.indexOf('#browse')===0){ location.replace('/dashboard/'+h) }
   else if(/^#(overview|quality|rank)/.test(h)){ location.replace('/dashboard/'+h) } })();
 </script>`,
+  })))
+
+  // ---- /v015/ v0.1.5 生态影响实测报告(2026-09-11,内容源 content/v015-impact.md)----
+  written.push(out('v015/index.html', page({
+    title: 'v0.1.5 生态影响实测', titleEn: 'The v0.1.5 Release, Measured', desc: '2431 插件兼容实测 · Node 门槛 · 1522 插件收编带 —— v0.1.5 对 dsh 生态的影响全景。',
+    base: '../', here: 'v015/',
+    body: `<p class="crumb">Report · 2026-09-11</p><h1 class="pagetitle">${t('v0.1.5 对 dsh 生态的影响:一份基于全量实测的观察', 'The v0.1.5 Release, Measured: an Ecosystem Impact Report')}</h1>
+<p class="lede">${t('兼容矩阵 2431 插件 × 4 shell 版本逐插件实测;每个数字可在 /data/ 复核。', 'Compatibility matrix: 2431 plugins × 4 shell versions, per-plugin load-tested; every number verifiable via /data/.')}</p>
+<div class="article">
+<h2>TL;DR</h2>
+<ol>
+<li><b>兼容性:零风险</b>。0.1.2-rc.1 → 0.1.5-rc.1 逐插件实测 <b>0 治愈、0 新破坏</b> —— 144 个坏插件全是存量,132 个(92%)坏在同一个从未被任何 shell 收录的模块上。</li>
+<li><b>真正的门槛是 Node 版本</b>:CLI 在 Node &lt; 24.21 上零输出静默退出(公告的 npx 路径全覆盖中招),社区已 3 例确认。</li>
+<li><b>结构性影响大于兼容影响</b>:公告内置的侧栏文件树/预览作用于生态最大类目 —— <b>1522 个插件(14%)进入收编带</b>,头部三家合计周下载 ~8.5 万。</li>
+<li><b>公告效应真实但温和</b>:新插件 98/日(周内次高)。</li>
+<li><b>卫生观察</b>:dist-tag 曾指远古版本;engines 未声明;engines.dsh 有 semver 预发布陷阱。</li>
+</ol>
+<h2>一、兼容性:一次零风险升级</h2>
+<table>
+<tr><th>shell</th><th>ok</th><th>broken</th><th>conditional</th></tr>
+<tr><td>0.0.1-rc.5(旧 latest tag)</td><td>2332</td><td>81</td><td>0</td></tr>
+<tr><td>0.1.2-rc.1(升级源)</td><td>2266</td><td>144</td><td>3</td></tr>
+<tr><td>0.1.5-alpha.2</td><td>2266</td><td>144</td><td>3</td></tr>
+<tr><td><b>0.1.5-rc.1</b></td><td><b>2266</b></td><td><b>144</b></td><td><b>3</b></td></tr>
+</table>
+<p><b>0.1.2 → 0.1.5:零迁移。</b>144 个 broken 中 132 个(92%)缺的是 <code>@deepseek-ai/dsh-client-runtime/client</code>(从未进入任何已发布 shell 的模块表);修法确定:迁移到 <code>dsh-client-store</code>(0.1.2-alpha.2 起收录,同名 API),见修法库。其余为 node 内建 require 等。<b>你的插件今天能用,0.1.5 上也能用。</b></p>
+<h2>二、真正的门槛:Node 版本静默坑</h2>
+<p>CLI 入口以 <code>if (import.meta.main)</code> 守卫,旧 Node 上为 undefined —— <b>零输出、退出码 0</b>。实测:22.14 / 23.11 / 24.0 / 24.1 ❌;<b>24.21 / 25.9 / 26.8 ✅</b>。升级前先 <code>node --version</code>。详见官方 Discussions #6124(含全版本实测表与修复建议)。</p>
+<h2>三、1522 个插件的收编带</h2>
+<table>
+<tr><th>插件</th><th>周下载</th><th>重叠点</th></tr>
+<tr><td>dsh-better-sidebar</td><td>43,309(生态第 2)</td><td>侧栏增强</td></tr>
+<tr><td>dsh-univer-office</td><td>26,504</td><td>文件预览/编辑</td></tr>
+<tr><td>dsh-context</td><td>15,102</td><td>文件浏览/预览</td></tr>
+</table>
+<p>公告内置的右侧 Sidebar 文件树 + 多格式预览与「侧栏/工作区」「文件浏览/预览」两类目正面重叠 —— 合计 <b>1522 个插件(权威集 14%)</b>。这不是"官方抄袭插件",而是平台成熟化的必然;对冲也在同一份公告里:<b>左右两侧标准化插件扩展入口</b>。收编带的出路是做内置不做的事(更深的格式支持、编辑、外部集成)。官方预告的「内置插件管理面板」是下一块会落地的区域。</p>
+<h2>四、公告效应:真实但温和</h2>
+<p>权威集按仓库创建日新增:09-08 82 → 09-09 78 → <b>09-10(公告日)98</b> —— 周内次高,次于 09-03 的 102。拉新存在,但生态主增量仍来自日常惯性。</p>
+<h2>五、卫生观察(给官方的三条)</h2>
+<ol>
+<li><b>dist-tag 卫生</b>:npm latest 曾长期指向远古 0.0.1-rc.5,公告日才移正 —— 建议发版即移 tag。</li>
+<li><b>engines 缺失 + 静默失败</b>:旧 Node 安装无警告、运行无输出(见 #6124)。</li>
+<li><b>engines.dsh 的 semver 预发布陷阱</b>:<code>&gt;=0.1.0-rc.6</code> 字面判 0.1.1-rc.x 不兼容,与作者意图相反(dsh-dream-skin 实测后改运行时探测)。若未来强制校验,需先定义预发布语义。</li>
+</ol>
+<p style="font-size:12px;color:var(--mut)">方法与数据:兼容矩阵 = 最新版 tarball 的 client bundle 静态 require 提取 × shell 模块表判定,缓存入 git、每日增量;原始数据见 <a href="../data/compat-observed.json">compat-observed.json</a>,修法见 <a href="../data/fixes.json">fixes.json</a>。观察站与 DeepSeek 官方无隶属关系;发现误判请提 issue。</p>
+</div>`,
   })))
 
   // ---- /about/ 关于 · 方法论与指标体系 --------------------------------------
