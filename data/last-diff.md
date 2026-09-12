@@ -1,29 +1,20 @@
 # 快照 Diff · 2026-09-12
 
-- 当前权威插件：**10914**（上次 10886）
-- 新增 28 · 消失 0
+- 当前权威插件：**10925**（上次 10914）
+- 新增 11 · 消失 0
 
-## 新增（Top 20）
-- fangwen9527/dsh-composer-ux ★1 (npm ✓)
-- alk233/dsh-wechat-status ★1 
-- rakibulrocky14/dsh-cli ★1 (npm ✓)
-- lwy0v0/dsh-miao-vst3 ★0 
-- zxr2115-1/dsh-anime-theme ★0 
-- ewoowe/session-messages-plugin ★0 
-- pureexe/dsh-image-base64 ★0 
-- nirvanaslash/dsh-bat2exe ★0 (npm ✓)
-- 2432450223/dsh-image-governor ★0 
-- zhourenke/dsh-reasoning-summary ★0 
-- chengyingshe/dsh-desktop-pet ★0 (npm ✓)
-- NmouZh/dsh-mattpocock-skills ★0 (npm ✓)
-- 3121455692atou-sudo/dsh-tavern-mode ★0 
-- yangyizhu8/dsh-unread-mark ★0 
-- Kirisame1969/dsh-project-based-learning ★0 (npm ✓)
-- caesarjue/dsh-audio-visualizer ★0 (npm ✓)
-- luoshuai990529/dsh-context-snapshot-bar ★0 (npm ✓)
-- LeeLee592/dsh-obsidian-plugin ★0 
-- MichengAI/dsh-pua ★0 (npm ✓)
-- WsTe47/dsh-step-clock ★0 (npm ✓)
+## 新增（Top 11）
+- corrinehu/dsh-buddy-checkin ★1 
+- zlZayn/dsh-zhihu-search ★0 (npm ✓)
+- MirrMeur/dsh-tavily-provider ★0 (npm ✓)
+- 99galaxy/dsh-plugin-market ★0 (npm ✓)
+- igormel81/dsh-chat-cost ★0 (npm ✓)
+- MirrMeur/dsh-workspace-colors ★0 
+- Zhuang-A/dsh-go-sensei ★0 
+- ddowbnac/dsh-claude-auth-proxy ★0 (npm ✓)
+- liyiersan/dsh-usage-monitor ★0 
+- hasan-aghayev/dsh-session-resilience ★0 
+- Volta-ln/dsh-quick-ask ★0 
 
 ## 消失（Top 0）
 
