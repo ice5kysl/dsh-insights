@@ -6,6 +6,9 @@
  * 一条 SQL 拉全量 reports 行，lib/db9.mjs 的 aggregateCrashSignatures() 聚合：
  * 按 sig 分组，count 倒序，plugins/shells 按频次截 10、category 取最常见值。
  *
+ * 来源分离：count/totalReports 只算真实用户上报（source='organic'）；
+ * 冷启动种子（source='seed'）单列 seededReports/seededCount，绝不混进对外数字。
+ *
  * 失败纪律（同 db9-sync）：无 DB9_TOKEN 或 db9 不可用 → 告警 exit 0，
  * 有旧 crash-corpus.json 不动它。
  *
@@ -24,19 +27,23 @@ async function main() {
   }
   let rows
   try {
-    const res = await sql(process.env.DB9_TOKEN, 'SELECT sig, category, shell, plugin, created_at FROM reports')
+    const res = await sql(process.env.DB9_TOKEN, 'SELECT sig, category, shell, plugin, created_at, source FROM reports')
     rows = res.rows
   } catch (e) {
     console.error(`[crash-corpus] reports 表读取失败（db9 不可用？），降级为告警 exit 0（旧文件不动）：${String(e?.message || e).slice(0, 200)}`)
     return
   }
   const signatures = aggregateCrashSignatures(rows)
+  const organic = signatures.reduce((a, s) => a + s.count, 0)
+  const seeded = signatures.reduce((a, s) => a + s.seededCount, 0)
   writeJson(PATHS.crashCorpus, {
     generatedAt: new Date().toISOString(),
-    totalReports: rows.length,
+    totalReports: organic,      // 只算真实用户上报
+    seededReports: seeded,      // 冷启动种子（机器灌入）
+    corpusReports: rows.length, // 全表规模
     signatures,
   }, true)
-  console.log(`[crash-corpus] ${rows.length} reports → ${signatures.length} signatures → data/crash-corpus.json`)
+  console.log(`[crash-corpus] ${rows.length} reports（用户 ${organic} · 种子 ${seeded}）→ ${signatures.length} signatures → data/crash-corpus.json`)
 }
 
 main().catch((e) => {

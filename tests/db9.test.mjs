@@ -336,3 +336,33 @@ test('aggregateCrashSignatures: plugins 超 10 截断；并列 count 按 sig 字
   assert.deepEqual(aggregateCrashSignatures([]), [])
   assert.deepEqual(aggregateCrashSignatures(null), [])
 })
+
+test('aggregateCrashSignatures: 种子(source=seed)与用户上报分开计数，绝不混入 count', () => {
+  const rows = [
+    ['r1_seed', 'module-missing', '0.1.5-rc.1', 'p-a', '2026-09-12 03:43:34+00', 'seed'],
+    ['r1_seed', 'module-missing', '0.1.5-rc.1', 'p-b', '2026-09-12 03:43:35+00', 'seed'],
+    ['r1_mixed', 'module-missing', '0.1.5-rc.1', 'p-c', '2026-09-12 03:43:36+00', 'seed'],
+    ['r1_mixed', 'module-missing', '0.1.5-rc.1', 'p-c', '2026-09-11 10:00:00+00', 'organic'],
+    ['r1_old', 'module-missing', '0.1.5-rc.1', 'p-d', '2026-09-10 10:00:00+00'], // 旧行无 source → 仍算用户上报
+  ]
+  const sigs = aggregateCrashSignatures(rows)
+  const bySig = new Map(sigs.map((s) => [s.sig, s]))
+
+  const seeded = bySig.get('r1_seed')
+  assert.equal(seeded.count, 0) // 种子不计入「N 例上报」
+  assert.equal(seeded.seededCount, 2)
+  assert.equal(seeded.seeded, true)
+  assert.deepEqual(seeded.plugins, ['p-a', 'p-b']) // 种子仍贡献模式信息
+  assert.equal(seeded.lastSeen, '2026-09-12T03:43:35.000Z') // 无用户上报时回落到种子时间
+
+  const mixed = bySig.get('r1_mixed')
+  assert.equal(mixed.count, 1)
+  assert.equal(mixed.seededCount, 1)
+  assert.equal(mixed.seeded, false)
+  assert.equal(mixed.firstSeen, '2026-09-11T10:00:00.000Z') // 时间线只认用户上报
+  assert.equal(mixed.lastSeen, '2026-09-11T10:00:00.000Z')
+
+  assert.equal(bySig.get('r1_old').seeded, false)
+  // 有用户上报的排在种子-only 之前
+  assert.deepEqual(sigs.map((s) => s.sig), ['r1_mixed', 'r1_old', 'r1_seed'])
+})
