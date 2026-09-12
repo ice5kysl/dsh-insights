@@ -69,7 +69,7 @@ node bin/backfill-events.mjs                                 # 一次性：db9 e
 node bin/backfill-plugin-events.mjs                          # 一次性：插件级事件回填（plugin_created / npm_first_publish）
 ```
 
-CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周五在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供作者在 Actions 手动触发本插件重检。
+CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周五在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供作者在 Actions 手动触发本插件重检。`site/` **不入 git**（生成物，已 gitignore）——`pages.yml` 部署时现场生成（`pipeline --only site,badges,pages`），再叠 `site-static/`（CNAME/图标/og，仅有的手工维护 Web 资产）。
 
 ## 评分口径（一段话）
 

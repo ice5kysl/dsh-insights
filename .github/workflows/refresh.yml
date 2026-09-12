@@ -86,7 +86,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/ site/
+          # site/ 已移出版本控制（gitignore），部署由 pages.yml 现场生成；这里只提交 data/
+          git add data/
           if git diff --cached --quiet; then
             echo 'no changes'
           else

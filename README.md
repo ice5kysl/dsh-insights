@@ -70,7 +70,7 @@ node bin/backfill-events.mjs                                 # one-off: backfill
 node bin/backfill-plugin-events.mjs                          # one-off: backfill plugin-level events (plugin_created / npm_first_publish)
 ```
 
-CI (`.github/workflows/refresh.yml`): single cron 03:07 UTC, Friday profile switched in-job, concurrency-grouped; deploys via `workflow_run`. `recheck.yml` lets authors trigger a re-check of their plugin from Actions.
+CI (`.github/workflows/refresh.yml`): single cron 03:07 UTC, Friday profile switched in-job, concurrency-grouped; deploys via `workflow_run`. `recheck.yml` lets authors trigger a re-check of their plugin from Actions. `site/` is **not in git** (build artifact, gitignored) — `pages.yml` regenerates it at deploy time (`pipeline --only site,badges,pages`) and layers in `site-static/` (CNAME/icons/og, the only hand-maintained web assets).
 
 ## Scoring in one paragraph
 

@@ -30,10 +30,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Stage public root (site + slim public data + llms.txt)
+      # site/ 不再入 git（生成物瘦身）：pages 部署时现场生成。
+      # site/badges/pages 三个 stage 纯 data/ → 静态文件、无网络/API 依赖（无需 GITHUB_TOKEN）。
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Generate site/ (dashboard + badges + pages)
+        run: node bin/pipeline.mjs --only site,badges,pages
+      - name: Stage public root (generated site + static assets + slim public data + llms.txt)
         run: |
           mkdir -p public/data
           cp -r site/. public/ 2>/dev/null || true
+          cp -r site-static/. public/ 2>/dev/null || true
           for f in insights.json health.json analysis.json plugins.jsonl invalid.jsonl enrich.json downloads.json listed.json plugins.csv dynamics.json scenarios.json metrics.jsonl compat.json shell-seeds.json shell-rows.json compat-observed.json fixes.json crash-corpus.json; do
             cp "data/$f" public/data/ 2>/dev/null || true
           done
