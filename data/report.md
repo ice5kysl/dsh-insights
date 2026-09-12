@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 10800 个插件 · 生成于 2026-09-11 · 由 DSH Insights 管线生成
+> 权威集 10802 个插件 · 生成于 2026-09-12 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**10800**
-- 近 7 天活跃：2645（24.5%）· 近 30 天：10800（100%）
+- 权威集规模：**10802**
+- 近 7 天活跃：2639（24.4%）· 近 30 天：10802（100%）
 - 仓库年龄 ≥ 1 天（可过收录门禁）：10487（97.1%）
 
 ## 发布与文档
-- npm 已发布 4536 / 未发布 6264 / 已发布但版本滞后 1283
-- 有 README 10771 · 中英双语/中文 5176 · 中文 README 文件 821 · 无 README 29
-- lib/index.js 5815 · lib/client.js 3676 · 双产物 3292
+- npm 已发布 4536 / 未发布 6266 / 已发布但版本滞后 1283
+- 有 README 10773 · 中英双语/中文 5177 · 中文 README 文件 821 · 无 README 29
+- lib/index.js 5816 · lib/client.js 3676 · 双产物 3292
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 764 · imsai 264 · 至少一个渠道 1023（9.5%） · 未收录 9777
+- awesome-dsh-plugin 762 · imsai 264 · 至少一个渠道 1021（9.5%） · 未收录 9781
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A
@@ -33,24 +33,24 @@
 - f20880479-lab/dsh-peak-gate A
 
 ## npm 周下载 Top 10
-- dsh-market/dsh-market：58177
-- KokuYu-sysu/dsh-market-desktop：58177
-- omdsh-dev/DSH-better-sidebar：43309
-- dream-num/dsh-univer-office：26504
-- bowenliang123/dsh-context：15102
-- Han-1413141/dsh-cost-meter：8468
-- Creakono/dsh-cost-meter：8468
-- AnakinCao/dsh-cost-meter：8468
-- omdsh-dev/dsh-mnemon：6194
-- ysr666/dsh-vision-router：5799
+- dsh-market/dsh-market：81151
+- KokuYu-sysu/dsh-market-desktop：81151
+- omdsh-dev/DSH-better-sidebar：66944
+- dream-num/dsh-univer-office：28282
+- bowenliang123/dsh-context：22339
+- Han-1413141/dsh-cost-meter：14662
+- Creakono/dsh-cost-meter：14662
+- AnakinCao/dsh-cost-meter：14662
+- omdsh-dev/dsh-mnemon：8665
+- ysr666/dsh-vision-router：8487
 
 ## 质量评分（启发式）
 - 平均分 76.1 · S+A 占比 10.2%（值得优先看；A+B 56%）
-- S 265 · A 840 · B 5208 · C 3227 · D 1260
+- S 265 · A 840 · B 5208 · C 3228 · D 1261
 
 ## 功能分类（启发式 Top 12）
-- 其它：4040
-- 模型 / 代理：1019
+- 其它：4041
+- 模型 / 代理：1020
 - 文件浏览 / 预览：937
 - 会话管理：872
 - 状态 / 监控 / 用量：754
@@ -74,12 +74,12 @@
 - 2026-06：16
 - 2026-07：28
 - 2026-08：9638
-- 2026-09：1079
+- 2026-09：1081
 
 ## Top topics
-- `dsh-plugin` × 10529
-- `deepseek-harness` × 7033
-- `dsh` × 3988
+- `dsh-plugin` × 10531
+- `deepseek-harness` × 7035
+- `dsh` × 3990
 - `deepseek` × 1186
 - `dsh-plugins` × 1101
 - `cordis` × 1018

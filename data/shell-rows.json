@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T23:56:13.421Z",
+  "generatedAt": "2026-09-12T00:22:01.018Z",
   "pkg": "@deepseek-ai/dsh-web-app",
   "note": "dsh 各版本客户端图行清单（@deepseek-ai/dsh-web-app 依赖树里带 dsh.client 声明的包全集——宁宽不收 roster，平台条件挂载的行也计入；与真实 __DSH_BOOT__ 对账为超集，多出的是平台选择器等条件行）。图行包的 bundle 随 combo 批次注册按包名命名的工厂，require 可解析：immediate=dsh.client.immediately（任何插件物化前已预取，确定可解析）；lazy=普通图行（批次到达时序多数可解析但无保证，插件声明 dsh.client.external/inject 可获确定性——判「条件可解析」）。Client graph rows per dsh version (every package with a dsh.client face in the dsh-web-app dependency tree — inclusive by design, platform-conditional mounts included): row bundles register package-name factories via combo batches, so their specifiers resolve at require() time — immediate rows are prefetched before any plugin materializes (deterministic), lazy rows resolve in practice but without ordering guarantee (declaring dsh.client.external/inject makes it deterministic → \"conditional\").",
   "versions": {
