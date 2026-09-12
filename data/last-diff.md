@@ -1,29 +1,29 @@
 # 快照 Diff · 2026-09-12
 
-- 当前权威插件：**10886**（上次 10865）
-- 新增 21 · 消失 0
+- 当前权威插件：**10914**（上次 10886）
+- 新增 28 · 消失 0
 
 ## 新增（Top 20）
-- Koierrr/Thalamus ★0 
-- M0R1C/dsh-vision-fix-lmstudio ★0 
-- nutsDad/dsh-plugin-vllm-ascend-profiler ★0 
-- zhiwuli0228/dsh-image-router ★0 (npm ✓)
-- ibuki-mu/dsh-tidecost ★0 
-- gezi-wen/sage-guikit ★0 (npm ✓)
-- alcheme-labs/dsh-experience-map ★0 (npm ✓)
-- GuoMonth/dsh-erp ★0 (npm ✓)
-- 233fxr-collab/dsh-launch-in-one-click ★0 
-- pureexe/dsh-mobile-topbar ★0 
-- new-Beginner/dsh-thought-fold ★0 
-- whoiszzj/dsh-opencodego ★0 
-- gezi-wen/dsh-plugin-development ★0 (npm ✓)
-- inxups/dsh-memento-tab ★0 
-- woodfood111/dsh-token-live ★0 
-- justarook1e/dsh-ide-lite ★0 (npm ✓)
-- jaxzhou/dsh-file-explorer ★0 (npm ✓)
-- jh-Evil/dsh-music ★0 (npm ✓)
-- Tkingxiao/I-am-Yuike ★0 
-- TodayJin/dsh-trilogy ★0 
+- fangwen9527/dsh-composer-ux ★1 (npm ✓)
+- alk233/dsh-wechat-status ★1 
+- rakibulrocky14/dsh-cli ★1 (npm ✓)
+- lwy0v0/dsh-miao-vst3 ★0 
+- zxr2115-1/dsh-anime-theme ★0 
+- ewoowe/session-messages-plugin ★0 
+- pureexe/dsh-image-base64 ★0 
+- nirvanaslash/dsh-bat2exe ★0 (npm ✓)
+- 2432450223/dsh-image-governor ★0 
+- zhourenke/dsh-reasoning-summary ★0 
+- chengyingshe/dsh-desktop-pet ★0 (npm ✓)
+- NmouZh/dsh-mattpocock-skills ★0 (npm ✓)
+- 3121455692atou-sudo/dsh-tavern-mode ★0 
+- yangyizhu8/dsh-unread-mark ★0 
+- Kirisame1969/dsh-project-based-learning ★0 (npm ✓)
+- caesarjue/dsh-audio-visualizer ★0 (npm ✓)
+- luoshuai990529/dsh-context-snapshot-bar ★0 (npm ✓)
+- LeeLee592/dsh-obsidian-plugin ★0 
+- MichengAI/dsh-pua ★0 (npm ✓)
+- WsTe47/dsh-step-clock ★0 (npm ✓)
 
 ## 消失（Top 0）
 
