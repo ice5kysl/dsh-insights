@@ -1,29 +1,29 @@
 # 快照 Diff · 2026-09-12
 
-- 当前权威插件：**10865**（上次 10826）
-- 新增 39 · 消失 0
+- 当前权威插件：**10886**（上次 10865）
+- 新增 21 · 消失 0
 
 ## 新增（Top 20）
-- Jackson-chen97/dsh-devops ★1 
-- apex-mochen/dsh-clock-context ★1 
-- leolee9086/dsh-session-title-refresh ★0 
-- cherrchen/dsh-plugin-multi-root-workspace ★0 
-- CCYellowStar2/dsh-astrbot-ingress ★0 
-- canelaslorenzoenego-ai/Orderzx ★0 
-- henrytian1998/dsh-doctor ★0 (npm ✓)
-- cheesewoo/dsh-qqbot-dafeiyu ★0 
-- Z-Asset/ZA_report ★0 
-- Z-Asset/ZA_data ★0 
-- kitterfast/dsh-ppt-maker ★0 
-- ice-ai-lab/dsh-plugin-codex-ui ★0 
-- wwwwangpengggg/dsh-api-balance ★0 (npm ✓)
-- uckkk/dsh-live-data ★0 
-- NaivG/dsh-network ★0 (npm ✓)
-- Z-Asset/ZA_literature ★0 
-- W233666/dsh-composer-tabs ★0 (npm ✓)
-- levodoubt/dsh-longtext-input ★0 
-- Dayi-Z/dsh-safety-restart ★0 
-- 1Vewton/dsh-edu ★0 (npm ✓)
+- Koierrr/Thalamus ★0 
+- M0R1C/dsh-vision-fix-lmstudio ★0 
+- nutsDad/dsh-plugin-vllm-ascend-profiler ★0 
+- zhiwuli0228/dsh-image-router ★0 (npm ✓)
+- ibuki-mu/dsh-tidecost ★0 
+- gezi-wen/sage-guikit ★0 (npm ✓)
+- alcheme-labs/dsh-experience-map ★0 (npm ✓)
+- GuoMonth/dsh-erp ★0 (npm ✓)
+- 233fxr-collab/dsh-launch-in-one-click ★0 
+- pureexe/dsh-mobile-topbar ★0 
+- new-Beginner/dsh-thought-fold ★0 
+- whoiszzj/dsh-opencodego ★0 
+- gezi-wen/dsh-plugin-development ★0 (npm ✓)
+- inxups/dsh-memento-tab ★0 
+- woodfood111/dsh-token-live ★0 
+- justarook1e/dsh-ide-lite ★0 (npm ✓)
+- jaxzhou/dsh-file-explorer ★0 (npm ✓)
+- jh-Evil/dsh-music ★0 (npm ✓)
+- Tkingxiao/I-am-Yuike ★0 
+- TodayJin/dsh-trilogy ★0 
 
 ## 消失（Top 0）
 
