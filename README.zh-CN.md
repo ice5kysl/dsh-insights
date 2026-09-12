@@ -32,6 +32,7 @@
 | `data/insights.json` + `insights.schema.json` | agent 契约（稳定 URL，schema 只增不改） |
 | `data/analysis.json` · `enrich.json` · `plugins.csv` | 聚合 / 每插件评分+渠道 / 表格 |
 | `data/dynamics.json` · `metrics.jsonl` | 官方动态快照 · 产品自测量指标 |
+| `data/crash-corpus.json` | 崩溃上报签名语料（聚合 db9 里 dsh-why --share 上报；无 DB9_TOKEN 跳过） |
 | `data/compat.json` · `compat-observed.json` · `shell-seeds.json` | 声明式兼容信号（engines.dsh）· 实测兼容矩阵（client require × shell 模块表）· shell seed 词表 |
 | `data/llm.jsonl` · `data/reports/*.md` · `data/weekly/*.md` | LLM 能力标注 · 致作者的信（外发物料）· 周报 |
 

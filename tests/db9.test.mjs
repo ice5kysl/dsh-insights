@@ -6,7 +6,7 @@
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { lit, jsonLit, isEnabled, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, pluginCreatedEvent, diffPluginEvents, DEFAULT_SQL_URL } from '../lib/db9.mjs'
+import { lit, jsonLit, isEnabled, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, pluginCreatedEvent, diffPluginEvents, aggregateCrashSignatures, toIso, DEFAULT_SQL_URL } from '../lib/db9.mjs'
 import { releaseToEvent, npmTimeToEvents } from '../bin/backfill-events.mjs'
 
 test('lit: null/undefined → NULL', () => {
@@ -294,4 +294,45 @@ test('diffPluginEvents: 空 oldMap 只产 plugin_created（首灌无幽灵事件
   // version 一侧为 null → 不判 release
   const oldMap = new Map([['a/b', { version: null, archived: false, npmPublished: false }]])
   assert.deepEqual(diffPluginEvents(oldMap, [{ full_name: 'a/b', version: '1.0.0' }], '2026-09-12T00:00:00Z'), [])
+})
+
+test('toIso: db9 TIMESTAMPTZ 文本 → ISO；无法解析 → null', () => {
+  assert.equal(toIso('2026-09-11 14:34:33.318122+00'), '2026-09-11T14:34:33.318Z')
+  assert.equal(toIso('2026-09-11T14:34:33Z'), '2026-09-11T14:34:33.000Z')
+  assert.equal(toIso(null), null)
+  assert.equal(toIso('garbage'), null)
+})
+
+test('aggregateCrashSignatures: 按 sig 分组、count 倒序、频次截断、null 过滤', () => {
+  const rows = [
+    ['r1_aaa', 'module-missing', '0.1.5-rc.1', 'dsh-workspace-kit', '2026-09-10 01:00:00+00'],
+    ['r1_aaa', 'module-missing', '0.1.5-rc.1', 'dsh-file-explorer-kit', '2026-09-11 02:00:00+00'],
+    ['r1_aaa', 'other-cat', null, '', '2026-09-11 03:00:00+00'], // 空串/null 过滤
+    ['r2_bbb', 'timeout', '0.1.4', null, '2026-09-09 01:00:00+00'],
+    [null, 'x', 'y', 'z', '2026-09-09 01:00:00+00'], // 无 sig 行跳过
+  ]
+  const sigs = aggregateCrashSignatures(rows)
+  assert.equal(sigs.length, 2)
+  const [first, second] = sigs
+  assert.equal(first.sig, 'r1_aaa')
+  assert.equal(first.count, 3)
+  assert.equal(first.category, 'module-missing') // 最常见值（2 vs 1）
+  assert.deepEqual(first.plugins, ['dsh-file-explorer-kit', 'dsh-workspace-kit']) // 同频次按字典序
+  assert.deepEqual(first.shells, ['0.1.5-rc.1'])
+  assert.equal(first.firstSeen, '2026-09-10T01:00:00.000Z')
+  assert.equal(first.lastSeen, '2026-09-11T03:00:00.000Z')
+  assert.equal(second.sig, 'r2_bbb')
+  assert.deepEqual(second.plugins, []) // null 过滤后为空
+})
+
+test('aggregateCrashSignatures: plugins 超 10 截断；并列 count 按 sig 字典序；空输入', () => {
+  const rows = []
+  for (let i = 0; i < 12; i++) rows.push(['r1_x', 'c', 's', `p${String(i).padStart(2, '0')}`, '2026-09-10 00:00:00+00'])
+  rows.push(['r1_a', 'c', 's', 'p', '2026-09-10 00:00:00+00'])
+  const sigs = aggregateCrashSignatures(rows)
+  assert.deepEqual(sigs.map((s) => s.sig), ['r1_x', 'r1_a']) // 12 > 1
+  assert.equal(sigs[0].plugins.length, 10) // 截断
+  assert.equal(sigs[0].plugins[0], 'p00') // 同频次按字典序
+  assert.deepEqual(aggregateCrashSignatures([]), [])
+  assert.deepEqual(aggregateCrashSignatures(null), [])
 })

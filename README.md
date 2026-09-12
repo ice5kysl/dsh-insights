@@ -33,6 +33,7 @@ Home (search + KPI + latest arrivals + scenario shortcuts) · [Dashboard](https:
 | `data/insights.json` + `insights.schema.json` | Agent contract (stable URL, additive-only schema) |
 | `data/analysis.json` · `enrich.json` · `plugins.csv` | Aggregates / per-plugin scores+channels / spreadsheet |
 | `data/dynamics.json` · `metrics.jsonl` | Official-dynamics snapshot · product self-metrics |
+| `data/crash-corpus.json` | Crash-report signature corpus (aggregated from `dsh-why --share` reports in db9; skipped without DB9_TOKEN) |
 | `data/compat.json` · `compat-observed.json` · `shell-seeds.json` | Declared compat signals (engines.dsh) · observed compat matrix (client requires × shell module table) · shell seed words |
 | `data/llm.jsonl` · `data/reports/*.md` · `data/weekly/*.md` | LLM capability tags · letters to authors · weekly issues |
 
