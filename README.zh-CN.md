@@ -1,7 +1,7 @@
 # DSH Insights — DeepSeek Harness 全景观察站
 
 > **[English (default)](./README.md)** · 简体中文
-> **对外站点：https://dsh-insights.com** · 本仓库 = 管线 + 站点 + 开放数据（ice5kysl/dsh-insights）
+> **对外站点：https://dsh-insights.com/?utm_source=github&utm_medium=readme** · 本仓库 = 管线 + 站点 + 开放数据（ice5kysl/dsh-insights）
 > **插件健康 · 官方动态 · 生态趋势**：全量索引 → 真伪校验 → 健康评分 → 收录矩阵 → 「致作者的信」→ 生态周报 → 官方动态快照（v0 已上线）+（M2）rc 兼容雷达 · 零依赖 Node · 开放可复核
 >
 > 文档：[Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [产品规划](./docs/PRODUCT-PLAN.md) · [产品设计](./docs/PRODUCT-DESIGN.md) · [调研证据库](./docs/RESEARCH.md) · [数据 Schema](./docs/SCHEMA.md) · [外发 SOP](./docs/OUTREACH.md) · 作者自检 CLI [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit)（`npx dsh-insights-kit selfcheck <dir>`）
@@ -22,7 +22,7 @@
 
 ## 站点
 
-首页（搜索 + KPI + 最新入库 + 场景速配）· [仪表盘](https://dsh-insights.com/dashboard/)（趋势/质量/榜单 + 插件库 #browse）· 插件详情页 [`/p/<owner>/<repo>/`](https://dsh-insights.com/p/ice5kysl/dsh-workspace-kit/)（全量权威集，客观数据）· [场景推荐](https://dsh-insights.com/scenarios/) · [作者榜](https://dsh-insights.com/authors/) · [生态周报](https://dsh-insights.com/weekly/)（双栏阅读器，可导出 MD/PDF/PNG）· [官方动态](https://dsh-insights.com/dynamics/) · [健康徽章](https://dsh-insights.com/badge/) · [开放数据](https://dsh-insights.com/data/) · [关于/方法论](https://dsh-insights.com/about/) · [RSS](https://dsh-insights.com/feed.xml)。深浅色主题切换、无 JS 可读、`llms.txt` 面向 agent。
+首页（搜索 + KPI + 最新入库 + 场景速配）· [仪表盘](https://dsh-insights.com/dashboard/?utm_source=github&utm_medium=readme)（趋势/质量/榜单 + 插件库 #browse）· 插件详情页 [`/p/<owner>/<repo>/`](https://dsh-insights.com/p/ice5kysl/dsh-workspace-kit/?utm_source=github&utm_medium=readme)（全量权威集，客观数据）· [场景推荐](https://dsh-insights.com/scenarios/?utm_source=github&utm_medium=readme) · [作者榜](https://dsh-insights.com/authors/?utm_source=github&utm_medium=readme) · [生态周报](https://dsh-insights.com/weekly/?utm_source=github&utm_medium=readme)（双栏阅读器，可导出 MD/PDF/PNG）· [官方动态](https://dsh-insights.com/dynamics/?utm_source=github&utm_medium=readme) · [健康徽章](https://dsh-insights.com/badge/?utm_source=github&utm_medium=readme) · [开放数据](https://dsh-insights.com/data/?utm_source=github&utm_medium=readme) · [关于/方法论](https://dsh-insights.com/about/?utm_source=github&utm_medium=readme) · [RSS](https://dsh-insights.com/feed.xml?utm_source=github&utm_medium=readme)。深浅色主题切换、无 JS 可读、`llms.txt` 面向 agent。
 
 ## 数据产出（开放）
 

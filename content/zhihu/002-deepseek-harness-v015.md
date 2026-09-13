@@ -1,9 +1,9 @@
-> 首发:[DSH Insights 观察报告 #002](https://dsh-insights.com/insights/002-deepseek-harness-v015.html) · 数据可复核 · 转载请保留来源链接
-> 作者:[DSH Insights](https://dsh-insights.com) —— dsh 生态独立观察站,数据/规则/管线全部开源
+> 首发:[DSH Insights 观察报告 #002](https://dsh-insights.com/insights/002-deepseek-harness-v015.html?utm_source=zhihu&utm_medium=article) · 数据可复核 · 转载请保留来源链接
+> 作者:[DSH Insights](https://dsh-insights.com/?utm_source=zhihu&utm_medium=article) —— dsh 生态独立观察站,数据/规则/管线全部开源
 
 # DeepSeek Harness v0.1.5 观察:平台收拢基础体验,生态分层正式成形
 
-> DSH Insights · 观察报告 #002 · 2026-09-11 · 数据快照可复核(https://dsh-insights.com/data/)· 兼容矩阵 = 权威集 10,534 个插件中已发布 npm 且带 web client 的 2,431 个 × 4 档 shell 逐插件实测 · 启发式评估,非安全审计
+> DSH Insights · 观察报告 #002 · 2026-09-11 · 数据快照可复核(https://dsh-insights.com/data/?utm_source=zhihu&utm_medium=article)· 兼容矩阵 = 权威集 10,534 个插件中已发布 npm 且带 web client 的 2,431 个 × 4 档 shell 逐插件实测 · 启发式评估,非安全审计
 
 ## 核心判断
 

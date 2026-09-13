@@ -1,6 +1,6 @@
 # DSH Insights — The DeepSeek Harness Ecosystem Observatory
 
-> **Live: <https://dsh-insights.com>** · This repo = pipeline + site + open data ([ice5kysl/dsh-insights](https://github.com/ice5kysl/dsh-insights))
+> **Live: <https://dsh-insights.com/?utm_source=github&utm_medium=readme>** · This repo = pipeline + site + open data ([ice5kysl/dsh-insights](https://github.com/ice5kysl/dsh-insights))
 > **Plugin health · Official dynamics · Ecosystem trends** — full-ecosystem indexing → authenticity gate → objective health scores (evidence attached) → channel coverage → letters to authors → weekly report → official-dynamics snapshots (+ rc compat radar, M2). Zero-dependency Node. Open and reproducible.
 >
 > **English (default)** · [简体中文](./README.zh-CN.md) · Docs: [Vision](./docs/VISION.md) · [Roadmap](./docs/ROADMAP.md) · [Product Plan](./docs/PRODUCT-PLAN.md) · [Product Design](./docs/PRODUCT-DESIGN.md) · [Research](./docs/RESEARCH.md) · [Schema](./docs/SCHEMA.md) · [Outreach](./docs/OUTREACH.md) · Author self-check CLI: [dsh-insights-kit](https://github.com/ice5kysl/dsh-insights-kit) (`npx dsh-insights-kit selfcheck <dir>`)
@@ -23,7 +23,7 @@ Not another directory or marketplace — a data & observation source for directo
 
 ## Site
 
-Home (search + KPI + latest arrivals + scenario shortcuts) · [Dashboard](https://dsh-insights.com/dashboard/) (trends/quality/rankings + full plugin library `#browse`) · Plugin pages [`/p/<owner>/<repo>/`](https://dsh-insights.com/p/ice5kysl/dsh-workspace-kit/) (objective data for **every** authoritative plugin) · [Scenarios](https://dsh-insights.com/scenarios/) · [Authors](https://dsh-insights.com/authors/) · [Weekly](https://dsh-insights.com/weekly/) (reader with MD/PDF/PNG export) · [Dynamics](https://dsh-insights.com/dynamics/) · [Badges](https://dsh-insights.com/badge/) · [Open data](https://dsh-insights.com/data/) · [About/methodology](https://dsh-insights.com/about/) · [RSS](https://dsh-insights.com/feed.xml). Dark/light theme toggle, readable without JS, `llms.txt` for agents.
+Home (search + KPI + latest arrivals + scenario shortcuts) · [Dashboard](https://dsh-insights.com/dashboard/?utm_source=github&utm_medium=readme) (trends/quality/rankings + full plugin library `#browse`) · Plugin pages [`/p/<owner>/<repo>/`](https://dsh-insights.com/p/ice5kysl/dsh-workspace-kit/?utm_source=github&utm_medium=readme) (objective data for **every** authoritative plugin) · [Scenarios](https://dsh-insights.com/scenarios/?utm_source=github&utm_medium=readme) · [Authors](https://dsh-insights.com/authors/?utm_source=github&utm_medium=readme) · [Weekly](https://dsh-insights.com/weekly/?utm_source=github&utm_medium=readme) (reader with MD/PDF/PNG export) · [Dynamics](https://dsh-insights.com/dynamics/?utm_source=github&utm_medium=readme) · [Badges](https://dsh-insights.com/badge/?utm_source=github&utm_medium=readme) · [Open data](https://dsh-insights.com/data/?utm_source=github&utm_medium=readme) · [About/methodology](https://dsh-insights.com/about/?utm_source=github&utm_medium=readme) · [RSS](https://dsh-insights.com/feed.xml?utm_source=github&utm_medium=readme). Dark/light theme toggle, readable without JS, `llms.txt` for agents.
 
 ## Data outputs (open)
 

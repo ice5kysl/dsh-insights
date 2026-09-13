@@ -891,7 +891,7 @@ ${badgeExHtml}
   <p><input id="brepo" ${ph('owner/repo，如 ice5kysl/dsh-workspace-kit', 'owner/repo, e.g. ice5kysl/dsh-workspace-kit')} style="width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font:13px var(--mono);background:var(--bg);color:var(--ink)"></p>
   <div id="bprev" style="margin:10px 0;min-height:26px"><span style="color:var(--faint);font-size:12.5px">${t('输入后预览徽章', 'Enter a repo to preview the badge')}</span></div>
   <b style="font-size:12.5px">${t('写法一 · 徽章 + 链接插件页（推荐）', 'Option 1 · badge linked to the plugin page (recommended)')}</b>
-  <pre style="margin:8px 0"><code id="bcode1">[![DSH Insights health](https://dsh-insights.com/badge/owner/repo.svg)](https://dsh-insights.com/p/owner/repo/)</code></pre>
+  <pre style="margin:8px 0"><code id="bcode1">[![DSH Insights health](https://dsh-insights.com/badge/owner/repo.svg)](https://dsh-insights.com/p/owner/repo/?utm_source=badge&utm_medium=readme&utm_campaign=owner/repo)</code></pre>
   <b style="font-size:12.5px">${t('写法二 · 纯徽章', 'Option 2 · badge only')}</b>
   <pre style="margin:8px 0"><code id="bcode2">![DSH Insights health](https://dsh-insights.com/badge/owner/repo.svg)</code></pre>
   <p style="margin-top:8px"><button id="bcopy" style="padding:6px 14px;border:1px solid var(--line);border-radius:8px;background:var(--track);color:var(--ink);font-size:12.5px;cursor:pointer">${t('复制写法一', 'Copy option 1')}</button> <span id="bcopied" style="font-size:12px;color:var(--ok)"></span></p>
@@ -916,7 +916,7 @@ ${badgeExHtml}
     img.src='../badge/'+r+'.svg'; img.style.height='22px'; img.alt=r+' badge';
     img.onerror=function(){ prev.innerHTML='<span style="font-size:12px;color:var(--warn)">'+__t('该仓库暂未收录权威集（徽章 404）——可能门禁未过或校验未覆盖','This repo is not in the authoritative set yet (badge 404) — the gate may not have passed, or validation has not covered it')+'</span>' };
     prev.appendChild(img);
-    c1.textContent='[![DSH Insights health](https://dsh-insights.com/badge/'+r+'.svg)](https://dsh-insights.com/p/'+r+'/)'
+    c1.textContent='[![DSH Insights health](https://dsh-insights.com/badge/'+r+'.svg)](https://dsh-insights.com/p/'+r+'/?utm_source=badge&utm_medium=readme&utm_campaign='+r+')'
     c2.textContent='![DSH Insights health](https://dsh-insights.com/badge/'+r+'.svg)' }
   inp.addEventListener('input',upd);
   document.addEventListener('langchange',function(){ if(!norm(inp.value))upd() });
