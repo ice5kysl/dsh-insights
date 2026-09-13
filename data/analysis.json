@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-12T22:22:10.848Z",
+  "generatedAt": "2026-09-13T00:16:44.347Z",
   "totals": {
-    "authoritative": 10927,
-    "active7": 2535,
+    "authoritative": 10930,
+    "active7": 2533,
     "active7Pct": 23.2,
-    "active30": 10927,
+    "active30": 10930,
     "active30Pct": 100,
     "ageGate1": 10490,
     "ageGate1Pct": 96,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1206,
+      "2026-09": 1209,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -54,7 +54,7 @@
       "2026-03-16": 1,
       "2026-05-18": 1,
       "2026-06-29": 6,
-      "2026-09-07": 589,
+      "2026-09-07": 592,
       "2026-03-02": 1
     },
     "byWeekGrades": {
@@ -128,7 +128,7 @@
         "2026-06-29": 2,
         "2026-07-20": 1,
         "2026-07-27": 1,
-        "2026-09-07": 245
+        "2026-09-07": 248
       },
       "D": {
         "2026-08-10": 139,
@@ -142,21 +142,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 4586,
-      "unpublished": 6341,
+      "published": 4587,
+      "unpublished": 6343,
       "stale": 1299
     },
     "docs": {
-      "readme": 10898,
+      "readme": 10901,
       "zhFile": 824,
-      "zh": 5227,
-      "both": 5217,
+      "zh": 5228,
+      "both": 5218,
       "none": 29
     },
     "lib": {
-      "index": 5891,
-      "client": 3729,
-      "both": 3342
+      "index": 5894,
+      "client": 3731,
+      "both": 3344
     },
     "publishPct": 42,
     "zhPct": 47.7
@@ -226,15 +226,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 10656
+      "count": 10659
     },
     {
       "topic": "deepseek-harness",
-      "count": 7123
+      "count": 7125
     },
     {
       "topic": "dsh",
-      "count": 4053
+      "count": 4054
     },
     {
       "topic": "deepseek",
@@ -242,7 +242,7 @@
     },
     {
       "topic": "dsh-plugins",
-      "count": 1112
+      "count": 1113
     },
     {
       "topic": "cordis",
@@ -262,7 +262,7 @@
     },
     {
       "topic": "dsh-plugin-market",
-      "count": 378
+      "count": 379
     },
     {
       "topic": "ai-agent",
@@ -341,8 +341,8 @@
     "imsai": 266,
     "covered": 1023,
     "coveredPct": 9.4,
-    "none": 9904,
-    "fetchedAt": "2026-09-12T22:21:25.710Z"
+    "none": 9907,
+    "fetchedAt": "2026-09-13T00:03:13.000Z"
   },
   "suggested": [
     {
@@ -1047,7 +1047,7 @@
     }
   ],
   "downloads": {
-    "fetchedAt": "2026-09-12T00:21:55.551Z",
+    "fetchedAt": "2026-09-13T00:04:01.914Z",
     "top": [
       {
         "full_name": "dsh-market/dsh-market",
@@ -1074,7 +1074,7 @@
         "inAwesome": false,
         "inImsai": true,
         "covered": true,
-        "weekly": 81151
+        "weekly": 86927
       },
       {
         "full_name": "KokuYu-sysu/dsh-market-desktop",
@@ -1109,7 +1109,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 81151
+        "weekly": 86927
       },
       {
         "full_name": "omdsh-dev/DSH-better-sidebar",
@@ -1130,32 +1130,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 66944
-      },
-      {
-        "full_name": "dream-num/dsh-univer-office",
-        "stars": 326,
-        "score": 98,
-        "grade": "S",
-        "dimScores": {
-          "eng": 98,
-          "docs": 100,
-          "discover": 100,
-          "maint": 100
-        },
-        "drops": [
-          {
-            "code": "manifest.not-lib-main",
-            "sev": "minor",
-            "label": "main 不是 lib/index.js（产物布局非常规）"
-          }
-        ],
-        "missing": [],
-        "category": "文件浏览 / 预览",
-        "inAwesome": false,
-        "inImsai": true,
-        "covered": true,
-        "weekly": 28282
+        "weekly": 73829
       },
       {
         "full_name": "bowenliang123/dsh-context",
@@ -1182,7 +1157,32 @@
         "inAwesome": false,
         "inImsai": true,
         "covered": true,
-        "weekly": 22339
+        "weekly": 25269
+      },
+      {
+        "full_name": "dream-num/dsh-univer-office",
+        "stars": 326,
+        "score": 98,
+        "grade": "S",
+        "dimScores": {
+          "eng": 98,
+          "docs": 100,
+          "discover": 100,
+          "maint": 100
+        },
+        "drops": [
+          {
+            "code": "manifest.not-lib-main",
+            "sev": "minor",
+            "label": "main 不是 lib/index.js（产物布局非常规）"
+          }
+        ],
+        "missing": [],
+        "category": "文件浏览 / 预览",
+        "inAwesome": false,
+        "inImsai": true,
+        "covered": true,
+        "weekly": 18211
       },
       {
         "full_name": "Han-1413141/dsh-cost-meter",
@@ -1207,7 +1207,7 @@
         "inAwesome": true,
         "inImsai": false,
         "covered": true,
-        "weekly": 14662
+        "weekly": 17298
       },
       {
         "full_name": "Creakono/dsh-cost-meter",
@@ -1267,7 +1267,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 14662
+        "weekly": 17298
       },
       {
         "full_name": "AnakinCao/dsh-cost-meter",
@@ -1317,7 +1317,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 14662
+        "weekly": 17298
       },
       {
         "full_name": "omdsh-dev/dsh-mnemon",
@@ -1336,7 +1336,7 @@
         "inAwesome": false,
         "inImsai": true,
         "covered": true,
-        "weekly": 8665
+        "weekly": 9063
       },
       {
         "full_name": "ysr666/dsh-vision-router",
@@ -1371,7 +1371,7 @@
         "inAwesome": false,
         "inImsai": true,
         "covered": true,
-        "weekly": 8487
+        "weekly": 8706
       },
       {
         "full_name": "MeteorNOX/DeepSeek-Balance-Whale-Widget",
@@ -1398,7 +1398,7 @@
         "inAwesome": true,
         "inImsai": false,
         "covered": true,
-        "weekly": 5311
+        "weekly": 6405
       },
       {
         "full_name": "awesome-dsh-plugin/dsh-find-plugin",
@@ -1438,7 +1438,7 @@
         "inAwesome": false,
         "inImsai": true,
         "covered": true,
-        "weekly": 4779
+        "weekly": 5278
       },
       {
         "full_name": "graceen2331-prog/find-plugin",
@@ -1483,7 +1483,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 4779
+        "weekly": 5278
       },
       {
         "full_name": "vclike/dsh-find-plugin",
@@ -1523,7 +1523,7 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 4779
+        "weekly": 5278
       },
       {
         "full_name": "RevolutionLA/dsh-dream-skin",
@@ -1542,10 +1542,10 @@
         "inAwesome": false,
         "inImsai": false,
         "covered": false,
-        "weekly": 4171
+        "weekly": 4997
       }
     ],
-    "sum": 322844
+    "sum": 336183
   },
   "deep": {
     "targets": 8,
@@ -1557,7 +1557,7 @@
     "grades": {
       "A": 847,
       "B": 5252,
-      "C": 3292,
+      "C": 3295,
       "D": 1267,
       "S": 269
     },
@@ -1568,11 +1568,11 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4074
+      "count": 4076
     },
     {
       "category": "模型 / 代理",
-      "count": 1030
+      "count": 1031
     },
     {
       "category": "文件浏览 / 预览",
@@ -8531,6 +8531,27 @@
       "topCat": "文件浏览 / 预览"
     },
     {
+      "owner": "acryldev",
+      "plugins": 5,
+      "stars": 1,
+      "grades": {
+        "A": 1,
+        "B": 2,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 3,
+      "npm": 4,
+      "covered": 3,
+      "lastPush": "2026-09-12",
+      "firstCreated": "2026-09-08",
+      "delta": 0,
+      "avg": 80,
+      "topPlugin": "acryldev/dsh-cordis",
+      "topStars": 1,
+      "topCat": "其它"
+    },
+    {
       "owner": "kiwifruit13",
       "plugins": 4,
       "stars": 1,
@@ -8823,27 +8844,6 @@
       "topPlugin": "aijunjiang/dsh-plugin-vision",
       "topStars": 1,
       "topCat": "侧栏 / 工作区"
-    },
-    {
-      "owner": "acryldev",
-      "plugins": 3,
-      "stars": 1,
-      "grades": {
-        "A": 1,
-        "B": 2,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 3,
-      "npm": 3,
-      "covered": 3,
-      "lastPush": "2026-09-10",
-      "firstCreated": "2026-09-08",
-      "delta": 0,
-      "avg": 88.3,
-      "topPlugin": "acryldev/dsh-cordis",
-      "topStars": 1,
-      "topCat": "其它"
     },
     {
       "owner": "awol2005ex3",
@@ -133294,10 +133294,31 @@
       "topPlugin": "moluyao/dsh-minimax-asr",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "succlz123",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-12",
+      "firstCreated": "2026-09-12",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "succlz123/dsh-model-switch",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
     }
   ],
   "authorStats": {
-    "total": 6260,
+    "total": 6261,
     "multi": 1473,
     "top10Share": 15.8
   },
@@ -133306,7 +133327,7 @@
       "count": 14336,
       "at": "2026-09-11T09:53:55.134Z"
     },
-    "candidates": 15154,
+    "candidates": 15157,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -133374,14 +133395,14 @@
       "2026-08-17": 4892,
       "2026-08-24": 1872,
       "2026-08-31": 936,
-      "2026-09-07": 710,
+      "2026-09-07": 713,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 436
     },
-    "validated": 15058,
+    "validated": 15061,
     "candidatesValidated": 30,
-    "authoritative": 10927,
+    "authoritative": 10930,
     "invalidUnique": 4131,
     "invalidBuckets": [
       {
@@ -133430,5 +133451,5 @@
       }
     ]
   },
-  "enrichCount": 10927
+  "enrichCount": 10930
 }
