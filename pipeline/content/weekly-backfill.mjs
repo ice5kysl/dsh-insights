@@ -115,7 +115,7 @@ for (const wk of weeksFrom(startWk, currentWk)) {
   L.push('')
   L.push('---')
   L.push('')
-  L.push('> 本期为历史补档，由 DSH Insights 基于仓库创建时间重建 · 正式周报自 2026-W36 起每周五自动发布：https://dsh-insights.com/weekly/')
+  L.push('> 本期为历史补档，由 DSH Insights 基于仓库创建时间重建 · 正式周报自 2026-W36 起每周一自动发布：https://dsh-insights.com/weekly/')
   writeFileSync(f, L.join('\n') + '\n')
   made++
   console.log(`[backfill] ${wk} ✓（新增候选 ${newCands.length} / 权威 ${newPlugins.length} / 官方版本 ${versions.length}）`)

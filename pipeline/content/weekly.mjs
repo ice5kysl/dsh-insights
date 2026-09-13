@@ -5,11 +5,15 @@
  *
  * Reads current snapshot (analysis/enrich/downloads/llm/diff) and renders a
  * shareable zh-CN report with numbers, movers, signals, and calls to action.
+ *
+ * 周标签语义（2026-09 起，生成时机周五 → 周一）：覆盖「刚结束的完整 ISO 周」，
+ * 见 lib/week.mjs 的 lastCompleteIsoWeek。--week YYYY-Www 可手动指定（补档/重跑）。
  */
 
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { PATHS, readJson, readJsonl, loadPlugins } from '../../lib/data.mjs'
+import { weekLabel, lastCompleteIsoWeek } from '../../lib/week.mjs'
 
 const W = PATHS.weeklyDir
 mkdirSync(W, { recursive: true })
@@ -53,24 +57,42 @@ function weeklyDiff() {
 const diff = weeklyDiff()
 const reviews = readJsonl(PATHS.reviews).length
 
-// ---- 编者按（LLM，可选）：事实编年之上的一段编辑视角；缺 key/失败自动跳过 ----
-async function editorial() {
+// ---- LLM 小节（可选）：编者按 + 本周洞察 + 行动建议；缺 key/失败整体跳过，事实部分照常出报 ----
+async function llmSections() {
   const key = process.env.DEEPSEEK_API_KEY || ''
   if (!key) return null
   const model = process.env.WEEKLY_LLM_MODEL || 'deepseek-v4-flash'
+  // S 级低星宝藏插件（score ≥95 按 ★ 升序）：值得被看见的「高分冷门」
+  const gems = enrich.filter((e) => (e.score ?? 0) >= 95).sort((a, b) => (a.stars || 0) - (b.stars || 0)).slice(0, 5)
+    .map((e) => ({ id: e.full_name, stars: e.stars || 0, score: e.score, category: e.category }))
+  // 崩溃语料 TOP 签名（dsh-why --share 上报聚合；文件缺失则不喂）
+  const crash = readJson(PATHS.crashCorpus, null)
+  const crashTop = (crash?.signatures || []).slice(0, 3).map((s) => ({ sig: s.sig, category: s.category, count: s.count, plugins: (s.plugins || []).slice(0, 3) }))
+  const breaking = (dyn?.dsh?.releases || []).filter((r) => r.breaking).slice(0, 5)
+    .map((r) => ({ tag: r.tag, at: (r.published_at || '').slice(0, 10), summary: (r.summary || '').slice(0, 60) }))
   const facts = {
     week: wk, range: weekLabel(wk),
     authoritative: (analysis.totals || {}).authoritative, grades: (analysis.quality || {}).grades, avgScore: (analysis.quality || {}).avgScore,
     publishPct: analysis.distribution?.publishPct, active7Pct: (analysis.totals || {}).active7Pct,
-    diff: diff && { base: undefined, added: diff.added, removed: diff.removed, addedTop: diff.addedTop, risers: diff.risers },
+    diff: diff && { added: diff.added, removed: diff.removed, addedTop: diff.addedTop, risers: diff.risers },
+    newAuthors: diff ? [...new Set(diff.addedTop.map((r) => r.id.split('/')[0]))].slice(0, 5) : [],
     topByStars: (analysis.topByStars || []).slice(0, 5),
     downloadsTop: (analysis.downloads?.top || []).slice(0, 5).map((s) => ({ id: s.full_name, weekly: s.weekly })),
     releases: (dyn?.dsh?.releases || []).slice(0, 3).map((r) => ({ tag: r.tag, at: (r.published_at || '').slice(0, 10), breaking: !!r.breaking })),
+    breaking,
+    gems,
+    crashTop,
   }
-  const prompt = `你是「DSH 插件生态周报」的编辑。基于以下本周事实（JSON），写一段「编者按」：
-- 3–5 条 bullet，每条一行：以一个**加粗的判断短语**开头（5–15 字，是具体的判断内容本身，严禁出现「一句话判断」这类占位字样），后接支撑（点名具体插件/作者/版本 + 数字）。禁止复述统计数字本身，要给编辑视角的判断（什么值得注意、为什么、意味着什么）。
-- 最后单独一行写一句「本周基调」收尾（一句话，不用 bullet）。
-- 只许使用给定事实，禁止编造。中文。直接输出 markdown（bullet + 收尾行），不要标题、不要代码围栏。
+  const prompt = `你是「DSH 插件生态周报」的编辑。基于以下本周事实（JSON），输出三个小节，严格返回 JSON（不要代码围栏）：
+{
+  "editorial": "编者按 markdown：3–5 条 bullet，每条一行：以一个**加粗的判断短语**开头（5–15 字，是具体的判断内容本身，严禁出现「一句话判断」这类占位字样），后接支撑（点名具体插件/作者/版本 + 数字）。禁止复述统计数字本身，要给编辑视角的判断（什么值得注意、为什么、意味着什么）。最后单独一行写一句「本周基调」收尾（一句话，不用 bullet）。",
+  "insights": ["本周洞察：2–4 条数据驱动的判断，每条 1–2 句「事实 + 含义」（点名具体插件/版本/数字，说明对生态意味着什么）。优先使用 breaking / gems / crashTop / newAuthors / risers 这些增量信号，不要复述速览统计。"],
+  "actions": {
+    "users": ["给插件用户的行动建议 1–2 条，具体可执行（如某版本含 breaking 时提示升级前先用 dsh-why 诊断当前插件组合、关注某类高分替代）"],
+    "authors": ["给插件作者的行动建议 1–2 条，具体可执行（如声明 engines.dsh、未发 npm 的尽快发布、参考 gems 的差异化方向）"]
+  }
+}
+只许使用给定事实，禁止编造。中文。bullet 内不要标题、不要代码围栏。
 
 事实：${JSON.stringify(facts)}`
   try {
@@ -80,52 +102,57 @@ async function editorial() {
       body: JSON.stringify({ model, messages: [{ role: 'user', content: prompt }], temperature: 0.4, max_tokens: 10000 }),
       signal: AbortSignal.timeout(120000),
     })
-    if (!r.ok) { console.error(`[weekly] 编者按 LLM HTTP ${r.status} —— 跳过`); return null }
+    if (!r.ok) { console.error(`[weekly] LLM HTTP ${r.status} —— 三个小节整体跳过`); return null }
     const doc = await r.json()
-    const md = (doc.choices?.[0]?.message?.content || '').replace(/^```(?:markdown)?|```$/gm, '').trim()
-    if (!md) console.error('[weekly] 编者按 LLM 返回空内容（推理模型可能吃光了 max_tokens）—— 跳过')
-    return md || null
-  } catch (e) { console.error(`[weekly] 编者按 LLM 失败（${e.message}）—— 跳过`); return null }
+    const text = (doc.choices?.[0]?.message?.content || '').replace(/^```(?:json|markdown)?|```$/gm, '').trim()
+    if (!text) { console.error('[weekly] LLM 返回空内容（推理模型可能吃光了 max_tokens）—— 三个小节整体跳过'); return null }
+    let out
+    try { out = JSON.parse(text) } catch { console.error('[weekly] LLM 输出非 JSON（跳过三个小节）'); return null }
+    if (typeof out?.editorial !== 'string' || !out.editorial.trim()) { console.error('[weekly] LLM 输出缺 editorial（跳过三个小节）'); return null }
+    return {
+      editorial: out.editorial.trim(),
+      insights: Array.isArray(out.insights) ? out.insights.filter((s) => typeof s === 'string' && s.trim()).slice(0, 4) : [],
+      users: Array.isArray(out.actions?.users) ? out.actions.users.filter((s) => typeof s === 'string' && s.trim()).slice(0, 2) : [],
+      authors: Array.isArray(out.actions?.authors) ? out.actions.authors.filter((s) => typeof s === 'string' && s.trim()).slice(0, 2) : [],
+    }
+  } catch (e) { console.error(`[weekly] LLM 失败（${e.message}）—— 三个小节整体跳过`); return null }
 }
 
-function isoWeek(d) {
-  const date = new Date(d + 'T00:00:00Z')
-  const day = (date.getUTCDay() + 6) % 7
-  date.setUTCDate(date.getUTCDate() - day + 3)
-  const first = new Date(Date.UTC(date.getUTCFullYear(), 0, 4))
-  const year = date.getUTCFullYear()
-  const week = 1 + Math.round(((date - first) / 86400000 - 3 + ((first.getUTCDay() + 6) % 7)) / 7)
-  return `${year}-W${String(week).padStart(2, '0')}`
-}
-// ISO 周 → [周一, 周日]（标题展示用 YYYY/MM/DD）
-function weekLabel(isoWk) {
-  const m = isoWk.match(/^(\d{4})-W(\d{2})$/)
-  const d = new Date(Date.UTC(+m[1], 0, 4))
-  const day = d.getUTCDay() || 7
-  d.setUTCDate(d.getUTCDate() - day + 1 + (+m[2] - 1) * 7)
-  const fmt = (x) => `${x.getUTCFullYear()}/${String(x.getUTCMonth() + 1).padStart(2, '0')}/${String(x.getUTCDate()).padStart(2, '0')}`
-  const sun = new Date(d.getTime() + 6 * 86400000)
-  return `${fmt(d)}～${fmt(sun)}`
-}
 const stamp = new Date()
 const wkArgIdx = process.argv.indexOf('--week')
 const wk = wkArgIdx >= 0 && /^\d{4}-W\d{2}$/.test(process.argv[wkArgIdx + 1] || '')
   ? process.argv[wkArgIdx + 1]
-  : isoWeek(stamp.toISOString().slice(0, 10))
+  : lastCompleteIsoWeek(stamp)
 const t = analysis.totals || {}
 const q = analysis.quality || {}
 const ch = analysis.channels
 const dl = analysis.downloads
-const editorialMd = await editorial()
+const llmMd = await llmSections()
 const L = []
 L.push(`# DSH 插件生态周报 · ${wk}（${weekLabel(wk)}）`)
 L.push('')
 L.push(`> 数据快照 ${(analysis.generatedAt || '').slice(0, 10)} · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)`)
 L.push('')
-if (editorialMd) {
-  L.push('## 编者按（DeepSeek 生成）')
+if (llmMd) {
+  L.push('## 编者按')
   L.push('')
-  L.push(editorialMd)
+  L.push(llmMd.editorial)
+  L.push('')
+  if (llmMd.insights.length) {
+    L.push('## 本周洞察')
+    L.push('')
+    for (const s of llmMd.insights) L.push(`- ${s}`)
+    L.push('')
+  }
+  if (llmMd.users.length || llmMd.authors.length) {
+    L.push('## 行动建议')
+    L.push('')
+    for (const s of llmMd.users) L.push(`- **给插件用户**：${s}`)
+    for (const s of llmMd.authors) L.push(`- **给插件作者**：${s}`)
+    L.push('')
+  }
+  // 轻量三小节 ↔ 深度长报告分工：周报末尾链到 insights 报告索引页
+  L.push('> 深度分析见《DSH 生态洞察》长报告：https://dsh-insights.com/insights/?utm_source=weekly&utm_medium=site')
   L.push('')
 }
 L.push('## 本期速览')

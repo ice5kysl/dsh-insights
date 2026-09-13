@@ -16,7 +16,7 @@
 |---|---|---|
 | **L1 插件洞察** | 真伪判定（manifest 门禁）→ 权威集 → 健康分 **S–D/0–100**（health-v5，逐条证据）→ 收录矩阵 → 「优质未收录」榜 | 数据快照 + 站点 + /p/ 详情页 + 信件 |
 | **L2 官方动态**（v0 已上线） | dsh releases/rc 节奏、dist-tags、DeepSeek 平台信号、API 模型清单（/models 探测，新模型首见标记）；rc 兼容雷达（M2） | /dynamics + 周报官方小节 |
-| **L3 生态报告** | 生态周报（每周五 CI 生成）+ 每插件「致作者的信」（外发物料） | /weekly + RSS + data/reports/ |
+| **L3 生态报告** | 生态周报（每周一 CI 生成，覆盖刚完结的 ISO 周）+ 每插件「致作者的信」（外发物料） | /weekly + RSS + data/reports/ |
 
 不是第 N 个目录/市场——让目录、市场、agent 与 dsh 官方**有据可依**的数据与观测源。
 
@@ -28,7 +28,7 @@
 
 | file | 说明 |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**权威集 10,938** + 分桶 4,136（0 重复 · 硬门禁 · 2026-09-13 快照，校验滚动扩大中）<!-- stats:end --> |
+| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**权威集 10,958** + 分桶 4,139（0 重复 · 硬门禁 · 2026-09-13 快照，校验滚动扩大中）<!-- stats:end --> |
 | `data/insights.json` + `insights.schema.json` | agent 契约（稳定 URL，schema 只增不改） |
 | `data/analysis.json` · `enrich.json` · `plugins.csv` | 聚合 / 每插件评分+渠道 / 表格 |
 | `data/dynamics.json` · `metrics.jsonl` | 官方动态快照 · 产品自测量指标 |
@@ -52,7 +52,7 @@ content    letters 致作者的信 · weekly 生态周报
 
 ```bash
 node bin/pipeline.mjs daily      # CI 每日轻量
-node bin/pipeline.mjs friday     # daily + discover/refresh + author-graph + metrics + 信件/周报（CI 每周五）
+node bin/pipeline.mjs monday     # daily + discover/refresh + author-graph + metrics + 信件/周报（CI 每周一；friday 保留别名）
 node bin/pipeline.mjs snapshot   # 分析 + 发布全链
 node bin/pipeline.mjs full       # 发现 → 校验 → snapshot
 node bin/pipeline.mjs --only score,badges / --from analyze / --dry
@@ -69,7 +69,7 @@ node bin/backfill-events.mjs                                 # 一次性：db9 e
 node bin/backfill-plugin-events.mjs                          # 一次性：插件级事件回填（plugin_created / npm_first_publish）
 ```
 
-CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周五在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供作者在 Actions 手动触发本插件重检。`site/` **不入 git**（生成物，已 gitignore）——`pages.yml` 部署时现场生成（`pipeline --only site,badges,pages`），再叠 `site-static/`（CNAME/图标/og，仅有的手工维护 Web 资产）。db9 有开发分支 `dsh-data-dev`（生产的 schema+快照克隆）：本地手跑管线可用 `DB9_SQL_URL=https://api.db9.ai/customer/databases/42r75opjazyn/sql` 指向它（端点不是秘密，token 用各自的 scoped token，CI secret 保持只连生产）。
+CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周一在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供作者在 Actions 手动触发本插件重检。`site/` **不入 git**（生成物，已 gitignore）——`pages.yml` 部署时现场生成（`pipeline --only site,badges,pages`），再叠 `site-static/`（CNAME/图标/og，仅有的手工维护 Web 资产）。db9 有开发分支 `dsh-data-dev`（生产的 schema+快照克隆）：本地手跑管线可用 `DB9_SQL_URL=https://api.db9.ai/customer/databases/42r75opjazyn/sql` 指向它（端点不是秘密，token 用各自的 scoped token，CI secret 保持只连生产）。
 
 ## 评分口径（一段话）
 

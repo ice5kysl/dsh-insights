@@ -2,7 +2,8 @@
 #
 # - 每小时 :23 一条 cron。GitHub schedule 投递不准点（实测可能整天落不进指定
 #   小时），故按 UTC 日去重而非按小时：每个 UTC 日首个到达的 schedule run 跑
-#   daily（周五跑 friday：daily + 作者关系图 + metrics + 信件 + 周报），其余
+#   daily（周一跑 monday：daily + 作者关系图 + metrics + 信件 + 周报——周日 24:00
+#   后才是完整一周，2026-09 起由周五改为周一），其余
 #   run 跑 `pipeline hourly`（增量纳新：discover-incr + validate + dynamics + 发布层）。
 #   去重状态存 data/last-daily.txt，随快照提交闭环。
 # - Manual `workflow_dispatch` mode=full: `pipeline full`（全量管线）。
@@ -20,13 +21,13 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'refresh (daily) / friday (daily+周报) / full (全量管线)'
+        description: 'refresh (daily) / monday (daily+周报) / full (全量管线)'
         required: true
         default: refresh
         type: choice
         options:
           - refresh
-          - friday
+          - monday
           - full
 
 permissions:
@@ -57,7 +58,7 @@ jobs:
           GA4_SA_KEY: ${{ secrets.GA4_SA_KEY }}
           GA4_PROPERTY: ${{ secrets.GA4_PROPERTY }}
         run: node bin/pipeline.mjs full
-      - name: Scheduled refresh（每个 UTC 日首个 schedule run 跑 daily/周五 friday，其余 hourly）
+      - name: Scheduled refresh（每个 UTC 日首个 schedule run 跑 daily/周一 monday，其余 hourly）
         if: inputs.mode != 'full'
         env:
           GITHUB_TOKEN: ${{ secrets.DSH_GH_TOKEN || secrets.GITHUB_TOKEN }}
@@ -77,15 +78,15 @@ jobs:
           TODAY=$(date -u +%F)
           LAST=$(cat data/last-daily.txt 2>/dev/null || echo never)
           echo "today=$TODAY last-daily=$LAST"
-          if [ "${{ inputs.mode }}" = "friday" ]; then
-            echo "Friday profile (manual)"
-            node bin/pipeline.mjs friday
+          if [ "${{ inputs.mode }}" = "monday" ]; then
+            echo "Monday profile (manual)"
+            node bin/pipeline.mjs monday
           elif [ "${{ github.event_name }}" = "schedule" ] && [ "$LAST" = "$TODAY" ]; then
             echo "Hourly incremental profile"
             node bin/pipeline.mjs hourly
-          elif [ "$(date -u +%u)" = "5" ]; then
-            echo "Friday profile"
-            node bin/pipeline.mjs friday
+          elif [ "$(date -u +%u)" = "1" ]; then
+            echo "Monday profile"
+            node bin/pipeline.mjs monday
             echo "$TODAY" > data/last-daily.txt
           else
             echo "Daily profile"

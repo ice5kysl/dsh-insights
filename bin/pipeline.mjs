@@ -7,7 +7,8 @@
  * Profiles:
  *   hourly    CI 每小时增量纳新（discover-incr + validate + dynamics + 发布层；不跑 downloads/compat/compat-observed 等重 API 步骤）
  *   daily     CI 每日轻量刷新（collect 增量的低成本部分 + 发布层）
- *   friday    daily + 内容层（信件 diff 驱动 + 生态周报）—— 每周五 CI
+ *   monday    daily + 内容层（信件 diff 驱动 + 生态周报）—— 每周一 CI（周日 24:00 后才是完整一周；
+ *             2026-09 起由周五改为周一，旧名 friday 保留为别名）
  *   snapshot  分析 + 发布全链（评分/导出/徽章/历史/重叠）
  *   full      全量：发现 → 校验 → snapshot
  *   content   只跑内容层（letters + weekly + pages）
@@ -82,13 +83,15 @@ const HOURLY = ['lists', 'discover-incr', 'validate', 'dynamics', 'analyze', 'ex
 // shell-rows.json（图行清单），且须先于 pages（详情页消费）
 const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'compat-observed', 'overlap', 'scenarios', 'badges', 'site', 'pages']
 const CONTENT = ['letters', 'weekly', 'insights', 'pages']
+const MONDAY = ['lists', 'discover', 'refresh', 'downloads', 'dynamics', 'compat', 'analyze', 'site', 'export-csv', 'diff', 'author-graph', 'metrics', 'letters', 'weekly', 'insights', 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'pages']
 const PROFILES = {
   hourly: HOURLY,
   daily: DAILY,
   // pages 必须在 letters/weekly/insights 之后（当天内容当天上线）——从 DAILY 摘出放到内容层之后，勿用 Set 去重（会把 pages 留在 DAILY 位置）
   // refresh（Tier 0 元数据合并）在 analyze 之前跑：本周活跃度/飙升榜用新鲜数据；discover 周度重爬供其消费（search 配额独立）
   // insights（LLM 洞察，需 DEEPSEEK_API_KEY；缺 key 自动跳过不失败）
-  friday: ['lists', 'discover', 'refresh', 'downloads', 'dynamics', 'compat', 'analyze', 'site', 'export-csv', 'diff', 'author-graph', 'metrics', 'letters', 'weekly', 'insights', 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'pages'],
+  monday: MONDAY,
+  friday: MONDAY, // 旧名别名（2026-09 起生成时机改为每周一），防止外部脚本/肌肉记忆断掉
   snapshot: SNAPSHOT,
   full: ['lists', 'discover', 'npm-map', 'downloads', 'validate', ...SNAPSHOT, 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'diff'],
   content: CONTENT,

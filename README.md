@@ -17,7 +17,7 @@ DSH Insights is the missing evaluation layer: **every plugin gets an honest, rep
 |---|---|---|
 | **L1 · Plugin insights** | Authenticity gate (manifest) → authoritative set → health score **S–D / 0–100** (health-v5, per-deduction evidence) → channel coverage → "quality unlisted" list | Snapshot data + site + per-plugin pages + letters |
 | **L2 · Official dynamics** (v0 live) | dsh releases/rc cadence, dist-tags, DeepSeek platform signals, API model list (`/models` probe, new-model detection); rc compat radar (M2) | `/dynamics` + weekly official section |
-| **L3 · Ecosystem reports** | Weekly report (every Friday, CI-generated) + a "letter to the author" per plugin (outreach material) | `/weekly` + RSS + `data/reports/` |
+| **L3 · Ecosystem reports** | Weekly report (every Monday, CI-generated; covers the just-completed ISO week) + a "letter to the author" per plugin (outreach material) | `/weekly` + RSS + `data/reports/` |
 
 Not another directory or marketplace — a data & observation source for directories, marketplaces, agents and the dsh team to build on.
 
@@ -29,7 +29,7 @@ Home (search + KPI + latest arrivals + scenario shortcuts) · [Dashboard](https:
 
 | File | What |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**Authoritative set 10,938** + 4,136 noise buckets (0 duplicates · hard gate · 2026-09-13 snapshot, validation still rolling)<!-- stats:end --> |
+| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**Authoritative set 10,958** + 4,139 noise buckets (0 duplicates · hard gate · 2026-09-13 snapshot, validation still rolling)<!-- stats:end --> |
 | `data/insights.json` + `insights.schema.json` | Agent contract (stable URL, additive-only schema) |
 | `data/analysis.json` · `enrich.json` · `plugins.csv` | Aggregates / per-plugin scores+channels / spreadsheet |
 | `data/dynamics.json` · `metrics.jsonl` | Official-dynamics snapshot · product self-metrics |
@@ -53,7 +53,7 @@ One orchestrator (`bin/pipeline.mjs`):
 
 ```bash
 node bin/pipeline.mjs daily      # CI daily (light refresh)
-node bin/pipeline.mjs friday     # daily + discover/refresh + author-graph + metrics + letters + weekly (CI Fridays)
+node bin/pipeline.mjs monday     # daily + discover/refresh + author-graph + metrics + letters + weekly (CI Mondays; `friday` kept as alias)
 node bin/pipeline.mjs snapshot   # analyze → publish full chain
 node bin/pipeline.mjs full       # discovery → validation → snapshot
 node bin/pipeline.mjs --only score,badges / --from analyze / --dry
@@ -70,7 +70,7 @@ node bin/backfill-events.mjs                                 # one-off: backfill
 node bin/backfill-plugin-events.mjs                          # one-off: backfill plugin-level events (plugin_created / npm_first_publish)
 ```
 
-CI (`.github/workflows/refresh.yml`): single cron 03:07 UTC, Friday profile switched in-job, concurrency-grouped; deploys via `workflow_run`. `recheck.yml` lets authors trigger a re-check of their plugin from Actions. `site/` is **not in git** (build artifact, gitignored) — `pages.yml` regenerates it at deploy time (`pipeline --only site,badges,pages`) and layers in `site-static/` (CNAME/icons/og, the only hand-maintained web assets). db9 has a dev branch `dsh-data-dev` (schema + snapshot of prod): for local pipeline runs point `DB9_SQL_URL=https://api.db9.ai/customer/databases/42r75opjazyn/sql` at it (endpoint is not a secret; use your own scoped token, CI secrets stay prod-only).
+CI (`.github/workflows/refresh.yml`): single cron 03:07 UTC, Monday profile switched in-job, concurrency-grouped; deploys via `workflow_run`. `recheck.yml` lets authors trigger a re-check of their plugin from Actions. `site/` is **not in git** (build artifact, gitignored) — `pages.yml` regenerates it at deploy time (`pipeline --only site,badges,pages`) and layers in `site-static/` (CNAME/icons/og, the only hand-maintained web assets). db9 has a dev branch `dsh-data-dev` (schema + snapshot of prod): for local pipeline runs point `DB9_SQL_URL=https://api.db9.ai/customer/databases/42r75opjazyn/sql` at it (endpoint is not a secret; use your own scoped token, CI secrets stay prod-only).
 
 ## Scoring in one paragraph
 
