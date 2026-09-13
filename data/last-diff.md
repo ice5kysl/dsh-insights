@@ -1,29 +1,29 @@
 # 快照 Diff · 2026-09-13
 
-- 当前权威插件：**10984**（上次 10958）
-- 新增 26 · 消失 0
+- 当前权威插件：**11012**（上次 10984）
+- 新增 28 · 消失 0
 
 ## 新增（Top 20）
-- RyanZeeee/dsh-chattree ★1 
-- Vergil-long/dsh-email-notify ★1 
-- iimaguest/dsh-browser-annotate ★0 
-- ArimaKana-Akane/dsh-whale-tools ★0 
-- gezi-wen/dsh-repair ★0 (npm ✓)
-- gezi-wen/dsh-subagent-delegation ★0 (npm ✓)
-- liyixuan201211/dsh-skillnotary ★0 
-- Astervolans/dsh-literature-search ★0 
-- BeiWay1145/dsh-sidebar-downloads ★0 
-- tippykafuu/dsh-client-ui-wallpaper ★0 
-- ArimaKana-Akane/dsh-wallpaper-position ★0 
-- lsjspl/dsh-reel ★0 
-- gezi-wen/dsh-skill-authoring ★0 (npm ✓)
-- iwinoid/dsh-kde-tint ★0 
-- MichengAI/dsh-code-review ★0 (npm ✓)
-- ArimaKana-Akane/dsh-sakurafrp ★0 
-- BeiWay1145/dsh-download-guard ★0 
-- Amer-CN/zcode-usage-stats ★0 
-- troytse/dsh-plugin-subagent-roles ★0 (npm ✓)
-- slatinwine/dsh-sentience-audit ★0 
+- webkubor/dsh-llm-hub ★1 (npm ✓)
+- better-er/dsh-notify-ding ★1 (npm ✓)
+- lcohvne-tomorin/dsh-context-dashboard ★0 (npm ✓)
+- liyixuan201211/dsh-deadend ★0 
+- qxcool/dsh-usage-plus ★0 (npm ✓)
+- ManoloRemiddi/dsh-adaptive-reasoning ★0 (npm ✓)
+- nina27486486/dsh-prompt-forge ★0 
+- yknBugs/dsh-balance-status ★0 (npm ✓)
+- yuu1111/dsh-ui-cost-meter ★0 (npm ✓)
+- VviLliAm-qwq/dsh-git-bash ★0 (npm ✓)
+- VviLliAm-qwq/dsh-console-utf8 ★0 (npm ✓)
+- cardclown/dsh-sims-agent ★0 
+- JIUYUE-SEP/dsh-plugin-archive-shelf ★0 
+- Baisbt/dsh-plugin-webrelay ★0 
+- VviLliAm-qwq/dshtui-format-setting ★0 (npm ✓)
+- idoall/dsh-notify ★0 (npm ✓)
+- BaihaWhite/dsh-web-search-scrape ★0 
+- 778672151/dsh-session-turn-eta ★0 
+- zhengjy01/dsh-updater ★0 (npm ✓)
+- VviLliAm-qwq/dsh-mama-cheer ★0 (npm ✓)
 
 ## 消失（Top 0）
 
