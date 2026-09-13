@@ -7,13 +7,14 @@
  *   2) 数据  GET /analytics/<region>/api/websites/<websiteId>/<endpoint>?startAt=<epoch_ms>&endAt=<epoch_ms>
  *            请求头必须带 x-umami-share-token 与 x-umami-share-context（即 shareId）。
  *
- * 一次跑五份只读请求（顺序执行，不写任何文件、不留任何状态）：
+ * 一次跑六份只读请求（顺序执行，不写任何文件、不留任何状态）：
  *   stats                              → 总计（pageviews/visitors/visits/bounces/totaltime）
  *   pageviews?unit=day                 → 按天曲线
+ *   metrics?type=hostname&limit=5      → 域名 Top 5（两站共用一个 website 时靠它拆开）
  *   metrics?type=path&limit=15         → 页面 Top 15
  *   metrics?type=referrer&limit=10     → 来源 Top 10
  *   metrics?type=country&limit=10      → 国家 Top 10
- * 三个 metrics 调用容忍单点失败（该字段记为 null 并继续）；stats / pageviews 失败即整体失败。
+ * 四个 metrics 调用容忍单点失败（该字段记为 null 并继续）；stats / pageviews 失败即整体失败。
  * 默认打印中文对齐文本；--json 只在 stdout 输出一个 JSON 对象（便于管线消费）。
  *
  * 用法（Run）:
@@ -297,9 +298,9 @@ async function fetchData({ region, websiteId, token, shareId, endpoint, params, 
 
 /**
  * 按顺序拉取分享配置 + 五项数据（统计 / 按天 / 三个 metrics）。
- * stats 与 pageviews 失败即抛出；三个 metrics 各自失败只记 null 并继续。
+ * stats 与 pageviews 失败即抛出；四个 metrics 各自失败只记 null 并继续。
  * @param {{slug:string, region:string, days?:number, fetchImpl?:Function, now?:Function}} opts
- * @returns {Promise<{share:string, region:string, websiteId:string, days:number, totals:object, byDate:Array, topPaths:Array|null, referrers:Array|null, countries:Array|null}>}
+ * @returns {Promise<{share:string, region:string, websiteId:string, days:number, totals:object, byDate:Array, topPaths:Array|null, referrers:Array|null, countries:Array|null, hostnames:Array|null}>}
  */
 export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImpl = globalThis.fetch, now = Date.now } = {}) {
   const cfg = await fetchShareConfig({ slug, region, fetchImpl })
@@ -311,6 +312,9 @@ export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImp
   const pvRaw = await fetchData({ ...common, endpoint: 'pageviews', label: 'pageviews', params: { unit: 'day' } })
 
   const metricSpecs = [
+    // hostname 放最前：dsh-why.com 与 dsh-insights.com 共用一个 website，
+    // 靠这一维拆开，是调用方最关心的第一列。
+    ['hostname', { type: 'hostname', limit: 5 }],
     ['path', { type: 'path', limit: 15 }],
     ['referrer', { type: 'referrer', limit: 10 }],
     ['country', { type: 'country', limit: 10 }],
@@ -334,6 +338,7 @@ export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImp
     topPaths: metrics.path === null ? null : mapMetrics(metrics.path, 'path', 'pageviews'),
     referrers: metrics.referrer === null ? null : mapMetrics(metrics.referrer, 'referrer', 'visits'),
     countries: metrics.country === null ? null : mapMetrics(metrics.country, 'country', 'visits'),
+    hostnames: metrics.hostname === null ? null : mapMetrics(metrics.hostname, 'hostname', 'visitors'),
   }
 }
 
@@ -374,13 +379,16 @@ function table(headers, rows, aligns) {
 
 const metricRows = (list, map) => (Array.isArray(list) ? list.map(map) : null)
 
-/** 人类可读输出（中文）：一行汇总 + 四张表。 */
+/** 人类可读输出（中文）：一行汇总 + 五张表（域名在最前）。 */
 export function renderHuman(data) {
-  const { days, totals, byDate, topPaths, referrers, countries } = data
+  const { days, totals, byDate, topPaths, referrers, countries, hostnames } = data
   const num = (n) => Number(n || 0).toLocaleString('en-US')
   const bounce = `${(Number(totals?.bounceRate || 0) * 100).toFixed(1)}%`
   const lines = []
   lines.push(`近 ${days} 天：${num(totals?.pageviews)} 浏览 · ${num(totals?.visitors)} 访客 · ${num(totals?.visits)} 会话 · 跳出率 ${bounce} · 平均停留 ${formatDuration(totals?.avgDuration)}`)
+  lines.push('')
+  lines.push('域名 Top 5')
+  lines.push(...table(['域名', '访客'], metricRows(hostnames, (r) => [truncate(r.hostname || '(未设置)', 48), num(r.visitors)]), ['l', 'r']))
   lines.push('')
   lines.push('按天')
   lines.push(...table(['日期', '浏览'], (byDate || []).map((r) => [r.date, num(r.pageviews)]), ['l', 'r']))

@@ -7,13 +7,17 @@
  * dsh-crash-collect 的 /admin/traffic 后台读取展示。
  *
  * 两个来源，各自独立、按需接入（未配置即跳过，不影响另一个）：
- *   umami  dsh-insights.com  ← UMAMI_SHARE（Umami 公开分享链接，见 bin/umami.mjs）
- *   ga4    dsh-why.com       ← GA4_SA_JSON + GA4_PROPERTY（服务账号，见 bin/ga4.mjs）
+ *   umami  dsh-insights.com + dsh-why.com  ← UMAMI_SHARE（同一个 website，按 hostname 拆，见 bin/umami.mjs）
+ *   ga4    dsh-why.com                     ← GA4_SA_JSON + GA4_PROPERTY（服务账号，见 bin/ga4.mjs）
+ *          —— 2026-09-13 起 dsh-why.com 已改用 Umami，ga4 仅作历史来源保留
  *
  * 表结构（自建，幂等）：
  *   site_traffic(date, source, window_days, visitors, pageviews, sessions, bounces,
- *                avg_duration, daily, top_paths, referrers, countries, collected_at)
+ *                avg_duration, daily, top_paths, referrers, countries, hostnames, collected_at)
  *   PRIMARY KEY (date, source) —— 每天一行滚动窗口快照，重跑即覆盖（ON CONFLICT DO UPDATE）。
+ *
+ * hostnames：dsh-why.com 与 dsh-insights.com 共用同一个 Umami website（Domain 字段只是展示用，
+ * 服务端不校验），靠 hostname 维度拆开——2026-09-13 起两站都走 umami 来源。
  *
  * 用法：
  *   DB9_TOKEN=… UMAMI_SHARE=<分享链接> node bin/traffic-sync.mjs
@@ -50,9 +54,15 @@ const DDL = `CREATE TABLE IF NOT EXISTS site_traffic (
   top_paths JSONB,
   referrers JSONB,
   countries JSONB,
+  hostnames JSONB,
   collected_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (date, source)
 )`
+
+// 建表语句之外的历史表补列（幂等，逐条执行——db9 HTTP API 一次只吃一条语句）
+const MIGRATIONS = [
+  'ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS hostnames JSONB',
+]
 
 /** 数字字面量（null/undefined/NaN → NULL）。 */
 export function numLit(v) {
@@ -69,11 +79,12 @@ export function jsonLit(v) {
 /** 一行快照 → 幂等 upsert（同 date+source 覆盖）。所有值都过 numLit/jsonLit。 */
 export function buildUpsert(row) {
   const cols = ['date', 'source', 'window_days', 'visitors', 'pageviews', 'sessions', 'bounces',
-    'avg_duration', 'daily', 'top_paths', 'referrers', 'countries']
+    'avg_duration', 'daily', 'top_paths', 'referrers', 'countries', 'hostnames']
   const vals = [
     `'${row.date}'`, `'${row.source}'`, numLit(row.window_days), numLit(row.visitors),
     numLit(row.pageviews), numLit(row.sessions), numLit(row.bounces), numLit(row.avg_duration),
     jsonLit(row.daily), jsonLit(row.top_paths), jsonLit(row.referrers), jsonLit(row.countries),
+    jsonLit(row.hostnames),
   ]
   const updates = cols.filter((c) => c !== 'date' && c !== 'source')
     .map((c) => `${c} = EXCLUDED.${c}`).join(', ')
@@ -103,7 +114,7 @@ export function readServiceAccount(spec) {
   return JSON.parse(readFileSync(s, 'utf8'))
 }
 
-/** dsh-insights.com（Umami 公开分享链接）→ site_traffic 行。 */
+/** dsh-insights.com + dsh-why.com（Umami 公开分享链接，同一个 website，按 hostname 拆）→ site_traffic 行。 */
 function umamiRow(d, date, windowDays) {
   return {
     date,
@@ -118,6 +129,7 @@ function umamiRow(d, date, windowDays) {
     top_paths: (d.topPaths || []).map((x) => ({ path: x.path, pageviews: x.pageviews })),
     referrers: (d.referrers || []).map((x) => ({ referrer: x.referrer, sessions: x.visits })),
     countries: (d.countries || []).map((x) => ({ country: x.country, sessions: x.visits })),
+    hostnames: (d.hostnames || []).map((x) => ({ host: x.hostname, visitors: x.visitors })),
   }
 }
 
@@ -136,6 +148,7 @@ function ga4Row(d, date, windowDays) {
     top_paths: (d.topPages || []).map((x) => ({ path: x.pagePath, pageviews: x.screenPageViews })),
     referrers: (d.channels || []).map((x) => ({ referrer: x.channel, sessions: x.sessions })),
     countries: null,
+    hostnames: null,
   }
 }
 
@@ -192,6 +205,7 @@ export async function syncTraffic({ env = process.env, fetchImpl = globalThis.fe
   let written = 0
   try {
     await sql(url, token, DDL, fetchImpl)
+    for (const ddl of MIGRATIONS) await sql(url, token, ddl, fetchImpl)
     for (const r of collected) {
       await sql(url, token, buildUpsert(r.row), fetchImpl)
       written++

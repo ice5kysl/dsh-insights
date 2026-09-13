@@ -48,6 +48,7 @@ const CONFIG = { shareId: SHARE_ID, shareType: 'share', parameters: { websiteId:
 const STATS = { pageviews: 1200, visitors: 300, visits: 420, bounces: 210, totaltime: 8100, comparison: { pageviews: 1000 } }
 const PV = { pageviews: [{ x: '2026-09-04T00:00:00Z', y: 259 }, { x: '2026-09-05T00:00:00Z', y: 341 }] }
 const METRICS = {
+  hostname: [{ x: 'dsh-insights.com', y: 290 }, { x: 'dsh-why.com', y: 10 }],
   path: [{ x: '/', y: 164 }, { x: '/docs', y: 90 }],
   referrer: [{ x: 'google.com', y: 120 }],
   country: [{ x: 'China', y: 200 }],
@@ -213,10 +214,10 @@ test('请求形态：配置 URL 无鉴权头；数据 URL 带 startAt/endAt 与�
   const pv = calls[2]
   assert.match(pv.url, /\/pageviews\?startAt=\d+&endAt=\d+&unit=day$/)
 
-  // 4) 三个 metrics：type/limit 按口径
+  // 4) 四个 metrics：type/limit 按口径（hostname 在最前）
   const metrics = calls.slice(3).map((c) => new URL(c.url).searchParams)
-  assert.deepEqual(metrics.map((m) => [m.get('type'), m.get('limit')]), [['path', '15'], ['referrer', '10'], ['country', '10']])
-  assert.equal(calls.length, 6)
+  assert.deepEqual(metrics.map((m) => [m.get('type'), m.get('limit')]), [['hostname', '5'], ['path', '15'], ['referrer', '10'], ['country', '10']])
+  assert.equal(calls.length, 7)
 
   // 隐私纪律：token 一个字符都不出现在输出里
   assert.ok(!(out.join('')).includes(TOKEN))
@@ -232,7 +233,7 @@ test('main --json: 单个 JSON 对象，键序/字段/映射按契约', async ()
   const stdout = out.join('')
   assert.equal(stdout.trim().split('\n').length, 1)
   const data = JSON.parse(stdout)
-  assert.deepEqual(Object.keys(data), ['share', 'region', 'websiteId', 'days', 'totals', 'byDate', 'topPaths', 'referrers', 'countries'])
+  assert.deepEqual(Object.keys(data), ['share', 'region', 'websiteId', 'days', 'totals', 'byDate', 'topPaths', 'referrers', 'countries', 'hostnames'])
   assert.equal(data.share, SLUG)
   assert.equal(data.region, 'us')
   assert.equal(data.websiteId, WEBSITE_ID)
@@ -249,9 +250,10 @@ test('main --json: 单个 JSON 对象，键序/字段/映射按契约', async ()
   assert.deepEqual(data.topPaths, [{ path: '/', pageviews: 164 }, { path: '/docs', pageviews: 90 }])
   assert.deepEqual(data.referrers, [{ referrer: 'google.com', visits: 120 }])
   assert.deepEqual(data.countries, [{ country: 'China', visits: 200 }])
+  assert.deepEqual(data.hostnames, [{ hostname: 'dsh-insights.com', visitors: 290 }, { hostname: 'dsh-why.com', visitors: 10 }])
 })
 
-test('main（默认文本）: 中文汇总行 + 按天/页面/来源/国家四张表', async () => {
+test('main（默认文本）: 中文汇总行 + 域名/按天/页面/来源/国家五张表', async () => {
   stubFetch()
   const { out, err, io } = capture()
   const code = await main(['--share', SLUG, '--days', '7'], {}, io)
@@ -259,6 +261,8 @@ test('main（默认文本）: 中文汇总行 + 按天/页面/来源/国家四�
   assert.equal(err.join(''), '')
   const text = out.join('')
   assert.match(text, /近 7 天：1,200 浏览 · 300 访客 · 420 会话 · 跳出率 50\.0% · 平均停留 19s/)
+  assert.match(text, /域名 Top 5/)
+  assert.match(text, /dsh-why\.com/)
   assert.match(text, /按天/)
   assert.match(text, /页面 Top 15/)
   assert.match(text, /来源 Top 10/)
@@ -386,7 +390,7 @@ test('main: 环境变量回退 UMAMI_SHARE / UMAMI_REGION，且 --region 覆盖�
   assert.equal(override[0].url, `https://cloud.umami.is/analytics/us/api/share/${SLUG}`)
 })
 
-test('collectUmami: 顺序请求五项，失败点可注入（now 固定便于断言窗口）', async () => {
+test('collectUmami: 顺序请求六项，失败点可注入（now 固定便于断言窗口）', async () => {
   const calls = stubFetch()
   const data = await collectUmami({ slug: SLUG, region: 'eu', days: 2, now: () => 1_800_000_000_000 })
   assert.equal(data.region, 'eu')
@@ -396,6 +400,7 @@ test('collectUmami: 顺序请求五项，失败点可注入（now 固定便于�
     `share/${SLUG}`,
     `websites/${WEBSITE_ID}/stats`,
     `websites/${WEBSITE_ID}/pageviews`,
+    `websites/${WEBSITE_ID}/metrics`,
     `websites/${WEBSITE_ID}/metrics`,
     `websites/${WEBSITE_ID}/metrics`,
     `websites/${WEBSITE_ID}/metrics`,
