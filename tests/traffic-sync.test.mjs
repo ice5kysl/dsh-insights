@@ -11,7 +11,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, test } from 'node:test'
 
-import { buildUpsert, jsonLit, numLit, readServiceAccount, syncTraffic } from '../bin/traffic-sync.mjs'
+import { buildUpsert, jsonLit, numLit, readServiceAccount, splitHosts, syncTraffic } from '../bin/traffic-sync.mjs'
 
 const realFetch = globalThis.fetch
 afterEach(() => {
@@ -59,24 +59,33 @@ test('jsonLit: null → NULL，数组 → jsonb 字面量，单引号双写转�
   assert.equal(jsonLit([{ path: "/o'brien/", pageviews: 3 }]), `'[{"path":"/o''brien/","pageviews":3}]'::jsonb`)
 })
 
-test('buildUpsert: 16 列齐全、按 (date,source) 幂等覆盖、每个字段都过字面量转义', () => {
+test('buildUpsert: 17 列齐全、按 (date,source,hostname) 幂等覆盖、每个字段都过字面量转义', () => {
   const sql = buildUpsert({
-    date: '2026-09-13', source: 'umami', window_days: 28, visitors: 351, pageviews: 1169,
+    date: '2026-09-13', source: 'umami', hostname: 'dsh-insights.com', window_days: 28, visitors: 351, pageviews: 1169,
     sessions: 452, bounces: 342, avg_duration: 141,
     daily: [{ date: '2026-09-06', pageviews: 259 }], top_paths: [{ path: "/x'--", pageviews: 1 }],
     referrers: [], countries: null, hostnames: [{ host: 'dsh-why.com', visitors: 1 }],
     windows: { d7: { visitors: 300 } }, active: 6, breakdowns: { path: { unit: 'pageviews', rows: [] } },
   })
-  assert.match(sql, /INSERT INTO site_traffic \(date, source, window_days, visitors, pageviews, sessions, bounces, avg_duration, daily, top_paths, referrers, countries, hostnames, windows, active, breakdowns\)/)
-  assert.match(sql, /ON CONFLICT \(date, source\) DO UPDATE SET window_days = EXCLUDED.window_days/)
+  assert.match(sql, /INSERT INTO site_traffic \(date, source, hostname, window_days, visitors, pageviews, sessions, bounces, avg_duration, daily, top_paths, referrers, countries, hostnames, windows, active, breakdowns\)/)
+  assert.match(sql, /ON CONFLICT \(date, source, hostname\) DO UPDATE SET window_days = EXCLUDED.window_days/)
   assert.match(sql, /collected_at = now\(\)/)
-  assert.match(sql, /'2026-09-13', 'umami', 28, 351, 1169, 452, 342, 141/)
+  assert.match(sql, /'2026-09-13', 'umami', 'dsh-insights\.com', 28, 351, 1169, 452, 342, 141/)
   assert.match(sql, /"path":"\/x''--"/)
   assert.match(sql, /"host":"dsh-why\.com"/)
   assert.match(sql, /"active":6|, 6,/)
   assert.match(sql, /'null'::jsonb|NULL/)
   // 注入样本不能逃出字面量
   assert.doesNotMatch(sql, /"path":"\/x'--"/)
+  // hostname 缺省为空串（合计行）
+  const plain = buildUpsert({ date: '2026-09-13', source: 'ga4' })
+  assert.match(plain, /'2026-09-13', 'ga4', ''/)
+})
+
+test('splitHosts: TRAFFIC_HOSTS 优先；自动发现排除 localhost 自流量', () => {
+  assert.deepEqual(splitHosts({}, [{ host: 'dsh-insights.com' }, { host: 'localhost' }, { host: '127.0.0.1' }, { host: '' }]), ['dsh-insights.com'])
+  assert.deepEqual(splitHosts({ TRAFFIC_HOSTS: ' a.example.com , b.example.com ' }, [{ host: 'x' }]), ['a.example.com', 'b.example.com'])
+  assert.deepEqual(splitHosts({}, null), [])
 })
 
 test('readServiceAccount: 既接受 JSON 内容，也接受文件路径', () => {
@@ -101,7 +110,7 @@ test('未配置任何来源：不发起请求、不写库、不报错', async ()
   assert.deepEqual(out.rows, [])
 })
 
-test('dry-run：采集并映射成行，但不写库（无需 DB9_TOKEN）', async () => {
+test('dry-run：采集并映射成行（合计 + 每个 hostname 一行），但不写库（无需 DB9_TOKEN）', async () => {
   const calls = []
   const out = await syncTraffic({
     env: { UMAMI_SHARE: SLUG },
@@ -111,10 +120,11 @@ test('dry-run：采集并映射成行，但不写库（无需 DB9_TOKEN）', asy
     log: () => {},
   })
   assert.equal(out.written, 0)
-  assert.equal(out.rows.length, 1)
+  assert.equal(out.rows.length, 3) // 合计 + dsh-insights.com + dsh-why.com
   const row = out.rows[0].row
   assert.equal(row.date, '2026-09-13')
   assert.equal(row.source, 'umami')
+  assert.equal(row.hostname, '')
   assert.equal(row.visitors, 351)
   assert.equal(row.pageviews, 1169)
   assert.equal(row.sessions, 452) // visits
@@ -131,10 +141,18 @@ test('dry-run：采集并映射成行，但不写库（无需 DB9_TOKEN）', asy
   assert.equal(row.breakdowns.path.unit, 'pageviews')
   assert.deepEqual(row.breakdowns.path.rows[0], { value: "/o'brien/", count: 164 })
   assert.equal(row.breakdowns.city.unit, 'visitors')
+  // 分域名行：hostname 带出，请求带 hostname filter，active 不采（端点不支持 filters）
+  const hostRow = out.rows[1].row
+  assert.equal(hostRow.hostname, 'dsh-insights.com')
+  assert.equal(hostRow.active, null)
+  assert.equal(out.rows[2].row.hostname, 'dsh-why.com')
+  const hostCalls = calls.filter((c) => c.url.includes('hostname=dsh-insights.com'))
+  assert.ok(hostCalls.some((c) => c.url.includes('/stats')), '分域名 stats 应带 hostname filter')
+  assert.ok(hostCalls.some((c) => c.url.includes('type=path')), '分域名 metrics 应带 hostname filter')
   assert.ok(!calls.some((c) => c.url.includes('api.db9.ai')), 'dry-run 不得请求 db9')
 })
 
-test('写库：先建表再 upsert，返回写入条数', async () => {
+test('写库：先建表再迁移再 upsert，返回写入条数', async () => {
   const sqls = []
   const base = stubUmami()
   const fetchImpl = async (url, init = {}) => {
@@ -150,15 +168,17 @@ test('写库：先建表再 upsert，返回写入条数', async () => {
     now: FIXED_NOW,
     log: () => {},
   })
-  assert.equal(out.written, 1)
-  assert.equal(sqls.length, 6) // CREATE TABLE + 4 条补列 migration + INSERT
+  assert.equal(out.written, 3)
+  assert.equal(sqls.length, 10) // CREATE TABLE + 5 条补列 migration + ensurePk 探测 + 3 条 INSERT
   assert.match(sqls[0], /CREATE TABLE IF NOT EXISTS site_traffic/)
+  assert.match(sqls[0], /PRIMARY KEY \(date, source, hostname\)/)
   assert.match(sqls[1], /ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS hostnames/)
-  assert.match(sqls[2], /ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS windows/)
-  assert.match(sqls[3], /ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS active/)
-  assert.match(sqls[4], /ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS breakdowns/)
-  assert.match(sqls[5], /INSERT INTO site_traffic/)
-  assert.match(sqls[5], /'2026-09-13', 'umami'/)
+  assert.match(sqls[5], /ADD COLUMN IF NOT EXISTS hostname/)
+  assert.match(sqls[6], /site_traffic_v2/) // ensurePk 探测旧表/迁移残留
+  assert.match(sqls[7], /INSERT INTO site_traffic/)
+  assert.match(sqls[7], /'2026-09-13', 'umami', '', 28/)
+  assert.match(sqls[8], /'2026-09-13', 'umami', 'dsh-insights\.com', 28/)
+  assert.match(sqls[9], /'2026-09-13', 'umami', 'dsh-why\.com', 28/)
 })
 
 test('失败纪律：采集失败与写库失败都只告警，不抛异常（旁路数据不阻塞管线）', async () => {
@@ -190,6 +210,6 @@ test('无 DB9_TOKEN：只采集不入库', async () => {
   const fetchImpl = stubUmami(calls)
   const out = await syncTraffic({ env: { UMAMI_SHARE: SLUG }, fetchImpl, now: FIXED_NOW, log: () => {} })
   assert.equal(out.written, 0)
-  assert.equal(out.rows.length, 1)
+  assert.equal(out.rows.length, 3)
   assert.ok(!calls.some((c) => c.url.includes('api.db9.ai')), '没有 token 不得请求 db9')
 })

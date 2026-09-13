@@ -346,18 +346,22 @@ async function fetchData({ region, websiteId, token, shareId, endpoint, params, 
 /**
  * 按顺序拉取分享配置 + 数据（总计 / 按天 / 两个额外窗口 / 实时在线 / 18 个 breakdowns 维度）。
  * stats 与 pageviews 失败即抛出（exit 1）；windows、active、每个 breakdown 各自失败只记 null 并继续。
- * @param {{slug:string, region:string, days?:number, fetchImpl?:Function, now?:Function}} opts
- * @returns {Promise<{share:string, region:string, websiteId:string, days:number, totals:object, byDate:Array, topPaths:Array|null, referrers:Array|null, countries:Array|null, hostnames:Array|null, windows:{d1:object|null, d7:object|null}, active:number|null, breakdowns:Object<string, {unit:string, rows:Array<{value:string,count:number}>}|null>}>}
+ * hostname 非空时走 Umami 的 filters 参数（stats/pageviews/metrics 均支持 hostname 过滤，
+ * 见 docs.umami.is/docs/api/website-stats）；active 端点不支持 filters，分域名时记 null。
+ * @param {{slug:string, region:string, days?:number, hostname?:string, fetchImpl?:Function, now?:Function}} opts
+ * @returns {Promise<{share:string, region:string, websiteId:string, days:number, hostname:string, totals:object, byDate:Array, topPaths:Array|null, referrers:Array|null, countries:Array|null, hostnames:Array|null, windows:{d1:object|null, d7:object|null}, active:number|null, breakdowns:Object<string, {unit:string, rows:Array<{value:string,count:number}>}|null>}>}
  */
-export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImpl = globalThis.fetch, now = Date.now } = {}) {
+export async function collectUmami({ slug, region, days = DAYS_DEFAULT, hostname = '', fetchImpl = globalThis.fetch, now = Date.now } = {}) {
   const cfg = await fetchShareConfig({ slug, region, fetchImpl })
   const endAt = Number(now())
   const startAt = endAt - days * DAY_MS
   const common = { region, websiteId: cfg.websiteId, token: cfg.token, shareId: cfg.shareId, startAt, endAt, fetchImpl }
+  // hostname 为 null/空串时 buildDataUrl 自动跳过该参数（filters 仅在分域名采集时带上）
+  const filter = hostname || null
 
   // 致命两项：主窗口总计与按天曲线。
-  const stats = await fetchData({ ...common, endpoint: 'stats', label: 'stats' })
-  const pvRaw = await fetchData({ ...common, endpoint: 'pageviews', label: 'pageviews', params: { unit: 'day' } })
+  const stats = await fetchData({ ...common, endpoint: 'stats', label: 'stats', params: { hostname: filter } })
+  const pvRaw = await fetchData({ ...common, endpoint: 'pageviews', label: 'pageviews', params: { unit: 'day', hostname: filter } })
 
   // 额外窗口（近 1 天 / 近 7 天，同一 endAt）：失败即 null，不致命。
   const windows = {}
@@ -368,6 +372,7 @@ export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImp
         endpoint: 'stats',
         label: `stats(${key})`,
         startAt: endAt - wdays * DAY_MS,
+        params: { hostname: filter },
       })
       windows[key] = computeTotals(raw)
     } catch {
@@ -376,20 +381,23 @@ export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImp
   }
 
   // 实时在线：响应可能是 {visitors: N} 或 {}；缺失/失败一律 null，不致命。
+  // active 端点不支持 filters，分域名采集时直接记 null。
   let active = null
-  try {
-    const raw = await fetchData({ ...common, endpoint: 'active', label: 'active' })
-    const n = Number(raw?.visitors)
-    active = Number.isFinite(n) ? n : null
-  } catch {
-    active = null
+  if (!filter) {
+    try {
+      const raw = await fetchData({ ...common, endpoint: 'active', label: 'active' })
+      const n = Number(raw?.visitors)
+      active = Number.isFinite(n) ? n : null
+    } catch {
+      active = null
+    }
   }
 
   // 18 个 breakdown 维度：按清单顺序请求，单点失败记 null，不致命。
   const breakdowns = {}
   for (const [type, limit, unit] of BREAKDOWN_SPECS) {
     try {
-      const raw = await fetchData({ ...common, endpoint: 'metrics', label: `metrics(${type})`, params: { type, limit } })
+      const raw = await fetchData({ ...common, endpoint: 'metrics', label: `metrics(${type})`, params: { type, limit, hostname: filter } })
       breakdowns[type] = { unit, rows: mapBreakdownRows(raw) }
     } catch {
       breakdowns[type] = null
@@ -418,6 +426,7 @@ export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImp
     windows,
     active,
     breakdowns,
+    hostname: filter ?? '',
   }
 }
 

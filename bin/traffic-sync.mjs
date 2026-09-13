@@ -12,16 +12,23 @@
  *          —— 2026-09-13 起 dsh-why.com 已改用 Umami，ga4 仅作历史来源保留
  *
  * 表结构（自建，幂等）：
- *   site_traffic(date, source, window_days, visitors, pageviews, sessions, bounces,
+ *   site_traffic(date, source, hostname, window_days, visitors, pageviews, sessions, bounces,
  *                avg_duration, daily, top_paths, referrers, countries, hostnames,
  *                windows, active, breakdowns, collected_at)
- *   PRIMARY KEY (date, source) —— 每天一行滚动窗口快照，重跑即覆盖（ON CONFLICT DO UPDATE）。
+ *   PRIMARY KEY (date, source, hostname) —— 每天每来源每域名一行滚动窗口快照，重跑即覆盖
+ *   （ON CONFLICT DO UPDATE）。hostname 空串 = 全站合计（旧行兼容），非空 = 单域名行。
  *
  * hostnames：dsh-why.com 与 dsh-insights.com 共用同一个 Umami website（Domain 字段只是展示用，
- * 服务端不校验），靠 hostname 维度拆开——2026-09-13 起两站都走 umami 来源。
+ * 服务端不校验），2026-09-13 起除合计行外每个 hostname 各采一行（Umami stats/pageviews/metrics
+ * 支持 hostname filter，见 docs.umami.is/docs/api/website-stats；active 端点不支持，分域名行
+ * active 记 NULL）。TRAFFIC_HOSTS 可显式指定域名清单（逗号分隔），缺省从合计行的 hostname
+ * 维度自动发现（排除 localhost 等自流量）。
  * windows：近 1 天 / 近 7 天口径（与窗口同 endAt），供后台对比"近期 vs 全窗口"。
  * active：采集瞬间的实时在线访客。breakdowns：18 个维度（路径/入口/出口/来源/国家/地区/城市/
  * 浏览器/系统/设备/语言/屏幕/标题/事件/UTM），每项 {unit, rows:[{value,count}]}。
+ *
+ * PK 迁移：旧表 PK 是 (date, source)，TiKV 不允许对有数据的表 DROP PK —— ensureSchema 检测到
+ * 旧 PK 时走换表迁移（site_traffic_v2 新结构 → 全量拷贝 → drop → rename），幂等可重入。
  *
  * 用法：
  *   DB9_TOKEN=… UMAMI_SHARE=<分享链接> node bin/traffic-sync.mjs
@@ -30,7 +37,7 @@
  *
  * 环境变量：DB9_TOKEN 必填（写库）· DB9_SQL_URL 可选 · UMAMI_SHARE · GA4_PROPERTY ·
  *          GA4_SA_JSON（服务账号 JSON 的**路径**，本地用）或 GA4_SA_KEY（JSON **内容**，CI secret 用）·
- *          TRAFFIC_WINDOW_DAYS 可选（默认 28）
+ *          TRAFFIC_WINDOW_DAYS 可选（默认 28）· TRAFFIC_HOSTS 可选（逗号分隔，覆盖分域名清单）
  *
  * 失败纪律（同 db9-sync / crash-corpus）：无 DB9_TOKEN → 告警 exit 0；单个来源失败 → 告警继续；
  * 写库失败 → 告警 exit 0。旁路数据永不阻塞管线；只有用法错误 exit 2。
@@ -48,6 +55,7 @@ const WINDOW_DEFAULT = 28
 const DDL = `CREATE TABLE IF NOT EXISTS site_traffic (
   date DATE NOT NULL,
   source TEXT NOT NULL,
+  hostname TEXT NOT NULL DEFAULT '',
   window_days INTEGER NOT NULL DEFAULT 28,
   visitors BIGINT,
   pageviews BIGINT,
@@ -63,7 +71,7 @@ const DDL = `CREATE TABLE IF NOT EXISTS site_traffic (
   active INTEGER,
   breakdowns JSONB,
   collected_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-  PRIMARY KEY (date, source)
+  PRIMARY KEY (date, source, hostname)
 )`
 
 // 建表语句之外的历史表补列（幂等，逐条执行——db9 HTTP API 一次只吃一条语句）
@@ -72,7 +80,53 @@ const MIGRATIONS = [
   'ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS windows JSONB',
   'ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS active INTEGER',
   'ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS breakdowns JSONB',
+  'ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS hostname TEXT NOT NULL DEFAULT \'\'',
 ]
+
+const DATA_COLS = `window_days, visitors, pageviews, sessions, bounces, avg_duration,
+  daily, top_paths, referrers, countries, hostnames, windows, active, breakdowns`
+
+const PK_QUERY = `SELECT kcu.column_name
+  FROM information_schema.table_constraints tc
+  JOIN information_schema.key_column_usage kcu
+    ON tc.constraint_name = kcu.constraint_name AND tc.table_schema = kcu.table_schema AND tc.table_name = kcu.table_name
+  WHERE tc.constraint_type = 'PRIMARY KEY' AND tc.table_schema = 'public' AND tc.table_name = 'site_traffic'
+  ORDER BY kcu.ordinal_position`
+
+// 换表迁移：TiKV 不允许对有数据的表 DROP PK，只能建新表 → 拷贝 → drop → rename。
+// 每步幂等/可重入：v2 已存在则接着拷贝（ON CONFLICT DO NOTHING），上次若断在 rename 前
+// （site_traffic 不存在而 site_traffic_v2 存在）直接补 rename。
+async function ensurePk(sqlFn) {
+  const tables = await sqlFn(`SELECT table_name FROM information_schema.tables
+    WHERE table_schema = 'public' AND table_name IN ('site_traffic', 'site_traffic_v2')`)
+  const have = new Set((tables.rows ?? []).map((r) => r[0]))
+  if (!have.has('site_traffic') && have.has('site_traffic_v2')) {
+    await sqlFn('ALTER TABLE site_traffic_v2 RENAME TO site_traffic')
+    return
+  }
+  if (!have.has('site_traffic')) return // 刚按新 DDL 建好，PK 已是三列
+  const pk = await sqlFn(PK_QUERY)
+  const cols = (pk.rows ?? []).map((r) => String(r[0]))
+  if (cols.includes('hostname') || !cols.length) return
+  await sqlFn(DDL.replace('site_traffic', 'site_traffic_v2'))
+  await sqlFn(`INSERT INTO site_traffic_v2 (date, source, hostname, ${DATA_COLS}, collected_at)
+    SELECT date, source, '', ${DATA_COLS}, collected_at FROM site_traffic
+    ON CONFLICT (date, source, hostname) DO NOTHING`)
+  await sqlFn('DROP TABLE site_traffic')
+  await sqlFn('ALTER TABLE site_traffic_v2 RENAME TO site_traffic')
+}
+
+/** 自流量（不计入分域名采集清单）。 */
+const SELF_HOST_RE = /^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/i
+
+/** 分域名采集清单：TRAFFIC_HOSTS 显式指定优先，否则从合计行的 hostname 维度自动发现。 */
+export function splitHosts(env, hostnamesRows) {
+  const pinned = String(env.TRAFFIC_HOSTS ?? '').split(',').map((s) => s.trim()).filter(Boolean)
+  if (pinned.length) return pinned
+  return (Array.isArray(hostnamesRows) ? hostnamesRows : [])
+    .map((h) => String(h?.host ?? h?.hostname ?? ''))
+    .filter((h) => h && !SELF_HOST_RE.test(h))
+}
 
 /** 数字字面量（null/undefined/NaN → NULL）。 */
 export function numLit(v) {
@@ -86,20 +140,20 @@ export function jsonLit(v) {
   return `'${JSON.stringify(v).replace(/'/g, "''")}'::jsonb`
 }
 
-/** 一行快照 → 幂等 upsert（同 date+source 覆盖）。所有值都过 numLit/jsonLit。 */
+/** 一行快照 → 幂等 upsert（同 date+source+hostname 覆盖）。所有值都过 numLit/jsonLit。 */
 export function buildUpsert(row) {
-  const cols = ['date', 'source', 'window_days', 'visitors', 'pageviews', 'sessions', 'bounces',
+  const cols = ['date', 'source', 'hostname', 'window_days', 'visitors', 'pageviews', 'sessions', 'bounces',
     'avg_duration', 'daily', 'top_paths', 'referrers', 'countries', 'hostnames', 'windows', 'active', 'breakdowns']
   const vals = [
-    `'${row.date}'`, `'${row.source}'`, numLit(row.window_days), numLit(row.visitors),
+    `'${row.date}'`, `'${row.source}'`, `'${String(row.hostname ?? '').replace(/'/g, "''")}'`, numLit(row.window_days), numLit(row.visitors),
     numLit(row.pageviews), numLit(row.sessions), numLit(row.bounces), numLit(row.avg_duration),
     jsonLit(row.daily), jsonLit(row.top_paths), jsonLit(row.referrers), jsonLit(row.countries),
     jsonLit(row.hostnames), jsonLit(row.windows), numLit(row.active), jsonLit(row.breakdowns),
   ]
-  const updates = cols.filter((c) => c !== 'date' && c !== 'source')
+  const updates = cols.filter((c) => !['date', 'source', 'hostname'].includes(c))
     .map((c) => `${c} = EXCLUDED.${c}`).join(', ')
   return `INSERT INTO site_traffic (${cols.join(', ')}) VALUES (${vals.join(', ')})
-ON CONFLICT (date, source) DO UPDATE SET ${updates}, collected_at = now()`
+ON CONFLICT (date, source, hostname) DO UPDATE SET ${updates}, collected_at = now()`
 }
 
 async function sql(url, token, query, fetchImpl = globalThis.fetch) {
@@ -124,11 +178,13 @@ export function readServiceAccount(spec) {
   return JSON.parse(readFileSync(s, 'utf8'))
 }
 
-/** dsh-insights.com + dsh-why.com（Umami 公开分享链接，同一个 website，按 hostname 拆）→ site_traffic 行。 */
-function umamiRow(d, date, windowDays) {
+/** dsh-insights.com + dsh-why.com（Umami 公开分享链接，同一个 website）→ site_traffic 行。
+ *  hostname 空串 = 合计行；非空 = 单域名行（采集时带 hostname filter）。 */
+function umamiRow(d, date, windowDays, hostname = '') {
   return {
     date,
     source: 'umami',
+    hostname,
     window_days: windowDays,
     visitors: d.totals.visitors,
     pageviews: d.totals.pageviews,
@@ -159,6 +215,7 @@ function ga4Row(d, date, windowDays) {
   return {
     date,
     source: 'ga4',
+    hostname: '',
     window_days: windowDays,
     visitors: d.totals.activeUsers,
     pageviews: d.totals.screenPageViews,
@@ -200,6 +257,16 @@ export async function syncTraffic({ env = process.env, fetchImpl = globalThis.fe
       const { slug, region } = normalizeShare(env.UMAMI_SHARE, { region: env.UMAMI_REGION })
       const d = await collectUmami({ slug, region, days: windowDays, fetchImpl, now: () => now().getTime() })
       rows.push({ row: umamiRow(d, date, windowDays), source: 'umami' })
+      // 每个外部 hostname 各采一行（Umami 支持 hostname filter）；单个域名失败只告警继续
+      for (const host of splitHosts(env, d.hostnames)) {
+        try {
+          const hd = await collectUmami({ slug, region, days: windowDays, hostname: host, fetchImpl, now: () => now().getTime() })
+          rows.push({ row: umamiRow(hd, date, windowDays, host), source: `umami:${host}` })
+        } catch (e) {
+          log(`[traffic] umami(${host}) 采集失败（跳过）：${String(e?.message || e).slice(0, 160)}`)
+          rows.push({ source: `umami:${host}`, error: true })
+        }
+      }
     } catch (e) {
       log(`[traffic] umami 采集失败（跳过）：${String(e?.message || e).slice(0, 160)}`)
       rows.push({ source: 'umami', error: true })
@@ -230,10 +297,12 @@ export async function syncTraffic({ env = process.env, fetchImpl = globalThis.fe
   try {
     await sql(url, token, DDL, fetchImpl)
     for (const ddl of MIGRATIONS) await sql(url, token, ddl, fetchImpl)
+    await ensurePk((query) => sql(url, token, query, fetchImpl))
     for (const r of collected) {
       await sql(url, token, buildUpsert(r.row), fetchImpl)
       written++
-      log(`[traffic] ${r.row.source} ${r.row.date}：${r.row.visitors} 访客 · ${r.row.pageviews} 浏览 · ${r.row.sessions} 会话`)
+      const host = r.row.hostname ? ` ${r.row.hostname}` : ''
+      log(`[traffic] ${r.row.source}${host} ${r.row.date}：${r.row.visitors} 访客 · ${r.row.pageviews} 浏览 · ${r.row.sessions} 会话`)
     }
     if (!collected.length) log('[traffic] 没有采集到任何来源的数据，未写入')
   } catch (e) {

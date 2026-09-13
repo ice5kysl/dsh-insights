@@ -285,7 +285,7 @@ test('main --json: 单个 JSON 对象，键序/字段/映射按契约', async ()
   assert.equal(stdout.trim().split('\n').length, 1)
   const data = JSON.parse(stdout)
   // 既有键序在前，新字段按契约追加在后（顺序即 JSON 序列化顺序）
-  assert.deepEqual(Object.keys(data), ['share', 'region', 'websiteId', 'days', 'totals', 'byDate', 'topPaths', 'referrers', 'countries', 'hostnames', 'windows', 'active', 'breakdowns'])
+  assert.deepEqual(Object.keys(data), ['share', 'region', 'websiteId', 'days', 'totals', 'byDate', 'topPaths', 'referrers', 'countries', 'hostnames', 'windows', 'active', 'breakdowns', 'hostname'])
   assert.equal(data.share, SLUG)
   assert.equal(data.region, 'us')
   assert.equal(data.websiteId, WEBSITE_ID)
@@ -595,13 +595,13 @@ test('--json 键序：既有 10 键在前，windows/active/breakdowns 追加在�
   const stdout = out.join('')
   assert.deepEqual(Object.keys(JSON.parse(stdout)), [
     'share', 'region', 'websiteId', 'days', 'totals', 'byDate', 'topPaths', 'referrers', 'countries', 'hostnames',
-    'windows', 'active', 'breakdowns',
+    'windows', 'active', 'breakdowns', 'hostname',
   ])
   // JSON 文本里的出现顺序也必须一致（序列化顺序）
-  const order = ['"share"', '"region"', '"websiteId"', '"days"', '"totals"', '"byDate"', '"topPaths"', '"referrers"', '"countries"', '"hostnames"', '"windows"', '"active"', '"breakdowns"']
+  const order = ['"share"', '"region"', '"websiteId"', '"days"', '"totals"', '"byDate"', '"topPaths"', '"referrers"', '"countries"', '"hostnames"', '"windows"', '"active"', '"breakdowns"', '"hostname"']
   let cursor = -1
   for (const key of order) {
-    const at = stdout.indexOf(key)
+    const at = stdout.indexOf(key, cursor + 1)
     assert.ok(at > cursor, `键序不对：${key}`)
     cursor = at
   }
