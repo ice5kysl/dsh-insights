@@ -13,11 +13,15 @@
  *
  * 表结构（自建，幂等）：
  *   site_traffic(date, source, window_days, visitors, pageviews, sessions, bounces,
- *                avg_duration, daily, top_paths, referrers, countries, hostnames, collected_at)
+ *                avg_duration, daily, top_paths, referrers, countries, hostnames,
+ *                windows, active, breakdowns, collected_at)
  *   PRIMARY KEY (date, source) —— 每天一行滚动窗口快照，重跑即覆盖（ON CONFLICT DO UPDATE）。
  *
  * hostnames：dsh-why.com 与 dsh-insights.com 共用同一个 Umami website（Domain 字段只是展示用，
  * 服务端不校验），靠 hostname 维度拆开——2026-09-13 起两站都走 umami 来源。
+ * windows：近 1 天 / 近 7 天口径（与窗口同 endAt），供后台对比"近期 vs 全窗口"。
+ * active：采集瞬间的实时在线访客。breakdowns：18 个维度（路径/入口/出口/来源/国家/地区/城市/
+ * 浏览器/系统/设备/语言/屏幕/标题/事件/UTM），每项 {unit, rows:[{value,count}]}。
  *
  * 用法：
  *   DB9_TOKEN=… UMAMI_SHARE=<分享链接> node bin/traffic-sync.mjs
@@ -55,6 +59,9 @@ const DDL = `CREATE TABLE IF NOT EXISTS site_traffic (
   referrers JSONB,
   countries JSONB,
   hostnames JSONB,
+  windows JSONB,
+  active INTEGER,
+  breakdowns JSONB,
   collected_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (date, source)
 )`
@@ -62,6 +69,9 @@ const DDL = `CREATE TABLE IF NOT EXISTS site_traffic (
 // 建表语句之外的历史表补列（幂等，逐条执行——db9 HTTP API 一次只吃一条语句）
 const MIGRATIONS = [
   'ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS hostnames JSONB',
+  'ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS windows JSONB',
+  'ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS active INTEGER',
+  'ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS breakdowns JSONB',
 ]
 
 /** 数字字面量（null/undefined/NaN → NULL）。 */
@@ -79,12 +89,12 @@ export function jsonLit(v) {
 /** 一行快照 → 幂等 upsert（同 date+source 覆盖）。所有值都过 numLit/jsonLit。 */
 export function buildUpsert(row) {
   const cols = ['date', 'source', 'window_days', 'visitors', 'pageviews', 'sessions', 'bounces',
-    'avg_duration', 'daily', 'top_paths', 'referrers', 'countries', 'hostnames']
+    'avg_duration', 'daily', 'top_paths', 'referrers', 'countries', 'hostnames', 'windows', 'active', 'breakdowns']
   const vals = [
     `'${row.date}'`, `'${row.source}'`, numLit(row.window_days), numLit(row.visitors),
     numLit(row.pageviews), numLit(row.sessions), numLit(row.bounces), numLit(row.avg_duration),
     jsonLit(row.daily), jsonLit(row.top_paths), jsonLit(row.referrers), jsonLit(row.countries),
-    jsonLit(row.hostnames),
+    jsonLit(row.hostnames), jsonLit(row.windows), numLit(row.active), jsonLit(row.breakdowns),
   ]
   const updates = cols.filter((c) => c !== 'date' && c !== 'source')
     .map((c) => `${c} = EXCLUDED.${c}`).join(', ')
@@ -130,6 +140,17 @@ function umamiRow(d, date, windowDays) {
     referrers: (d.referrers || []).map((x) => ({ referrer: x.referrer, sessions: x.visits })),
     countries: (d.countries || []).map((x) => ({ country: x.country, sessions: x.visits })),
     hostnames: (d.hostnames || []).map((x) => ({ host: x.hostname, visitors: x.visitors })),
+    // 近 1 天 / 近 7 天窗口（同一 endAt），给后台做"近期 vs 全窗口"对比。
+    // 注意窗口字段沿用 computeTotals 命名：sessions 在那边叫 visits。
+    windows: d.windows
+      ? Object.fromEntries(Object.entries(d.windows).map(([k, w]) => [k, w && {
+        visitors: w.visitors, pageviews: w.pageviews, sessions: w.visits, bounces: w.bounces,
+        avg_duration: Math.round(w.avgDuration || 0),
+      }]))
+      : null,
+    active: Number.isFinite(d.active) ? d.active : null,
+    // 18 个维度（unit + rows[{value,count}]），见 bin/umami.mjs
+    breakdowns: d.breakdowns || null,
   }
 }
 
@@ -149,6 +170,9 @@ function ga4Row(d, date, windowDays) {
     referrers: (d.channels || []).map((x) => ({ referrer: x.channel, sessions: x.sessions })),
     countries: null,
     hostnames: null,
+    windows: null,
+    active: null,
+    breakdowns: null,
   }
 }
 

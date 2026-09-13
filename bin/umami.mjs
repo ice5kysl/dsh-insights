@@ -7,14 +7,17 @@
  *   2) 数据  GET /analytics/<region>/api/websites/<websiteId>/<endpoint>?startAt=<epoch_ms>&endAt=<epoch_ms>
  *            请求头必须带 x-umami-share-token 与 x-umami-share-context（即 shareId）。
  *
- * 一次跑六份只读请求（顺序执行，不写任何文件、不留任何状态）：
- *   stats                              → 总计（pageviews/visitors/visits/bounces/totaltime）
- *   pageviews?unit=day                 → 按天曲线
- *   metrics?type=hostname&limit=5      → 域名 Top 5（两站共用一个 website 时靠它拆开）
- *   metrics?type=path&limit=15         → 页面 Top 15
- *   metrics?type=referrer&limit=10     → 来源 Top 10
- *   metrics?type=country&limit=10      → 国家 Top 10
- * 四个 metrics 调用容忍单点失败（该字段记为 null 并继续）；stats / pageviews 失败即整体失败。
+ * 一次跑 24 份只读请求（顺序执行，不写任何文件、不留任何状态）：
+ *   stats                              → 总计 totals（pageviews/visitors/visits/bounces/totaltime）
+ *   pageviews?unit=day                 → 按天曲线 byDate
+ *   stats（startAt = endAt - 1/7 天）  → windows.d1 / windows.d7（与主窗口同一个 endAt）
+ *   active                             → 实时在线访客 active
+ *   metrics?type=<T>&limit=<N> ×18     → breakdowns 十八个维度（path/entry/exit/referrer/country/
+ *                                        region/city/browser/os/device/language/screen/title/
+ *                                        hostname/event/utmSource/utmMedium/utmCampaign）
+ * stats / pageviews 失败即整体失败（exit 1）；windows、active 与每个 metrics 维度各自容忍失败，
+ * 失败的记为 null 并继续。旧字段 topPaths / referrers / countries / hostnames 由 breakdowns
+ * 投影而来（字段名与行内键名保持原样，供 bin/traffic-sync.mjs 消费）。
  * 默认打印中文对齐文本；--json 只在 stdout 输出一个 JSON 对象（便于管线消费）。
  *
  * 用法（Run）:
@@ -45,6 +48,38 @@ const DAYS_MAX = 365
 const DAY_MS = 86_400_000
 const TIMEOUT_MS = 30_000
 const SLUG_RE = /^[A-Za-z0-9._-]+$/
+
+/**
+ * breakdowns 的抓取清单（顺序即请求顺序）：[metricType, limit, unit]。
+ * unit 是该维度 `y` 的真实口径（Umami metrics 由 type 决定，不额外传 unit 参数）。
+ * `utm_source/utm_medium/utm_campaign` 会返回 HTTP 400，必须用驼峰形式。
+ */
+export const BREAKDOWN_SPECS = [
+  ['path', 200, 'pageviews'],
+  ['entry', 8, 'visitors'],
+  ['exit', 8, 'visitors'],
+  ['referrer', 8, 'visits'],
+  ['country', 8, 'visitors'],
+  ['region', 8, 'visitors'],
+  ['city', 8, 'visitors'],
+  ['browser', 8, 'visitors'],
+  ['os', 8, 'visitors'],
+  ['device', 8, 'visitors'],
+  ['language', 8, 'visitors'],
+  ['screen', 8, 'visitors'],
+  ['title', 50, 'pageviews'],
+  ['hostname', 8, 'visitors'],
+  ['event', 8, 'visitors'],
+  ['utmSource', 8, 'visits'],
+  ['utmMedium', 8, 'visits'],
+  ['utmCampaign', 8, 'visits'],
+]
+
+/** 额外窗口：key → 天数（startAt = endAt - days*DAY_MS）。 */
+const WINDOW_SPECS = [
+  ['d1', 1],
+  ['d7', 7],
+]
 
 /** 用法错误（参数 / 缺失分享链接）→ exit 2。 */
 export class UmamiUsageError extends Error {
@@ -244,6 +279,18 @@ export function mapMetrics(payload, keyName, valueName) {
 }
 
 /**
+ * breakdown 行归一化：`{x, y}` → `{value, count}`，保持 API 顺序（不排序）。
+ * 跳过 `x` 非字符串或为空串的行（region/city 行上的 country 字段一并忽略）。
+ * @param {unknown} payload metrics 原始响应
+ * @returns {Array<{value:string, count:number}>}
+ */
+export function mapBreakdownRows(payload) {
+  return toList(payload)
+    .filter((r) => typeof r?.x === 'string' && r.x !== '')
+    .map((r) => ({ value: r.x, count: Number(r?.y ?? 0) || 0 }))
+}
+
+/**
  * 拉取分享配置；缺 websiteId/token、非 JSON、HTTP 失败一律 UmamiHttpError（exit 1）。
  * 网络异常只透出截断后的中文描述，绝不回显响应体。
  */
@@ -297,10 +344,10 @@ async function fetchData({ region, websiteId, token, shareId, endpoint, params, 
 }
 
 /**
- * 按顺序拉取分享配置 + 五项数据（统计 / 按天 / 三个 metrics）。
- * stats 与 pageviews 失败即抛出；四个 metrics 各自失败只记 null 并继续。
+ * 按顺序拉取分享配置 + 数据（总计 / 按天 / 两个额外窗口 / 实时在线 / 18 个 breakdowns 维度）。
+ * stats 与 pageviews 失败即抛出（exit 1）；windows、active、每个 breakdown 各自失败只记 null 并继续。
  * @param {{slug:string, region:string, days?:number, fetchImpl?:Function, now?:Function}} opts
- * @returns {Promise<{share:string, region:string, websiteId:string, days:number, totals:object, byDate:Array, topPaths:Array|null, referrers:Array|null, countries:Array|null, hostnames:Array|null}>}
+ * @returns {Promise<{share:string, region:string, websiteId:string, days:number, totals:object, byDate:Array, topPaths:Array|null, referrers:Array|null, countries:Array|null, hostnames:Array|null, windows:{d1:object|null, d7:object|null}, active:number|null, breakdowns:Object<string, {unit:string, rows:Array<{value:string,count:number}>}|null>}>}
  */
 export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImpl = globalThis.fetch, now = Date.now } = {}) {
   const cfg = await fetchShareConfig({ slug, region, fetchImpl })
@@ -308,24 +355,53 @@ export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImp
   const startAt = endAt - days * DAY_MS
   const common = { region, websiteId: cfg.websiteId, token: cfg.token, shareId: cfg.shareId, startAt, endAt, fetchImpl }
 
+  // 致命两项：主窗口总计与按天曲线。
   const stats = await fetchData({ ...common, endpoint: 'stats', label: 'stats' })
   const pvRaw = await fetchData({ ...common, endpoint: 'pageviews', label: 'pageviews', params: { unit: 'day' } })
 
-  const metricSpecs = [
-    // hostname 放最前：dsh-why.com 与 dsh-insights.com 共用一个 website，
-    // 靠这一维拆开，是调用方最关心的第一列。
-    ['hostname', { type: 'hostname', limit: 5 }],
-    ['path', { type: 'path', limit: 15 }],
-    ['referrer', { type: 'referrer', limit: 10 }],
-    ['country', { type: 'country', limit: 10 }],
-  ]
-  const metrics = {}
-  for (const [key, params] of metricSpecs) {
+  // 额外窗口（近 1 天 / 近 7 天，同一 endAt）：失败即 null，不致命。
+  const windows = {}
+  for (const [key, wdays] of WINDOW_SPECS) {
     try {
-      metrics[key] = await fetchData({ ...common, endpoint: 'metrics', label: `metrics(${params.type})`, params })
+      const raw = await fetchData({
+        ...common,
+        endpoint: 'stats',
+        label: `stats(${key})`,
+        startAt: endAt - wdays * DAY_MS,
+      })
+      windows[key] = computeTotals(raw)
     } catch {
-      metrics[key] = null
+      windows[key] = null
     }
+  }
+
+  // 实时在线：响应可能是 {visitors: N} 或 {}；缺失/失败一律 null，不致命。
+  let active = null
+  try {
+    const raw = await fetchData({ ...common, endpoint: 'active', label: 'active' })
+    const n = Number(raw?.visitors)
+    active = Number.isFinite(n) ? n : null
+  } catch {
+    active = null
+  }
+
+  // 18 个 breakdown 维度：按清单顺序请求，单点失败记 null，不致命。
+  const breakdowns = {}
+  for (const [type, limit, unit] of BREAKDOWN_SPECS) {
+    try {
+      const raw = await fetchData({ ...common, endpoint: 'metrics', label: `metrics(${type})`, params: { type, limit } })
+      breakdowns[type] = { unit, rows: mapBreakdownRows(raw) }
+    } catch {
+      breakdowns[type] = null
+    }
+  }
+
+  // 旧字段由 breakdowns 投影：字段名与行内键名保持原样（countries 仍用 visits，兼容 traffic-sync）。
+  // 投影给 CLI / 下游的行内字段。path/title 在 breakdowns 里取全量（后台要按前缀聚合，
+  // 如 /p/*），但投影只取前 10 行，免得文本输出刷屏。
+  const project = (type, keyName, valueName, cap = Infinity) => {
+    const b = breakdowns[type]
+    return b === null ? null : b.rows.slice(0, cap).map((r) => ({ [keyName]: r.value, [valueName]: r.count }))
   }
 
   return {
@@ -335,10 +411,13 @@ export async function collectUmami({ slug, region, days = DAYS_DEFAULT, fetchImp
     days,
     totals: computeTotals(stats),
     byDate: mapByDate(pvRaw),
-    topPaths: metrics.path === null ? null : mapMetrics(metrics.path, 'path', 'pageviews'),
-    referrers: metrics.referrer === null ? null : mapMetrics(metrics.referrer, 'referrer', 'visits'),
-    countries: metrics.country === null ? null : mapMetrics(metrics.country, 'country', 'visits'),
-    hostnames: metrics.hostname === null ? null : mapMetrics(metrics.hostname, 'hostname', 'visitors'),
+    topPaths: project('path', 'path', 'pageviews', 10),
+    referrers: project('referrer', 'referrer', 'visits'),
+    countries: project('country', 'country', 'visits'),
+    hostnames: project('hostname', 'hostname', 'visitors'),
+    windows,
+    active,
+    breakdowns,
   }
 }
 
@@ -379,27 +458,37 @@ function table(headers, rows, aligns) {
 
 const metricRows = (list, map) => (Array.isArray(list) ? list.map(map) : null)
 
-/** 人类可读输出（中文）：一行汇总 + 五张表（域名在最前）。 */
+/** 人类可读输出（中文）：汇总（近 N 天 + 近 7 天/近 24 小时/实时在线）+ 五张表（域名在最前）。 */
 export function renderHuman(data) {
-  const { days, totals, byDate, topPaths, referrers, countries, hostnames } = data
+  const { days, totals, byDate, topPaths, referrers, countries, hostnames, windows, active } = data
   const num = (n) => Number(n || 0).toLocaleString('en-US')
   const bounce = `${(Number(totals?.bounceRate || 0) * 100).toFixed(1)}%`
   const lines = []
   lines.push(`近 ${days} 天：${num(totals?.pageviews)} 浏览 · ${num(totals?.visitors)} 访客 · ${num(totals?.visits)} 会话 · 跳出率 ${bounce} · 平均停留 ${formatDuration(totals?.avgDuration)}`)
+  // 第二行：近 7 天 / 近 24 小时 / 实时在线；各自为 null 即省略，全为 null 则整行不打印。
+  const windowText = (label, w) => (w ? `${label}：${num(w.pageviews)} 浏览 · ${num(w.visitors)} 访客 · ${num(w.visits)} 会话` : null)
+  const extra = [
+    windowText('近 7 天', windows?.d7),
+    windowText('近 24 小时', windows?.d1),
+    Number.isFinite(active) ? `实时在线：${num(active)}` : null,
+  ].filter(Boolean)
+  if (extra.length) lines.push(extra.join(' · '))
   lines.push('')
-  lines.push('域名 Top 5')
+  // 表头里的条数直接取自 BREAKDOWN_SPECS，避免与 limit 漂移
+  const lim = (type) => BREAKDOWN_SPECS.find(([t]) => t === type)?.[1] ?? 0
+  lines.push(`域名 Top ${lim('hostname')}`)
   lines.push(...table(['域名', '访客'], metricRows(hostnames, (r) => [truncate(r.hostname || '(未设置)', 48), num(r.visitors)]), ['l', 'r']))
   lines.push('')
   lines.push('按天')
   lines.push(...table(['日期', '浏览'], (byDate || []).map((r) => [r.date, num(r.pageviews)]), ['l', 'r']))
   lines.push('')
-  lines.push('页面 Top 15')
+  lines.push('页面 Top 10')  // breakdowns.path 取全量供后台聚合，这里只印前 10
   lines.push(...table(['路径', '浏览'], metricRows(topPaths, (r) => [truncate(r.path, 48), num(r.pageviews)]), ['l', 'r']))
   lines.push('')
-  lines.push('来源 Top 10')
+  lines.push(`来源 Top ${lim('referrer')}`)
   lines.push(...table(['来源', '会话'], metricRows(referrers, (r) => [truncate(r.referrer || '(未设置)', 48), num(r.visits)]), ['l', 'r']))
   lines.push('')
-  lines.push('国家 Top 10')
+  lines.push(`国家 Top ${lim('country')}`)
   lines.push(...table(['国家', '会话'], metricRows(countries, (r) => [truncate(r.country || '(未设置)', 32), num(r.visits)]), ['l', 'r']))
   return lines.join('\n')
 }
@@ -412,6 +501,11 @@ const HELP_TEXT = `用法：node bin/umami.mjs --share <url|slug> [--days 30] [-
   --region <us|eu>   区域覆盖（默认取链接里的区域，无则 us；或 UMAMI_REGION）
   --json             只输出一个 JSON 对象到 stdout
   -h, --help         显示本帮助
+
+抓取内容：总计 totals · 按天 byDate · 近 1 天/近 7 天窗口 windows · 实时在线 active ·
+18 个维度 breakdowns（path/entry/exit/referrer/country/region/city/browser/os/device/
+language/screen/title/hostname/event/utmSource/utmMedium/utmCampaign）。
+除 totals 与 byDate 外均为「失败记 null 不中断」。
 
 分享链接在 Umami → Settings → Share 生成（公开只读）。本工具只读，不写任何文件。
 `

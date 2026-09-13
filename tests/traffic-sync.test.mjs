@@ -32,11 +32,13 @@ function stubUmami(calls = []) {
     const u = String(url)
     if (u.includes('/api/share/')) return jsonRes(CONFIG)
     if (u.includes('/stats')) return jsonRes({ pageviews: 1169, visitors: 351, visits: 452, bounces: 342, totaltime: 63583 })
+    if (u.includes('/active')) return jsonRes({ visitors: 6 })
     if (u.includes('/pageviews')) return jsonRes({ pageviews: [{ x: '2026-09-06T00:00:00Z', y: 259 }, { x: '2026-09-07T00:00:00Z', y: 254 }] })
     if (u.includes('type=path')) return jsonRes([{ x: "/o'brien/", y: 164 }])
     if (u.includes('type=hostname')) return jsonRes([{ x: 'dsh-insights.com', y: 351 }, { x: 'dsh-why.com', y: 1 }])
     if (u.includes('type=referrer')) return jsonRes([{ x: 'github.com', y: 23 }])
     if (u.includes('type=country')) return jsonRes([{ x: 'US', y: 173 }])
+    if (u.includes('type=')) return jsonRes([{ x: 'sample', y: 3 }]) // 其余维度统一给一条
     return errRes(404)
   }
 }
@@ -57,19 +59,21 @@ test('jsonLit: null → NULL，数组 → jsonb 字面量，单引号双写转�
   assert.equal(jsonLit([{ path: "/o'brien/", pageviews: 3 }]), `'[{"path":"/o''brien/","pageviews":3}]'::jsonb`)
 })
 
-test('buildUpsert: 13 列齐全、按 (date,source) 幂等覆盖、每个字段都过字面量转义', () => {
+test('buildUpsert: 16 列齐全、按 (date,source) 幂等覆盖、每个字段都过字面量转义', () => {
   const sql = buildUpsert({
     date: '2026-09-13', source: 'umami', window_days: 28, visitors: 351, pageviews: 1169,
     sessions: 452, bounces: 342, avg_duration: 141,
     daily: [{ date: '2026-09-06', pageviews: 259 }], top_paths: [{ path: "/x'--", pageviews: 1 }],
     referrers: [], countries: null, hostnames: [{ host: 'dsh-why.com', visitors: 1 }],
+    windows: { d7: { visitors: 300 } }, active: 6, breakdowns: { path: { unit: 'pageviews', rows: [] } },
   })
-  assert.match(sql, /INSERT INTO site_traffic \(date, source, window_days, visitors, pageviews, sessions, bounces, avg_duration, daily, top_paths, referrers, countries, hostnames\)/)
+  assert.match(sql, /INSERT INTO site_traffic \(date, source, window_days, visitors, pageviews, sessions, bounces, avg_duration, daily, top_paths, referrers, countries, hostnames, windows, active, breakdowns\)/)
   assert.match(sql, /ON CONFLICT \(date, source\) DO UPDATE SET window_days = EXCLUDED.window_days/)
   assert.match(sql, /collected_at = now\(\)/)
   assert.match(sql, /'2026-09-13', 'umami', 28, 351, 1169, 452, 342, 141/)
   assert.match(sql, /"path":"\/x''--"/)
   assert.match(sql, /"host":"dsh-why\.com"/)
+  assert.match(sql, /"active":6|, 6,/)
   assert.match(sql, /'null'::jsonb|NULL/)
   // 注入样本不能逃出字面量
   assert.doesNotMatch(sql, /"path":"\/x'--"/)
@@ -121,6 +125,12 @@ test('dry-run：采集并映射成行，但不写库（无需 DB9_TOKEN）', asy
   assert.deepEqual(row.referrers[0], { referrer: 'github.com', sessions: 23 })
   assert.deepEqual(row.countries[0], { country: 'US', sessions: 173 })
   assert.deepEqual(row.hostnames[0], { host: 'dsh-insights.com', visitors: 351 })
+  assert.equal(row.active, 6)
+  assert.equal(row.windows.d1.visitors, 351)
+  assert.equal(row.windows.d7.avg_duration, 141)
+  assert.equal(row.breakdowns.path.unit, 'pageviews')
+  assert.deepEqual(row.breakdowns.path.rows[0], { value: "/o'brien/", count: 164 })
+  assert.equal(row.breakdowns.city.unit, 'visitors')
   assert.ok(!calls.some((c) => c.url.includes('api.db9.ai')), 'dry-run 不得请求 db9')
 })
 
@@ -141,11 +151,14 @@ test('写库：先建表再 upsert，返回写入条数', async () => {
     log: () => {},
   })
   assert.equal(out.written, 1)
-  assert.equal(sqls.length, 3) // CREATE TABLE + 补列 migration + INSERT
+  assert.equal(sqls.length, 6) // CREATE TABLE + 4 条补列 migration + INSERT
   assert.match(sqls[0], /CREATE TABLE IF NOT EXISTS site_traffic/)
   assert.match(sqls[1], /ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS hostnames/)
-  assert.match(sqls[2], /INSERT INTO site_traffic/)
-  assert.match(sqls[2], /'2026-09-13', 'umami'/)
+  assert.match(sqls[2], /ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS windows/)
+  assert.match(sqls[3], /ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS active/)
+  assert.match(sqls[4], /ALTER TABLE site_traffic ADD COLUMN IF NOT EXISTS breakdowns/)
+  assert.match(sqls[5], /INSERT INTO site_traffic/)
+  assert.match(sqls[5], /'2026-09-13', 'umami'/)
 })
 
 test('失败纪律：采集失败与写库失败都只告警，不抛异常（旁路数据不阻塞管线）', async () => {

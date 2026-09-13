@@ -74,7 +74,9 @@ const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 's
 // dsh-insights-kit 的 registry overlay 形成两级新鲜度。export-json 必须
 // 同行：discover-incr/validate 让 plugins.jsonl 纳新后若不重导 insights.json，
 // site 的混代守卫（行数 vs meta.total）会拒绝发布 —— 纳新小时整 run 失败。
-const HOURLY = ['lists', 'discover-incr', 'validate', 'dynamics', 'analyze', 'export-json', 'site', 'export-csv', 'diff', 'crash-corpus', 'pages']
+// traffic 每小时也跑：它对 (date, source) 做 upsert（当天一行滚动窗口快照），
+// 只写 db9、不动仓库，故不会产生额外提交；好处是 /admin/traffic 永远不超过 1 小时旧。
+const HOURLY = ['lists', 'discover-incr', 'validate', 'dynamics', 'analyze', 'export-json', 'site', 'export-csv', 'diff', 'crash-corpus', 'traffic', 'pages']
 // compat-observed（实测兼容矩阵）依赖 export-json 的 insights.json、shell-seeds.json 与
 // shell-rows.json（图行清单），且须先于 pages（详情页消费）
 const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'compat-observed', 'overlap', 'scenarios', 'badges', 'site', 'pages']
