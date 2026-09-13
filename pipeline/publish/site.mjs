@@ -14,7 +14,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { PATHS, SITE, readJsonl, readJson, loadEnrichMap, byFullName, loadPlugins } from '../../lib/data.mjs'
-import { stripEmoji, icon } from '../../lib/page.mjs'
+import { stripEmoji, icon, TRACK_HELPER } from '../../lib/page.mjs'
 import { t, ph, titleAttr, langBlock, I18N_CSS, I18N_HEAD, I18N_BODY } from '../../lib/i18n.mjs'
 
 const OUT = join(SITE, 'dashboard', 'index.html')
@@ -206,6 +206,7 @@ function main() {
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="7fc5eb24-1687-4827-9775-5326d957b46a"></script>
+${TRACK_HELPER}
 <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})()</script>
 ${I18N_HEAD}
 <style>

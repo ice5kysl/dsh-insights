@@ -30,6 +30,13 @@ import { DATA, SITE, PATHS, loadPlugins, byFullName, readJsonl } from '../../lib
 
 const ORIGIN = 'https://dsh-insights.com'
 
+// Analytics · RSS: one `rss-subscribe` event per click on any feed.xml link,
+// routed through the head-injected `window.__track` (a no-op when Umami is
+// blocked). A capture-phase delegated listener, so navigation always proceeds
+// normally — never preventDefault / return false — and every current or future
+// feed.xml anchor on the page is covered.
+const RSS_TRACK = `<script>(function(){document.addEventListener('click',function(e){try{var n=e.target;while(n&&n.nodeType===1){if(n.tagName==='A'&&String(n.getAttribute('href')||'').indexOf('feed.xml')>-1){window.__track&&window.__track('rss-subscribe',{href:n.getAttribute('href')});break}n=n.parentNode}}catch(err){}},true)})()</script>`
+
 const out = (rel, content) => {
   const p = join(SITE, rel)
   mkdirSync(join(p, '..'), { recursive: true })
@@ -160,7 +167,8 @@ var ISSUES=${JSON.stringify(weeklyIssues).replace(/</g, '\\u003c')};
     img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   });
 })();
-</script>`,
+</script>
+${RSS_TRACK}`,
   })))
 
   // ---- insights pages（LLM 阶段性生态洞察，中英双语成对块） ----------------
@@ -326,6 +334,11 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
 </div>
 ${obsBlock}
 ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（${escHtml(en.category)}）`, `Similar plugins (${escHtml(en.category)})`)}</h2><div class="card">${peersHtml}</div>` : ''}
+<div class="card" style="margin-top:18px;border-left:3px solid var(--accent);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+  <a id="report-cta" class="wkbtn" href="https://github.com/ice5kysl/dsh-why" target="_blank" rel="noopener">${t('遇到加载崩溃？用 dsh-why 诊断并上报这个案例 →', 'Hit a load crash? Diagnose it and report this case with dsh-why →')}</a>
+  <span style="font-size:12px;color:var(--faint)">${t('本地只读诊断，生成可上报的案例。', 'Read-only local diagnosis that produces a reportable case.')}</span>
+</div>
+<script>(function(){var a=document.getElementById('report-cta');if(!a)return;a.addEventListener('click',function(){try{window.__track&&window.__track('report-click',{plugin:${JSON.stringify(full).replace(/</g, '\\u003c')}})}catch(e){}})})()</script>
 <p style="margin-top:18px;font-size:12px;color:var(--faint)">${t('数据有误或已更新？', 'Data wrong or outdated? ')}<a href="https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml">${t('申请重检', 'Request a re-check')}</a>${t('（Actions 手动触发，输入 owner/repo，约半小时生效）', ' (manual Actions trigger; enter owner/repo; takes effect in ~30 min)')} · <a href="https://github.com/ice5kysl/dsh-insights/issues/new/choose">${t('申诉 / 纠错', 'Appeal / correction')}</a></p>`
     const html = page({
       title: `${repo} · 插件详情 · DSH Insights`, titleEn: `${repo} · Plugin · DSH Insights`, desc: `${full} 的健康分、维度画像、扣分明细与客观数据（DSH Insights 自动生成）`,
@@ -908,6 +921,7 @@ ${badgeExHtml}
   inp.addEventListener('input',upd);
   document.addEventListener('langchange',function(){ if(!norm(inp.value))upd() });
   btn.addEventListener('click',function(){
+    try{ window.__track&&window.__track('badge-copy',{repo:norm(inp.value)||''}) }catch(e){}
     (navigator.clipboard?navigator.clipboard.writeText(c1.textContent):Promise.reject()).then(function(){ ok.textContent=__t('已复制 ✓','Copied ✓') }).catch(function(){ ok.textContent=__t('请手动复制','Copy manually') });
     setTimeout(function(){ ok.textContent='' },2000) });
 })();
@@ -1053,7 +1067,8 @@ ${badgeExHtml}
 (function(){ var h=location.hash||'';
   if(h.indexOf('#browse')===0){ location.replace('/dashboard/'+h) }
   else if(/^#(overview|quality|rank)/.test(h)){ location.replace('/dashboard/'+h) } })();
-</script>`,
+</script>
+${RSS_TRACK}`,
   })))
 
   // ---- /about/ 关于 · 方法论与指标体系 --------------------------------------
@@ -1101,7 +1116,7 @@ ${langBlock(`
 <h2>边界声明</h2>
 <p>启发式评估 ≠ 安全审计。不做社区评分/投票、不做安装托管交易、不做登录产品。深检（写面/消毒）为增量信号，单独标注。</p>
 <h2>站点统计（隐私披露）</h2>
-<p>本站使用 <a href="https://umami.is" target="_blank">Umami</a>（开源、无 cookie、不收集个人信息）统计页面访问与来源，用于衡量产品发展（指标体系 E 组）；同时每周将覆盖/内容/触达指标记入 <code>data/metrics.jsonl</code> 公开于仓库。不使用任何其他跟踪。</p>
+<p>本站使用 <a href="https://umami.is" target="_blank">Umami</a>（开源、无 cookie、不收集个人信息）统计 dsh-insights.com 的页面访问与来源，姊妹站 dsh-why.com 使用 GA4，两者都只用于衡量产品发展（指标体系 E 组）。覆盖/内容指标每周记入 <code>data/metrics.jsonl</code> 公开于仓库；<b>站点访问统计记录在我们自己的数据库中，不随仓库发布</b>。不使用任何其他跟踪。</p>
 <h2>可复核</h2>
 <p>数据、规则、管线全部开源：<a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>。发现误判请提 issue —— 争议工单本身是公信力指标（见上表 C 组）。产品版本与发布记录见<a href="../changelog/">更新日志</a>。</p>
 `, `
@@ -1142,7 +1157,7 @@ ${langBlock(`
 <h2>Boundary Statement</h2>
 <p>Heuristic evaluation ≠ security audit. No community ratings or voting, no install hosting or transactions, no logged-in product. The deep scan (write surface / sanitization) is an incremental signal and is labeled separately.</p>
 <h2>Site Analytics (privacy disclosure)</h2>
-<p>This site uses <a href="https://umami.is" target="_blank">Umami</a> (open source, cookieless, collects no personal information) to measure page visits and referrers — it feeds metric group E above. Coverage/content/reach metrics are also appended weekly to <code>data/metrics.jsonl</code>, public in the repo. No other tracking of any kind.</p>
+<p>This site uses <a href="https://umami.is" target="_blank">Umami</a> (open source, cookieless, collects no personal information) to measure page visits and referrers on dsh-insights.com; the sibling site dsh-why.com uses GA4. Both are used only to measure product development (metric group E above). Coverage/content metrics are still appended weekly to <code>data/metrics.jsonl</code>, public in the repo; <b>site visit statistics are recorded only in our own database and are not published in the repo</b>. No other tracking of any kind.</p>
 <h2>Verifiability</h2>
 <p>Data, rules, and pipeline are all open source: <a href="https://github.com/ice5kysl/dsh-insights" target="_blank">GitHub</a>. If you spot a misjudgment, open an issue — dispute tickets are themselves a credibility metric (group C above). Product versions and releases: <a href="../changelog/">Changelog</a>.</p>
 `)}
