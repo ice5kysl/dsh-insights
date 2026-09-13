@@ -19,6 +19,8 @@
  *                         npm_publish / platform_release / api_model_first_seen；
  *                         append-only：冲突只更新 payload，occurred_at/first_seen 不动）
  *   weekly_letters      ← insight-reports/<week>.json（周报元数据；正文 md 不入库）
+ *   invalid_candidates  ← invalid.jsonl（被拒候选 + 拒绝原因；主键 full_name 缺失回退 owner/repo，
+ *                         reasons 归一为数组；first_seen 口径同 plugins 源）
  *
  * 失败纪律（对齐 collect/downloads.mjs）：
  *   - 无 DB9_TOKEN → 打印跳过说明，exit 0
@@ -31,7 +33,7 @@
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { PATHS, DATA, readJson, readJsonl, loadPlugins, loadEnrichMap } from '../../lib/data.mjs'
-import { isEnabled, sql, lit, jsonLit, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, diffPluginEvents } from '../../lib/db9.mjs'
+import { isEnabled, sql, lit, jsonLit, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, diffPluginEvents, invalidCandidateKey } from '../../lib/db9.mjs'
 
 const BATCH = 200
 
@@ -119,6 +121,15 @@ const CREATE_METRICS = `CREATE TABLE IF NOT EXISTS project_metrics (
   payload JSONB
 )`
 
+const CREATE_INVALID = `CREATE TABLE IF NOT EXISTS invalid_candidates (
+  full_name TEXT PRIMARY KEY,
+  reasons JSONB,
+  raw JSONB,
+  first_seen TIMESTAMPTZ,
+  last_seen TIMESTAMPTZ,
+  updated_at TIMESTAMPTZ
+)`
+
 const CREATE_EVENTS = `CREATE TABLE IF NOT EXISTS ecosystem_events (
   type TEXT,
   key TEXT,
@@ -186,6 +197,12 @@ ON CONFLICT (full_name) DO UPDATE SET
 const UPSERT_METRICS = `INSERT INTO project_metrics (date, payload)
 VALUES %s
 ON CONFLICT (date) DO UPDATE SET payload = EXCLUDED.payload`
+
+// 口径同 plugins 源：first_seen 只首插写；冲突刷新 reasons/raw + last_seen/updated_at。
+const UPSERT_INVALID = `INSERT INTO invalid_candidates (full_name, reasons, raw, first_seen, last_seen, updated_at)
+VALUES %s
+ON CONFLICT (full_name) DO UPDATE SET
+  reasons = EXCLUDED.reasons, raw = EXCLUDED.raw, last_seen = now(), updated_at = now()`
 
 // append-only 语义：事件发生过就是发生过——冲突只刷新 payload，
 // occurred_at（客观发生时间）与 first_seen（首见时间）都不动，重复 sync 不产生新行。
@@ -353,6 +370,21 @@ async function syncMetrics(token) {
   return fmt('project_metrics', r, all.length)
 }
 
+async function syncInvalidCandidates(token) {
+  await sql(token, CREATE_INVALID)
+  const all = readJsonl(PATHS.invalid)
+  // 主键归一（full_name 缺失回退 owner/repo）+ 文件内去重（同键后者覆盖）
+  const byKey = new Map()
+  for (const r of all) {
+    const k = invalidCandidateKey(r)
+    if (k) byKey.set(k.key, { ...k, raw: r })
+  }
+  const rows = [...byKey.values()].map((v) =>
+    `(${[lit(v.key), jsonLit(v.reasons), jsonLit(v.raw), 'now()', 'now()', 'now()'].join(', ')})`)
+  const r = await upsertBatches(token, 'invalid_candidates', UPSERT_INVALID, rows)
+  return fmt('invalid_candidates', r, byKey.size)
+}
+
 async function syncEcosystemEvents(token) {
   await sql(token, CREATE_EVENTS)
   const dynamics = readJson(PATHS.dynamics, null)
@@ -388,6 +420,7 @@ async function main() {
     ['compat', syncCompatObservations],
     ['llm-tags', syncLlmTags],
     ['metrics', syncMetrics],
+    ['invalid', syncInvalidCandidates],
     ['events', syncEcosystemEvents],
     ['letters', syncWeeklyLetters],
   ]

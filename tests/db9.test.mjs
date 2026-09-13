@@ -6,7 +6,7 @@
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { lit, jsonLit, isEnabled, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, pluginCreatedEvent, diffPluginEvents, aggregateCrashSignatures, toIso, DEFAULT_SQL_URL } from '../lib/db9.mjs'
+import { lit, jsonLit, isEnabled, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, pluginCreatedEvent, diffPluginEvents, aggregateCrashSignatures, toIso, invalidCandidateKey, DEFAULT_SQL_URL } from '../lib/db9.mjs'
 import { releaseToEvent, npmTimeToEvents } from '../bin/backfill-events.mjs'
 
 test('lit: null/undefined → NULL', () => {
@@ -365,4 +365,17 @@ test('aggregateCrashSignatures: 种子(source=seed)与用户上报分开计数�
   assert.equal(bySig.get('r1_old').seeded, false)
   // 有用户上报的排在种子-only 之前
   assert.deepEqual(sigs.map((s) => s.sig), ['r1_mixed', 'r1_old', 'r1_seed'])
+})
+
+test('invalidCandidateKey: full_name 优先，缺失回退 owner/repo，reason 归一数组', () => {
+  assert.deepEqual(invalidCandidateKey({ full_name: 'a/b', owner: 'a', repo: 'b', reason: 'fork' }), { key: 'a/b', reasons: ['fork'] })
+  assert.deepEqual(invalidCandidateKey({ owner: 'c', repo: 'd', reason: 'repo-gone' }), { key: 'c/d', reasons: ['repo-gone'] })
+  // reason 缺失 → 空数组而非 [undefined]
+  assert.deepEqual(invalidCandidateKey({ full_name: 'e/f' }), { key: 'e/f', reasons: [] })
+})
+
+test('invalidCandidateKey: 无任何标识 → null', () => {
+  assert.equal(invalidCandidateKey(null), null)
+  assert.equal(invalidCandidateKey({ reason: 'fork' }), null)
+  assert.equal(invalidCandidateKey({ owner: 'a' }), null)
 })

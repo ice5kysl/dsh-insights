@@ -44,7 +44,7 @@
 collect    discover 分片全量爬取 · npm-map · lists 收录渠道 · downloads 周下载 · dynamics 官方动态 · refresh 元数据合并
 validate   validate 真伪→权威集/分桶(断点续跑) · regress 校准回归(硬门禁) · deep 限量深检(写面/消毒)
 analyze    analyze(→enrich) · score 健康分 · history 快照历史 · compat · overlap · llm-tags · scenarios
-publish    site 仪表盘 · pages 多页站(首页/p/weekly/dynamics/scenarios/authors/badge/data/about) · 导出 · badges · diff · db9-sync (旁路镜像 plugins/downloads/scores/compat-observations/llm-tags/metrics/ecosystem-events/weekly-letters 到 db9, 含插件级事件 diff: created/release/archived/first-publish, 无 DB9_TOKEN 自动跳过)
+publish    site 仪表盘 · pages 多页站(首页/p/weekly/dynamics/scenarios/authors/badge/data/about) · 导出 · badges · diff · db9-sync (旁路镜像 plugins/downloads/scores/compat-observations/llm-tags/metrics/ecosystem-events/weekly-letters/invalid-candidates 到 db9, 含插件级事件 diff: created/release/archived/first-publish, 无 DB9_TOKEN 自动跳过)
 content    letters 致作者的信 · weekly 生态周报
 ```
 
@@ -69,7 +69,7 @@ node bin/backfill-events.mjs                                 # 一次性：db9 e
 node bin/backfill-plugin-events.mjs                          # 一次性：插件级事件回填（plugin_created / npm_first_publish）
 ```
 
-CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周五在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供作者在 Actions 手动触发本插件重检。`site/` **不入 git**（生成物，已 gitignore）——`pages.yml` 部署时现场生成（`pipeline --only site,badges,pages`），再叠 `site-static/`（CNAME/图标/og，仅有的手工维护 Web 资产）。
+CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周五在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供作者在 Actions 手动触发本插件重检。`site/` **不入 git**（生成物，已 gitignore）——`pages.yml` 部署时现场生成（`pipeline --only site,badges,pages`），再叠 `site-static/`（CNAME/图标/og，仅有的手工维护 Web 资产）。db9 有开发分支 `dsh-data-dev`（生产的 schema+快照克隆）：本地手跑管线可用 `DB9_SQL_URL=https://api.db9.ai/customer/databases/42r75opjazyn/sql` 指向它（端点不是秘密，token 用各自的 scoped token，CI secret 保持只连生产）。
 
 ## 评分口径（一段话）
 
