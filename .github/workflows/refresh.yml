@@ -97,7 +97,8 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           # site/ 已移出版本控制（gitignore），部署由 pages.yml 现场生成；这里只提交 data/
-          git add data/
+          # README*.md：readme-sync 阶段自动对账的数字区间（stats 锚点内），随快照一起提交
+          git add data/ README.md README.zh-CN.md
           if git diff --cached --quiet; then
             echo 'no changes'
           else
