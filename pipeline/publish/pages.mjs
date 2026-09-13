@@ -296,6 +296,13 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
       ? (en.drops || []).map((d) => `<div class="scrow"><a style="cursor:default">${escHtml(d.label)}</a><span class="meta">${d.sev === 'fail' ? 'fail −20' : d.sev === 'major' ? '−10' : d.sev === 'minor' ? '−2' : '−5'}</span></div>`).join('')
       : ''
     const peersHtml = peers.map((p) => `<div class="scrow"><a href="/p/${escHtml(p.full_name)}/">${escHtml(p.full_name)}</a><span class="meta"><span class="grade ${escHtml(p.grade)}">${escHtml(p.grade)}</span> ${p.score} · ★${p.stars}</span></div>`).join('')
+    // dsh-why 引流：有扣分项或实测崩溃信号时在健康区块下挂诊断 callout（干净页只有页脚通用 CTA，不喧宾夺主）
+    const hasDrops = hasScore && (en.drops || []).length > 0
+    const obsBroken = vd && (vd.cls === 'never' || vd.cls === 'broken-since')
+    const whyUrl = `https://dsh-why.com/?utm_source=insights&utm_medium=site&utm_campaign=${escHtml(full)}`
+    const whyCallout = (hasDrops || obsBroken)
+      ? `<div class="card" style="margin-top:14px;border-left:3px solid var(--warn)"><p style="font-size:13px;margin:0">${t('插件装不上 / 打开崩溃？', 'Plugin won’t load or crashes on open?')} <code>npx dsh-why --package .</code> ${t('一键诊断并给修复建议 →', 'diagnoses it in one command with fix guidance →')} <a href="${whyUrl}" target="_blank" rel="noopener">dsh-why.com</a></p></div>`
+      : ''
     const body = `<p class="crumb">${t('插件详情', 'Plugin')} · ${escHtml(full)}</p>
 <div style="display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:6px">
   <img src="https://github.com/${escHtml(owner)}.png?size=80" width="56" height="56" style="border-radius:14px" alt="">
@@ -322,6 +329,7 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
   <div class="card" style="margin:0"><b>${t('评分维度（六维框架）', 'Scoring dimensions (six-dimension framework)')}</b>${dimRows || `<p style="color:var(--faint);font-size:13px;margin-top:8px">${t('评分待生成（新入库，下个评分快照补齐）', 'Score pending (newly indexed; filled in the next scoring snapshot)')}</p>`}<p style="font-size:11px;color:var(--faint);margin-top:10px">${t('安全卫生（深检抽样）、采用度与兼容性（engines.dsh/peers 探测）只展示不进分。口径见', 'Safety hygiene (deep-scan sampling), adoption and compatibility (engines.dsh/peers probe) are display-only, never scored. Definitions:')} <a href="/about/">${t('关于·指标体系', 'About · Metrics')}</a></p></div>
   <div class="card" style="margin:0"><b>${t('扣分明细（health-v4）', 'Deductions (health-v4)')}</b>${dropsRows || (hasScore ? `<p style="color:var(--ok);font-size:13px;margin-top:8px">${t('无扣分项 ✓', 'No deductions ✓')}</p>` : `<p style="color:var(--faint);font-size:13px;margin-top:8px">${t('评分待生成（新入库，下个评分快照补齐）', 'Score pending (newly indexed; filled in the next scoring snapshot)')}</p>`)}${hasScore && (en.missing || []).length ? `<p style="font-size:11px;color:var(--faint);margin-top:8px">${t('未探测（不扣分）：', 'Not probed (no deduction): ')}${escHtml(en.missing.join('、'))}</p>` : ''}</div>
 </div>
+${whyCallout}
 <div class="sc-cols" style="margin-top:14px">
   <div class="card" style="margin:0"><b>${t('收录 / 发布', 'Listing / Publishing')}</b>
     <p style="font-size:13px;margin-top:8px">${en.inAwesome ? okIco + ' awesome-dsh-plugin' : '— ' + t('awesome 未收录', 'not in awesome')} · ${en.inImsai ? okIco + ' imsai' : '— ' + t('imsai 未收录', 'not in imsai')}</p>
@@ -335,7 +343,7 @@ ${latest.sigBox}<div class="article">${latest.bodyHtml}</div>`,
 ${obsBlock}
 ${peersHtml ? `<h2 style="font-size:16px;margin:26px 0 8px">${t(`同类插件（${escHtml(en.category)}）`, `Similar plugins (${escHtml(en.category)})`)}</h2><div class="card">${peersHtml}</div>` : ''}
 <div class="card" style="margin-top:18px;border-left:3px solid var(--accent);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
-  <a id="report-cta" class="wkbtn" href="https://github.com/ice5kysl/dsh-why" target="_blank" rel="noopener">${t('遇到加载崩溃？用 dsh-why 诊断并上报这个案例 →', 'Hit a load crash? Diagnose it and report this case with dsh-why →')}</a>
+  <a id="report-cta" class="wkbtn" href="${whyUrl}" target="_blank" rel="noopener">${t('遇到加载崩溃？用 dsh-why 诊断并上报这个案例 →', 'Hit a load crash? Diagnose it and report this case with dsh-why →')}</a>
   <span style="font-size:12px;color:var(--faint)">${t('本地只读诊断，生成可上报的案例。', 'Read-only local diagnosis that produces a reportable case.')}</span>
 </div>
 <script>(function(){var a=document.getElementById('report-cta');if(!a)return;a.addEventListener('click',function(){try{window.__track&&window.__track('report-click',{plugin:${JSON.stringify(full).replace(/</g, '\\u003c')}})}catch(e){}})})()</script>
@@ -1219,6 +1227,7 @@ ${relHtml || `<p class="lede">${t('暂无发布记录', 'No releases yet')}</p>`
 <div class="cards">
   <a class="card" href="https://github.com/ice5kysl/dsh-insights-kit" target="_blank" style="text-decoration:none;color:inherit"><b>GitHub ↗</b><p>${t('源码、issue、安装脚本', 'Source, issues, install scripts')}</p></a>
   <a class="card" href="../badge/" style="text-decoration:none;color:inherit"><b>${t('健康徽章', 'Health Badge')}</b><p>${t('自检通过后，把徽章挂进你的 README', 'After your self-check passes, put the badge in your README')}</p></a>
+  <a class="card" href="https://dsh-why.com/?utm_source=insights&utm_medium=site" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><b>dsh-why ↗</b><p>${t('姊妹工具：插件加载崩溃一键诊断 + 修复建议（npm i -g dsh-why）', 'Sister tool: one-command diagnosis + fix guidance for plugin load crashes (npm i -g dsh-why)')}</p></a>
 </div>
 <p class="lede" style="margin-top:14px">${t('dogfooding 说明：本插件按 DSH 官方 bundle 规范开发，同样被 DSH Insights 管线收录与评分——你可以在', 'Dogfooding note: this plugin is built to the official DSH bundle spec and is itself indexed and scored by the DSH Insights pipeline — you can watch its own grade on')} <a href="https://github.com/ice5kysl/dsh-insights-kit" target="_blank">${t('它的仓库与（即将上线的）详情页', 'its repo and (soon) its own detail page')}</a>${t('上看到它自己的等级。', '.')}</p>`,
   })))
