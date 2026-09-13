@@ -261,8 +261,10 @@ async function npmCreated(pkgName) {
 
 async function syncPlugins(token) {
   await sql(token, CREATE_PLUGINS)
-  // 与现有发布层同口径：只同步通过门禁的权威集（valid 且 kind='repo'）
-  const plugins = loadPlugins().filter((p) => p.valid && p.kind === 'repo')
+  // 与现有发布层同口径：只同步通过门禁的权威集。注意 valid 是信息字段而非过滤依据——
+  // plugins.jsonl 本身即权威集（invalid 行进另一个文件），少数 bootstrap 老行没有该字段，
+  // 真值过滤会把它们误丢（曾导致 3 行缺同步），故只排除显式 false
+  const plugins = loadPlugins().filter((p) => p.valid !== false && p.kind === 'repo')
   const enrich = loadEnrichMap()
 
   // 插件级事件 diff（upsert 前与 db9 现存量对比）：
