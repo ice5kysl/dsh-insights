@@ -1,25 +1,30 @@
 # 快照 Diff · 2026-09-14
 
-- 当前权威插件：**11023**（上次 11023）
-- 新增 0 · 消失 0
+- 当前权威插件：**11124**（上次 11023）
+- 新增 101 · 消失 0
 
-## 新增（Top 0）
+## 新增（Top 20）
+- zeyu-j/centricmem-skill ★1 
+- axelfreeman/hermes-security-audit ★1 
+- fang2hou/dsh-locale-ja ★4 (npm ✓)
+- minhdevtry/dsh-markdown-ide ★5 
+- Stellum-Waq/dsh-pet-ronaldo ★5 
+- xp266/dsh-tui ★1 (npm ✓)
+- startnewlabs/dsh-history ★15 (npm ✓)
+- salathleizhang/dsh-volcengine ★0 
+- wanrenhuifu/NovelNovel ★0 
+- JeffreySuen-x/dsh-skill-dossier ★0 
+- AsILAnn/dsh-update-checker ★0 
+- wldxiaobai/dsh-project-mcp-manager ★3 (npm ✓)
+- xiaomujiang/dsh-user-question-nav ★2 (npm ✓)
+- Dayi-Z/dsh-learn-wiki ★1 
+- shxtmaker/dsh-token-quota ★0 
+- qgx1992/dsh-ui-tools ★0 (npm ✓)
+- Phant0Meow/dsh-femo ★2 
+- ManoloRemiddi/dsh-model-picker-augmented ★2 
+- firestige/crystra-dsh ★0 
+- wannanbigpig/dsh-sidebar ★0 (npm ✓)
 
 ## 消失（Top 0）
 
 ## star 涨幅榜
-- YuJunZhiXue/dsh-purge：589 → 773（+184）
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：2122 → 2297（+175）
-- dsh-market/dsh-market：3651 → 3821（+170）
-- antibrow/dsh-antibrow：97 → 225（+128）
-- zhu1090093659/dsh-web：7387 → 7512（+125）
-- Minglink/dsh-infinite-gen-4：1299 → 1419（+120）
-- a1exsun/dsh-council：29 → 72（+43）
-- superdesigndev/treg：1352 → 1394（+42）
-- shaobeichen/dsh-pocket：1067 → 1108（+41）
-- bowenliang123/dsh-context：1333 → 1369（+36）
-- SeaOf0/dsh-redteam-model：392 → 427（+35）
-- Mars-Sea/dsh-commandcode-provider：202 → 231（+29）
-- PolinniZhong/dsh-personal-center：99 → 125（+26）
-- Amakurai/dsh-liketavern：85 → 111（+26）
-- xmanrui/dsh-im：1263 → 1287（+24）
