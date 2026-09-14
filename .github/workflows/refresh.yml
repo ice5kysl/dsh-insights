@@ -12,6 +12,9 @@
 # - concurrency 组防止多 run 并发写 data/（cancel-in-progress: false 排队执行）。
 # - bot push 不触发新 workflow（GitHub 限制），Pages 部署由 pages.yml 的
 #   `workflow_run`（refresh 成功完成后）触发，形成闭环。
+# - 每次运行（含失败）由末尾的 run-report 步骤落 db9 pipeline_runs 表（dsh-data 库，
+#   /admin/pipeline 页可视化），并做缺口自检：>6h 无成功 / UTC 14 点后当日 daily
+#   缺席 → 自动开 ops-timer issue（按 label 去重）。定时器不再静默失联。
 
 name: refresh
 
@@ -32,6 +35,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: refresh
@@ -77,22 +81,35 @@ jobs:
         run: |
           TODAY=$(date -u +%F)
           LAST=$(cat data/last-daily.txt 2>/dev/null || echo never)
-          echo "today=$TODAY last-daily=$LAST"
+          MODE=hourly
           if [ "${{ inputs.mode }}" = "monday" ]; then
-            echo "Monday profile (manual)"
-            node bin/pipeline.mjs monday
+            MODE=monday
           elif [ "${{ github.event_name }}" = "schedule" ] && [ "$LAST" = "$TODAY" ]; then
-            echo "Hourly incremental profile"
-            node bin/pipeline.mjs hourly
+            MODE=hourly
           elif [ "$(date -u +%u)" = "1" ]; then
-            echo "Monday profile"
-            node bin/pipeline.mjs monday
-            echo "$TODAY" > data/last-daily.txt
+            MODE=monday
           else
-            echo "Daily profile"
-            node bin/pipeline.mjs daily
+            MODE=daily
+          fi
+          echo "today=$TODAY last-daily=$LAST mode=$MODE"
+          # 运行元信息给最后的 run-report 步骤用（写 RUNNER_TEMP，不进 git，避免每小时制造空提交）
+          printf '{"run_id":%s,"event":"%s","mode":"%s","started_at":"%s"}\n' \
+            "${{ github.run_id }}" "${{ github.event_name }}" "$MODE" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            > "${RUNNER_TEMP}/last-run.json"
+          node bin/pipeline.mjs "$MODE"
+          # 非 hourly 模式（daily/monday，含手动触发）推进去重标记，防重复跑日更
+          if [ "$MODE" != "hourly" ]; then
             echo "$TODAY" > data/last-daily.txt
           fi
+      - name: Report run to db9（定时器可观测性，best-effort 不影响主任务）
+        if: always() && inputs.mode != 'full'
+        env:
+          DB9_TOKEN: ${{ secrets.DB9_TOKEN }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_STATUS: ${{ job.status }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node bin/run-report.mjs || true
       - name: Commit snapshot changes
         run: |
           git config user.name 'github-actions[bot]'
