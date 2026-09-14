@@ -1,29 +1,29 @@
 # 快照 Diff · 2026-09-14
 
-- 当前权威插件：**11124**（上次 11023）
-- 新增 101 · 消失 0
+- 当前权威插件：**11154**（上次 11124）
+- 新增 30 · 消失 0
 
 ## 新增（Top 20）
-- zeyu-j/centricmem-skill ★1 
-- axelfreeman/hermes-security-audit ★1 
-- fang2hou/dsh-locale-ja ★4 (npm ✓)
-- minhdevtry/dsh-markdown-ide ★5 
-- Stellum-Waq/dsh-pet-ronaldo ★5 
-- xp266/dsh-tui ★1 (npm ✓)
-- startnewlabs/dsh-history ★15 (npm ✓)
-- salathleizhang/dsh-volcengine ★0 
-- wanrenhuifu/NovelNovel ★0 
-- JeffreySuen-x/dsh-skill-dossier ★0 
-- AsILAnn/dsh-update-checker ★0 
-- wldxiaobai/dsh-project-mcp-manager ★3 (npm ✓)
-- xiaomujiang/dsh-user-question-nav ★2 (npm ✓)
-- Dayi-Z/dsh-learn-wiki ★1 
-- shxtmaker/dsh-token-quota ★0 
-- qgx1992/dsh-ui-tools ★0 (npm ✓)
-- Phant0Meow/dsh-femo ★2 
-- ManoloRemiddi/dsh-model-picker-augmented ★2 
-- firestige/crystra-dsh ★0 
-- wannanbigpig/dsh-sidebar ★0 (npm ✓)
+- liyixuan201211/mcp-cap ★1 
+- advance-lion/dsh-lan-link ★0 
+- Riderich/self-evolving-router-dsh ★0 
+- baixianger/dsh-codex-adapter ★0 (npm ✓)
+- Aclguh/dsh-web-close ★0 
+- exoticknight/dsh-just-chat ★0 (npm ✓)
+- liyixuan201211/ctx-budget ★0 (npm ✓)
+- alexhegit/dsh-plugin-h3-hip ★0 
+- new-Beginner/dsh-default-prompt ★0 
+- ChenneyZhuang/email-deliverability-audit ★0 
+- ChenneyZhuang/resume-localize-cn2en ★0 
+- Missher12/dsh-missher-brain ★0 
+- new-Beginner/dsh-cliproxyapi ★0 
+- YpipaQ/dsh-s-m-c-center ★0 
+- Missher12/dsh-missher-enhance ★0 
+- MrTomTao/dsh-token-billing ★0 
+- almazom/dsh-almazom-approve-escalate ★0 
+- wangzhanchao883/dsh-lost-and-found ★0 (npm ✓)
+- LyaxZ/dsh-fonttune ★0 (npm ✓)
+- pureexe/dsh-vision-3090-fix ★0 
 
 ## 消失（Top 0）
 
