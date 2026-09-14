@@ -4,12 +4,12 @@
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-topics-memory 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（80/100）** · 在「记忆 / 知识」类 296 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（80/100）** · 在「记忆 / 知识」类 302 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★0 · dsh-plugin: OKF v0.2 topic memory for dsh - local-first git-tracked bundle, hot-path LLM-free injection, two-stage observer with background distill
 - npm：`@aiwayds/dsh-topics-memory@0.9.0`（5 个版本）
 - 周下载：**1023**
-- 最近 push 2026-09-11
+- 最近 push 2026-09-14
 
 以下几项检查未发现问题（仅作记录）：产物布局规范、files 白名单、npm 已发布、README 齐备、dsh-plugin topic、已度过新仓观察期、近期活跃。
 

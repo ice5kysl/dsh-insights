@@ -4,7 +4,7 @@
 
 ## 总览
 - 权威集规模：**11191**
-- 近 7 天活跃：2692（24.1%）· 近 30 天：11191（100%）
+- 近 7 天活跃：2775（24.8%）· 近 30 天：11191（100%）
 - 仓库年龄 ≥ 1 天（可过收录门禁）：10564（94.4%）
 
 ## 发布与文档
@@ -46,7 +46,7 @@
 
 ## 质量评分（启发式）
 - 平均分 76.1 · S+A 占比 10.1%（值得优先看；A+B 55.7%）
-- S 272 · A 859 · B 5375 · C 3411 · D 1274
+- S 272 · A 859 · B 5378 · C 3409 · D 1273
 
 ## 功能分类（启发式 Top 12）
 - 其它：4145
@@ -77,46 +77,46 @@
 - 2026-09：1451
 
 ## Top topics
-- `dsh-plugin` × 10869
-- `deepseek-harness` × 7262
-- `dsh` × 4137
-- `deepseek` × 1217
-- `dsh-plugins` × 1133
+- `dsh-plugin` × 10866
+- `deepseek-harness` × 7263
+- `dsh` × 4138
+- `deepseek` × 1218
+- `dsh-plugins` × 1132
 - `cordis` × 1044
-- `plugin` × 703
-- `typescript` × 409
+- `plugin` × 702
+- `typescript` × 410
 - `deepseek-harness-plugin` × 390
-- `dsh-plugin-market` × 382
-- `ai-agent` × 328
+- `dsh-plugin-market` × 381
+- `ai-agent` × 329
 - `ai-agents` × 299
 
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |
 |---|---|---|---|
-| zhu1090093659/dsh-web | 7512 | — | ✅ |
-| yjh051108/dsh-routing-suite | 7177 | — | ✅ |
-| liustack/modlens | 3963 | — | ✅ |
-| dsh-market/dsh-market | 3821 | ✅ | ✅ |
-| MeteorNOX/DeepSeek-Balance-Whale-Widget | 2297 | ✅ | ✅ |
-| Minglink/dsh-infinite-gen-4 | 1419 | — | ✅ |
-| superdesigndev/treg | 1394 | — | — |
-| bowenliang123/dsh-context | 1369 | ✅ | ✅ |
-| xmanrui/dsh-im | 1287 | — | ✅ |
-| GanyuanRan/Aegis | 1182 | ✅ | ✅ |
+| zhu1090093659/dsh-web | 7564 | — | ✅ |
+| yjh051108/dsh-routing-suite | 7182 | — | ✅ |
+| liustack/modlens | 3960 | — | ✅ |
+| dsh-market/dsh-market | 3898 | ✅ | ✅ |
+| MeteorNOX/DeepSeek-Balance-Whale-Widget | 2357 | ✅ | ✅ |
+| Minglink/dsh-infinite-gen-4 | 1494 | — | ✅ |
+| superdesigndev/treg | 1403 | — | — |
+| bowenliang123/dsh-context | 1380 | ✅ | ✅ |
+| xmanrui/dsh-im | 1309 | — | ✅ |
+| GanyuanRan/Aegis | 1185 | ✅ | ✅ |
 
 ## npm 版本滞后榜（仓库新于发布）
 | repo | ★ | 仓库版本 → npm |
 |---|---|---|
-| GanyuanRan/Aegis | 1182 | 2.9.6 → 0.1.0 |
-| sandbaseai/sandbase-harness | 644 | 0.3.8 → 0.0.1 |
-| adoresever/graph-memory | 619 | 1.6.0-beta.13 → 1.5.8 |
-| FSMargoo/dsh-at-file | 510 | 0.7.0 → 0.6.3 |
-| zh667/TokenLedger | 198 | 0.1.1-blue.0 → 0.1.0 |
+| GanyuanRan/Aegis | 1185 | 2.9.6 → 0.1.0 |
+| sandbaseai/sandbase-harness | 646 | 0.3.8 → 0.0.1 |
+| adoresever/graph-memory | 620 | 1.6.0-beta.13 → 1.5.8 |
+| FSMargoo/dsh-at-file | 512 | 0.7.0 → 0.6.3 |
+| zh667/TokenLedger | 199 | 0.1.1-blue.0 → 0.1.0 |
+| kingOfSoySauce/dsh-liang-skin | 191 | 0.1.7 → 0.1.6 |
 | tinqiao-oss/engramory | 190 | 0.2.4 → 0.2.3 |
-| weijiafu14/pi2dsh | 189 | 0.23.0 → 0.24.0 |
-| kingOfSoySauce/dsh-liang-skin | 188 | 0.1.7 → 0.1.6 |
-| seriousz158/dsh-memory | 184 | 0.9.2 → 0.8.1 |
-| theBigGavin/marketingdashboard | 170 | 1.4.0 → 0.1.0 |
+| weijiafu14/pi2dsh | 190 | 0.23.0 → 0.24.0 |
+| seriousz158/dsh-memory | 183 | 0.9.2 → 0.8.1 |
+| theBigGavin/marketingdashboard | 171 | 1.4.0 → 0.1.0 |
 
 ## 深检抽样（写面 / 消毒）
 - 抽样 8 个：只读/无写面 1 · 检出写面 7 · 渲染带消毒 5
