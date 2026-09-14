@@ -1,29 +1,29 @@
 # 快照 Diff · 2026-09-14
 
-- 当前权威插件：**11154**（上次 11124）
-- 新增 30 · 消失 0
+- 当前权威插件：**11191**（上次 11154）
+- 新增 37 · 消失 0
 
 ## 新增（Top 20）
-- liyixuan201211/mcp-cap ★1 
-- advance-lion/dsh-lan-link ★0 
-- Riderich/self-evolving-router-dsh ★0 
-- baixianger/dsh-codex-adapter ★0 (npm ✓)
-- Aclguh/dsh-web-close ★0 
-- exoticknight/dsh-just-chat ★0 (npm ✓)
-- liyixuan201211/ctx-budget ★0 (npm ✓)
-- alexhegit/dsh-plugin-h3-hip ★0 
-- new-Beginner/dsh-default-prompt ★0 
-- ChenneyZhuang/email-deliverability-audit ★0 
-- ChenneyZhuang/resume-localize-cn2en ★0 
-- Missher12/dsh-missher-brain ★0 
-- new-Beginner/dsh-cliproxyapi ★0 
-- YpipaQ/dsh-s-m-c-center ★0 
-- Missher12/dsh-missher-enhance ★0 
-- MrTomTao/dsh-token-billing ★0 
-- almazom/dsh-almazom-approve-escalate ★0 
-- wangzhanchao883/dsh-lost-and-found ★0 (npm ✓)
-- LyaxZ/dsh-fonttune ★0 (npm ✓)
-- pureexe/dsh-vision-3090-fix ★0 
+- huashenglian/dsh-livechat ★3 
+- liceses/dsh-showme-html ★1 
+- yangdcm/dsh-expert-team ★1 (npm ✓)
+- meimiaoji-creator/meow-file-view ★1 
+- xingheyewang-1/dsh-whale-rod-cursor ★0 
+- GooDAnDReaDY/dsh-issue-reporter ★0 (npm ✓)
+- ChenneyZhuang/estimate-before-build ★0 
+- ChenneyZhuang/expense-capture ★0 
+- danhcng3822f/dsh-upload-plugin ★0 
+- ChenneyZhuang/deliverable-versioning ★0 
+- damlys99/dsh-queue-reorder ★0 (npm ✓)
+- wei125775-lab/whalegirl-deskpet ★0 
+- zhang-guo-wen/dsh-drawioedit ★0 
+- ivanearisty/dsh-plugin-cmdk ★0 
+- yiyunet/dsh-dingtalk-connector ★0 (npm ✓)
+- ivanearisty/dsh-session-search ★0 
+- eiainano/agpa-dsh-plugin ★0 (npm ✓)
+- ChenneyZhuang/ask-batch ★0 
+- ChenneyZhuang/verify-claims ★0 
+- ManoloRemiddi/dsh-steering ★0 
 
 ## 消失（Top 0）
 
