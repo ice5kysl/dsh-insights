@@ -6,6 +6,8 @@
 #   后才是完整一周，2026-09 起由周五改为周一），其余
 #   run 跑 `pipeline hourly`（增量纳新：discover-incr + validate + dynamics + 发布层）。
 #   去重状态存 data/last-daily.txt，随快照提交闭环。
+# - 主触发器：db9 pg_cron 每小时可靠 POST repository_dispatch（event_type=db9-cron），
+#   GitHub 原生 schedule 仅作兜底；两者都按上面的 UTC 日去重工作。
 # - Manual `workflow_dispatch` mode=full: `pipeline full`（全量管线）。
 # - Token: falls back to built-in GITHUB_TOKEN; set repo secret `DSH_GH_TOKEN`
 #   for a raised API budget.
@@ -21,6 +23,8 @@ name: refresh
 on:
   schedule:
     - cron: '23 * * * *'
+  repository_dispatch:
+    types: [db9-cron]
   workflow_dispatch:
     inputs:
       mode:
@@ -84,7 +88,7 @@ jobs:
           MODE=hourly
           if [ "${{ inputs.mode }}" = "monday" ]; then
             MODE=monday
-          elif [ "${{ github.event_name }}" = "schedule" ] && [ "$LAST" = "$TODAY" ]; then
+          elif { [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event_name }}" = "repository_dispatch" ]; } && [ "$LAST" = "$TODAY" ]; then
             MODE=hourly
           elif [ "$(date -u +%u)" = "1" ]; then
             MODE=monday
