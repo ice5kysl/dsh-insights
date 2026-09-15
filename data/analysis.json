@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-15T10:24:38.532Z",
+  "generatedAt": "2026-09-15T10:30:55.044Z",
   "totals": {
     "authoritative": 11264,
-    "active7": 2731,
+    "active7": 2729,
     "active7Pct": 24.2,
     "active30": 11262,
     "active30Pct": 100,
@@ -86,7 +86,7 @@
         "2026-04-20": 1,
         "2026-05-18": 1,
         "2026-06-29": 4,
-        "2026-09-07": 355,
+        "2026-09-07": 356,
         "2026-09-14": 48
       },
       "S": {
@@ -108,7 +108,7 @@
         "2026-06-22": 1,
         "2026-08-31": 77,
         "2026-07-13": 1,
-        "2026-09-07": 45,
+        "2026-09-07": 44,
         "2026-03-02": 1,
         "2026-09-14": 5
       },
@@ -349,7 +349,7 @@
     "covered": 1035,
     "coveredPct": 9.2,
     "none": 10229,
-    "fetchedAt": "2026-09-15T10:23:58.041Z"
+    "fetchedAt": "2026-09-15T10:30:10.536Z"
   },
   "suggested": [
     {
@@ -1018,21 +1018,21 @@
       "weekly": 113
     },
     {
-      "full_name": "Ricardo-WJP/dsh-signal",
+      "full_name": "runcat-tommy/dsh-unitverse",
       "stars": 0,
       "score": 94,
       "grade": "A",
       "dimScores": {
-        "eng": 98,
+        "eng": 96,
         "docs": 98,
         "discover": 100,
-        "maint": 98
+        "maint": 100
       },
       "drops": [
         {
-          "code": "npm.single-release",
+          "code": "manifest.not-lib-main",
           "sev": "minor",
-          "label": "npm 仅 1 个发布版本（迭代深度不足）"
+          "label": "main 不是 lib/index.js（产物布局非常规）"
         },
         {
           "code": "eng.no-ci",
@@ -1046,11 +1046,11 @@
         }
       ],
       "missing": [],
-      "category": "状态 / 监控 / 用量",
+      "category": "工具 / 效率",
       "inAwesome": false,
       "inImsai": false,
       "covered": false,
-      "weekly": 40
+      "weekly": 431
     }
   ],
   "downloads": {
@@ -1607,15 +1607,15 @@
   },
   "quality": {
     "grades": {
-      "A": 861,
-      "B": 5409,
+      "A": 860,
+      "B": 5410,
       "C": 3445,
       "D": 1277,
       "S": 272
     },
     "avgScore": 76.1,
     "gradePct": 55.7,
-    "gradePctSA": 10.1
+    "gradePctSA": 10
   },
   "categories": [
     {
@@ -90155,8 +90155,8 @@
       "plugins": 1,
       "stars": 0,
       "grades": {
-        "A": 1,
-        "B": 0,
+        "A": 0,
+        "B": 1,
         "C": 0,
         "D": 0
       },
@@ -90166,7 +90166,7 @@
       "lastPush": "2026-09-08",
       "firstCreated": "2026-09-08",
       "delta": 0,
-      "avg": 94,
+      "avg": 84,
       "topPlugin": "Ricardo-WJP/dsh-signal",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
@@ -133471,7 +133471,7 @@
       "lastPush": "2026-09-08",
       "firstCreated": "2026-09-08",
       "delta": 0,
-      "avg": 74,
+      "avg": 64,
       "topPlugin": "lffrom0303/dsh-window98-theme",
       "topStars": 0,
       "topCat": "主题 / 视觉美化"
