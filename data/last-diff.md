@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-15
 
-- 当前权威插件：**11322**（上次 11321）
+- 当前权威插件：**11323**（上次 11322）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- Saretheya/dsh-settings-nav-order ★0 
+- SiriusWJ/dsh-skill-manager ★0 (npm ✓)
 
 ## 消失（Top 0）
 
