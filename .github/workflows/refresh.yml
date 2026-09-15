@@ -80,6 +80,9 @@ jobs:
           UMAMI_SHARE: ${{ secrets.UMAMI_SHARE }}
           GA4_SA_KEY: ${{ secrets.GA4_SA_KEY }}
           GA4_PROPERTY: ${{ secrets.GA4_PROPERTY }}
+          # db9 旁路存储同步（pipeline/publish/db9-sync.mjs）：full 模式也同步
+          # plugin_scores/score_runs/traffic 等；缺此 env 时 db9-sync 静默跳过（曾致评分断更）
+          DB9_TOKEN: ${{ secrets.DB9_TOKEN }}
         run: node bin/pipeline.mjs full
       - name: Scheduled refresh（每个 UTC 日首个 schedule run 跑 daily/周一 monday，其余 hourly）
         if: inputs.mode != 'full'
