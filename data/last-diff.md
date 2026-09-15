@@ -1,24 +1,30 @@
 # 快照 Diff · 2026-09-15
 
-- 当前权威插件：**11191**（上次 11191）
-- 新增 0 · 消失 0
+- 当前权威插件：**11222**（上次 11191）
+- 新增 31 · 消失 0
 
-## 新增（Top 0）
+## 新增（Top 20）
+- Azurer0121/dsh-ssh-plugin ★0 
+- MoonGlassKitty/dsh-tailscale-sync ★4 
+- ch1bug/dsh-voice-mimo ★0 
+- rex178178/dsh-turnbar ★0 (npm ✓)
+- baixianger/dsh-uni-browser ★0 (npm ✓)
+- drscrewdriver/dsh-search-index ★3 (npm ✓)
+- 776138506/pinpoint ★0 (npm ✓)
+- NeoXider/neoxider-mcp-hub ★1 
+- Phant0Meow/femo-plugin ★2 (npm ✓)
+- meimiaoji-creator/meow-dsh-task ★1 
+- Xian-JL/dsh-Kinich-theme ★0 (npm ✓)
+- GooDAnDReaDY/dsh-model-search ★0 (npm ✓)
+- WestFox-AwA/dsh-prompt-optimizer ★38 
+- Momonaka/commandcode-dash ★2 (npm ✓)
+- RUO-MO/dsh-deepseek-web ★2 (npm ✓)
+- DZQJOKER/dsh-plugin-local-model ★1 
+- qtaik/dsh-noname-kit ★1 (npm ✓)
+- HakureiMonika/dsh-browser-scope ★1 
+- cnkids/dsh-session-reattach ★0 (npm ✓)
+- zhourenke/dsh-reasoning-mode ★0 
 
 ## 消失（Top 0）
 
 ## star 涨幅榜
-- antibrow/dsh-antibrow：288 → 291（+3）
-- yjh051108/dsh-routing-suite：7182 → 7183（+1）
-- dsh-market/dsh-market：3898 → 3899（+1）
-- xmanrui/dsh-im：1309 → 1310（+1）
-- shaobeichen/dsh-pocket：1125 → 1126（+1）
-- SeaOf0/dsh-redteam-model：443 → 444（+1）
-- Phant0Meow/dsh-meow-memory：98 → 99（+1）
-- dhicoc/dsh-chinese-traditional-wisdom-skill：37 → 38（+1）
-- sunxin-ai/dsh-design-qa：43 → 44（+1）
-- Kytolly/dsh-evolve-in-git：35 → 36（+1）
-- falling-ts/dsh-force-compact：4 → 5（+1）
-- nguyenduclong-ict/dsh-plugin-live-terminal：0 → 1（+1）
-- LiPu-jpg/Openwrite：723 → 724（+1）
-- cv-superding/dsh-deepseek-web-login：22 → 23（+1）
