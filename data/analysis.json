@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-15T16:54:09.062Z",
+  "generatedAt": "2026-09-15T16:57:55.918Z",
   "totals": {
-    "authoritative": 11319,
-    "active7": 2701,
+    "authoritative": 11320,
+    "active7": 2702,
     "active7Pct": 23.9,
-    "active30": 11317,
+    "active30": 11318,
     "active30Pct": 100,
     "ageGate1": 10623,
-    "ageGate1Pct": 93.9,
+    "ageGate1Pct": 93.8,
     "byMonth": {
       "2026-08": 9677,
       "2026-02": 4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1558,
+      "2026-09": 1559,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 166
+      "2026-09-14": 167
     },
     "byWeekGrades": {
       "B": {
@@ -134,7 +134,7 @@
         "2026-07-27": 1,
         "2026-09-07": 319,
         "2026-07-06": 1,
-        "2026-09-14": 96
+        "2026-09-14": 97
       },
       "D": {
         "2026-08-10": 138,
@@ -150,11 +150,11 @@
   "distribution": {
     "publish": {
       "published": 4730,
-      "unpublished": 6589,
+      "unpublished": 6590,
       "stale": 1356
     },
     "docs": {
-      "readme": 11290,
+      "readme": 11291,
       "zhFile": 849,
       "zh": 5399,
       "both": 5389,
@@ -233,15 +233,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 10988
+      "count": 10989
     },
     {
       "topic": "deepseek-harness",
-      "count": 7344
+      "count": 7345
     },
     {
       "topic": "dsh",
-      "count": 4200
+      "count": 4201
     },
     {
       "topic": "deepseek",
@@ -253,15 +253,15 @@
     },
     {
       "topic": "cordis",
-      "count": 1054
+      "count": 1055
     },
     {
       "topic": "plugin",
-      "count": 712
+      "count": 713
     },
     {
       "topic": "typescript",
-      "count": 415
+      "count": 416
     },
     {
       "topic": "deepseek-harness-plugin",
@@ -348,8 +348,8 @@
     "imsai": 270,
     "covered": 1038,
     "coveredPct": 9.2,
-    "none": 10281,
-    "fetchedAt": "2026-09-15T16:53:35.132Z"
+    "none": 10282,
+    "fetchedAt": "2026-09-15T16:57:20.682Z"
   },
   "suggested": [
     {
@@ -1609,7 +1609,7 @@
     "grades": {
       "A": 862,
       "B": 5440,
-      "C": 3465,
+      "C": 3466,
       "D": 1280,
       "S": 272
     },
@@ -1624,7 +1624,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1085
+      "count": 1086
     },
     {
       "category": "文件浏览 / 预览",
@@ -137633,10 +137633,31 @@
       "topPlugin": "GIN0076/dsh-bg-changer",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "tearslee",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-15",
+      "firstCreated": "2026-09-15",
+      "delta": 0,
+      "avg": 73,
+      "topPlugin": "tearslee/dsh-workbuddy2api",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
     }
   ],
   "authorStats": {
-    "total": 6464,
+    "total": 6465,
     "multi": 1543,
     "top10Share": 15.3
   },
@@ -137645,7 +137666,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 15614,
+    "candidates": 15615,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -137716,14 +137737,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 201,
+      "2026-09-14": 202,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 15582,
-    "candidatesValidated": 27,
-    "authoritative": 11319,
+    "validated": 15583,
+    "candidatesValidated": 28,
+    "authoritative": 11320,
     "invalidUnique": 4263,
     "invalidBuckets": [
       {
@@ -137772,5 +137793,5 @@
       }
     ]
   },
-  "enrichCount": 11319
+  "enrichCount": 11320
 }
