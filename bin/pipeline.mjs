@@ -70,7 +70,9 @@ const STEPS = [
 
 // daily 含 export-json（compat.json 的 npmLatest 日频新鲜源在此回灌 insights.json）与
 // compat-observed（实测矩阵：pkg@version 缓存入 git 后是增量成本，只为当天发新版的包重抓 tarball）
-const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'shell-seeds', 'shell-rows', 'compat', 'analyze', 'export-json', 'compat-observed', 'site', 'export-csv', 'diff', 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'pages']
+// score+history 日更：规则评分零 LLM 成本，history.json 每天一条 UTC 日快照（append-only
+// 是其设计本意）；同日 db9-sync 把 plugin_scores/score_runs 写进 db9，/admin 评分按天滚动
+const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'shell-seeds', 'shell-rows', 'compat', 'analyze', 'score', 'history', 'export-json', 'compat-observed', 'site', 'export-csv', 'diff', 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'pages']
 // 每小时增量纳新：daily 去掉 downloads（重 API、日频足够）；dynamics 轻量
 // （~20 次调用）进 hourly —— 官方发版/移动 dist-tag 当天小时内追上，配合
 // dsh-insights-kit 的 registry overlay 形成两级新鲜度。export-json 必须
