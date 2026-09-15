@@ -1,29 +1,29 @@
 # DSH 插件生态周报 · 2026-W37（2026/09/07～2026/09/13）
 
-> 数据快照 2026-09-14 · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
+> 数据快照 2026-09-15 · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
 
 ## 编者按
 
-- **头部增量偏展示** Minglink/dsh-infinite-gen-4 以 1494 stars 进入 addedTop 却 npm=false，说明本周新增热度仍集中在展示型/入口型项目，用户要区分 star 与可安装性。
-- **清理工具在回温** risers 中 YuJunZhiXue/dsh-purge 从 347 到 883、antibrow/dsh-antibrow 从 7 到 288，说明轻量清理/隔离类插件正在被重新发现，长尾仍有爆发空间。
-- **市场入口成枢纽** dsh-market/dsh-market 从 3196 到 3898，且 downloadsTop 周下载 86927，dsh-market-desktop 同为 86927，说明市场与桌面入口正在承担分发中枢角色。
-- **1.5 线快速收敛** dsh-v0.1.5-rc.1 与 alpha.2 标 breaking，rc.2 已取消 breaking，说明 1.5 系列在 RC 阶段快速收敛，升级节奏应围绕 RC 验证而非 alpha 抢跑。
-- **满分插件被低估** gems 中 DSH-better-sidebar、dsh-dream-skin 均 score 100 但 stars 为 0，dsh-chat-import 为 98，说明发现机制仍滞后于质量评分。
-本周基调：本周新增冲高与安装转化之间仍有落差，生态热度先于可用性兑现。
+- **新增量高星未发 npm**：Minglink/dsh-infinite-gen-4 首周 1494 星但 npm=false，说明高热度新插件仍停在仓库分发，会抬高安装与复现门槛。
+- **已发 npm 的新作者更稳**：LiPu-jpg/Openwrite 以 724 星、npm=true 进入 addedTop，a1exsun/dsh-council 88 星、FylarOpen/dsh-fylar-office-editor 47 星也均 npm=true，发布到 npm 的新作者更容易形成可复用供给。
+- **市场与 Web 双核拉动**：dsh-market/dsh-market 升至 3899 且周下载 86927，zhu1090093659/dsh-web 升至 7564，流量继续向发现与工作台入口集中，插件曝光更依赖这两个入口。
+- **会话管理现高分空位**：gems 中 Han-1413141/dsh-cost-meter 95 分、Nwflower/dsh-chat-import 98 分、HsiangNianian/dsh-auto-continue 95 分，均 stars=0，说明低星高质插件正在会话管理细分里补空白。
+- **崩溃根因是模块缺失**：crashTop 的 dsh-workspace-kit、@wishp3/dsh-cite、dsh-token-usage 均归为 module-missing，说明依赖声明与打包完整性仍是插件可用性短板。
+本周基调：增量凶猛，但 npm 分发、依赖完整与入口集中是本周生态的三道关卡。
 
 ## 本周洞察
 
-- dsh-v0.1.5-rc.1 与 dsh-v0.1.5-alpha.2 均标 breaking，而 rc.2 改为非 breaking，说明 1.5 线的接口波动集中在早期 RC；插件作者应优先验证 DeepSeek-V41-Flash 适配和 Sidebar 预览相关改动，避免正式版前被动跟改。
-- gems 中 omdsh-dev/DSH-better-sidebar 与 RevolutionLA/dsh-dream-skin 均 score 100 但 stars 为 0，Nwflower/dsh-chat-import 为 98，说明高质量插件与 star 热度脱节；用户按功能评分筛选比只看 star 更能找到可用工具。
-- crashTop 里 dsh-workspace-kit 以 module-missing 居首（count 1），@wishp3/dsh-cite 与 dsh-token-usage 仅以 count 0 被记录，说明模块缺失样本虽少却最值得优先修复；相关插件发布前应补齐依赖声明。
-- newAuthors 中 Minglink/dsh-infinite-gen-4 获 1494 stars 但 npm=false，LiPu-jpg/Openwrite 获 723 stars 且 npm=true；risers 里 antibrow/dsh-antibrow 从 7 到 288、YuJunZhiXue/dsh-purge 从 347 到 883，说明新爆点同时来自新作者与长尾工具，高 star 不等于可安装。
+- dsh-v0.1.5-rc.1 新增 DeepSeek-V41-Flash（deepseek-flash）模型适配器，同周 alpha.1 又要求模型显式声明支持动态系统提示词；两条 breaking 叠加说明模型适配与提示词层进入版本敏感期，插件作者需按 rc.1/alpha.2 验证兼容，用户不宜无脑升级。
+- gems 中 omdsh-dev/DSH-better-sidebar 与 RevolutionLA/dsh-dream-skin 均拿到 100 分但 stars 为 0，Nwflower/dsh-chat-import 98 分、Han-1413141/dsh-cost-meter 与 HsiangNianian/dsh-auto-continue 各 95 分，且后三者扎堆会话管理；这意味着高分供给尚未转化为可见度，用户可优先用它们补会话与侧栏体验。
+- crashTop 三条全部是 module-missing：dsh-workspace-kit 出现 count=1，@wishp3/dsh-cite 与 dsh-token-usage 同因；说明当前崩溃不是复杂运行时，而是依赖/打包声明缺口，作者补齐模块即可显著降低安装失败。
+- 新作者 Minglink 的 dsh-infinite-gen-4 首周 1494 星却 npm=false，而 antibrow/dsh-antibrow 从 7 升到 291、YuJunZhiXue/dsh-purge 从 347 升到 883；高星未发 npm 会卡住复现与留存，已发 npm 的新作者更容易把热度转成安装。
 
 ## 行动建议
 
-- **给插件用户**：面对 dsh-v0.1.5-rc.1/alpha.2 的 breaking，先不要直接在生产环境升级；可优先留在 dsh-v0.1.5-rc.2 或等正式版，并逐项验证 Sidebar 预览、DeepSeek-V41-Flash 相关插件。
-- **给插件用户**：找替代工具时优先看 gems 高分项：omdsh-dev/DSH-better-sidebar、Han-1413141/dsh-cost-meter、Nwflower/dsh-chat-import、HsiangNianian/dsh-auto-continue，而不是只按 stars 排序。
-- **给插件作者**：未发 npm 的高星项目应尽快发布或给出安装指引，Minglink/dsh-infinite-gen-4（1494 stars、npm=false）是本周最明显的安装转化缺口；同时补齐依赖/兼容声明，避免像 dsh-workspace-kit 的 module-missing 进入 crashTop。
-- **给插件作者**：参考 gems 的差异化方向：侧栏/工作区的 DSH-better-sidebar、会话管理的 dsh-cost-meter/dsh-chat-import/dsh-auto-continue 均获 95+ 分，新作者可避开通用市场头部，切入这些垂直场景。
+- **给插件用户**：升级 dsh-v0.1.5-rc.1 或 alpha.2 前，先确认现有模型是否支持 deepseek-flash 与动态系统提示词；若未显式声明支持，暂缓升级并保留旧版回退。
+- **给插件用户**：优先试装 gems 中 0 星高分的 omdsh-dev/DSH-better-sidebar（100）、Nwflower/dsh-chat-import（98）、Han-1413141/dsh-cost-meter（95）、HsiangNianian/dsh-auto-continue（95）；安装 dsh-workspace-kit、@wishp3/dsh-cite、dsh-token-usage 前先检查 module-missing 依赖。
+- **给插件作者**：Minglink/dsh-infinite-gen-4 等高星未发 npm 插件应尽快发布，参考 LiPu-jpg/Openwrite（724 星、npm=true）和 a1exsun/dsh-council（88 星、npm=true）的分发路径。
+- **给插件作者**：优先补齐 crashTop 暴露的 module-missing 依赖，并参考 gems 的差异化方向：侧栏/工作区、会话管理、状态/监控/用量已有 95–100 分空位，可围绕 DSH-better-sidebar、dsh-cost-meter、dsh-dream-skin、dsh-chat-import、dsh-auto-continue 做同类能力。
 
 > 深度分析见《DSH 生态洞察》长报告：https://dsh-insights.com/insights/?utm_source=weekly&utm_medium=site
 
@@ -34,17 +34,17 @@
 - npm 发布率 41.8%（已发布 4675 / 版本滞后 1333）
 - 中英/双语文档率 47.6% · 平均质量分 76.1（S+A 10.1%）
 - curated 收录覆盖 9.2%（1033 个已进 awesome/imsai）
-- npm 周下载样本 Top 15 合计 1286323
+- npm 周下载样本 Top 15 合计 1286852
 - LLM 能力标注进度：1823/11191
 
 ## 官方动态（dsh × DeepSeek 平台）
 
-- dsh 官方仓库 ★223,939 · 最近 push 2026-09-11
+- dsh 官方仓库 ★223,959 · 最近 push 2026-09-11
 - npm dist-tags：alpha=0.1.5-alpha.2 · next=0.1.5-rc.2 · latest=0.1.5-rc.1
 - 最新 release：dsh-v0.1.5-rc.2（pre-release · 2026-09-10）
 - 最近 8 个 release 中 6 个含 breaking/迁移关键词——升级前请核对 releases 说明
-- rc 兼容信号：latest=0.1.5-rc.1；已探测 3867 个 npm 插件，仅 90 个声明 engines.dsh（声明率过低，雷达走 v1 API 符号路线）
-- DeepSeek 平台：DeepSeek-V3 ★104,447 · v1.0.0；DeepSeek-R1 ★91,991 · v1.0.0；awesome-deepseek-integration ★39,115；DeepSeek-Coder ★24,263；DeepSeek-OCR ★23,887；Janus ★17,762；FlashMLA ★12,917；3FS ★10,198
+- rc 兼容信号：latest=0.1.5-rc.1；已探测 3902 个 npm 插件，仅 98 个声明 engines.dsh（声明率过低，雷达走 v1 API 符号路线）
+- DeepSeek 平台：DeepSeek-V3 ★104,448 · v1.0.0；DeepSeek-R1 ★91,991 · v1.0.0；awesome-deepseek-integration ★39,117；DeepSeek-Coder ★24,263；DeepSeek-OCR ★23,887；Janus ★17,762；FlashMLA ★12,918；3FS ★10,198
 - 详见站点「动态」页：https://dsh-insights.com/dynamics/
 
 ## 增长与榜单
@@ -52,9 +52,9 @@
 | 仓库 | ★ | npm | 中/双语 |
 |---|---|---|---|
 | zhu1090093659/dsh-web | 7564 | — | ✓ |
-| yjh051108/dsh-routing-suite | 7182 | — | ✓ |
+| yjh051108/dsh-routing-suite | 7183 | — | ✓ |
 | liustack/modlens | 3960 | — | ✓ |
-| dsh-market/dsh-market | 3898 | ✓ | ✓ |
+| dsh-market/dsh-market | 3899 | ✓ | ✓ |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 2357 | ✓ | ✓ |
 | Minglink/dsh-infinite-gen-4 | 1494 | — | ✓ |
 | superdesigndev/treg | 1403 | — | — |
@@ -83,11 +83,11 @@
 
 ## 信号与观察（启发式）
 
-- 质量两级分化仍在：A 级 859 个 vs D 级 1273 个（C 级是主体 3409），生态"能跑但文档/发布不齐"的中段插件占比最高。
+- 质量两级分化仍在：A 级 859 个 vs D 级 1274 个（C 级是主体 3408），生态"能跑但文档/发布不齐"的中段插件占比最高。
 - 功能分类上「其它」最拥挤（4145 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
 - 29 个插件没有 README、6516 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
 - curated 收录仍集中于少数头部（1033/11191），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
-- 本周新增 1002 / 消失 0，见文末「本周快照 Diff」。
+- 本周新增 1001 / 消失 0，见文末「本周快照 Diff」。
 
 ## 优质未收录 · 建议收录（Top 8，供作者与目录维护者）
 
@@ -108,20 +108,20 @@
 
 ---
 
-## 本周快照 Diff（基线 2026-09-07）
+## 本周快照 Diff（基线 2026-09-08）
 
-- 当前权威插件：**11191**（基线 10189 · 2026-09-07）
-- 新增 1002 · 消失 0
+- 当前权威插件：**11191**（基线 10190 · 2026-09-08）
+- 新增 1001 · 消失 0
 
 ### 新增（Top 15，按 ★）
 - Minglink/dsh-infinite-gen-4 ★1494
-- LiPu-jpg/Openwrite ★723 (npm ✓)
+- LiPu-jpg/Openwrite ★724 (npm ✓)
 - a1exsun/dsh-council ★88 (npm ✓)
 - FylarOpen/dsh-fylar-office-editor ★47 (npm ✓)
 - 398894496-arch/DSH-KRouter ★39
 - axelfreeman/marketing-mindset ★32
 - a86582751/dsh-nexttavern ★25
-- cv-superding/dsh-deepseek-web-login ★22
+- cv-superding/dsh-deepseek-web-login ★23
 - youqu68/dsh-delete-chat ★20 (npm ✓)
 - robiteame/dsh-session-tree-extension ★20
 - sz1698/dsh-bg-new ★20
@@ -131,16 +131,16 @@
 - Zoria-Lind/dsh-token-optimizer ★12 (npm ✓)
 
 ### star 涨幅榜（同基线）
-- dsh-market/dsh-market：3196 → 3898（+702）
+- dsh-market/dsh-market：3196 → 3899（+703）
 - zhu1090093659/dsh-web：6887 → 7564（+677）
 - MeteorNOX/DeepSeek-Balance-Whale-Widget：1727 → 2357（+630）
 - YuJunZhiXue/dsh-purge：347 → 883（+536）
-- antibrow/dsh-antibrow：7 → 288（+281）
+- antibrow/dsh-antibrow：7 → 291（+284）
 - superdesigndev/treg：1190 → 1403（+213）
-- xmanrui/dsh-im：1110 → 1309（+199）
-- SeaOf0/dsh-redteam-model：250 → 443（+193）
+- xmanrui/dsh-im：1110 → 1310（+200）
+- SeaOf0/dsh-redteam-model：250 → 444（+194）
 - d-dev0101/open-sea-skin：196 → 377（+181）
-- shaobeichen/dsh-pocket：952 → 1125（+173）
+- shaobeichen/dsh-pocket：952 → 1126（+174）
 
 ---
 

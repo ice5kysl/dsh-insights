@@ -1,10 +1,10 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 11191 个插件 · 生成于 2026-09-14 · 由 DSH Insights 管线生成
+> 权威集 11191 个插件 · 生成于 2026-09-15 · 由 DSH Insights 管线生成
 
 ## 总览
 - 权威集规模：**11191**
-- 近 7 天活跃：2775（24.8%）· 近 30 天：11191（100%）
+- 近 7 天活跃：2773（24.8%）· 近 30 天：11191（100%）
 - 仓库年龄 ≥ 1 天（可过收录门禁）：10564（94.4%）
 
 ## 发布与文档
@@ -46,7 +46,7 @@
 
 ## 质量评分（启发式）
 - 平均分 76.1 · S+A 占比 10.1%（值得优先看；A+B 55.7%）
-- S 272 · A 859 · B 5378 · C 3409 · D 1273
+- S 272 · A 859 · B 5378 · C 3408 · D 1274
 
 ## 功能分类（启发式 Top 12）
 - 其它：4145
@@ -94,14 +94,14 @@
 | repo | ★ | npm | 中文/双语 |
 |---|---|---|---|
 | zhu1090093659/dsh-web | 7564 | — | ✅ |
-| yjh051108/dsh-routing-suite | 7182 | — | ✅ |
+| yjh051108/dsh-routing-suite | 7183 | — | ✅ |
 | liustack/modlens | 3960 | — | ✅ |
-| dsh-market/dsh-market | 3898 | ✅ | ✅ |
+| dsh-market/dsh-market | 3899 | ✅ | ✅ |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 2357 | ✅ | ✅ |
 | Minglink/dsh-infinite-gen-4 | 1494 | — | ✅ |
 | superdesigndev/treg | 1403 | — | — |
 | bowenliang123/dsh-context | 1380 | ✅ | ✅ |
-| xmanrui/dsh-im | 1309 | — | ✅ |
+| xmanrui/dsh-im | 1310 | — | ✅ |
 | GanyuanRan/Aegis | 1185 | ✅ | ✅ |
 
 ## npm 版本滞后榜（仓库新于发布）

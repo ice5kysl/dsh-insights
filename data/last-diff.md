@@ -1,4 +1,4 @@
-# 快照 Diff · 2026-09-14
+# 快照 Diff · 2026-09-15
 
 - 当前权威插件：**11191**（上次 11191）
 - 新增 0 · 消失 0
@@ -8,18 +8,17 @@
 ## 消失（Top 0）
 
 ## star 涨幅榜
-- YuJunZhiXue/dsh-purge：773 → 883（+110）
-- dsh-market/dsh-market：3821 → 3898（+77）
-- Minglink/dsh-infinite-gen-4：1419 → 1494（+75）
-- antibrow/dsh-antibrow：225 → 288（+63）
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：2297 → 2357（+60）
-- zhu1090093659/dsh-web：7512 → 7564（+52）
-- xmanrui/dsh-im：1287 → 1309（+22）
-- shaobeichen/dsh-pocket：1108 → 1125（+17）
-- SeaOf0/dsh-redteam-model：427 → 443（+16）
-- a1exsun/dsh-council：72 → 88（+16）
-- howmp/dsh-pentest：453 → 467（+14）
-- Mars-Sea/dsh-commandcode-provider：231 → 244（+13）
-- FylarOpen/dsh-fylar-office-editor：34 → 47（+13）
-- youqu68/dsh-delete-chat：8 → 20（+12）
-- bowenliang123/dsh-context：1369 → 1380（+11）
+- antibrow/dsh-antibrow：288 → 291（+3）
+- yjh051108/dsh-routing-suite：7182 → 7183（+1）
+- dsh-market/dsh-market：3898 → 3899（+1）
+- xmanrui/dsh-im：1309 → 1310（+1）
+- shaobeichen/dsh-pocket：1125 → 1126（+1）
+- SeaOf0/dsh-redteam-model：443 → 444（+1）
+- Phant0Meow/dsh-meow-memory：98 → 99（+1）
+- dhicoc/dsh-chinese-traditional-wisdom-skill：37 → 38（+1）
+- sunxin-ai/dsh-design-qa：43 → 44（+1）
+- Kytolly/dsh-evolve-in-git：35 → 36（+1）
+- falling-ts/dsh-force-compact：4 → 5（+1）
+- nguyenduclong-ict/dsh-plugin-live-terminal：0 → 1（+1）
+- LiPu-jpg/Openwrite：723 → 724（+1）
+- cv-superding/dsh-deepseek-web-login：22 → 23（+1）
