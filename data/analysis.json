@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-15T15:08:24.191Z",
+  "generatedAt": "2026-09-15T15:15:09.608Z",
   "totals": {
-    "authoritative": 11282,
-    "active7": 2691,
+    "authoritative": 11284,
+    "active7": 2692,
     "active7Pct": 23.9,
-    "active30": 11280,
+    "active30": 11282,
     "active30Pct": 100,
     "ageGate1": 10596,
     "ageGate1Pct": 93.9,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1532,
+      "2026-09": 1534,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 742,
       "2026-03-02": 1,
-      "2026-09-14": 155
+      "2026-09-14": 157
     },
     "byWeekGrades": {
       "B": {
@@ -134,7 +134,7 @@
         "2026-07-27": 1,
         "2026-09-07": 315,
         "2026-07-06": 1,
-        "2026-09-14": 89
+        "2026-09-14": 91
       },
       "D": {
         "2026-08-10": 138,
@@ -150,14 +150,14 @@
   "distribution": {
     "publish": {
       "published": 4713,
-      "unpublished": 6569,
+      "unpublished": 6571,
       "stale": 1351
     },
     "docs": {
-      "readme": 11253,
+      "readme": 11255,
       "zhFile": 846,
-      "zh": 5379,
-      "both": 5369,
+      "zh": 5380,
+      "both": 5370,
       "none": 29
     },
     "lib": {
@@ -233,11 +233,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 10954
+      "count": 10956
     },
     {
       "topic": "deepseek-harness",
-      "count": 7323
+      "count": 7324
     },
     {
       "topic": "dsh",
@@ -348,8 +348,8 @@
     "imsai": 270,
     "covered": 1036,
     "coveredPct": 9.2,
-    "none": 10246,
-    "fetchedAt": "2026-09-15T15:07:39.668Z"
+    "none": 10248,
+    "fetchedAt": "2026-09-15T15:14:13.013Z"
   },
   "suggested": [
     {
@@ -1609,7 +1609,7 @@
     "grades": {
       "A": 860,
       "B": 5417,
-      "C": 3453,
+      "C": 3455,
       "D": 1280,
       "S": 272
     },
@@ -1620,11 +1620,11 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4168
+      "count": 4169
     },
     {
       "category": "模型 / 代理",
-      "count": 1083
+      "count": 1084
     },
     {
       "category": "文件浏览 / 预览",
@@ -137213,19 +137213,61 @@
       "topPlugin": "twoyoung91/dsh-memoknow",
       "topStars": 0,
       "topCat": "记忆 / 知识"
+    },
+    {
+      "owner": "davidekingsss",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-15",
+      "firstCreated": "2026-09-15",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "davidekingsss/dsh-screen-eye",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "udisyue",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-15",
+      "firstCreated": "2026-09-15",
+      "delta": 0,
+      "avg": 72,
+      "topPlugin": "udisyue/dsh-update",
+      "topStars": 0,
+      "topCat": "其它"
     }
   ],
   "authorStats": {
-    "total": 6444,
+    "total": 6446,
     "multi": 1533,
-    "top10Share": 15.4
+    "top10Share": 15.3
   },
   "coverage": {
     "topicUniverse": {
       "count": 14852,
       "at": "2026-09-14T23:32:23.865Z"
     },
-    "candidates": 15592,
+    "candidates": 15594,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -137296,14 +137338,14 @@
       "2026-08-24": 1877,
       "2026-08-31": 955,
       "2026-09-07": 875,
-      "2026-09-14": 196,
+      "2026-09-14": 198,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 486
     },
-    "validated": 15529,
+    "validated": 15531,
     "candidatesValidated": 29,
-    "authoritative": 11282,
+    "authoritative": 11284,
     "invalidUnique": 4247,
     "invalidBuckets": [
       {
@@ -137352,5 +137394,5 @@
       }
     ]
   },
-  "enrichCount": 11282
+  "enrichCount": 11284
 }
