@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-15T11:15:00.255Z",
+  "generatedAt": "2026-09-15T11:36:34.282Z",
   "totals": {
-    "authoritative": 11269,
+    "authoritative": 11271,
     "active7": 2729,
     "active7Pct": 24.2,
-    "active30": 11267,
+    "active30": 11269,
     "active30Pct": 100,
     "ageGate1": 10593,
     "ageGate1Pct": 94,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1519,
+      "2026-09": 1521,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 742,
       "2026-03-02": 1,
-      "2026-09-14": 142
+      "2026-09-14": 144
     },
     "byWeekGrades": {
       "B": {
@@ -134,7 +134,7 @@
         "2026-07-27": 1,
         "2026-09-07": 317,
         "2026-07-06": 1,
-        "2026-09-14": 83
+        "2026-09-14": 85
       },
       "D": {
         "2026-08-10": 138,
@@ -149,20 +149,20 @@
   },
   "distribution": {
     "publish": {
-      "published": 4710,
+      "published": 4712,
       "unpublished": 6559,
-      "stale": 1348
+      "stale": 1350
     },
     "docs": {
-      "readme": 11240,
+      "readme": 11242,
       "zhFile": 844,
       "zh": 5373,
       "both": 5363,
       "none": 29
     },
     "lib": {
-      "index": 6046,
-      "client": 3861,
+      "index": 6047,
+      "client": 3862,
       "both": 3448
     },
     "publishPct": 41.8,
@@ -233,15 +233,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 10941
+      "count": 10943
     },
     {
       "topic": "deepseek-harness",
-      "count": 7315
+      "count": 7316
     },
     {
       "topic": "dsh",
-      "count": 4178
+      "count": 4179
     },
     {
       "topic": "deepseek",
@@ -348,8 +348,8 @@
     "imsai": 269,
     "covered": 1035,
     "coveredPct": 9.2,
-    "none": 10234,
-    "fetchedAt": "2026-09-15T11:14:11.055Z"
+    "none": 10236,
+    "fetchedAt": "2026-09-15T11:35:52.574Z"
   },
   "suggested": [
     {
@@ -1609,7 +1609,7 @@
     "grades": {
       "A": 860,
       "B": 5411,
-      "C": 3449,
+      "C": 3451,
       "D": 1277,
       "S": 272
     },
@@ -1624,7 +1624,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1081
+      "count": 1082
     },
     {
       "category": "文件浏览 / 预览",
@@ -1640,7 +1640,7 @@
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 669
+      "count": 670
     },
     {
       "category": "搜索 / 命令面板",
@@ -45881,7 +45881,7 @@
       "lastPush": "2026-09-09",
       "firstCreated": "2026-09-08",
       "delta": 0,
-      "avg": 75.5,
+      "avg": 70.5,
       "topPlugin": "Yelloooooow/dsh-shutdown-button",
       "topStars": 1,
       "topCat": "其它"
@@ -70898,6 +70898,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "masknull",
+      "plugins": 8,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 7,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-15",
+      "firstCreated": "2026-08-23",
+      "delta": 0,
+      "avg": 70.5,
+      "topPlugin": "masknull/dsh-session-prompt",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
+    },
+    {
       "owner": "fatatalia",
       "plugins": 7,
       "stars": 0,
@@ -70917,27 +70938,6 @@
       "topPlugin": "fatatalia/dsh-heartbeat",
       "topStars": 0,
       "topCat": "其它"
-    },
-    {
-      "owner": "masknull",
-      "plugins": 7,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 6,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-15",
-      "firstCreated": "2026-08-23",
-      "delta": 0,
-      "avg": 70,
-      "topPlugin": "masknull/dsh-session-prompt",
-      "topStars": 0,
-      "topCat": "侧栏 / 工作区"
     },
     {
       "owner": "catsenior507",
@@ -104896,6 +104896,27 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
+      "owner": "id7869",
+      "plugins": 1,
+      "stars": 2,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-15",
+      "firstCreated": "2026-09-14",
+      "delta": 0,
+      "avg": 72,
+      "topPlugin": "id7869/dsh-security",
+      "topStars": 2,
+      "topCat": "模型 / 代理"
+    },
+    {
       "owner": "HarryLi-7",
       "plugins": 4,
       "stars": 1,
@@ -137048,7 +137069,7 @@
     }
   ],
   "authorStats": {
-    "total": 6436,
+    "total": 6437,
     "multi": 1531,
     "top10Share": 15.4
   },
@@ -137057,7 +137078,7 @@
       "count": 14852,
       "at": "2026-09-14T23:32:23.865Z"
     },
-    "candidates": 15576,
+    "candidates": 15578,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -137128,14 +137149,14 @@
       "2026-08-24": 1877,
       "2026-08-31": 955,
       "2026-09-07": 875,
-      "2026-09-14": 180,
+      "2026-09-14": 182,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 486
     },
-    "validated": 15513,
-    "candidatesValidated": 32,
-    "authoritative": 11269,
+    "validated": 15515,
+    "candidatesValidated": 29,
+    "authoritative": 11271,
     "invalidUnique": 4244,
     "invalidBuckets": [
       {
@@ -137184,5 +137205,5 @@
       }
     ]
   },
-  "enrichCount": 11269
+  "enrichCount": 11271
 }
