@@ -1,11 +1,9 @@
 # 快照 Diff · 2026-09-15
 
-- 当前权威插件：**11274**（上次 11272）
-- 新增 2 · 消失 0
+- 当前权威插件：**11274**（上次 11274）
+- 新增 0 · 消失 0
 
-## 新增（Top 2）
-- sra-research/self-evolving-router-dsh ★0 
-- Tisitan/dsh-tool-guard ★0 
+## 新增（Top 0）
 
 ## 消失（Top 0）
 
