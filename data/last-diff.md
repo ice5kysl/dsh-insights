@@ -1,10 +1,11 @@
 # 快照 Diff · 2026-09-15
 
-- 当前权威插件：**11339**（上次 11338）
-- 新增 1 · 消失 0
+- 当前权威插件：**11341**（上次 11339）
+- 新增 2 · 消失 0
 
-## 新增（Top 1）
-- POPCORNBOOM/dsh-insight-dock ★0 (npm ✓)
+## 新增（Top 2）
+- zhiheng-zhang-Mera/dsh-health-scheduler ★0 
+- zhiheng-zhang-Mera/dsh-restart ★0 (npm ✓)
 
 ## 消失（Top 0）
 
