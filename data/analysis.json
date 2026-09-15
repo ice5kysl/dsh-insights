@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-15T19:07:58.739Z",
+  "generatedAt": "2026-09-15T19:18:26.894Z",
   "totals": {
-    "authoritative": 11326,
-    "active7": 2697,
+    "authoritative": 11332,
+    "active7": 2702,
     "active7Pct": 23.8,
-    "active30": 11324,
+    "active30": 11330,
     "active30Pct": 100,
     "ageGate1": 10623,
-    "ageGate1Pct": 93.8,
+    "ageGate1Pct": 93.7,
     "byMonth": {
       "2026-08": 9677,
       "2026-02": 4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1565,
+      "2026-09": 1571,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 173
+      "2026-09-14": 179
     },
     "byWeekGrades": {
       "B": {
@@ -87,7 +87,7 @@
         "2026-05-18": 1,
         "2026-06-29": 4,
         "2026-09-07": 361,
-        "2026-09-14": 65
+        "2026-09-14": 69
       },
       "S": {
         "2026-08-03": 2,
@@ -110,7 +110,7 @@
         "2026-07-13": 1,
         "2026-09-07": 46,
         "2026-03-02": 1,
-        "2026-09-14": 5
+        "2026-09-14": 6
       },
       "C": {
         "2026-01-19": 1,
@@ -134,7 +134,7 @@
         "2026-07-27": 1,
         "2026-09-07": 318,
         "2026-07-06": 1,
-        "2026-09-14": 98
+        "2026-09-14": 99
       },
       "D": {
         "2026-08-10": 138,
@@ -149,21 +149,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 4732,
-      "unpublished": 6594,
-      "stale": 1357
+      "published": 4733,
+      "unpublished": 6599,
+      "stale": 1358
     },
     "docs": {
-      "readme": 11297,
+      "readme": 11303,
       "zhFile": 849,
-      "zh": 5403,
-      "both": 5393,
+      "zh": 5408,
+      "both": 5398,
       "none": 29
     },
     "lib": {
-      "index": 6079,
-      "client": 3885,
-      "both": 3470
+      "index": 6084,
+      "client": 3888,
+      "both": 3473
     },
     "publishPct": 41.8,
     "zhPct": 47.6
@@ -233,15 +233,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 10995
+      "count": 11001
     },
     {
       "topic": "deepseek-harness",
-      "count": 7349
+      "count": 7351
     },
     {
       "topic": "dsh",
-      "count": 4202
+      "count": 4208
     },
     {
       "topic": "deepseek",
@@ -253,7 +253,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1056
+      "count": 1061
     },
     {
       "topic": "plugin",
@@ -261,7 +261,7 @@
     },
     {
       "topic": "typescript",
-      "count": 416
+      "count": 417
     },
     {
       "topic": "deepseek-harness-plugin",
@@ -273,7 +273,7 @@
     },
     {
       "topic": "ai-agent",
-      "count": 332
+      "count": 333
     },
     {
       "topic": "ai-agents",
@@ -348,8 +348,8 @@
     "imsai": 270,
     "covered": 1038,
     "coveredPct": 9.2,
-    "none": 10288,
-    "fetchedAt": "2026-09-15T18:30:37.470Z"
+    "none": 10294,
+    "fetchedAt": "2026-09-15T19:17:51.543Z"
   },
   "suggested": [
     {
@@ -1607,9 +1607,9 @@
   },
   "quality": {
     "grades": {
-      "A": 862,
-      "B": 5445,
-      "C": 3466,
+      "A": 863,
+      "B": 5449,
+      "C": 3467,
       "D": 1281,
       "S": 272
     },
@@ -1620,7 +1620,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4188
+      "count": 4189
     },
     {
       "category": "模型 / 代理",
@@ -1632,19 +1632,19 @@
     },
     {
       "category": "会话管理",
-      "count": 930
+      "count": 932
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 789
+      "count": 790
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 675
+      "count": 676
     },
     {
       "category": "搜索 / 命令面板",
-      "count": 629
+      "count": 630
     },
     {
       "category": "工具 / 效率",
@@ -2581,12 +2581,12 @@
     },
     {
       "owner": "drscrewdriver",
-      "plugins": 7,
+      "plugins": 8,
       "stars": 18,
       "grades": {
         "A": 2,
         "B": 5,
-        "C": 0,
+        "C": 1,
         "D": 0
       },
       "ab": 7,
@@ -2595,7 +2595,7 @@
       "lastPush": "2026-09-15",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 86,
+      "avg": 84.1,
       "topPlugin": "drscrewdriver/dsh-thinking-levels",
       "topStars": 6,
       "topCat": "其它"
@@ -4062,6 +4062,27 @@
       "topPlugin": "YrracOwl/dsh-theme-acid-noir",
       "topStars": 0,
       "topCat": "主题 / 视觉美化"
+    },
+    {
+      "owner": "CHIP-PHILO-GH",
+      "plugins": 5,
+      "stars": 0,
+      "grades": {
+        "A": 1,
+        "B": 4,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 5,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-15",
+      "firstCreated": "2026-09-15",
+      "delta": 0,
+      "avg": 84,
+      "topPlugin": "CHIP-PHILO-GH/dsh-session-search",
+      "topStars": 0,
+      "topCat": "会话管理"
     },
     {
       "owner": "dhicoc",
@@ -137741,8 +137762,8 @@
     }
   ],
   "authorStats": {
-    "total": 6469,
-    "multi": 1543,
+    "total": 6470,
+    "multi": 1544,
     "top10Share": 15.3
   },
   "coverage": {
@@ -137750,7 +137771,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 15623,
+    "candidates": 15629,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -137821,14 +137842,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 210,
+      "2026-09-14": 216,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 15591,
-    "candidatesValidated": 27,
-    "authoritative": 11326,
+    "validated": 15597,
+    "candidatesValidated": 33,
+    "authoritative": 11332,
     "invalidUnique": 4265,
     "invalidBuckets": [
       {
@@ -137877,5 +137898,5 @@
       }
     ]
   },
-  "enrichCount": 11326
+  "enrichCount": 11332
 }
