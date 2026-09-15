@@ -1,13 +1,15 @@
 # Daily refresh of the dsh-insights snapshot (CI 定时刷新)
 #
-# - 每小时 :23 一条 cron。GitHub schedule 投递不准点（实测可能整天落不进指定
+# - 每小时 4 条错开 cron（:09/:24/:39/:54）。GitHub schedule 投递不准点（实测可能整天落不进指定
 #   小时），故按 UTC 日去重而非按小时：每个 UTC 日首个到达的 schedule run 跑
 #   daily（周一跑 monday：daily + 作者关系图 + metrics + 信件 + 周报——周日 24:00
 #   后才是完整一周，2026-09 起由周五改为周一），其余
 #   run 跑 `pipeline hourly`（增量纳新：discover-incr + validate + dynamics + 发布层）。
 #   去重状态存 data/last-daily.txt，随快照提交闭环。
-# - 主触发器：db9 pg_cron 每小时可靠 POST repository_dispatch（event_type=db9-cron），
-#   GitHub 原生 schedule 仅作兜底；两者都按上面的 UTC 日去重工作。
+# - 曾计划 db9 pg_cron 每小时 POST repository_dispatch 作主触发器，实测被封印不可用：
+#   cron.schedule 全库报 PreActivationSeal、cron.job 为只读虚拟目录（2026-09-15 验证），
+#   待 db9 官方解封后可切回。当前 GitHub 原生 schedule 加密错开为主触发器，
+#   repository_dispatch(db9-cron) 保留给手动/外部触发，均按上面的 UTC 日去重工作。
 # - Manual `workflow_dispatch` mode=full: `pipeline full`（全量管线）。
 # - Token: falls back to built-in GITHUB_TOKEN; set repo secret `DSH_GH_TOKEN`
 #   for a raised API budget.
@@ -22,7 +24,7 @@ name: refresh
 
 on:
   schedule:
-    - cron: '23 * * * *'
+    - cron: '9,24,39,54 * * * *'
   repository_dispatch:
     types: [db9-cron]
   workflow_dispatch:
