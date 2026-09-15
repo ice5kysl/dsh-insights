@@ -1,11 +1,9 @@
 # 快照 Diff · 2026-09-15
 
-- 当前权威插件：**11341**（上次 11339）
-- 新增 2 · 消失 0
+- 当前权威插件：**11341**（上次 11341）
+- 新增 0 · 消失 0
 
-## 新增（Top 2）
-- zhiheng-zhang-Mera/dsh-health-scheduler ★0 
-- zhiheng-zhang-Mera/dsh-restart ★0 (npm ✓)
+## 新增（Top 0）
 
 ## 消失（Top 0）
 
