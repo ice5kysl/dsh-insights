@@ -24,10 +24,18 @@ name: refresh
 
 on:
   schedule:
+    - cron: '4 * * * *'
     - cron: '9 * * * *'
+    - cron: '14 * * * *'
+    - cron: '19 * * * *'
     - cron: '24 * * * *'
+    - cron: '29 * * * *'
+    - cron: '34 * * * *'
     - cron: '39 * * * *'
+    - cron: '44 * * * *'
+    - cron: '49 * * * *'
     - cron: '54 * * * *'
+    - cron: '59 * * * *'
   repository_dispatch:
     types: [db9-cron]
   workflow_dispatch:
