@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-15T11:59:26.713Z",
+  "generatedAt": "2026-09-15T12:09:05.302Z",
   "totals": {
-    "authoritative": 11272,
+    "authoritative": 11274,
     "active7": 2726,
     "active7Pct": 24.2,
-    "active30": 11270,
+    "active30": 11272,
     "active30Pct": 100,
-    "ageGate1": 10593,
+    "ageGate1": 10594,
     "ageGate1Pct": 94,
     "byMonth": {
       "2026-08": 9666,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1522,
+      "2026-09": 1524,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 742,
       "2026-03-02": 1,
-      "2026-09-14": 145
+      "2026-09-14": 147
     },
     "byWeekGrades": {
       "B": {
@@ -87,7 +87,7 @@
         "2026-05-18": 1,
         "2026-06-29": 4,
         "2026-09-07": 356,
-        "2026-09-14": 50
+        "2026-09-14": 51
       },
       "S": {
         "2026-08-03": 2,
@@ -132,9 +132,9 @@
         "2026-06-29": 2,
         "2026-07-20": 1,
         "2026-07-27": 1,
-        "2026-09-07": 317,
+        "2026-09-07": 315,
         "2026-07-06": 1,
-        "2026-09-14": 85
+        "2026-09-14": 86
       },
       "D": {
         "2026-08-10": 138,
@@ -142,7 +142,7 @@
         "2026-08-31": 33,
         "2026-03-16": 1,
         "2026-08-24": 26,
-        "2026-09-07": 10,
+        "2026-09-07": 12,
         "2026-09-14": 4
       }
     }
@@ -150,18 +150,18 @@
   "distribution": {
     "publish": {
       "published": 4712,
-      "unpublished": 6560,
+      "unpublished": 6562,
       "stale": 1350
     },
     "docs": {
-      "readme": 11243,
-      "zhFile": 844,
-      "zh": 5374,
-      "both": 5364,
+      "readme": 11245,
+      "zhFile": 845,
+      "zh": 5375,
+      "both": 5365,
       "none": 29
     },
     "lib": {
-      "index": 6047,
+      "index": 6048,
       "client": 3862,
       "both": 3448
     },
@@ -233,15 +233,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 10944
+      "count": 10946
     },
     {
       "topic": "deepseek-harness",
-      "count": 7316
+      "count": 7318
     },
     {
       "topic": "dsh",
-      "count": 4180
+      "count": 4181
     },
     {
       "topic": "deepseek",
@@ -253,7 +253,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1048
+      "count": 1049
     },
     {
       "topic": "plugin",
@@ -348,8 +348,8 @@
     "imsai": 269,
     "covered": 1035,
     "coveredPct": 9.2,
-    "none": 10237,
-    "fetchedAt": "2026-09-15T11:58:41.974Z"
+    "none": 10239,
+    "fetchedAt": "2026-09-15T12:08:23.722Z"
   },
   "suggested": [
     {
@@ -1608,9 +1608,9 @@
   "quality": {
     "grades": {
       "A": 860,
-      "B": 5412,
-      "C": 3451,
-      "D": 1277,
+      "B": 5413,
+      "C": 3450,
+      "D": 1279,
       "S": 272
     },
     "avgScore": 76.1,
@@ -1624,7 +1624,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1082
+      "count": 1083
     },
     {
       "category": "文件浏览 / 预览",
@@ -1652,7 +1652,7 @@
     },
     {
       "category": "主题 / 视觉美化",
-      "count": 437
+      "count": 438
     },
     {
       "category": "消息 / 协作集成",
@@ -29585,6 +29585,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "Tisitan",
+      "plugins": 2,
+      "stars": 8,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-15",
+      "firstCreated": "2026-08-15",
+      "delta": 0,
+      "avg": 77,
+      "topPlugin": "Tisitan/dsh-live2d-companion",
+      "topStars": 8,
+      "topCat": "其它"
+    },
+    {
       "owner": "chiro2001",
       "plugins": 2,
       "stars": 8,
@@ -29814,27 +29835,6 @@
       "topPlugin": "zhujunpeng12/dsh-memory-system",
       "topStars": 8,
       "topCat": "记忆 / 知识"
-    },
-    {
-      "owner": "Tisitan",
-      "plugins": 1,
-      "stars": 8,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-13",
-      "firstCreated": "2026-08-15",
-      "delta": 0,
-      "avg": 81,
-      "topPlugin": "Tisitan/dsh-live2d-companion",
-      "topStars": 8,
-      "topCat": "其它"
     },
     {
       "owner": "chenzheshushi-commits",
@@ -93892,6 +93892,27 @@
       "topCat": "搜索 / 命令面板"
     },
     {
+      "owner": "sra-research",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-15",
+      "firstCreated": "2026-09-14",
+      "delta": 0,
+      "avg": 83,
+      "topPlugin": "sra-research/self-evolving-router-dsh",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
+    },
+    {
       "owner": "linhay",
       "plugins": 1,
       "stars": 347,
@@ -133462,8 +133483,8 @@
       "grades": {
         "A": 0,
         "B": 0,
-        "C": 1,
-        "D": 0
+        "C": 0,
+        "D": 1
       },
       "ab": 0,
       "npm": 0,
@@ -133471,7 +133492,7 @@
       "lastPush": "2026-09-08",
       "firstCreated": "2026-09-08",
       "delta": 0,
-      "avg": 64,
+      "avg": 54,
       "topPlugin": "ShadowMiner/hermes-web-mcp",
       "topStars": 0,
       "topCat": "其它"
@@ -136234,8 +136255,8 @@
       "grades": {
         "A": 0,
         "B": 0,
-        "C": 1,
-        "D": 0
+        "C": 0,
+        "D": 1
       },
       "ab": 0,
       "npm": 0,
@@ -136243,7 +136264,7 @@
       "lastPush": "2026-09-08",
       "firstCreated": "2026-09-08",
       "delta": 0,
-      "avg": 64,
+      "avg": 54,
       "topPlugin": "newbeebnb/hermes-web-mcp",
       "topStars": 0,
       "topCat": "其它"
@@ -137069,8 +137090,8 @@
     }
   ],
   "authorStats": {
-    "total": 6437,
-    "multi": 1531,
+    "total": 6438,
+    "multi": 1532,
     "top10Share": 15.4
   },
   "coverage": {
@@ -137078,7 +137099,7 @@
       "count": 14852,
       "at": "2026-09-14T23:32:23.865Z"
     },
-    "candidates": 15579,
+    "candidates": 15581,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -137149,14 +137170,14 @@
       "2026-08-24": 1877,
       "2026-08-31": 955,
       "2026-09-07": 875,
-      "2026-09-14": 183,
+      "2026-09-14": 185,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 486
     },
-    "validated": 15516,
-    "candidatesValidated": 28,
-    "authoritative": 11272,
+    "validated": 15518,
+    "candidatesValidated": 29,
+    "authoritative": 11274,
     "invalidUnique": 4244,
     "invalidBuckets": [
       {
@@ -137205,5 +137226,5 @@
       }
     ]
   },
-  "enrichCount": 11272
+  "enrichCount": 11274
 }
