@@ -1,14 +1,14 @@
 # 快照 Diff · 2026-09-16
 
-- 当前权威插件：**11404**（上次 11399）
+- 当前权威插件：**11409**（上次 11404）
 - 新增 5 · 消失 0
 
 ## 新增（Top 5）
-- s11phere/dsh-away-notify ★1 
-- Aik358/dsh-memory-fitting ★1 (npm ✓)
-- fourzkw/dsh-drawai ★1 (npm ✓)
-- zaimokuza-yoshiteru/dsh-agent-teams-office ★0 (npm ✓)
-- Iambatman1928/dsh-xingye ★0 
+- DaXYao/dsh-plugin-fluffy-yard ★1 
+- zmm863-commits/dsh-agnes-studio ★0 (npm ✓)
+- skyyyyyk/dsh-szg-hint ★0 (npm ✓)
+- fengbinmov/dsh-git-panel ★0 
+- zmm863-commits/dsh-client-ui-paopaocat ★0 (npm ✓)
 
 ## 消失（Top 0）
 
