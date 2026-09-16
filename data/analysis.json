@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-16T21:44:42.258Z",
+  "generatedAt": "2026-09-16T21:54:53.974Z",
   "totals": {
-    "authoritative": 11418,
+    "authoritative": 11419,
     "active7": 2564,
     "active7Pct": 22.5,
-    "active30": 11416,
+    "active30": 11417,
     "active30Pct": 100,
     "ageGate1": 10627,
     "ageGate1Pct": 93.1,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1657,
+      "2026-09": 1658,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 265
+      "2026-09-14": 266
     },
     "byWeekGrades": {
       "B": {
@@ -134,7 +134,7 @@
         "2026-07-27": 1,
         "2026-09-07": 319,
         "2026-07-06": 1,
-        "2026-09-14": 132
+        "2026-09-14": 133
       },
       "D": {
         "2026-08-10": 138,
@@ -150,20 +150,20 @@
   "distribution": {
     "publish": {
       "published": 4765,
-      "unpublished": 6653,
+      "unpublished": 6654,
       "stale": 1369
     },
     "docs": {
-      "readme": 11389,
+      "readme": 11390,
       "zhFile": 856,
       "zh": 5453,
       "both": 5443,
       "none": 29
     },
     "lib": {
-      "index": 6133,
-      "client": 3933,
-      "both": 3514
+      "index": 6134,
+      "client": 3934,
+      "both": 3515
     },
     "publishPct": 41.7,
     "zhPct": 47.7
@@ -233,11 +233,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11087
+      "count": 11088
     },
     {
       "topic": "deepseek-harness",
-      "count": 7414
+      "count": 7415
     },
     {
       "topic": "dsh",
@@ -348,8 +348,8 @@
     "imsai": 272,
     "covered": 1040,
     "coveredPct": 9.1,
-    "none": 10378,
-    "fetchedAt": "2026-09-16T21:44:03.231Z"
+    "none": 10379,
+    "fetchedAt": "2026-09-16T21:54:15.891Z"
   },
   "suggested": [
     {
@@ -1609,7 +1609,7 @@
     "grades": {
       "A": 866,
       "B": 5489,
-      "C": 3501,
+      "C": 3502,
       "D": 1289,
       "S": 273
     },
@@ -1636,7 +1636,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 801
+      "count": 802
     },
     {
       "category": "侧栏 / 工作区",
@@ -138788,10 +138788,31 @@
       "topPlugin": "SUZUNAMI/dsh-workspace-hide",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
+    },
+    {
+      "owner": "luigiinred",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-16",
+      "firstCreated": "2026-09-16",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "luigiinred/dsh-git-status-pill",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
     }
   ],
   "authorStats": {
-    "total": 6519,
+    "total": 6520,
     "multi": 1559,
     "top10Share": 15.2
   },
@@ -138800,7 +138821,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 15732,
+    "candidates": 15733,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -138871,14 +138892,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 319,
+      "2026-09-14": 320,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 15700,
-    "candidatesValidated": 27,
-    "authoritative": 11418,
+    "validated": 15701,
+    "candidatesValidated": 28,
+    "authoritative": 11419,
     "invalidUnique": 4282,
     "invalidBuckets": [
       {
@@ -138927,5 +138948,5 @@
       }
     ]
   },
-  "enrichCount": 11418
+  "enrichCount": 11419
 }
