@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-16
 
-- 当前权威插件：**11392**（上次 11391）
+- 当前权威插件：**11393**（上次 11392）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- lemonxiny55/dsh-composition-doctor ★0 (npm ✓)
+- mays-hi/dsh-git-idea ★0 
 
 ## 消失（Top 0）
 
