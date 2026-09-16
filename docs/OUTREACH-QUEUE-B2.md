@@ -48,19 +48,36 @@
 
 2026-09-10 的 vision-router 误报已立过规矩：**「实测」二字必须名副其实；高危触达（指控别人崩溃）发前必须过真实运行时回放**。本队列的判定来源是**静态分析**，因此：
 
-- [ ] **每封发出前必须做真实运行时回放**（真实 shell × 真实插件 bundle，走官方 loader），确认「加载失败」在目标 shell 版本上可复现；
-- [ ] 回放不通过的**一律不发**（宁缺勿错）；
-- [ ] 信件文案必须写明方法（「静态分析口径 · 已在本机复核」或「未复现，仅供参考」），**不得写「实测崩溃」**；
-- [ ] 每封信附**具体修法**（缺哪个模块、声明 `dsh.client.external` 还是换依赖），而不是只报故障。
+- [ ] **每个目标发出前必须跑 `npm run replay -- <target>`**，只有 `data/replay.json` 里该目标 `verdict === 'broken'` 才允许发信；
+- [ ] 实跑为 `ok` 的**一律不发**（宁缺勿错）——并把它当作静态口径的假阳性样本，反馈给 [compat-observed](../pipeline/analyze/compat-observed.mjs) 修正；
+- [ ] 信件文案必须写明方法（「真实 shell + 浏览器复核」或「静态分析，未复现」），**不得写「实测崩溃」除非真的是回放结论**；
+- [ ] 每封信附**回放给出的那条真实根因**（不是静态推断的那条）+ 参考修法。
 
-> 运行时回放能力即 [ROADMAP](./ROADMAP.md) 附录 A 的 **D4 实装 smoke 测试**（当前 ⬜ 未做）。**建议把 D4 的最小切片当作本队列的前置工程**——它同时是 M2 兼容雷达的产品底座，一次投入两处收益。
+### 门禁已可用：D4 最小切片（2026-09-17 上线）
+
+运行时回放能力已落地为 [D4 实装 smoke 测试](./D4-REPLAY.md)（`pipeline/verify/replay.mjs` + `lib/cdp.mjs`，零依赖；`npm run replay`）。**首次抽样就证明这道门禁不能省**——队列前 5 个目标里 **2 个实跑完全正常**：
+
+| 目标 | 静态判定 | 实跑 | 处理 |
+|---|---|---|---|
+| FSMargoo/dsh-at-file | broken-since | ❌ broken（host 侧 `settingsNamespace` 导出缺失） | 可发 |
+| Tkingxiao/dsh-any-background | broken-since | ❌ broken（`webServer` without inject） | 可发 |
+| anweat/dsh-restart | broken-since | ❌ broken（host 侧导出缺失） | 可发 |
+| WSL043/dsh-chat-manager | never | ✅ **ok** | 🚫 **不发** |
+| hellodigua/dsh-share | never | ✅ **ok** | 🚫 **不发** |
+
+> 两个结论：① 静态口径在这批里 **40% 假阳性**——没有回放就会产生两封新的 vision-router 式误报；② 真 broken 的根因**全在 host 侧**（模块导出 / inject），静态分析只看 client bundle 的 require，**连「为什么」都指错了**——所以信件必须用回放那条根因。
 
 ## 信件形态
 
-不使用「一期一会」健康信模板（那是全量、中性的观测分享）。改用加载体检信：**发生了什么（哪个 shell 版本）→ 我们在本机怎么复核的 → 根因（缺哪个 require / 图行时序）→ 参考修法 → 不要求任何行动**。
+不使用「一期一会」健康信模板（那是全量、中性的观测分享）。改用加载体检信：**发生了什么（哪个 shell 版本）→ 我们怎么复核的（真实 shell + 浏览器）→ 回放给出的根因 → 参考修法 → 不要求任何行动**。范例（dsh-at-file）：
+
+> 装上 `dsh-at-file@0.6.3` 后，dsh 0.1.5-rc.1 的 shell 起不来，报：
+> `The requested module '@deepseek-ai/dsh-settings' does not provide an export named 'settingsNamespace'`
+> （发生在 `lib/index.js` 的 import 阶段，host 侧。）
 
 ## 关联
 
 - 原队列（首批 10 + 已发记录）：[OUTREACH-QUEUE.md](./OUTREACH-QUEUE.md)
 - 渠道与节奏：[OUTREACH.md](./OUTREACH.md)
+- 回放装置与边界：[D4-REPLAY.md](./D4-REPLAY.md)
 - 判定口径全文：`data/compat-observed.json` 的 `note` 字段（中英双语）

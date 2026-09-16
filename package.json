@@ -38,7 +38,8 @@
     "pages": "node pipeline/publish/pages.mjs",
     "suggest": "node bin/export-suggested.mjs",
     "report": "node pipeline/content/letters.mjs",
-    "weekly": "node pipeline/content/weekly.mjs"
+    "weekly": "node pipeline/content/weekly.mjs",
+    "replay": "node pipeline/verify/replay.mjs"
   },
   "keywords": [
     "dsh",

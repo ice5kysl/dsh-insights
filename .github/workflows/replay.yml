@@ -1,0 +1,96 @@
+# D4 · 实装 smoke 测试（真实运行时加载回放）—— 手动触发
+#
+# 干什么：起真实 dsh shell + headless Chromium，把插件真装进去跑一遍，看它是
+# 「装上后 shell 能不能正常起来」，产出 data/replay.json。这是**指控作者插件崩溃
+# 之前的发送前门禁**——静态分析（compat-observed）已实测有 40% 假阳性（首次抽样
+# 5 个里 2 个实跑正常），见 docs/D4-REPLAY.md。
+#
+# ⚠️ 为什么只做 workflow_dispatch、不做定时：
+#   本流程会**真实执行第三方 npm 包的 host 侧代码**。CI runner 是一次性沙箱，
+#   适合跑；但也因此不适合无人值守定时批量跑（成本 + 供应链暴露面）。
+#   按需对「即将发信的队列目标」跑一批即可。
+#
+# ⚠️ 首次使用请手动 workflow_dispatch 验证一遍（作者尚未在 CI 上实跑过本 workflow）：
+#   本机验证环境是 macOS + dsh 0.1.5-rc.1 + Playwright 缓存里的 Chromium；
+#   CI 为 ubuntu，靠 `playwright install --with-deps chromium` 装浏览器，
+#   dsh 版本由 dsh_spec 输入指定。
+name: replay
+
+on:
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: '目标（空格分隔）：owner/repo 或 pkg@version'
+        required: true
+        default: 'ice5kysl/dsh-insights-kit'
+      dsh_spec:
+        description: 'dsh 版本（npm spec；注意 npm latest 长期指向远古 0.0.1-rc.5，别用 latest）'
+        required: true
+        default: '@deepseek-ai/dsh@0.1.5-rc.1'
+      settle:
+        description: '页面等待毫秒数（慢机器加大）'
+        required: false
+        default: '12000'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: replay
+  cancel-in-progress: false
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+
+      # Node ≥22：lib/cdp.mjs 依赖内置的全局 WebSocket（零依赖实现 CDP）
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+
+      - name: Install dsh (real shell under test)
+        run: npm i -g "${{ github.event.inputs.dsh_spec }}" && dsh --version
+
+      - name: Install Chromium (reuse Playwright's browser cache)
+        run: npx --yes playwright@latest install --with-deps chromium
+
+      - name: Replay
+        env:
+          DSH_BIN: dsh
+        run: |
+          node pipeline/verify/replay.mjs --fresh-baseline \
+            --settle "${{ github.event.inputs.settle }}" \
+            ${{ github.event.inputs.targets }}
+
+      - name: Summarize
+        if: always()
+        run: |
+          node -e '
+            const fs=require("fs");
+            if(!fs.existsSync("data/replay.json")){console.log("no data/replay.json");process.exit(0)}
+            const d=JSON.parse(fs.readFileSync("data/replay.json","utf8"));
+            console.log("shell",d.shell);
+            for(const t of d.targets) console.log(`${t.verdict.padEnd(14)} ${(t.repo||t.target).padEnd(40)} ${t.reason||""} ${t.shellError||""}`);
+          '
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: replay-json
+          path: data/replay.json
+          if-no-files-found: warn
+
+      - name: Commit evidence
+        if: always()
+        run: |
+          git config user.name "dsh-insights-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A data/replay.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "chore(replay): 实装 smoke 测试 ${{ github.event.inputs.targets }}"
+          git pull --rebase --autostash origin main
+          git push

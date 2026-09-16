@@ -1,0 +1,130 @@
+{
+  "generatedAt": "2026-09-16T23:23:11.399Z",
+  "shell": "0.1.5-rc.1",
+  "method": "真实 shell（dsh web）+ headless Chromium（CDP）加载真实插件；与干净 profile baseline 做差集归因。非静态分析。",
+  "baseline": {
+    "appBooted": true,
+    "errorCount": 0
+  },
+  "targets": [
+    {
+      "target": "dsh-insights-kit@0.10.2",
+      "pkg": "dsh-insights-kit",
+      "version": "0.10.2",
+      "repo": null,
+      "verdict": "ok",
+      "reason": "loaded",
+      "appBooted": true,
+      "shellBooted": true,
+      "shellError": null,
+      "shellLog": null,
+      "novelErrors": [],
+      "loadFailErrors": [],
+      "probe": {
+        "title": "DeepSeek Harness",
+        "bodyLen": 31710,
+        "roots": [
+          1
+        ]
+      },
+      "durationMs": 13722
+    },
+    {
+      "target": "FSMargoo/dsh-at-file",
+      "repo": "FSMargoo/dsh-at-file",
+      "pkg": "dsh-at-file",
+      "version": "0.6.3",
+      "repoStars": 512,
+      "verdict": "broken",
+      "reason": "shell-boot-failed",
+      "appBooted": false,
+      "shellBooted": false,
+      "shellError": "dsh: plugin tree failed to load: failed to apply loader entry include (cordis:include): failed to import loader entry dsh-at-file (dsh-at-file): The requested module '@deepseek-ai/dsh-settings' does not provide an export named 'settingsNamespace'",
+      "shellLog": "_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:505:4)\n        ... 3 lines matching cause stack trace ...\n        at async EntryGroup.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:97:21)\n        at async Include._apply (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-app-boot/lib/index.js:240:3) {\n      [cause]: file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/node_modules/dsh-at-file/lib/index.js:15817\n      import { settingsNamespace } from \"@deepseek-ai/dsh-settings\";\n               ^^^^^^^^^^^^^^^^^\n      SyntaxError: The requested module '@deepseek-ai/dsh-settings' does not provide an export named 'settingsNamespace'\n          at #asyncInstantiate (node:internal/modules/esm/module_job:463:21)\n          at async ModuleJob.run (node:internal/modules/esm/module_job:561:5)\n          at async node:internal/modules/esm/loader:650:26\n          at async file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:274:41\n          at async Entry._init (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:522:39)\n          at async Entry.init (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:505:4)\n          at async Entry.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:426:37)\n          at async EntryGroup.create (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:65:4)\n          at async Promise.allSettled (index 152)\n          at async EntryGroup.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:97:21)\n    }\n  }\n}\n\nNode.js v26.8.2\n",
+      "novelErrors": [],
+      "loadFailErrors": [],
+      "probe": null,
+      "durationMs": 14577
+    },
+    {
+      "target": "Tkingxiao/dsh-any-background",
+      "repo": "Tkingxiao/dsh-any-background",
+      "pkg": "dsh-any-background",
+      "version": "0.2.2",
+      "repoStars": 29,
+      "verdict": "broken",
+      "reason": "shell-boot-failed",
+      "appBooted": false,
+      "shellBooted": false,
+      "shellError": "dsh: plugin tree failed to load: failed to apply loader entry dsh-any-background (dsh-any-background): cannot get property \"webServer\" without inject",
+      "shellLog": "c Proxy.await (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:192:22)\n      at async boot (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-app-boot/lib/index.js:1535:3)\n      at async runProfile (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/lib/profile-boot-Dk-7KqJc.js:311:14)\n      at async runCli (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/lib/bin.js:146:4)\n      at async file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/lib/bin.js:168:23 {\n    [cause]: Error: cannot get property \"webServer\" without inject\n        at Fiber.<anonymous> (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js:618:35)\n        at file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js:1141:34\n        at Proxy.register (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js:618:16)\n        at Object.apply (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js:120:36)\n        at Object.handle (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js:543:39)\n        at new apply (file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/node_modules/dsh-any-background/lib/index.js:451:37)\n        at Fiber.execute (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js:1067:24)\n        at file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js:1141:34\n        at file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/#dsh-any-background\n        at file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/#include\n  }\n}\n\nNode.js v26.8.2\n",
+      "novelErrors": [],
+      "loadFailErrors": [],
+      "probe": null,
+      "durationMs": 4019
+    },
+    {
+      "target": "WSL043/dsh-chat-manager",
+      "repo": "WSL043/dsh-chat-manager",
+      "pkg": "dsh-chat-manager",
+      "version": "1.3.1",
+      "repoStars": 6,
+      "verdict": "ok",
+      "reason": "loaded",
+      "appBooted": true,
+      "shellBooted": true,
+      "shellError": null,
+      "shellLog": null,
+      "novelErrors": [],
+      "loadFailErrors": [],
+      "probe": {
+        "title": "DeepSeek Harness",
+        "bodyLen": 33478,
+        "roots": [
+          1
+        ]
+      },
+      "durationMs": 13807
+    },
+    {
+      "target": "anweat/dsh-restart",
+      "repo": "anweat/dsh-restart",
+      "pkg": "dsh-restart",
+      "version": "0.1.2",
+      "repoStars": 7,
+      "verdict": "broken",
+      "reason": "shell-boot-failed",
+      "appBooted": false,
+      "shellBooted": false,
+      "shellError": "dsh: plugin tree failed to load: failed to apply loader entry include (cordis:include): failed to import loader entry dsh-restart (dsh-restart): The requested module '@deepseek-ai/dsh-settings' does not provide an export named 'installSettingsSection'",
+      "shellLog": "ugin-loader/lib/index.js:505:4)\n        ... 3 lines matching cause stack trace ...\n        at async EntryGroup.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:97:21)\n        at async Include._apply (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-app-boot/lib/index.js:240:3) {\n      [cause]: file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/node_modules/dsh-restart/lib/index.js:24\n      import { installSettingsSection, settingsNamespace } from '@deepseek-ai/dsh-settings';\n               ^^^^^^^^^^^^^^^^^^^^^^\n      SyntaxError: The requested module '@deepseek-ai/dsh-settings' does not provide an export named 'installSettingsSection'\n          at #asyncInstantiate (node:internal/modules/esm/module_job:463:21)\n          at async ModuleJob.run (node:internal/modules/esm/module_job:561:5)\n          at async node:internal/modules/esm/loader:650:26\n          at async file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:274:41\n          at async Entry._init (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:522:39)\n          at async Entry.init (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:505:4)\n          at async Entry.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:426:37)\n          at async EntryGroup.create (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:65:4)\n          at async Promise.allSettled (index 152)\n          at async EntryGroup.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:97:21)\n    }\n  }\n}\n\nNode.js v26.8.2\n",
+      "novelErrors": [],
+      "loadFailErrors": [],
+      "probe": null,
+      "durationMs": 14449
+    },
+    {
+      "target": "hellodigua/dsh-share",
+      "repo": "hellodigua/dsh-share",
+      "pkg": "dsh-share",
+      "version": "0.4.0",
+      "repoStars": 35,
+      "verdict": "ok",
+      "reason": "loaded",
+      "appBooted": true,
+      "shellBooted": true,
+      "shellError": null,
+      "shellLog": null,
+      "novelErrors": [],
+      "loadFailErrors": [],
+      "probe": {
+        "title": "DeepSeek Harness",
+        "bodyLen": 31258,
+        "roots": [
+          1
+        ]
+      },
+      "durationMs": 13970
+    }
+  ]
+}
