@@ -1,6 +1,6 @@
 # M2 集成提案：给 awesome-dsh-plugin / dsh-market 的健康分数据层
 
-> 状态：**已发出**（2026-09-05 · awesome-dsh-plugin org Discussions **#4399** · 待回复）· 本「集成提案」对应 [ROADMAP](./ROADMAP.md) v0.2 的 **M3 采纳推进**，与「M2 官方动态」无关（文件名因对外链接保留，勿改名）· 回复记录回填本文末尾决策日志并同步 [RESEARCH](./RESEARCH.md) §决策日志
+> 状态：**已判渠道无效 · 停止投入**（2026-09-17）——2026-09-05 发出于 awesome-dsh-plugin org Discussions **#4399**（`Ideas` 类目），12 天 **0 评论 / 0 upvote**，无维护者巡视（该库 Discussions 活跃的是 `Plugins`/`Show and tell` 的自发提交帖）。按 [OUTREACH](./OUTREACH.md) §六「未达处理」条款停止投入，采纳路线改走「数据被引用」（不追采纳、只把数据与徽章做到被自愿引用）。**重启前置条件**：health-v6 口径更正（2026-09-17，见 [SCHEMA](./SCHEMA.md) §health changelog）在站点/changelog 公开满一周；重启时只提「数据可引用」，不再提收录门槛（B 案）。⚠ 注意本文件正文内的 health-v5 表述与示例为发出时的历史快照，现行口径见 SCHEMA §health（health-v6）· 本「集成提案」对应 [ROADMAP](./ROADMAP.md) v0.2 的 **M3 采纳推进**，与「M2 官方动态」无关（文件名因对外链接保留，勿改名）· 回复记录回填本文末尾决策日志并同步 [RESEARCH](./RESEARCH.md) §决策日志
 > 提议对象：[awesome-dsh-plugin org](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)（收录注册表 / awesome-dsh-plugin.com）与 [dsh-market](https://github.com/dsh-market/dsh-market)（应用内市场，消费其 plugins.json）。本文件也是 PR/Discussions 的草稿与决策日志模板。
 
 ## 一句话提案

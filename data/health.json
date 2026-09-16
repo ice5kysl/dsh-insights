@@ -1,66 +1,66 @@
 {
-  "generatedAt": "2026-09-16T12:04:55.751Z",
-  "ruleVersion": "health-v5",
-  "total": 11389,
+  "generatedAt": "2026-09-16T22:50:59.253Z",
+  "ruleVersion": "health-v6",
+  "total": 11419,
   "grades": {
-    "S": 273,
-    "A": 864,
-    "B": 5473,
-    "C": 3493,
-    "D": 1286
+    "S": 262,
+    "A": 788,
+    "B": 5363,
+    "C": 3500,
+    "D": 1506
   },
-  "avg": 76.1,
-  "median": 77,
+  "avg": 75.4,
+  "median": 76,
   "topDeductions": [
     {
       "code": "manifest.no-client-export",
-      "count": 8681,
+      "count": 8702,
       "pct": 76.2
     },
     {
       "code": "eng.no-ci",
-      "count": 8196,
+      "count": 8220,
       "pct": 72
     },
     {
       "code": "docs.no-docs-dir",
-      "count": 7987,
+      "count": 8001,
       "pct": 70.1
     },
     {
       "code": "npm.unpublished",
-      "count": 6636,
+      "count": 6654,
       "pct": 58.3
     },
     {
       "code": "docs.zh-missing",
-      "count": 5933,
+      "count": 5947,
       "pct": 52.1
     },
     {
       "code": "eng.no-tests",
-      "count": 5400,
+      "count": 5408,
       "pct": 47.4
     },
     {
       "code": "manifest.not-lib-main",
-      "count": 4412,
+      "count": 4423,
       "pct": 38.7
     },
     {
       "code": "maint.single-push",
-      "count": 2748,
+      "count": 2755,
       "pct": 24.1
     },
     {
-      "code": "repo.sparse-topics",
-      "count": 2045,
-      "pct": 18
+      "code": "activity.dormant",
+      "count": 2206,
+      "pct": 19.3
     },
     {
-      "code": "npm.version-drift",
-      "count": 1365,
-      "pct": 12
+      "code": "repo.sparse-topics",
+      "count": 2046,
+      "pct": 17.9
     }
   ]
 }

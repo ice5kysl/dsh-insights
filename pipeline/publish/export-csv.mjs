@@ -7,7 +7,7 @@
  */
 
 import { writeFileSync } from 'node:fs'
-import { PATHS, readJsonl } from '../../lib/data.mjs'
+import { PATHS, readJsonl, deriveActivity } from '../../lib/data.mjs'
 
 const SRC = PATHS.plugins
 
@@ -38,7 +38,16 @@ function main() {
   const lines = [cols.join(',')]
   for (const r of rows) {
     const topics = (r.topics || []).join('|')
-    lines.push(cols.map((c) => esc(c === 'topics' ? topics : c === 'description' ? r.description : get(r, c))).join(','))
+    // 活跃度列必须是现算值：持久化的 metrics.active30/ageGate1 是首次校验时冻结的（health-v6）。
+    const act = deriveActivity(r)
+    const val = (c) => {
+      if (c === 'topics') return topics
+      if (c === 'description') return r.description
+      if (c === 'metrics.active30') return act ? act.active30 : ''
+      if (c === 'metrics.ageGate1') return act ? act.ageGate1 : ''
+      return get(r, c)
+    }
+    lines.push(cols.map((c) => esc(val(c))).join(','))
   }
   writeFileSync(PATHS.pluginsCsv, lines.join('\n') + '\n')
   console.log(`[export] ${rows.length} rows → data/plugins.csv`)

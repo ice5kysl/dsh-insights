@@ -12,10 +12,10 @@
 
 L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，只提供卡片上那个分数」（详见 [M2-INTEGRATION.md](./M2-INTEGRATION.md)）。
 
-**叙事三件套（帖子/README/演示统一用，2026-09-08 快照口径）**
-1. 数据点：`dsh-plugin` topic 宇宙 13.7k、多源候选 14,239、权威集 **10,190**（manifest 门禁逐条校验）、中位 ★3、npm 发布率仅 **41.9%**
-2. 证据点（health.json topDeductions，health-v5）：**76.4% 缺 client export**（Web 端装不上）、72% 无 CI、58.1% 未发 npm、51.7% 缺中文文档、48.5% 无测试
-3. 反差点：14.5k★ 权威列表明说"不评判质量" → 评估层无人做、我们做且开源；S+A 仅 1,036 个（10.2%），均分 76
+**叙事三件套（帖子/README/演示统一用，2026-09-17 快照口径 · health-v6）**
+1. 数据点：`dsh-plugin` topic 宇宙 14,941、多源候选 15,733、权威集 **11,419**（manifest 门禁逐条校验）、npm 发布率 **41.7%**（4,765 已发布）
+2. 证据点（health.json topDeductions，health-v6）：**76.2% 缺 client export**（Web 端装不上）、72% 无 CI、70.1% 无 docs 目录、58.3% 未发 npm、52.1% 缺中文文档、47.4% 无测试、**19.3% 超 30 天停更**（该条此前因口径缺陷几乎不触发，见 SCHEMA §health changelog health-v6）
+3. 反差点：14.5k★ 权威列表明说"不评判质量" → 评估层无人做、我们做且开源；S+A 仅 **1,050 个（9.2%）**，均分 75.4
 
 **dogfooding 证据（自证可信）**：自家三个插件 dsh-insights-kit / dsh-workspace-kit / dsh-file-explorer-kit 全部 100 分 S 级、徽章挂 README、自检 CLI 进 CI（fail 档退出码 1）。
 
@@ -30,7 +30,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 
 ### 2. 插件作者（被看见 + 被信任）
 - 插件页/信件：`https://dsh-insights.com/p/<owner>/<repo>/`（分数证据 + 扣分明细 + 相似推荐）
-- 自查：`npx dsh-insights-kit selfcheck <dir>`（与线上 health-v5 同规则书，fail 档 exit 1 可挂 CI 门禁）
+- 自查：`npx dsh-insights-kit selfcheck <dir>`（与线上 health-v6 同规则书，fail 档 exit 1 可挂 CI 门禁）
 - 徽章：`[![DSH Insights health](https://dsh-insights.com/badge/<owner>/<repo>.svg)](https://dsh-insights.com/p/<owner>/<repo>/)`（/badge/ 页有一键复制）
 - 重检：push 修复后到 Actions → recheck 手动触发（单插件分钟级生效，站点自动接力部署）
 - 修复路径：发布 npm / 补 `exports["./client"]` / 中英 README / LICENSE / `dsh-plugin` topic / tests/ + CI / 声明 `engines.dsh`
@@ -44,7 +44,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 
 | 时机 | 渠道 | 动作 | 状态/成功标准 |
 |---|---|---|---|
-| 2026-09-05（已做） | awesome-dsh-plugin org Discussions | 发集成提案（ZH/EN） | ✅ 已发 = **#4399**，待回复；W37 帖发出后带新数字跟进 |
+| 2026-09-05（已做） | awesome-dsh-plugin org Discussions | 发集成提案（ZH/EN） | ❌ **已判渠道无效（2026-09-17）**：发出 12 天 0 评论 0 upvote，`Ideas` 类目无维护者巡视（该库 Discussions 活跃的是 `Plugins`/`Show and tell` 自发提交帖）。按 §六「未达处理」停止投入；采纳路线改走「数据被引用」——不追采纳、只把数据/徽章做到被自愿引用。**重启前置条件**：health-v6 口径更正（2026-09-17）先在站点/changelog 公开满一周，届时若重启也只提「数据可引用」，不再提收录门槛（B 案） |
 | 2026-09-08（已做） | 自荐 3 插件 README | 贴 health badge（新域名） | ✅ insights/workspace/file-explorer 三 kit，均 100 S |
 | **本周（启动周，见 §五）** | 作者 issue 信件 + 官方/本仓库 Discussions | 首批 10 封信（社区自推广渠道全部挂起，见下） | 信件发出 ≥10 · 回复率见 §六 |
 | 2026-09-08（已做） | **官方 deepseek-harness Discussions「Show Your Plugins!」** | 生态官宣（作者向：徽章/selfcheck/recheck + 开放数据） | ✅ 已发 = **#5933**；官方仅监控自家 Discussions，这是最直接的官方触达通道 |
@@ -71,7 +71,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 ### D0（周二 09-08，今天）
 - [ ] **官宣帖发布**（人，30 分钟）：~~帖 2（Discussions）已发 #5933~~；~~V2EX 一帖~~（2026-09-08 决策：社区自推广全部挂起，此条取消）。渠道收敛为：作者信（主）+ 官方 Discussions 互动 + 数据/徽章被引用。
 - [ ] **首批作者信 10 封**（人，40 分钟）：按 [OUTREACH-QUEUE.md](./OUTREACH-QUEUE.md) 前 10 位（omdsh-dev、shanliuling、RevolutionLA、pengyue-polaron、SiriLee、SenmuuuuW、Ultronen、Likenttt、lee259、chendefine），到对应仓库开 issue，正文 = `data/reports/<owner>__<repo>.md` 全文（已含新 CLI 页脚），标题「你的插件在 DSH Insights 的评分与改进建议」。发完在队列表勾记。
-- [ ] **提案 #4399 预热带数**：暂不回复，等 W37 帖链接出来一起跟（避免刷屏）。
+- [x] ~~**提案 #4399 预热带数**：暂不回复，等 W37 帖链接出来一起跟（避免刷屏）。~~ **已取消（2026-09-17）**：12 天 0 回复，判渠道无效。
 
 ### D1（周三 09-09）
 - [ ] 检查官宣帖回复，逐条回应（数据问题引 /about/ 口径，误判引导 issue 申诉 + recheck 自助）。
@@ -84,7 +84,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 
 ### D3（周五 09-11 · 周报日）
 - [ ] W37 周报 CI 生成 → review（≤15 分钟）→ 按 §四外发周报帖；**同时在官宣帖下更新 W37 3 个数字**（二次曝光）。
-- [ ] 带 W37 数字与官宣帖链接，跟进提案 #4399。
+- [x] ~~带 W37 数字与官宣帖链接，跟进提案 #4399。~~ **已取消（2026-09-17）**——判渠道无效、停止投入，见 §三渠道表。
 - [ ] 填 §六 度量表第一周实际值。
 
 ### D4–D7（周末–下周一）
@@ -106,6 +106,8 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 | dsh-insights-kit npm 周下载 | 未统计 | ≥10 | ≥30 | ≥80 | downloads.json |
 | 目录/市场采纳 | #4399 待回复 | 跟进 1 次 | 有实质回复 | ≥1 家接入谈判中 | M2-INTEGRATION 状态 |
 
+> 2026-09-17 判读：**#4399 连续未达 → 按本条处置**：`awesome-dsh-plugin` Discussions 的 `Ideas` 类目 12 天 0 回复，判渠道无效、停止投入（详见 §三渠道表）。同时 `#5933` 互动 0、repo ★0 两项也未达。三项未达集中在「等外部回应」类动作上，而达标的四项（徽章 5 家 / 作者信回复率 40% / kit 周下载 1,898 / 周报 5 期）全部是「我们自己动手」的动作——本条的执行结论：**把投入从"求采纳"移到"做产品 + 递数据"**。
+
 **未达处理**：任一指标连续 2 周未达下限 → 当周复盘会砍掉对应渠道动作，投入转到回复率最高的渠道（预计为作者信→徽章链路）；徽章部署 4 周 <10 则回到 ROADMAP 重议 M3 打法。
 
 ## 七、使用速查（放 README/帖子附录）
@@ -114,7 +116,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 node bin/query.mjs --search omdsh                                        # 查某个插件
 node bin/query.mjs --grade A --npm published --active30 --search file    # 组合筛选
 curl https://dsh-insights.com/data/insights.json                         # 全量数据（agent/脚本）
-npx dsh-insights-kit selfcheck ./my-plugin                               # 作者自查（health-v5 同规则书）
+npx dsh-insights-kit selfcheck ./my-plugin                               # 作者自查（health-v6 同规则书）
 ```
 
 ## 八、红线（外发时绝不越界）

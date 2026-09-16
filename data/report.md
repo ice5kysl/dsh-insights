@@ -4,8 +4,8 @@
 
 ## 总览
 - 权威集规模：**11419**
-- 近 7 天活跃：2563（22.4%）· 近 30 天：11417（100%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：10627（93.1%）
+- 近 7 天活跃：2563（22.4%）· 近 30 天：8934（78.2%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：11073（97%）
 
 ## 发布与文档
 - npm 已发布 4765 / 未发布 6654 / 已发布但版本滞后 1369
@@ -18,19 +18,19 @@
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A · 周下载 217
 - NyaaCaster/dsh-yuque-kb A · 周下载 120
-- Simon314620/dsh-turn-index A · 周下载 74
-- DGPisces/dsh-openai-oauth A · 周下载 141
 - hrhgit/dsh-model-manager A · 周下载 182
-- spoon-man569/dsh-token-price A · 周下载 108
-- PaRr0tBoY/dsh-toc-and-rewind A · 周下载 10
 - belowthetree/dsh-mcp-setting A · 周下载 117
 - spacexun2/dsh-worktime-board A · 周下载 197
 - Ultronen/dsh-liquid-glass A · 周下载 121
-- sfyyy/dsh-vision-bridge A · 周下载 58
 - yangzhe1991/dsh-code-review A · 周下载 238
 - hyper-dsh-plugins/dsh-open-file A · 周下载 622
 - MayBeTheWorld/dsh-inherit A · 周下载 39
 - mrzhangkris/dsh-session-pruner A · 周下载 367
+- f20880479-lab/dsh-peak-gate A · 周下载 59
+- yj-liuzepeng/dsh-project-brain A · 周下载 154
+- hotpot-labs/dsh-notifier-plugin A · 周下载 278
+- hotpot-labs/dsh-prompt-history-plugin A · 周下载 113
+- runcat-tommy/dsh-unitverse A · 周下载 431
 
 ## npm 周下载 Top 10
 - dsh-market/dsh-market：86927
@@ -45,8 +45,8 @@
 - Han-1413141/dsh-cost-meter：17298
 
 ## 质量评分（启发式）
-- 平均分 76.1 · S+A 占比 10%（值得优先看；A+B 55.7%）
-- S 273 · A 866 · B 5489 · C 3502 · D 1289
+- 平均分 75.4 · S+A 占比 9.2%（值得优先看；A+B 53.9%）
+- S 262 · A 788 · B 5363 · C 3500 · D 1506
 
 ## 功能分类（启发式 Top 12）
 - 其它：4216

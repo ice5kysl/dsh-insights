@@ -1,0 +1,66 @@
+# 作者触达队列 · B2（缺陷驱动，2026-09-17 重建）
+
+> **为什么重建**：原「第二批（队列 11–20）」被整批弃用（2026-09-17 决策）。原因有二：
+> 1. **满分促销信**——原名单 10 位全是 `S(100)`，信件正文「本期观测没有发现明显的短板信号」，且缺 batch 1 那种「观察员的额外视角」个性化段。信的实际内容是「你很好 + 用我们的工具」，正是 2026-09-09 [DSH-better-sidebar#581](https://github.com/omdsh-dev/DSH-better-sidebar/issues/581) 被公开吐槽的「评委视角/引流」形态。
+> 2. **名单建立在错误数据上**——队列按「近 30 天活跃」筛选，而该指标当时被冻结（见 [SCHEMA §health changelog health-v6](./SCHEMA.md)）。原名单里 2 位已实际停更 >30 天。
+>
+> **新口径**：选「**真的有问题、且这问题值得作者知道**」的插件，复制 2026-09-09 加载体检专线的打法——[dsh-ego-browser#32](https://github.com/Fisfzy/dsh-ego-browser/issues/32) 那封信直接促成作者发出 0.8.4 修掉崩溃，是全部外联里唯一产生**真实代码修复**的一封。
+
+## 选择口径（可复现）
+
+数据源 `data/compat-observed.json`（实测兼容矩阵 · **静态分析口径，非运行时测试**）× `data/plugins.jsonl` × `data/enrich.json` × `data/downloads.json`：
+
+1. `verdict.cls ∈ {never, broken-since}` —— 在所有已发布 shell 上加载失败 / 某版本起持续失败（加载即崩类）
+2. **排除 `hostTransform` 标记**（host 侧 tapIndex 改写模块面，静态口径不可判定——vision-router 误报的根因）
+3. 排除 `maint.single-push` / `discover.batch-import`（一次性导入的模板农场，不触达）
+4. 近 30 天有提交（用 `deriveActivity` 现算口径，保证信里「你仍在维护」这句话成立）
+5. 排除已触达的 12 个仓库（首批 10 + 加载体检 2）
+6. 排序：**周下载 → 星数**（优先打真实用户在用的）
+
+命中 **99** 个，下表列前 20。
+
+## 队列（前 20 · 按周下载）
+
+| # | 仓库 | npm | 判定 | 周下载 | ★ | 停更天 | 健康分 |
+|---|---|---|---|---|---|---|---|
+| 1 | [FSMargoo/dsh-at-file](https://github.com/FSMargoo/dsh-at-file) | `dsh-at-file@0.6.3` | broken-since | 1,896 | 512 | 15 | B · 84 |
+| 2 | [Tkingxiao/dsh-any-background](https://github.com/Tkingxiao/dsh-any-background) | `dsh-any-background@0.2.8` | broken-since | 1,047 | 29 | 2 | B · 86 |
+| 3 | [WSL043/dsh-chat-manager](https://github.com/WSL043/dsh-chat-manager) | `dsh-chat-manager@1.3.5` | never | 865 | 6 | 2 | A · 93 |
+| 4 | [anweat/dsh-restart](https://github.com/anweat/dsh-restart) | `dsh-restart@0.1.2` | broken-since | 647 | 7 | 7 | S · 95 |
+| 5 | [liuGuanYi-hub/dsh-message-edit](https://github.com/liuGuanYi-hub/dsh-message-edit) | `dsh-message-edit@0.2.3` | broken-since | 539 | 1 | 26 | C · 71 |
+| 6 | [clown139880/dsh-live2d-avatar](https://github.com/clown139880/dsh-live2d-avatar) | `dsh-live2d-avatar@0.2.1` | never | 367 | 0 | 5 | B · 77 |
+| 7 | [hellodigua/dsh-share](https://github.com/hellodigua/dsh-share) | `dsh-share@0.4.1` | never | 360 | 35 | 4 | A · 93 |
+| 8 | [xiaoshihou514/dsh-desktop-pet](https://github.com/xiaoshihou514/dsh-desktop-pet) | `dsh-desktop-pet@0.2.0` | broken-since | 317 | 35 | 26 | B · 89 |
+| 9 | [siegfly/dsh-deepseek-vision](https://github.com/siegfly/dsh-deepseek-vision) | `dsh-deepseek-vision@0.1.7` | broken-since | 317 | 8 | 5 | A · 90 |
+| 10 | [SuperstructureJH/dsh-workbuddy-ppt](https://github.com/SuperstructureJH/dsh-workbuddy-ppt) | `dsh-workbuddy-ppt@0.1.0` | broken-since | 302 | 1 | 19 | B · 81 |
+| 11 | [GitHubJiKe/dsh-markdown-preview](https://github.com/GitHubJiKe/dsh-markdown-preview) | `dsh-markdown-preview@0.3.0` | broken-since | 298 | 2 | 30 | B · 84 |
+| 12 | [lgquan/dsh-voco](https://github.com/lgquan/dsh-voco) | `@flowingspring/dsh-voco@0.3.13` | broken-since | 283 | 1 | 15 | A · 93 |
+| 13 | [xiaoksio/dsh-solution-explorer](https://github.com/xiaoksio/dsh-solution-explorer) | `dsh-solution-explorer@1.0.0` | never | 276 | 11 | 3 | B · 86 |
+| 14 | [tingfeng347/dsh-vscode-workbench](https://github.com/tingfeng347/dsh-vscode-workbench) | `dsh-vscode-workbench@0.1.8` | never | 271 | 9 | 15 | A · 93 |
+| 15 | [ThreeBody6666/dsh-computer-use](https://github.com/ThreeBody6666/dsh-computer-use) | `@crazy_th/dsh-computer-use@0.2.4` | broken-since | 250 | 1 | 25 | S · 96 |
+| 16 | [suntianc/dsh-ui-settings-icons](https://github.com/suntianc/dsh-ui-settings-icons) | `dsh-ui-settings-icons@0.1.2` | broken-since | 250 | 1 | 6 | B · 86 |
+| 17 | [yangdongzhen590/dsh-knj-extension-center](https://github.com/yangdongzhen590/dsh-knj-extension-center) | `dsh-knj-extension-center@2026.9.13` | never | 249 | 0 | 7 | C · 72 |
+| 18 | [zhijun-dai/Catppuccin-dsh-theme](https://github.com/zhijun-dai/Catppuccin-dsh-theme) | `dsh-catppuccin@0.2.3` | broken-since | 235 | 9 | 13 | B · 78 |
+| 19 | [TsFreddie/dsh-compaction-instant](https://github.com/TsFreddie/dsh-compaction-instant) | `dsh-compaction-instant@0.1.4` | broken-since | 217 | 13 | 14 | A · 94 |
+| 20 | [linxichen/dsh-rigorquant](https://github.com/linxichen/dsh-rigorquant) | `dsh-rigorquant@0.4.1` | broken-since | 204 | 5 | 6 | A · 91 |
+
+## ⚠️ 发送前硬门禁（不得跳过）
+
+2026-09-10 的 vision-router 误报已立过规矩：**「实测」二字必须名副其实；高危触达（指控别人崩溃）发前必须过真实运行时回放**。本队列的判定来源是**静态分析**，因此：
+
+- [ ] **每封发出前必须做真实运行时回放**（真实 shell × 真实插件 bundle，走官方 loader），确认「加载失败」在目标 shell 版本上可复现；
+- [ ] 回放不通过的**一律不发**（宁缺勿错）；
+- [ ] 信件文案必须写明方法（「静态分析口径 · 已在本机复核」或「未复现，仅供参考」），**不得写「实测崩溃」**；
+- [ ] 每封信附**具体修法**（缺哪个模块、声明 `dsh.client.external` 还是换依赖），而不是只报故障。
+
+> 运行时回放能力即 [ROADMAP](./ROADMAP.md) 附录 A 的 **D4 实装 smoke 测试**（当前 ⬜ 未做）。**建议把 D4 的最小切片当作本队列的前置工程**——它同时是 M2 兼容雷达的产品底座，一次投入两处收益。
+
+## 信件形态
+
+不使用「一期一会」健康信模板（那是全量、中性的观测分享）。改用加载体检信：**发生了什么（哪个 shell 版本）→ 我们在本机怎么复核的 → 根因（缺哪个 require / 图行时序）→ 参考修法 → 不要求任何行动**。
+
+## 关联
+
+- 原队列（首批 10 + 已发记录）：[OUTREACH-QUEUE.md](./OUTREACH-QUEUE.md)
+- 渠道与节奏：[OUTREACH.md](./OUTREACH.md)
+- 判定口径全文：`data/compat-observed.json` 的 `note` 字段（中英双语）

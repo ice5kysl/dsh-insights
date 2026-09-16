@@ -15,7 +15,7 @@
 
 import { writeFileSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { DATA, PATHS, readJsonl, readJson, writeJson, loadPlugins } from '../../lib/data.mjs'
+import { DATA, PATHS, readJsonl, readJson, writeJson, loadPlugins, deriveActivity } from '../../lib/data.mjs'
 import { scoreAll } from './score.mjs'
 
 const PLUGINS = process.argv[2] || null
@@ -200,10 +200,10 @@ function analyze(rows) {
 
   const topStars = rows.slice().sort((a, b) => (b.stars || 0) - (a.stars || 0)).slice(0, 10)
     .map((r) => ({ repo: r.full_name, stars: r.stars, published: Boolean(r.npm?.published), zh: Boolean(r.metrics?.hasZhDocs) }))
-  const active = rows.filter((r) => r.metrics?.active30).length
+  const active = rows.filter((r) => deriveActivity(r)?.active30 === true).length
   const NOW = Date.now()
   const active7 = rows.filter((r) => r.pushed_at && (NOW - new Date(r.pushed_at).getTime()) < 7 * 86400000).length
-  const ageOk = rows.filter((r) => r.metrics?.ageGate1).length
+  const ageOk = rows.filter((r) => deriveActivity(r, NOW)?.ageGate1 === true).length
   const staleTop = rows
     .filter((r) => r.npm?.published && r.version && r.npm.latest && r.npm.latest !== r.version)
     .sort((a, b) => (b.stars || 0) - (a.stars || 0))

@@ -14,7 +14,7 @@
 
 | 层 | 内容 | 交付 |
 |---|---|---|
-| **L1 插件洞察** | 真伪判定（manifest 门禁）→ 权威集 → 健康分 **S–D/0–100**（health-v5，逐条证据）→ 收录矩阵 → 「优质未收录」榜 | 数据快照 + 站点 + /p/ 详情页 + 信件 |
+| **L1 插件洞察** | 真伪判定（manifest 门禁）→ 权威集 → 健康分 **S–D/0–100**（health-v6，逐条证据）→ 收录矩阵 → 「优质未收录」榜 | 数据快照 + 站点 + /p/ 详情页 + 信件 |
 | **L2 官方动态**（v0 已上线） | dsh releases/rc 节奏、dist-tags、DeepSeek 平台信号、API 模型清单（/models 探测，新模型首见标记）；rc 兼容雷达（M2） | /dynamics + 周报官方小节 |
 | **L3 生态报告** | 生态周报（每周一 CI 生成，覆盖刚完结的 ISO 周）+ 每插件「致作者的信」（外发物料） | /weekly + RSS + data/reports/ |
 
@@ -28,7 +28,7 @@
 
 | file | 说明 |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**权威集 11,342** + 分桶 4,266（0 重复 · 硬门禁 · 2026-09-16 快照，校验滚动扩大中）<!-- stats:end --> |
+| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**权威集 11,419** + 分桶 4,282（0 重复 · 硬门禁 · 2026-09-16 快照，校验滚动扩大中）<!-- stats:end --> |
 | `data/insights.json` + `insights.schema.json` | agent 契约（稳定 URL，schema 只增不改） |
 | `data/analysis.json` · `enrich.json` · `plugins.csv` | 聚合 / 每插件评分+渠道 / 表格 |
 | `data/dynamics.json` · `metrics.jsonl` | 官方动态快照 · 产品自测量指标 |

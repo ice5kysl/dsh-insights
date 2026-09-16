@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T12:05:09.086Z",
+  "generatedAt": "2026-09-16T22:51:30.826Z",
   "dshVersions": [
     "0.0.1-rc.5",
     "0.1.5-rc.2",
@@ -33,16 +33,16 @@
   },
   "note": "实测兼容 = 静态分析口径：提取插件 npm 最新版 client bundle 中「代码态」require(\"X\") 字面量（注释/字符串/模板/正则里的字样不计；模板串/动态 require 静态不可判定不计；相对/绝对路径 spec 不计——bundle 自带模块表就地服务，不进 loader），逐 shell 版本按官方 loader 真实解析序归类：ok=seed 词表/插件自身/语料库插件包名/immediate 图行/已声明的 lazy 图行；conditional=未声明的 lazy 图行（批次时序多数可解析但无保证，声明 dsh.client.external 可获确定性）；missing=其余（如 dsh-client-runtime/*）。守卫感知：require 为调用时解析，try{...}catch{...} 花括号配对识别——unguarded missing 即 broken、unguarded conditional 即 conditional；try 块缺失看配对 catch（全 ok 含空 catch=兜底可用判 ok，catch 有 conditional 判 conditional，catch 有 missing 判 broken）；try 无配对 catch 视同无守卫。非运行时测试；无 client bundle 的插件不在结果中。results 为 distTag 展示轴（ok/conditional/broken 三态）；verdict 为跨全部已发布 shell 版本的分类（ok/never/conditional/broken-since/supported-since/mixed，conditional 版本单列）。图行清单见 data/shell-rows.json（已对 0.1.2-rc.1 真实 __DSH_BOOT__ 验证一致）。已知盲区：插件 host 侧的 server 端 index/HTML 变换（如 WebServer tapIndex 注入 require 改写前奏）不建模——带 hostTransform 标记的插件其判定仅供参考。Observed compatibility = static analysis: code-state literal require() specifiers of each plugin's latest npm client bundle (comments/strings/templates/regex contents excluded; dynamic/template requires undecidable; relative/absolute specifiers excluded — bundle-local module tables serve them, never the loader), classified per shell version following the official loader's real resolution order: ok = seed word / own package / corpus plugin package / immediate graph row / declared lazy graph row; conditional = undeclared lazy graph row (batch-arrival timing usually resolves but is not guaranteed — declaring dsh.client.external makes it deterministic); missing = everything else. Guard-aware: require resolves at call time, so try{...}catch{...} pairs are brace-matched — an unguarded missing specifier breaks that shell version, unguarded conditional marks it conditional; a try-side miss falls back to its catch (all-ok catch, empty included, stays ok; conditional catch → conditional; missing catch → broken); a try without catch counts as unguarded. Not a runtime test; plugins without a client bundle are absent. results covers the distTag display axis (ok/conditional/broken); verdict classifies across all published shell versions (ok/never/conditional/broken-since/supported-since/mixed, conditional versions listed separately). Graph rows: data/shell-rows.json (validated against the real __DSH_BOOT__ on 0.1.2-rc.1). Known blind spot: server-side index/HTML transforms in a plugin's host half (e.g. WebServer tapIndex preludes rewriting the module surface) are not modeled — verdicts of hostTransform-flagged plugins are indicative only.",
   "stats": {
-    "targets": 3937,
-    "observed": 2623,
-    "cached": 3924,
-    "fetched": 9,
+    "targets": 3947,
+    "observed": 2632,
+    "cached": 3933,
+    "fetched": 10,
     "refetched": 0,
-    "noClient": 1310,
+    "noClient": 1311,
     "failed": 4
   },
   "verdicts": {
-    "ok": 2401,
+    "ok": 2409,
     "never": 13,
     "conditional": 0,
     "broken-since": {
@@ -50,7 +50,7 @@
       "0.1.0-rc.8": 5
     },
     "supported-since": {
-      "0.1.2-alpha.2": 92
+      "0.1.2-alpha.2": 93
     },
     "mixed": 0
   },
@@ -41776,6 +41776,29 @@
         "total": 19
       }
     },
+    "dsh-jenkins-panel": {
+      "repo": "developerdh/dsh-jenkins-panel",
+      "version": "0.1.0-rc.1",
+      "requires": [
+        "react",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.1.5-rc.2": {
+          "status": "ok"
+        },
+        "0.1.6-alpha.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 19
+      }
+    },
     "dsh-better-sidebar": {
       "repo": "omdsh-dev/DSH-better-sidebar",
       "version": "0.19.1",
@@ -61075,9 +61098,32 @@
         "total": 19
       }
     },
-    "dsh-jenkins-panel": {
-      "repo": "developerdh/dsh-jenkins-panel",
-      "version": "0.1.0-rc.1",
+    "dsh-approval-chime": {
+      "repo": "Cloudto1/dsh-approval-chime",
+      "version": "0.1.1",
+      "requires": [
+        "react/jsx-runtime",
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.1.5-rc.2": {
+          "status": "ok"
+        },
+        "0.1.6-alpha.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 19
+      }
+    },
+    "dsh-voice-mini": {
+      "repo": "CroissanTTs/dsh-voice-mini",
+      "version": "0.3.2",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -61098,9 +61144,32 @@
         "total": 19
       }
     },
-    "dsh-msg9-kit": {
-      "repo": "ice5kysl/dsh-msg9-kit",
-      "version": "0.4.6",
+    "dsh-tool-manager": {
+      "repo": "pan17/dsh-tool-manager",
+      "version": "1.2.0",
+      "requires": [
+        "react",
+        "react-dom"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.1.5-rc.2": {
+          "status": "ok"
+        },
+        "0.1.6-alpha.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 19
+      }
+    },
+    "dsh-voice-input-plugin": {
+      "repo": "zRa1ny/dsh-voice-input-plugin",
+      "version": "0.1.1",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -61150,9 +61219,9 @@
         "total": 19
       }
     },
-    "dsh-voice-mini": {
-      "repo": "CroissanTTs/dsh-voice-mini",
-      "version": "0.3.2",
+    "dsh-msg9-kit": {
+      "repo": "ice5kysl/dsh-msg9-kit",
+      "version": "0.4.6",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -61173,11 +61242,10 @@
         "total": 19
       }
     },
-    "dsh-approval-chime": {
-      "repo": "Cloudto1/dsh-approval-chime",
-      "version": "0.1.1",
+    "dsh-composition-doctor": {
+      "repo": "lemonxiny55/dsh-composition-doctor",
+      "version": "0.1.3",
       "requires": [
-        "react/jsx-runtime",
         "react"
       ],
       "results": {
@@ -61196,12 +61264,11 @@
         "total": 19
       }
     },
-    "dsh-voice-input-plugin": {
-      "repo": "zRa1ny/dsh-voice-input-plugin",
-      "version": "0.1.1",
+    "dsh-novel-craft": {
+      "repo": "shiyan688/dsh-novel-craft",
+      "version": "0.1.2",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -61219,12 +61286,31 @@
         "total": 19
       }
     },
-    "dsh-tool-manager": {
-      "repo": "pan17/dsh-tool-manager",
-      "version": "1.2.0",
+    "@a9i5k4/dsh-memory-fitting": {
+      "repo": "Aik358/dsh-memory-fitting",
+      "version": "0.1.0",
+      "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.1.5-rc.2": {
+          "status": "ok"
+        },
+        "0.1.6-alpha.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 19
+      }
+    },
+    "dsh-drawai": {
+      "repo": "fourzkw/dsh-drawai",
+      "version": "0.1.0",
       "requires": [
-        "react",
-        "react-dom"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -61239,6 +61325,121 @@
       },
       "verdict": {
         "cls": "ok",
+        "total": 19
+      }
+    },
+    "dsh-szg-hint": {
+      "repo": "skyyyyyk/dsh-szg-hint",
+      "version": "0.1.0",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.1.5-rc.2": {
+          "status": "ok"
+        },
+        "0.1.6-alpha.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 19
+      }
+    },
+    "dsh-fx-marquee": {
+      "repo": "0rangeSoda1506/dsh-fx-marquee",
+      "version": "0.1.0",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.1.5-rc.2": {
+          "status": "ok"
+        },
+        "0.1.6-alpha.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 19
+      }
+    },
+    "dsh-agnes-studio": {
+      "repo": "zmm863-commits/dsh-agnes-studio",
+      "version": "0.3.0",
+      "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.1.5-rc.2": {
+          "status": "ok"
+        },
+        "0.1.6-alpha.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 19
+      }
+    },
+    "@zaimokuza/dsh-agent-teams-office": {
+      "repo": "zaimokuza-yoshiteru/dsh-agent-teams-office",
+      "version": "0.1.0-beta.1",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.1.5-rc.2": {
+          "status": "ok"
+        },
+        "0.1.6-alpha.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 19
+      }
+    },
+    "dsh-client-ui-paopaocat": {
+      "repo": "zmm863-commits/dsh-client-ui-paopaocat",
+      "version": "0.3.1",
+      "requires": [
+        "react",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-store"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
+        },
+        "0.1.5-rc.2": {
+          "status": "ok"
+        },
+        "0.1.6-alpha.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 19
       }
     }

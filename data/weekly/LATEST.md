@@ -2,6 +2,9 @@
 
 > 数据快照 2026-09-15 · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
 
+> ⚠ **口径更正（2026-09-17）**：本期「近 30 天活跃」原报 **100%**，系活跃度指标在首次校验后被冻结、refresh 未重算派生值所致。更正后为 **78.2%**（`activity.dormant` 扣分 2 → 2,206 个）。规则版本升为 health-v6，详见[更新日志](https://dsh-insights.com/changelog/)与 SCHEMA §health changelog。
+
+
 ## 编者按
 
 - **新增量高星未发 npm**：Minglink/dsh-infinite-gen-4 首周 1494 星但 npm=false，说明高热度新插件仍停在仓库分发，会抬高安装与复现门槛。

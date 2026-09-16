@@ -2,6 +2,8 @@
 
 > 选择口径：**S/A 级 × 近 30 天活跃 × 优先未收录**（未收录作者收到信的价值最大——信内自带可复制的收录提交文案）。按「未收录 > 分数 > star」排序，一人一信（信件路径 `data/reports/<owner>__<repo>.md`）。
 > 触达方式建议：仓库 issue（礼貌、公开可查）或邮箱（README 有留则用）；语气=信件本身，无需改动。每周推进 10-20 位，回复/反馈记入 RESEARCH §决策日志（D3 指标）。
+>
+> **⚠ 2026-09-17：本文的「队列 11–20」已整批弃用**——原名单全为 S(100) 满分插件，信件无实质发现（且建立在当时已冻结的活跃度指标上）。作者信主线改为[缺陷驱动队列 B2](./OUTREACH-QUEUE-B2.md)（compat 加载失败类，复制 ego-browser 真修复打法）。下表 11–20 行保留仅为历史记录，**不要再按它发信**。
 
 | # | 作者 | 代表插件 | 等级/分 | ★ | 分类 | 插件数 | 收录 |
 |---|---|---|---|---|---|---|---|
@@ -39,8 +41,15 @@
 - 2026-09-09 · **dream-skin 跟进信发出**（[issue#47 评论](https://github.com/RevolutionLA/dsh-dream-skin/issues/47#issuecomment-5601034304)）：guard 感知修正上线（`eadf12da30`，页面已翻正为 supported-since 0.1.2-alpha.2）后发出。内容：主动收回我方「全版本崩溃」误判；指出其 catch 回退分支（dsh-client-runtime/client）是死代码、#43 靠回退修不好，建议 `engines.dsh >= 0.1.2-alpha.2` 后关闭 #43；补 #43 时间线诊断（报告者跑的应是 8.29.0 裸 require store 版）。姿态=递数据+认误判，无行动要求。发出前已删除「网站修正正在走」占位句（修正已上线）。
 - 2026-09-10 · **vision-router #447 误报成立，作者公开纠正**（[ysr666 的复现回复](https://github.com/ysr666/dsh-vision-router/issues/447)）：作者用三个官方 tag（0.1.0-rc.8 / 0.1.2-rc.1 / 0.1.5-alpha.1）真实构建 + 真实 Chromium 复现，vision-router 2.1.4 全部正常加载、零报错，按误报关闭 issue。根因是我们的模型漏了两层：① **图行工厂**——ui-attachment 从 seed 表移除后仍作为图行挂载，bundle 随 combo 批次注册按包名命名的工厂，require 可解析（loader 真实解析序：seed → 已物化 → 已注册工厂）；② **tapIndex**——该插件 host 侧用 WebServer tapIndex 注入 scopedRequire 前奏改写模块面，纯 client bundle 静态分析完全看不到这层。教训：**「实测」二字必须名副其实**——静态分析对外话术一律写「静态分析/加载模拟」，不得暗示运行时验证；高危触达（指控别人崩溃）发前必须过真实运行时回放。已回复认账致谢。整改落地：矩阵模型升级为「seed / immediate 图行 / 声明的 lazy 图行 → ok；未声明 lazy 图行 → conditional（新层级，不翻红）；不存在 → broken」+ 代码态提取（注释/字符串不计）+ 相对路径排除（localRequire 模式）+ hostTransform 标记（tapIndex 用户判定仅供参考）；dsh-why 0.1.3 / dsh-insights-kit 0.9.6 同步发布。同批波及面自查：ego-browser #32 不受影响（缺的是从未存在的 dsh-client-runtime/client）；rc.1 原 176 个 broken 中 18 个为误判（10 图行 + 8 相对路径），矩阵重跑翻正。
 - 2026-09-10 · **首批 D+2 复查**：徽章 PR 2 merged（workbench、image-gen）/ 1 婉拒（rewind）/ 7 在途 0 回复；10 封信 1 关闭（rewind）、2 有实质交流、7 封 0 回复；Discussions #5933 仍 1 upvote 0 评论；北极星=2（仓库数不变，但两位作者各补了第二语言 README 徽章——image-gen +README.en.md、workbench +README.zh-CN.md，file 数 2→4）。compat 专线：vision-router #447 误报收场（见 9-10 整改条目），ego-browser #32 无回复。npm downloads API 对 insights-kit（9-07 首发）/dsh-why（9-09 首发）尚未聚合（新包聚合延迟，非异常）；workspace-kit 537/周、file-explorer-kit 361/周（8-31~9-06 窗口）。第二批（#11~20）维持 9-15 满 7 天再评估。
+- 2026-09-17 · **首批全量复盘（D+9）**——台账此前停在 09-10，期间 4 项落地未回填：
+  - **徽章 5/10 落地**：lee259/dsh-workbench #14（09-08）、shanliuling/dsh-image-gen #35（09-08）之外，**RevolutionLA/dsh-dream-skin 实际也已落地**（作者变基合入 main `f492caa4`，PR #48 界面显示 closed-unmerged 但内容已在主线，09-10 已在评论中说明——此前台账把它漏计了，实际不是婉拒）；**pengyue-polaron/deepseek-harness-genui #12（09-16 合并）**、**Ultronen/dsh-archived-chats #38（09-16 合并）** 为新增。**唯一明确婉拒仍是 SiriLee/dsh-rewind**（只挂运行时状态徽章）。北极星：**5 家第三方仓库**（含 dream-skin）。
+  - **加载体检专线 2/2 收口**：vision-router #447 = 我方误报、已认账整改；[Fisfzy/dsh-ego-browser #32](https://github.com/Fisfzy/dsh-ego-browser/issues/32) = ✅ **09-15 关闭，作者回复「0.8.4 已是 npm latest，engines.dsh 已声明，感谢详细加载数据」——外联直接促成真实修复**，是本项目迄今最有说服力的一例。
+  - 仍有 4 个徽章 PR 在途 0 回复：better-sidebar #582（★3339）、whale-report #7、garmin #2、web-fetch-playwright #5；对应 issue 亦 0 回复（better-sidebar #581 有 3 条评论，但发言人含路人，且 09-12 出现「回复吐槽都用 ai 回复吗😂」的调侃——**公开回复的 AI 腔已是可观测风险**）。
+  - **第二批（#11~20）整批弃用**，改[缺陷驱动队列 B2](./OUTREACH-QUEUE-B2.md)。原因见该文首段。
+  - 启发：#4399/#5933 两项「等外部回应」的指标连续未达，而达标的四项（徽章 5 家 / 作者信回复率 40% / kit 周下载 1,898 / 周报 5 期）全是「自己动手」的动作——**投入继续从"求采纳"移向"做产品 + 递数据"**。
 
 ## 触达后动作
 - 回复积极 → 引导挂徽章（/badge/ 有接入指南与一键复制）
 - 对收录感兴趣的 → 指引信内「可复制收录文案」段直接提 PR
 - 误判申诉 → 走 issue 模板（score-appeal）
+

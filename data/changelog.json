@@ -3,43 +3,150 @@
   "note": "产品版本与发布记录（手工维护，随 git tag 发布）；管线数据快照另有每日滚动，不在此列。",
   "releases": [
     {
+      "version": "v0.2.1",
+      "date": "2026-09-17",
+      "title": {
+        "zh": "活跃度口径更正",
+        "en": "Activity-metric correction"
+      },
+      "summary": {
+        "zh": "修复一个让「超 30 天无提交」规则几乎从不生效的数据缺陷：活跃度指标曾被首次校验冻结、此后永不重算，站点「30 天活跃」因此虚报 100%。更正后为 78.2%，受影响插件的分数按其真实状态重算；规则版本升为 health-v6。",
+        "en": "Fixed a data defect that made the \"no commits for 30+ days\" rule almost never fire: activity metrics were frozen at first validation and never recomputed, so the site overstated 30-day activity as 100%. Corrected to 78.2%, with affected plugins rescored to their true state; the rulebook is now health-v6."
+      },
+      "items": [
+        {
+          "type": "fix",
+          "zh": "活跃度改为按 pushed_at 实时推导（新增 deriveActivity），评分 / 统计 / CSV 导出统一走现算值，不再读持久化副本；缺 pushed_at 的行明示为「活跃度未评估」而不是默认通过",
+          "en": "Activity is now derived live from pushed_at (new deriveActivity); scoring, statistics and the CSV export all use the derived value instead of the persisted copy. Rows missing pushed_at are reported as \"activity not evaluated\" rather than silently passing"
+        },
+        {
+          "type": "data",
+          "zh": "口径更正：activity.dormant 扣分由 2 个 → 2,206 个；「30 天活跃」由 100% → 78.2%；S+A 由 1,139 → 1,050（104 出 / 15 入）。规则版本 health-v5 → health-v6，变更记入 SCHEMA §health changelog",
+          "en": "Corrected figures: activity.dormant deductions went from 2 to 2,206; 30-day activity from 100% to 78.2%; S+A from 1,139 to 1,050 (104 out / 15 in). Rulebook health-v5 → health-v6, recorded in the SCHEMA §health changelog"
+        },
+        {
+          "type": "pipeline",
+          "zh": "新增回归测试 tests/activity.test.mjs，把「活跃度必须现算、持久化副本不得被读取」锁死，防止该缺陷回退",
+          "en": "Added the regression test tests/activity.test.mjs to lock in \"activity must be derived live and the persisted copy must never be read\", preventing the defect from returning"
+        }
+      ]
+    },
+    {
       "version": "v0.2.0",
       "date": "2026-09-08",
-      "title": { "zh": "生态助手插件", "en": "The Kit" },
+      "title": {
+        "zh": "生态助手插件",
+        "en": "The Kit"
+      },
       "summary": {
         "zh": "dsh-insights-kit 首发并上架 npm：把观察站装进 DSH 侧栏——体检、查验、场景发现一个入口；作者自检转为随包 CLI。",
         "en": "dsh-insights-kit debuts on npm: the observatory inside the DSH sidebar — checkup, pre-install check and scenario picks in one entry; author self-check ships as a bundled CLI."
       },
       "items": [
-        { "type": "feat", "zh": "dsh-insights-kit 生态助手插件（npm 可装）：侧栏「✦ 生态」面板——我的插件体检（枚举已装 + 健康分 + 升级/breaking 预警）、装前查验、场景发现（已装插件带「已安装」标记）", "en": "dsh-insights-kit on npm: the \"✦ 生态\" sidebar panel — installed-plugin checkup (enumeration, health scores, upgrade/breaking alerts), pre-install check, scenario picks with Installed markers" },
-        { "type": "feat", "zh": "装/卸保持只读姿态：面板一键复制 dsh plugin add/remove 命令，插件本身不碰你的 profile", "en": "Install/uninstall stays read-only: one-click copy of dsh plugin add/remove commands — the plugin never touches your profile" },
-        { "type": "feat", "zh": "作者自检转为随包 CLI：npx dsh-insights-kit selfcheck <目录>，health-v5 规则书 + 逐条修复指引，退出码可直接做 CI pre-publish 门禁", "en": "Author self-check becomes a bundled CLI: npx dsh-insights-kit selfcheck <dir> — health-v5 rulebook with per-deduction fix guidance; the exit code doubles as a CI pre-publish gate" },
-        { "type": "fix", "zh": "体检枚举适配 cordis inject 守卫（经子 fiber 等待服务就位 + 3s 超时兜底），修复面板「正在枚举」卡死", "en": "Checkup enumeration adapted to the cordis inject guard (child fiber waits for the service, 3s timeout fallback) — fixes the panel hanging on \"Enumerating\"" },
-        { "type": "feat", "zh": "全站主导航收敛为 6 项；移动端改为汉堡菜单（原 PC 横排在 H5 下 About/GitHub 不可见）", "en": "Top navigation consolidated to 6 items; mobile gets a hamburger menu (the PC-style row hid About/GitHub on phones)" },
-        { "type": "fix", "zh": "插件页路径大小写规范化：owner/repo 统一为 GitHub canonical 大小写，清理 36 个重复/失效变体页（修复大小写不敏感文件系统的同名撞路径）", "en": "Plugin page paths normalized to the GitHub-canonical owner/repo casing; 36 duplicate/stale casing variants removed (fixes same-name path collisions on case-insensitive filesystems)" },
-        { "type": "data", "zh": "health-v5 评分分布全链对齐：S+A ≈10% · C+D ≈42%，区分度重构生效", "en": "health-v5 score distribution aligned across the pipeline: S+A ≈10% · C+D ≈42% — the discrimination rework is in effect" }
+        {
+          "type": "feat",
+          "zh": "dsh-insights-kit 生态助手插件（npm 可装）：侧栏「✦ 生态」面板——我的插件体检（枚举已装 + 健康分 + 升级/breaking 预警）、装前查验、场景发现（已装插件带「已安装」标记）",
+          "en": "dsh-insights-kit on npm: the \"✦ 生态\" sidebar panel — installed-plugin checkup (enumeration, health scores, upgrade/breaking alerts), pre-install check, scenario picks with Installed markers"
+        },
+        {
+          "type": "feat",
+          "zh": "装/卸保持只读姿态：面板一键复制 dsh plugin add/remove 命令，插件本身不碰你的 profile",
+          "en": "Install/uninstall stays read-only: one-click copy of dsh plugin add/remove commands — the plugin never touches your profile"
+        },
+        {
+          "type": "feat",
+          "zh": "作者自检转为随包 CLI：npx dsh-insights-kit selfcheck <目录>，health-v5 规则书 + 逐条修复指引，退出码可直接做 CI pre-publish 门禁",
+          "en": "Author self-check becomes a bundled CLI: npx dsh-insights-kit selfcheck <dir> — health-v5 rulebook with per-deduction fix guidance; the exit code doubles as a CI pre-publish gate"
+        },
+        {
+          "type": "fix",
+          "zh": "体检枚举适配 cordis inject 守卫（经子 fiber 等待服务就位 + 3s 超时兜底），修复面板「正在枚举」卡死",
+          "en": "Checkup enumeration adapted to the cordis inject guard (child fiber waits for the service, 3s timeout fallback) — fixes the panel hanging on \"Enumerating\""
+        },
+        {
+          "type": "feat",
+          "zh": "全站主导航收敛为 6 项；移动端改为汉堡菜单（原 PC 横排在 H5 下 About/GitHub 不可见）",
+          "en": "Top navigation consolidated to 6 items; mobile gets a hamburger menu (the PC-style row hid About/GitHub on phones)"
+        },
+        {
+          "type": "fix",
+          "zh": "插件页路径大小写规范化：owner/repo 统一为 GitHub canonical 大小写，清理 36 个重复/失效变体页（修复大小写不敏感文件系统的同名撞路径）",
+          "en": "Plugin page paths normalized to the GitHub-canonical owner/repo casing; 36 duplicate/stale casing variants removed (fixes same-name path collisions on case-insensitive filesystems)"
+        },
+        {
+          "type": "data",
+          "zh": "health-v5 评分分布全链对齐：S+A ≈10% · C+D ≈42%，区分度重构生效",
+          "en": "health-v5 score distribution aligned across the pipeline: S+A ≈10% · C+D ≈42% — the discrimination rework is in effect"
+        }
       ]
     },
     {
       "version": "v0.1.0",
       "date": "2026-09-07",
-      "title": { "zh": "首次公开亮相", "en": "Public Debut" },
+      "title": {
+        "zh": "首次公开亮相",
+        "en": "Public Debut"
+      },
       "summary": {
         "zh": "DSH Insights 首个对外版本：DeepSeek Harness 全景观察站——插件健康 · 官方动态 · 生态趋势。",
         "en": "First public release of DSH Insights, the DeepSeek Harness observatory: plugin health, official dynamics and ecosystem trends."
       },
       "items": [
-        { "type": "feat", "zh": "全量发现与校验：14,151 多源候选 → 10,189 权威插件（manifest 门禁逐条核验，断点续跑）", "en": "Full discovery and validation: 14,151 multi-source candidates → 10,189 authoritative plugins (item-by-item manifest-gate verification, resumable)" },
-        { "type": "feat", "zh": "10,000+ 插件详情页：健康分 / 维度画像 / 扣分明细 / 同类推荐，全部静态生成", "en": "10,000+ plugin detail pages: health score, dimension profile, deduction breakdown and peer picks, all statically generated" },
-        { "type": "feat", "zh": "健康评分 health-v5：S–D 五级扣分制，含反模板农场规则（一次性导入 / 批量账号识别）", "en": "Health scoring health-v5: S–D deduction-based grades with anti template-farming rules (one-shot imports, batch-account detection)" },
-        { "type": "feat", "zh": "生态洞察（LLM 分析）：规则引擎检出异常信号，DeepSeek v4-pro 撰写结论与建议，中英双语，每周五产出", "en": "Ecosystem Insights (LLM analysis): a rules engine detects anomaly signals, DeepSeek v4-pro writes conclusions and recommendations, bilingual, every Friday" },
-        { "type": "feat", "zh": "生态周报：数据快照驱动，周五自动生成，支持 Markdown / PDF / PNG 导出", "en": "Ecosystem Weekly: snapshot-driven, generated every Friday, exportable as Markdown / PDF / PNG" },
-        { "type": "feat", "zh": "动态时间线：插件新入库 / 版本升级 / 活跃更新 + 官方 release，按日分组、类型筛选", "en": "Dynamics timeline: plugin arrivals / version upgrades / recent activity + official releases, grouped by day and filterable by type" },
-        { "type": "feat", "zh": "场景组合推荐（按「我想做什么」选插件）、作者榜与协作关系图", "en": "Scenario-based picks (start from what you want to do), author leaderboards and the collaboration graph" },
-        { "type": "feat", "zh": "全站中英双语：跟随浏览器语言 + 一键切换 + ?lang= 可分享链接", "en": "Full-site zh/en i18n: follows browser language, one-click toggle, shareable ?lang= links" },
-        { "type": "data", "zh": "开放数据集首发（CC BY 4.0）：plugins.jsonl / enrich.json / insights.json / 周下载 / RSS / llms.txt", "en": "Open dataset debut (CC BY 4.0): plugins.jsonl / enrich.json / insights.json / weekly downloads / RSS / llms.txt" },
-        { "type": "feat", "zh": "健康徽章：每插件 SVG badge 与接入指南（/badge/）", "en": "Health badges: per-plugin SVG badges with integration guide (/badge/)" },
-        { "type": "ci", "zh": "管线自动化：每小时增量纳新 + 每日刷新 + 周五内容管线（周报/洞察/信件），GitHub Actions 全闭环", "en": "Pipeline automation: hourly incremental intake, daily refresh and the Friday content pipeline (weekly / insights / letters) — all on GitHub Actions" }
+        {
+          "type": "feat",
+          "zh": "全量发现与校验：14,151 多源候选 → 10,189 权威插件（manifest 门禁逐条核验，断点续跑）",
+          "en": "Full discovery and validation: 14,151 multi-source candidates → 10,189 authoritative plugins (item-by-item manifest-gate verification, resumable)"
+        },
+        {
+          "type": "feat",
+          "zh": "10,000+ 插件详情页：健康分 / 维度画像 / 扣分明细 / 同类推荐，全部静态生成",
+          "en": "10,000+ plugin detail pages: health score, dimension profile, deduction breakdown and peer picks, all statically generated"
+        },
+        {
+          "type": "feat",
+          "zh": "健康评分 health-v5：S–D 五级扣分制，含反模板农场规则（一次性导入 / 批量账号识别）",
+          "en": "Health scoring health-v5: S–D deduction-based grades with anti template-farming rules (one-shot imports, batch-account detection)"
+        },
+        {
+          "type": "feat",
+          "zh": "生态洞察（LLM 分析）：规则引擎检出异常信号，DeepSeek v4-pro 撰写结论与建议，中英双语，每周五产出",
+          "en": "Ecosystem Insights (LLM analysis): a rules engine detects anomaly signals, DeepSeek v4-pro writes conclusions and recommendations, bilingual, every Friday"
+        },
+        {
+          "type": "feat",
+          "zh": "生态周报：数据快照驱动，周五自动生成，支持 Markdown / PDF / PNG 导出",
+          "en": "Ecosystem Weekly: snapshot-driven, generated every Friday, exportable as Markdown / PDF / PNG"
+        },
+        {
+          "type": "feat",
+          "zh": "动态时间线：插件新入库 / 版本升级 / 活跃更新 + 官方 release，按日分组、类型筛选",
+          "en": "Dynamics timeline: plugin arrivals / version upgrades / recent activity + official releases, grouped by day and filterable by type"
+        },
+        {
+          "type": "feat",
+          "zh": "场景组合推荐（按「我想做什么」选插件）、作者榜与协作关系图",
+          "en": "Scenario-based picks (start from what you want to do), author leaderboards and the collaboration graph"
+        },
+        {
+          "type": "feat",
+          "zh": "全站中英双语：跟随浏览器语言 + 一键切换 + ?lang= 可分享链接",
+          "en": "Full-site zh/en i18n: follows browser language, one-click toggle, shareable ?lang= links"
+        },
+        {
+          "type": "data",
+          "zh": "开放数据集首发（CC BY 4.0）：plugins.jsonl / enrich.json / insights.json / 周下载 / RSS / llms.txt",
+          "en": "Open dataset debut (CC BY 4.0): plugins.jsonl / enrich.json / insights.json / weekly downloads / RSS / llms.txt"
+        },
+        {
+          "type": "feat",
+          "zh": "健康徽章：每插件 SVG badge 与接入指南（/badge/）",
+          "en": "Health badges: per-plugin SVG badges with integration guide (/badge/)"
+        },
+        {
+          "type": "ci",
+          "zh": "管线自动化：每小时增量纳新 + 每日刷新 + 周五内容管线（周报/洞察/信件），GitHub Actions 全闭环",
+          "en": "Pipeline automation: hourly incremental intake, daily refresh and the Friday content pipeline (weekly / insights / letters) — all on GitHub Actions"
+        }
       ]
     }
   ]

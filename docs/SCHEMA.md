@@ -39,6 +39,10 @@
   "metrics": {
     "ageDays": 1.2, "idleDays": 0.3,
     "active30": true, "ageGate1": true, "hasZhDocs": true
+    // ⚠ health-v6（2026-09-17）起 ageDays/idleDays/active30/ageGate1 为【废弃字段】：
+    //   它们是首次校验时冻结的旧值，不得被任何消费者直接读取（曾导致 activity.dormant
+    //   对停更仓库几乎从不生效）。活跃度一律用 lib/data.mjs#deriveActivity(row) 从
+    //   pushed_at 现算；只有 hasZhDocs（与时间无关）仍然有效。
     // 注：站点的「近 7 天活跃」为 analyze 派生（pushed_at 距今 <7 天），不入 metrics
     // active30 保留给 health 的 activity.dormant 规则（30 天停滞才是维护风险，7 天过苛）
   },
@@ -85,7 +89,7 @@
 
 ## `health` — 健康分（`pipeline/analyze/score.mjs` 唯一真源 → `data/health.json` + `data/enrich.json` + `data/insights.json`）
 
-评分只有一套（health-v5 扣分制，S≥95/A≥90/B≥75/C≥60），由 `score.mjs` 的 `scoreAll` 提供；`analyze`（enrich.json）、`export-json`（insights.json）、badges、history 全部经它取分，不再各自实现。`data/health.json` 为聚合（grades/avg/median/topDeductions）；`data/enrich.json` 每插件行：`{full_name, stars, score, grade, dimScores, drops:[{code,sev,label}], missing[], category, inAwesome, inImsai, covered, weekly}`（score/grade/drops 来自 health；category/收录渠道/周下载为 analyze 独有维度）。
+评分只有一套（health-v6 扣分制，S≥95/A≥90/B≥75/C≥60），由 `score.mjs` 的 `scoreAll` 提供；`analyze`（enrich.json）、`export-json`（insights.json）、badges、history 全部经它取分，不再各自实现。`data/health.json` 为聚合（grades/avg/median/topDeductions）；`data/enrich.json` 每插件行：`{full_name, stars, score, grade, dimScores, drops:[{code,sev,label}], missing[], category, inAwesome, inImsai, covered, weekly}`（score/grade/drops 来自 health；category/收录渠道/周下载为 analyze 独有维度）。
 
 ### 评估指标体系 v1（维度框架）
 
@@ -107,7 +111,7 @@
 "health": {
   "score": 87,                  // 0–100，从 100 扣分，clamp ≥0
   "grade": "B",                 // S≥95 · A≥90 · B≥75 · C≥60 · D<60
-  "ruleVersion": "health-v5",
+  "ruleVersion": "health-v6",
   "at": "ISO…",
   "drops": [                    // 每条扣分都带证据
     { "code": "npm.unpublished", "sev": "warn", "label": "未发布到 npm（仅仓库安装）", "evidence": { "pkgName": "…" } }
@@ -117,9 +121,10 @@
 }
 ```
 
-**规则（RULE_VERSION=health-v5；升版必须在此加 changelog）**
+**规则（RULE_VERSION=health-v6；升版必须在此加 changelog）**
 
 Changelog：
+- health-v6 (2026-09-17)：**活跃度口径更正（bug 修复，非新规则）**——`metrics.active30/idleDays/ageDays/ageGate1` 原先由 validate 在首次校验时用 `Date.now()` 算完即**永久冻结**（refresh 只刷新 stars/pushed_at 等原始字段，没重算这几个派生值），于是 `activity.dormant` 对停更仓库几乎从未生效：更正当期，全量 11,419 个插件里只有 **2 个** 触发了该扣分，实际应有 **2,206 个**。修复方式：新增 `lib/data.mjs#deriveActivity()`，评分/统计/导出**一律从 `pushed_at` 现算**，不再读持久化副本；缺 `pushed_at` 的行记入 `missing`（活跃度不可知，不当通过）。受影响口径：站点「30 天活跃」由虚报的 **100%** 更正为 **78.2%**；S+A 由 1,139 → **1,050**（104 出 / 15 入，净 −89）；`activity.dormant` 扣分 2 → 2,206。**持久化的 `metrics.active30/idleDays/ageDays/ageGate1` 自本版起为废弃字段，任何消费者不得直接读取**（`metrics.hasZhDocs` 与时间无关，仍有效）。回归测试：`tests/activity.test.mjs`。
 - health-v5 (2026-09-07)：**反模板农场**——新增 `maint.single-push`（major −10：创建≈最后 push <1h 且仓库 ≥7 天，一次性导入后再无维护；npm ≥2 版本豁免）、`discover.batch-import`（warn −5：同账号 ≥20 个权威插件且 ≥70% 一次性仓库）。背景：uckkk 独占 1,285 个插件（13%），其 88% 仓库 push-created<1h（全生态 31%）、均分 75 却有 317 个 B 级；v5 后该账号均分 61、958 个落 D 级。实测分布 S248/A787/B4875/C3030/D1249，区分度改善。
 - health-v4 (2026-09-06)：新增 **S 级（≥95）**——v3 下 A(≥90) 占 28% 仍偏宽，S 档（实测 10.0%）给真正卓越的插件出头空间；阈值成为 S≥95 · A≥90 · B≥75 · C≥60 · D<60。
 - health-v3 (2026-09-06)：**区分度重构**——扣分从一刀切 −5/−20 改为四档（fail −20 / major −10 / warn −5 / minor −2）；`npm.unpublished` 升 major（无法一键安装是核心可用性）；`not-lib-main`/`no-files-whitelist` 降 minor；新增 7 条：`docs.no-description`、`repo.sparse-topics`、`npm.single-release`、`npm.release-stale`（>90 天）、`eng.no-tests`、`eng.no-ci`、`docs.no-docs-dir`、`docs.tiny-readme`（<400B）。树探测信号（tests/CI/docsDir/readmeBytes）随 backfill 逐步生效（缺失不扣分）。背景：v2 分布 A+B 99.6% 无区分度。

@@ -23,9 +23,9 @@
  */
 
 import { pathToFileURL } from 'node:url'
-import { PATHS, readJsonl, writeJson, loadPlugins } from '../../lib/data.mjs'
+import { PATHS, readJsonl, writeJson, loadPlugins, deriveActivity } from '../../lib/data.mjs'
 
-export const RULE_VERSION = 'health-v5'
+export const RULE_VERSION = 'health-v6'
 
 /**
  * 评估指标体系 v1（docs/SCHEMA.md §health 有完整定义与说明）。
@@ -132,7 +132,11 @@ export function scoreOne(r, ctx = null) {
   const files = r.files ?? null
   const evl = r.eval ?? null
   const npm = r.npm ?? null
-  const met = r.metrics ?? null
+  // 活跃度现算（health-v6）：持久化的 metrics.active30/idleDays/ageDays/ageGate1 是
+  // 首次校验时冻结的旧值，读它会让 dormant 规则对停更仓库永不生效（见 lib/data.mjs）。
+  // hasZhDocs 与时间无关，仍读持久化值。
+  const persisted = r.metrics ?? null
+  const act = deriveActivity(r)
 
   // manifest
   if (evl && typeof evl.hasClientExport === 'boolean') {
@@ -165,7 +169,7 @@ export function scoreOne(r, ctx = null) {
   if (files && typeof files.readme === 'boolean') {
     if (files.readme === false) {
       warn('docs.no-readme', { readme: false })
-    } else if (met && met.hasZhDocs === false) {
+    } else if (persisted && persisted.hasZhDocs === false) {
       warn('docs.zh-missing', { hasZhDocs: false })
     }
     if (files.readme && typeof files.readmeBytes === 'number' && files.readmeBytes < 400) {
@@ -196,9 +200,9 @@ export function scoreOne(r, ctx = null) {
   // apply to plugins with >=2 published npm versions — a release history is
   // survivability evidence (re-created/migrated repos are the common case).
   const matureShip = npm?.published === true && (npm.versions || 0) >= 2
-  if (met) {
-    if (met.ageGate1 === false && !matureShip) warn('activity.too-young', { ageDays: met.ageDays ?? null, npmVersions: npm?.versions ?? null })
-    if (met.active30 === false) warn('activity.dormant', { idleDays: met.idleDays ?? null })
+  if (act) {
+    if (act.ageGate1 === false && !matureShip) warn('activity.too-young', { ageDays: act.ageDays ?? null, npmVersions: npm?.versions ?? null })
+    if (act.active30 === false) warn('activity.dormant', { idleDays: act.idleDays ?? null })
   } else missing.push('metrics')
   // 一次性导入（uckkk 模板农场特征：88% 仓库 push-created<1h，全生态仅 31%）；
   // matureShip 豁免：有 ≥2 个 npm 版本 = 有真实发布史（仓库重建/迁移的常见形态）

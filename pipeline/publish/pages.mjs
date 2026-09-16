@@ -27,6 +27,7 @@ import { join } from 'node:path'
 import { page, mdToHtml, mdTitle, escHtml, icon, stripEmoji } from '../../lib/page.mjs'
 import { t, ph, langBlock } from '../../lib/i18n.mjs'
 import { DATA, SITE, PATHS, loadPlugins, byFullName, readJsonl } from '../../lib/data.mjs'
+import { RULE_VERSION } from '../analyze/score.mjs'
 
 const ORIGIN = 'https://dsh-insights.com'
 
@@ -947,6 +948,10 @@ ${badgeExHtml}
   const distTags = dyn0?.dsh?.npm?.distTags || {}
   const latestWk = weekly[0]
   const wkBullets = latestWk ? (latestWk.md.split('## 本期速览')[1] || '').split('\n').filter((l) => l.startsWith('- ')).slice(0, 5).map((l) => mdToHtml(l)).join('') : ''
+  // 周报若带口径更正声明，首页摘要不能静默沿用旧数字——把更正一并露出来（health-v6，2026-09-17）
+  const wkWarn = latestWk && latestWk.md.includes('口径更正')
+    ? `<div style="margin-top:8px;padding:8px 10px;border-left:3px solid var(--warn);font-size:12px;color:var(--mut)">${t('⚠ 本期含口径更正（活跃度指标曾被冻结，30 天活跃由 100% 更正为 78.2%）——详见<a href="../changelog/">更新日志</a>', '⚠ This issue carries a definitions correction (activity metrics were frozen; 30-day activity corrected from 100% to 78.2%) — see the <a href="../changelog/">changelog</a>')}</div>`
+    : ''
   const saN = (gr0.S ?? 0) + (gr0.A ?? 0)
   const saPct = t0.authoritative ? Math.round((saN / t0.authoritative) * 1000) / 10 : null
   const fresh6 = [...plugAll].sort((a, b) => (b.created_at || '').localeCompare(a.created_at || '')).slice(0, 6)
@@ -1028,7 +1033,7 @@ ${badgeExHtml}
     <p style="margin-top:10px"><a href="dynamics/">${t('按标签筛选的完整时间线 →', 'Full timeline with tag filters →')}</a></p>
   </div>
   <div class="card" style="margin:0"><b>${ico('mail')} ${t('本周速览', 'This Week')} · ${latestWk ? escHtml(latestWk.slug) : ''}</b>
-    ${latestWk ? `<div class="article" style="font-size:13px">${wkBullets}</div><p style="margin-top:10px"><a href="weekly/#${latestWk.slug}">${t('读全文（可导出 Markdown/PDF/图片）→', 'Read the full report (export Markdown/PDF/PNG) →')}</a></p>` : `<p>${t('生成中', 'Generating')}</p>`}
+    ${latestWk ? `<div class="article" style="font-size:13px">${wkBullets}</div>${wkWarn}<p style="margin-top:10px"><a href="weekly/#${latestWk.slug}">${t('读全文（可导出 Markdown/PDF/图片）→', 'Read the full report (export Markdown/PDF/PNG) →')}</a></p>` : `<p>${t('生成中', 'Generating')}</p>`}
   </div>
 </div>
 <h2 style="font-size:16px;margin:30px 0 10px">${t('榜单速览', 'Leaderboards')} <span style="color:var(--faint);font-weight:400;font-size:12px">${t('客观评分 · 社区关注', 'Objective score · community attention')} · <a href="dashboard/#rank">${t('完整榜单 →', 'Full leaderboards →')}</a></span></h2>
@@ -1062,7 +1067,7 @@ ${badgeExHtml}
   ${navCard('weekly/', 'mail', t('生态周报', 'Weekly'), t('双栏阅读器 · 可导出 Markdown/PDF/图片 · RSS', 'Two-pane reader · export Markdown/PDF/PNG · RSS'), t(`${weekly.length} 期 · 每周五`, `${weekly.length} issues · every Friday`))}
   ${navCard('dynamics/', 'radar', t('官方动态', 'Dynamics'), t('dsh releases/dist-tags · DeepSeek 平台 · API 模型清单 · rc 兼容信号', 'dsh releases/dist-tags · DeepSeek platform · API model list · rc compatibility signal'), latestRel ? escHtml(latestRel.tag) : '—')}
   ${navCard('authors/', 'users', t('作者榜', 'Authors'), t('生态里的重要人物：榜单 + 协作关系图', 'Key people of the ecosystem: leaderboards + collaboration graph'), t(`${(an0.authorStats?.total || 0).toLocaleString()} 位`, `${(an0.authorStats?.total || 0).toLocaleString()} authors`))}
-  ${navCard('badge/', 'star', t('健康徽章', 'Badge'), t('把客观评分带进 README：一页接入指南', 'Bring the objective score into your README: a one-page setup guide'), t('health-v5 · 每日刷新', 'health-v5 · refreshed daily'))}
+  ${navCard('badge/', 'star', t('健康徽章', 'Badge'), t('把客观评分带进 README：一页接入指南', 'Bring the objective score into your README: a one-page setup guide'), t(`${RULE_VERSION} · 每日刷新`, `${RULE_VERSION} · refreshed daily`))}
   ${navCard('data/', 'database', t('开放数据', 'Open Data'), t('稳定 JSON URL · agent 可读 · CC BY 4.0', 'Stable JSON URLs · agent-friendly · CC BY 4.0'), t('insights.json 等 13 个数据集', '13 datasets incl. insights.json'))}
   ${navCard('about/', 'book', t('关于 · 指标体系', 'About · Metrics'), t('方法论全公开：权威集门禁 · 六维框架 · 校准回归', 'Methodology in the open: authoritative-set gate · six-dimension framework · calibration regression'), t('可复核到每条扣分', 'Every deduction is verifiable'))}
 </div>
@@ -1094,7 +1099,7 @@ ${langBlock(`
 <h2>覆盖与完整性（为什么权威集 ≪ topic 总数）</h2>
 <p>GitHub <code>topic:dsh-plugin</code> 是官方唯一发现机制，<b>打标即入、零门槛</b>——其中混有大量蹭标、无关仓库、fork、monorepo 子路径与已删除仓库。我们的漏斗：<b>topic 宇宙（≈13.7k，首页漏斗实时口径）→ 多源候选（topic 分片全量抓取 + 策展目录 + npm 映射，去重）→ manifest 门禁逐条校验 → 权威集 + 分桶</b>。权威集是「货真价实可按官方 bundle 形态安装」的下限子集；<code>no-dsh-bundle</code> / <code>no-package.json</code> 桶里的候选可能是插件但形态非标，留待人工复核而不是混入权威集。校验按 API 预算<b>滚动推进、断点续跑</b>，权威集随每次快照扩大——<b>覆盖率数字本身也公开</b>（首页覆盖漏斗），这就是我们对「完整性」的回答方式：不报大数，报可核验的数。</p>
 <h2>插件评估指标体系（六维框架 v1）</h2>
-<p>每个插件从六个维度考察：<b>计分四维</b>进入总分（100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2，当前 health-v5），<b>展示两维</b>只呈现不进分，<b>兼容性</b>为预留维度。阈值：<span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>；插件详情页可见各维度子分（dimScores）。</p>
+<p>每个插件从六个维度考察：<b>计分四维</b>进入总分（100 起扣 · fail −20 / 较重 −10 / 中 −5 / 轻 −2，当前 ${RULE_VERSION}），<b>展示两维</b>只呈现不进分，<b>兼容性</b>为预留维度。阈值：<span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>；插件详情页可见各维度子分（dimScores）。</p>
 <table>
 <tr><th>维度</th><th>指标项</th><th>计分处理</th></tr>
 <tr><td>工程质量</td><td>client 导出 · main=lib 布局 · files 白名单 · npm 发布 · 版本一致</td><td><b>计分</b></td></tr>
@@ -1135,7 +1140,7 @@ ${langBlock(`
 <h2>Coverage & Completeness (why the authoritative set ≪ the topic total)</h2>
 <p>GitHub's <code>topic:dsh-plugin</code> is the official discovery mechanism — <b>tag and you're in, zero barrier</b> — so it is full of tag squatters, unrelated repos, forks, monorepo subpaths, and deleted repos. Our coverage funnel: <b>topic universe (≈13.7k; see the live funnel on the home page) → multi-source candidates (full topic shard crawl + curated lists + npm mapping, deduplicated) → item-by-item manifest-gate verification → authoritative set + buckets</b>. The authoritative set is the lower-bound subset that is "genuinely installable in the official bundle form"; candidates in the <code>no-dsh-bundle</code> / <code>no-package.json</code> buckets may be plugins in a non-standard shape, held for manual review rather than mixed into the authoritative set. Verification <b>rolls forward within an API budget and is resumable</b>, so the authoritative set grows with every snapshot — <b>and the coverage numbers themselves are public</b> (the coverage funnel on the home page). That is how we answer "completeness": not with a big number, but with a verifiable one.</p>
 <h2>Plugin Evaluation Metrics (six-dimension framework v1)</h2>
-<p>Every plugin is examined on six dimensions: <b>four scored dimensions</b> feed the total (start at 100 · fail −20 / major −10 / moderate −5 / minor −2; currently health-v5), <b>two display dimensions</b> are shown but never scored, and <b>compatibility</b> is a reserved dimension. Quality grades: <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>; per-dimension subscores (dimScores) are visible on each plugin's detail page.</p>
+<p>Every plugin is examined on six dimensions: <b>four scored dimensions</b> feed the total (start at 100 · fail −20 / major −10 / moderate −5 / minor −2; currently ${RULE_VERSION}), <b>two display dimensions</b> are shown but never scored, and <b>compatibility</b> is a reserved dimension. Quality grades: <span class="grade S">S ≥ 95</span> <span class="grade A">A ≥ 90</span> <span class="grade B">B ≥ 75</span> <span class="grade C">C ≥ 60</span> <span class="grade D">D</span>; per-dimension subscores (dimScores) are visible on each plugin's detail page.</p>
 <table>
 <tr><th>Dimension</th><th>Signals</th><th>Scoring</th></tr>
 <tr><td>Engineering quality</td><td>client export · main=lib layout · files whitelist · published to npm · version consistency</td><td><b>Scored</b></td></tr>
@@ -1205,7 +1210,7 @@ ${relHtml || `<p class="lede">${t('暂无发布记录', 'No releases yet')}</p>`
     ['我的插件体检', 'My Plugins Checkup', '列出你已安装的插件，逐个标注健康等级与分数；npm 有新版本时提醒升级；dsh 官方发布 breaking 版本时给出适配预警；低分插件给出同类更优替代。', 'Lists your installed plugins with health grades and scores, warns when npm has newer versions, alerts on official breaking releases, and points to better alternatives for low-grade plugins.'],
     ['装前查验', 'Pre-install Check', '输入插件名（或粘贴 GitHub 链接）→ 健康卡：S–D 等级、百分制分数、四维子分、逐条扣分明细，一键跳到完整详情页。', 'Type a plugin name (or paste a GitHub link) → a health card: S–D grade, 0–100 score, four dimension sub-scores, and itemized deductions, with a link to the full detail page.'],
     ['场景发现', 'Scenario Picks', '从「我想做什么」出发浏览 22 个场景的推荐插件——按健康分客观排序，不卖「最好」叙事。', 'Browse picks across 22 scenarios starting from "what I want to do" — ranked by objective health score, no "best" narrative for sale.'],
-    ['作者自检（CLI）', 'Author Self-check (CLI)', '随包附带的命令行：npx dsh-insights-kit selfcheck <目录>，按 health-v5 规则书体检本地插件目录（manifest / 文档 / 工程成熟度 + 只读面安全扫描），每条扣分附修复指引；退出码可直接当 CI pre-publish 门禁。', 'A CLI ships with the package: npx dsh-insights-kit selfcheck <dir> runs the health-v5 rulebook against a local plugin directory (manifest / docs / engineering maturity plus a read-only-surface scan), every deduction with fix guidance; the exit code doubles as a CI pre-publish gate.'],
+    ['作者自检（CLI）', 'Author Self-check (CLI)', '随包附带的命令行：npx dsh-insights-kit selfcheck <目录>，按 ${RULE_VERSION} 规则书体检本地插件目录（manifest / 文档 / 工程成熟度 + 只读面安全扫描），每条扣分附修复指引；退出码可直接当 CI pre-publish 门禁。', 'A CLI ships with the package: npx dsh-insights-kit selfcheck <dir> runs the ${RULE_VERSION} rulebook against a local plugin directory (manifest / docs / engineering maturity plus a read-only-surface scan), every deduction with fix guidance; the exit code doubles as a CI pre-publish gate.'],
   ]
   written.push(out('kit/index.html', page({
     title: '生态助手插件', titleEn: 'The Kit', desc: 'dsh-insights-kit：装在 DSH 里的生态助手——插件体检、装前查验、场景发现、作者自检。',
