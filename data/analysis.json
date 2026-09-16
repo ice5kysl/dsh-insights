@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-16T10:20:33.388Z",
+  "generatedAt": "2026-09-16T11:14:58.968Z",
   "totals": {
-    "authoritative": 11385,
-    "active7": 2645,
-    "active7Pct": 23.2,
-    "active30": 11383,
+    "authoritative": 11387,
+    "active7": 2634,
+    "active7Pct": 23.1,
+    "active30": 11385,
     "active30Pct": 100,
     "ageGate1": 10624,
     "ageGate1Pct": 93.3,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1624,
+      "2026-09": 1626,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 232
+      "2026-09-14": 234
     },
     "byWeekGrades": {
       "B": {
@@ -132,9 +132,9 @@
         "2026-06-29": 2,
         "2026-07-20": 1,
         "2026-07-27": 1,
-        "2026-09-07": 325,
+        "2026-09-07": 321,
         "2026-07-06": 1,
-        "2026-09-14": 119
+        "2026-09-14": 121
       },
       "D": {
         "2026-08-10": 138,
@@ -142,7 +142,7 @@
         "2026-08-31": 33,
         "2026-03-16": 1,
         "2026-08-24": 26,
-        "2026-09-07": 15,
+        "2026-09-07": 19,
         "2026-09-14": 4
       }
     }
@@ -150,20 +150,20 @@
   "distribution": {
     "publish": {
       "published": 4752,
-      "unpublished": 6633,
+      "unpublished": 6635,
       "stale": 1365
     },
     "docs": {
-      "readme": 11356,
+      "readme": 11358,
       "zhFile": 853,
-      "zh": 5435,
-      "both": 5425,
+      "zh": 5436,
+      "both": 5426,
       "none": 29
     },
     "lib": {
-      "index": 6119,
-      "client": 3917,
-      "both": 3501
+      "index": 6120,
+      "client": 3918,
+      "both": 3502
     },
     "publishPct": 41.7,
     "zhPct": 47.7
@@ -233,7 +233,7 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11054
+      "count": 11056
     },
     {
       "topic": "deepseek-harness",
@@ -241,7 +241,7 @@
     },
     {
       "topic": "dsh",
-      "count": 4239
+      "count": 4241
     },
     {
       "topic": "deepseek",
@@ -249,7 +249,7 @@
     },
     {
       "topic": "dsh-plugins",
-      "count": 1155
+      "count": 1156
     },
     {
       "topic": "cordis",
@@ -261,7 +261,7 @@
     },
     {
       "topic": "typescript",
-      "count": 418
+      "count": 419
     },
     {
       "topic": "deepseek-harness-plugin",
@@ -269,7 +269,7 @@
     },
     {
       "topic": "dsh-plugin-market",
-      "count": 393
+      "count": 394
     },
     {
       "topic": "ai-agent",
@@ -348,8 +348,8 @@
     "imsai": 271,
     "covered": 1039,
     "coveredPct": 9.1,
-    "none": 10346,
-    "fetchedAt": "2026-09-16T10:19:47.486Z"
+    "none": 10348,
+    "fetchedAt": "2026-09-16T11:14:15.955Z"
   },
   "suggested": [
     {
@@ -1609,8 +1609,8 @@
     "grades": {
       "A": 864,
       "B": 5473,
-      "C": 3494,
-      "D": 1282,
+      "C": 3492,
+      "D": 1286,
       "S": 272
     },
     "avgScore": 76.1,
@@ -1636,7 +1636,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 799
+      "count": 800
     },
     {
       "category": "侧栏 / 工作区",
@@ -1644,7 +1644,7 @@
     },
     {
       "category": "搜索 / 命令面板",
-      "count": 633
+      "count": 634
     },
     {
       "category": "工具 / 效率",
@@ -6728,12 +6728,12 @@
     },
     {
       "owner": "hoyyang",
-      "plugins": 5,
+      "plugins": 6,
       "stars": 10,
       "grades": {
         "A": 0,
         "B": 2,
-        "C": 2,
+        "C": 3,
         "D": 0,
         "S": 1
       },
@@ -6743,7 +6743,7 @@
       "lastPush": "2026-09-16",
       "firstCreated": "2026-08-20",
       "delta": 0,
-      "avg": 81.6,
+      "avg": 79.5,
       "topPlugin": "hoyyang/dsh-mall",
       "topStars": 9,
       "topCat": "消息 / 协作集成"
@@ -13366,6 +13366,27 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
+      "owner": "QuantumKuba",
+      "plugins": 3,
+      "stars": 5,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-16",
+      "firstCreated": "2026-08-31",
+      "delta": 0,
+      "avg": 78,
+      "topPlugin": "QuantumKuba/dsh-graphify-plugin",
+      "topStars": 3,
+      "topCat": "记忆 / 知识"
+    },
+    {
       "owner": "haoku123",
       "plugins": 3,
       "stars": 5,
@@ -14357,27 +14378,6 @@
       "topPlugin": "TtTRz/dsh-wecom",
       "topStars": 3,
       "topCat": "工具 / 效率"
-    },
-    {
-      "owner": "QuantumKuba",
-      "plugins": 2,
-      "stars": 4,
-      "grades": {
-        "A": 0,
-        "B": 2,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 2,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-14",
-      "firstCreated": "2026-08-31",
-      "delta": 0,
-      "avg": 81.5,
-      "topPlugin": "QuantumKuba/dsh-graphify-plugin",
-      "topStars": 3,
-      "topCat": "记忆 / 知识"
     },
     {
       "owner": "zhangzujian",
@@ -101584,8 +101584,8 @@
       "grades": {
         "A": 0,
         "B": 0,
-        "C": 8,
-        "D": 1
+        "C": 4,
+        "D": 5
       },
       "ab": 0,
       "npm": 1,
@@ -101593,7 +101593,7 @@
       "lastPush": "2026-09-10",
       "firstCreated": "2026-09-04",
       "delta": 0,
-      "avg": 65.4,
+      "avg": 59.9,
       "topPlugin": "CAI-MH/dsh-quality-review",
       "topStars": 1,
       "topCat": "其它"
@@ -138422,7 +138422,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 15692,
+    "candidates": 15695,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -138493,19 +138493,19 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 279,
+      "2026-09-14": 282,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 15660,
-    "candidatesValidated": 28,
-    "authoritative": 11385,
-    "invalidUnique": 4275,
+    "validated": 15663,
+    "candidatesValidated": 30,
+    "authoritative": 11387,
+    "invalidUnique": 4276,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 2350
+        "count": 2351
       },
       {
         "reason": "no-package.json",
@@ -138549,5 +138549,5 @@
       }
     ]
   },
-  "enrichCount": 11385
+  "enrichCount": 11387
 }
