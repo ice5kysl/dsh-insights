@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-16T04:14:56.033Z",
+  "generatedAt": "2026-09-16T04:41:38.052Z",
   "totals": {
-    "authoritative": 11361,
-    "active7": 2689,
-    "active7Pct": 23.7,
-    "active30": 11359,
+    "authoritative": 11362,
+    "active7": 2687,
+    "active7Pct": 23.6,
+    "active30": 11360,
     "active30Pct": 100,
     "ageGate1": 10624,
     "ageGate1Pct": 93.5,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1600,
+      "2026-09": 1601,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 208
+      "2026-09-14": 209
     },
     "byWeekGrades": {
       "B": {
@@ -87,7 +87,7 @@
         "2026-05-18": 1,
         "2026-06-29": 4,
         "2026-09-07": 359,
-        "2026-09-14": 87
+        "2026-09-14": 88
       },
       "S": {
         "2026-08-03": 2,
@@ -149,12 +149,12 @@
   },
   "distribution": {
     "publish": {
-      "published": 4743,
+      "published": 4744,
       "unpublished": 6618,
       "stale": 1362
     },
     "docs": {
-      "readme": 11332,
+      "readme": 11333,
       "zhFile": 852,
       "zh": 5419,
       "both": 5409,
@@ -165,7 +165,7 @@
       "client": 3903,
       "both": 3488
     },
-    "publishPct": 41.7,
+    "publishPct": 41.8,
     "zhPct": 47.6
   },
   "npmStaleTop": [
@@ -233,7 +233,7 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11030
+      "count": 11031
     },
     {
       "topic": "deepseek-harness",
@@ -241,7 +241,7 @@
     },
     {
       "topic": "dsh",
-      "count": 4225
+      "count": 4226
     },
     {
       "topic": "deepseek",
@@ -249,7 +249,7 @@
     },
     {
       "topic": "dsh-plugins",
-      "count": 1153
+      "count": 1154
     },
     {
       "topic": "cordis",
@@ -348,8 +348,8 @@
     "imsai": 271,
     "covered": 1039,
     "coveredPct": 9.1,
-    "none": 10322,
-    "fetchedAt": "2026-09-16T04:14:10.316Z"
+    "none": 10323,
+    "fetchedAt": "2026-09-16T04:40:58.553Z"
   },
   "suggested": [
     {
@@ -1608,7 +1608,7 @@
   "quality": {
     "grades": {
       "A": 863,
-      "B": 5465,
+      "B": 5466,
       "C": 3480,
       "D": 1281,
       "S": 272
@@ -1620,7 +1620,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4197
+      "count": 4198
     },
     {
       "category": "模型 / 代理",
@@ -13807,6 +13807,27 @@
       "topPlugin": "young-tim/dsh-profile-lab",
       "topStars": 3,
       "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "developerdh",
+      "plugins": 2,
+      "stars": 5,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 2,
+      "covered": 0,
+      "lastPush": "2026-09-16",
+      "firstCreated": "2026-08-20",
+      "delta": 0,
+      "avg": 83.5,
+      "topPlugin": "developerdh/dsh-sandbox-allowlist",
+      "topStars": 4,
+      "topCat": "开发 / 数据"
     },
     {
       "owner": "AKI2253",
@@ -39149,27 +39170,6 @@
       "topPlugin": "joekytc/dsh-swarm",
       "topStars": 4,
       "topCat": "主题 / 视觉美化"
-    },
-    {
-      "owner": "developerdh",
-      "plugins": 1,
-      "stars": 4,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-09-07",
-      "firstCreated": "2026-08-20",
-      "delta": 0,
-      "avg": 86,
-      "topPlugin": "developerdh/dsh-sandbox-allowlist",
-      "topStars": 4,
-      "topCat": "开发 / 数据"
     },
     {
       "owner": "swell05",
@@ -138057,7 +138057,7 @@
   ],
   "authorStats": {
     "total": 6484,
-    "multi": 1553,
+    "multi": 1554,
     "top10Share": 15.3
   },
   "coverage": {
@@ -138065,7 +138065,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 15660,
+    "candidates": 15661,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -138136,14 +138136,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 247,
+      "2026-09-14": 248,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 15628,
-    "candidatesValidated": 34,
-    "authoritative": 11361,
+    "validated": 15629,
+    "candidatesValidated": 28,
+    "authoritative": 11362,
     "invalidUnique": 4267,
     "invalidBuckets": [
       {
@@ -138192,5 +138192,5 @@
       }
     ]
   },
-  "enrichCount": 11361
+  "enrichCount": 11362
 }
