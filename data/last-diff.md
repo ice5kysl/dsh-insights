@@ -1,13 +1,13 @@
 # 快照 Diff · 2026-09-16
 
-- 当前权威插件：**11347**（上次 11343）
+- 当前权威插件：**11351**（上次 11347）
 - 新增 4 · 消失 0
 
 ## 新增（Top 4）
-- LitoMore/agent-discord-presence ★3 (npm ✓)
-- RangeKing/dsh-whale-buddy ★0 
-- BPTumbleweed/dsh-agent-memory ★0 (npm ✓)
-- liujuntao123/dsh-trusted-page ★0 
+- loyalchiiina/dsh-voice-alert ★0 
+- activeing123/dsh-mcptoon ★0 
+- Saunato/dsh-mac-cua ★0 
+- sujingkpo/dsh-auto-pass ★0 
 
 ## 消失（Top 0）
 
