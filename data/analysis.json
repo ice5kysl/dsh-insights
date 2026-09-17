@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-17T11:49:31.378Z",
+  "generatedAt": "2026-09-17T12:00:42.643Z",
   "totals": {
-    "authoritative": 11475,
-    "active7": 2390,
+    "authoritative": 11476,
+    "active7": 2384,
     "active7Pct": 20.8,
     "active30": 8769,
     "active30Pct": 76.4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1714,
+      "2026-09": 1715,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,11 +56,11 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 322
+      "2026-09-14": 323
     },
     "byWeekGrades": {
       "B": {
-        "2026-08-10": 1970,
+        "2026-08-10": 1969,
         "2026-02-16": 3,
         "2026-07-13": 7,
         "2026-04-27": 2,
@@ -87,7 +87,7 @@
         "2026-06-29": 4,
         "2026-09-07": 465,
         "2026-03-02": 1,
-        "2026-09-14": 207
+        "2026-09-14": 208
       },
       "S": {
         "2026-08-03": 2,
@@ -113,7 +113,7 @@
         "2026-01-05": 1,
         "2026-08-17": 1060,
         "2026-07-13": 3,
-        "2026-08-10": 1349,
+        "2026-08-10": 1350,
         "2026-02-02": 1,
         "2026-08-03": 19,
         "2026-03-23": 1,
@@ -148,20 +148,20 @@
   "distribution": {
     "publish": {
       "published": 5145,
-      "unpublished": 6330,
+      "unpublished": 6331,
       "stale": 2653
     },
     "docs": {
-      "readme": 11446,
-      "zhFile": 864,
-      "zh": 5475,
-      "both": 5465,
+      "readme": 11447,
+      "zhFile": 865,
+      "zh": 5476,
+      "both": 5466,
       "none": 29
     },
     "lib": {
-      "index": 6161,
-      "client": 3952,
-      "both": 3532
+      "index": 6162,
+      "client": 3953,
+      "both": 3533
     },
     "publishPct": 44.8,
     "zhPct": 47.6
@@ -231,15 +231,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11144
+      "count": 11145
     },
     {
       "topic": "deepseek-harness",
-      "count": 7451
+      "count": 7452
     },
     {
       "topic": "dsh",
-      "count": 4276
+      "count": 4277
     },
     {
       "topic": "deepseek",
@@ -346,8 +346,8 @@
     "imsai": 274,
     "covered": 1042,
     "coveredPct": 9.1,
-    "none": 10433,
-    "fetchedAt": "2026-09-17T11:48:51.222Z"
+    "none": 10434,
+    "fetchedAt": "2026-09-17T11:59:59.298Z"
   },
   "suggested": [
     {
@@ -1616,7 +1616,7 @@
     "grades": {
       "A": 628,
       "B": 5616,
-      "C": 3546,
+      "C": 3547,
       "D": 1509,
       "S": 176
     },
@@ -1631,7 +1631,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1102
+      "count": 1103
     },
     {
       "category": "文件浏览 / 预览",
@@ -30076,27 +30076,6 @@
       "topPlugin": "Blaczz/dsh-achievements",
       "topStars": 2,
       "topCat": "会话管理"
-    },
-    {
-      "owner": "yauntyour",
-      "plugins": 4,
-      "stars": 7,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 3,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-08-18",
-      "firstCreated": "2026-08-15",
-      "delta": 0,
-      "avg": 71.3,
-      "topPlugin": "yauntyour/DSH-Encrypt",
-      "topStars": 6,
-      "topCat": "状态 / 监控 / 用量"
     },
     {
       "owner": "Retr67",
@@ -91577,6 +91556,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "misswell",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-17",
+      "firstCreated": "2026-09-17",
+      "delta": 0,
+      "avg": 85,
+      "topPlugin": "misswell/dsh-advanced-provider-settings",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
+    },
+    {
       "owner": "linhay",
       "plugins": 1,
       "stars": 347,
@@ -93738,6 +93738,27 @@
       "topPlugin": "gulagala001/oh-my-dsh",
       "topStars": 8,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "yauntyour",
+      "plugins": 4,
+      "stars": 7,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 4,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-08-18",
+      "firstCreated": "2026-08-15",
+      "delta": 0,
+      "avg": 70,
+      "topPlugin": "yauntyour/DSH-Encrypt",
+      "topStars": 6,
+      "topCat": "状态 / 监控 / 用量"
     },
     {
       "owner": "kezboardpj",
@@ -139605,7 +139626,7 @@
     }
   ],
   "authorStats": {
-    "total": 6561,
+    "total": 6562,
     "multi": 1564,
     "top10Share": 15.1
   },
@@ -139614,7 +139635,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 15808,
+    "candidates": 15809,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -139685,14 +139706,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 395,
+      "2026-09-14": 396,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 15776,
+    "validated": 15777,
     "candidatesValidated": 28,
-    "authoritative": 11475,
+    "authoritative": 11476,
     "invalidUnique": 4301,
     "invalidBuckets": [
       {
@@ -139741,5 +139762,5 @@
       }
     ]
   },
-  "enrichCount": 11475
+  "enrichCount": 11476
 }
