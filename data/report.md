@@ -4,11 +4,11 @@
 
 ## 总览
 - 权威集规模：**11419**
-- 近 7 天活跃：2556（22.4%）· 近 30 天：8929（78.2%）
+- 近 7 天活跃：2555（22.4%）· 近 30 天：8928（78.2%）
 - 仓库年龄 ≥ 1 天（可过收录门禁）：11074（97%）
 
 ## 发布与文档
-- npm 已发布 4765 / 未发布 6654 / 已发布但版本滞后 1369
+- npm 已发布 5128 / 未发布 6291 / 已发布但版本滞后 2643
 - 有 README 11390 · 中英双语/中文 5453 · 中文 README 文件 856 · 无 README 29
 - lib/index.js 6134 · lib/client.js 3934 · 双产物 3515
 
@@ -22,15 +22,15 @@
 - belowthetree/dsh-mcp-setting A · 周下载 117
 - spacexun2/dsh-worktime-board A · 周下载 197
 - Ultronen/dsh-liquid-glass A · 周下载 121
-- yangzhe1991/dsh-code-review A · 周下载 238
-- hyper-dsh-plugins/dsh-open-file A · 周下载 622
 - MayBeTheWorld/dsh-inherit A · 周下载 39
-- mrzhangkris/dsh-session-pruner A · 周下载 367
 - f20880479-lab/dsh-peak-gate A · 周下载 59
-- yj-liuzepeng/dsh-project-brain A · 周下载 154
-- hotpot-labs/dsh-notifier-plugin A · 周下载 278
 - hotpot-labs/dsh-prompt-history-plugin A · 周下载 113
 - runcat-tommy/dsh-unitverse A · 周下载 431
+- Rabbit-bot-No-002/dsh-chat-avatar A
+- Sxuan-Coder/dsh-user-prompt A · 周下载 125
+- zjuatri/dsh-terminal-plugin A · 周下载 3
+- skyyyyyk/dsh-szg-hint A
+- saya-ch/dsh-mobile A · 周下载 2160
 
 ## npm 周下载 Top 10
 - dsh-market/dsh-market：86927
@@ -45,8 +45,8 @@
 - Han-1413141/dsh-cost-meter：17298
 
 ## 质量评分（启发式）
-- 平均分 75.4 · S+A 占比 9.2%（值得优先看；A+B 53.9%）
-- S 261 · A 789 · B 5363 · C 3500 · D 1506
+- 平均分 75.1 · S+A 占比 7.1%（值得优先看；A+B 54.8%）
+- S 176 · A 634 · B 5629 · C 3486 · D 1494
 
 ## 功能分类（启发式 Top 12）
 - 其它：4216
@@ -95,28 +95,28 @@
 |---|---|---|---|
 | zhu1090093659/dsh-web | 7564 | — | ✅ |
 | yjh051108/dsh-routing-suite | 7183 | — | ✅ |
-| liustack/modlens | 3960 | — | ✅ |
+| liustack/modlens | 3960 | ✅ | ✅ |
 | dsh-market/dsh-market | 3899 | ✅ | ✅ |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 2357 | ✅ | ✅ |
 | Minglink/dsh-infinite-gen-4 | 1494 | — | ✅ |
 | superdesigndev/treg | 1403 | — | — |
 | bowenliang123/dsh-context | 1380 | ✅ | ✅ |
-| xmanrui/dsh-im | 1310 | — | ✅ |
+| xmanrui/dsh-im | 1310 | ✅ | ✅ |
 | GanyuanRan/Aegis | 1185 | ✅ | ✅ |
 
 ## npm 版本滞后榜（仓库新于发布）
 | repo | ★ | 仓库版本 → npm |
 |---|---|---|
+| liustack/modlens | 3960 | 3.25.4 → 3.26.1 |
+| dsh-market/dsh-market | 3899 | 1.43.0 → 1.47.0 |
+| MeteorNOX/DeepSeek-Balance-Whale-Widget | 2357 | 0.2.10 → 0.3.2 |
+| bowenliang123/dsh-context | 1380 | 0.42.0 → 0.53.1 |
+| xmanrui/dsh-im | 1310 | 4.11.0 → 4.21.2 |
 | GanyuanRan/Aegis | 1185 | 2.9.6 → 0.1.0 |
-| sandbaseai/sandbase-harness | 646 | 0.3.8 → 0.0.1 |
-| adoresever/graph-memory | 620 | 1.6.0-beta.13 → 1.5.8 |
-| FSMargoo/dsh-at-file | 512 | 0.7.0 → 0.6.3 |
-| zh667/TokenLedger | 199 | 0.1.1-blue.0 → 0.1.0 |
-| kingOfSoySauce/dsh-liang-skin | 191 | 0.1.7 → 0.1.6 |
-| tinqiao-oss/engramory | 190 | 0.2.4 → 0.2.3 |
-| weijiafu14/pi2dsh | 190 | 0.23.0 → 0.24.0 |
-| seriousz158/dsh-memory | 183 | 0.9.2 → 0.8.1 |
-| theBigGavin/marketingdashboard | 171 | 1.4.0 → 0.1.0 |
+| shaobeichen/dsh-pocket | 1126 | 2.10.3 → 2.10.6 |
+| ysr666/dsh-vision-router | 1099 | 2.1.2 → 2.1.7 |
+| vshulcz/deja-vu | 811 | 0.20.5 → 0.20.8 |
+| LiPu-jpg/Openwrite | 724 | 0.2.9 → 0.2.10 |
 
 ## 深检抽样（写面 / 消毒）
 - 抽样 8 个：只读/无写面 1 · 检出写面 7 · 渲染带消毒 5

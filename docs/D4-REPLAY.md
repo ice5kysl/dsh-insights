@@ -108,7 +108,7 @@ npm run replay -- --settle 12000 <targets…>                        # 慢机器
 - 本批 8 个目标里 **6 个 drift**（如 insights-kit：corpus `0.5.0` vs npm `0.10.2`）
 - 影响面：`npm.version-drift` 扣分、站点展示的 npm 版本、队列表里的 `pkg@version`、以及**回放会验到旧包**
 
-装置侧已修（现探 registry + 记 `versionDrift`）；**权威集本身的修复待决策**（同 health-v6，属会改分的口径变更）。
+**已修（health-v7，2026-09-17）**：新增 `pipeline/collect/npm-refresh.mjs`（进 daily + monday，在 analyze 之前）日更——先做极廉价的 dist-tags 探测，只有 latest 变了才拉完整 packument，无实质变化不写文件。全量重跑：**新版本 1,321 · 首次发布 371 · 已下架 39**；`npm.version-drift` 扣分 **1,369 → 2,642**（旧数据把 drift 藏住了）、S+A 1,050 → **810**。装置侧同时改为现探 registry（并记 `versionDrift`）。同批修掉一个凭据外泄：`raw()` 曾把 GitHub token 发往 registry.npmjs.org。
 
 ## 8. 边界（别过度承诺）
 

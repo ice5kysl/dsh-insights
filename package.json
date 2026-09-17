@@ -16,6 +16,7 @@
     "pipeline": "node bin/pipeline.mjs",
     "discover": "node pipeline/collect/discover.mjs",
     "validate": "node pipeline/validate/validate.mjs",
+    "npm-refresh": "node pipeline/collect/npm-refresh.mjs",
     "analyze": "node pipeline/analyze/analyze.mjs",
     "site": "node pipeline/publish/site.mjs",
     "export": "node pipeline/publish/export-csv.mjs",

@@ -41,6 +41,7 @@ const STEPS = [
   ['shell-rows',  'pipeline/collect/shell-rows.mjs'],
   ['author-graph', 'pipeline/collect/author-graph.mjs'],
   ['validate',    'pipeline/validate/validate.mjs'],
+  ['npm-refresh', 'pipeline/collect/npm-refresh.mjs'],
   ['regress',     'pipeline/validate/regress.mjs'],
   ['deep',        'pipeline/validate/deep.mjs'],
   ['analyze',     'pipeline/analyze/analyze.mjs'],
@@ -72,7 +73,7 @@ const STEPS = [
 // compat-observed（实测矩阵：pkg@version 缓存入 git 后是增量成本，只为当天发新版的包重抓 tarball）
 // score+history 日更：规则评分零 LLM 成本，history.json 每天一条 UTC 日快照（append-only
 // 是其设计本意）；同日 db9-sync 把 plugin_scores/score_runs 写进 db9，/admin 评分按天滚动
-const DAILY = ['lists', 'discover-incr', 'validate', 'downloads', 'dynamics', 'shell-seeds', 'shell-rows', 'compat', 'analyze', 'score', 'history', 'export-json', 'compat-observed', 'site', 'export-csv', 'diff', 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'pages']
+const DAILY = ['lists', 'discover-incr', 'validate', 'npm-refresh', 'downloads', 'dynamics', 'shell-seeds', 'shell-rows', 'compat', 'analyze', 'score', 'history', 'export-json', 'compat-observed', 'site', 'export-csv', 'diff', 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'pages']
 // 每小时增量纳新：daily 去掉 downloads（重 API、日频足够）；dynamics 轻量
 // （~20 次调用）进 hourly —— 官方发版/移动 dist-tag 当天小时内追上，配合
 // dsh-insights-kit 的 registry overlay 形成两级新鲜度。export-json 必须
@@ -85,7 +86,7 @@ const HOURLY = ['lists', 'discover-incr', 'validate', 'dynamics', 'analyze', 'ex
 // shell-rows.json（图行清单），且须先于 pages（详情页消费）
 const SNAPSHOT = ['analyze', 'score', 'history', 'regress', 'export-csv', 'export-json', 'compat-observed', 'overlap', 'scenarios', 'badges', 'site', 'pages']
 const CONTENT = ['letters', 'weekly', 'insights', 'pages']
-const MONDAY = ['lists', 'discover', 'refresh', 'downloads', 'dynamics', 'compat', 'analyze', 'site', 'export-csv', 'diff', 'author-graph', 'metrics', 'letters', 'weekly', 'insights', 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'pages']
+const MONDAY = ['lists', 'discover', 'refresh', 'npm-refresh', 'downloads', 'dynamics', 'compat', 'analyze', 'site', 'export-csv', 'diff', 'author-graph', 'metrics', 'letters', 'weekly', 'insights', 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'pages']
 const PROFILES = {
   hourly: HOURLY,
   daily: DAILY,
@@ -95,7 +96,7 @@ const PROFILES = {
   monday: MONDAY,
   friday: MONDAY, // 旧名别名（2026-09 起生成时机改为每周一），防止外部脚本/肌肉记忆断掉
   snapshot: SNAPSHOT,
-  full: ['lists', 'discover', 'npm-map', 'downloads', 'validate', ...SNAPSHOT, 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'diff'],
+  full: ['lists', 'discover', 'npm-map', 'downloads', 'validate', 'npm-refresh', ...SNAPSHOT, 'db9-sync', 'crash-corpus', 'traffic', 'readme-sync', 'diff'],
   content: CONTENT,
 }
 

@@ -21,6 +21,9 @@
  *   weekly_letters      ← insight-reports/<week>.json（周报元数据；正文 md 不入库）
  *   invalid_candidates  ← invalid.jsonl（被拒候选 + 拒绝原因；主键 full_name 缺失回退 owner/repo，
  *                         reasons 归一为数组；first_seen 口径同 plugins 源）
+ *   plugin_replay       ← replay-history.jsonl（D4 实装 smoke 测试台账；同 (repo,shell,date) 覆盖）
+ *                         + replay.json 关联当日明细（shellError/egress/installed/page/shot）
+ *   replay_runs         ← replay-history.jsonl 按 (date,shell) 现算汇总（total/ok/broken/degraded）
  *
  * 失败纪律（对齐 collect/downloads.mjs）：
  *   - 无 DB9_TOKEN → 打印跳过说明，exit 0
@@ -33,7 +36,7 @@
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { PATHS, DATA, readJson, readJsonl, loadPlugins, loadEnrichMap } from '../../lib/data.mjs'
-import { isEnabled, sql, lit, jsonLit, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, diffPluginEvents, invalidCandidateKey } from '../../lib/db9.mjs'
+import { isEnabled, sql, lit, jsonLit, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, diffPluginEvents, invalidCandidateKey, aggregateReplayRuns } from '../../lib/db9.mjs'
 
 const BATCH = 200
 
@@ -215,6 +218,51 @@ VALUES %s
 ON CONFLICT (week) DO UPDATE SET
   range = EXCLUDED.range, generated_at = EXCLUDED.generated_at, model = EXCLUDED.model,
   usage = EXCLUDED.usage, extra = EXCLUDED.extra`
+
+// D4 实装 smoke 测试（真实 shell + 浏览器回放）。台账在 data/replay-history.jsonl
+// （append-only，同 (date,shell,repo) 一行），当日明细在 data/replay.json。
+// detail 存当日完整观测（shellError / egress / installed / page / shot 路径）。
+const CREATE_PLUGIN_REPLAY = `CREATE TABLE IF NOT EXISTS plugin_replay (
+  repo TEXT,
+  shell TEXT,
+  date DATE,
+  pkg TEXT,
+  version TEXT,
+  verdict TEXT,
+  reason TEXT,
+  host_boot_ms INT,
+  egress_count INT,
+  version_drift BOOLEAN,
+  detail JSONB,
+  observed_at TIMESTAMPTZ,
+  PRIMARY KEY (repo, shell, date)
+)`
+
+const UPSERT_PLUGIN_REPLAY = `INSERT INTO plugin_replay (
+  repo, shell, date, pkg, version, verdict, reason, host_boot_ms, egress_count, version_drift, detail, observed_at
+) VALUES %s
+ON CONFLICT (repo, shell, date) DO UPDATE SET
+  pkg = EXCLUDED.pkg, version = EXCLUDED.version, verdict = EXCLUDED.verdict,
+  reason = EXCLUDED.reason, host_boot_ms = EXCLUDED.host_boot_ms,
+  egress_count = EXCLUDED.egress_count, version_drift = EXCLUDED.version_drift,
+  detail = EXCLUDED.detail`
+
+const CREATE_REPLAY_RUNS = `CREATE TABLE IF NOT EXISTS replay_runs (
+  date DATE,
+  shell TEXT,
+  total INT,
+  ok INT,
+  broken INT,
+  degraded INT,
+  install_failed INT,
+  PRIMARY KEY (date, shell)
+)`
+
+const UPSERT_REPLAY_RUNS = `INSERT INTO replay_runs (date, shell, total, ok, broken, degraded, install_failed)
+VALUES %s
+ON CONFLICT (date, shell) DO UPDATE SET
+  total = EXCLUDED.total, ok = EXCLUDED.ok, broken = EXCLUDED.broken,
+  degraded = EXCLUDED.degraded, install_failed = EXCLUDED.install_failed`
 
 function pluginRow(p, enrich) {
   const e = enrich.get(p.full_name) || {}
@@ -409,6 +457,45 @@ async function syncWeeklyLetters(token) {
   return fmt('weekly_letters', r, records.length)
 }
 
+/**
+ * D4 回放结果 → plugin_replay（每 (repo,shell,date) 一行）+ replay_runs（每日每 shell 汇总）。
+ *
+ * 台账取 `replay-history.jsonl`（append-only 时间序列，唯一完整的跨日记录）；
+ * 当日明细从 `replay.json` 关联进来——历史行拿不到 detail 就留空，不编造。
+ * 这是「修好了」事件与崩溃率趋势的可 SQL 查询副本（data/ 仍是唯一事实来源）。
+ */
+async function syncReplay(token) {
+  await sql(token, CREATE_PLUGIN_REPLAY)
+  await sql(token, CREATE_REPLAY_RUNS)
+
+  const history = readJsonl(PATHS.replayHistory)
+  const snap = readJson(PATHS.replay, null)
+  const detailByKey = new Map()
+  for (const t of snap?.targets || []) {
+    if (!t?.repo) continue
+    detailByKey.set(`${t.repo}|${snap.shell}|${String(snap.generatedAt).slice(0, 10)}`, t)
+  }
+
+  const rows = history
+    .filter((r) => r.repo && r.date)
+    .map((r) => {
+      const detail = detailByKey.get(`${r.repo}|${r.shell}|${r.date}`) ?? null
+      return `(${[
+        lit(r.repo), lit(r.shell), lit(r.date), lit(r.pkg), lit(r.version),
+        lit(r.verdict), lit(r.reason), lit(r.hostBootMs ?? null), lit(r.egressCount ?? null),
+        lit(Boolean(r.versionDrift)), jsonLit(detail), 'now()',
+      ].join(', ')})`
+    })
+  const a = await upsertBatches(token, 'plugin_replay', UPSERT_PLUGIN_REPLAY, rows)
+
+  // 汇总从完整台账现算（lib/db9 的纯函数，可单测）—— 幂等，重跑即修正
+  const runRows = aggregateReplayRuns(history).map((v) =>
+    `(${[lit(v.date), lit(v.shell), lit(v.total), lit(v.ok), lit(v.broken), lit(v.degraded), lit(v.install_failed)].join(', ')})`)
+  const b = await upsertBatches(token, 'replay_runs', UPSERT_REPLAY_RUNS, runRows)
+
+  return `${fmt('plugin_replay', a, rows.length)} · ${fmt('replay_runs', b, runRows.length)}`
+}
+
 async function main() {
   if (!isEnabled()) {
     console.log('[db9-sync] 未配置 DB9_TOKEN，跳过 db9 同步（旁路存储，不影响管线）')
@@ -425,6 +512,7 @@ async function main() {
     ['invalid', syncInvalidCandidates],
     ['events', syncEcosystemEvents],
     ['letters', syncWeeklyLetters],
+    ['replay', syncReplay],
   ]
   const summaries = []
   let failedSources = 0

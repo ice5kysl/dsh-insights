@@ -12,10 +12,10 @@
 
 L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，只提供卡片上那个分数」（详见 [M2-INTEGRATION.md](./M2-INTEGRATION.md)）。
 
-**叙事三件套（帖子/README/演示统一用，2026-09-17 快照口径 · health-v6）**
-1. 数据点：`dsh-plugin` topic 宇宙 14,941、多源候选 15,733、权威集 **11,419**（manifest 门禁逐条校验）、npm 发布率 **41.7%**（4,765 已发布）
-2. 证据点（health.json topDeductions，health-v6）：**76.2% 缺 client export**（Web 端装不上）、72% 无 CI、70.1% 无 docs 目录、58.3% 未发 npm、52.1% 缺中文文档、47.4% 无测试、**19.3% 超 30 天停更**（该条此前因口径缺陷几乎不触发，见 SCHEMA §health changelog health-v6）
-3. 反差点：14.5k★ 权威列表明说"不评判质量" → 评估层无人做、我们做且开源；S+A 仅 **1,050 个（9.2%）**，均分 75.4
+**叙事三件套（帖子/README/演示统一用，2026-09-17 快照口径 · health-v7）**
+1. 数据点：`dsh-plugin` topic 宇宙 14,941、多源候选 15,733、权威集 **11,419**（manifest 门禁逐条校验）、npm 发布率 **44.9%**（5,124 已发布）
+2. 证据点（health.json topDeductions，health-v7）：**76.2% 缺 client export**（Web 端装不上）、72% 无 CI、70.1% 无 docs 目录、55.1% 未发 npm、52.1% 缺中文文档、47.4% 无测试、**23.1% npm 版本落后于仓库**、**19.4% 超 30 天停更**（后两条此前因数据冻结被系统性低估，见 SCHEMA §health changelog health-v6/v7）
+3. 反差点：14.5k★ 权威列表明说"不评判质量" → 评估层无人做、我们做且开源；S+A 仅 **810 个（7.1%）**，均分 75.1
 
 **dogfooding 证据（自证可信）**：自家三个插件 dsh-insights-kit / dsh-workspace-kit / dsh-file-explorer-kit 全部 100 分 S 级、徽章挂 README、自检 CLI 进 CI（fail 档退出码 1）。
 

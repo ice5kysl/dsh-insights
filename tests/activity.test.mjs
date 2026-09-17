@@ -77,5 +77,5 @@ test('正向：真正活跃的行不触发 dormant', () => {
 })
 
 test('ruleVersion 已随本次口径更正升版', () => {
-  assert.equal(RULE_VERSION, 'health-v6')
+  assert.equal(RULE_VERSION, 'health-v7')
 })

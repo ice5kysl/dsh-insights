@@ -124,9 +124,10 @@
 }
 ```
 
-**规则（RULE_VERSION=health-v6；升版必须在此加 changelog）**
+**规则（RULE_VERSION=health-v7；升版必须在此加 changelog）**
 
 Changelog：
+- health-v7 (2026-09-17)：**npm 数据新鲜度修复（同样非新规则，而是输入修复）**——`r.npm`（latest/versions/latestTime）由 validate 首次校验时算完即**永久冻结**，`refresh.mjs` 只刷 stars/pushed_at 等字段，于是版本号一直停在入库那天：抽样重探 40 个已发布插件，**约 25% 已过期**。新增 `pipeline/collect/npm-refresh.mjs`（进 daily + monday，在 analyze 之前）日更：先做极廉价的 `/-/package/<pkg>/dist-tags` 探测，只有 latest 变了（或首次发布）才拉完整 packument —— 无实质变化**不写文件**（避免每天全文件 diff）。影响口径：`npm.version-drift`（现能正确判定/消解）、`npm.single-release`、`npm.release-stale`、`npm.unpublished`（首次发布会从「未发布」翻正）。npm 端点怪癖：不存在的作用域包在 `/-/package/<spec>/dist-tags` 上返回 **401 而非 404**（隐藏私有包是否存在），必须按 missing 处理，否则每次都白重试。同批修掉一个**凭据外泄**：`lib/api.mjs` 的 `raw()` 曾把 GitHub token + GitHub Accept 头挂到**任何** URL，而 `npmDoc` 走该路径 → 每次 npm 探测都在向 registry.npmjs.org 发送 GITHUB_TOKEN；现限定只对 GitHub 域加凭据，`npmDoc` 改裸 fetch。**全量重跑实测（11,419 行，7 分钟）**：新版本 1,321 · 首次发布 371 · 已下架 39 · 无变化 9,686。口径影响：`npm.version-drift` 扣分 **1,369 → 2,642**（旧数据把 drift 藏住了）· `npm.unpublished` 6,654 → 6,291 · S+A **1,050 → 810**（632 个插件档位变化）· 均分 75.4 → 75.1。回归测试 `tests/npm-refresh.test.mjs`。
 - health-v6 (2026-09-17)：**活跃度口径更正（bug 修复，非新规则）**——`metrics.active30/idleDays/ageDays/ageGate1` 原先由 validate 在首次校验时用 `Date.now()` 算完即**永久冻结**（refresh 只刷新 stars/pushed_at 等原始字段，没重算这几个派生值），于是 `activity.dormant` 对停更仓库几乎从未生效：更正当期，全量 11,419 个插件里只有 **2 个** 触发了该扣分，实际应有 **2,206 个**。修复方式：新增 `lib/data.mjs#deriveActivity()`，评分/统计/导出**一律从 `pushed_at` 现算**，不再读持久化副本；缺 `pushed_at` 的行记入 `missing`（活跃度不可知，不当通过）。受影响口径：站点「30 天活跃」由虚报的 **100%** 更正为 **78.2%**；S+A 由 1,139 → **1,050**（104 出 / 15 入，净 −89）；`activity.dormant` 扣分 2 → 2,206。**持久化的 `metrics.active30/idleDays/ageDays/ageGate1` 自本版起为废弃字段，任何消费者不得直接读取**（`metrics.hasZhDocs` 与时间无关，仍有效）。回归测试：`tests/activity.test.mjs`。
 - health-v5 (2026-09-07)：**反模板农场**——新增 `maint.single-push`（major −10：创建≈最后 push <1h 且仓库 ≥7 天，一次性导入后再无维护；npm ≥2 版本豁免）、`discover.batch-import`（warn −5：同账号 ≥20 个权威插件且 ≥70% 一次性仓库）。背景：uckkk 独占 1,285 个插件（13%），其 88% 仓库 push-created<1h（全生态 31%）、均分 75 却有 317 个 B 级；v5 后该账号均分 61、958 个落 D 级。实测分布 S248/A787/B4875/C3030/D1249，区分度改善。
 - health-v4 (2026-09-06)：新增 **S 级（≥95）**——v3 下 A(≥90) 占 28% 仍偏宽，S 档（实测 10.0%）给真正卓越的插件出头空间；阈值成为 S≥95 · A≥90 · B≥75 · C≥60 · D<60。

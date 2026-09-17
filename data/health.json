@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-09-17T00:41:14.679Z",
-  "ruleVersion": "health-v6",
+  "generatedAt": "2026-09-17T01:01:37.564Z",
+  "ruleVersion": "health-v7",
   "total": 11419,
   "grades": {
-    "S": 261,
-    "A": 789,
-    "B": 5363,
-    "C": 3500,
-    "D": 1506
+    "S": 176,
+    "A": 634,
+    "B": 5629,
+    "C": 3486,
+    "D": 1494
   },
-  "avg": 75.4,
+  "avg": 75.1,
   "median": 76,
   "topDeductions": [
     {
@@ -29,8 +29,8 @@
     },
     {
       "code": "npm.unpublished",
-      "count": 6654,
-      "pct": 58.3
+      "count": 6291,
+      "pct": 55.1
     },
     {
       "code": "docs.zh-missing",
@@ -49,18 +49,18 @@
     },
     {
       "code": "maint.single-push",
-      "count": 2756,
-      "pct": 24.1
+      "count": 2742,
+      "pct": 24
+    },
+    {
+      "code": "npm.version-drift",
+      "count": 2643,
+      "pct": 23.1
     },
     {
       "code": "activity.dormant",
-      "count": 2211,
+      "count": 2212,
       "pct": 19.4
-    },
-    {
-      "code": "repo.sparse-topics",
-      "count": 2046,
-      "pct": 17.9
     }
   ]
 }

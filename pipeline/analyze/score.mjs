@@ -25,7 +25,7 @@
 import { pathToFileURL } from 'node:url'
 import { PATHS, readJsonl, writeJson, loadPlugins, deriveActivity } from '../../lib/data.mjs'
 
-export const RULE_VERSION = 'health-v6'
+export const RULE_VERSION = 'health-v7'
 
 /**
  * 评估指标体系 v1（docs/SCHEMA.md §health 有完整定义与说明）。

@@ -6,7 +6,7 @@
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { lit, jsonLit, isEnabled, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, pluginCreatedEvent, diffPluginEvents, aggregateCrashSignatures, toIso, invalidCandidateKey, DEFAULT_SQL_URL } from '../lib/db9.mjs'
+import { lit, jsonLit, isEnabled, splitPkgVersion, latestBy, extractDynamicsEvents, letterToRecord, pluginCreatedEvent, diffPluginEvents, aggregateCrashSignatures, toIso, invalidCandidateKey, DEFAULT_SQL_URL, aggregateReplayRuns } from '../lib/db9.mjs'
 import { releaseToEvent, npmTimeToEvents } from '../bin/backfill-events.mjs'
 
 test('lit: null/undefined → NULL', () => {
@@ -378,4 +378,32 @@ test('invalidCandidateKey: 无任何标识 → null', () => {
   assert.equal(invalidCandidateKey(null), null)
   assert.equal(invalidCandidateKey({ reason: 'fork' }), null)
   assert.equal(invalidCandidateKey({ owner: 'a' }), null)
+})
+
+// ---- D4 回放台账汇总（health-v7 同批新增的 db9 表）----
+test('aggregateReplayRuns: 按 (date,shell) 汇总，未知 verdict 只计入 total', () => {
+  const rows = [
+    { date: '2026-09-17', shell: '0.1.5-rc.1', repo: 'a/x', verdict: 'ok' },
+    { date: '2026-09-17', shell: '0.1.5-rc.1', repo: 'b/y', verdict: 'broken' },
+    { date: '2026-09-17', shell: '0.1.5-rc.1', repo: 'c/z', verdict: 'degraded' },
+    { date: '2026-09-17', shell: '0.1.5-rc.1', repo: 'd/w', verdict: 'install-failed' },
+    { date: '2026-09-17', shell: '0.1.5-rc.1', repo: 'e/v', verdict: 'weird-unknown' },
+    { date: '2026-09-17', shell: '0.1.6-alpha.1', repo: 'a/x', verdict: 'broken' },
+    { date: '2026-09-16', shell: '0.1.5-rc.1', repo: 'a/x', verdict: 'broken' },
+  ]
+  const out = aggregateReplayRuns(rows)
+  assert.equal(out.length, 3, '两条日期 × 两个 shell 组合')
+  const main = out.find((r) => r.date === '2026-09-17' && r.shell === '0.1.5-rc.1')
+  assert.deepEqual(
+    { total: main.total, ok: main.ok, broken: main.broken, degraded: main.degraded, install_failed: main.install_failed },
+    { total: 5, ok: 1, broken: 1, degraded: 1, install_failed: 1 },
+    '未知 verdict 只进 total'
+  )
+  const other = out.find((r) => r.shell === '0.1.6-alpha.1')
+  assert.equal(other.total, 1)
+})
+
+test('aggregateReplayRuns: 忽略缺 repo/date 的行，不炸', () => {
+  assert.deepEqual(aggregateReplayRuns([{ shell: 'x', verdict: 'ok' }, null, { date: '2026-09-17', shell: 'x' }]), [])
+  assert.deepEqual(aggregateReplayRuns(null), [])
 })
