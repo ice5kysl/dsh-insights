@@ -1,16 +1,15 @@
 # 快照 Diff · 2026-09-17
 
-- 当前权威插件：**11434**（上次 11427）
-- 新增 7 · 消失 0
+- 当前权威插件：**11440**（上次 11434）
+- 新增 6 · 消失 0
 
-## 新增（Top 7）
-- wertyq111/dsh-paste-preview ★1 (npm ✓)
-- dooooling/dsh-opencode-compat ★0 
-- mugnimaestra/dsh-browser-use ★0 (npm ✓)
-- RCYD857/857-dsh-pdf-patched ★0 
-- aklnaaw/dsh-claude-crab ★0 
-- JeremyWangCY/win-pilot ★0 (npm ✓)
-- xyzzing/dsh-captain-guard ★0 
+## 新增（Top 6）
+- Smallballoons01/dsh-water-reminder ★1 
+- darrien1998/dsh-ditto ★0 (npm ✓)
+- xiaobbl/dsh-opencode-go-model-list ★0 
+- xianmua/dsh-apis-plugin ★0 (npm ✓)
+- voidmind26/dsh-lsp-bridge ★0 
+- fengshuai3/memosbox-dsh-plugin ★0 
 
 ## 消失（Top 0）
 
