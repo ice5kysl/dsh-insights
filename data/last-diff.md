@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-17
 
-- 当前权威插件：**11445**（上次 11444）
+- 当前权威插件：**11446**（上次 11445）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- yunfeizhu/dsh-pptx-editor ★0 (npm ✓)
+- SkyblueeeLabs/dsh-iconic-launcher ★0 
 
 ## 消失（Top 0）
 
