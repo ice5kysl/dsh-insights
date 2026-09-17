@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-17T05:15:29.781Z",
+  "generatedAt": "2026-09-17T05:26:26.087Z",
   "totals": {
     "authoritative": 11443,
-    "active7": 2527,
+    "active7": 2525,
     "active7Pct": 22.1,
-    "active30": 8874,
+    "active30": 8868,
     "active30Pct": 77.5,
     "ageGate1": 11100,
     "ageGate1Pct": 97,
@@ -69,7 +69,7 @@
         "2026-08-03": 35,
         "2026-03-09": 3,
         "2026-06-22": 4,
-        "2026-08-17": 1622,
+        "2026-08-17": 1621,
         "2026-06-08": 4,
         "2026-06-15": 2,
         "2026-08-24": 829,
@@ -111,7 +111,7 @@
         "2026-01-19": 1,
         "2026-03-09": 1,
         "2026-01-05": 1,
-        "2026-08-17": 1048,
+        "2026-08-17": 1049,
         "2026-07-13": 3,
         "2026-08-10": 1340,
         "2026-02-02": 1,
@@ -347,7 +347,7 @@
     "covered": 1040,
     "coveredPct": 9.1,
     "none": 10403,
-    "fetchedAt": "2026-09-17T05:14:51.030Z"
+    "fetchedAt": "2026-09-17T05:25:38.315Z"
   },
   "suggested": [
     {
@@ -1061,13 +1061,13 @@
       {
         "full_name": "KokuYu-sysu/dsh-market-desktop",
         "stars": 1,
-        "score": 88,
+        "score": 83,
         "grade": "B",
         "dimScores": {
           "eng": 90,
           "docs": 100,
           "discover": 98,
-          "maint": 100
+          "maint": 95
         },
         "drops": [
           {
@@ -1084,6 +1084,11 @@
             "code": "repo.sparse-topics",
             "sev": "minor",
             "label": "topics 过少（<2，可发现面窄）"
+          },
+          {
+            "code": "activity.dormant",
+            "sev": "warn",
+            "label": "超 30 天无提交（维护停滞风险）"
           }
         ],
         "missing": [],
@@ -1610,8 +1615,8 @@
   "quality": {
     "grades": {
       "A": 631,
-      "B": 5624,
-      "C": 3510,
+      "B": 5623,
+      "C": 3511,
       "D": 1501,
       "S": 177
     },
@@ -57313,7 +57318,7 @@
       "lastPush": "2026-08-18",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 80,
+      "avg": 75,
       "topPlugin": "alcohol-101/dsh-gif-background",
       "topStars": 1,
       "topCat": "主题 / 视觉美化"
@@ -60052,27 +60057,6 @@
       "topCat": "消息 / 协作集成"
     },
     {
-      "owner": "zhangshaobo608",
-      "plugins": 1,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-08-18",
-      "firstCreated": "2026-08-18",
-      "delta": 0,
-      "avg": 76,
-      "topPlugin": "zhangshaobo608/dsh-cost-widget",
-      "topStars": 1,
-      "topCat": "状态 / 监控 / 用量"
-    },
-    {
       "owner": "KokuYu-sysu",
       "plugins": 1,
       "stars": 1,
@@ -60088,7 +60072,7 @@
       "lastPush": "2026-08-18",
       "firstCreated": "2026-08-18",
       "delta": 0,
-      "avg": 88,
+      "avg": 83,
       "topPlugin": "KokuYu-sysu/dsh-market-desktop",
       "topStars": 1,
       "topCat": "搜索 / 命令面板"
@@ -76903,7 +76887,7 @@
       "lastPush": "2026-08-18",
       "firstCreated": "2026-08-18",
       "delta": 0,
-      "avg": 81,
+      "avg": 76,
       "topPlugin": "wencharmwang/dsh-voice",
       "topStars": 0,
       "topCat": "其它"
@@ -99127,7 +99111,7 @@
       "lastPush": "2026-08-18",
       "firstCreated": "2026-08-16",
       "delta": 0,
-      "avg": 69,
+      "avg": 64,
       "topPlugin": "wpc0323/deepseek-web-import",
       "topStars": 3,
       "topCat": "其它"
@@ -112405,6 +112389,27 @@
       "topCat": "会话管理"
     },
     {
+      "owner": "zhangshaobo608",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-08-18",
+      "firstCreated": "2026-08-18",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "zhangshaobo608/dsh-cost-widget",
+      "topStars": 1,
+      "topCat": "状态 / 监控 / 用量"
+    },
+    {
       "owner": "looput",
       "plugins": 1,
       "stars": 1,
@@ -118972,7 +118977,7 @@
       "lastPush": "2026-08-18",
       "firstCreated": "2026-08-17",
       "delta": 0,
-      "avg": 69,
+      "avg": 64,
       "topPlugin": "AskingTheHeavens/dsh-openclaw-persona",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
@@ -139204,7 +139209,7 @@
       "1969-12-29": 489
     },
     "validated": 15731,
-    "candidatesValidated": 31,
+    "candidatesValidated": 27,
     "authoritative": 11443,
     "invalidUnique": 4288,
     "invalidBuckets": [
