@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-09-17T13:15:11.915Z",
+  "fetchedAt": "2026-09-17T13:40:12.328Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 227543,
-    "forks": 27124,
-    "pushed_at": "2026-09-15T04:51:11Z",
+    "stars": 227564,
+    "forks": 27129,
+    "pushed_at": "2026-09-17T13:30:15Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.1.6-alpha.2",
+        "name": "v0.1.6-alpha.2",
+        "prerelease": true,
+        "published_at": "2026-09-17T13:30:16Z",
+        "breaking": true,
+        "summary": "新增插件管理页，支持插件安装和修改配置，支持实时开启禁用插件。 @LegGasai,",
+        "added": 4,
+        "fixed": 11
+      },
       {
         "tag": "dsh-v0.1.6-alpha.1",
         "name": "v0.1.6-alpha.1",
@@ -76,26 +86,16 @@
         "summary": "Web 支持上传任意类型的通用文件：文件与图片可在同一预览区混排，后台上传支持进度、取消与会话切换续显，模型可通过已保存路径使用现有文件工具按需读取。",
         "added": 5,
         "fixed": 10
-      },
-      {
-        "tag": "dsh-v0.1.2-rc.1",
-        "name": "v0.1.2-rc.1",
-        "prerelease": true,
-        "published_at": "2026-09-03T06:06:07Z",
-        "breaking": true,
-        "summary": "会话流默认在每个已完成回答前折叠过程内容，并默认折叠的「System prompt」 @07akioni,",
-        "added": 8,
-        "fixed": 20
       }
     ],
     "npm": {
       "pkg": "@deepseek-ai/dsh",
       "distTags": {
-        "alpha": "0.1.6-alpha.1",
-        "latest": "0.1.5-rc.1",
-        "next": "0.1.5-rc.2"
+        "latest": "0.1.5-rc.2",
+        "next": "0.1.5-rc.2",
+        "alpha": "0.1.6-alpha.1"
       },
-      "modified": "2026-09-15T03:23:13.922Z",
+      "modified": "2026-09-17T13:29:50.515Z",
       "versions": [
         {
           "version": "0.1.6-alpha.1",
@@ -186,7 +186,7 @@
     {
       "repo": "deepseek-ai/DeepSeek-Coder",
       "stars": 24270,
-      "forks": 2927,
+      "forks": 2926,
       "pushed_at": "2025-11-11T06:44:56Z",
       "description": "DeepSeek Coder: Let the Code Write Itself",
       "latestRelease": null
@@ -209,7 +209,7 @@
     },
     {
       "repo": "deepseek-ai/FlashMLA",
-      "stars": 12938,
+      "stars": 12939,
       "forks": 1154,
       "pushed_at": "2026-09-15T01:50:44Z",
       "description": "FlashMLA: Efficient Multi-head Latent Attention Kernels",
