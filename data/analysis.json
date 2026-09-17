@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-17T11:03:41.481Z",
+  "generatedAt": "2026-09-17T11:15:08.961Z",
   "totals": {
-    "authoritative": 11472,
-    "active7": 2405,
-    "active7Pct": 21,
-    "active30": 8774,
+    "authoritative": 11473,
+    "active7": 2401,
+    "active7Pct": 20.9,
+    "active30": 8772,
     "active30Pct": 76.5,
     "ageGate1": 11123,
-    "ageGate1Pct": 97,
+    "ageGate1Pct": 96.9,
     "byMonth": {
       "2026-08": 9677,
       "2026-02": 4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1711,
+      "2026-09": 1712,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,11 +56,11 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 319
+      "2026-09-14": 320
     },
     "byWeekGrades": {
       "B": {
-        "2026-08-10": 1972,
+        "2026-08-10": 1970,
         "2026-02-16": 3,
         "2026-07-13": 7,
         "2026-04-27": 2,
@@ -113,7 +113,7 @@
         "2026-01-05": 1,
         "2026-08-17": 1061,
         "2026-07-13": 3,
-        "2026-08-10": 1347,
+        "2026-08-10": 1349,
         "2026-02-02": 1,
         "2026-08-03": 19,
         "2026-03-23": 1,
@@ -129,7 +129,7 @@
         "2026-06-29": 2,
         "2026-09-07": 215,
         "2026-07-06": 1,
-        "2026-09-14": 94
+        "2026-09-14": 95
       },
       "D": {
         "2026-08-10": 327,
@@ -148,18 +148,18 @@
   "distribution": {
     "publish": {
       "published": 5144,
-      "unpublished": 6328,
+      "unpublished": 6329,
       "stale": 2652
     },
     "docs": {
-      "readme": 11443,
+      "readme": 11444,
       "zhFile": 864,
       "zh": 5475,
       "both": 5465,
       "none": 29
     },
     "lib": {
-      "index": 6158,
+      "index": 6159,
       "client": 3951,
       "both": 3531
     },
@@ -231,11 +231,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11141
+      "count": 11142
     },
     {
       "topic": "deepseek-harness",
-      "count": 7448
+      "count": 7449
     },
     {
       "topic": "dsh",
@@ -346,8 +346,8 @@
     "imsai": 274,
     "covered": 1042,
     "coveredPct": 9.1,
-    "none": 10430,
-    "fetchedAt": "2026-09-17T11:02:48.110Z"
+    "none": 10431,
+    "fetchedAt": "2026-09-17T11:14:25.049Z"
   },
   "suggested": [
     {
@@ -1615,8 +1615,8 @@
   "quality": {
     "grades": {
       "A": 628,
-      "B": 5617,
-      "C": 3543,
+      "B": 5615,
+      "C": 3546,
       "D": 1508,
       "S": 176
     },
@@ -1671,7 +1671,7 @@
     },
     {
       "category": "记忆 / 知识",
-      "count": 311
+      "count": 312
     }
   ],
   "authors": [
@@ -7186,6 +7186,27 @@
       "topCat": "侧栏 / 工作区"
     },
     {
+      "owner": "QuantumKuba",
+      "plugins": 4,
+      "stars": 5,
+      "grades": {
+        "A": 0,
+        "B": 3,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 3,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-17",
+      "firstCreated": "2026-08-31",
+      "delta": 0,
+      "avg": 78.8,
+      "topPlugin": "QuantumKuba/dsh-graphify-plugin",
+      "topStars": 3,
+      "topCat": "记忆 / 知识"
+    },
+    {
       "owner": "NokorinNishikino",
       "plugins": 4,
       "stars": 5,
@@ -7268,27 +7289,6 @@
       "avg": 92,
       "topPlugin": "ChuanTianML/dsh-chat-tidy",
       "topStars": 5,
-      "topCat": "记忆 / 知识"
-    },
-    {
-      "owner": "QuantumKuba",
-      "plugins": 3,
-      "stars": 5,
-      "grades": {
-        "A": 0,
-        "B": 3,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 3,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-09-16",
-      "firstCreated": "2026-08-31",
-      "delta": 0,
-      "avg": 80.7,
-      "topPlugin": "QuantumKuba/dsh-graphify-plugin",
-      "topStars": 3,
       "topCat": "记忆 / 知识"
     },
     {
@@ -19851,7 +19851,7 @@
       "lastPush": "2026-09-15",
       "firstCreated": "2026-08-16",
       "delta": 0,
-      "avg": 86.5,
+      "avg": 84,
       "topPlugin": "Paloma966/dsh-socrates",
       "topStars": 0,
       "topCat": "其它"
@@ -35742,27 +35742,6 @@
       "topCat": "消息 / 协作集成"
     },
     {
-      "owner": "zdjmrq",
-      "plugins": 2,
-      "stars": 4,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-08-18",
-      "firstCreated": "2026-08-14",
-      "delta": 0,
-      "avg": 72.5,
-      "topPlugin": "zdjmrq/dsh-pluginmanager",
-      "topStars": 3,
-      "topCat": "其它"
-    },
-    {
       "owner": "cynch18",
       "plugins": 2,
       "stars": 4,
@@ -39084,27 +39063,6 @@
       "topPlugin": "ChengChe106/dsh-session-cost",
       "topStars": 2,
       "topCat": "会话管理"
-    },
-    {
-      "owner": "Whning0513",
-      "plugins": 2,
-      "stars": 3,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-08-18",
-      "firstCreated": "2026-08-14",
-      "delta": 0,
-      "avg": 71,
-      "topPlugin": "Whning0513/awesome-deepseek-skills",
-      "topStars": 2,
-      "topCat": "工具 / 效率"
     },
     {
       "owner": "oneinitAI",
@@ -95630,6 +95588,27 @@
       "topCat": "开发 / 数据"
     },
     {
+      "owner": "zdjmrq",
+      "plugins": 2,
+      "stars": 4,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-08-18",
+      "firstCreated": "2026-08-14",
+      "delta": 0,
+      "avg": 70,
+      "topPlugin": "zdjmrq/dsh-pluginmanager",
+      "topStars": 3,
+      "topCat": "其它"
+    },
+    {
       "owner": "CaoNing3212",
       "plugins": 2,
       "stars": 4,
@@ -97707,6 +97686,27 @@
       "topPlugin": "l541402398/dsh-file-uploads",
       "topStars": 3,
       "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "Whning0513",
+      "plugins": 2,
+      "stars": 3,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-08-18",
+      "firstCreated": "2026-08-14",
+      "delta": 0,
+      "avg": 68.5,
+      "topPlugin": "Whning0513/awesome-deepseek-skills",
+      "topStars": 2,
+      "topCat": "工具 / 效率"
     },
     {
       "owner": "xuboboo",
@@ -139572,7 +139572,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 15803,
+    "candidates": 15804,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -139643,14 +139643,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 390,
+      "2026-09-14": 391,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 15771,
-    "candidatesValidated": 32,
-    "authoritative": 11472,
+    "validated": 15772,
+    "candidatesValidated": 28,
+    "authoritative": 11473,
     "invalidUnique": 4299,
     "invalidBuckets": [
       {
@@ -139699,5 +139699,5 @@
       }
     ]
   },
-  "enrichCount": 11472
+  "enrichCount": 11473
 }
