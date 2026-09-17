@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-17
 
-- 当前权威插件：**11512**（上次 11511）
+- 当前权威插件：**11513**（上次 11512）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- zemanzhang809/dsh-stt-plugin ★0 
+- loonylabs-dev/dsh-cache-guard ★0 (npm ✓)
 
 ## 消失（Top 0）
 

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-17T21:14:29.333Z",
+  "generatedAt": "2026-09-17T21:36:58.473Z",
   "totals": {
-    "authoritative": 11512,
-    "active7": 2226,
+    "authoritative": 11513,
+    "active7": 2225,
     "active7Pct": 19.3,
     "active30": 8687,
     "active30Pct": 75.5,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1751,
+      "2026-09": 1752,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 359
+      "2026-09-14": 360
     },
     "byWeekGrades": {
       "B": {
@@ -87,7 +87,7 @@
         "2026-06-29": 4,
         "2026-09-07": 451,
         "2026-03-02": 1,
-        "2026-09-14": 231
+        "2026-09-14": 232
       },
       "S": {
         "2026-08-03": 2,
@@ -147,12 +147,12 @@
   },
   "distribution": {
     "publish": {
-      "published": 5156,
+      "published": 5157,
       "unpublished": 6356,
       "stale": 2656
     },
     "docs": {
-      "readme": 11483,
+      "readme": 11484,
       "zhFile": 867,
       "zh": 5492,
       "both": 5482,
@@ -231,11 +231,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11181
+      "count": 11182
     },
     {
       "topic": "deepseek-harness",
-      "count": 7478
+      "count": 7479
     },
     {
       "topic": "dsh",
@@ -251,7 +251,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1099
+      "count": 1100
     },
     {
       "topic": "plugin",
@@ -346,8 +346,8 @@
     "imsai": 274,
     "covered": 1042,
     "coveredPct": 9.1,
-    "none": 10470,
-    "fetchedAt": "2026-09-17T21:13:43.601Z"
+    "none": 10471,
+    "fetchedAt": "2026-09-17T21:36:16.320Z"
   },
   "suggested": [
     {
@@ -1615,7 +1615,7 @@
   "quality": {
     "grades": {
       "A": 627,
-      "B": 5607,
+      "B": 5608,
       "C": 3585,
       "D": 1518,
       "S": 175
@@ -1643,7 +1643,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 806
+      "count": 807
     },
     {
       "category": "侧栏 / 工作区",
@@ -91450,6 +91450,27 @@
       "topCat": "消息 / 协作集成"
     },
     {
+      "owner": "loonylabs-dev",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-17",
+      "firstCreated": "2026-09-17",
+      "delta": 0,
+      "avg": 79,
+      "topPlugin": "loonylabs-dev/dsh-cache-guard",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
+    },
+    {
       "owner": "linhay",
       "plugins": 1,
       "stars": 347,
@@ -113242,7 +113263,7 @@
       "lastPush": "2026-08-18",
       "firstCreated": "2026-08-18",
       "delta": 0,
-      "avg": 59,
+      "avg": 54,
       "topPlugin": "DeBug-lzy/Restart-service-button",
       "topStars": 1,
       "topCat": "其它"
@@ -139982,7 +140003,7 @@
     }
   ],
   "authorStats": {
-    "total": 6579,
+    "total": 6580,
     "multi": 1572,
     "top10Share": 15.1
   },
@@ -139991,7 +140012,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 15868,
+    "candidates": 15870,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -140062,19 +140083,19 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 455,
+      "2026-09-14": 457,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 15836,
+    "validated": 15838,
     "candidatesValidated": 29,
-    "authoritative": 11512,
-    "invalidUnique": 4324,
+    "authoritative": 11513,
+    "invalidUnique": 4325,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 2368
+        "count": 2369
       },
       {
         "reason": "no-package.json",
@@ -140118,5 +140139,5 @@
       }
     ]
   },
-  "enrichCount": 11512
+  "enrichCount": 11513
 }
