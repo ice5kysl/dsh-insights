@@ -1,130 +1,346 @@
 {
-  "generatedAt": "2026-09-16T23:23:11.399Z",
+  "format": "replay-v1",
+  "generatedAt": "2026-09-17T00:13:09.890Z",
   "shell": "0.1.5-rc.1",
   "method": "真实 shell（dsh web）+ headless Chromium（CDP）加载真实插件；与干净 profile baseline 做差集归因。非静态分析。",
+  "signals": [
+    "verdict",
+    "shellError",
+    "hostBootMs",
+    "page",
+    "errors",
+    "warnings",
+    "egress",
+    "installed",
+    "shot"
+  ],
+  "note": "egress = 观测到的外部请求主机名（只留 host、剥掉路径/query，排除 shell 自身与 localhost）。这是**观测事实，非安全审计**，不得据此断言插件恶意。",
   "baseline": {
     "appBooted": true,
     "errorCount": 0
   },
   "targets": [
     {
-      "target": "dsh-insights-kit@0.10.2",
+      "target": "ice5kysl/dsh-insights-kit",
+      "repo": "ice5kysl/dsh-insights-kit",
       "pkg": "dsh-insights-kit",
       "version": "0.10.2",
-      "repo": null,
+      "corpusVersion": "0.5.0",
+      "versionDrift": true,
+      "repoStars": 0,
+      "grade": "S",
       "verdict": "ok",
       "reason": "loaded",
       "appBooted": true,
       "shellBooted": true,
       "shellError": null,
       "shellLog": null,
-      "novelErrors": [],
-      "loadFailErrors": [],
-      "probe": {
+      "hostBootMs": 3340,
+      "page": {
         "title": "DeepSeek Harness",
-        "bodyLen": 31710,
+        "bodyLen": 49609,
         "roots": [
           1
         ]
       },
-      "durationMs": 13722
+      "errors": {
+        "novel": 0,
+        "loadFail": 0,
+        "sample": []
+      },
+      "warnings": [],
+      "egress": [],
+      "installed": {
+        "depCount": 0,
+        "peerCount": 0,
+        "installScripts": [
+          "prepare"
+        ],
+        "license": "MIT",
+        "declaredEnginesDsh": null
+      },
+      "shot": "data/replay-shots/ice5kysl__dsh-insights-kit.webp",
+      "durationMs": 13953,
+      "at": "2026-09-17T00:10:58.847Z"
+    },
+    {
+      "target": "ice5kysl/dsh-workspace-kit",
+      "repo": "ice5kysl/dsh-workspace-kit",
+      "pkg": "dsh-workspace-kit",
+      "version": "0.1.11",
+      "corpusVersion": "0.1.3",
+      "versionDrift": true,
+      "repoStars": 0,
+      "grade": "S",
+      "verdict": "ok",
+      "reason": "loaded",
+      "appBooted": true,
+      "shellBooted": true,
+      "shellError": null,
+      "shellLog": null,
+      "hostBootMs": 3367,
+      "page": {
+        "title": "DeepSeek Harness",
+        "bodyLen": 46796,
+        "roots": [
+          1
+        ]
+      },
+      "errors": {
+        "novel": 0,
+        "loadFail": 0,
+        "sample": []
+      },
+      "warnings": [],
+      "egress": [],
+      "installed": {
+        "depCount": 0,
+        "peerCount": 0,
+        "installScripts": [
+          "prepare"
+        ],
+        "license": "MIT",
+        "declaredEnginesDsh": null
+      },
+      "shot": "data/replay-shots/ice5kysl__dsh-workspace-kit.webp",
+      "durationMs": 13890,
+      "at": "2026-09-17T00:11:17.918Z"
+    },
+    {
+      "target": "ice5kysl/dsh-file-explorer-kit",
+      "repo": "ice5kysl/dsh-file-explorer-kit",
+      "pkg": "dsh-file-explorer-kit",
+      "version": "0.3.8",
+      "corpusVersion": "0.3.3",
+      "versionDrift": true,
+      "repoStars": 0,
+      "grade": "S",
+      "verdict": "ok",
+      "reason": "loaded",
+      "appBooted": true,
+      "shellBooted": true,
+      "shellError": null,
+      "shellLog": null,
+      "hostBootMs": 3322,
+      "page": {
+        "title": "DeepSeek Harness",
+        "bodyLen": 49128,
+        "roots": [
+          1
+        ]
+      },
+      "errors": {
+        "novel": 0,
+        "loadFail": 0,
+        "sample": []
+      },
+      "warnings": [],
+      "egress": [],
+      "installed": {
+        "depCount": 0,
+        "peerCount": 0,
+        "installScripts": [
+          "prepare"
+        ],
+        "license": "MIT",
+        "declaredEnginesDsh": null
+      },
+      "shot": "data/replay-shots/ice5kysl__dsh-file-explorer-kit.webp",
+      "durationMs": 13855,
+      "at": "2026-09-17T00:11:39.209Z"
     },
     {
       "target": "FSMargoo/dsh-at-file",
       "repo": "FSMargoo/dsh-at-file",
       "pkg": "dsh-at-file",
       "version": "0.6.3",
+      "corpusVersion": "0.6.3",
+      "versionDrift": false,
       "repoStars": 512,
+      "grade": "B",
       "verdict": "broken",
       "reason": "shell-boot-failed",
       "appBooted": false,
       "shellBooted": false,
       "shellError": "dsh: plugin tree failed to load: failed to apply loader entry include (cordis:include): failed to import loader entry dsh-at-file (dsh-at-file): The requested module '@deepseek-ai/dsh-settings' does not provide an export named 'settingsNamespace'",
       "shellLog": "_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:505:4)\n        ... 3 lines matching cause stack trace ...\n        at async EntryGroup.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:97:21)\n        at async Include._apply (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-app-boot/lib/index.js:240:3) {\n      [cause]: file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/node_modules/dsh-at-file/lib/index.js:15817\n      import { settingsNamespace } from \"@deepseek-ai/dsh-settings\";\n               ^^^^^^^^^^^^^^^^^\n      SyntaxError: The requested module '@deepseek-ai/dsh-settings' does not provide an export named 'settingsNamespace'\n          at #asyncInstantiate (node:internal/modules/esm/module_job:463:21)\n          at async ModuleJob.run (node:internal/modules/esm/module_job:561:5)\n          at async node:internal/modules/esm/loader:650:26\n          at async file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:274:41\n          at async Entry._init (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:522:39)\n          at async Entry.init (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:505:4)\n          at async Entry.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:426:37)\n          at async EntryGroup.create (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:65:4)\n          at async Promise.allSettled (index 152)\n          at async EntryGroup.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:97:21)\n    }\n  }\n}\n\nNode.js v26.8.2\n",
-      "novelErrors": [],
-      "loadFailErrors": [],
-      "probe": null,
-      "durationMs": 14577
+      "hostBootMs": null,
+      "page": null,
+      "errors": {
+        "novel": 0,
+        "loadFail": 0,
+        "sample": []
+      },
+      "warnings": [],
+      "egress": [],
+      "installed": {
+        "depCount": 1,
+        "peerCount": 15,
+        "installScripts": [],
+        "license": "MIT",
+        "declaredEnginesDsh": null
+      },
+      "shot": null,
+      "durationMs": 14428,
+      "at": "2026-09-17T00:11:56.561Z"
     },
     {
       "target": "Tkingxiao/dsh-any-background",
       "repo": "Tkingxiao/dsh-any-background",
       "pkg": "dsh-any-background",
-      "version": "0.2.2",
+      "version": "0.2.9",
+      "corpusVersion": "0.2.2",
+      "versionDrift": true,
       "repoStars": 29,
-      "verdict": "broken",
-      "reason": "shell-boot-failed",
-      "appBooted": false,
-      "shellBooted": false,
-      "shellError": "dsh: plugin tree failed to load: failed to apply loader entry dsh-any-background (dsh-any-background): cannot get property \"webServer\" without inject",
-      "shellLog": "c Proxy.await (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:192:22)\n      at async boot (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-app-boot/lib/index.js:1535:3)\n      at async runProfile (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/lib/profile-boot-Dk-7KqJc.js:311:14)\n      at async runCli (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/lib/bin.js:146:4)\n      at async file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/lib/bin.js:168:23 {\n    [cause]: Error: cannot get property \"webServer\" without inject\n        at Fiber.<anonymous> (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js:618:35)\n        at file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js:1141:34\n        at Proxy.register (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js:618:16)\n        at Object.apply (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js:120:36)\n        at Object.handle (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-client-connection/lib/index.js:543:39)\n        at new apply (file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/node_modules/dsh-any-background/lib/index.js:451:37)\n        at Fiber.execute (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js:1067:24)\n        at file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis/lib/index.js:1141:34\n        at file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/#dsh-any-background\n        at file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/#include\n  }\n}\n\nNode.js v26.8.2\n",
-      "novelErrors": [],
-      "loadFailErrors": [],
-      "probe": null,
-      "durationMs": 4019
-    },
-    {
-      "target": "WSL043/dsh-chat-manager",
-      "repo": "WSL043/dsh-chat-manager",
-      "pkg": "dsh-chat-manager",
-      "version": "1.3.1",
-      "repoStars": 6,
+      "grade": "B",
       "verdict": "ok",
       "reason": "loaded",
       "appBooted": true,
       "shellBooted": true,
       "shellError": null,
       "shellLog": null,
-      "novelErrors": [],
-      "loadFailErrors": [],
-      "probe": {
+      "hostBootMs": 3404,
+      "page": {
         "title": "DeepSeek Harness",
-        "bodyLen": 33478,
+        "bodyLen": 30498,
         "roots": [
           1
         ]
       },
-      "durationMs": 13807
+      "errors": {
+        "novel": 0,
+        "loadFail": 0,
+        "sample": []
+      },
+      "warnings": [],
+      "egress": [],
+      "installed": {
+        "depCount": 1,
+        "peerCount": 8,
+        "installScripts": [],
+        "license": "MIT",
+        "declaredEnginesDsh": null
+      },
+      "shot": null,
+      "durationMs": 13921,
+      "at": "2026-09-17T00:12:14.752Z"
+    },
+    {
+      "target": "WSL043/dsh-chat-manager",
+      "repo": "WSL043/dsh-chat-manager",
+      "pkg": "dsh-chat-manager",
+      "version": "1.3.5",
+      "corpusVersion": "1.3.1",
+      "versionDrift": true,
+      "repoStars": 6,
+      "grade": "A",
+      "verdict": "ok",
+      "reason": "loaded",
+      "appBooted": true,
+      "shellBooted": true,
+      "shellError": null,
+      "shellLog": null,
+      "hostBootMs": 3277,
+      "page": {
+        "title": "DeepSeek Harness",
+        "bodyLen": 51388,
+        "roots": [
+          1
+        ]
+      },
+      "errors": {
+        "novel": 0,
+        "loadFail": 0,
+        "sample": []
+      },
+      "warnings": [],
+      "egress": [],
+      "installed": {
+        "depCount": 1,
+        "peerCount": 9,
+        "installScripts": [],
+        "license": "MIT",
+        "declaredEnginesDsh": null
+      },
+      "shot": "data/replay-shots/WSL043__dsh-chat-manager.webp",
+      "durationMs": 13799,
+      "at": "2026-09-17T00:12:33.552Z"
     },
     {
       "target": "anweat/dsh-restart",
       "repo": "anweat/dsh-restart",
       "pkg": "dsh-restart",
       "version": "0.1.2",
+      "corpusVersion": "0.1.2",
+      "versionDrift": false,
       "repoStars": 7,
+      "grade": "S",
       "verdict": "broken",
       "reason": "shell-boot-failed",
       "appBooted": false,
       "shellBooted": false,
       "shellError": "dsh: plugin tree failed to load: failed to apply loader entry include (cordis:include): failed to import loader entry dsh-restart (dsh-restart): The requested module '@deepseek-ai/dsh-settings' does not provide an export named 'installSettingsSection'",
       "shellLog": "ugin-loader/lib/index.js:505:4)\n        ... 3 lines matching cause stack trace ...\n        at async EntryGroup.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:97:21)\n        at async Include._apply (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/dsh-app-boot/lib/index.js:240:3) {\n      [cause]: file:///Users/iceskysl/Code/Labs/dsh/dsh-insights/.d4-sandbox/home/profiles/web/node_modules/dsh-restart/lib/index.js:24\n      import { installSettingsSection, settingsNamespace } from '@deepseek-ai/dsh-settings';\n               ^^^^^^^^^^^^^^^^^^^^^^\n      SyntaxError: The requested module '@deepseek-ai/dsh-settings' does not provide an export named 'installSettingsSection'\n          at #asyncInstantiate (node:internal/modules/esm/module_job:463:21)\n          at async ModuleJob.run (node:internal/modules/esm/module_job:561:5)\n          at async node:internal/modules/esm/loader:650:26\n          at async file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:274:41\n          at async Entry._init (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:522:39)\n          at async Entry.init (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:505:4)\n          at async Entry.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:426:37)\n          at async EntryGroup.create (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:65:4)\n          at async Promise.allSettled (index 152)\n          at async EntryGroup.update (file:///opt/homebrew/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/cordis-plugin-loader/lib/index.js:97:21)\n    }\n  }\n}\n\nNode.js v26.8.2\n",
-      "novelErrors": [],
-      "loadFailErrors": [],
-      "probe": null,
-      "durationMs": 14449
+      "hostBootMs": null,
+      "page": null,
+      "errors": {
+        "novel": 0,
+        "loadFail": 0,
+        "sample": []
+      },
+      "warnings": [],
+      "egress": [],
+      "installed": {
+        "depCount": 0,
+        "peerCount": 12,
+        "installScripts": [],
+        "license": "MIT",
+        "declaredEnginesDsh": null
+      },
+      "shot": null,
+      "durationMs": 14556,
+      "at": "2026-09-17T00:12:51.169Z"
     },
     {
       "target": "hellodigua/dsh-share",
       "repo": "hellodigua/dsh-share",
       "pkg": "dsh-share",
-      "version": "0.4.0",
+      "version": "0.4.1",
+      "corpusVersion": "0.4.0",
+      "versionDrift": true,
       "repoStars": 35,
+      "grade": "A",
       "verdict": "ok",
       "reason": "loaded",
       "appBooted": true,
       "shellBooted": true,
       "shellError": null,
       "shellLog": null,
-      "novelErrors": [],
-      "loadFailErrors": [],
-      "probe": {
+      "hostBootMs": 3358,
+      "page": {
         "title": "DeepSeek Harness",
-        "bodyLen": 31258,
+        "bodyLen": 49128,
         "roots": [
           1
         ]
       },
-      "durationMs": 13970
+      "errors": {
+        "novel": 0,
+        "loadFail": 0,
+        "sample": []
+      },
+      "warnings": [],
+      "egress": [],
+      "installed": {
+        "depCount": 0,
+        "peerCount": 8,
+        "installScripts": [],
+        "license": "MIT",
+        "declaredEnginesDsh": null
+      },
+      "shot": "data/replay-shots/hellodigua__dsh-share.webp",
+      "durationMs": 13964,
+      "at": "2026-09-17T00:13:09.890Z"
     }
   ]
 }

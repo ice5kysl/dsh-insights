@@ -50,6 +50,20 @@ const PROBE = `JSON.stringify({
   roots: Array.from(document.querySelectorAll('#root,#app,.app,[data-dsh-root]')).map(e => e.childElementCount)
 })`
 
+/**
+ * 首启弹窗关闭器：shell 首次启动会弹「Internal Testing Notice」，**盖住整个 UI**。
+ * 不关掉的话截图全是同一张公告图、插件面板也看不见，截图这项能力等于白做。
+ */
+const DISMISS = `(() => {
+  const norm = (s) => (s || '').replace(/\\s+/g, ' ').trim()
+  const els = Array.from(document.querySelectorAll('button, [role="button"], a'))
+  const hit = els.find((el) => /^(continue|got it|ok|知道了|继续|我同意|同意)$/i.test(norm(el.textContent)))
+  if (hit) { hit.click(); return 'clicked:' + norm(hit.textContent) }
+  const dlg = document.querySelector('dialog[open], [role="dialog"]')
+  if (dlg) { const b = dlg.querySelector('button'); if (b) { b.click(); return 'dialog-clicked' } }
+  return 'none'
+})()`
+
 /** 归因：这些签名说明「插件加载失败」，而不是无关噪声（favicon 404 之类不计）。 */
 const LOAD_FAIL_RE = /Failed to resolve|Cannot find module|does not provide an export|Module not found|ERR_MODULE_NOT_FOUND|Unable to resolve|error loading plugin|failed to load plugin|Cannot read properties of undefined \(reading 'client'\)|not a function \(reading/i
 
@@ -149,8 +163,36 @@ export function extractShellError(log) {
   return line ? line.slice(0, 300) : null
 }
 
+/**
+ * append-only 合并：同一 (date, shell, repo) 用新行覆盖（当天重跑不产生重复行），
+ * 其余历史一律保留——历史是「修好了」事件与崩溃率趋势的唯一来源，绝不能丢。
+ */
+export function mergeHistoryRows(prevRows, freshRows) {
+  const key = (r) => `${r.date}|${r.shell}|${r.repo}`
+  const fresh = new Set(freshRows.map(key))
+  return [...prevRows.filter((r) => !fresh.has(key(r))), ...freshRows]
+}
+
+/**
+ * 读装出来的插件目录，拿**安装期**就能看到的事实（供应链信号）。 */
+export function readInstalledMeta(pkg) {
+  const dir = join(HOME_DIR, 'profiles', PROFILE, 'node_modules', pkg)
+  try {
+    const pj = JSON.parse(readFileSync(join(dir, 'package.json'), 'utf8'))
+    const scripts = pj.scripts || {}
+    const lifecycle = ['preinstall', 'install', 'postinstall', 'prepare'].filter((s) => scripts[s])
+    return {
+      depCount: Object.keys(pj.dependencies || {}).length,
+      peerCount: Object.keys(pj.peerDependencies || {}).length,
+      installScripts: lifecycle,
+      license: pj.license ?? null,
+      declaredEnginesDsh: pj.dsh?.engines?.dsh ?? null,
+    }
+  } catch { return null }
+}
+
 /** 跑一次「装/不装插件 → 起 shell → 开页面」，返回观测。 */
-async function observe({ label, chromeUserDir, settleMs }) {
+async function observe({ label, chromeUserDir, settleMs, wantShot = false }) {
   const t0 = Date.now()
   let { url, proc, log } = await bootShell()
   // 锁竞争是环境性噪声（不是插件缺陷）：清锁重试一次，避免把「对照组也 broken」的假阳性
@@ -167,24 +209,36 @@ async function observe({ label, chromeUserDir, settleMs }) {
       label,
       appBooted: false,
       shellBooted: false,
+      hostBootMs: null,
       exitCode: proc.exitCode,
       shellError: extractShellError(log),
       shellLog: String(log).slice(-2000),
       errors: [],
+      warnings: [],
+      egress: [],
       probe: null,
+      screenshot: null,
       durationMs: Date.now() - t0,
     }
   }
+  const hostBootMs = Date.now() - t0 // 进程起来到 URL 可用 = host 侧启动耗时
   const cdp = await launchChrome({ userDataDir: chromeUserDir })
   try {
-    const { errors, probe } = await capturePage(cdp, { url, settleMs, probeExpr: PROBE })
+    const { errors, warnings, egress, probe, screenshot } = await capturePage(cdp, {
+      url, settleMs, probeExpr: PROBE, network: true, dismissExpr: DISMISS,
+      screenshot: wantShot ? { width: 1280, height: 800, format: 'webp', quality: 70 } : null,
+    })
     const parsed = (() => { try { return JSON.parse(probe) } catch { return null } })()
     return {
       label,
       shellBooted: true,
       appBooted: Boolean(parsed && parsed.bodyLen > 500),
+      hostBootMs,
       probe: parsed,
       errors,
+      warnings: [...new Map(warnings.map((w) => [norm(w.text), w])).values()].slice(0, 20),
+      egress,
+      screenshot,
       durationMs: Date.now() - t0,
     }
   } finally {
@@ -195,8 +249,27 @@ async function observe({ label, chromeUserDir, settleMs }) {
   }
 }
 
-/** 解析目标：owner/repo → 权威集里的 pkgName + npm latest；pkg@ver 直接透传。 */
-function resolveTargets(list) {
+/**
+ * 取 npm 上的**真实** latest。
+ *
+ * 为什么不能直接用权威集里的 `npm.latest`：那是 `validate` 首次校验时冻结的，
+ * 而 `refresh` 只刷新 stars/pushed_at 等字段、不重探 npm（与 health-v6 修的活跃度
+ * 是同一类缺陷）。实测抽样 40 个已发布插件，**约 25% 的 corpus 版本已过期**——
+ * 拿它做回放等于验一个旧包。所以这里现探 registry，并记下 drift 供反馈。
+ */
+async function npmLatest(pkg) {
+  try {
+    const r = await fetch(`https://registry.npmjs.org/-/package/${encodeURIComponent(pkg)}/dist-tags`, {
+      headers: { 'user-agent': 'dsh-insights' },
+      signal: AbortSignal.timeout(15000),
+    })
+    if (!r.ok) return null
+    return (await r.json()).latest ?? null
+  } catch { return null }
+}
+
+/** 解析目标：owner/repo → pkgName + **真实** npm latest；pkg@version 直接透传。 */
+async function resolveTargets(list) {
   const plugins = readJsonl(PATHS.plugins)
   const byName = new Map(plugins.map((p) => [p.full_name, p]))
   const out = []
@@ -214,7 +287,15 @@ function resolveTargets(list) {
     const p = byName.get(t)
     if (!p) { out.push({ target: t, error: 'not in authoritative set' }); continue }
     if (!p.pkgName || !p.npm?.published) { out.push({ target: t, error: 'not published to npm (cannot install)' }); continue }
-    out.push({ target: t, repo: t, pkg: p.pkgName, version: p.npm.latest, repoStars: p.stars ?? 0 })
+    const real = await npmLatest(p.pkgName)
+    const corpusVersion = p.npm.latest ?? null
+    out.push({
+      target: t, repo: t, pkg: p.pkgName,
+      version: real || corpusVersion,
+      corpusVersion,
+      versionDrift: Boolean(real && corpusVersion && real !== corpusVersion),
+      repoStars: p.stars ?? 0,
+    })
   }
   return out
 }
@@ -251,13 +332,20 @@ async function main() {
   if (!targets.length) { console.error('[replay] 没有目标。用法: node pipeline/verify/replay.mjs <owner/repo> […]'); process.exit(2) }
 
   const baselineSet = new Set(baseline.errors.map((e) => norm(e.text)))
-  const resolved = resolveTargets(targets)
+  const resolved = await resolveTargets(targets)
+  // 截图只给「S/A 级 + 回放通过」的插件出（控制仓库体积；顺带是优质插件的正向激励）
+  const grades = new Map(readJson(PATHS.enrich, []).map((e) => [e.full_name, e.grade]))
+  const shotsDir = join(ROOT, 'data', 'replay-shots')
+  const shellVersion = run(DSH, ['--version'], { env: dshEnv() }).trim()
+  const today = new Date().toISOString().slice(0, 10)
 
   const results = []
   for (const [i, t] of resolved.entries()) {
     if (t.error) { console.log(`[replay] SKIP ${t.target} — ${t.error}`); results.push({ ...t, verdict: 'skipped' }); continue }
     const name = `d4-${i + 1}`
-    console.log(`[replay] ${t.repo || t.target} → ${t.pkg}@${t.version} …`)
+    const grade = t.repo ? grades.get(t.repo) : null
+    const wantShot = grade === 'S' || grade === 'A'
+    console.log(`[replay] ${t.repo || t.target} → ${t.pkg}@${t.version} …${wantShot ? '（S/A，出图）' : ''}${t.versionDrift ? `（corpus 记的是 ${t.corpusVersion}，已按 npm 真实版本修正）` : ''}`)
     resetProfile()
     let installError = null
     try { addPlugin(`${t.pkg}@${t.version}`) } catch (e) { installError = String(e.stderr || e.message).slice(0, 300) }
@@ -265,43 +353,79 @@ async function main() {
       console.log(`[replay]   install 失败：${installError.slice(0, 120)}`)
       results.push({ ...t, verdict: 'install-failed', installError }); continue
     }
-    const obs = await observe({ label: name, chromeUserDir: join(SANDBOX, `chrome-${name}`), settleMs })
+    const installed = readInstalledMeta(t.pkg)
+    const obs = await observe({ label: name, chromeUserDir: join(SANDBOX, `chrome-${name}`), settleMs, wantShot })
     const novel = obs.errors.filter((e) => !baselineSet.has(norm(e.text)))
+    const novelWarn = obs.warnings.filter((w) => !baselineSet.has(norm(w.text)))
     const loadFail = novel.filter((e) => LOAD_FAIL_RE.test(e.text))
     const [verdict, reason] = !obs.shellBooted ? ['broken', 'shell-boot-failed']
       : !obs.appBooted ? ['broken', 'app-did-not-mount']
         : loadFail.length ? ['broken', 'page-load-error']
           : novel.length ? ['degraded', 'page-novel-errors']
             : ['ok', 'loaded']
-    console.log(`[replay]   → ${verdict}（${reason} · appBooted=${obs.appBooted} · novel=${novel.length}）`)
+    // 截图落盘：只在「通过 + S/A」时保留，其余直接丢（别把 broken 的空白图入库）
+    let shotPath = null
+    if (obs.screenshot && verdict === 'ok' && wantShot && t.repo) {
+      mkdirSync(shotsDir, { recursive: true })
+      shotPath = join('data', 'replay-shots', `${t.repo.replace('/', '__')}.webp`)
+      writeFileSync(join(ROOT, shotPath), Buffer.from(obs.screenshot, 'base64'))
+    }
+    console.log(`[replay]   → ${verdict}（${reason} · appBooted=${obs.appBooted} · novel=${novel.length} · 出站 ${obs.egress.length} · ${obs.hostBootMs ?? '—'}ms）`)
     if (obs.shellError) console.log(`        shell: ${obs.shellError.slice(0, 180)}`)
     for (const e of (loadFail.length ? loadFail : novel).slice(0, 3)) console.log(`        ${e.kind}: ${e.text.slice(0, 160)}`)
     results.push({
       ...t,
+      grade: grade ?? null,
       verdict,
       reason,
       appBooted: obs.appBooted,
       shellBooted: obs.shellBooted,
       shellError: obs.shellError ?? null,
       shellLog: obs.shellBooted ? null : obs.shellLog,
-      novelErrors: novel.slice(0, 12),
-      loadFailErrors: loadFail.slice(0, 6),
-      probe: obs.probe,
+      hostBootMs: obs.hostBootMs ?? null,
+      page: obs.probe ?? null,
+      errors: { novel: novel.length, loadFail: loadFail.length, sample: (loadFail.length ? loadFail : novel).slice(0, 6) },
+      warnings: novelWarn.slice(0, 10),
+      egress: obs.egress,
+      installed,
+      shot: shotPath,
       durationMs: obs.durationMs,
+      at: new Date().toISOString(),
     })
     writeFileSync(OUT, JSON.stringify({
+      format: 'replay-v1',
       generatedAt: new Date().toISOString(),
-      shell: run(DSH, ['--version'], { env: dshEnv() }).trim(),
+      shell: shellVersion,
       method: '真实 shell（dsh web）+ headless Chromium（CDP）加载真实插件；与干净 profile baseline 做差集归因。非静态分析。',
+      signals: ['verdict', 'shellError', 'hostBootMs', 'page', 'errors', 'warnings', 'egress', 'installed', 'shot'],
+      note: 'egress = 观测到的外部请求主机名（只留 host、剥掉路径/query，排除 shell 自身与 localhost）。这是**观测事实，非安全审计**，不得据此断言插件恶意。',
       baseline: { appBooted: baseline.appBooted, errorCount: baseline.errors.length },
       targets: results,
     }, null, 2))
     rmSync(join(SANDBOX, `chrome-${name}`), { recursive: true, force: true })
   }
 
+  // ---- append-only 时间序列：同一 (date,shell,repo) 覆盖，其余保留。
+  // 有了它才能派生「修好了」事件（上周 broken → 本周 ok）与崩溃率趋势。----
+  const histPath = join(ROOT, 'data', 'replay-history.jsonl')
+  const prevRows = existsSync(histPath)
+    ? readFileSync(histPath, 'utf8').split('\n').filter(Boolean).map((l) => { try { return JSON.parse(l) } catch { return null } }).filter(Boolean)
+    : []
+  const freshRows = results
+    .filter((r) => r.repo && r.verdict !== 'skipped')
+    .map((r) => ({
+      format: 'replay-history-v1', date: today, shell: shellVersion,
+      repo: r.repo, pkg: r.pkg, version: r.version,
+      verdict: r.verdict, reason: r.reason ?? null,
+      hostBootMs: r.hostBootMs ?? null, egressCount: (r.egress || []).length,
+      versionDrift: Boolean(r.versionDrift),
+    }))
+  const allRows = mergeHistoryRows(prevRows, freshRows)
+  writeFileSync(histPath, allRows.map((r) => JSON.stringify(r)).join('\n') + '\n')
+
   const ok = results.filter((r) => r.verdict === 'ok').length
   const broken = results.filter((r) => r.verdict === 'broken').length
-  console.log(`[replay] 完成：${results.length} 个目标 · ok ${ok} · broken ${broken} → data/replay.json`)
+  console.log(`[replay] 完成：${results.length} 个目标 · ok ${ok} · broken ${broken} → data/replay.json（历史 ${allRows.length} 行）`)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

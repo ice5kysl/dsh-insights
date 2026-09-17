@@ -76,6 +76,9 @@
 - `data/shell-rows.json` — shell 图行清单（`pipeline/collect/shell-rows.mjs`，daily）：`{generatedAt, pkg, versions:{[dsh 版本]: {immediate: string[], lazy: string[]}}, failed}`；图行 = 安装树 dsh.client 包 ∩ 组合 roster，loader 的第三解析分支（工厂按包名注册）。
 - `data/compat-observed.json` — 实测兼容矩阵（`pipeline/analyze/compat-observed.mjs`，snapshot）：`{generatedAt, dshVersions, shellDistTags, note, stats, plugins:{[pkgName]: {repo, version, requires, results:{[shell 版本]: {status: ok|conditional|broken, missing?|conditional?}}, verdict:{cls: ok|never|conditional|broken-since|supported-since|mixed, conditional?}}}}`；判定口径与边界见文件内 note（静态分析、代码态提取、非运行时测试、动态 require 不测；conditional = 未声明的 lazy 图行，批次时序通常可解析）。
 - `data/fixes.json` — 已知修法案例库（**手工维护的编辑性数据**，入 git）：`{generatedAt, note, modules:{[缺失模块]: {status, fix, cases:[{repo, url, note}]}}}`；dsh-why 的 R1 修法区消费（"已知修法"块），无管线产出方。
+- `data/replay.json` — **D4 实装 smoke 测试**结果（`pipeline/verify/replay.mjs`，**手动/CI 触发，不进自动 profile**）：`{format: 'replay-v1', generatedAt, shell, method, signals[], note, baseline, targets:[{repo, pkg, version, grade, verdict: ok|broken|degraded|install-failed|skipped, reason, appBooted, shellBooted, shellError, shellLog, hostBootMs, page, errors:{novel,loadFail,sample}, warnings[], egress[], installed:{depCount,peerCount,installScripts,license,declaredEnginesDsh}, shot, durationMs, at}]}`。**这是真实 shell + 真实浏览器的运行时观测**（非静态分析），是「指控插件崩溃」前的发送前门禁。`egress` 只留 host（剥掉路径/query，排除 shell 自身与 localhost），**是观测事实、非安全审计**，不得据此断言插件恶意。
+- `data/replay-history.jsonl` — 上述结果的 **append-only 时间序列**（`{format:'replay-history-v1', date, shell, repo, pkg, version, verdict, reason, hostBootMs, egressCount}`）；同一 `(date, shell, repo)` 覆盖，其余历史保留 → 用于派生「修好了」事件（上周 broken → 本周 ok）与崩溃率趋势。
+- `data/replay-shots/*.webp` — 插件在真实 shell 里的 UI 截图（1280×800 webp q70）；**只对 `grade ∈ {S,A}` 且回放 `ok` 的插件出图**（控制仓库体积 + 优质插件正向激励）。首启弹窗会被自动关闭，否则拍到的全是同一张公告图。
 - `data/metrics.jsonl` — 产品自测量指标（周五 CI append）。
 - `data/report.md` — 人类可读报告。
 - `data/last-diff.md` — 与**上一快照**的 diff（周报已不依赖它：weekly 生成时按 history 基线现场重算本周 diff）。
@@ -101,9 +104,9 @@
 | 文档完整性 `docs` | 用户上手材料与许可 | README 有无（fail −20）· 中文/双语文档 · LICENSE（git tree 探测） | **计分** |
 | 可发现性 `discover` | 被找到的能力 | `dsh-plugin` topic（repo topics）；策展收录 awesome/imsai（listed.json） | topic **计分**；收录**只展示** |
 | 维护活跃 `maint` | 存活与持续维护信号 | 仓库年龄 <1 天 · >30 天无提交（pushed_at；npm ≥2 版本豁免 too-young） | **计分** |
-| 安全卫生 `safety` | 写面/消毒启发式（非审计） | 源文件写面（fs 写/子进程/HTTP 写动词）· 渲染消毒器（深检 deep.jsonl，抽样覆盖） | **增量信号，单独标注，不进总分**（覆盖不足，不虚构） |
+| 安全卫生 `safety` | 写面/消毒启发式（非审计） | 源文件写面（fs 写/子进程/HTTP 写动词）· 渲染消毒器（深检 deep.jsonl，抽样覆盖）· **运行时外部出站 host**（`replay.json` 的 `egress`，真实启动观测，抽样） | **增量信号，单独标注，不进总分**（覆盖不足，不虚构；出站只报「向谁发了请求」，不断言恶意） |
 | 采用度 `adoption` | 社区使用与关注 | ★ · npm 周下载（downloads.json）· 收录渠道 | **只展示不进分**（可刷/monorepo 污染，见原则） |
-| 兼容性 `compat` | 与 dsh 版本匹配 | engines.dsh 声明（实测声明率 ~1%，不可用）· **实测矩阵**：client bundle require × shell seed 词表（compat-observed.json，静态分析口径） · 深检 API 符号 × rc changelog（M2 雷达 v1） | **预留维度，不进分**；实测矩阵在 /p/ 详情页只展示 |
+| 兼容性 `compat` | 与 dsh 版本匹配 | engines.dsh 声明（实测声明率 ~1%，不可用）· **静态矩阵**：client bundle require × shell seed 词表（compat-observed.json，静态分析口径） · **实跑结论**：真实 shell + 浏览器加载（replay.json，抽样；静态判定已实测有 ~40% 假阳性） · 深检 API 符号 × rc changelog（M2 雷达 v1） | **预留维度，不进分**；两份口径在 /p/ 详情页并列展示、互不覆盖 |
 
 原则（维持）：纯客观信号；星数不进分；缺失不虚构不扣分（missing 明示）；社区评分/投票永不引入。`dimScores` = 各计分维度独立 100 起扣（与该维度内规则扣分同步），总分 = 全部计分规则合并起扣。
 

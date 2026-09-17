@@ -9,7 +9,7 @@
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { extractShellError, resolveTargets } from '../pipeline/verify/replay.mjs'
+import { extractShellError, resolveTargets, mergeHistoryRows } from '../pipeline/verify/replay.mjs'
 
 test('extractShellError: 从 host 侧启动崩溃日志里抽出人话根因', () => {
   const log = [
@@ -30,21 +30,43 @@ test('extractShellError: 空日志 / 无 Error 行时有兜底且不炸', () => 
   assert.equal(extractShellError('some noise\nlast line here'), 'last line here')
 })
 
-test('resolveTargets: owner/repo 走权威集取 pkgName + npm latest', () => {
-  const [t] = resolveTargets(['ice5kysl/dsh-insights-kit'])
+test('resolveTargets: owner/repo 走权威集取 pkgName + 真实 npm latest', async () => {
+  const [t] = await resolveTargets(['ice5kysl/dsh-insights-kit'])
   assert.equal(t.pkg, 'dsh-insights-kit')
   assert.ok(t.version, '需要有 npm latest 版本号')
   assert.equal(t.error, undefined)
 })
 
-test('resolveTargets: 显式 pkg@version 透传，作用域包不被拆错', () => {
-  const [a] = resolveTargets(['some-plugin@1.2.3'])
+test('resolveTargets: 显式 pkg@version 透传，作用域包不被拆错', async () => {
+  const [a] = await resolveTargets(['some-plugin@1.2.3'])
   assert.deepEqual([a.pkg, a.version], ['some-plugin', '1.2.3'])
-  const [b] = resolveTargets(['@scope/some-plugin@2.0.0'])
+  const [b] = await resolveTargets(['@scope/some-plugin@2.0.0'])
   assert.deepEqual([b.pkg, b.version], ['@scope/some-plugin', '2.0.0'])
 })
 
-test('resolveTargets: 不在权威集的仓库明确报错，不静默跳过', () => {
-  const [t] = resolveTargets(['definitely-not/InTheCorpus-xyz'])
+test('resolveTargets: 不在权威集的仓库明确报错，不静默跳过', async () => {
+  const [t] = await resolveTargets(['definitely-not/InTheCorpus-xyz'])
   assert.equal(t.error, 'not in authoritative set')
+})
+
+test('mergeHistoryRows: 当天重跑覆盖同一行，历史不丢（append-only 语义）', () => {
+  const prev = [
+    { date: '2026-09-16', shell: '0.1.5-rc.1', repo: 'a/x', verdict: 'broken' },
+    { date: '2026-09-17', shell: '0.1.5-rc.1', repo: 'a/x', verdict: 'broken' },
+    { date: '2026-09-17', shell: '0.1.5-rc.1', repo: 'b/y', verdict: 'ok' },
+  ]
+  const fresh = [
+    { date: '2026-09-17', shell: '0.1.5-rc.1', repo: 'a/x', verdict: 'ok' }, // a/x 修好了
+  ]
+  const out = mergeHistoryRows(prev, fresh)
+  assert.equal(out.length, 3, '不能产生重复行')
+  assert.equal(out.filter((r) => r.repo === 'a/x' && r.date === '2026-09-16').length, 1, '旧日期必须保留')
+  assert.equal(out.find((r) => r.repo === 'a/x' && r.date === '2026-09-17').verdict, 'ok', '当天行被覆盖')
+  assert.equal(out.find((r) => r.repo === 'b/y').verdict, 'ok', '无关行不受影响')
+})
+
+test('mergeHistoryRows: 跨 shell 版本算不同行（矩阵化后不互相覆盖）', () => {
+  const prev = [{ date: '2026-09-17', shell: '0.1.5-rc.1', repo: 'a/x', verdict: 'ok' }]
+  const fresh = [{ date: '2026-09-17', shell: '0.1.6-alpha.1', repo: 'a/x', verdict: 'broken' }]
+  assert.equal(mergeHistoryRows(prev, fresh).length, 2)
 })

@@ -19,6 +19,8 @@
 
 命中 **99** 个，下表列前 20。
 
+> ⚠️ **下表 `npm` 列的版本号取自权威集，而权威集的 npm 数据是首次校验时冻结的**——2026-09-17 抽样重探 40 个已发布插件，**约 25% 的版本号已过期**（与 health-v6 修掉的活跃度缺陷同源，详见 [RESEARCH](./RESEARCH.md) 决策日志）。回放装置已改为**现探 registry 取真实 latest**（结果里记 `versionDrift`），所以**发信前一律以 `data/replay.json` 里的版本为准**，不要照抄下表。
+
 ## 队列（前 20 · 按周下载）
 
 | # | 仓库 | npm | 判定 | 周下载 | ★ | 停更天 | 健康分 |
@@ -55,17 +57,17 @@
 
 ### 门禁已可用：D4 最小切片（2026-09-17 上线）
 
-运行时回放能力已落地为 [D4 实装 smoke 测试](./D4-REPLAY.md)（`pipeline/verify/replay.mjs` + `lib/cdp.mjs`，零依赖；`npm run replay`）。**首次抽样就证明这道门禁不能省**——队列前 5 个目标里 **2 个实跑完全正常**：
+运行时回放能力已落地为 [D4 实装 smoke 测试](./D4-REPLAY.md)（`pipeline/verify/replay.mjs` + `lib/cdp.mjs`，零依赖；`npm run replay`）。**门禁第一次跑就证明不能省**——队列前 5 个目标里 **3 个实跑完全正常**：
 
 | 目标 | 静态判定 | 实跑 | 处理 |
 |---|---|---|---|
-| FSMargoo/dsh-at-file | broken-since | ❌ broken（host 侧 `settingsNamespace` 导出缺失） | 可发 |
-| Tkingxiao/dsh-any-background | broken-since | ❌ broken（`webServer` without inject） | 可发 |
-| anweat/dsh-restart | broken-since | ❌ broken（host 侧导出缺失） | 可发 |
-| WSL043/dsh-chat-manager | never | ✅ **ok** | 🚫 **不发** |
-| hellodigua/dsh-share | never | ✅ **ok** | 🚫 **不发** |
+| FSMargoo/dsh-at-file | broken-since | ❌ broken（host 侧 `settingsNamespace` 导出缺失，`@0.6.3`） | ✅ 可发 |
+| anweat/dsh-restart | broken-since | ❌ broken（host 侧导出缺失，`@0.1.2`） | ✅ 可发 |
+| Tkingxiao/dsh-any-background | broken-since | ✅ **ok**（`@0.2.9`） | 🚫 **不发**——静态依据的 `0.2.2` 已过期，作者早修好了 |
+| WSL043/dsh-chat-manager | never | ✅ **ok**（`@1.3.5`） | 🚫 **不发** |
+| hellodigua/dsh-share | never | ✅ **ok**（`@0.4.1`） | 🚫 **不发** |
 
-> 两个结论：① 静态口径在这批里 **40% 假阳性**——没有回放就会产生两封新的 vision-router 式误报；② 真 broken 的根因**全在 host 侧**（模块导出 / inject），静态分析只看 client bundle 的 require，**连「为什么」都指错了**——所以信件必须用回放那条根因。
+> **静态口径在这批里假阳性率 60%（3/5）。** 没有回放就是三封新的 vision-router 式误报。另外真 broken 的根因**全在 host 侧**（模块导出），静态分析只看 client bundle 的 require，**连「为什么」都指错了**——信件必须用回放那条根因。三者里还有一个是**版本过期**造成的假阳性（见上方 ⚠️ 注），进一步说明「按真实 npm 版本回放」不是可选优化。
 
 ## 信件形态
 

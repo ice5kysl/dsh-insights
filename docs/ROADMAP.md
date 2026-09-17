@@ -92,7 +92,7 @@ M4 底座化与托管决策（11月+）    → 独立站/DB 触发点评估、�
 | D1 | 重叠/重复族检测（词汇桶→LLM 精修） | 分析层 | 低 | ✅ v1 已跑：`pipeline/analyze/overlap.mjs` 词汇启发式 → `data/overlap.json` |
 | D2 | OSV 供应链漏洞计数（health-v3 新维度） | 事实层 | 低 | ⬜ 未做 |
 | D3 | LLM 语义标注（能力摘要/分类/i18n，结构化回填） | 分析层 | 中 | ✅ 首跑：`pipeline/analyze/llm-tags.mjs` → `data/llm.jsonl`（增量续跑中） |
-| D4 | 实装 smoke 测试（CI 沙箱跑真实 harness） | 事实层(最硬) | 高 | 🟡 **最小切片已上线（2026-09-17）**：`pipeline/verify/replay.mjs` + `lib/cdp.mjs`——隔离 DSH_HOME + 真实 `dsh web` + headless Chromium（零依赖 CDP）+ baseline 差集归因 → `data/replay.json`。已复现静态口径看不到的 host 侧启动崩溃。**下一步**：CI 沙箱矩阵化（多 shell 版本）+ 作为高危触达的发送前门禁。另见 [D4-REPLAY](./D4-REPLAY.md) |
+| D4 | 实装 smoke 测试（CI 沙箱跑真实 harness） | 事实层(最硬) | 高 | 🟡 **最小切片 + Tier 1 信号已上线（2026-09-17）**：`pipeline/verify/replay.mjs` + `lib/cdp.mjs`——隔离 DSH_HOME + 真实 `dsh web` + headless Chromium（零依赖 CDP）+ baseline 差集归因；一轮采齐 verdict / 真实根因 / `hostBootMs` / `egress` / 截图 / 依赖信号，并落 append-only 时间序列（可派生「修好了」事件）。首轮即证明静态口径 **60% 假阳性**，且真根因在 host 侧（静态看不到）。**下一步**：CI 矩阵化（多 shell 版本）+ 叠进 /p/ 与 /data/ 展示。另见 [D4-REPLAY](./D4-REPLAY.md) |
 | D5 | 快照历史积累（分数趋势） | 时间层 | 低 | ✅ 在跑：`pipeline/analyze/history.mjs` 每日 append |
 | D6 | README 结构质量（小节/坏链/截图） | 信任层 | 低 | ⬜ 未做（M2） |
 | D7 | 单插件 dossier 页 | 信任层 | 中 | 🟡 部分：`/p/<o>/<r>/` 插件页（publish/pages）已上线，深检/趋势并入待做 |
