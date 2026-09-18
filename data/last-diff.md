@@ -1,14 +1,13 @@
 # 快照 Diff · 2026-09-18
 
-- 当前权威插件：**11589**（上次 11584）
-- 新增 5 · 消失 0
+- 当前权威插件：**11593**（上次 11589）
+- 新增 4 · 消失 0
 
-## 新增（Top 5）
-- dytom18/dsh-plugin-voice-dictation ★0 
-- NEVSTOP-LAB/dsh-import-vscode-ai-files ★0 
-- wlc114514/dsh-upload-origin ★0 
-- frederico-kluser/dsh-worktree-jump ★0 
-- frederico-kluser/dsh-goal-pause-guard ★0 
+## 新增（Top 4）
+- cny1230/deskpet-guard ★0 
+- Farewish/dsh-viewtune ★0 
+- jonah791/dsh-earn-radar ★0 
+- GeoSyntax/dsh-plugin-time-machine ★0 
 
 ## 消失（Top 0）
 
