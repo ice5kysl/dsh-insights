@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-18T06:15:05.609Z",
+  "generatedAt": "2026-09-18T06:19:39.711Z",
   "totals": {
-    "authoritative": 11537,
-    "active7": 2090,
+    "authoritative": 11538,
+    "active7": 2088,
     "active7Pct": 18.1,
-    "active30": 8606,
+    "active30": 8605,
     "active30Pct": 74.6,
     "ageGate1": 11179,
     "ageGate1Pct": 96.9,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1776,
+      "2026-09": 1777,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 384
+      "2026-09-14": 385
     },
     "byWeekGrades": {
       "B": {
@@ -69,7 +69,7 @@
         "2026-08-03": 34,
         "2026-03-09": 3,
         "2026-06-22": 4,
-        "2026-08-17": 1577,
+        "2026-08-17": 1576,
         "2026-06-08": 4,
         "2026-06-15": 2,
         "2026-08-24": 829,
@@ -87,7 +87,7 @@
         "2026-06-29": 4,
         "2026-09-07": 442,
         "2026-03-02": 1,
-        "2026-09-14": 252
+        "2026-09-14": 253
       },
       "S": {
         "2026-08-03": 2,
@@ -111,7 +111,7 @@
         "2026-01-19": 1,
         "2026-03-09": 1,
         "2026-01-05": 1,
-        "2026-08-17": 1080,
+        "2026-08-17": 1081,
         "2026-07-13": 3,
         "2026-08-10": 1362,
         "2026-02-02": 1,
@@ -148,20 +148,20 @@
   "distribution": {
     "publish": {
       "published": 5170,
-      "unpublished": 6367,
+      "unpublished": 6368,
       "stale": 2665
     },
     "docs": {
-      "readme": 11508,
+      "readme": 11509,
       "zhFile": 867,
-      "zh": 5502,
-      "both": 5492,
+      "zh": 5503,
+      "both": 5493,
       "none": 29
     },
     "lib": {
-      "index": 6195,
-      "client": 3982,
-      "both": 3556
+      "index": 6196,
+      "client": 3983,
+      "both": 3557
     },
     "publishPct": 44.8,
     "zhPct": 47.6
@@ -231,15 +231,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11206
+      "count": 11207
     },
     {
       "topic": "deepseek-harness",
-      "count": 7497
+      "count": 7498
     },
     {
       "topic": "dsh",
-      "count": 4302
+      "count": 4303
     },
     {
       "topic": "deepseek",
@@ -346,8 +346,8 @@
     "imsai": 274,
     "covered": 1033,
     "coveredPct": 9,
-    "none": 10504,
-    "fetchedAt": "2026-09-18T06:14:26.700Z"
+    "none": 10505,
+    "fetchedAt": "2026-09-18T06:18:52.582Z"
   },
   "suggested": [
     {
@@ -1623,7 +1623,7 @@
     "grades": {
       "A": 627,
       "B": 5602,
-      "C": 3608,
+      "C": 3609,
       "D": 1528,
       "S": 172
     },
@@ -1642,7 +1642,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1008
+      "count": 1009
     },
     {
       "category": "会话管理",
@@ -21586,6 +21586,27 @@
       "topPlugin": "BrackRat/dsh-opencode",
       "topStars": 0,
       "topCat": "搜索 / 命令面板"
+    },
+    {
+      "owner": "jackchen13755",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-18",
+      "firstCreated": "2026-09-18",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "jackchen13755/dsh-source-control",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
     },
     {
       "owner": "zhu1090093659",
@@ -75867,27 +75888,6 @@
       "topCat": "侧栏 / 工作区"
     },
     {
-      "owner": "wuyh",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-08-19",
-      "firstCreated": "2026-08-17",
-      "delta": 0,
-      "avg": 79,
-      "topPlugin": "wuyh/dsh-workspace-toolbox",
-      "topStars": 0,
-      "topCat": "侧栏 / 工作区"
-    },
-    {
       "owner": "begonia599",
       "plugins": 1,
       "stars": 0,
@@ -91325,27 +91325,6 @@
       "delta": 0,
       "avg": 79,
       "topPlugin": "shkzhang/dsh-file-link-menu",
-      "topStars": 0,
-      "topCat": "文件浏览 / 预览"
-    },
-    {
-      "owner": "jackchen13755",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-18",
-      "firstCreated": "2026-09-18",
-      "delta": 0,
-      "avg": 76,
-      "topPlugin": "jackchen13755/dsh-source-control",
       "topStars": 0,
       "topCat": "文件浏览 / 预览"
     },
@@ -126666,7 +126645,7 @@
       "lastPush": "2026-08-19",
       "firstCreated": "2026-08-17",
       "delta": 0,
-      "avg": 74,
+      "avg": 69,
       "topPlugin": "wuyan19/dsh-plugin-zquota",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
@@ -127405,6 +127384,27 @@
       "topPlugin": "wanghaonan3333-web/dsh-idea-jar",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "wuyh",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-08-19",
+      "firstCreated": "2026-08-17",
+      "delta": 0,
+      "avg": 74,
+      "topPlugin": "wuyh/dsh-workspace-toolbox",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
     },
     {
       "owner": "chuyue-yue",
@@ -140261,7 +140261,7 @@
   ],
   "authorStats": {
     "total": 6592,
-    "multi": 1578,
+    "multi": 1579,
     "top10Share": 15
   },
   "coverage": {
@@ -140269,7 +140269,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 15901,
+    "candidates": 15902,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -140340,14 +140340,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 488,
+      "2026-09-14": 489,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 15869,
-    "candidatesValidated": 27,
-    "authoritative": 11537,
+    "validated": 15870,
+    "candidatesValidated": 28,
+    "authoritative": 11538,
     "invalidUnique": 4332,
     "invalidBuckets": [
       {
@@ -140396,5 +140396,5 @@
       }
     ]
   },
-  "enrichCount": 11537
+  "enrichCount": 11538
 }
