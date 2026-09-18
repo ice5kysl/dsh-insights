@@ -1,14 +1,10 @@
 # 快照 Diff · 2026-09-18
 
-- 当前权威插件：**11564**（上次 11559）
-- 新增 5 · 消失 0
+- 当前权威插件：**11565**（上次 11564）
+- 新增 1 · 消失 0
 
-## 新增（Top 5）
-- HaydenSmith1121/dsh-codex-provider ★0 (npm ✓)
-- jiawei322/dsh-pi-catalog-sync ★0 
-- let-mi-think/agent-manager ★0 
-- let-mi-think/wechat-agent-router ★0 
-- asxiuxiu/dsh-quick-open ★0 
+## 新增（Top 1）
+- fu827707013/dsh-model-health-probe ★0 (npm ✓)
 
 ## 消失（Top 0）
 
