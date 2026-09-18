@@ -1,10 +1,11 @@
 # 快照 Diff · 2026-09-18
 
-- 当前权威插件：**11581**（上次 11580）
-- 新增 1 · 消失 0
+- 当前权威插件：**11583**（上次 11581）
+- 新增 2 · 消失 0
 
-## 新增（Top 1）
-- leolee9086/dsh-tool-cordis-local ★0 
+## 新增（Top 2）
+- Arcadia822/dsh-tmp-hook ★0 
+- neufagents/dsh-healthcheck ★0 
 
 ## 消失（Top 0）
 
