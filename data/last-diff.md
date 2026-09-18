@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-18
 
-- 当前权威插件：**11609**（上次 11608）
+- 当前权威插件：**11610**（上次 11609）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- Jiangsubei/dsh-qqbot-bridge ★0 (npm ✓)
+- yueyexiayu/dsh-jiyi ★0 
 
 ## 消失（Top 0）
 
