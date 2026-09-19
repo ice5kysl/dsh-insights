@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-19T16:49:38.109Z",
+  "generatedAt": "2026-09-19T17:15:15.318Z",
   "totals": {
-    "authoritative": 11679,
-    "active7": 1596,
-    "active7Pct": 13.7,
-    "active30": 7608,
+    "authoritative": 11681,
+    "active7": 1590,
+    "active7Pct": 13.6,
+    "active30": 7606,
     "active30Pct": 65.1,
     "ageGate1": 11335,
-    "ageGate1Pct": 97.1,
+    "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9677,
       "2026-02": 4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1918,
+      "2026-09": 1920,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 526
+      "2026-09-14": 528
     },
     "byWeekGrades": {
       "B": {
@@ -87,7 +87,7 @@
         "2026-06-29": 4,
         "2026-09-07": 410,
         "2026-03-02": 1,
-        "2026-09-14": 348
+        "2026-09-14": 349
       },
       "S": {
         "2026-08-03": 2,
@@ -111,7 +111,7 @@
         "2026-01-19": 1,
         "2026-03-09": 1,
         "2026-01-05": 1,
-        "2026-08-17": 1023,
+        "2026-08-17": 1022,
         "2026-07-13": 3,
         "2026-08-10": 1457,
         "2026-02-02": 1,
@@ -129,11 +129,11 @@
         "2026-06-29": 2,
         "2026-09-07": 263,
         "2026-07-06": 1,
-        "2026-09-14": 143
+        "2026-09-14": 144
       },
       "D": {
         "2026-08-10": 332,
-        "2026-08-17": 1251,
+        "2026-08-17": 1252,
         "2026-08-31": 29,
         "2026-03-16": 1,
         "2026-05-25": 2,
@@ -147,20 +147,20 @@
   },
   "distribution": {
     "publish": {
-      "published": 5220,
-      "unpublished": 6459,
+      "published": 5221,
+      "unpublished": 6460,
       "stale": 2683
     },
     "docs": {
-      "readme": 11650,
+      "readme": 11652,
       "zhFile": 873,
-      "zh": 5568,
-      "both": 5558,
+      "zh": 5570,
+      "both": 5560,
       "none": 29
     },
     "lib": {
       "index": 6274,
-      "client": 4044,
+      "client": 4045,
       "both": 3613
     },
     "publishPct": 44.7,
@@ -231,15 +231,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11348
+      "count": 11350
     },
     {
       "topic": "deepseek-harness",
-      "count": 7582
+      "count": 7584
     },
     {
       "topic": "dsh",
-      "count": 4374
+      "count": 4376
     },
     {
       "topic": "deepseek",
@@ -346,8 +346,8 @@
     "imsai": 275,
     "covered": 1035,
     "coveredPct": 8.9,
-    "none": 10644,
-    "fetchedAt": "2026-09-19T16:48:57.037Z"
+    "none": 10646,
+    "fetchedAt": "2026-09-19T17:14:29.926Z"
   },
   "suggested": [
     {
@@ -1622,9 +1622,9 @@
   "quality": {
     "grades": {
       "A": 623,
-      "B": 5517,
+      "B": 5518,
       "C": 3712,
-      "D": 1667,
+      "D": 1668,
       "S": 160
     },
     "avgScore": 74.5,
@@ -1642,11 +1642,11 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1023
+      "count": 1024
     },
     {
       "category": "会话管理",
-      "count": 975
+      "count": 976
     },
     {
       "category": "状态 / 监控 / 用量",
@@ -5532,8 +5532,8 @@
       "grades": {
         "A": 0,
         "B": 3,
-        "C": 230,
-        "D": 1053
+        "C": 229,
+        "D": 1054
       },
       "ab": 3,
       "npm": 84,
@@ -22402,7 +22402,7 @@
       "lastPush": "2026-08-20",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 82,
+      "avg": 77,
       "topPlugin": "e2mcc/dsh-popout-sidebar",
       "topStars": 210,
       "topCat": "侧栏 / 工作区"
@@ -90228,6 +90228,27 @@
       "topCat": "开发 / 数据"
     },
     {
+      "owner": "imtokenxinluo",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-19",
+      "firstCreated": "2026-09-19",
+      "delta": 0,
+      "avg": 89,
+      "topPlugin": "imtokenxinluo/dsh-contract-check",
+      "topStars": 0,
+      "topCat": "会话管理"
+    },
+    {
       "owner": "SeaOf0",
       "plugins": 2,
       "stars": 444,
@@ -117192,6 +117213,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "JRJRJPRO",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-19",
+      "firstCreated": "2026-09-19",
+      "delta": 0,
+      "avg": 74,
+      "topPlugin": "JRJRJPRO/dsh-tree",
+      "topStars": 1,
+      "topCat": "文件浏览 / 预览"
+    },
+    {
       "owner": "ChenneyZhuang",
       "plugins": 19,
       "stars": 0,
@@ -130542,7 +130584,7 @@
       "lastPush": "2026-08-20",
       "firstCreated": "2026-08-19",
       "delta": 0,
-      "avg": 69,
+      "avg": 64,
       "topPlugin": "davidwellscn-maker/dsh-book-reader",
       "topStars": 0,
       "topCat": "其它"
@@ -141826,7 +141868,7 @@
     }
   ],
   "authorStats": {
-    "total": 6667,
+    "total": 6669,
     "multi": 1608,
     "top10Share": 4
   },
@@ -141835,7 +141877,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 16077,
+    "candidates": 16079,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -141906,14 +141948,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 664,
+      "2026-09-14": 666,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 16044,
-    "candidatesValidated": 28,
-    "authoritative": 11679,
+    "validated": 16046,
+    "candidatesValidated": 29,
+    "authoritative": 11681,
     "invalidUnique": 4365,
     "invalidBuckets": [
       {
@@ -141962,5 +142004,5 @@
       }
     ]
   },
-  "enrichCount": 11679
+  "enrichCount": 11681
 }
