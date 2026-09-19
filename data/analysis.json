@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-19T11:07:59.106Z",
+  "generatedAt": "2026-09-19T11:15:17.074Z",
   "totals": {
     "authoritative": 11653,
-    "active7": 1668,
+    "active7": 1666,
     "active7Pct": 14.3,
-    "active30": 7906,
+    "active30": 7905,
     "active30Pct": 67.8,
-    "ageGate1": 11308,
+    "ageGate1": 11309,
     "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9677,
@@ -87,7 +87,7 @@
         "2026-06-29": 4,
         "2026-09-07": 413,
         "2026-03-02": 1,
-        "2026-09-14": 330
+        "2026-09-14": 331
       },
       "S": {
         "2026-08-03": 2,
@@ -129,7 +129,7 @@
         "2026-06-29": 2,
         "2026-09-07": 263,
         "2026-07-06": 1,
-        "2026-09-14": 137
+        "2026-09-14": 136
       },
       "D": {
         "2026-08-10": 332,
@@ -347,7 +347,7 @@
     "covered": 1036,
     "coveredPct": 8.9,
     "none": 10617,
-    "fetchedAt": "2026-09-19T11:07:16.930Z"
+    "fetchedAt": "2026-09-19T11:14:33.763Z"
   },
   "suggested": [
     {
@@ -1622,8 +1622,8 @@
   "quality": {
     "grades": {
       "A": 625,
-      "B": 5512,
-      "C": 3732,
+      "B": 5513,
+      "C": 3731,
       "D": 1622,
       "S": 162
     },
@@ -3244,6 +3244,27 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
+      "owner": "leolee9086",
+      "plugins": 6,
+      "stars": 2,
+      "grades": {
+        "A": 0,
+        "B": 6,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 6,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-18",
+      "firstCreated": "2026-08-22",
+      "delta": 0,
+      "avg": 78.5,
+      "topPlugin": "leolee9086/dsh-zhihu-tools",
+      "topStars": 2,
+      "topCat": "其它"
+    },
+    {
       "owner": "hrhgit",
       "plugins": 6,
       "stars": 1,
@@ -3921,27 +3942,6 @@
       "topPlugin": "nicecx/dsh-relay",
       "topStars": 2,
       "topCat": "消息 / 协作集成"
-    },
-    {
-      "owner": "leolee9086",
-      "plugins": 6,
-      "stars": 2,
-      "grades": {
-        "A": 0,
-        "B": 5,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 5,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-09-18",
-      "firstCreated": "2026-08-22",
-      "delta": 0,
-      "avg": 77.7,
-      "topPlugin": "leolee9086/dsh-zhihu-tools",
-      "topStars": 2,
-      "topCat": "其它"
     },
     {
       "owner": "NinjaSln-labs",
@@ -16619,7 +16619,7 @@
       "lastPush": "2026-08-20",
       "firstCreated": "2026-08-18",
       "delta": 0,
-      "avg": 79.5,
+      "avg": 77,
       "topPlugin": "liqiming-whu/dsh-status-card",
       "topStars": 1,
       "topCat": "状态 / 监控 / 用量"
@@ -141522,7 +141522,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 16045,
+    "candidates": 16046,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -141593,15 +141593,15 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 632,
+      "2026-09-14": 633,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 16013,
+    "validated": 16014,
     "candidatesValidated": 28,
     "authoritative": 11653,
-    "invalidUnique": 4360,
+    "invalidUnique": 4361,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -141609,7 +141609,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1557
+        "count": 1558
       },
       {
         "reason": "no-signal",
