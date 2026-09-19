@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-19T19:15:18.751Z",
+  "generatedAt": "2026-09-19T19:37:34.019Z",
   "totals": {
-    "authoritative": 11684,
-    "active7": 1568,
+    "authoritative": 11685,
+    "active7": 1564,
     "active7Pct": 13.4,
-    "active30": 7315,
-    "active30Pct": 62.6,
-    "ageGate1": 11342,
+    "active30": 7275,
+    "active30Pct": 62.3,
+    "ageGate1": 11343,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9677,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1923,
+      "2026-09": 1924,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 531
+      "2026-09-14": 532
     },
     "byWeekGrades": {
       "B": {
@@ -87,7 +87,7 @@
         "2026-06-29": 4,
         "2026-09-07": 409,
         "2026-03-02": 1,
-        "2026-09-14": 350
+        "2026-09-14": 351
       },
       "S": {
         "2026-08-03": 2,
@@ -111,7 +111,7 @@
         "2026-01-19": 1,
         "2026-03-09": 1,
         "2026-01-05": 1,
-        "2026-08-17": 1004,
+        "2026-08-17": 1003,
         "2026-07-13": 3,
         "2026-08-10": 1457,
         "2026-02-02": 1,
@@ -133,7 +133,7 @@
       },
       "D": {
         "2026-08-10": 332,
-        "2026-08-17": 1271,
+        "2026-08-17": 1272,
         "2026-08-31": 29,
         "2026-03-16": 1,
         "2026-05-25": 2,
@@ -147,21 +147,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 5222,
+      "published": 5223,
       "unpublished": 6462,
-      "stale": 2683
+      "stale": 2684
     },
     "docs": {
-      "readme": 11655,
+      "readme": 11656,
       "zhFile": 874,
       "zh": 5573,
       "both": 5563,
       "none": 29
     },
     "lib": {
-      "index": 6277,
-      "client": 4048,
-      "both": 3616
+      "index": 6278,
+      "client": 4049,
+      "both": 3617
     },
     "publishPct": 44.7,
     "zhPct": 47.6
@@ -231,15 +231,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11353
+      "count": 11354
     },
     {
       "topic": "deepseek-harness",
-      "count": 7587
+      "count": 7588
     },
     {
       "topic": "dsh",
-      "count": 4378
+      "count": 4379
     },
     {
       "topic": "deepseek",
@@ -346,8 +346,8 @@
     "imsai": 275,
     "covered": 1035,
     "coveredPct": 8.9,
-    "none": 10649,
-    "fetchedAt": "2026-09-19T19:14:31.154Z"
+    "none": 10650,
+    "fetchedAt": "2026-09-19T19:36:31.367Z"
   },
   "suggested": [
     {
@@ -1622,9 +1622,9 @@
   "quality": {
     "grades": {
       "A": 623,
-      "B": 5517,
-      "C": 3697,
-      "D": 1687,
+      "B": 5518,
+      "C": 3696,
+      "D": 1688,
       "S": 160
     },
     "avgScore": 74.3,
@@ -1662,7 +1662,7 @@
     },
     {
       "category": "工具 / 效率",
-      "count": 582
+      "count": 583
     },
     {
       "category": "主题 / 视觉美化",
@@ -5532,8 +5532,8 @@
       "grades": {
         "A": 0,
         "B": 3,
-        "C": 213,
-        "D": 1070
+        "C": 212,
+        "D": 1071
       },
       "ab": 3,
       "npm": 84,
@@ -5541,7 +5541,7 @@
       "lastPush": "2026-09-14",
       "firstCreated": "2026-08-16",
       "delta": 0,
-      "avg": 57.6,
+      "avg": 57.5,
       "topPlugin": "uckkk/dsh-design-tokens",
       "topStars": 2,
       "topCat": "其它"
@@ -18580,6 +18580,27 @@
       "topPlugin": "langyo/dsh-mobile-upgrade",
       "topStars": 1,
       "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "lucagiftzek",
+      "plugins": 2,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 2,
+      "covered": 0,
+      "lastPush": "2026-09-19",
+      "firstCreated": "2026-09-09",
+      "delta": 0,
+      "avg": 79.5,
+      "topPlugin": "lucagiftzek/dsh-artifacts",
+      "topStars": 1,
+      "topCat": "侧栏 / 工作区"
     },
     {
       "owner": "Aafff623",
@@ -65390,27 +65411,6 @@
       "topPlugin": "songer522/dsh-launcher",
       "topStars": 1,
       "topCat": "状态 / 监控 / 用量"
-    },
-    {
-      "owner": "lucagiftzek",
-      "plugins": 1,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-09-09",
-      "firstCreated": "2026-09-09",
-      "delta": 0,
-      "avg": 83,
-      "topPlugin": "lucagiftzek/dsh-artifacts",
-      "topStars": 1,
-      "topCat": "侧栏 / 工作区"
     },
     {
       "owner": "OTTTTTO",
@@ -119622,7 +119622,7 @@
       "lastPush": "2026-09-19",
       "firstCreated": "2026-09-18",
       "delta": 0,
-      "avg": 69,
+      "avg": 71.5,
       "topPlugin": "BaiZhi967/dsh-plugin-terminal-panel",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
@@ -141869,7 +141869,7 @@
   ],
   "authorStats": {
     "total": 6669,
-    "multi": 1609,
+    "multi": 1610,
     "top10Share": 4
   },
   "coverage": {
@@ -141877,7 +141877,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 16083,
+    "candidates": 16084,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -141948,14 +141948,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 670,
+      "2026-09-14": 671,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 16050,
-    "candidatesValidated": 27,
-    "authoritative": 11684,
+    "validated": 16051,
+    "candidatesValidated": 28,
+    "authoritative": 11685,
     "invalidUnique": 4366,
     "invalidBuckets": [
       {
@@ -142004,5 +142004,5 @@
       }
     ]
   },
-  "enrichCount": 11684
+  "enrichCount": 11685
 }
