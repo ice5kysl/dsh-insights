@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-19T23:20:56.353Z",
+  "generatedAt": "2026-09-19T23:29:36.700Z",
   "totals": {
-    "authoritative": 11691,
-    "active7": 1544,
+    "authoritative": 11692,
+    "active7": 1543,
     "active7Pct": 13.2,
-    "active30": 7102,
+    "active30": 7097,
     "active30Pct": 60.7,
     "ageGate1": 11346,
     "ageGate1Pct": 97,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 1930,
+      "2026-09": 1931,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -56,7 +56,7 @@
       "2026-06-29": 6,
       "2026-09-07": 754,
       "2026-03-02": 1,
-      "2026-09-14": 538
+      "2026-09-14": 539
     },
     "byWeekGrades": {
       "B": {
@@ -87,7 +87,7 @@
         "2026-06-29": 4,
         "2026-09-07": 409,
         "2026-03-02": 1,
-        "2026-09-14": 353
+        "2026-09-14": 354
       },
       "S": {
         "2026-08-03": 2,
@@ -111,7 +111,7 @@
         "2026-01-19": 1,
         "2026-03-09": 1,
         "2026-01-05": 1,
-        "2026-08-17": 990,
+        "2026-08-17": 988,
         "2026-07-13": 3,
         "2026-08-10": 1457,
         "2026-02-02": 1,
@@ -133,7 +133,7 @@
       },
       "D": {
         "2026-08-10": 332,
-        "2026-08-17": 1286,
+        "2026-08-17": 1288,
         "2026-08-31": 29,
         "2026-03-16": 1,
         "2026-05-25": 2,
@@ -148,14 +148,14 @@
   "distribution": {
     "publish": {
       "published": 5225,
-      "unpublished": 6466,
+      "unpublished": 6467,
       "stale": 2685
     },
     "docs": {
-      "readme": 11662,
+      "readme": 11663,
       "zhFile": 874,
-      "zh": 5576,
-      "both": 5566,
+      "zh": 5577,
+      "both": 5567,
       "none": 29
     },
     "lib": {
@@ -231,19 +231,19 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11360
+      "count": 11361
     },
     {
       "topic": "deepseek-harness",
-      "count": 7593
+      "count": 7594
     },
     {
       "topic": "dsh",
-      "count": 4382
+      "count": 4383
     },
     {
       "topic": "deepseek",
-      "count": 1278
+      "count": 1279
     },
     {
       "topic": "dsh-plugins",
@@ -251,7 +251,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1133
+      "count": 1134
     },
     {
       "topic": "plugin",
@@ -346,8 +346,8 @@
     "imsai": 275,
     "covered": 1035,
     "coveredPct": 8.9,
-    "none": 10656,
-    "fetchedAt": "2026-09-19T23:20:16.939Z"
+    "none": 10657,
+    "fetchedAt": "2026-09-19T23:28:44.316Z"
   },
   "suggested": [
     {
@@ -1622,9 +1622,9 @@
   "quality": {
     "grades": {
       "A": 624,
-      "B": 5519,
-      "C": 3686,
-      "D": 1702,
+      "B": 5520,
+      "C": 3684,
+      "D": 1704,
       "S": 160
     },
     "avgScore": 74.2,
@@ -1634,7 +1634,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4289
+      "count": 4290
     },
     {
       "category": "模型 / 代理",
@@ -5532,8 +5532,8 @@
       "grades": {
         "A": 0,
         "B": 3,
-        "C": 199,
-        "D": 1084
+        "C": 197,
+        "D": 1086
       },
       "ab": 3,
       "npm": 84,
@@ -5693,6 +5693,27 @@
       "avg": 81.3,
       "topPlugin": "moon09300731/dsh-approval-gate",
       "topStars": 67,
+      "topCat": "其它"
+    },
+    {
+      "owner": "Fishsb",
+      "plugins": 4,
+      "stars": 71,
+      "grades": {
+        "A": 0,
+        "B": 3,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 3,
+      "npm": 0,
+      "covered": 1,
+      "lastPush": "2026-09-19",
+      "firstCreated": "2026-08-13",
+      "delta": 0,
+      "avg": 77.3,
+      "topPlugin": "Fishsb/dsh-prompt-enhancer",
+      "topStars": 69,
       "topCat": "其它"
     },
     {
@@ -9741,27 +9762,6 @@
       "avg": 78.3,
       "topPlugin": "Yan-Zero/dsh-codex",
       "topStars": 60,
-      "topCat": "模型 / 代理"
-    },
-    {
-      "owner": "Fishsb",
-      "plugins": 3,
-      "stars": 71,
-      "grades": {
-        "A": 0,
-        "B": 2,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 2,
-      "npm": 0,
-      "covered": 1,
-      "lastPush": "2026-09-14",
-      "firstCreated": "2026-08-13",
-      "delta": 0,
-      "avg": 76.7,
-      "topPlugin": "Fishsb/dsh-prompt-enhancer",
-      "topStars": 69,
       "topCat": "模型 / 代理"
     },
     {
@@ -142003,7 +142003,7 @@
       "count": 14941,
       "at": "2026-09-15T16:00:30.504Z"
     },
-    "candidates": 16091,
+    "candidates": 16092,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -142074,14 +142074,14 @@
       "2026-08-24": 1880,
       "2026-08-31": 956,
       "2026-09-07": 890,
-      "2026-09-14": 678,
+      "2026-09-14": 679,
       "2024-05-20": 1,
       "2025-10-20": 1,
       "1969-12-29": 489
     },
-    "validated": 16058,
-    "candidatesValidated": 27,
-    "authoritative": 11691,
+    "validated": 16059,
+    "candidatesValidated": 28,
+    "authoritative": 11692,
     "invalidUnique": 4367,
     "invalidBuckets": [
       {
@@ -142130,5 +142130,5 @@
       }
     ]
   },
-  "enrichCount": 11691
+  "enrichCount": 11692
 }
