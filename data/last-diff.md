@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-19
 
-- 当前权威插件：**11678**（上次 11677）
+- 当前权威插件：**11679**（上次 11678）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- WoodSettler/dsh-local-proxy ★0 
+- reisen-ww/dsh-bonk-pet ★0 
 
 ## 消失（Top 0）
 
