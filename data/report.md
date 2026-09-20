@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 11702 个插件 · 生成于 2026-09-20 · 由 DSH Insights 管线生成
+> 权威集 11709 个插件 · 生成于 2026-09-20 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**11702**
-- 近 7 天活跃：1522（13%）· 近 30 天：7042（60.2%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：11356（97%）
+- 权威集规模：**11709**
+- 近 7 天活跃：1518（13%）· 近 30 天：7039（60.1%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：11360（97%）
 
 ## 发布与文档
-- npm 已发布 5227 / 未发布 6475 / 已发布但版本滞后 2685
-- 有 README 11673 · 中英双语/中文 5580 · 中文 README 文件 874 · 无 README 29
-- lib/index.js 6286 · lib/client.js 4058 · 双产物 3624
+- npm 已发布 5230 / 未发布 6479 / 已发布但版本滞后 2686
+- 有 README 11680 · 中英双语/中文 5584 · 中文 README 文件 875 · 无 README 29
+- lib/index.js 6288 · lib/client.js 4061 · 双产物 3626
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 763 · imsai 275 · 至少一个渠道 1033（8.8%） · 未收录 10669
+- awesome-dsh-plugin 763 · imsai 275 · 至少一个渠道 1033（8.8%） · 未收录 10676
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A · 周下载 283
@@ -30,7 +30,7 @@
 - Sxuan-Coder/dsh-user-prompt A · 周下载 58
 - zjuatri/dsh-terminal-plugin A · 周下载 9
 - skyyyyyk/dsh-szg-hint A · 周下载 48
-- saya-ch/dsh-mobile A · 周下载 2363
+- stormbuf/dsh-tavily-pool A
 
 ## npm 周下载 Top 10
 - dsh-market/dsh-market：86791
@@ -46,20 +46,20 @@
 
 ## 质量评分（启发式）
 - 平均分 74.2 · S+A 占比 6.7%（值得优先看；A+B 52.5%）
-- S 159 · A 623 · B 5523 · C 3685 · D 1712
+- S 159 · A 623 · B 5524 · C 3691 · D 1712
 
 ## 功能分类（启发式 Top 12）
-- 其它：4293
-- 模型 / 代理：1133
+- 其它：4295
+- 模型 / 代理：1134
 - 文件浏览 / 预览：1027
 - 会话管理：980
 - 状态 / 监控 / 用量：815
-- 侧栏 / 工作区：709
-- 搜索 / 命令面板：649
+- 侧栏 / 工作区：710
+- 搜索 / 命令面板：651
 - 工具 / 效率：584
 - 主题 / 视觉美化：447
 - 消息 / 协作集成：393
-- 开发 / 数据：352
+- 开发 / 数据：353
 - 记忆 / 知识：320
 
 ## 月度新增（按仓库创建）
@@ -74,20 +74,20 @@
 - 2026-06：16
 - 2026-07：29
 - 2026-08：9677
-- 2026-09：1941
+- 2026-09：1948
 
 ## Top topics
-- `dsh-plugin` × 11371
-- `deepseek-harness` × 7598
-- `dsh` × 4388
-- `deepseek` × 1281
-- `dsh-plugins` × 1183
-- `cordis` × 1136
-- `plugin` × 739
+- `dsh-plugin` × 11378
+- `deepseek-harness` × 7601
+- `dsh` × 4393
+- `deepseek` × 1283
+- `dsh-plugins` × 1185
+- `cordis` × 1137
+- `plugin` × 741
 - `typescript` × 426
 - `deepseek-harness-plugin` × 404
 - `dsh-plugin-market` × 401
-- `ai-agent` × 351
+- `ai-agent` × 352
 - `ai-agents` × 315
 
 ## Star 榜前 10
