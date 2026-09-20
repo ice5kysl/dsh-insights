@@ -1,11 +1,11 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 11692 个插件 · 生成于 2026-09-19 · 由 DSH Insights 管线生成
+> 权威集 11692 个插件 · 生成于 2026-09-20 · 由 DSH Insights 管线生成
 
 ## 总览
 - 权威集规模：**11692**
-- 近 7 天活跃：1543（13.2%）· 近 30 天：7093（60.7%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：11346（97%）
+- 近 7 天活跃：1534（13.1%）· 近 30 天：7067（60.4%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：11347（97%）
 
 ## 发布与文档
 - npm 已发布 5225 / 未发布 6467 / 已发布但版本滞后 2685
@@ -16,37 +16,37 @@
 - awesome-dsh-plugin 765 · imsai 275 · 至少一个渠道 1035（8.9%） · 未收录 10657
 
 ## 优质未收录 · 建议收录（Top 15）
-- TsFreddie/dsh-compaction-instant A · 周下载 320
-- NyaaCaster/dsh-yuque-kb A · 周下载 131
-- hrhgit/dsh-model-manager A · 周下载 131
-- belowthetree/dsh-mcp-setting A · 周下载 142
-- spacexun2/dsh-worktime-board A · 周下载 136
-- Ultronen/dsh-liquid-glass A · 周下载 183
-- MayBeTheWorld/dsh-inherit A · 周下载 56
-- f20880479-lab/dsh-peak-gate A · 周下载 81
-- hotpot-labs/dsh-prompt-history-plugin A · 周下载 118
-- runcat-tommy/dsh-unitverse A · 周下载 468
-- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 258
-- Sxuan-Coder/dsh-user-prompt A · 周下载 176
-- zjuatri/dsh-terminal-plugin A · 周下载 8
-- skyyyyyk/dsh-szg-hint A · 周下载 29
-- saya-ch/dsh-mobile A · 周下载 3018
+- TsFreddie/dsh-compaction-instant A · 周下载 283
+- NyaaCaster/dsh-yuque-kb A · 周下载 103
+- hrhgit/dsh-model-manager A · 周下载 103
+- belowthetree/dsh-mcp-setting A · 周下载 106
+- spacexun2/dsh-worktime-board A · 周下载 93
+- Ultronen/dsh-liquid-glass A · 周下载 135
+- MayBeTheWorld/dsh-inherit A · 周下载 40
+- f20880479-lab/dsh-peak-gate A · 周下载 64
+- hotpot-labs/dsh-prompt-history-plugin A · 周下载 86
+- runcat-tommy/dsh-unitverse A · 周下载 52
+- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 115
+- Sxuan-Coder/dsh-user-prompt A · 周下载 58
+- zjuatri/dsh-terminal-plugin A · 周下载 9
+- skyyyyyk/dsh-szg-hint A · 周下载 48
+- saya-ch/dsh-mobile A · 周下载 2363
 
 ## npm 周下载 Top 10
-- dsh-market/dsh-market：112918
-- KokuYu-sysu/dsh-market-desktop：112918
-- omdsh-dev/DSH-better-sidebar：92307
-- biyuhao/dsh-model-proxy：59681
-- Nicercz007-cloud/schedule：58626
-- bowenliang123/dsh-context：32865
-- Han-1413141/dsh-cost-meter：25583
-- Creakono/dsh-cost-meter：25583
-- AnakinCao/dsh-cost-meter：25583
-- jkStars/dsh-token-usage-stats：22385
+- dsh-market/dsh-market：86791
+- KokuYu-sysu/dsh-market-desktop：86791
+- omdsh-dev/DSH-better-sidebar：58124
+- biyuhao/dsh-model-proxy：51758
+- Nicercz007-cloud/schedule：50763
+- bowenliang123/dsh-context：23327
+- Han-1413141/dsh-cost-meter：18481
+- Creakono/dsh-cost-meter：18481
+- AnakinCao/dsh-cost-meter：18481
+- cnkids/dsh-palimpsest：18449
 
 ## 质量评分（启发式）
 - 平均分 74.2 · S+A 占比 6.7%（值得优先看；A+B 52.5%）
-- S 160 · A 624 · B 5520 · C 3683 · D 1705
+- S 159 · A 625 · B 5518 · C 3678 · D 1712
 
 ## 功能分类（启发式 Top 12）
 - 其它：4290
@@ -108,10 +108,10 @@
 | repo | ★ | 仓库版本 → npm |
 |---|---|---|
 | liustack/modlens | 3960 | 3.25.4 → 3.26.2 |
-| dsh-market/dsh-market | 3899 | 1.43.0 → 1.48.0 |
-| MeteorNOX/DeepSeek-Balance-Whale-Widget | 2357 | 0.2.10 → 0.3.5 |
-| bowenliang123/dsh-context | 1380 | 0.42.0 → 0.53.3 |
-| xmanrui/dsh-im | 1310 | 4.11.0 → 4.21.2 |
+| dsh-market/dsh-market | 3899 | 1.43.0 → 1.49.0 |
+| MeteorNOX/DeepSeek-Balance-Whale-Widget | 2357 | 0.2.10 → 0.3.9 |
+| bowenliang123/dsh-context | 1380 | 0.42.0 → 0.53.4 |
+| xmanrui/dsh-im | 1310 | 4.11.0 → 4.22.0 |
 | GanyuanRan/Aegis | 1185 | 2.9.6 → 0.1.0 |
 | shaobeichen/dsh-pocket | 1126 | 2.10.3 → 2.10.6 |
 | ysr666/dsh-vision-router | 1099 | 2.1.2 → 2.2.0 |

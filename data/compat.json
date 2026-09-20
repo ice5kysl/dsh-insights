@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-19T01:13:10.499Z",
-  "sourceRows": 11616,
-  "probed": 4351,
+  "generatedAt": "2026-09-20T01:17:34.473Z",
+  "sourceRows": 11692,
+  "probed": 4371,
   "note": "engines.dsh/dsh peers from npm registry latest publish — heuristic compat signal, not a runtime test; repo-only (unpublished) plugins excluded.",
   "officialDsh": {
     "latest": "0.1.5-rc.2",
@@ -211,7 +211,7 @@
       "pkgName": "dshmarket",
       "repo": "dsh-market/dsh-market",
       "stars": 3899,
-      "npmLatest": "1.48.0",
+      "npmLatest": "1.49.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -359,7 +359,7 @@
       "pkgName": "dsh-whale-widget",
       "repo": "MeteorNOX/DeepSeek-Balance-Whale-Widget",
       "stars": 2357,
-      "npmLatest": "0.3.5",
+      "npmLatest": "0.3.9",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -470,7 +470,7 @@
       "pkgName": "dsh-context",
       "repo": "bowenliang123/dsh-context",
       "stars": 1380,
-      "npmLatest": "0.53.3",
+      "npmLatest": "0.53.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -509,7 +509,7 @@
       "pkgName": "@xmanrui/dsh-im",
       "repo": "xmanrui/dsh-im",
       "stars": 1310,
-      "npmLatest": "4.21.2",
+      "npmLatest": "4.22.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -871,7 +871,7 @@
       "pkgName": "dsh-mnemon",
       "repo": "omdsh-dev/dsh-mnemon",
       "stars": 369,
-      "npmLatest": "0.5.11",
+      "npmLatest": "0.5.12",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -881,11 +881,11 @@
         },
         {
           "name": "@deepseek-ai/dsh-typert-protocol",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.1 || ^0.1.5-rc.1"
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-primitives",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.1 || ^0.1.5-rc.1"
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
         }
       ]
     },
@@ -1234,7 +1234,7 @@
       "pkgName": "dsh-mobile",
       "repo": "saya-ch/dsh-mobile",
       "stars": 265,
-      "npmLatest": "0.4.2",
+      "npmLatest": "0.4.3",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -1243,8 +1243,8 @@
           "range": "^4.0.1"
         },
         {
-          "name": "@deepseek-ai/dsh-client-connection",
-          "range": "^0.1.0-rc.5 || ^0.1.1-0 || ^0.1.2-0 || ^0.1.3-0 || ^0.1.5-0 || ^0.1.6-0"
+          "name": "@deepseek-ai/dsh-llm",
+          "range": "^0.1.0-rc.6 || ^0.1.1-0 || ^0.1.2-0 || ^0.1.3-0 || ^0.1.5-0 || ^0.1.6-0"
         },
         {
           "name": "@deepseek-ai/dsh-commands",
@@ -1255,8 +1255,8 @@
           "range": "^0.1.0-rc.5 || ^0.1.1-0 || ^0.1.2-0 || ^0.1.3-0 || ^0.1.5-0 || ^0.1.6-0"
         },
         {
-          "name": "@deepseek-ai/dsh-llm",
-          "range": "^0.1.0-rc.6 || ^0.1.1-0 || ^0.1.2-0 || ^0.1.3-0 || ^0.1.5-0 || ^0.1.6-0"
+          "name": "@deepseek-ai/dsh-client-connection",
+          "range": "^0.1.0-rc.5 || ^0.1.1-0 || ^0.1.2-0 || ^0.1.3-0 || ^0.1.5-0 || ^0.1.6-0"
         }
       ]
     },
@@ -2041,7 +2041,7 @@
       "pkgName": "@mars-sea/dsh-commandcode-provider",
       "repo": "Mars-Sea/dsh-commandcode-provider",
       "stars": 244,
-      "npmLatest": "0.11.5",
+      "npmLatest": "0.11.7",
       "enginesDsh": "^0.1.6-alpha.2 || ^0.1.6-alpha.1 || ^0.1.5-rc.2 || ^0.1.5-rc.1 || ^0.1.5-alpha.1 || ^0.1.3-alpha.2 || ^0.1.3-alpha.1 || ^0.1.2-rc.1",
       "engines": [
         {
@@ -2359,7 +2359,7 @@
       "pkgName": "dsh-auto-review",
       "repo": "PerryLink/dsh-auto-review",
       "stars": 0,
-      "npmLatest": "0.12.5",
+      "npmLatest": "0.12.6",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -2724,7 +2724,7 @@
       "pkgName": "dsh-skill-mcp-panel",
       "repo": "Fishquito7/dsh-skill-mcp-panel",
       "stars": 127,
-      "npmLatest": "2.0.5",
+      "npmLatest": "2.1.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -2733,7 +2733,7 @@
       "pkgName": "dsh-permission-rules",
       "repo": "PerryLink/dsh-permission-rules",
       "stars": 0,
-      "npmLatest": "0.7.3",
+      "npmLatest": "0.7.4",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -3002,7 +3002,7 @@
       "pkgName": "dsh-easyrewrite",
       "repo": "Renzic-Stone/DSH-EasyRewrite",
       "stars": 111,
-      "npmLatest": "2.5.4",
+      "npmLatest": "2.5.5",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -3115,7 +3115,7 @@
       "pkgName": "dsh-memento",
       "repo": "PerryLink/dsh-memento",
       "stars": 0,
-      "npmLatest": "0.5.13",
+      "npmLatest": "0.5.14",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -3553,7 +3553,7 @@
       "pkgName": "@modusensus/dsh-mneme",
       "repo": "modusensus/dsh-mneme",
       "stars": 97,
-      "npmLatest": "0.8.3",
+      "npmLatest": "0.8.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -4226,7 +4226,7 @@
       "pkgName": "dsh-industry-research",
       "repo": "PerryLink/dsh-industry-research",
       "stars": 0,
-      "npmLatest": "0.3.10",
+      "npmLatest": "0.3.11",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -4406,7 +4406,7 @@
       "pkgName": "dsh-research-report",
       "repo": "PerryLink/dsh-research-report",
       "stars": 0,
-      "npmLatest": "0.3.11",
+      "npmLatest": "0.3.12",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -4485,53 +4485,58 @@
       "pkgName": "dsh-mcp-panel",
       "repo": "PerryLink/dsh-mcp-panel",
       "stars": 0,
-      "npmLatest": "0.6.15",
-      "enginesDsh": null,
-      "engines": [],
+      "npmLatest": "0.6.16",
+      "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
+      "engines": [
+        {
+          "name": "dsh",
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
+        }
+      ],
       "dshPeers": [
         {
           "name": "@deepseek-ai/cordis",
           "range": "^4.0.2"
         },
         {
-          "name": "@deepseek-ai/cordis-plugin-loader",
-          "range": "^1.0.3"
-        },
-        {
-          "name": "@deepseek-ai/dsh-commands",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
-        },
-        {
           "name": "@deepseek-ai/dsh-jobs",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-tools",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
-        },
-        {
-          "name": "@deepseek-ai/dsh-typert-protocol",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/schemastery",
           "range": "^3.18.2"
         },
         {
-          "name": "@deepseek-ai/dsh-client-connection",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "name": "@deepseek-ai/dsh-commands",
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-api-remotes",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-client-locale",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-typert-protocol",
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
+        },
+        {
+          "name": "@deepseek-ai/cordis-plugin-loader",
+          "range": "^1.0.3"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-connection",
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-settings",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         }
       ]
     },
@@ -4669,7 +4674,7 @@
       "pkgName": "@dickpy/dsh-imagegen",
       "repo": "dickpy/dsh-imagegen",
       "stars": 71,
-      "npmLatest": "1.5.12",
+      "npmLatest": "1.6.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -5293,7 +5298,7 @@
       "pkgName": "dsh-plugin-tether",
       "repo": "zexadev/dsh-tether",
       "stars": 44,
-      "npmLatest": "0.1.14",
+      "npmLatest": "0.1.17",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -6225,7 +6230,7 @@
       "pkgName": "dsh-plugin-guide",
       "repo": "PerryLink/dsh-plugin-guide",
       "stars": 0,
-      "npmLatest": "0.3.10",
+      "npmLatest": "0.3.16",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -6361,7 +6366,7 @@
       "pkgName": "dsh-code",
       "repo": "UNLINEARITY/dsh-code",
       "stars": 33,
-      "npmLatest": "1.3.0",
+      "npmLatest": "1.4.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -7330,7 +7335,7 @@
       "pkgName": "stratagate-dsh",
       "repo": "diqierjia/StrataGate-AgentMemory",
       "stars": 77,
-      "npmLatest": "0.2.73",
+      "npmLatest": "0.2.74",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -8067,7 +8072,7 @@
       "pkgName": "@hytime/dsh-thinking-effort",
       "repo": "hytime/dsh-thinking-effort",
       "stars": 30,
-      "npmLatest": "0.3.0",
+      "npmLatest": "0.3.1",
       "enginesDsh": ">=0.1.0-rc.7",
       "engines": [
         {
@@ -8146,7 +8151,7 @@
       "pkgName": "dsh-fund-research",
       "repo": "PerryLink/dsh-fund-research",
       "stars": 0,
-      "npmLatest": "0.4.12",
+      "npmLatest": "0.4.13",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -8556,7 +8561,7 @@
       "pkgName": "dsh-opencode-palette",
       "repo": "FeatherHunter/dsh-opencode-palette",
       "stars": 25,
-      "npmLatest": "2.0.0",
+      "npmLatest": "2.0.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -9574,7 +9579,7 @@
       "pkgName": "dsh-archived-chats",
       "repo": "Ultronen/dsh-archived-chats",
       "stars": 22,
-      "npmLatest": "1.3.2",
+      "npmLatest": "1.3.3",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -9869,7 +9874,7 @@
       "pkgName": "dsh-harmony",
       "repo": "memorax-ai/dsh-harmony",
       "stars": 17,
-      "npmLatest": "0.8.10",
+      "npmLatest": "0.8.12",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -10213,7 +10218,7 @@
       "pkgName": "dsh-lsp-actions",
       "repo": "PerryLink/dsh-lsp-actions",
       "stars": 0,
-      "npmLatest": "0.5.2",
+      "npmLatest": "0.5.3",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -10330,7 +10335,7 @@
       "pkgName": "dsh-ui-tweaks",
       "repo": "wlj521/dsh-ui-tweaks",
       "stars": 17,
-      "npmLatest": "0.16.4",
+      "npmLatest": "0.17.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -10340,7 +10345,7 @@
         },
         {
           "name": "@deepseek-ai/dsh-session",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/schemastery",
@@ -10348,75 +10353,75 @@
         },
         {
           "name": "@deepseek-ai/dsh-settings",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-workspace",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-token-meter",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-store",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-locale",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-host-webserver",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-storage-domain",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-slots",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-session",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-commands",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-renderer",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-settings",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-session-projection",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-workspace",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-api-session-controller",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-conversation",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-sidebar-right",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-api-workspace-controller",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.6-alpha.2"
         }
       ]
     },
@@ -10433,7 +10438,7 @@
       "pkgName": "dsh-read-url",
       "repo": "2672243194/dsh-read-url",
       "stars": 18,
-      "npmLatest": "1.8.0",
+      "npmLatest": "1.9.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -10489,7 +10494,7 @@
       "pkgName": "dsh-checkpoint-rewind",
       "repo": "PerryLink/dsh-checkpoint-rewind",
       "stars": 0,
-      "npmLatest": "0.6.12",
+      "npmLatest": "0.6.13",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -11221,7 +11226,7 @@
       "pkgName": "dsh-doublecheck",
       "repo": "PerryLink/dsh-doublecheck",
       "stars": 0,
-      "npmLatest": "0.9.12",
+      "npmLatest": "0.9.13",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -11758,7 +11763,7 @@
       "pkgName": "dsh-watcher",
       "repo": "aa2246740/dsh-watcher",
       "stars": 71,
-      "npmLatest": "0.4.1",
+      "npmLatest": "0.4.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -12294,7 +12299,7 @@
       "pkgName": "dsh-agent-skills",
       "repo": "minivv/dsh-agent-skills",
       "stars": 13,
-      "npmLatest": "0.1.10",
+      "npmLatest": "0.1.11",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -12303,40 +12308,40 @@
           "range": "^4.0.1"
         },
         {
-          "name": "@deepseek-ai/dsh-api-remotes",
-          "range": "^0.1.0-rc.6"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-locale",
-          "range": "^0.1.0-rc.6"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-runtime",
-          "range": "^0.1.0-rc.6"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-settings",
-          "range": "^0.1.0-rc.6"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-slots",
-          "range": "^0.1.0-rc.6"
-        },
-        {
-          "name": "@deepseek-ai/dsh-home-paths",
-          "range": "^0.1.0-rc.6"
-        },
-        {
           "name": "@deepseek-ai/dsh-scope",
-          "range": "^0.1.0-rc.6"
+          "range": ">=0.1.0-rc.2 <0.2.0 || ^0.1.1-rc.1 || ^0.1.2-alpha.2 || ^0.1.2-rc.1 || ^0.1.3-alpha.2 || ^0.1.5-alpha.1 || ^0.1.5-rc.1 || ^0.1.6-alpha.1"
         },
         {
           "name": "@deepseek-ai/dsh-skill",
-          "range": "^0.1.0-rc.6"
+          "range": ">=0.1.0-rc.2 <0.2.0 || ^0.1.1-rc.1 || ^0.1.2-alpha.2 || ^0.1.2-rc.1 || ^0.1.3-alpha.2 || ^0.1.5-alpha.1 || ^0.1.5-rc.1 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-home-paths",
+          "range": ">=0.1.0-rc.2 <0.2.0 || ^0.1.1-rc.1 || ^0.1.2-alpha.2 || ^0.1.2-rc.1 || ^0.1.3-alpha.2 || ^0.1.5-alpha.1 || ^0.1.5-rc.1 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-api-remotes",
+          "range": ">=0.1.0-rc.2 <0.2.0 || ^0.1.1-rc.1 || ^0.1.2-alpha.2 || ^0.1.2-rc.1 || ^0.1.3-alpha.2 || ^0.1.5-alpha.1 || ^0.1.5-rc.1 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-locale",
+          "range": ">=0.1.0-rc.2 <0.2.0 || ^0.1.1-rc.1 || ^0.1.2-alpha.2 || ^0.1.2-rc.1 || ^0.1.3-alpha.2 || ^0.1.5-alpha.1 || ^0.1.5-rc.1 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-runtime",
+          "range": ">=0.1.0-rc.2 <0.2.0 || ^0.1.1-rc.1 || ^0.1.2-alpha.2 || ^0.1.2-rc.1 || ^0.1.3-alpha.2 || ^0.1.5-alpha.1 || ^0.1.5-rc.1 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "range": ">=0.1.0-rc.2 <0.2.0 || ^0.1.1-rc.1 || ^0.1.2-alpha.2 || ^0.1.2-rc.1 || ^0.1.3-alpha.2 || ^0.1.5-alpha.1 || ^0.1.5-rc.1 || ^0.1.6-alpha.1"
         },
         {
           "name": "@deepseek-ai/dsh-typert-protocol",
-          "range": "^0.1.0-rc.6"
+          "range": ">=0.1.0-rc.2 <0.2.0 || ^0.1.1-rc.1 || ^0.1.2-alpha.2 || ^0.1.2-rc.1 || ^0.1.3-alpha.2 || ^0.1.5-alpha.1 || ^0.1.5-rc.1 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-settings",
+          "range": ">=0.1.0-rc.2 <0.2.0 || ^0.1.1-rc.1 || ^0.1.2-alpha.2 || ^0.1.2-rc.1 || ^0.1.3-alpha.2 || ^0.1.5-alpha.1 || ^0.1.5-rc.1 || ^0.1.6-alpha.1"
         }
       ]
     },
@@ -12387,7 +12392,7 @@
       "pkgName": "dsh-ui-appearance",
       "repo": "TQSY114514/dsh-ui-appearance",
       "stars": 13,
-      "npmLatest": "0.1.10",
+      "npmLatest": "0.1.11",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -12396,11 +12401,23 @@
           "range": "*"
         },
         {
+          "name": "@deepseek-ai/schemastery",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-settings",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-invariants",
+          "range": "*"
+        },
+        {
           "name": "@deepseek-ai/dsh-api-remotes",
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-client-connection",
+          "name": "@deepseek-ai/dsh-client-store",
           "range": "*"
         },
         {
@@ -12412,18 +12429,6 @@
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-client-store",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-primitives",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-settings",
-          "range": "*"
-        },
-        {
           "name": "@deepseek-ai/dsh-client-ui-slots",
           "range": "*"
         },
@@ -12432,15 +12437,15 @@
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-invariants",
+          "name": "@deepseek-ai/dsh-client-connection",
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-settings",
+          "name": "@deepseek-ai/dsh-client-ui-settings",
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/schemastery",
+          "name": "@deepseek-ai/dsh-client-ui-primitives",
           "range": "*"
         }
       ]
@@ -12605,7 +12610,7 @@
       "pkgName": "dsh-email",
       "repo": "STARDUSTLC666/dsh-email",
       "stars": 13,
-      "npmLatest": "0.13.0",
+      "npmLatest": "0.13.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -12999,7 +13004,7 @@
       "pkgName": "dsh-skill-hub",
       "repo": "cheshireez/dsh-skill-hub",
       "stars": 17,
-      "npmLatest": "0.3.13",
+      "npmLatest": "0.3.14",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -13009,55 +13014,55 @@
         },
         {
           "name": "@deepseek-ai/dsh-skill",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-session",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-settings",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-client-store",
-          "range": ">=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-client-locale",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-session-query",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-system-prompt",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-client-runtime",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-host-webserver",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-slots",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-client-connection",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-settings",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-input-trigger",
-          "range": ">=0.1.0-rc.7 <0.2.0-0 || >=0.1.1-rc.2 <0.2.0-0 || >=0.1.2-alpha.2 <0.2.0-0 || >=0.1.2-alpha.3 <0.2.0-0 || >=0.1.2-alpha.4 <0.2.0-0 || >=0.1.2-alpha.5 <0.2.0-0 || >=0.1.2-rc.1 <0.2.0-0 || >=0.1.3-alpha.2 <0.2.0-0 || >=0.1.5-alpha.1 <0.2.0-0 || >=0.1.5-alpha.2 <0.2.0-0 || >=0.1.5-rc.1 <0.2.0-0 || >=0.1.5-rc.2 <0.2.0-0 || >=0.1.6-alpha.1 <0.2.0-0"
+          "range": ">=0.1.6-alpha.2 <0.2.0-0"
         }
       ]
     },
@@ -13065,7 +13070,7 @@
       "pkgName": "@eddyskywalker/dsh-chatgpt-subscription",
       "repo": "Aa728848/dsh-chatgpt-subscription",
       "stars": 15,
-      "npmLatest": "0.3.8",
+      "npmLatest": "0.4.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -13656,7 +13661,7 @@
       "pkgName": "dsh-data-quality",
       "repo": "PerryLink/dsh-data-quality",
       "stars": 0,
-      "npmLatest": "0.3.11",
+      "npmLatest": "0.3.12",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -13790,25 +13795,25 @@
       "pkgName": "@ch4acko3/dsh-turn-fold",
       "repo": "CH4ACKO3/dsh-turn-fold",
       "stars": 13,
-      "npmLatest": "0.6.0",
+      "npmLatest": "0.6.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
         {
-          "name": "@deepseek-ai/dsh-client-ui-chat",
-          "range": ">=0.1.2-alpha.5 <0.1.3-0"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-conversation",
-          "range": ">=0.1.0-rc.8 <=0.1.1-rc.2 || >=0.1.2-alpha.5 <0.1.3-0"
+          "name": "dsh-harmony",
+          "range": "^0.8.11"
         },
         {
           "name": "@deepseek-ai/dsh-settings",
-          "range": ">=0.1.0-rc.8 <=0.1.1-rc.2 || >=0.1.2-alpha.5 <0.1.3-0"
+          "range": ">=0.1.0-rc.8 <=0.1.1-rc.2 || >=0.1.2-alpha.5 <0.1.3-0 || >=0.1.3-0 <0.1.4-0 || >=0.1.4-0 <0.1.5-0 || >=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
         },
         {
-          "name": "dsh-harmony",
-          "range": "^0.8.10"
+          "name": "@deepseek-ai/dsh-client-ui-chat",
+          "range": ">=0.1.2-alpha.5 <0.1.3-0 || >=0.1.3-0 <0.1.4-0 || >=0.1.4-0 <0.1.5-0 || >=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-conversation",
+          "range": ">=0.1.0-rc.8 <=0.1.1-rc.2 || >=0.1.2-alpha.5 <0.1.3-0 || >=0.1.3-0 <0.1.4-0 || >=0.1.4-0 <0.1.5-0 || >=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
         }
       ]
     },
@@ -14053,7 +14058,7 @@
       "pkgName": "dsh-llm-verifier",
       "repo": "Aa728848/dsh-llm-verifier",
       "stars": 15,
-      "npmLatest": "0.6.8",
+      "npmLatest": "0.7.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -14099,7 +14104,7 @@
       "pkgName": "dsh-usage-chart",
       "repo": "Max-Samson/dsh-usage-chart",
       "stars": 9,
-      "npmLatest": "1.1.5",
+      "npmLatest": "1.1.6",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -14491,12 +14496,12 @@
       "pkgName": "dsh-zotero",
       "repo": "Vncntvx/dsh-zotero",
       "stars": 17,
-      "npmLatest": "0.8.4",
-      "enginesDsh": "^0.1.5-rc.2",
+      "npmLatest": "0.9.0",
+      "enginesDsh": "^0.1.5-rc.1 || ^0.1.6-alpha.2",
       "engines": [
         {
           "name": "dsh",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
         }
       ],
       "dshPeers": [
@@ -14505,88 +14510,92 @@
           "range": "^4.0.2"
         },
         {
-          "name": "@deepseek-ai/dsh-api-remotes",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-connection",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-locale",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-store",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-chat",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-conversation",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-primitives",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-renderer",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-session",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-settings",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-slots",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-commands",
-          "range": "^0.1.5-rc.2"
-        },
-        {
           "name": "@deepseek-ai/dsh-llm",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-settings",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-system-prompt",
-          "range": "^0.1.5-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-timeout",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-tools",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
         },
         {
-          "name": "@deepseek-ai/dsh-typert-protocol",
-          "range": "^0.1.5-rc.2"
+          "name": "@deepseek-ai/dsh-timeout",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
         },
         {
-          "name": "@deepseek-ai/dsh-typert-registry",
-          "range": "^0.1.5-rc.2"
+          "name": "@deepseek-ai/dsh-commands",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
         },
         {
-          "name": "@deepseek-ai/dsh-user-questions",
-          "range": "^0.1.5-rc.2"
+          "name": "@deepseek-ai/dsh-settings",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-api-remotes",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-credentials",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-util-values",
-          "range": "^0.1.5-rc.2"
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-store",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-locale",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-system-prompt",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-chat",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-user-questions",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-typert-protocol",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-typert-registry",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-connection",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-session",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-renderer",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-settings",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-primitives",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-conversation",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.2"
         }
       ]
     },
@@ -14861,7 +14870,7 @@
       "pkgName": "dsh-tavern",
       "repo": "chen731215-dev/dsh-tavern-v2",
       "stars": 18,
-      "npmLatest": "2.3.9",
+      "npmLatest": "2.4.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -15320,7 +15329,7 @@
       "pkgName": "dsh-llm-agentrouter",
       "repo": "aqiu817/dsh-llm-agentrouter",
       "stars": 20,
-      "npmLatest": "0.2.0",
+      "npmLatest": "2.1.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -16586,7 +16595,7 @@
       "pkgName": "dsh-compact-activity",
       "repo": "wallpap/dsh-compact-activity",
       "stars": 8,
-      "npmLatest": "1.2.5",
+      "npmLatest": "1.3.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -16603,11 +16612,7 @@
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-client-ui-conversation",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-renderer",
+          "name": "@deepseek-ai/dsh-client-ui-slots",
           "range": "*"
         },
         {
@@ -16615,7 +16620,11 @@
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "name": "@deepseek-ai/dsh-client-ui-renderer",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-conversation",
           "range": "*"
         }
       ]
@@ -17036,7 +17045,7 @@
       "pkgName": "dsh-embedded-workbench",
       "repo": "AmethystLuna/embedded-workbench",
       "stars": 10,
-      "npmLatest": "0.8.10",
+      "npmLatest": "0.8.11",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -17093,7 +17102,7 @@
       "pkgName": "dsh-talk",
       "repo": "PerryLink/dsh-talk",
       "stars": 0,
-      "npmLatest": "0.3.11",
+      "npmLatest": "0.3.12",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -17338,7 +17347,7 @@
       "pkgName": "dsh-library",
       "repo": "PerryLink/dsh-library",
       "stars": 0,
-      "npmLatest": "0.2.12",
+      "npmLatest": "0.2.13",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -17776,7 +17785,7 @@
       "pkgName": "dsh-mpkg-wallpaper",
       "repo": "XHR666/dsh-mpkg-wallpaper",
       "stars": 7,
-      "npmLatest": "3.7.3",
+      "npmLatest": "3.10.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -18876,7 +18885,7 @@
       "pkgName": "dsh-session-sync",
       "repo": "TheChengXi/dsh-session-sync",
       "stars": 0,
-      "npmLatest": "0.2.15",
+      "npmLatest": "0.2.16",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -19255,7 +19264,7 @@
       "pkgName": "dsh-widgets",
       "repo": "Physicolor/dsh-widgets",
       "stars": 5,
-      "npmLatest": "1.6.0",
+      "npmLatest": "1.6.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -19501,7 +19510,7 @@
       "pkgName": "@islibaodong/dsh-login",
       "repo": "islibaodong/dsh-login",
       "stars": 5,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.2.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -20530,7 +20539,7 @@
       "pkgName": "@banana-peeljj12/dsh-trellis",
       "repo": "1264459640/dsh-trellis",
       "stars": 7,
-      "npmLatest": "0.3.3",
+      "npmLatest": "0.3.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -22283,7 +22292,7 @@
       "pkgName": "dsh-multi-folder",
       "repo": "AngelosZou/dsh-multi-folder",
       "stars": 9,
-      "npmLatest": "0.2.3",
+      "npmLatest": "0.2.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -22753,7 +22762,7 @@
       "pkgName": "dsh-chat-tidy",
       "repo": "ChuanTianML/dsh-chat-tidy",
       "stars": 5,
-      "npmLatest": "0.3.0",
+      "npmLatest": "0.4.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -22902,7 +22911,7 @@
       "pkgName": "dsh-cool-theme",
       "repo": "CoolTea001/dsh-cool-theme",
       "stars": 2,
-      "npmLatest": "0.5.0",
+      "npmLatest": "0.6.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -23074,7 +23083,7 @@
       "pkgName": "dsh-gacha-calendar",
       "repo": "EastMG/dsh-gacha-calendar",
       "stars": 0,
-      "npmLatest": "0.9.8",
+      "npmLatest": "0.9.12",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23517,7 +23526,7 @@
       "pkgName": "dsh-markdown-preview",
       "repo": "GitHubJiKe/dsh-markdown-preview",
       "stars": 2,
-      "npmLatest": "0.3.0",
+      "npmLatest": "0.4.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -23580,7 +23589,7 @@
       "pkgName": "@goodandready/dsh-context-lens",
       "repo": "GooDAnDReaDY/dsh-context-lens",
       "stars": 0,
-      "npmLatest": "0.1.21",
+      "npmLatest": "0.1.22",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23614,7 +23623,7 @@
       "pkgName": "@goodandready/dsh-grok-xsearch",
       "repo": "GooDAnDReaDY/dsh-grok-xsearch",
       "stars": 0,
-      "npmLatest": "0.3.15",
+      "npmLatest": "0.3.16",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23648,7 +23657,7 @@
       "pkgName": "@goodandready/dsh-image-gen",
       "repo": "GooDAnDReaDY/dsh-image-gen",
       "stars": 0,
-      "npmLatest": "0.10.27",
+      "npmLatest": "0.10.28",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23694,7 +23703,7 @@
       "pkgName": "@goodandready/dsh-key-rotation",
       "repo": "GooDAnDReaDY/dsh-key-rotation",
       "stars": 0,
-      "npmLatest": "0.8.13",
+      "npmLatest": "0.8.15",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23716,7 +23725,7 @@
       "pkgName": "@goodandready/dsh-lanmode",
       "repo": "GooDAnDReaDY/dsh-lanmode",
       "stars": 0,
-      "npmLatest": "0.7.22",
+      "npmLatest": "0.7.24",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23734,7 +23743,7 @@
       "pkgName": "@goodandready/dsh-live-canvas",
       "repo": "GooDAnDReaDY/dsh-live-canvas",
       "stars": 0,
-      "npmLatest": "0.2.15",
+      "npmLatest": "0.2.17",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23764,7 +23773,7 @@
       "pkgName": "@goodandready/dsh-russian-lang",
       "repo": "GooDAnDReaDY/dsh-russian-lang",
       "stars": 0,
-      "npmLatest": "0.2.25",
+      "npmLatest": "0.3.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23782,7 +23791,7 @@
       "pkgName": "@goodandready/dsh-subscriptions",
       "repo": "GooDAnDReaDY/dsh-subscriptions",
       "stars": 0,
-      "npmLatest": "0.6.14",
+      "npmLatest": "0.6.15",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23816,7 +23825,7 @@
       "pkgName": "@goodandready/dsh-tts",
       "repo": "GooDAnDReaDY/dsh-tts",
       "stars": 0,
-      "npmLatest": "0.4.17",
+      "npmLatest": "0.4.18",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23850,7 +23859,7 @@
       "pkgName": "@goodandready/dsh-vision-bridge",
       "repo": "GooDAnDReaDY/dsh-vision-bridge",
       "stars": 0,
-      "npmLatest": "0.6.3",
+      "npmLatest": "0.6.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -23888,7 +23897,7 @@
       "pkgName": "@goodandready/dsh-voice",
       "repo": "GooDAnDReaDY/dsh-voice",
       "stars": 0,
-      "npmLatest": "0.8.31",
+      "npmLatest": "0.8.33",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -25119,7 +25128,7 @@
       "pkgName": "dsh-live-voice",
       "repo": "Jstn-1g/dsh-live-voice",
       "stars": 1,
-      "npmLatest": "0.2.0",
+      "npmLatest": "0.2.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -25395,7 +25404,7 @@
       "pkgName": "dsh-agent-lang",
       "repo": "KannaKuron/dsh-agent-lang",
       "stars": 1,
-      "npmLatest": "0.5.2",
+      "npmLatest": "0.5.4",
       "enginesDsh": ">=0.1.0",
       "engines": [
         {
@@ -25418,7 +25427,7 @@
       "pkgName": "dsh-better-workspace",
       "repo": "KannaKuron/dsh-better-workspace",
       "stars": 4,
-      "npmLatest": "0.14.0",
+      "npmLatest": "0.18.0",
       "enginesDsh": ">=0.1.0",
       "engines": [
         {
@@ -25445,7 +25454,7 @@
       "pkgName": "dsh-gitbash-shell",
       "repo": "KannaKuron/dsh-gitbash-shell",
       "stars": 9,
-      "npmLatest": "0.16.1",
+      "npmLatest": "0.23.0",
       "enginesDsh": ">=0.1.0",
       "engines": [
         {
@@ -25468,7 +25477,7 @@
       "pkgName": "dsh-ptc-cordis-preset",
       "repo": "KannaKuron/dsh-ptc-cordis-preset",
       "stars": 5,
-      "npmLatest": "0.12.0",
+      "npmLatest": "0.12.2",
       "enginesDsh": ">=0.1.0",
       "engines": [
         {
@@ -26297,7 +26306,7 @@
       "pkgName": "dsh-quick-toc",
       "repo": "LyaxZ/dsh-quick-toc",
       "stars": 0,
-      "npmLatest": "0.7.0",
+      "npmLatest": "0.7.1",
       "enginesDsh": ">=0.1.5-rc.1",
       "engines": [
         {
@@ -26619,7 +26628,7 @@
       "pkgName": "@max-null/dsh-memory",
       "repo": "Max-Null/dsh-memory",
       "stars": 3,
-      "npmLatest": "0.10.0",
+      "npmLatest": "0.11.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -26909,7 +26918,7 @@
       "pkgName": "dsh-quota",
       "repo": "Minokun/dsh-quota",
       "stars": 0,
-      "npmLatest": "0.14.1",
+      "npmLatest": "0.14.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -26918,7 +26927,7 @@
       "pkgName": "dsh-openrouter-providers",
       "repo": "MoRanYue/dsh-openrouter-providers",
       "stars": 1,
-      "npmLatest": "1.0.11",
+      "npmLatest": "1.1.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -27176,7 +27185,7 @@
       "pkgName": "@duke-dsh-plugins/dsh-token-stats",
       "repo": "MoonlitDropOfBlood/dsh-token-stats",
       "stars": 3,
-      "npmLatest": "1.3.4",
+      "npmLatest": "1.4.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -27821,37 +27830,37 @@
       "pkgName": "dsh-voice-call",
       "repo": "PandaPolo/dsh-voice-call",
       "stars": 2,
-      "npmLatest": "0.2.0",
+      "npmLatest": "0.3.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
         {
           "name": "@deepseek-ai/cordis",
-          "range": "^4.0.1"
+          "range": "^4.0.2"
         },
         {
           "name": "@deepseek-ai/dsh-llm",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-jobs",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-agent",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-shell",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-tools",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-session",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/schemastery",
@@ -27859,31 +27868,31 @@
         },
         {
           "name": "@deepseek-ai/dsh-commands",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-settings",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-home-paths",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-credentials",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-system-prompt",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-user-questions",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-launch-environment",
-          "range": "^0.1.2-rc.1"
+          "range": "^0.1.5-rc.2"
         }
       ]
     },
@@ -28043,7 +28052,7 @@
       "pkgName": "dsh-click",
       "repo": "PerryLink/dsh-click",
       "stars": 0,
-      "npmLatest": "0.3.11",
+      "npmLatest": "0.3.12",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -28094,7 +28103,7 @@
       "pkgName": "dsh-defend",
       "repo": "PerryLink/dsh-defend",
       "stars": 0,
-      "npmLatest": "0.3.11",
+      "npmLatest": "0.3.12",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -28137,9 +28146,14 @@
       "pkgName": "dsh-draw",
       "repo": "PerryLink/dsh-draw",
       "stars": 0,
-      "npmLatest": "0.2.14",
-      "enginesDsh": null,
-      "engines": [],
+      "npmLatest": "0.2.15",
+      "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
+      "engines": [
+        {
+          "name": "dsh",
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
+        }
+      ],
       "dshPeers": [
         {
           "name": "@deepseek-ai/cordis",
@@ -28147,19 +28161,19 @@
         },
         {
           "name": "@deepseek-ai/dsh-llm",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-brand",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-tools",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-session",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/schemastery",
@@ -28167,35 +28181,35 @@
         },
         {
           "name": "@deepseek-ai/dsh-attachment",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-credentials",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-client-locale",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-tool",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-slots",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-typert-protocol",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-client-connection",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-settings",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         }
       ]
     },
@@ -28203,7 +28217,7 @@
       "pkgName": "dsh-fast",
       "repo": "PerryLink/dsh-fast",
       "stars": 0,
-      "npmLatest": "0.2.13",
+      "npmLatest": "0.2.14",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -28304,7 +28318,7 @@
       "pkgName": "dsh-local-ai",
       "repo": "PerryLink/dsh-local-ai",
       "stars": 0,
-      "npmLatest": "0.2.11",
+      "npmLatest": "0.2.12",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -28351,7 +28365,7 @@
       "pkgName": "dsh-mask",
       "repo": "PerryLink/dsh-mask",
       "stars": 0,
-      "npmLatest": "0.2.11",
+      "npmLatest": "0.2.12",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -28398,7 +28412,7 @@
       "pkgName": "dsh-observe",
       "repo": "PerryLink/dsh-observe",
       "stars": 0,
-      "npmLatest": "0.2.13",
+      "npmLatest": "0.2.14",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -28507,7 +28521,7 @@
       "pkgName": "dsh-reach",
       "repo": "PerryLink/dsh-reach",
       "stars": 0,
-      "npmLatest": "0.1.9",
+      "npmLatest": "0.1.10",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -28634,7 +28648,7 @@
       "pkgName": "dsh-score",
       "repo": "PerryLink/dsh-score",
       "stars": 0,
-      "npmLatest": "0.2.12",
+      "npmLatest": "0.2.13",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -28723,7 +28737,7 @@
       "pkgName": "dsh-translate",
       "repo": "PerryLink/dsh-translate",
       "stars": 0,
-      "npmLatest": "0.2.11",
+      "npmLatest": "0.2.12",
       "enginesDsh": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0",
       "engines": [
         {
@@ -28942,7 +28956,7 @@
       "pkgName": "dsh-session-export",
       "repo": "bwndlct/dsh-session-export",
       "stars": 3,
-      "npmLatest": "1.8.0",
+      "npmLatest": "1.8.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -28952,7 +28966,7 @@
         },
         {
           "name": "@deepseek-ai/dsh-llm",
-          "range": "^0.1.0-rc.6"
+          "range": "^0.1.1-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-tools",
@@ -28960,15 +28974,15 @@
         },
         {
           "name": "@deepseek-ai/dsh-session",
-          "range": "^0.1.0-rc.6"
+          "range": "^0.1.1-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-commands",
-          "range": "^0.1.0-rc.6"
+          "range": "^0.1.1-rc.2"
         },
         {
           "name": "@deepseek-ai/dsh-session-query",
-          "range": "^0.1.0-rc.6"
+          "range": "^0.1.1-rc.2"
         }
       ]
     },
@@ -29258,7 +29272,7 @@
       "pkgName": "@ddtcorex/maestro-skills",
       "repo": "ddtcorex/maestro-skills",
       "stars": 4,
-      "npmLatest": "2.13.0",
+      "npmLatest": "2.14.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -29317,7 +29331,7 @@
       "pkgName": "dsh-riskproof",
       "repo": "onlyqzq/dsh-riskproof",
       "stars": 7,
-      "npmLatest": "0.3.0",
+      "npmLatest": "0.4.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -29330,16 +29344,16 @@
           "range": "^0.1.0-rc.7 || ^0.1.1-rc.1 || ^0.1.2-rc.1"
         },
         {
-          "name": "@deepseek-ai/dsh-commands",
-          "range": "^0.1.0-rc.7 || ^0.1.1-rc.1 || ^0.1.2-rc.1"
-        },
-        {
           "name": "@deepseek-ai/dsh-tools",
           "range": "^0.1.0-rc.7 || ^0.1.1-rc.1 || ^0.1.2-rc.1"
         },
         {
           "name": "@deepseek-ai/schemastery",
           "range": "^3.18.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-commands",
+          "range": "^0.1.0-rc.7 || ^0.1.1-rc.1 || ^0.1.2-rc.1"
         }
       ]
     },
@@ -32508,7 +32522,7 @@
       "pkgName": "@goodandready/dsh-model-sync",
       "repo": "GooDAnDReaDY/dsh-model-sync",
       "stars": 0,
-      "npmLatest": "0.4.2",
+      "npmLatest": "0.4.3",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -32530,7 +32544,7 @@
       "pkgName": "@goodandready/dsh-usage-guard",
       "repo": "GooDAnDReaDY/dsh-usage-guard",
       "stars": 0,
-      "npmLatest": "0.1.12",
+      "npmLatest": "0.1.13",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -32982,7 +32996,7 @@
       "pkgName": "dsh-deepseek-monitor-moyuer233",
       "repo": "moyuer233/dsh-deepseek-monitor",
       "stars": 3,
-      "npmLatest": "0.2.3",
+      "npmLatest": "0.2.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -34119,69 +34133,69 @@
       "pkgName": "dsh-acp-enhanced",
       "repo": "grunmin/dsh-acp-enhanced",
       "stars": 6,
-      "npmLatest": "0.7.0",
+      "npmLatest": "0.9.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
         {
           "name": "@deepseek-ai/cordis",
-          "range": "^4.0.1-rc.1 || ^4.0.2"
-        },
-        {
-          "name": "@deepseek-ai/cordis-plugin-include",
-          "range": "^1.0.6-rc.1 || ^1.0.7"
-        },
-        {
-          "name": "@deepseek-ai/cordis-plugin-loader",
-          "range": "^1.0.2-rc.1 || ^1.0.3"
-        },
-        {
-          "name": "@deepseek-ai/dsh-agent",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-agent-instructions",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-agent-presets",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-invariants",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
+          "range": "^4.0.1-rc.1"
         },
         {
           "name": "@deepseek-ai/dsh-llm",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
         },
         {
-          "name": "@deepseek-ai/dsh-mcp-client",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-permission-presets",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-session",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-session-query",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
+          "name": "@deepseek-ai/dsh-agent",
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
         },
         {
           "name": "@deepseek-ai/dsh-skill",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
         },
         {
           "name": "@deepseek-ai/dsh-tools",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session",
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-invariants",
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-mcp-client",
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-agent-presets",
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session-query",
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
         },
         {
           "name": "@deepseek-ai/dsh-user-approval",
-          "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.2"
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/cordis-plugin-loader",
+          "range": "^1.0.2-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/cordis-plugin-include",
+          "range": "^1.0.6-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-agent-instructions",
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-permission-presets",
+          "range": "^0.1.5-rc.2 || ^0.1.6-alpha.1"
         }
       ]
     },
@@ -34384,7 +34398,7 @@
       "pkgName": "dsh-calendar",
       "repo": "STARDUSTLC666/dsh-calendar",
       "stars": 2,
-      "npmLatest": "0.5.4",
+      "npmLatest": "0.8.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -36232,7 +36246,7 @@
       "pkgName": "@snowamberx/dsh-role-router",
       "repo": "SnowAmberX/dsh-role-router",
       "stars": 4,
-      "npmLatest": "0.3.0",
+      "npmLatest": "0.3.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -36241,72 +36255,80 @@
           "range": "^4.0.2"
         },
         {
-          "name": "@deepseek-ai/dsh-agent",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-api-remotes",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-connection",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-locale",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-conversation",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-model-selection",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-settings",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-settings-plugins",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-slots",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
           "name": "@deepseek-ai/dsh-llm",
-          "range": "^0.1.2-alpha.2"
+          "range": "^0.1.6-alpha.2"
         },
         {
-          "name": "@deepseek-ai/dsh-plan-mode",
-          "range": "^0.1.2-alpha.2"
+          "name": "@deepseek-ai/dsh-agent",
+          "range": "^0.1.6-alpha.2"
         },
         {
-          "name": "@deepseek-ai/dsh-settings",
-          "range": "^0.1.2-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-system-prompt",
-          "range": "^0.1.2-alpha.2"
+          "name": "@deepseek-ai/dsh-session",
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/schemastery",
           "range": "^3.18.1"
         },
         {
-          "name": "@deepseek-ai/dsh-client-store",
-          "range": "^0.1.2-alpha.2"
+          "name": "@deepseek-ai/dsh-settings",
+          "range": "^0.1.6-alpha.2"
         },
         {
-          "name": "@deepseek-ai/dsh-api-session-controller",
-          "range": "^0.1.2-alpha.2"
+          "name": "@deepseek-ai/dsh-plan-mode",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-api-remotes",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-store",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-locale",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-system-prompt",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-connection",
+          "range": "^0.1.6-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-client-ui-renderer",
-          "range": "^0.1.2-alpha.2"
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-settings",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session-projection",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-api-session-controller",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-conversation",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-plugin-manager",
+          "range": "^0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-model-selection",
+          "range": "^0.1.6-alpha.2"
         }
       ]
     },
@@ -38109,13 +38131,13 @@
       "pkgName": "dsh-patchouli",
       "repo": "memorax-ai/dsh-patchouli",
       "stars": 2,
-      "npmLatest": "0.1.6",
+      "npmLatest": "0.1.7",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
         {
           "name": "dsh-harmony",
-          "range": "^0.8.8"
+          "range": "^0.8.11"
         },
         {
           "name": "@deepseek-ai/cordis",
@@ -38123,7 +38145,7 @@
         },
         {
           "name": "@deepseek-ai/dsh-storage-domain",
-          "range": ">=0.1.0-rc.5 <0.2.0"
+          "range": ">=0.1.0-rc.5 <0.2.0 || >=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
         }
       ]
     },
@@ -39068,7 +39090,7 @@
       "pkgName": "dshbase-catalog",
       "repo": "ylwl1997/dshbase-catalog",
       "stars": 0,
-      "npmLatest": "0.3.31",
+      "npmLatest": "0.3.32",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -40345,7 +40367,7 @@
       "pkgName": "archgraph-argo",
       "repo": "derekhu0002/archgraph",
       "stars": 3,
-      "npmLatest": "0.23.0",
+      "npmLatest": "0.24.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -41038,7 +41060,7 @@
       "pkgName": "dsh-plugin-catalog",
       "repo": "LuniteGlaze/dsh-plugin-catalog",
       "stars": 1,
-      "npmLatest": "2026.918.3559",
+      "npmLatest": "2026.919.3641",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -42901,7 +42923,7 @@
       "pkgName": "@lengduan/dsh-client-ui-skin-815",
       "repo": "lengduan/dsh-815-skin",
       "stars": 1,
-      "npmLatest": "0.1.23",
+      "npmLatest": "0.1.24",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -47580,7 +47602,7 @@
       "pkgName": "@hyzyn/dsh-plugin-kit",
       "repo": "hyzyn/dsh-plugin-kit",
       "stars": 4,
-      "npmLatest": "0.1.28",
+      "npmLatest": "0.1.32",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -48657,7 +48679,7 @@
       "pkgName": "@yangzhe1991/dsh-web-enhance",
       "repo": "yangzhe1991/dsh-web-enhance",
       "stars": 2,
-      "npmLatest": "0.1.9",
+      "npmLatest": "0.1.10",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -48666,11 +48688,7 @@
           "range": "^4.0.2"
         },
         {
-          "name": "@deepseek-ai/dsh-client-ui-conversation",
-          "range": "^0.1.3-alpha.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-primitives",
+          "name": "@deepseek-ai/dsh-client-ui-slots",
           "range": "^0.1.3-alpha.2"
         },
         {
@@ -48678,7 +48696,11 @@
           "range": "^0.1.3-alpha.2"
         },
         {
-          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "name": "@deepseek-ai/dsh-client-ui-primitives",
+          "range": "^0.1.3-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-conversation",
           "range": "^0.1.3-alpha.2"
         }
       ]
@@ -49377,7 +49399,7 @@
       "pkgName": "dsh-channel-telegram",
       "repo": "LosEcher/dsh-channel-telegram",
       "stars": 0,
-      "npmLatest": "0.5.1",
+      "npmLatest": "0.5.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -50254,7 +50276,7 @@
       "pkgName": "@riceawa/dsh-lan-gateway",
       "repo": "rice-awa/dsh-lan-gateway",
       "stars": 4,
-      "npmLatest": "0.5.3",
+      "npmLatest": "0.5.5",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -50263,16 +50285,16 @@
           "range": "^4.0.2"
         },
         {
-          "name": "@deepseek-ai/dsh-settings",
-          "range": "^0.1.2-rc.1 || ^0.1.5-rc.2"
-        },
-        {
           "name": "@deepseek-ai/dsh-tools",
           "range": "^0.1.2-rc.1 || ^0.1.5-rc.2"
         },
         {
           "name": "@deepseek-ai/schemastery",
           "range": "^3.18.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-settings",
+          "range": "^0.1.2-rc.1 || ^0.1.5-rc.2"
         }
       ]
     },
@@ -50420,16 +50442,16 @@
       "pkgName": "@dsh-bio/dsh-bio-genie",
       "repo": "moonbowterfly/dsh-bio-genie",
       "stars": 2,
-      "npmLatest": "0.6.26",
+      "npmLatest": "0.6.36",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
         {
-          "name": "@deepseek-ai/dsh-tools",
+          "name": "@deepseek-ai/dsh-skill",
           "range": "^0.1.0-rc.6"
         },
         {
-          "name": "@deepseek-ai/dsh-skill",
+          "name": "@deepseek-ai/dsh-tools",
           "range": "^0.1.0-rc.6"
         },
         {
@@ -51340,7 +51362,7 @@
       "pkgName": "@riffkit/dsh-plugin",
       "repo": "riffkit/dsh-plugin",
       "stars": 1,
-      "npmLatest": "1.5.4",
+      "npmLatest": "1.7.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -52881,7 +52903,7 @@
       "pkgName": "dsh-webui-studio",
       "repo": "memorax-ai/dsh-webui-studio",
       "stars": 3,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.3.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -52890,60 +52912,60 @@
           "range": "^4.0.1"
         },
         {
+          "name": "@deepseek-ai/dsh-agent",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-skill",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-tools",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-subprocess",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-api-gateway",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-system-prompt",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-modules",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-host-webserver",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-typert-protocol",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-typert-registry",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
+        },
+        {
           "name": "@deepseek-ai/cordis-plugin-loader",
           "range": "^1.0.2"
         },
         {
-          "name": "@deepseek-ai/dsh-agent",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-api-gateway",
-          "range": "^0.1.1-rc.2"
-        },
-        {
           "name": "@deepseek-ai/dsh-client-connection",
-          "range": "^0.1.1-rc.2"
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
         },
         {
-          "name": "@deepseek-ai/dsh-client-modules",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-host-apiproxy",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-host-webserver",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-session",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-skill",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-subprocess",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-system-prompt",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-tools",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-typert-protocol",
-          "range": "^0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-typert-registry",
-          "range": "^0.1.1-rc.2"
+          "name": "@deepseek-ai/dsh-api-session-controller",
+          "range": ">=0.1.5-0 <0.1.6-0 || >=0.1.6-0 <0.1.7-0"
         }
       ]
     },
@@ -54415,7 +54437,7 @@
       "pkgName": "@1mlightyears/dsh-theme-synthwave",
       "repo": "1MLightyears/dsh-theme-synthwave",
       "stars": 0,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.3.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -58299,7 +58321,7 @@
       "pkgName": "dsh-client-ui-cpa-quota",
       "repo": "wkscc310/dsh-client-ui-cpa-quota",
       "stars": 4,
-      "npmLatest": "0.8.6",
+      "npmLatest": "0.8.7",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -58355,7 +58377,7 @@
       "pkgName": "dsh-argp",
       "repo": "yoza10635/dsh-argp",
       "stars": 7,
-      "npmLatest": "1.2.0",
+      "npmLatest": "1.3.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -58770,7 +58792,7 @@
       "pkgName": "lunheng-article-pipeline",
       "repo": "zuoyunlai/lunheng-article-pipeline-dsh",
       "stars": 4,
-      "npmLatest": "18.2.5",
+      "npmLatest": "18.2.8",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -60617,7 +60639,7 @@
       "pkgName": "@shuind/dsh-codex-harness",
       "repo": "shuind/dsh-codex-harness",
       "stars": 6,
-      "npmLatest": "0.2.14",
+      "npmLatest": "0.2.15",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -60648,6 +60670,10 @@
         {
           "name": "@deepseek-ai/dsh-tools",
           "range": ">=0.0.1-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-persona",
+          "range": ">=0.1.3-alpha.2"
         },
         {
           "name": "@deepseek-ai/dsh-sandbox",
@@ -62067,7 +62093,7 @@
       "pkgName": "dsh-odette-skin",
       "repo": "lkdx0220/Genshin-odette-skin-dsh",
       "stars": 2,
-      "npmLatest": "0.0.1",
+      "npmLatest": "0.1.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -64771,7 +64797,7 @@
       "pkgName": "dsh-long-plugins",
       "repo": "jackylong1987/dsh-long-plugins",
       "stars": 0,
-      "npmLatest": "3.2.0",
+      "npmLatest": "4.0.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -66786,7 +66812,7 @@
       "pkgName": "dsh-cursor-subscription",
       "repo": "orrinzeng/dsh-cursor-subscription",
       "stars": 5,
-      "npmLatest": "0.6.3",
+      "npmLatest": "0.6.5",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -67457,7 +67483,7 @@
       "pkgName": "dsh-oh-my-ticket",
       "repo": "rqwj/oh-my-ticket",
       "stars": 2,
-      "npmLatest": "0.6.4",
+      "npmLatest": "0.6.5",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -67678,7 +67704,7 @@
       "pkgName": "@lyhue1991/dsh-soup",
       "repo": "lyhue1991/dsh-soup",
       "stars": 2,
-      "npmLatest": "0.5.3",
+      "npmLatest": "0.5.5",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -67734,7 +67760,7 @@
       "pkgName": "@gehennawu/dsh-service",
       "repo": "gehennawu/dsh-service",
       "stars": 5,
-      "npmLatest": "1.8.1",
+      "npmLatest": "1.9.0",
       "enginesDsh": ">=0.1.1-rc.2 <0.1.6-alpha.3",
       "engines": [
         {
@@ -69909,7 +69935,7 @@
       "pkgName": "dsh-retrace",
       "repo": "yamingmou/dsh-retrace",
       "stars": 2,
-      "npmLatest": "0.4.29",
+      "npmLatest": "0.4.32",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -74284,7 +74310,7 @@
       "pkgName": "dsh-hashline-edittool",
       "repo": "hyperion2144/dsh-hashline-edittool",
       "stars": 1,
-      "npmLatest": "0.7.3",
+      "npmLatest": "0.8.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -74743,7 +74769,7 @@
       "pkgName": "dsh-code-index",
       "repo": "lemonxiny55/dsh-code-index",
       "stars": 3,
-      "npmLatest": "0.6.1",
+      "npmLatest": "0.7.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -76194,7 +76220,7 @@
       "pkgName": "dshhub-market",
       "repo": "dshhub-co/dshhub-market",
       "stars": 4,
-      "npmLatest": "0.8.58",
+      "npmLatest": "0.8.59",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -76204,7 +76230,7 @@
         },
         {
           "name": "@deepseek-ai/dsh-settings",
-          "range": "^0.1.0-rc.7"
+          "range": "^0.1.0-rc.7 || ^0.1.5-rc.2"
         }
       ]
     },
@@ -77523,7 +77549,7 @@
       "pkgName": "evo-subagent",
       "repo": "ZekaiShi/evo-subagent",
       "stars": 8,
-      "npmLatest": "0.6.0",
+      "npmLatest": "0.6.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -77652,7 +77678,7 @@
       "pkgName": "relay-dsh-plugin-codex",
       "repo": "yangbobo2021/relay-dsh-plugin-codex",
       "stars": 10,
-      "npmLatest": "0.2.3",
+      "npmLatest": "0.2.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -77818,21 +77844,21 @@
       "pkgName": "relay-dsh-plugin-claude",
       "repo": "yangbobo2021/relay-dsh-plugin-claude",
       "stars": 5,
-      "npmLatest": "0.2.3",
+      "npmLatest": "0.2.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
         {
           "name": "@deepseek-ai/dsh-llm",
-          "range": ">=0.1.1-rc.2 <0.1.2-0 || >=0.1.2-alpha.2 <0.1.3-0 || 0.1.5-rc.2 || 0.1.6-alpha.1"
+          "range": ">=0.1.1-rc.2 <0.1.2-0 || >=0.1.2-alpha.2 <0.1.3-0 || 0.1.5-rc.2 || >=0.1.6-alpha.1 <0.1.7-0"
         },
         {
           "name": "@deepseek-ai/dsh-session",
-          "range": ">=0.1.1-rc.2 <0.1.2-0 || >=0.1.2-alpha.2 <0.1.3-0 || 0.1.5-rc.2 || 0.1.6-alpha.1"
+          "range": ">=0.1.1-rc.2 <0.1.2-0 || >=0.1.2-alpha.2 <0.1.3-0 || 0.1.5-rc.2 || >=0.1.6-alpha.1 <0.1.7-0"
         },
         {
           "name": "@deepseek-ai/dsh-typert-protocol",
-          "range": ">=0.1.1-rc.2 <0.1.2-0 || >=0.1.2-alpha.2 <0.1.3-0 || 0.1.5-rc.2 || 0.1.6-alpha.1"
+          "range": ">=0.1.1-rc.2 <0.1.2-0 || >=0.1.2-alpha.2 <0.1.3-0 || 0.1.5-rc.2 || >=0.1.6-alpha.1 <0.1.7-0"
         }
       ]
     },
@@ -81035,7 +81061,7 @@
       "pkgName": "dsh-opencode-go-dashboard",
       "repo": "12398k/dsh-opencode-go-dashboard",
       "stars": 0,
-      "npmLatest": "0.1.3",
+      "npmLatest": "0.2.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -81044,11 +81070,11 @@
           "range": ">=4.0.0-rc <5"
         },
         {
-          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "name": "@deepseek-ai/dsh-host-webserver",
           "range": ">=0.0.1-rc <2"
         },
         {
-          "name": "@deepseek-ai/dsh-host-webserver",
+          "name": "@deepseek-ai/dsh-client-ui-slots",
           "range": ">=0.0.1-rc <2"
         }
       ]
@@ -81236,7 +81262,7 @@
       "pkgName": "@dougen/dsh-deepseek-usage",
       "repo": "dougen/dsh-deepseek-usage",
       "stars": 0,
-      "npmLatest": "0.9.0",
+      "npmLatest": "0.10.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -81394,7 +81420,7 @@
       "pkgName": "@aiwayds/dsh-feishu",
       "repo": "fan56/dsh-feishu",
       "stars": 0,
-      "npmLatest": "0.13.0",
+      "npmLatest": "0.13.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -82239,7 +82265,7 @@
       "pkgName": "dsh-loop-engine",
       "repo": "kuun993/dsh-loop-engine",
       "stars": 4,
-      "npmLatest": "0.1.5-rc1",
+      "npmLatest": "0.1.5-rc2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -82523,7 +82549,7 @@
       "pkgName": "dingtalk-dsh-assistant",
       "repo": "HiQ-AI/dingtalk-dsh-assistant",
       "stars": 4,
-      "npmLatest": "0.5.14",
+      "npmLatest": "0.5.15",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -82782,7 +82808,7 @@
       "pkgName": "dsh-code-server-app",
       "repo": "jinsiyu/dsh-code-server-app",
       "stars": 2,
-      "npmLatest": "0.3.54",
+      "npmLatest": "0.3.56",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -83131,7 +83157,7 @@
       "pkgName": "@objectivex666/dsh-settings-search",
       "repo": "objectivex666/dsh-settings-search",
       "stars": 1,
-      "npmLatest": "1.10.0",
+      "npmLatest": "1.11.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -83814,7 +83840,7 @@
       "pkgName": "@goodandready/dsh-messenger-gateway",
       "repo": "GooDAnDReaDY/dsh-messenger-gateway",
       "stars": 1,
-      "npmLatest": "0.4.1",
+      "npmLatest": "0.4.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -83995,7 +84021,7 @@
       "pkgName": "dsh-session-recall",
       "repo": "kittimzhe/dsh-session-recall",
       "stars": 0,
-      "npmLatest": "0.7.0",
+      "npmLatest": "0.7.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -86425,7 +86451,7 @@
       "pkgName": "dsh-muv-table",
       "repo": "chen731215-dev/dsh-muv-table",
       "stars": 1,
-      "npmLatest": "0.2.4",
+      "npmLatest": "0.2.12",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -86770,7 +86796,7 @@
       "pkgName": "dsh-muv-engine",
       "repo": "chen731215-dev/dsh-muv-engine",
       "stars": 1,
-      "npmLatest": "0.3.3",
+      "npmLatest": "0.3.8",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -87830,7 +87856,7 @@
       "pkgName": "@goodandready/dsh-kanban",
       "repo": "GooDAnDReaDY/dsh-kanban",
       "stars": 0,
-      "npmLatest": "0.2.10",
+      "npmLatest": "0.2.11",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -88346,7 +88372,7 @@
       "pkgName": "@stardustlc/dsh-suite",
       "repo": "STARDUSTLC666/dsh-suite",
       "stars": 0,
-      "npmLatest": "0.1.4",
+      "npmLatest": "0.1.8",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -89887,7 +89913,7 @@
       "pkgName": "dsh-context-milvus",
       "repo": "bobjia/dsh-context-milvus",
       "stars": 2,
-      "npmLatest": "0.7.4",
+      "npmLatest": "0.7.5",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -91360,7 +91386,7 @@
       "pkgName": "@goodandready/dsh-time-machine",
       "repo": "GooDAnDReaDY/dsh-time-machine",
       "stars": 0,
-      "npmLatest": "0.1.19",
+      "npmLatest": "0.1.20",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -93446,7 +93472,7 @@
       "pkgName": "@goodandready/dsh-gitea",
       "repo": "GooDAnDReaDY/dsh-gitea",
       "stars": 0,
-      "npmLatest": "0.7.10",
+      "npmLatest": "0.7.11",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -93714,7 +93740,7 @@
       "pkgName": "@furayoshi/dsh-widechat",
       "repo": "FraYoshi/dsh-widechat",
       "stars": 1,
-      "npmLatest": "0.8.0",
+      "npmLatest": "0.8.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -94373,16 +94399,16 @@
       "pkgName": "dsh-squeeze-command",
       "repo": "hardes11/dsh-squeeze-command",
       "stars": 1,
-      "npmLatest": "0.1.3",
+      "npmLatest": "0.1.4",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
         {
-          "name": "@deepseek-ai/dsh-compaction",
+          "name": "@deepseek-ai/dsh-llm",
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-llm",
+          "name": "@deepseek-ai/dsh-compaction",
           "range": "*"
         }
       ]
@@ -94579,7 +94605,7 @@
       "pkgName": "dsh-swarm-orchestrator",
       "repo": "linkbag/dsh-swarm-orchestrator",
       "stars": 2,
-      "npmLatest": "0.6.6",
+      "npmLatest": "0.6.8",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -95192,7 +95218,7 @@
       "pkgName": "@goodandready/dsh-cron",
       "repo": "GooDAnDReaDY/dsh-cron",
       "stars": 0,
-      "npmLatest": "0.2.19",
+      "npmLatest": "0.2.21",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -95201,19 +95227,11 @@
           "range": "^4.0.1"
         },
         {
-          "name": "@deepseek-ai/dsh-agent",
-          "range": ">=0.1.0-rc.6 <0.1.1 || >=0.1.1-rc.1 <0.1.2 || >=0.1.2-alpha.1 <1.0.0"
-        },
-        {
           "name": "@deepseek-ai/dsh-llm",
           "range": ">=0.1.0-rc.6 <0.1.1 || >=0.1.1-rc.1 <0.1.2 || >=0.1.2-alpha.1 <1.0.0"
         },
         {
-          "name": "@deepseek-ai/dsh-session",
-          "range": ">=0.1.0-rc.6 <0.1.1 || >=0.1.1-rc.1 <0.1.2 || >=0.1.2-alpha.1 <1.0.0"
-        },
-        {
-          "name": "@deepseek-ai/dsh-settings",
+          "name": "@deepseek-ai/dsh-agent",
           "range": ">=0.1.0-rc.6 <0.1.1 || >=0.1.1-rc.1 <0.1.2 || >=0.1.2-alpha.1 <1.0.0"
         },
         {
@@ -95221,8 +95239,16 @@
           "range": ">=0.1.0-rc.6 <0.1.1 || >=0.1.1-rc.1 <0.1.2 || >=0.1.2-alpha.1 <1.0.0"
         },
         {
+          "name": "@deepseek-ai/dsh-session",
+          "range": ">=0.1.0-rc.6 <0.1.1 || >=0.1.1-rc.1 <0.1.2 || >=0.1.2-alpha.1 <1.0.0"
+        },
+        {
           "name": "@deepseek-ai/schemastery",
           "range": "^3.18.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-settings",
+          "range": ">=0.1.0-rc.6 <0.1.1 || >=0.1.1-rc.1 <0.1.2 || >=0.1.2-alpha.1 <1.0.0"
         }
       ]
     },
@@ -95244,7 +95270,7 @@
       "pkgName": "@goodandready/dsh-goal",
       "repo": "GooDAnDReaDY/dsh-goal",
       "stars": 0,
-      "npmLatest": "0.2.4",
+      "npmLatest": "0.2.5",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -95353,7 +95379,7 @@
       "pkgName": "@goodandready/dsh-agent-loop-guard",
       "repo": "GooDAnDReaDY/dsh-agent-loop-guard",
       "stars": 0,
-      "npmLatest": "0.2.11",
+      "npmLatest": "0.2.12",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -95452,7 +95478,7 @@
       "pkgName": "@goodandready/dsh-dsml-artifact-guard",
       "repo": "GooDAnDReaDY/dsh-dsml-artifact-guard",
       "stars": 0,
-      "npmLatest": "0.2.2",
+      "npmLatest": "0.2.3",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -95622,7 +95648,7 @@
       "pkgName": "@catheadowl/dsh-extras",
       "repo": "CatheadOwl/dsh-extras",
       "stars": 0,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.3.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -95631,59 +95657,19 @@
           "range": "*"
         },
         {
+          "name": "@deepseek-ai/dsh-llm",
+          "range": "*"
+        },
+        {
           "name": "@deepseek-ai/dsh-agent",
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-api-session-controller",
+          "name": "@deepseek-ai/dsh-skill",
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-api-workspace-controller",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-connection",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-locale",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-primitives",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-renderer",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-session",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-settings",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-settings-plugins",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-slots",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-workspace",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-commands",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-llm",
+          "name": "@deepseek-ai/dsh-tools",
           "range": "*"
         },
         {
@@ -95691,15 +95677,11 @@
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-session-persistence-jsonl",
+          "name": "@deepseek-ai/schemastery",
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-session-projection",
-          "range": "*"
-        },
-        {
-          "name": "@deepseek-ai/dsh-skill",
+          "name": "@deepseek-ai/dsh-commands",
           "range": "*"
         },
         {
@@ -95715,7 +95697,15 @@
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-tools",
+          "name": "@deepseek-ai/dsh-util-values",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-locale",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-slots",
           "range": "*"
         },
         {
@@ -95723,11 +95713,47 @@
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/dsh-util-values",
+          "name": "@deepseek-ai/dsh-client-connection",
           "range": "*"
         },
         {
-          "name": "@deepseek-ai/schemastery",
+          "name": "@deepseek-ai/dsh-client-ui-session",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-renderer",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-settings",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session-projection",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-workspace",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-primitives",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-api-session-controller",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-api-workspace-controller",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session-persistence-jsonl",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-settings-plugins",
           "range": "*"
         }
       ]
@@ -95917,7 +95943,7 @@
       "pkgName": "@goodandready/dsh-cost-meter",
       "repo": "GooDAnDReaDY/dsh-cost-meter",
       "stars": 0,
-      "npmLatest": "0.8.4",
+      "npmLatest": "0.8.5",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -96334,7 +96360,7 @@
       "pkgName": "@goodandready/dsh-shadow-auditor",
       "repo": "GooDAnDReaDY/dsh-shadow-auditor",
       "stars": 0,
-      "npmLatest": "0.2.12",
+      "npmLatest": "0.2.13",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -96681,7 +96707,7 @@
       "pkgName": "@goodandready/dsh-clinebot",
       "repo": "GooDAnDReaDY/dsh-clinebot",
       "stars": 0,
-      "npmLatest": "0.3.12",
+      "npmLatest": "0.3.15",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -96889,7 +96915,7 @@
       "pkgName": "dsh-workbuddy-xdpool",
       "repo": "aosi526/dsh-workbuddy-xdpool",
       "stars": 4,
-      "npmLatest": "0.4.0",
+      "npmLatest": "0.4.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -96933,7 +96959,7 @@
       "pkgName": "@goodandready/dsh-moa",
       "repo": "GooDAnDReaDY/dsh-moa",
       "stars": 3,
-      "npmLatest": "0.2.18",
+      "npmLatest": "0.2.19",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -97443,7 +97469,7 @@
       "pkgName": "@goodandready/dsh-session-control",
       "repo": "GooDAnDReaDY/dsh-session-control",
       "stars": 0,
-      "npmLatest": "0.2.2",
+      "npmLatest": "0.2.3",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -97916,7 +97942,7 @@
       "pkgName": "dsh-prompt-for-me",
       "repo": "XXXXXQ-0206/dsh-prompt-for-me",
       "stars": 0,
-      "npmLatest": "0.6.0",
+      "npmLatest": "0.6.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -98746,7 +98772,7 @@
       "pkgName": "dsh-distillation-director",
       "repo": "winsonpong98-cloud/dsh-distillation-director",
       "stars": 2,
-      "npmLatest": "4.6.6",
+      "npmLatest": "4.9.17",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -98810,7 +98836,7 @@
       "pkgName": "dsh-plugin-upgrade",
       "repo": "PerryLink/dsh-plugin-upgrade",
       "stars": 0,
-      "npmLatest": "0.1.3",
+      "npmLatest": "2.0.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -98820,7 +98846,7 @@
         },
         {
           "name": "@deepseek-ai/dsh-skill",
-          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0"
+          "range": ">=0.1.2-rc.1 <0.2.0 || >=0.1.5-alpha.1 <0.2.0 || >=0.1.6-0 <0.2.0"
         },
         {
           "name": "@deepseek-ai/schemastery",
@@ -99376,7 +99402,7 @@
       "pkgName": "@domitor-syh/dsh-rollback",
       "repo": "domitor-syh/dsh-rollback",
       "stars": 1,
-      "npmLatest": "0.1.0",
+      "npmLatest": "0.2.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -99439,7 +99465,7 @@
       "pkgName": "dsh-skills-anywhere",
       "repo": "noteflowai/dsh-skills-anywhere",
       "stars": 2,
-      "npmLatest": "0.12.0",
+      "npmLatest": "0.12.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -99754,7 +99780,7 @@
       "pkgName": "dsh-locale-tr",
       "repo": "azizemreozturk/dsh-locale-tr",
       "stars": 0,
-      "npmLatest": "0.1.0",
+      "npmLatest": "0.2.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -99781,7 +99807,7 @@
       "pkgName": "@goodandready/dsh-remote-workspace",
       "repo": "GooDAnDReaDY/dsh-remote-workspace",
       "stars": 0,
-      "npmLatest": "0.3.3",
+      "npmLatest": "0.3.5",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -99918,7 +99944,7 @@
       "pkgName": "dsh-backup-migrator",
       "repo": "zhengjy01/dsh-backup-migrator",
       "stars": 0,
-      "npmLatest": "0.1.4",
+      "npmLatest": "0.4.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -99927,11 +99953,11 @@
           "range": "^4.0.1"
         },
         {
-          "name": "@deepseek-ai/dsh-system-prompt",
+          "name": "@deepseek-ai/dsh-tools",
           "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.1 || ^0.1.5-rc.1"
         },
         {
-          "name": "@deepseek-ai/dsh-tools",
+          "name": "@deepseek-ai/dsh-system-prompt",
           "range": "^0.1.0-rc.6 || ^0.1.1-rc.1 || ^0.1.2-alpha.1 || ^0.1.5-rc.1"
         }
       ]
@@ -100719,7 +100745,7 @@
       "pkgName": "@busabase/dsh-plugin",
       "repo": "busabase/busabase-dsh-plugin",
       "stars": 5,
-      "npmLatest": "0.1.8",
+      "npmLatest": "0.1.9",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -100728,35 +100754,15 @@
           "range": "^4.0.1"
         },
         {
-          "name": "@deepseek-ai/dsh-credentials",
-          "range": "0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-host-webserver",
-          "range": "0.1.1-rc.2"
-        },
-        {
           "name": "@deepseek-ai/dsh-skill",
           "range": "0.1.1-rc.2"
         },
         {
-          "name": "@deepseek-ai/dsh-client-runtime",
+          "name": "@deepseek-ai/dsh-tools",
           "range": "0.1.1-rc.2"
         },
         {
-          "name": "@deepseek-ai/dsh-client-ui-conversation",
-          "range": "0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-layout",
-          "range": "0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-slots",
-          "range": "0.1.1-rc.2"
-        },
-        {
-          "name": "@deepseek-ai/dsh-client-ui-tool",
+          "name": "@deepseek-ai/dsh-credentials",
           "range": "0.1.1-rc.2"
         },
         {
@@ -100764,7 +100770,27 @@
           "range": "0.1.1-rc.2"
         },
         {
-          "name": "@deepseek-ai/dsh-tools",
+          "name": "@deepseek-ai/dsh-client-runtime",
+          "range": "0.1.1-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-tool",
+          "range": "0.1.1-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-host-webserver",
+          "range": "0.1.1-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "range": "0.1.1-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-layout",
+          "range": "0.1.1-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-conversation",
           "range": "0.1.1-rc.2"
         }
       ]
@@ -101201,7 +101227,7 @@
       "pkgName": "@firetruck666/dsh-task-board",
       "repo": "FiretrUCK666/dsh-task-board",
       "stars": 1,
-      "npmLatest": "0.2.138",
+      "npmLatest": "0.2.139",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -101475,7 +101501,7 @@
       "pkgName": "dsh-paoding",
       "repo": "lifangjin/dsh-paoding",
       "stars": 1,
-      "npmLatest": "0.3.0",
+      "npmLatest": "0.3.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -101582,7 +101608,7 @@
       "pkgName": "dsh-livebench-panel",
       "repo": "Vithrive/dsh-livebench-panel",
       "stars": 0,
-      "npmLatest": "0.2.23",
+      "npmLatest": "0.2.24",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -101907,7 +101933,7 @@
       "pkgName": "@duke-dsh-plugins/dsh-model-prompt-injector",
       "repo": "MoonlitDropOfBlood/dsh-model-prompt-injector",
       "stars": 0,
-      "npmLatest": "1.0.0",
+      "npmLatest": "1.0.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -101917,7 +101943,7 @@
         },
         {
           "name": "@deepseek-ai/dsh-typert-protocol",
-          "range": "0.1.1-rc.2 || 0.1.2-rc.1"
+          "range": "0.1.1-rc.2 || 0.1.2-rc.1 || ^0.1.5-rc.2"
         }
       ]
     },
@@ -102263,7 +102289,7 @@
       "pkgName": "@zhengjunyao/dsh-restart",
       "repo": "zhengjy01/dsh-restart",
       "stars": 0,
-      "npmLatest": "0.1.3",
+      "npmLatest": "0.2.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -102607,7 +102633,7 @@
       "pkgName": "dsh-plugin-tool-management",
       "repo": "ouli-1242/dsh-plugin-tool-management",
       "stars": 3,
-      "npmLatest": "0.10.0",
+      "npmLatest": "0.11.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -103559,7 +103585,7 @@
       "pkgName": "@kasenri/dsh-orbit",
       "repo": "KasenRi/dsh-orbit",
       "stars": 0,
-      "npmLatest": "0.5.7",
+      "npmLatest": "0.5.10",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -104112,7 +104138,7 @@
       "pkgName": "dsh-locale-es",
       "repo": "GuidoMaxier/dsh-locale-es",
       "stars": 1,
-      "npmLatest": "0.1.2",
+      "npmLatest": "0.1.3",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -104551,7 +104577,7 @@
       "pkgName": "dsh-ide-git",
       "repo": "KannaKuron/dsh-ide-git",
       "stars": 1,
-      "npmLatest": "0.5.3",
+      "npmLatest": "0.5.5",
       "enginesDsh": ">=0.1.2-0",
       "engines": [
         {
@@ -104772,7 +104798,7 @@
       "pkgName": "dsh-gme-workflow",
       "repo": "nuaaweixinye/dsh-gme-workflow",
       "stars": 0,
-      "npmLatest": "0.1.1",
+      "npmLatest": "0.1.2",
       "enginesDsh": ">=0.1.2-alpha.1 <0.2.0-0",
       "engines": [
         {
@@ -104820,7 +104846,7 @@
       "pkgName": "@yangdcm/dsh-expert-team",
       "repo": "yangdcm/dsh-expert-team",
       "stars": 1,
-      "npmLatest": "1.3.34",
+      "npmLatest": "1.4.0",
       "enginesDsh": ">=0.1.5-rc.1",
       "engines": [
         {
@@ -104859,7 +104885,7 @@
       "pkgName": "@goodandready/dsh-issue-reporter",
       "repo": "GooDAnDReaDY/dsh-issue-reporter",
       "stars": 0,
-      "npmLatest": "0.1.5",
+      "npmLatest": "0.1.6",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -105008,13 +105034,18 @@
       "pkgName": "dsh-kinich-theme",
       "repo": "Xian-JL/dsh-Kinich-theme",
       "stars": 0,
-      "npmLatest": "1.0.0",
-      "enginesDsh": null,
-      "engines": [],
+      "npmLatest": "1.2.2",
+      "enginesDsh": "^0.1.5-rc.1 || ^0.1.6-alpha.1",
+      "engines": [
+        {
+          "name": "dsh",
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.1"
+        }
+      ],
       "dshPeers": [
         {
           "name": "@deepseek-ai/dsh-settings",
-          "range": "0.1.5-rc.1"
+          "range": "^0.1.5-rc.1 || ^0.1.6-alpha.1"
         }
       ]
     },
@@ -105022,7 +105053,7 @@
       "pkgName": "@goodandready/dsh-model-search",
       "repo": "GooDAnDReaDY/dsh-model-search",
       "stars": 0,
-      "npmLatest": "0.1.9",
+      "npmLatest": "0.1.10",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -105049,7 +105080,7 @@
       "pkgName": "dsh-noname-kit",
       "repo": "qtaik/dsh-noname-kit",
       "stars": 1,
-      "npmLatest": "1.6.2",
+      "npmLatest": "1.7.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -105813,7 +105844,7 @@
       "pkgName": "dsh-knit",
       "repo": "PolinniZhong/dsh-knit",
       "stars": 1,
-      "npmLatest": "0.9.0",
+      "npmLatest": "0.12.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -105868,7 +105899,7 @@
       "pkgName": "@goodandready/dsh-key-limits",
       "repo": "GooDAnDReaDY/dsh-key-limits",
       "stars": 0,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.2.2",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -106015,15 +106046,10 @@
       "pkgName": "dsh-tgrep",
       "repo": "huuthuan-nguyen/dsh-tgrep",
       "stars": 0,
-      "npmLatest": "0.1.0",
+      "npmLatest": "0.1.12",
       "enginesDsh": null,
       "engines": [],
-      "dshPeers": [
-        {
-          "name": "@deepseek-ai/dsh-tools",
-          "range": "*"
-        }
-      ]
+      "dshPeers": []
     },
     {
       "pkgName": "dsh-approval-chime",
@@ -106439,7 +106465,7 @@
       "pkgName": "dsh-ditto",
       "repo": "darrien1998/dsh-ditto",
       "stars": 0,
-      "npmLatest": "0.1.0",
+      "npmLatest": "0.2.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -106648,7 +106674,7 @@
       "pkgName": "dsh-cache-guard",
       "repo": "loonylabs-dev/dsh-cache-guard",
       "stars": 0,
-      "npmLatest": "0.3.0",
+      "npmLatest": "0.4.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -106657,7 +106683,7 @@
       "pkgName": "chinese-script-policy",
       "repo": "KSF1216/chinese-script-policy",
       "stars": 0,
-      "npmLatest": "1.1.1",
+      "npmLatest": "1.2.0",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": []
@@ -106905,7 +106931,7 @@
       "pkgName": "dsh-browser-harness",
       "repo": "chaserchan/dsh-browser-harness",
       "stars": 0,
-      "npmLatest": "0.1.0",
+      "npmLatest": "0.2.0",
       "enginesDsh": ">=0.1.0-rc.6 <0.2.0",
       "engines": [
         {
@@ -106924,7 +106950,7 @@
       "pkgName": "dsh-prompt-vcs",
       "repo": "hj01857655/dsh-prompt-vcs",
       "stars": 0,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.5.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -106938,7 +106964,7 @@
       "pkgName": "dsh-model-arena",
       "repo": "hj01857655/dsh-model-arena",
       "stars": 0,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.5.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -106952,7 +106978,7 @@
       "pkgName": "dsh-cost-track",
       "repo": "hj01857655/dsh-cost-track",
       "stars": 0,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.5.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -106966,7 +106992,7 @@
       "pkgName": "dsh-tool-stats",
       "repo": "hj01857655/dsh-tool-stats",
       "stars": 0,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.5.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -106980,7 +107006,7 @@
       "pkgName": "dsh-step-trace",
       "repo": "hj01857655/dsh-step-trace",
       "stars": 0,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.5.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -106994,7 +107020,7 @@
       "pkgName": "dsh-context-memory",
       "repo": "hj01857655/dsh-context-memory",
       "stars": 0,
-      "npmLatest": "0.2.1",
+      "npmLatest": "0.6.1",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -107095,7 +107121,7 @@
       "pkgName": "@goodandready/dsh-agent-orchestrator",
       "repo": "GooDAnDReaDY/dsh-agent-orchestrator",
       "stars": 0,
-      "npmLatest": "0.1.7",
+      "npmLatest": "0.1.9",
       "enginesDsh": null,
       "engines": [],
       "dshPeers": [
@@ -107140,6 +107166,557 @@
         {
           "name": "@deepseek-ai/cordis",
           "range": ">=4.0.1 <5"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-skills-manager-plus",
+      "repo": "appthin/dsh-skills-manager-plus",
+      "stars": 2,
+      "npmLatest": "0.1.1",
+      "enginesDsh": ">=0.1.5-rc.1",
+      "engines": [
+        {
+          "name": "dsh",
+          "range": ">=0.1.5-rc.1"
+        }
+      ],
+      "dshPeers": []
+    },
+    {
+      "pkgName": "dsh-canvas-xiaohe",
+      "repo": "wild-River2016/dsh-canvas-xiaohe",
+      "stars": 0,
+      "npmLatest": "0.1.1",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": "^4.0.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-tools",
+          "range": "*"
+        }
+      ]
+    },
+    {
+      "pkgName": "@skzhang/dsh-appearance",
+      "repo": "shkzhang/dsh-appearance",
+      "stars": 0,
+      "npmLatest": "0.1.0",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": []
+    },
+    {
+      "pkgName": "dsh-wallpaper-engine",
+      "repo": "HaydenSmith1121/dsh-wallpaper-engine",
+      "stars": 0,
+      "npmLatest": null,
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": []
+    },
+    {
+      "pkgName": "dsh-theme-studio",
+      "repo": "hj01857655/dsh-theme-studio",
+      "stars": 0,
+      "npmLatest": "0.6.3",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": "^4.0.1"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-qoder-connect",
+      "repo": "masknull/dsh-qoder-connect",
+      "stars": 0,
+      "npmLatest": "0.1.0",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": "^4.0.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-atomic-write",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-attachment",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-home-paths",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-host-webserver",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-llm",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-llm-pi-ai",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-settings",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/schemastery",
+          "range": "^3.18.2"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-connect-qoder",
+      "repo": "hdhgsysh/dsh-connect-qoder",
+      "stars": 2,
+      "npmLatest": "0.2.0",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": ">=4.0.2 <5.0.0"
+        },
+        {
+          "name": "@deepseek-ai/dsh-llm",
+          "range": "0.1.0-rc.6 || 0.1.2-rc.1 || >=0.1.5-0 <0.2.0-0 || 0.1.6-alpha.1 || 0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/schemastery",
+          "range": "^3.18.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-settings",
+          "range": "0.1.0-rc.6 || 0.1.2-rc.1 || >=0.1.5-0 <0.2.0-0 || 0.1.6-alpha.1 || 0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-llm-pi-ai",
+          "range": "0.1.0-rc.6 || 0.1.2-rc.1 || >=0.1.5-0 <0.2.0-0 || 0.1.6-alpha.1 || 0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-home-paths",
+          "range": "0.1.0-rc.6 || 0.1.2-rc.1 || >=0.1.5-0 <0.2.0-0 || 0.1.6-alpha.1 || 0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-locale",
+          "range": "0.1.0-rc.6 || 0.1.2-rc.1 || >=0.1.5-0 <0.2.0-0 || 0.1.6-alpha.1 || 0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-host-webserver",
+          "range": "0.1.0-rc.6 || 0.1.2-rc.1 || >=0.1.5-0 <0.2.0-0 || 0.1.6-alpha.1 || 0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "range": "0.1.0-rc.6 || 0.1.2-rc.1 || >=0.1.5-0 <0.2.0-0 || 0.1.6-alpha.1 || 0.1.6-alpha.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-settings",
+          "range": "0.1.0-rc.6 || 0.1.2-rc.1 || >=0.1.5-0 <0.2.0-0 || 0.1.6-alpha.1 || 0.1.6-alpha.2"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-orbital-agents",
+      "repo": "Qulierm/orbital-agents",
+      "stars": 0,
+      "npmLatest": "0.2.4",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": "^4.0.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-llm",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-agent",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-tools",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/schemastery",
+          "range": "3.18.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-settings",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-subagent",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-locale",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-chat",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session-projection",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-workspace",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-api-session-controller",
+          "range": "0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-conversation",
+          "range": "0.1.5-rc.2"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-router-loomy",
+      "repo": "2404723600/dsh-router-loomy",
+      "stars": 0,
+      "npmLatest": "0.1.1",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": "^4.0.2"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-unsandboxed-winbash",
+      "repo": "xswt442-cmd/dsh-unsandboxed-winbash",
+      "stars": 0,
+      "npmLatest": "0.1.1",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": []
+    },
+    {
+      "pkgName": "dsh-tool-antigravity",
+      "repo": "Jaylor-Wang/dsh-tool-antigravity",
+      "stars": 1,
+      "npmLatest": "0.2.1",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": "^4.0.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-fs",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-llm",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-agent",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-tools",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/schemastery",
+          "range": "^3.18.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-commands",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-settings",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-attachment",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-invariants",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-api-remotes",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-locale",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-host-webserver",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-connection",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-renderer",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-settings",
+          "range": "^0.1.5-rc.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-primitives",
+          "range": "^0.1.5-rc.1"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-cli-mode",
+      "repo": "Shadoso-w/dsh-cli-mode",
+      "stars": 0,
+      "npmLatest": "0.2.0",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": "^4.0.1"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-plugin-dependency-graph",
+      "repo": "ewoowe/dsh-plugin-dependency-graph-plugin",
+      "stars": 0,
+      "npmLatest": "0.2.0",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-settings",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-slots",
+          "range": "*"
+        },
+        {
+          "name": "@deepseek-ai/dsh-host-webserver",
+          "range": "*"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-duet",
+      "repo": "YuMS/dsh-duet",
+      "stars": 0,
+      "npmLatest": "0.1.0",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": []
+    },
+    {
+      "pkgName": "dsh-novel-studio",
+      "repo": "Voyage-He/dsh-novel-studio",
+      "stars": 0,
+      "npmLatest": "0.3.0",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/dsh-fs",
+          "range": "^0.1.1-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-llm",
+          "range": "^0.1.1-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-skill",
+          "range": "^0.1.1-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-tools",
+          "range": "^0.1.0-rc.6"
+        },
+        {
+          "name": "@deepseek-ai/schemastery",
+          "range": "^3.18.1"
+        },
+        {
+          "name": "dsh-better-sidebar",
+          "range": ">=0.13.0 <0.16"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-keyless-search",
+      "repo": "OzzyDeng-JunDeng/dsh-keyless-search",
+      "stars": 0,
+      "npmLatest": "0.1.0",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/dsh-web",
+          "range": "*"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-contract-check",
+      "repo": "imtokenxinluo/dsh-contract-check",
+      "stars": 0,
+      "npmLatest": "0.1.0",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": []
+    },
+    {
+      "pkgName": "dsh-archive-manager-pro",
+      "repo": "loyalchiiina/dsh-archive-manager-pro",
+      "stars": 0,
+      "npmLatest": "0.1.40",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": "^4.0.1"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-connection",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-locale",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-runtime",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-store",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-conversation",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-primitives",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-sidebar",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-client-ui-workspace",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-host-webserver",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-session-projection-cache",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-spill-local",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-storage-domain",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-typert-protocol",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-typert-registry",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        },
+        {
+          "name": "@deepseek-ai/dsh-workspace",
+          "range": "0.1.0-rc.8 || 0.1.1-rc.2 || 0.1.2-rc.1 || 0.1.5-rc.1 || 0.1.5-rc.2"
+        }
+      ]
+    },
+    {
+      "pkgName": "dsh-mail",
+      "repo": "lucagiftzek/dsh-mail",
+      "stars": 0,
+      "npmLatest": "0.0.1",
+      "enginesDsh": null,
+      "engines": [],
+      "dshPeers": []
+    },
+    {
+      "pkgName": "dsh-jev",
+      "repo": "lldois/dsh-jev",
+      "stars": 0,
+      "npmLatest": "0.2.0",
+      "enginesDsh": ">=0.1.5-rc.2",
+      "engines": [
+        {
+          "name": "dsh",
+          "range": ">=0.1.5-rc.2"
+        }
+      ],
+      "dshPeers": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "range": ">=4.0.0"
         }
       ]
     }
