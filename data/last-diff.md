@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-20
 
-- 当前权威插件：**11786**（上次 11785）
+- 当前权威插件：**11787**（上次 11786）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- GooDAnDReaDY/dsh-web-gateway ★0 (npm ✓)
+- MosesCharm/dsh-sidebar-stack ★0 
 
 ## 消失（Top 0）
 
