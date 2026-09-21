@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 11941 个插件 · 生成于 2026-09-21 · 由 DSH Insights 管线生成
+> 权威集 11942 个插件 · 生成于 2026-09-21 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**11941**
-- 近 7 天活跃：2271（19%）· 近 30 天：6877（57.6%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：11560（96.8%）
+- 权威集规模：**11942**
+- 近 7 天活跃：2261（18.9%）· 近 30 天：6871（57.5%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：11563（96.8%）
 
 ## 发布与文档
-- npm 已发布 5326 / 未发布 6615 / 已发布但版本滞后 2715
-- 有 README 11912 · 中英双语/中文 5673 · 中文 README 文件 893 · 无 README 29
-- lib/index.js 6407 · lib/client.js 4159 · 双产物 3712
+- npm 已发布 5326 / 未发布 6616 / 已发布但版本滞后 2715
+- 有 README 11913 · 中英双语/中文 5673 · 中文 README 文件 893 · 无 README 29
+- lib/index.js 6408 · lib/client.js 4160 · 双产物 3713
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 767 · imsai 276 · 至少一个渠道 1038（8.7%） · 未收录 10903
+- awesome-dsh-plugin 767 · imsai 276 · 至少一个渠道 1038（8.7%） · 未收录 10904
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A · 周下载 297
@@ -34,7 +34,6 @@
 
 ## npm 周下载 Top 10
 - dsh-market/dsh-market：89707
-- KokuYu-sysu/dsh-market-desktop：89707
 - Nicercz007-cloud/schedule：55410
 - biyuhao/dsh-model-proxy：52711
 - omdsh-dev/DSH-better-sidebar：52147
@@ -43,14 +42,15 @@
 - MichengAI/dsh-archive-manager：23473
 - MichengAI/dsh-skills-manager：22571
 - bowenliang123/dsh-context：22115
+- cnkids/dsh-palimpsest：18475
 
 ## 质量评分（启发式）
 - 平均分 74.2 · S+A 占比 6.6%（值得优先看；A+B 52.5%）
-- S 156 · A 629 · B 5642 · C 3757 · D 1757
+- S 155 · A 630 · B 5642 · C 3758 · D 1757
 
 ## 功能分类（启发式 Top 12）
 - 其它：4358
-- 模型 / 代理：1165
+- 模型 / 代理：1166
 - 文件浏览 / 预览：1052
 - 会话管理：1006
 - 状态 / 监控 / 用量：835
@@ -74,10 +74,10 @@
 - 2026-06：16
 - 2026-07：30
 - 2026-08：9712
-- 2026-09：2144
+- 2026-09：2145
 
 ## Top topics
-- `dsh-plugin` × 11584
+- `dsh-plugin` × 11585
 - `deepseek-harness` × 7756
 - `dsh` × 4512
 - `deepseek` × 1309
