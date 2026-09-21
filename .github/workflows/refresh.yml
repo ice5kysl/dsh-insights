@@ -102,6 +102,12 @@ jobs:
           GA4_PROPERTY: ${{ secrets.GA4_PROPERTY }}
         run: |
           TODAY=$(date -u +%F)
+          # 排队的 run 携带的是**入队时**的 head_sha，而不是启动时的。concurrency 组把它放行时，
+          # 上一个 run 刚推上来的 data/last-daily.txt 可能压根不在工作树里 → 去重失效、
+          # 同一个 UTC 日跑了两次 monday（2026-09-21 实测：两次各 83 分钟，insights 的 LLM 费用翻倍）。
+          # 这里强制对齐到远端最新再判 mode（checkout 已是 fetch-depth: 0，用普通 fetch 即可，
+          # 不要加 --depth=1 —— 那会在全量克隆里引入浅边界）。
+          git fetch origin main && git reset --hard origin/main
           LAST=$(cat data/last-daily.txt 2>/dev/null || echo never)
           MODE=hourly
           if [ "${{ inputs.mode }}" = "monday" ]; then
@@ -109,7 +115,15 @@ jobs:
           elif { [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event_name }}" = "repository_dispatch" ]; } && [ "$LAST" = "$TODAY" ]; then
             MODE=hourly
           elif [ "$(date -u +%u)" = "1" ]; then
-            MODE=monday
+            # 幂等守卫（按**交付物**而非标记文件判断，不受上面那种竞态影响）：
+            # 刚结束的那个 ISO 周的周报已经存在 → Monday 的产出已经在仓库里，降级 hourly。
+            WK=$(date -u -d yesterday +%G-W%V)
+            if ls data/weekly/"${WK}"-*.md >/dev/null 2>&1; then
+              MODE=hourly
+              echo "[dedup] ${WK} 周报已存在 → Monday 工作已完成，降级 hourly"
+            else
+              MODE=monday
+            fi
           else
             MODE=daily
           fi

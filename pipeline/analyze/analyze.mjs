@@ -17,6 +17,7 @@ import { writeFileSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { DATA, PATHS, readJsonl, readJson, writeJson, loadPlugins, deriveActivity } from '../../lib/data.mjs'
 import { scoreAll } from './score.mjs'
+import { cmpVersion } from '../../lib/version.mjs'
 
 const PLUGINS = process.argv[2] || null
 
@@ -116,7 +117,7 @@ function analyze(rows) {
     const inAwesome = channels.awesome.has(r.full_name)
     const inImsai = channels.imsai.has(r.full_name)
     const weekly = r.npm?.published && r.pkgName ? (dlMap[r.pkgName]?.d ?? null) : null
-    enrich.push({ full_name: r.full_name, stars: r.stars || 0, score: h.score, grade: h.grade, dimScores: h.dimScores || {}, drops: h.drops.map((d) => ({ code: d.code, sev: d.sev, label: d.label })), missing: h.missing || [], category: cat, inAwesome, inImsai, covered: inAwesome || inImsai, weekly })
+    enrich.push({ full_name: r.full_name, stars: r.stars || 0, score: h.score, grade: h.grade, dimScores: h.dimScores || {}, drops: h.drops.map((d) => ({ code: d.code, sev: d.sev, label: d.label })), missing: h.missing || [], category: cat, inAwesome, inImsai, covered: inAwesome || inImsai, weekly, pkgName: r.pkgName ?? null })
     gradeAgg[h.grade] = (gradeAgg[h.grade] || 0) + 1
     catAgg[cat] = (catAgg[cat] || 0) + 1
     scoreSum += h.score
@@ -209,12 +210,37 @@ function analyze(rows) {
     .sort((a, b) => (b.stars || 0) - (a.stars || 0))
     .slice(0, 10)
     .map((r) => ({ repo: r.full_name, stars: r.stars, repoVersion: r.version, npmLatest: r.npm.latest }))
+  // 「版本不一致」有两个方向，含义完全不同，必须分开（2026-09-21 修）：
+  //   仓库领先 → 作者改了 package.json 但没发版（该催，可行动）
+  //   npm 领先 → 发布版比默认分支的 package.json 还新（多半是 CI 发布没回写版本，通常无害）
+  // 旧实现把两者混在一个 "npm 版本滞后（仓库领先于发布）" 标题下，而列出来的几乎全是后者。
+  const driftRows = rows
+    .filter((r) => r.npm?.published && r.version && r.npm.latest && r.npm.latest !== r.version)
+  const byStars = (a, b) => (b.stars || 0) - (a.stars || 0)
+  const repoAheadTop = driftRows.filter((r) => cmpVersion(r.version, r.npm.latest) > 0)
+    .sort(byStars).slice(0, 10)
+    .map((r) => ({ repo: r.full_name, stars: r.stars, repoVersion: r.version, npmLatest: r.npm.latest }))
+  const registryAheadTop = driftRows.filter((r) => cmpVersion(r.npm.latest, r.version) > 0)
+    .sort(byStars).slice(0, 10)
+    .map((r) => ({ repo: r.full_name, stars: r.stars, repoVersion: r.version, npmLatest: r.npm.latest }))
   const aw = enrich.filter((e) => e.inAwesome).length
   const im = enrich.filter((e) => e.inImsai).length
   const covered = enrich.filter((e) => e.covered).length
   const suggested = enrich.filter((e) => (e.grade === 'A' || e.grade === 'B') && !e.covered)
     .sort((x, y) => (y.score || 0) - (x.score || 0)).slice(0, 20)
-  const dlTop = enrich.filter((e) => e.weekly != null).sort((x, y) => (y.weekly || 0) - (x.weekly || 0)).slice(0, 15)
+  // 同一下载数可能挂在多个仓库上（它们指向同一个 npm 包，例如 dsh-market/dsh-market 与
+  // KokuYu-sysu/dsh-market-desktop 都指向 `dshmarket`）——按包名去重，留星数最高的那个作代表，
+  // 否则「周下载 Top N」会把同一个包的下载量列两遍，读者以为翻倍（2026-09-21 修）。
+  const dlTop = (() => {
+    const byPkg = new Map()
+    for (const e of enrich) {
+      if (e.weekly == null) continue
+      const key = e.pkgName || e.full_name
+      const cur = byPkg.get(key)
+      if (!cur || (e.stars || 0) > (cur.stars || 0)) byPkg.set(key, e)
+    }
+    return [...byPkg.values()].sort((x, y) => (y.weekly || 0) - (x.weekly || 0)).slice(0, 15)
+  })()
   writeJson(PATHS.enrich, enrich)
   return {
     generatedAt: new Date().toISOString(),
@@ -229,6 +255,8 @@ function analyze(rows) {
     },
     distribution: { publish, docs, lib, publishPct: pct(publish.published, n), zhPct: pct(docs.both, n) },
     npmStaleTop: staleTop,
+    npmRepoAheadTop: repoAheadTop,
+    npmRegistryAheadTop: registryAheadTop,
     topTopics: Object.entries(topics).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([t, c]) => ({ topic: t, count: c })),
     medianStars: n ? stars[Math.floor(n / 2)] : 0,
     topByStars: topStars,

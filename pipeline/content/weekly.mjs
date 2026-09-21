@@ -194,8 +194,24 @@ if (dl && dl.top.length) {
   for (const s of dl.top.slice(0, 10)) L.push(`- ${s.full_name}：**${s.weekly}**/周`)
   L.push('')
 }
-if (analysis.npmStaleTop && analysis.npmStaleTop.length) {
-  L.push('### npm 版本滞后（仓库领先于发布）Top 5')
+// 「版本不一致」按方向分两节（2026-09-21 修）：旧实现只有一个标题「npm 版本滞后（仓库领先于发布）」，
+// 但取数口径是「npm.latest !== r.version」——任意不等，而实际列出的几乎全是 npm 领先仓库，标题反了。
+// 两个方向的含义完全不同：仓库领先=该发版（可行动）；npm 领先=发布已超前于默认分支的 package.json。
+if (analysis.npmRepoAheadTop && analysis.npmRepoAheadTop.length) {
+  L.push('### 仓库领先、尚未发布 Top 5（作者已改版本号，npm 上还没有）')
+  L.push('')
+  for (const s of analysis.npmRepoAheadTop.slice(0, 5)) L.push(`- ${s.repo}：仓库 ${s.repoVersion} → npm ${s.npmLatest}`)
+  L.push('')
+}
+if (analysis.npmRegistryAheadTop && analysis.npmRegistryAheadTop.length) {
+  L.push('### npm 领先仓库 Top 5（发布版比默认分支 package.json 新）')
+  L.push('')
+  for (const s of analysis.npmRegistryAheadTop.slice(0, 5)) L.push(`- ${s.repo}：仓库 ${s.repoVersion} → npm ${s.npmLatest}`)
+  L.push('')
+}
+// 兼容：analysis.json 尚未重算时（旧快照）退回原来的混合列表，至少标题不再说反方向
+if (!analysis.npmRepoAheadTop && !analysis.npmRegistryAheadTop && analysis.npmStaleTop && analysis.npmStaleTop.length) {
+  L.push('### npm 与仓库版本不一致 Top 5')
   L.push('')
   for (const s of analysis.npmStaleTop.slice(0, 5)) L.push(`- ${s.repo}：仓库 ${s.repoVersion} → npm ${s.npmLatest}`)
   L.push('')
