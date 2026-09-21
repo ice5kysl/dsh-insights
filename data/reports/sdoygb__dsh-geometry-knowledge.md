@@ -1,22 +1,22 @@
 # 致 dsh-geometry-knowledge 的作者：一期一会 · 观测分享
 
-> sdoygb/dsh-geometry-knowledge · 第 1 期（数据快照 2026-09-15）
+> sdoygb/dsh-geometry-knowledge · 第 1 期（数据快照 2026-09-21）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-geometry-knowledge 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（82/100）** · 在「记忆 / 知识」类 302 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（87/100）** · 在「记忆 / 知识」类 321 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
-- ★0 · 几何论（共扼谱几何 CSG）知识库插件 for DeepSeek Harness：纯离线 BM25 检索 251 篇文章 + 869 条真理，31 个 geo_* 工具，开箱即用。Conjugate Spectral Geometry knowledge base plugin for DSH.
+- ★1 · 几何论（共扼谱几何 CSG）知识库插件 for DeepSeek Harness：纯离线 BM25 检索 251 篇文章 + 869 条真理，31 个 geo_* 工具，开箱即用。Conjugate Spectral Geometry knowledge base plugin for DSH.
 - npm：`dsh-geometry-knowledge@0.4.0`（1 个版本）
+- 周下载：**186**
 - 最近 push 2026-09-14
 
-以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、npm 版本同步、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、近期活跃。
+以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、npm 版本同步、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
 1. **未声明 client 导出** —— GUI 能力无法被 dsh web 加载（TUI/CLI 类插件可忽略）。参考做法：按官方 bundle 规范补 exports["./client"]。
-2. **仓库刚创建** —— 新仓的存活率还没经过时间检验，部分用户会观望。参考做法：无需操作，保持稳定提交即可。
-3. **main 未对齐 lib/index.js** —— 与官方 bundle 惯例不一致，部分装载路径可能认不出。参考做法：调整 package.json main 或产物目录。
+2. **main 未对齐 lib/index.js** —— 与官方 bundle 惯例不一致，部分装载路径可能认不出。参考做法：调整 package.json main 或产物目录。
 
 > 后续：我们每周做一次全生态观测，下期会附上与本期对比的变化。**如果这类信件对你构成打扰，回复一声即可，我们此后不再发送到贵仓库。**
 
@@ -24,6 +24,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-15
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-21
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

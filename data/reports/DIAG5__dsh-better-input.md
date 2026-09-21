@@ -1,21 +1,22 @@
 # 致 dsh-better-input 的作者：一期一会 · 观测分享
 
-> DIAG5/dsh-better-input · 第 1 期（数据快照 2026-09-15）
+> DIAG5/dsh-better-input · 第 1 期（数据快照 2026-09-21）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-better-input 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（86/100）** · 在「文件浏览 / 预览」类 977 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（81/100）** · 在「文件浏览 / 预览」类 1035 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★30 · BetterInput是一套输入增强套件：语音识别、提示词优化、输入更多文件类型，各类文件转Md，交互体验优化等——把每一种喂给智能体的输入都变得更好。BetterInput is an input-enhancement suite — voice recognition, prompt optimization, 
-- npm：`dsh-better-input@0.2.0`（11 个版本）
-- 周下载：**638**
+- npm：`dsh-better-input@0.2.3`（14 个版本）
+- 周下载：**371**
 - 最近 push 2026-09-12
 
-以下几项检查未发现问题（仅作记录）：client 导出齐备、产物布局规范、files 白名单、npm 已发布、npm 版本同步、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「输入增强套件，支持语音识别、提示词优化、多种文件类型及转换Markdown。」。
+以下几项检查未发现问题（仅作记录）：client 导出齐备、产物布局规范、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「输入增强套件，支持语音识别、提示词优化、多种文件类型及转换Markdown。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
-1. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
+1. **npm 版本落后于仓库** —— 商店会展示旧版（也可能是包名被抢注，值得核查）。参考做法：把仓库当前版本发到 npm。
+2. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
 
 **能力标签**：voice-recognition、prompt-optimization、file-conversion、markdown、ux；README 宣称：Voice recognition；Prompt optimization；More file types；Everything-to-Markdown conversion
 
@@ -25,6 +26,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-15
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-21
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

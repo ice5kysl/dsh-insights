@@ -1,14 +1,14 @@
 # 致 dsh-model-router 的作者：一期一会 · 观测分享
 
-> tianji-qingtian/dsh-model-router · 第 1 期（数据快照 2026-09-15）
+> tianji-qingtian/dsh-model-router · 第 1 期（数据快照 2026-09-21）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-model-router 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（78/100）** · 在「状态 / 监控 / 用量」类 781 个插件的分布里大致位于前列（同类中位 81）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（78/100）** · 在「状态 / 监控 / 用量」类 822 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★7 · 模型路由与成本优化器：简单问题 flash 直答、故障自动降级、会话 token/缓存/成本实时面板 | Model router & cost optimizer for DeepSeek Harness: flash quick-answers for simple questions, failure fallb
-- npm：`dsh-model-router@0.6.2`（9 个版本）
-- 周下载：**565**
+- npm：`dsh-model-router@0.7.0`（11 个版本）
+- 周下载：**200**
 - 最近 push 2026-09-03
 
 以下几项检查未发现问题（仅作记录）：产物布局规范、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「模型路由与成本优化：简单问题flash直答，故障自动降级，实时token/缓存/成本面板。」。
@@ -27,6 +27,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-15
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-21
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

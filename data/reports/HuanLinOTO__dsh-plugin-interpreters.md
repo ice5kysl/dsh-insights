@@ -1,14 +1,14 @@
 # 致 dsh-plugin-interpreters 的作者：一期一会 · 观测分享
 
-> HuanLinOTO/dsh-plugin-interpreters · 第 1 期（数据快照 2026-09-15）
+> HuanLinOTO/dsh-plugin-interpreters · 第 1 期（数据快照 2026-09-21）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-plugin-interpreters 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（82/100）** · 在「会话管理」类 923 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（82/100）** · 在「会话管理」类 998 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
-- ★10 · 暴露 run_python/run_node 工具，通过 stdin 执行代码返回 stdout/stderr/exit，含解释器路径配置卡 | Exposes run_python/run_node tools that execute code via stdin and return stdout/stderr/
-- npm：`@huanlin/dsh-plugin-interpreters@0.3.0`（6 个版本）
-- 周下载：**379**
+- ★9 · 暴露 run_python/run_node 工具，通过 stdin 执行代码返回 stdout/stderr/exit，含解释器路径配置卡 | Exposes run_python/run_node tools that execute code via stdin and return stdout/stderr/
+- npm：`@huanlin/dsh-plugin-interpreters@0.4.1`（8 个版本）
+- 周下载：**107**
 - 最近 push 2026-09-11
 
 以下几项检查未发现问题（仅作记录）：client 导出齐备、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「提供 Python/Node 执行工具，经标准输入运行代码，返回输出/错误与退出码，可配置解释器路径。」。
@@ -27,6 +27,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-15
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-21
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

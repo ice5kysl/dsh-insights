@@ -1,17 +1,17 @@
 # 致 dsh-token-stats 的作者：一期一会 · 观测分享
 
-> F1shn/dsh-token-stats · 第 1 期（数据快照 2026-09-15）
+> F1shn/dsh-token-stats · 第 1 期（数据快照 2026-09-21）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-token-stats 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：C（74/100）** · 在「状态 / 监控 / 用量」类 781 个插件的分布里大致位于前列（同类中位 81）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：C（69/100）** · 在「状态 / 监控 / 用量」类 822 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★1 · Daily, weekly, and monthly Token usage, activity heatmap, and CNY cost tracking plugin for DeepSeek Harness.
 - npm：`dsh-token-stats@0.2.0`（2 个版本）
-- 周下载：**89**
+- 周下载：**85**
 - 最近 push 2026-08-17
 
-以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、README 齐备、LICENSE、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「按日/周/月统计Token用量、活动热力图及人民币费用，为DeepSeek Harness提供成本跟踪。」。
+以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、README 齐备、LICENSE、已度过新仓观察期；按 README 解读，主要能力是「按日/周/月统计Token用量、活动热力图及人民币费用，为DeepSeek Harness提供成本跟踪。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
@@ -19,7 +19,7 @@
 2. **npm 版本落后于仓库** —— 商店会展示旧版（也可能是包名被抢注，值得核查）。参考做法：把仓库当前版本发到 npm。
 3. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
 
-其余信号：未打 dsh-plugin topic（topic 是目前生态发现的主要机制）；main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
+其余信号：未打 dsh-plugin topic（topic 是目前生态发现的主要机制）；超过 30 天没有提交（会被观望中的用户解读为维护停滞）；main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
 
 **能力标签**：tokens、usage、heatmap、cost、daily、weekly、monthly、cny；README 宣称：Daily, weekly, and monthly token usage；Activity heatmap；CNY cost tracking
 
@@ -29,6 +29,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-15
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-21
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

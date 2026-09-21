@@ -1,21 +1,22 @@
 # 致 dsh-novel-writer 的作者：一期一会 · 观测分享
 
-> siweina/dsh-novel-writer · 第 1 期（数据快照 2026-09-15）
+> siweina/dsh-novel-writer · 第 1 期（数据快照 2026-09-21）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-novel-writer 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：A（93/100）** · 在「主题 / 视觉美化」类 432 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（88/100）** · 在「主题 / 视觉美化」类 452 个插件的分布里大致位于前列（同类中位 75）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★16 · DSH / DeepSeek Harness 小说写作助手插件：章节库管理、句式模式分析（九类句式/情感曲线/风格指纹）、风格自检、伏笔登记、批量导入、续写辅助。Novel writing assistant plugin for DeepSeek Harness: chapter library, sentence 
-- npm：`dsh-novel-writer@3.9.1`（35 个版本）
-- 周下载：**510**
-- 最近 push 2026-09-13
+- npm：`dsh-novel-writer@5.1.1`（45 个版本）
+- 周下载：**982**
+- 最近 push 2026-09-19
 
-以下几项检查未发现问题（仅作记录）：产物布局规范、files 白名单、npm 已发布、npm 版本同步、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「小说写作助手，支持章节库、句式分析、风格自检、伏笔登记、批量导入、续写辅助。」。
+以下几项检查未发现问题（仅作记录）：产物布局规范、files 白名单、npm 已发布、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「小说写作助手，支持章节库、句式分析、风格自检、伏笔登记、批量导入、续写辅助。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
 1. **未声明 client 导出** —— GUI 能力无法被 dsh web 加载（TUI/CLI 类插件可忽略）。参考做法：按官方 bundle 规范补 exports["./client"]。
+2. **npm 版本落后于仓库** —— 商店会展示旧版（也可能是包名被抢注，值得核查）。参考做法：把仓库当前版本发到 npm。
 
 **能力标签**：chapters、patterns、style、plot、import、writing；README 宣称：supports nine sentence pattern types；provides emotion curves and style fingerprints；manages chapter library；tracks foreshadowing
 
@@ -25,6 +26,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-15
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-21
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

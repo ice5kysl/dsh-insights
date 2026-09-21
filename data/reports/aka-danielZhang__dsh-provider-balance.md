@@ -1,17 +1,17 @@
 # 致 dsh-provider-balance 的作者：一期一会 · 观测分享
 
-> aka-danielZhang/dsh-provider-balance · 第 1 期（数据快照 2026-09-15）
+> aka-danielZhang/dsh-provider-balance · 第 1 期（数据快照 2026-09-21）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-provider-balance 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：C（67/100）** · 在「状态 / 监控 / 用量」类 781 个插件的分布里大致位于前列（同类中位 81）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：C（62/100）** · 在「状态 / 监控 / 用量」类 822 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★0 · DSH web plugin: provider quota chip beside the composer context meter (GLM Coding / Kimi Code / OpenCode Go)
 - npm：`dsh-provider-balance@0.2.0`（1 个版本）
-- 周下载：**0**
+- 周下载：**12**
 - 最近 push 2026-08-19
 
-以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、README 齐备、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「在上下文计量器旁显示模型提供商配额指示器。」。
+以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、README 齐备、dsh-plugin topic、已度过新仓观察期；按 README 解读，主要能力是「在上下文计量器旁显示模型提供商配额指示器。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
@@ -19,7 +19,7 @@
 2. **npm 版本落后于仓库** —— 商店会展示旧版（也可能是包名被抢注，值得核查）。参考做法：把仓库当前版本发到 npm。
 3. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
 
-其余信号：未声明 LICENSE（没有许可证会让谨慎的用户和企业不敢用）；main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
+其余信号：未声明 LICENSE（没有许可证会让谨慎的用户和企业不敢用）；超过 30 天没有提交（会被观望中的用户解读为维护停滞）；main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
 
 **能力标签**：quota、chip、web、glm、kimi、opencode；README 宣称：支持GLM Coding/Kimi Code/OpenCode Go；作为DSH web插件提供配额显示
 
@@ -29,6 +29,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-15
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-21
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

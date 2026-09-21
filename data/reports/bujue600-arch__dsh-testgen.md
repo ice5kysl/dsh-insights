@@ -1,22 +1,24 @@
 # 致 dsh-testgen 的作者：一期一会 · 观测分享
 
-> bujue600-arch/dsh-testgen · 第 1 期（数据快照 2026-09-15）
+> bujue600-arch/dsh-testgen · 第 1 期（数据快照 2026-09-21）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-testgen 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：C（73/100）** · 在「搜索 / 命令面板」类 615 个插件的分布里大致位于前列（同类中位 79）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：C（68/100）** · 在「搜索 / 命令面板」类 657 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★2 · Automated unit-test generation for DeepSeek Harness: /testgen command + generate_tests tool that scaffold, run, and fix unit tests until they pass.
 - npm：尚未发布
 - 最近 push 2026-08-14
 
-以下几项检查未发现问题（仅作记录）：files 白名单、npm 版本同步、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「自动生成单元测试：/testgen命令与generate_tests工具，搭框架、运行并修复直至通过。」。
+以下几项检查未发现问题（仅作记录）：files 白名单、npm 版本同步、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、已度过新仓观察期；按 README 解读，主要能力是「自动生成单元测试：/testgen命令与generate_tests工具，搭框架、运行并修复直至通过。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
 1. **尚未发布到 npm** —— 一键安装和商店收录都以 npm 为前提。参考做法：npm publish（先查包名是否被占用）。
 2. **未声明 client 导出** —— GUI 能力无法被 dsh web 加载（TUI/CLI 类插件可忽略）。参考做法：按官方 bundle 规范补 exports["./client"]。
-3. **main 未对齐 lib/index.js** —— 与官方 bundle 惯例不一致，部分装载路径可能认不出。参考做法：调整 package.json main 或产物目录。
+3. **超过 30 天没有提交** —— 会被观望中的用户解读为维护停滞。参考做法：如果仍在维护，一次实质提交即可解除该信号。
+
+其余信号：main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
 
 **能力标签**：unittest、scaffold、autofix、testgen；README 宣称：/testgen command and generate_tests tool；Scaffold, run, and fix unit tests until they pass
 
@@ -26,6 +28,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-15
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-21
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 
