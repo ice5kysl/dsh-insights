@@ -1,18 +1,18 @@
 # 快照 Diff · 2026-09-21
 
-- 当前权威插件：**11929**（上次 11920）
+- 当前权威插件：**11938**（上次 11929）
 - 新增 9 · 消失 0
 
 ## 新增（Top 9）
-- kenz1117/dsh-ui-composer-rainbow ★1 (npm ✓)
-- MrWeiCodes/dsh-loop-guard ★1 
-- TheYoungChen/dsh-annotate ★1 (npm ✓)
-- nengong-ai/dsh-keychain-credentials ★0 
-- mia-wong1016/dsh-codex-plus ★0 
-- sqzssg12138/dsh-service-runner ★0 
-- wanghuiym123/dsh-cherry-kb ★0 
-- SugarFatFree/dsh-agent-extension ★0 
-- xydijkkk/dsh-voredteam ★0 
+- GJayun/dsh-goal-zcode-like ★2 
+- kenz1117/dsh-ui-rainbowspeak ★1 (npm ✓)
+- dreammaker2016/dsh-file-menu ★0 (npm ✓)
+- chenjingchun/dsh-deepseek-balance-badge ★0 
+- danbao/dsh-jev ★0 (npm ✓)
+- jack1545/dsh-weixin-reader ★0 
+- elanski/dsh-failover-continue ★0 
+- hirohana77/dsh-plugin-trajectory-tracker ★0 
+- dymzz/lgtm-dsh ★0 
 
 ## 消失（Top 0）
 
