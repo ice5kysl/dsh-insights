@@ -1,16 +1,13 @@
 # 快照 Diff · 2026-09-21
 
-- 当前权威插件：**11953**（上次 11946）
-- 新增 7 · 消失 0
+- 当前权威插件：**11957**（上次 11953）
+- 新增 4 · 消失 0
 
-## 新增（Top 7）
-- WONGIII/dsh-effort-dial ★0 
-- itchenshi/dsh-opencode-go-path ★0 
-- itchenshi/dsh-gui-last-session ★0 
-- itchenshi/dsh-model-usage ★0 
-- kingzhz/dsh-global-rules ★0 (npm ✓)
-- itchenshi/dsh-composer-keys-setting ★0 
-- kai-GitHubaccount/dsh-usage-panel ★0 (npm ✓)
+## 新增（Top 4）
+- chiyu-star499/dsh-folder-drop ★0 
+- BetterZflyee/dsh-jev-adapter ★0 
+- itchenshi/dsh-keys-setting ★0 
+- enderzcx/spire-ctl ★0 
 
 ## 消失（Top 0）
 
