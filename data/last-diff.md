@@ -1,25 +1,30 @@
 # 快照 Diff · 2026-09-21
 
-- 当前权威插件：**11792**（上次 11792）
-- 新增 0 · 消失 0
+- 当前权威插件：**11902**（上次 11792）
+- 新增 110 · 消失 0
 
-## 新增（Top 0）
+## 新增（Top 20）
+- xuzhougeng/ScientificFigureLibrary ★85 (npm ✓)
+- ranxianglei/billion-context ★213 (npm ✓)
+- LuminariSoftwares/context-guardian ★0 (npm ✓)
+- GYINT/infoseek ★0 (npm ✓)
+- RealAlexandreAI/dsh-dejavu-memory ★1 (npm ✓)
+- cking000bigdemon/dsh-toolbelt ★0 
+- Noob-stupid/dsh-plugin-gating-hub ★87 (npm ✓)
+- zhang66633/.dsh-plugin-installer ★2 (npm ✓)
+- WangPaoPaoLab/dsh-font ★13 (npm ✓)
+- heyadhithya/fullstack-expert ★1 
+- Mr-remon219/search-boost ★5 (npm ✓)
+- JonyChan1350/dsh-llm-balance ★1 (npm ✓)
+- knyazev741/knyazevai-dsh ★0 (npm ✓)
+- QLM1234/dsh-plugin-dynamic-assembler ★0 (npm ✓)
+- bihangchi9-creator/lark-agent-bridge ★33 (npm ✓)
+- 2025Bigeye/dsh-nanobot-subagent-link ★0 
+- Nicholas023/vision-exp-tile ★12 
+- chemmy-11/dsh-nautilus ★1 
+- zlqd123/dsh-composer-keys ★0 (npm ✓)
+- ZSeven-W/dsh-browser ★0 (npm ✓)
 
 ## 消失（Top 0）
 
 ## star 涨幅榜
-- YuJunZhiXue/dsh-purge：883 → 1630（+747）
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：2357 → 2809（+452）
-- dsh-market/dsh-market：3899 → 4262（+363）
-- superdesigndev/treg：1403 → 1739（+336）
-- Minglink/dsh-infinite-gen-4：1494 → 1823（+329）
-- zhu1090093659/dsh-web：7564 → 7861（+297）
-- antibrow/dsh-antibrow：291 → 460（+169）
-- shaobeichen/dsh-pocket：1126 → 1258（+132）
-- xmanrui/dsh-im：1310 → 1417（+107）
-- SeaOf0/dsh-redteam-model：444 → 542（+98）
-- vshulcz/deja-vu：811 → 898（+87）
-- cv-superding/dsh-deepseek-web-login：23 → 108（+85）
-- corrinehu/dsh-workbuddy-connect：81 → 155（+74）
-- bowenliang123/dsh-context：1380 → 1453（+73）
-- a1exsun/dsh-council：88 → 154（+66）
