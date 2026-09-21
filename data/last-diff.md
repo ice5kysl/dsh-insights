@@ -1,14 +1,15 @@
 # 快照 Diff · 2026-09-21
 
-- 当前权威插件：**11966**（上次 11961）
-- 新增 5 · 消失 0
+- 当前权威插件：**11972**（上次 11966）
+- 新增 6 · 消失 0
 
-## 新增（Top 5）
-- zhanghao3693/dsh-client-ui-model-clock ★0 
-- Gdenich/dsh-opencode-go-key-broker ★0 (npm ✓)
-- vianvio/dsh-assistant ★0 
-- alexzshl/dsh-settings-size ★0 
-- S-AN-Shu/dsh-progress-narrator ★0 
+## 新增（Top 6）
+- zjbc2000/attention-plugins ★0 
+- mikasa-servent/dsh-research-check ★0 
+- bruc3van/dsh-md2word ★0 (npm ✓)
+- johnny-ggao/trading-agent ★0 
+- VoidPrim/dsh-wsl-windows-folder-picker ★0 
+- YMRwithNoworry/dsh-global-system-prompt ★0 (npm ✓)
 
 ## 消失（Top 0）
 
