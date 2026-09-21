@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-21T05:35:41.798Z",
+  "generatedAt": "2026-09-21T06:11:51.398Z",
   "totals": {
-    "authoritative": 11908,
-    "active7": 2297,
-    "active7Pct": 19.3,
-    "active30": 6880,
+    "authoritative": 11912,
+    "active7": 2289,
+    "active7Pct": 19.2,
+    "active30": 6881,
     "active30Pct": 57.8,
-    "ageGate1": 11536,
+    "ageGate1": 11538,
     "ageGate1Pct": 96.9,
     "byMonth": {
       "2026-08": 9712,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2111,
+      "2026-09": 2115,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 11
+      "2026-09-21": 15
     },
     "byWeekGrades": {
       "B": {
@@ -70,7 +70,7 @@
         "2026-08-03": 30,
         "2026-03-09": 3,
         "2026-06-22": 4,
-        "2026-08-17": 1496,
+        "2026-08-17": 1495,
         "2026-06-08": 4,
         "2026-06-15": 2,
         "2026-08-24": 840,
@@ -88,8 +88,8 @@
         "2026-06-29": 4,
         "2026-09-07": 433,
         "2026-03-02": 1,
-        "2026-09-14": 427,
-        "2026-09-21": 4
+        "2026-09-14": 428,
+        "2026-09-21": 5
       },
       "S": {
         "2026-08-03": 2,
@@ -114,7 +114,7 @@
         "2026-01-19": 1,
         "2026-03-09": 1,
         "2026-01-05": 1,
-        "2026-08-17": 970,
+        "2026-08-17": 971,
         "2026-08-10": 1468,
         "2026-07-13": 3,
         "2026-02-02": 1,
@@ -133,8 +133,8 @@
         "2026-07-27": 1,
         "2026-09-07": 271,
         "2026-07-06": 1,
-        "2026-09-14": 185,
-        "2026-09-21": 7
+        "2026-09-14": 184,
+        "2026-09-21": 10
       },
       "D": {
         "2026-08-10": 331,
@@ -152,21 +152,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 5318,
-      "unpublished": 6590,
+      "published": 5319,
+      "unpublished": 6593,
       "stale": 2714
     },
     "docs": {
-      "readme": 11879,
+      "readme": 11883,
       "zhFile": 891,
-      "zh": 5662,
-      "both": 5652,
+      "zh": 5663,
+      "both": 5653,
       "none": 29
     },
     "lib": {
-      "index": 6390,
-      "client": 4147,
-      "both": 3700
+      "index": 6393,
+      "client": 4150,
+      "both": 3703
     },
     "publishPct": 44.7,
     "zhPct": 47.5
@@ -236,15 +236,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11551
+      "count": 11555
     },
     {
       "topic": "deepseek-harness",
-      "count": 7734
+      "count": 7737
     },
     {
       "topic": "dsh",
-      "count": 4500
+      "count": 4503
     },
     {
       "topic": "deepseek",
@@ -252,7 +252,7 @@
     },
     {
       "topic": "dsh-plugins",
-      "count": 1211
+      "count": 1212
     },
     {
       "topic": "cordis",
@@ -260,7 +260,7 @@
     },
     {
       "topic": "plugin",
-      "count": 757
+      "count": 760
     },
     {
       "topic": "typescript",
@@ -272,7 +272,7 @@
     },
     {
       "topic": "dsh-plugin-market",
-      "count": 406
+      "count": 407
     },
     {
       "topic": "ai-agent",
@@ -351,8 +351,8 @@
     "imsai": 276,
     "covered": 1038,
     "coveredPct": 8.7,
-    "none": 10870,
-    "fetchedAt": "2026-09-21T05:35:03.462Z"
+    "none": 10874,
+    "fetchedAt": "2026-09-21T06:11:15.032Z"
   },
   "suggested": [
     {
@@ -1642,8 +1642,8 @@
   "quality": {
     "grades": {
       "A": 630,
-      "B": 5635,
-      "C": 3731,
+      "B": 5636,
+      "C": 3734,
       "D": 1756,
       "S": 156
     },
@@ -1654,11 +1654,11 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4351
+      "count": 4352
     },
     {
       "category": "模型 / 代理",
-      "count": 1157
+      "count": 1158
     },
     {
       "category": "文件浏览 / 预览",
@@ -1670,7 +1670,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 832
+      "count": 834
     },
     {
       "category": "侧栏 / 工作区",
@@ -8541,6 +8541,27 @@
       "topPlugin": "moonbowterfly/dsh-bio-genie",
       "topStars": 2,
       "topCat": "其它"
+    },
+    {
+      "owner": "zhangnan",
+      "plugins": 3,
+      "stars": 2,
+      "grades": {
+        "A": 0,
+        "B": 3,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 3,
+      "npm": 3,
+      "covered": 0,
+      "lastPush": "2026-09-21",
+      "firstCreated": "2026-08-20",
+      "delta": 0,
+      "avg": 81.3,
+      "topPlugin": "zhangnan/think-like-codex",
+      "topStars": 2,
+      "topCat": "模型 / 代理"
     },
     {
       "owner": "frederico-kluser",
@@ -16997,27 +17018,6 @@
       "topPlugin": "songofhawk/dsh-alpha",
       "topStars": 2,
       "topCat": "搜索 / 命令面板"
-    },
-    {
-      "owner": "zhangnan",
-      "plugins": 2,
-      "stars": 2,
-      "grades": {
-        "A": 0,
-        "B": 2,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 2,
-      "npm": 2,
-      "covered": 0,
-      "lastPush": "2026-08-20",
-      "firstCreated": "2026-08-20",
-      "delta": 0,
-      "avg": 81.5,
-      "topPlugin": "zhangnan/think-like-codex",
-      "topStars": 2,
-      "topCat": "模型 / 代理"
     },
     {
       "owner": "DoggyHU",
@@ -32406,7 +32406,7 @@
       "lastPush": "2026-08-22",
       "firstCreated": "2026-08-14",
       "delta": 0,
-      "avg": 81,
+      "avg": 76,
       "topPlugin": "huanyuLv/dsh-balance-tide",
       "topStars": 6,
       "topCat": "其它"
@@ -59442,27 +59442,6 @@
       "topCat": "会话管理"
     },
     {
-      "owner": "ovo669",
-      "plugins": 1,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-08-22",
-      "firstCreated": "2026-08-18",
-      "delta": 0,
-      "avg": 76,
-      "topPlugin": "ovo669/dsh-settings-sections",
-      "topStars": 1,
-      "topCat": "其它"
-    },
-    {
       "owner": "shengshifantang",
       "plugins": 1,
       "stars": 1,
@@ -70427,10 +70406,31 @@
       "lastPush": "2026-09-20",
       "firstCreated": "2026-09-20",
       "delta": 0,
-      "avg": 73.5,
+      "avg": 76,
       "topPlugin": "LoveIrishCoffee/dsh-effort-ultra-skin",
       "topStars": 0,
       "topCat": "主题 / 视觉美化"
+    },
+    {
+      "owner": "Ryuu-64",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-20",
+      "firstCreated": "2026-09-20",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "Ryuu-64/dsh-find-all",
+      "topStars": 0,
+      "topCat": "搜索 / 命令面板"
     },
     {
       "owner": "ccch1mneyyy",
@@ -97863,7 +97863,7 @@
       "lastPush": "2026-08-22",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 63,
+      "avg": 61.3,
       "topPlugin": "lemonorangeapple/dsh-effort-switcher",
       "topStars": 2,
       "topCat": "其它"
@@ -113388,6 +113388,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "ovo669",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-08-22",
+      "firstCreated": "2026-08-18",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "ovo669/dsh-settings-sections",
+      "topStars": 1,
+      "topCat": "其它"
+    },
+    {
       "owner": "caoTbenren0",
       "plugins": 1,
       "stars": 1,
@@ -121221,27 +121242,6 @@
       "topCat": "搜索 / 命令面板"
     },
     {
-      "owner": "Ryuu-64",
-      "plugins": 2,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 2,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-20",
-      "firstCreated": "2026-09-20",
-      "delta": 0,
-      "avg": 68.5,
-      "topPlugin": "Ryuu-64/dsh-find-all",
-      "topStars": 0,
-      "topCat": "搜索 / 命令面板"
-    },
-    {
       "owner": "KKKKeybird",
       "plugins": 2,
       "stars": 0,
@@ -121303,6 +121303,27 @@
       "topPlugin": "we39/dsh-pve",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "HoodyHuo",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-21",
+      "firstCreated": "2026-09-21",
+      "delta": 0,
+      "avg": 66,
+      "topPlugin": "HoodyHuo/dsh-plugin-glm-balance",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
     },
     {
       "owner": "haoliangwu",
@@ -144592,11 +144613,32 @@
       "topPlugin": "liuyuguo99/dsh-task-todo",
       "topStars": 0,
       "topCat": "搜索 / 命令面板"
+    },
+    {
+      "owner": "wangxuewangxue98",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-21",
+      "firstCreated": "2026-09-21",
+      "delta": 0,
+      "avg": 64,
+      "topPlugin": "wangxuewangxue98/dsh-motor-ai-l0",
+      "topStars": 0,
+      "topCat": "其它"
     }
   ],
   "authorStats": {
-    "total": 6798,
-    "multi": 1644,
+    "total": 6800,
+    "multi": 1645,
     "top10Share": 4
   },
   "coverage": {
@@ -144604,7 +144646,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 16308,
+    "candidates": 16313,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -144679,16 +144721,16 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 14
+      "2026-09-21": 19
     },
-    "validated": 16371,
-    "candidatesValidated": 28,
-    "authoritative": 11908,
-    "invalidUnique": 4463,
+    "validated": 16376,
+    "candidatesValidated": 33,
+    "authoritative": 11912,
+    "invalidUnique": 4464,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 2440
+        "count": 2441
       },
       {
         "reason": "no-package.json",
@@ -144732,5 +144774,5 @@
       }
     ]
   },
-  "enrichCount": 11908
+  "enrichCount": 11912
 }
