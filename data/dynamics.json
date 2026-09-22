@@ -1,9 +1,9 @@
 {
-  "fetchedAt": "2026-09-22T13:35:56.701Z",
+  "fetchedAt": "2026-09-22T14:14:53.711Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 233128,
-    "forks": 27990,
+    "stars": 233165,
+    "forks": 27995,
     "pushed_at": "2026-09-22T06:16:26Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
@@ -160,7 +160,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-R1",
-      "stars": 91977,
+      "stars": 91976,
       "forks": 11680,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
@@ -177,7 +177,7 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39212,
+      "stars": 39213,
       "forks": 4257,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
@@ -229,6 +229,29 @@
       "id": "deepseek-flash",
       "object": "model",
       "owned_by": "deepseek",
+      "name": "DeepSeek-V4.1-Flash",
+      "context_window": 1048576,
+      "max_output_tokens": 393216,
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "effort": {
+        "supported_levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default_level": "high"
+      },
+      "api_capabilities": {
+        "anthropic_messages": {
+          "system_prompt_update": "in-history"
+        }
+      },
       "firstSeen": "2026-09-10",
       "isNew": true
     },
@@ -236,6 +259,28 @@
       "id": "deepseek-v4-pro",
       "object": "model",
       "owned_by": "deepseek",
+      "name": "DeepSeek-V4-Pro",
+      "context_window": 1048576,
+      "max_output_tokens": 393216,
+      "input_modalities": [
+        "text"
+      ],
+      "output_modalities": [
+        "text"
+      ],
+      "effort": {
+        "supported_levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default_level": "high"
+      },
+      "api_capabilities": {
+        "anthropic_messages": {
+          "system_prompt_update": "leading-only"
+        }
+      },
       "firstSeen": null,
       "isNew": false
     }
