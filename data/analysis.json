@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-22T04:43:22.007Z",
+  "generatedAt": "2026-09-22T04:49:03.198Z",
   "totals": {
-    "authoritative": 12003,
+    "authoritative": 12004,
     "active7": 2157,
     "active7Pct": 18,
-    "active30": 6785,
+    "active30": 6786,
     "active30Pct": 56.5,
     "ageGate1": 11615,
     "ageGate1Pct": 96.8,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2206,
+      "2026-09": 2207,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 106
+      "2026-09-21": 107
     },
     "byWeekGrades": {
       "B": {
@@ -89,7 +89,7 @@
         "2026-09-07": 433,
         "2026-03-02": 1,
         "2026-09-14": 440,
-        "2026-09-21": 37
+        "2026-09-21": 38
       },
       "S": {
         "2026-08-03": 2,
@@ -154,12 +154,12 @@
   },
   "distribution": {
     "publish": {
-      "published": 5337,
+      "published": 5338,
       "unpublished": 6666,
       "stale": 2720
     },
     "docs": {
-      "readme": 11974,
+      "readme": 11975,
       "zhFile": 895,
       "zh": 5698,
       "both": 5688,
@@ -362,19 +362,19 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11646
+      "count": 11647
     },
     {
       "topic": "deepseek-harness",
-      "count": 7804
+      "count": 7805
     },
     {
       "topic": "dsh",
-      "count": 4541
+      "count": 4542
     },
     {
       "topic": "deepseek",
-      "count": 1313
+      "count": 1314
     },
     {
       "topic": "dsh-plugins",
@@ -382,7 +382,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1192
+      "count": 1193
     },
     {
       "topic": "plugin",
@@ -477,8 +477,8 @@
     "imsai": 279,
     "covered": 1033,
     "coveredPct": 8.6,
-    "none": 10970,
-    "fetchedAt": "2026-09-22T04:42:41.302Z"
+    "none": 10971,
+    "fetchedAt": "2026-09-22T04:48:19.382Z"
   },
   "suggested": [
     {
@@ -1743,7 +1743,7 @@
   "quality": {
     "grades": {
       "A": 623,
-      "B": 5655,
+      "B": 5656,
       "C": 3795,
       "D": 1777,
       "S": 153
@@ -1755,7 +1755,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4378
+      "count": 4379
     },
     {
       "category": "模型 / 代理",
@@ -91858,6 +91858,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "linbin-mk",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-22",
+      "firstCreated": "2026-09-22",
+      "delta": 0,
+      "avg": 86,
+      "topPlugin": "linbin-mk/dsh-notify",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
       "owner": "SeaOf0",
       "plugins": 2,
       "stars": 543,
@@ -146039,7 +146060,7 @@
     }
   ],
   "authorStats": {
-    "total": 6862,
+    "total": 6863,
     "multi": 1662,
     "top10Share": 3.9
   },
@@ -146048,7 +146069,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 16419,
+    "candidates": 16421,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -146123,12 +146144,12 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 125
+      "2026-09-21": 127
     },
-    "validated": 16482,
+    "validated": 16484,
     "candidatesValidated": 30,
-    "authoritative": 12003,
-    "invalidUnique": 4479,
+    "authoritative": 12004,
+    "invalidUnique": 4480,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -146136,7 +146157,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1602
+        "count": 1603
       },
       {
         "reason": "no-signal",
@@ -146176,5 +146197,5 @@
       }
     ]
   },
-  "enrichCount": 12003
+  "enrichCount": 12004
 }
