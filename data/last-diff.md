@@ -1,17 +1,17 @@
 # 快照 Diff · 2026-09-22
 
-- 当前权威插件：**12041**（上次 12033）
+- 当前权威插件：**12049**（上次 12041）
 - 新增 8 · 消失 0
 
 ## 新增（Top 8）
-- 173787247/dsh-wsl-jev ★1 
-- liujianqiao701/dsh-ask-notify ★0 
-- qcsjjjjj/dsh-hero-rightbar ★0 
-- MarchLiu/dsh-cf-sas ★0 (npm ✓)
-- Edge-Echo/dsh-driftwatch ★0 
-- Tungpeng/dsh-offpeak-inbox ★0 
-- Zh0uHX/dsh-skills ★0 (npm ✓)
-- AskTheWay/dsh-auto-memory ★0 
+- qcsjjjjj/dsh-hero-rightbar-hold ★0 
+- Ylhow06/dsh-agnes-gen ★0 
+- hoyyang/dsh-manage-sessions ★0 (npm ✓)
+- fatatalia/dsh-credentials-admin ★0 
+- justhalfbit/dsh-plugin-jev-effort-selector ★0 
+- linbin-mk/dsh-brand-deepseek ★0 (npm ✓)
+- crazy-L118/dsh-scheduled-tasks ★0 (npm ✓)
+- viyu-tech/dsh-input-limit ★0 
 
 ## 消失（Top 0）
 
