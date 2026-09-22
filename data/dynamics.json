@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-09-22T15:17:11.827Z",
+  "fetchedAt": "2026-09-22T16:15:13.692Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 233208,
-    "forks": 28002,
-    "pushed_at": "2026-09-22T06:16:26Z",
+    "stars": 233256,
+    "forks": 28004,
+    "pushed_at": "2026-09-22T15:50:34Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.1.7-alpha.2",
+        "name": "v0.1.7-alpha.2",
+        "prerelease": true,
+        "published_at": "2026-09-22T15:49:49Z",
+        "breaking": false,
+        "summary": "稳定会话与工作过程组的滚动跟随；改善历史分页与轮次跳转，并减少发送消息的瞬间跳动或重复显示。",
+        "added": 0,
+        "fixed": 15
+      },
       {
         "tag": "dsh-v0.1.7-alpha.1",
         "name": "v0.1.7-alpha.1",
@@ -76,27 +86,21 @@
         "summary": "支持动态修改系统提示词且不破坏 KV Cache，模型需显式声明支持",
         "added": 3,
         "fixed": 10
-      },
-      {
-        "tag": "dsh-v0.1.3-alpha.2",
-        "name": "v0.1.3-alpha.2",
-        "prerelease": true,
-        "published_at": "2026-09-07T13:59:29Z",
-        "breaking": true,
-        "summary": "升级 pi-ai 到 0.85.1，支持新模型。 —",
-        "added": 4,
-        "fixed": 10
       }
     ],
     "npm": {
       "pkg": "@deepseek-ai/dsh",
       "distTags": {
         "latest": "0.1.5-rc.2",
-        "alpha": "0.1.7-alpha.1",
-        "next": "0.1.5-rc.3"
+        "next": "0.1.5-rc.3",
+        "alpha": "0.1.7-alpha.2"
       },
-      "modified": "2026-09-22T06:23:31.842Z",
+      "modified": "2026-09-22T16:08:55.837Z",
       "versions": [
+        {
+          "version": "0.1.7-alpha.2",
+          "time": "2026-09-22T16:08:55.647Z"
+        },
         {
           "version": "0.1.7-alpha.1",
           "time": "2026-09-22T06:23:31.522Z"
@@ -132,10 +136,6 @@
         {
           "version": "0.1.3-alpha.2",
           "time": "2026-09-07T13:11:36.213Z"
-        },
-        {
-          "version": "0.1.2-rc.1",
-          "time": "2026-09-03T06:21:52.107Z"
         }
       ]
     }
@@ -143,7 +143,7 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104479,
+      "stars": 104478,
       "forks": 16735,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
@@ -178,7 +178,7 @@
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
       "stars": 39213,
-      "forks": 4257,
+      "forks": 4256,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
       "latestRelease": null
