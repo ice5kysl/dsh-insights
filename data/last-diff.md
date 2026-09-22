@@ -1,15 +1,13 @@
 # 快照 Diff · 2026-09-22
 
-- 当前权威插件：**12089**（上次 12083）
-- 新增 6 · 消失 0
+- 当前权威插件：**12093**（上次 12089）
+- 新增 4 · 消失 0
 
-## 新增（Top 6）
-- LovelyDazai/dsh-model-selector ★1 
-- wowyuarm/dsh-channel-gateway ★0 (npm ✓)
-- tr1v3r/dsh-ltm ★0 (npm ✓)
-- QuanhuZeYu/dsh-upstream-model-audit ★0 
-- Goothe13-gugu/dsh-audio-cue ★0 
-- 2333hutao/dsh-ls125-uv-probe ★0 
+## 新增（Top 4）
+- yefengliu1/dsh-theme-songgrid ★1 (npm ✓)
+- yefengliu1/dsh-agent-grid ★1 (npm ✓)
+- zhxnix/dsh-sidebar-annotations ★0 
+- zhxnix/dsh-wx-preview ★0 
 
 ## 消失（Top 0）
 
