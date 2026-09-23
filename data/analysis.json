@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-23T19:15:01.818Z",
+  "generatedAt": "2026-09-23T19:29:16.018Z",
   "totals": {
-    "authoritative": 12182,
-    "active7": 1834,
+    "authoritative": 12183,
+    "active7": 1835,
     "active7Pct": 15.1,
     "active30": 6627,
     "active30Pct": 54.4,
-    "ageGate1": 11816,
+    "ageGate1": 11817,
     "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9712,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2385,
+      "2026-09": 2386,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 285
+      "2026-09-21": 286
     },
     "byWeekGrades": {
       "B": {
@@ -89,7 +89,7 @@
         "2026-09-07": 433,
         "2026-03-02": 1,
         "2026-09-14": 420,
-        "2026-09-21": 157
+        "2026-09-21": 158
       },
       "S": {
         "2026-08-03": 2,
@@ -154,12 +154,12 @@
   },
   "distribution": {
     "publish": {
-      "published": 5391,
+      "published": 5392,
       "unpublished": 6791,
-      "stale": 2736
+      "stale": 2737
     },
     "docs": {
-      "readme": 12153,
+      "readme": 12154,
       "zhFile": 902,
       "zh": 5763,
       "both": 5753,
@@ -362,15 +362,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11825
+      "count": 11826
     },
     {
       "topic": "deepseek-harness",
-      "count": 7945
+      "count": 7946
     },
     {
       "topic": "dsh",
-      "count": 4624
+      "count": 4625
     },
     {
       "topic": "deepseek",
@@ -477,8 +477,8 @@
     "imsai": 284,
     "covered": 1043,
     "coveredPct": 8.6,
-    "none": 11139,
-    "fetchedAt": "2026-09-23T19:14:18.825Z"
+    "none": 11140,
+    "fetchedAt": "2026-09-23T19:28:21.796Z"
   },
   "suggested": [
     {
@@ -1743,7 +1743,7 @@
   "quality": {
     "grades": {
       "A": 598,
-      "B": 5715,
+      "B": 5716,
       "C": 3913,
       "D": 1805,
       "S": 151
@@ -1763,7 +1763,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1069
+      "count": 1070
     },
     {
       "category": "会话管理",
@@ -90549,7 +90549,7 @@
       "lastPush": "2026-08-24",
       "firstCreated": "2026-08-17",
       "delta": 0,
-      "avg": 84,
+      "avg": 79,
       "topPlugin": "QLM1234/dsh-plugin-dynamic-assembler",
       "topStars": 0,
       "topCat": "其它"
@@ -92233,6 +92233,27 @@
       "topPlugin": "cx2002302-lang/dsh-chat-collapse",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "chintoleung",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-23",
+      "firstCreated": "2026-09-23",
+      "delta": 0,
+      "avg": 81,
+      "topPlugin": "chintoleung/dsh-ping",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
     },
     {
       "owner": "SeaOf0",
@@ -147459,7 +147480,7 @@
       "lastPush": "2026-09-22",
       "firstCreated": "2026-09-22",
       "delta": 0,
-      "avg": 64,
+      "avg": 69,
       "topPlugin": "SeanTolstoyevski/dsh-code-review",
       "topStars": 0,
       "topCat": "开发 / 数据"
@@ -147970,7 +147991,7 @@
     }
   ],
   "authorStats": {
-    "total": 6954,
+    "total": 6955,
     "multi": 1690,
     "top10Share": 3.9
   },
@@ -147979,7 +148000,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 16626,
+    "candidates": 16628,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -148054,16 +148075,16 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 332
+      "2026-09-21": 334
     },
-    "validated": 16690,
+    "validated": 16692,
     "candidatesValidated": 29,
-    "authoritative": 12182,
-    "invalidUnique": 4508,
+    "authoritative": 12183,
+    "invalidUnique": 4509,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 2461
+        "count": 2462
       },
       {
         "reason": "no-package.json",
@@ -148107,5 +148128,5 @@
       }
     ]
   },
-  "enrichCount": 12182
+  "enrichCount": 12183
 }
