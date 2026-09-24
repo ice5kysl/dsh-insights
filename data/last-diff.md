@@ -1,12 +1,12 @@
 # 快照 Diff · 2026-09-24
 
-- 当前权威插件：**12248**（上次 12245）
+- 当前权威插件：**12251**（上次 12248）
 - 新增 3 · 消失 0
 
 ## 新增（Top 3）
-- zeng6125-rgb/dsh-usage-heatmap ★1 
-- leaves615/dsh-llm-ctl ★0 (npm ✓)
-- MaybeJustLikeThis/rainbow-fart-dsh ★0 
+- zwbao/dsh-plugin-mirobody ★0 
+- zpda88888a88888-debug/dsh-progress-secretary ★0 
+- ZiYuan258/dsh-skill-router ★0 (npm ✓)
 
 ## 消失（Top 0）
 
