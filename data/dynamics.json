@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-09-24T13:17:35.207Z",
+  "fetchedAt": "2026-09-24T14:15:24.100Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 234866,
-    "forks": 28254,
-    "pushed_at": "2026-09-23T13:30:24Z",
+    "stars": 234902,
+    "forks": 28259,
+    "pushed_at": "2026-09-24T14:10:21Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.1.7-rc.2",
+        "name": "v0.1.7-rc.2",
+        "prerelease": true,
+        "published_at": "2026-09-24T14:10:21Z",
+        "breaking": true,
+        "summary": "启用定时任务后，可创建和管理提醒、查看运行记录；重启后任务仍会保留，并支持最短每分钟重复一次。 @Chinesezjc,",
+        "added": 5,
+        "fixed": 13
+      },
       {
         "tag": "dsh-v0.1.7-rc.1",
         "name": "v0.1.7-rc.1",
@@ -76,16 +86,6 @@
         "summary": "DeepSeek 模型适配器新增 `DeepSeek-V41-Flash`（`deepseek-flash`）支持文本、图片及会话历史中的系统提示词更新。新会话默认使用该模型，配置文件显式指定模型时以配置值为准。",
         "added": 7,
         "fixed": 25
-      },
-      {
-        "tag": "dsh-v0.1.5-alpha.2",
-        "name": "v0.1.5-alpha.2",
-        "prerelease": true,
-        "published_at": "2026-09-09T14:23:10Z",
-        "breaking": true,
-        "summary": "右侧 Sidebar 新增常见文档类型预览，支持 Markdown、代码高亮、HTML、PDF 、图片 @imccyu, @Yifffan, @yixiangihsiang, @CreatixChu,",
-        "added": 4,
-        "fixed": 11
       }
     ],
     "npm": {
@@ -143,7 +143,7 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104485,
+      "stars": 104486,
       "forks": 16732,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
@@ -193,7 +193,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 23906,
+      "stars": 23907,
       "forks": 2201,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
