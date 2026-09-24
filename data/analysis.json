@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-24T17:15:07.768Z",
+  "generatedAt": "2026-09-24T17:35:55.515Z",
   "totals": {
-    "authoritative": 12256,
-    "active7": 1680,
+    "authoritative": 12258,
+    "active7": 1676,
     "active7Pct": 13.7,
-    "active30": 6517,
+    "active30": 6519,
     "active30Pct": 53.2,
-    "ageGate1": 11899,
+    "ageGate1": 11900,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9712,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2459,
+      "2026-09": 2461,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 359
+      "2026-09-21": 361
     },
     "byWeekGrades": {
       "B": {
@@ -136,7 +136,7 @@
         "2026-09-07": 271,
         "2026-07-06": 1,
         "2026-09-14": 194,
-        "2026-09-21": 133
+        "2026-09-21": 135
       },
       "D": {
         "2026-08-10": 336,
@@ -156,14 +156,14 @@
   "distribution": {
     "publish": {
       "published": 5413,
-      "unpublished": 6843,
+      "unpublished": 6845,
       "stale": 2747
     },
     "docs": {
-      "readme": 12226,
+      "readme": 12228,
       "zhFile": 905,
-      "zh": 5793,
-      "both": 5783,
+      "zh": 5795,
+      "both": 5785,
       "none": 30
     },
     "lib": {
@@ -363,11 +363,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11899
+      "count": 11901
     },
     {
       "topic": "deepseek-harness",
-      "count": 8002
+      "count": 8004
     },
     {
       "topic": "dsh",
@@ -383,7 +383,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1225
+      "count": 1227
     },
     {
       "topic": "plugin",
@@ -475,11 +475,11 @@
   ],
   "channels": {
     "awesome": 765,
-    "imsai": 284,
-    "covered": 1044,
+    "imsai": 285,
+    "covered": 1045,
     "coveredPct": 8.5,
-    "none": 11212,
-    "fetchedAt": "2026-09-24T17:14:21.752Z"
+    "none": 11213,
+    "fetchedAt": "2026-09-24T17:35:06.883Z"
   },
   "suggested": [
     {
@@ -1745,7 +1745,7 @@
     "grades": {
       "A": 574,
       "B": 5752,
-      "C": 3955,
+      "C": 3957,
       "D": 1824,
       "S": 151
     },
@@ -1756,7 +1756,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4466
+      "count": 4467
     },
     {
       "category": "模型 / 代理",
@@ -1792,7 +1792,7 @@
     },
     {
       "category": "消息 / 协作集成",
-      "count": 413
+      "count": 414
     },
     {
       "category": "开发 / 数据",
@@ -91998,7 +91998,7 @@
       "lastPush": "2026-09-23",
       "firstCreated": "2026-09-23",
       "delta": 0,
-      "avg": 81,
+      "avg": 86,
       "topPlugin": "tokai-teiodh/dsh-script-cards",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
@@ -148912,10 +148912,52 @@
       "topPlugin": "Mushroomcowisheggs/dsh-hardlink-publish-fallback",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "blueberrymaid",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 1,
+      "lastPush": "2026-09-24",
+      "firstCreated": "2026-09-24",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "blueberrymaid/dsh-midtalk",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
+      "owner": "xiaozhaoz1",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-24",
+      "firstCreated": "2026-09-24",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "xiaozhaoz1/dsh-mc-bridge",
+      "topStars": 0,
+      "topCat": "消息 / 协作集成"
     }
   ],
   "authorStats": {
-    "total": 6999,
+    "total": 7001,
     "multi": 1706,
     "top10Share": 3.9
   },
@@ -148924,7 +148966,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 16720,
+    "candidates": 16722,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -148999,11 +149041,11 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 426
+      "2026-09-21": 428
     },
-    "validated": 16784,
+    "validated": 16786,
     "candidatesValidated": 29,
-    "authoritative": 12256,
+    "authoritative": 12258,
     "invalidUnique": 4528,
     "invalidBuckets": [
       {
@@ -149052,5 +149094,5 @@
       }
     ]
   },
-  "enrichCount": 12256
+  "enrichCount": 12258
 }
