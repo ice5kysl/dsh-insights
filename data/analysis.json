@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-24T09:55:31.131Z",
+  "generatedAt": "2026-09-24T09:57:54.769Z",
   "totals": {
-    "authoritative": 12233,
+    "authoritative": 12234,
     "active7": 1741,
     "active7Pct": 14.2,
     "active30": 6569,
     "active30Pct": 53.7,
     "ageGate1": 11873,
-    "ageGate1Pct": 97.1,
+    "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9712,
       "2026-02": 4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2436,
+      "2026-09": 2437,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 336
+      "2026-09-21": 337
     },
     "byWeekGrades": {
       "B": {
@@ -136,7 +136,7 @@
         "2026-09-07": 271,
         "2026-07-06": 1,
         "2026-09-14": 189,
-        "2026-09-21": 126
+        "2026-09-21": 127
       },
       "D": {
         "2026-08-10": 336,
@@ -156,20 +156,20 @@
   "distribution": {
     "publish": {
       "published": 5407,
-      "unpublished": 6826,
+      "unpublished": 6827,
       "stale": 2746
     },
     "docs": {
-      "readme": 12204,
+      "readme": 12205,
       "zhFile": 903,
       "zh": 5785,
       "both": 5775,
       "none": 29
     },
     "lib": {
-      "index": 6572,
-      "client": 4291,
-      "both": 3823
+      "index": 6573,
+      "client": 4292,
+      "both": 3824
     },
     "publishPct": 44.2,
     "zhPct": 47.2
@@ -363,15 +363,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11876
+      "count": 11877
     },
     {
       "topic": "deepseek-harness",
-      "count": 7988
+      "count": 7989
     },
     {
       "topic": "dsh",
-      "count": 4651
+      "count": 4652
     },
     {
       "topic": "deepseek",
@@ -478,8 +478,8 @@
     "imsai": 284,
     "covered": 1044,
     "coveredPct": 8.5,
-    "none": 11189,
-    "fetchedAt": "2026-09-24T09:54:44.281Z"
+    "none": 11190,
+    "fetchedAt": "2026-09-24T09:57:04.532Z"
   },
   "suggested": [
     {
@@ -1745,7 +1745,7 @@
     "grades": {
       "A": 582,
       "B": 5746,
-      "C": 3933,
+      "C": 3934,
       "D": 1820,
       "S": 152
     },
@@ -1772,7 +1772,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 855
+      "count": 856
     },
     {
       "category": "侧栏 / 工作区",
@@ -62477,7 +62477,7 @@
       "lastPush": "2026-08-25",
       "firstCreated": "2026-08-25",
       "delta": 0,
-      "avg": 86,
+      "avg": 81,
       "topPlugin": "hzpeng57/dsh-lens-rail",
       "topStars": 1,
       "topCat": "主题 / 视觉美化"
@@ -148598,10 +148598,31 @@
       "topPlugin": "FYKANG/dsh-rss-reader",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "xiangnan0811",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-24",
+      "firstCreated": "2026-09-24",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "xiangnan0811/dsh-clinepass",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
     }
   ],
   "authorStats": {
-    "total": 6984,
+    "total": 6985,
     "multi": 1700,
     "top10Share": 3.9
   },
@@ -148610,7 +148631,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 16691,
+    "candidates": 16692,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -148685,11 +148706,11 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 397
+      "2026-09-21": 398
     },
-    "validated": 16755,
-    "candidatesValidated": 32,
-    "authoritative": 12233,
+    "validated": 16756,
+    "candidatesValidated": 28,
+    "authoritative": 12234,
     "invalidUnique": 4522,
     "invalidBuckets": [
       {
@@ -148738,5 +148759,5 @@
       }
     ]
   },
-  "enrichCount": 12233
+  "enrichCount": 12234
 }
