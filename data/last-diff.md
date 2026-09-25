@@ -1,13 +1,12 @@
 # 快照 Diff · 2026-09-25
 
-- 当前权威插件：**12318**（上次 12314）
-- 新增 4 · 消失 0
+- 当前权威插件：**12321**（上次 12318）
+- 新增 3 · 消失 0
 
-## 新增（Top 4）
-- huzhengbang2007/dsh-orca-glass ★1 
-- masknull/dsh-acl-sandbox-patch ★0 
-- qcsjjjjj/dsh-github-accel ★0 
-- qcsjjjjj/dsh-planner ★0 (npm ✓)
+## 新增（Top 3）
+- H-xie/zotero4DSH ★0 (npm ✓)
+- xling001/dsh-reading-companion ★0 
+- CheeseFox259/dsh-better-composer ★0 (npm ✓)
 
 ## 消失（Top 0）
 
