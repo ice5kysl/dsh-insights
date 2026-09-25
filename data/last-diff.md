@@ -1,11 +1,13 @@
 # 快照 Diff · 2026-09-25
 
-- 当前权威插件：**12293**（上次 12291）
-- 新增 2 · 消失 0
+- 当前权威插件：**12297**（上次 12293）
+- 新增 4 · 消失 0
 
-## 新增（Top 2）
-- mengqi1436/DSH-Rtk-rewrite ★0 (npm ✓)
-- zhaoguoqiang-hub/dsh-soul-engine ★0 
+## 新增（Top 4）
+- ZhangBo-cmd/dsh-pricing-badge ★0 (npm ✓)
+- windwhiterain/dsh-model-proxy ★0 (npm ✓)
+- itchenshi/dsh-gateway-models ★0 
+- guooo1380/dsh-team-panel ★0 
 
 ## 消失（Top 0）
 
