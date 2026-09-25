@@ -1,11 +1,12 @@
 # 快照 Diff · 2026-09-25
 
-- 当前权威插件：**12288**（上次 12286）
-- 新增 2 · 消失 0
+- 当前权威插件：**12291**（上次 12288）
+- 新增 3 · 消失 0
 
-## 新增（Top 2）
-- VCPr0j3k7/dsh-index-tap-bridge ★0 
-- qikairo7/dsh-gemini-pool ★0 
+## 新增（Top 3）
+- bakasbk/dsh-connect-comate ★1 
+- CNyaotian-Lunar/dsh-time-inject ★0 
+- CNyaotian-Lunar/dsh-peak-gate ★0 (npm ✓)
 
 ## 消失（Top 0）
 
