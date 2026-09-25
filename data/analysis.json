@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-25T01:31:03.688Z",
+  "generatedAt": "2026-09-25T01:36:18.964Z",
   "totals": {
-    "authoritative": 12281,
-    "active7": 1658,
+    "authoritative": 12282,
+    "active7": 1656,
     "active7Pct": 13.5,
     "active30": 6523,
     "active30Pct": 53.1,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2484,
+      "2026-09": 2485,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 384
+      "2026-09-21": 385
     },
     "byWeekGrades": {
       "B": {
@@ -73,7 +73,7 @@
         "2026-08-17": 1439,
         "2026-06-08": 4,
         "2026-06-15": 2,
-        "2026-08-24": 845,
+        "2026-08-24": 844,
         "2026-06-01": 1,
         "2026-05-25": 4,
         "2026-07-27": 6,
@@ -122,7 +122,7 @@
         "2026-02-02": 1,
         "2026-08-03": 23,
         "2026-03-23": 1,
-        "2026-08-24": 516,
+        "2026-08-24": 517,
         "2026-08-31": 252,
         "2026-07-20": 2,
         "2026-04-06": 2,
@@ -136,7 +136,7 @@
         "2026-09-07": 265,
         "2026-07-06": 1,
         "2026-09-14": 193,
-        "2026-09-21": 135
+        "2026-09-21": 136
       },
       "D": {
         "2026-08-10": 337,
@@ -156,20 +156,20 @@
   "distribution": {
     "publish": {
       "published": 5509,
-      "unpublished": 6772,
+      "unpublished": 6773,
       "stale": 2989
     },
     "docs": {
-      "readme": 12251,
+      "readme": 12252,
       "zhFile": 905,
       "zh": 5803,
       "both": 5793,
       "none": 30
     },
     "lib": {
-      "index": 6594,
-      "client": 4314,
-      "both": 3840
+      "index": 6595,
+      "client": 4315,
+      "both": 3841
     },
     "publishPct": 44.9,
     "zhPct": 47.2
@@ -363,15 +363,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11924
+      "count": 11925
     },
     {
       "topic": "deepseek-harness",
-      "count": 8018
+      "count": 8019
     },
     {
       "topic": "dsh",
-      "count": 4671
+      "count": 4672
     },
     {
       "topic": "deepseek",
@@ -478,8 +478,8 @@
     "imsai": 286,
     "covered": 1046,
     "coveredPct": 8.5,
-    "none": 11235,
-    "fetchedAt": "2026-09-25T01:30:26.346Z"
+    "none": 11236,
+    "fetchedAt": "2026-09-25T01:35:39.899Z"
   },
   "suggested": [
     {
@@ -1749,8 +1749,8 @@
   "quality": {
     "grades": {
       "A": 553,
-      "B": 5818,
-      "C": 3943,
+      "B": 5817,
+      "C": 3945,
       "D": 1826,
       "S": 141
     },
@@ -1765,7 +1765,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1196
+      "count": 1197
     },
     {
       "category": "文件浏览 / 预览",
@@ -45342,7 +45342,7 @@
       "lastPush": "2026-09-20",
       "firstCreated": "2026-09-18",
       "delta": 0,
-      "avg": 78.5,
+      "avg": 73.5,
       "topPlugin": "dingchenhui0618-arch/dsh-imagegen-skill",
       "topStars": 1,
       "topCat": "模型 / 代理"
@@ -62668,27 +62668,6 @@
       "topCat": "主题 / 视觉美化"
     },
     {
-      "owner": "1024483906-pixel",
-      "plugins": 1,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-08-26",
-      "firstCreated": "2026-08-25",
-      "delta": 0,
-      "avg": 79,
-      "topPlugin": "1024483906-pixel/dsh-novel-reader",
-      "topStars": 1,
-      "topCat": "其它"
-    },
-    {
       "owner": "rangrongg",
       "plugins": 1,
       "stars": 1,
@@ -70338,6 +70317,27 @@
       "topPlugin": "smallwhitelin/dsh-memory-md",
       "topStars": 0,
       "topCat": "记忆 / 知识"
+    },
+    {
+      "owner": "qikairo7",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-25",
+      "firstCreated": "2026-09-24",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "qikairo7/dsh-usage-panel",
+      "topStars": 0,
+      "topCat": "会话管理"
     },
     {
       "owner": "ccch1mneyyy",
@@ -92712,27 +92712,6 @@
       "topPlugin": "3289192-bot/dsh-cache-bricks",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
-    },
-    {
-      "owner": "qikairo7",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-09-24",
-      "firstCreated": "2026-09-24",
-      "delta": 0,
-      "avg": 81,
-      "topPlugin": "qikairo7/dsh-usage-panel",
-      "topStars": 0,
-      "topCat": "会话管理"
     },
     {
       "owner": "SeaOf0",
@@ -118773,6 +118752,27 @@
       "topPlugin": "TestTheBoy/dsh_plugin_file_attach",
       "topStars": 1,
       "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "1024483906-pixel",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-08-26",
+      "firstCreated": "2026-08-25",
+      "delta": 0,
+      "avg": 74,
+      "topPlugin": "1024483906-pixel/dsh-novel-reader",
+      "topStars": 1,
+      "topCat": "其它"
     },
     {
       "owner": "Ultmebius",
@@ -149185,7 +149185,7 @@
   ],
   "authorStats": {
     "total": 7012,
-    "multi": 1712,
+    "multi": 1713,
     "top10Share": 3.8
   },
   "coverage": {
@@ -149193,7 +149193,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 16745,
+    "candidates": 16746,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -149268,11 +149268,11 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 451
+      "2026-09-21": 452
     },
-    "validated": 16809,
-    "candidatesValidated": 27,
-    "authoritative": 12281,
+    "validated": 16810,
+    "candidatesValidated": 28,
+    "authoritative": 12282,
     "invalidUnique": 4528,
     "invalidBuckets": [
       {
@@ -149321,5 +149321,5 @@
       }
     ]
   },
-  "enrichCount": 12281
+  "enrichCount": 12282
 }
