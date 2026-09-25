@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-25T13:55:03.857Z",
+  "generatedAt": "2026-09-25T14:00:36.433Z",
   "totals": {
-    "authoritative": 12330,
-    "active7": 1449,
-    "active7Pct": 11.8,
-    "active30": 6426,
+    "authoritative": 12331,
+    "active7": 1447,
+    "active7Pct": 11.7,
+    "active30": 6427,
     "active30Pct": 52.1,
-    "ageGate1": 11969,
+    "ageGate1": 11970,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9712,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2533,
+      "2026-09": 2534,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 433
+      "2026-09-21": 434
     },
     "byWeekGrades": {
       "B": {
@@ -89,7 +89,7 @@
         "2026-09-07": 442,
         "2026-03-02": 1,
         "2026-09-14": 403,
-        "2026-09-21": 261
+        "2026-09-21": 263
       },
       "S": {
         "2026-08-03": 2,
@@ -136,7 +136,7 @@
         "2026-09-07": 265,
         "2026-07-06": 1,
         "2026-09-14": 206,
-        "2026-09-21": 150
+        "2026-09-21": 149
       },
       "D": {
         "2026-08-10": 337,
@@ -156,20 +156,20 @@
   "distribution": {
     "publish": {
       "published": 5526,
-      "unpublished": 6804,
+      "unpublished": 6805,
       "stale": 2997
     },
     "docs": {
-      "readme": 12299,
+      "readme": 12300,
       "zhFile": 905,
       "zh": 5830,
       "both": 5820,
       "none": 31
     },
     "lib": {
-      "index": 6622,
-      "client": 4329,
-      "both": 3854
+      "index": 6623,
+      "client": 4330,
+      "both": 3855
     },
     "publishPct": 44.8,
     "zhPct": 47.2
@@ -363,11 +363,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11973
+      "count": 11974
     },
     {
       "topic": "deepseek-harness",
-      "count": 8057
+      "count": 8058
     },
     {
       "topic": "dsh",
@@ -379,7 +379,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1237
+      "count": 1238
     },
     {
       "topic": "dsh-plugins",
@@ -391,7 +391,7 @@
     },
     {
       "topic": "typescript",
-      "count": 455
+      "count": 456
     },
     {
       "topic": "deepseek-harness-plugin",
@@ -478,8 +478,8 @@
     "imsai": 286,
     "covered": 1043,
     "coveredPct": 8.5,
-    "none": 11287,
-    "fetchedAt": "2026-09-25T13:54:17.337Z"
+    "none": 11288,
+    "fetchedAt": "2026-09-25T13:59:38.260Z"
   },
   "suggested": [
     {
@@ -1749,8 +1749,8 @@
   "quality": {
     "grades": {
       "A": 552,
-      "B": 5820,
-      "C": 3988,
+      "B": 5822,
+      "C": 3987,
       "D": 1835,
       "S": 135
     },
@@ -1765,7 +1765,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1201
+      "count": 1202
     },
     {
       "category": "文件浏览 / 预览",
@@ -67877,6 +67877,27 @@
       "topCat": "主题 / 视觉美化"
     },
     {
+      "owner": "jghwwnq",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-25",
+      "firstCreated": "2026-09-25",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "jghwwnq/dsh-model-audit",
+      "topStars": 1,
+      "topCat": "模型 / 代理"
+    },
+    {
       "owner": "fatatalia",
       "plugins": 8,
       "stars": 0,
@@ -92368,6 +92389,27 @@
       "delta": 0,
       "avg": 88,
       "topPlugin": "leaves615/dsh-llm-ctl",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
+      "owner": "MaybeJustLikeThis",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-24",
+      "firstCreated": "2026-09-24",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "MaybeJustLikeThis/rainbow-fart-dsh",
       "topStars": 0,
       "topCat": "其它"
     },
@@ -149261,27 +149303,6 @@
       "topCat": "会话管理"
     },
     {
-      "owner": "MaybeJustLikeThis",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-24",
-      "firstCreated": "2026-09-24",
-      "delta": 0,
-      "avg": 71,
-      "topPlugin": "MaybeJustLikeThis/rainbow-fart-dsh",
-      "topStars": 0,
-      "topCat": "其它"
-    },
-    {
       "owner": "zpda88888a88888-debug",
       "plugins": 1,
       "stars": 0,
@@ -149808,7 +149829,7 @@
     }
   ],
   "authorStats": {
-    "total": 7042,
+    "total": 7043,
     "multi": 1719,
     "top10Share": 3.8
   },
@@ -149817,7 +149838,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 16801,
+    "candidates": 16802,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -149892,11 +149913,11 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 507
+      "2026-09-21": 508
     },
-    "validated": 16865,
+    "validated": 16866,
     "candidatesValidated": 28,
-    "authoritative": 12330,
+    "authoritative": 12331,
     "invalidUnique": 4535,
     "invalidBuckets": [
       {
@@ -149945,5 +149966,5 @@
       }
     ]
   },
-  "enrichCount": 12330
+  "enrichCount": 12331
 }
