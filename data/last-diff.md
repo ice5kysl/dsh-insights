@@ -1,12 +1,11 @@
 # 快照 Diff · 2026-09-25
 
-- 当前权威插件：**12291**（上次 12288）
-- 新增 3 · 消失 0
+- 当前权威插件：**12293**（上次 12291）
+- 新增 2 · 消失 0
 
-## 新增（Top 3）
-- bakasbk/dsh-connect-comate ★1 
-- CNyaotian-Lunar/dsh-time-inject ★0 
-- CNyaotian-Lunar/dsh-peak-gate ★0 (npm ✓)
+## 新增（Top 2）
+- mengqi1436/DSH-Rtk-rewrite ★0 (npm ✓)
+- zhaoguoqiang-hub/dsh-soul-engine ★0 
 
 ## 消失（Top 0）
 
