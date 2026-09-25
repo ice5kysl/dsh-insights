@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 12333 个插件 · 生成于 2026-09-25 · 由 DSH Insights 管线生成
+> 权威集 12337 个插件 · 生成于 2026-09-25 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**12333**
-- 近 7 天活跃：1449（11.7%）· 近 30 天：6428（52.1%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：11971（97.1%）
+- 权威集规模：**12337**
+- 近 7 天活跃：1435（11.6%）· 近 30 天：6414（52%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：11974（97.1%）
 
 ## 发布与文档
-- npm 已发布 5526 / 未发布 6807 / 已发布但版本滞后 2997
-- 有 README 12302 · 中英双语/中文 5832 · 中文 README 文件 906 · 无 README 31
-- lib/index.js 6625 · lib/client.js 4330 · 双产物 3855
+- npm 已发布 5527 / 未发布 6810 / 已发布但版本滞后 2998
+- 有 README 12306 · 中英双语/中文 5833 · 中文 README 文件 906 · 无 README 31
+- lib/index.js 6627 · lib/client.js 4331 · 双产物 3856
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 762 · imsai 286 · 至少一个渠道 1043（8.5%） · 未收录 11290
+- awesome-dsh-plugin 762 · imsai 286 · 至少一个渠道 1043（8.5%） · 未收录 11294
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A · 周下载 270
@@ -23,7 +23,6 @@
 - spacexun2/dsh-worktime-board A · 周下载 94
 - Ultronen/dsh-liquid-glass A · 周下载 125
 - MayBeTheWorld/dsh-inherit A · 周下载 40
-- f20880479-lab/dsh-peak-gate A · 周下载 67
 - hotpot-labs/dsh-prompt-history-plugin A · 周下载 83
 - runcat-tommy/dsh-unitverse A · 周下载 46
 - Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 114
@@ -31,6 +30,7 @@
 - zjuatri/dsh-terminal-plugin A · 周下载 8
 - imtokenxinluo/dsh-contract-check A · 周下载 315
 - stormbuf/dsh-tavily-pool A · 周下载 454
+- webkubor/dsh-env-inspector A
 
 ## npm 周下载 Top 10
 - dsh-market/dsh-market：94507
@@ -45,20 +45,20 @@
 - MichengAI/dsh-im-connect：39402
 
 ## 质量评分（启发式）
-- 平均分 73.9 · S+A 占比 5.6%（值得优先看；A+B 51.7%）
-- S 135 · A 552 · B 5824 · C 3987 · D 1835
+- 平均分 73.9 · S+A 占比 5.5%（值得优先看；A+B 51.7%）
+- S 134 · A 550 · B 5828 · C 3990 · D 1835
 
 ## 功能分类（启发式 Top 12）
-- 其它：4488
+- 其它：4489
 - 模型 / 代理：1203
 - 文件浏览 / 预览：1080
 - 会话管理：1043
 - 状态 / 监控 / 用量：862
-- 侧栏 / 工作区：763
+- 侧栏 / 工作区：764
 - 搜索 / 命令面板：690
 - 工具 / 效率：610
-- 主题 / 视觉美化：469
-- 消息 / 协作集成：421
+- 主题 / 视觉美化：470
+- 消息 / 协作集成：422
 - 开发 / 数据：369
 - 记忆 / 知识：335
 
@@ -74,13 +74,13 @@
 - 2026-06：16
 - 2026-07：30
 - 2026-08：9712
-- 2026-09：2536
+- 2026-09：2540
 
 ## Top topics
-- `dsh-plugin` × 11976
-- `deepseek-harness` × 8060
-- `dsh` × 4703
-- `deepseek` × 1346
+- `dsh-plugin` × 11980
+- `deepseek-harness` × 8061
+- `dsh` × 4707
+- `deepseek` × 1347
 - `cordis` × 1238
 - `dsh-plugins` × 1236
 - `plugin` × 792
