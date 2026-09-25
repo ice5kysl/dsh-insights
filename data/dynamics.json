@@ -1,9 +1,9 @@
 {
-  "fetchedAt": "2026-09-25T00:44:47.228Z",
+  "fetchedAt": "2026-09-25T01:26:28.055Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 235160,
-    "forks": 28290,
+    "stars": 235179,
+    "forks": 28291,
     "pushed_at": "2026-09-24T14:10:21Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
@@ -177,7 +177,7 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39236,
+      "stars": 39237,
       "forks": 4258,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
@@ -193,7 +193,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 23910,
+      "stars": 23911,
       "forks": 2200,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
@@ -288,12 +288,12 @@
   "compatSignal": {
     "distTags": {
       "latest": "0.1.5-rc.3",
-      "next": "0.1.7-rc.1",
-      "alpha": "0.1.7-alpha.2"
+      "alpha": "0.1.7-alpha.2",
+      "next": "0.1.7-rc.2"
     },
-    "pluginsProbed": 4501,
-    "declaringEngines": 207,
-    "declaringPeers": 3042
+    "pluginsProbed": 4600,
+    "declaringEngines": 229,
+    "declaringPeers": 3111
   },
   "note": "只含可观测公开信号（releases / dist-tags / repo 活动 / API 模型清单），不含新闻舆情；DeepSeek 模型发布可能先在官网/HuggingFace（GitHub 仓库动态自动纳入，API 模型经 /models 端点探测）。rc 兼容雷达 v0 依赖契约字段声明率，见 /about。"
 }
