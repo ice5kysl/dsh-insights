@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-25T01:53:02.906Z",
+  "generatedAt": "2026-09-25T01:58:16.984Z",
   "totals": {
-    "authoritative": 12285,
+    "authoritative": 12286,
     "active7": 1654,
     "active7Pct": 13.5,
     "active30": 6522,
     "active30Pct": 53.1,
     "ageGate1": 11923,
-    "ageGate1Pct": 97.1,
+    "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9712,
       "2026-02": 4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2488,
+      "2026-09": 2489,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 388
+      "2026-09-21": 389
     },
     "byWeekGrades": {
       "B": {
@@ -136,7 +136,7 @@
         "2026-09-07": 265,
         "2026-07-06": 1,
         "2026-09-14": 193,
-        "2026-09-21": 139
+        "2026-09-21": 140
       },
       "D": {
         "2026-08-10": 337,
@@ -156,22 +156,22 @@
   "distribution": {
     "publish": {
       "published": 5510,
-      "unpublished": 6775,
+      "unpublished": 6776,
       "stale": 2990
     },
     "docs": {
-      "readme": 12255,
+      "readme": 12256,
       "zhFile": 905,
       "zh": 5804,
       "both": 5794,
       "none": 30
     },
     "lib": {
-      "index": 6598,
+      "index": 6599,
       "client": 4316,
       "both": 3842
     },
-    "publishPct": 44.9,
+    "publishPct": 44.8,
     "zhPct": 47.2
   },
   "npmStaleTop": [
@@ -363,15 +363,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 11928
+      "count": 11929
     },
     {
       "topic": "deepseek-harness",
-      "count": 8022
+      "count": 8023
     },
     {
       "topic": "dsh",
-      "count": 4674
+      "count": 4675
     },
     {
       "topic": "deepseek",
@@ -395,7 +395,7 @@
     },
     {
       "topic": "deepseek-harness-plugin",
-      "count": 426
+      "count": 427
     },
     {
       "topic": "dsh-plugin-market",
@@ -478,8 +478,8 @@
     "imsai": 286,
     "covered": 1046,
     "coveredPct": 8.5,
-    "none": 11239,
-    "fetchedAt": "2026-09-25T01:52:19.053Z"
+    "none": 11240,
+    "fetchedAt": "2026-09-25T01:57:29.477Z"
   },
   "suggested": [
     {
@@ -1750,7 +1750,7 @@
     "grades": {
       "A": 554,
       "B": 5817,
-      "C": 3948,
+      "C": 3949,
       "D": 1826,
       "S": 140
     },
@@ -1769,7 +1769,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1077
+      "count": 1078
     },
     {
       "category": "会话管理",
@@ -6640,7 +6640,7 @@
       "lastPush": "2026-09-07",
       "firstCreated": "2026-08-17",
       "delta": 0,
-      "avg": 82,
+      "avg": 80.3,
       "topPlugin": "beihzb/dsh-opencode-session-header",
       "topStars": 10,
       "topCat": "会话管理"
@@ -121903,6 +121903,27 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
+      "owner": "mattcarvercom",
+      "plugins": 3,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 3,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-25",
+      "firstCreated": "2026-09-25",
+      "delta": 0,
+      "avg": 72,
+      "topPlugin": "mattcarvercom/dsh-memory",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
+    },
+    {
       "owner": "LoserFox",
       "plugins": 2,
       "stars": 0,
@@ -124106,27 +124127,6 @@
       "topPlugin": "anthony1x6000/dsh-remote",
       "topStars": 0,
       "topCat": "其它"
-    },
-    {
-      "owner": "mattcarvercom",
-      "plugins": 2,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 2,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-09-25",
-      "firstCreated": "2026-09-25",
-      "delta": 0,
-      "avg": 72.5,
-      "topPlugin": "mattcarvercom/dsh-memory",
-      "topStars": 0,
-      "topCat": "文件浏览 / 预览"
     },
     {
       "owner": "haoliangwu",
@@ -149234,7 +149234,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 16749,
+    "candidates": 16750,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -149309,11 +149309,11 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 455
+      "2026-09-21": 456
     },
-    "validated": 16813,
-    "candidatesValidated": 29,
-    "authoritative": 12285,
+    "validated": 16814,
+    "candidatesValidated": 28,
+    "authoritative": 12286,
     "invalidUnique": 4528,
     "invalidBuckets": [
       {
@@ -149362,5 +149362,5 @@
       }
     ]
   },
-  "enrichCount": 12285
+  "enrichCount": 12286
 }
