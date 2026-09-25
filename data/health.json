@@ -1,66 +1,66 @@
 {
-  "generatedAt": "2026-09-24T01:15:24.936Z",
+  "generatedAt": "2026-09-25T01:03:02.395Z",
   "ruleVersion": "health-v7",
-  "total": 12184,
+  "total": 12277,
   "grades": {
-    "S": 151,
-    "A": 597,
-    "B": 5719,
-    "C": 3910,
-    "D": 1807
+    "S": 141,
+    "A": 553,
+    "B": 5818,
+    "C": 3939,
+    "D": 1826
   },
-  "avg": 74,
+  "avg": 73.9,
   "median": 76,
   "topDeductions": [
     {
       "code": "manifest.no-client-export",
-      "count": 9304,
-      "pct": 76.4
+      "count": 9366,
+      "pct": 76.3
     },
     {
       "code": "eng.no-ci",
-      "count": 8787,
-      "pct": 72.1
+      "count": 8858,
+      "pct": 72.2
     },
     {
       "code": "docs.no-docs-dir",
-      "count": 8497,
-      "pct": 69.7
+      "count": 8564,
+      "pct": 69.8
     },
     {
       "code": "npm.unpublished",
-      "count": 6789,
-      "pct": 55.7
+      "count": 6768,
+      "pct": 55.1
     },
     {
       "code": "docs.zh-missing",
-      "count": 6402,
-      "pct": 52.5
+      "count": 6455,
+      "pct": 52.6
     },
     {
       "code": "eng.no-tests",
-      "count": 5660,
-      "pct": 46.5
+      "count": 5691,
+      "pct": 46.4
     },
     {
       "code": "activity.dormant",
-      "count": 5268,
-      "pct": 43.2
+      "count": 5461,
+      "pct": 44.5
     },
     {
       "code": "manifest.not-lib-main",
-      "count": 4809,
+      "count": 4854,
       "pct": 39.5
     },
     {
-      "code": "maint.single-push",
-      "count": 2908,
-      "pct": 23.9
+      "code": "npm.version-drift",
+      "count": 2989,
+      "pct": 24.3
     },
     {
-      "code": "npm.version-drift",
-      "count": 2740,
-      "pct": 22.5
+      "code": "maint.single-push",
+      "count": 2919,
+      "pct": 23.8
     }
   ]
 }
