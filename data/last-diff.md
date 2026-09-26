@@ -1,13 +1,13 @@
 # 快照 Diff · 2026-09-26
 
-- 当前权威插件：**12457**（上次 12453）
+- 当前权威插件：**12461**（上次 12457）
 - 新增 4 · 消失 0
 
 ## 新增（Top 4）
-- kyle123740/dsh-message-recall ★0 (npm ✓)
-- OctoberaYours/dsh-rightbar-default-width ★0 
-- 3289192-bot/dsh-adaptive-max-tokens ★0 
-- ethanwong-hk/dsh-thinking-guard ★0 
+- XINGRUYU33224/dsh-liquid-glass-wallpaper ★1 
+- GooDAnDReaDY/dsh-smart-restart ★0 (npm ✓)
+- suufon/dsh-turn-speed ★0 
+- suufon/dsh-429-guard ★0 
 
 ## 消失（Top 0）
 
