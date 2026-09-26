@@ -1,10 +1,15 @@
 # 快照 Diff · 2026-09-26
 
-- 当前权威插件：**12420**（上次 12419）
-- 新增 1 · 消失 0
+- 当前权威插件：**12426**（上次 12420）
+- 新增 6 · 消失 0
 
-## 新增（Top 1）
-- Planckbaka/dsh-plugin-github-workflows ★1 
+## 新增（Top 6）
+- overact/dsh-context-management ★0 
+- HuaimaoCy/dsh-agent-hub ★0 (npm ✓)
+- ArthurZhou/dsh-plugin-model-hub ★0 
+- dienlanhvietnam-lang/deepseek-harness-vietnamese ★0 
+- weibaohui/dsh-matrix ★0 (npm ✓)
+- Neo65536-engineer/dsh-agent-log ★0 
 
 ## 消失（Top 0）
 
