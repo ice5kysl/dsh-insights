@@ -1,12 +1,11 @@
 # 快照 Diff · 2026-09-26
 
-- 当前权威插件：**12396**（上次 12393）
-- 新增 3 · 消失 0
+- 当前权威插件：**12398**（上次 12396）
+- 新增 2 · 消失 0
 
-## 新增（Top 3）
-- re-ITRT/dsh-skill-mcp-panel ★0 (npm ✓)
-- huguangyu666/dsh-plugin-android-emulator ★0 (npm ✓)
-- linanbuan/dsh-usage ★0 
+## 新增（Top 2）
+- Lequait/dsh-glm-web ★0 
+- pure-craft/dsh-actions ★0 (npm ✓)
 
 ## 消失（Top 0）
 
