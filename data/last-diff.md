@@ -1,12 +1,13 @@
 # 快照 Diff · 2026-09-26
 
-- 当前权威插件：**12375**（上次 12372）
-- 新增 3 · 消失 0
+- 当前权威插件：**12379**（上次 12375）
+- 新增 4 · 消失 0
 
-## 新增（Top 3）
-- win10ogod/dsh-fount-reality ★0 
-- leolee9086/dsh-viz ★0 
-- mpetruc/dsh-vcc ★0 
+## 新增（Top 4）
+- win10ogod/dsh-agent-browser ★0 (npm ✓)
+- noahchalifour/dsh-anthropic-image-clamp ★0 
+- miseryrua/dsh-wb-memory ★0 
+- Headmaster218/dsh-llm-moe4all ★0 
 
 ## 消失（Top 0）
 
