@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-27
 
-- 当前权威插件：**12559**（上次 12558）
+- 当前权威插件：**12560**（上次 12559）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- MCXCC303/dsh-hdsl-3dmodel ★0 
+- Leafstory/dsh-context-checkpoint ★0 
 
 ## 消失（Top 0）
 
