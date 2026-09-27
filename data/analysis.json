@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-27T11:56:27.946Z",
+  "generatedAt": "2026-09-27T12:15:53.061Z",
   "totals": {
-    "authoritative": 12521,
-    "active7": 912,
-    "active7Pct": 7.3,
+    "authoritative": 12522,
+    "active7": 904,
+    "active7Pct": 7.2,
     "active30": 6173,
     "active30Pct": 49.3,
-    "ageGate1": 12145,
+    "ageGate1": 12148,
     "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9712,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2724,
+      "2026-09": 2725,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 624
+      "2026-09-21": 625
     },
     "byWeekGrades": {
       "B": {
@@ -89,7 +89,7 @@
         "2026-09-07": 442,
         "2026-03-02": 1,
         "2026-09-14": 368,
-        "2026-09-21": 399
+        "2026-09-21": 401
       },
       "S": {
         "2026-08-03": 2,
@@ -137,7 +137,7 @@
         "2026-09-07": 265,
         "2026-07-06": 1,
         "2026-09-14": 234,
-        "2026-09-21": 195
+        "2026-09-21": 194
       },
       "D": {
         "2026-08-10": 337,
@@ -156,24 +156,24 @@
   },
   "distribution": {
     "publish": {
-      "published": 5584,
+      "published": 5585,
       "unpublished": 6937,
-      "stale": 3029
+      "stale": 3030
     },
     "docs": {
-      "readme": 12490,
+      "readme": 12491,
       "zhFile": 915,
-      "zh": 5926,
-      "both": 5916,
+      "zh": 5927,
+      "both": 5917,
       "none": 31
     },
     "lib": {
-      "index": 6723,
-      "client": 4409,
-      "both": 3921
+      "index": 6724,
+      "client": 4410,
+      "both": 3922
     },
     "publishPct": 44.6,
-    "zhPct": 47.2
+    "zhPct": 47.3
   },
   "npmStaleTop": [
     {
@@ -364,15 +364,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12164
+      "count": 12165
     },
     {
       "topic": "deepseek-harness",
-      "count": 8180
+      "count": 8181
     },
     {
       "topic": "dsh",
-      "count": 4809
+      "count": 4810
     },
     {
       "topic": "deepseek",
@@ -479,8 +479,8 @@
     "imsai": 288,
     "covered": 1048,
     "coveredPct": 8.4,
-    "none": 11473,
-    "fetchedAt": "2026-09-27T11:55:34.398Z"
+    "none": 11474,
+    "fetchedAt": "2026-09-27T12:15:08.479Z"
   },
   "suggested": [
     {
@@ -1770,8 +1770,8 @@
   "quality": {
     "grades": {
       "A": 525,
-      "B": 5881,
-      "C": 4013,
+      "B": 5883,
+      "C": 4012,
       "D": 1971,
       "S": 131
     },
@@ -1786,7 +1786,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1225
+      "count": 1226
     },
     {
       "category": "文件浏览 / 预览",
@@ -1868,7 +1868,7 @@
       "lastPush": "2026-09-19",
       "firstCreated": "2026-08-04",
       "delta": 0,
-      "avg": 77,
+      "avg": 76.9,
       "topPlugin": "omdsh-dev/dsh-genui",
       "topStars": 469,
       "topCat": "其它"
@@ -67621,6 +67621,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "wbb316",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-27",
+      "firstCreated": "2026-09-27",
+      "delta": 0,
+      "avg": 81,
+      "topPlugin": "wbb316/dsh-novel",
+      "topStars": 1,
+      "topCat": "模型 / 代理"
+    },
+    {
       "owner": "fatatalia",
       "plugins": 8,
       "stars": 0,
@@ -92597,6 +92618,27 @@
       "topPlugin": "dienlanhvietnam-lang/deepseek-harness-vietnamese",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "Neo65536-engineer",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-26",
+      "firstCreated": "2026-09-26",
+      "delta": 0,
+      "avg": 79,
+      "topPlugin": "Neo65536-engineer/dsh-agent-log",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
     },
     {
       "owner": "kangtsang",
@@ -151688,31 +151730,10 @@
       "lastPush": "2026-09-26",
       "firstCreated": "2026-09-26",
       "delta": 0,
-      "avg": 69,
+      "avg": 74,
       "topPlugin": "ArthurZhou/dsh-plugin-model-hub",
       "topStars": 0,
       "topCat": "模型 / 代理"
-    },
-    {
-      "owner": "Neo65536-engineer",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-26",
-      "firstCreated": "2026-09-26",
-      "delta": 0,
-      "avg": 74,
-      "topPlugin": "Neo65536-engineer/dsh-agent-log",
-      "topStars": 0,
-      "topCat": "文件浏览 / 预览"
     },
     {
       "owner": "sunzphy",
@@ -152388,7 +152409,7 @@
     }
   ],
   "authorStats": {
-    "total": 7164,
+    "total": 7165,
     "multi": 1756,
     "top10Share": 3.8
   },
@@ -152397,7 +152418,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 17025,
+    "candidates": 17026,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -152472,11 +152493,11 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 731
+      "2026-09-21": 732
     },
-    "validated": 17089,
-    "candidatesValidated": 33,
-    "authoritative": 12521,
+    "validated": 17090,
+    "candidatesValidated": 28,
+    "authoritative": 12522,
     "invalidUnique": 4568,
     "invalidBuckets": [
       {
@@ -152525,5 +152546,5 @@
       }
     ]
   },
-  "enrichCount": 12521
+  "enrichCount": 12522
 }

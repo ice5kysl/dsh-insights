@@ -1,13 +1,10 @@
 # 快照 Diff · 2026-09-27
 
-- 当前权威插件：**12521**（上次 12517）
-- 新增 4 · 消失 0
+- 当前权威插件：**12522**（上次 12521）
+- 新增 1 · 消失 0
 
-## 新增（Top 4）
-- cnyc6n/dsh-uia-agent ★0 
-- Stolyarovmn/dsh-ui-registry-aggregator ★0 (npm ✓)
-- catsenior507/dsh-command-center ★0 
-- KAsyori/dsh-unicode-guard ★0 
+## 新增（Top 1）
+- wbb316/dsh-novel ★1 (npm ✓)
 
 ## 消失（Top 0）
 
