@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-27T18:41:50.585Z",
+  "generatedAt": "2026-09-27T19:08:33.917Z",
   "totals": {
-    "authoritative": 12567,
-    "active7": 741,
+    "authoritative": 12568,
+    "active7": 736,
     "active7Pct": 5.9,
-    "active30": 6155,
+    "active30": 6154,
     "active30Pct": 49,
-    "ageGate1": 12181,
+    "ageGate1": 12182,
     "ageGate1Pct": 96.9,
     "byMonth": {
       "2026-08": 9712,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2770,
+      "2026-09": 2771,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 670
+      "2026-09-21": 671
     },
     "byWeekGrades": {
       "B": {
@@ -88,8 +88,8 @@
         "2026-06-29": 4,
         "2026-09-07": 442,
         "2026-03-02": 1,
-        "2026-09-14": 357,
-        "2026-09-21": 423
+        "2026-09-14": 356,
+        "2026-09-21": 424
       },
       "S": {
         "2026-08-03": 2,
@@ -136,7 +136,7 @@
         "2026-07-27": 1,
         "2026-09-07": 265,
         "2026-07-06": 1,
-        "2026-09-14": 243,
+        "2026-09-14": 244,
         "2026-09-21": 216
       },
       "D": {
@@ -156,20 +156,20 @@
   },
   "distribution": {
     "publish": {
-      "published": 5597,
+      "published": 5598,
       "unpublished": 6970,
-      "stale": 3035
+      "stale": 3036
     },
     "docs": {
-      "readme": 12536,
+      "readme": 12537,
       "zhFile": 920,
-      "zh": 5948,
-      "both": 5938,
+      "zh": 5949,
+      "both": 5939,
       "none": 31
     },
     "lib": {
       "index": 6732,
-      "client": 4416,
+      "client": 4417,
       "both": 3924
     },
     "publishPct": 44.5,
@@ -364,15 +364,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12210
+      "count": 12211
     },
     {
       "topic": "deepseek-harness",
-      "count": 8218
+      "count": 8219
     },
     {
       "topic": "dsh",
-      "count": 4830
+      "count": 4831
     },
     {
       "topic": "deepseek",
@@ -380,7 +380,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1271
+      "count": 1272
     },
     {
       "topic": "dsh-plugins",
@@ -479,8 +479,8 @@
     "imsai": 289,
     "covered": 1051,
     "coveredPct": 8.4,
-    "none": 11516,
-    "fetchedAt": "2026-09-27T18:41:05.314Z"
+    "none": 11517,
+    "fetchedAt": "2026-09-27T19:07:40.823Z"
   },
   "suggested": [
     {
@@ -1771,7 +1771,7 @@
     "grades": {
       "A": 526,
       "B": 5881,
-      "C": 4056,
+      "C": 4057,
       "D": 1974,
       "S": 130
     },
@@ -1790,7 +1790,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1110
+      "count": 1111
     },
     {
       "category": "会话管理",
@@ -9272,27 +9272,6 @@
       "topPlugin": "DWJZ/dsh-restart",
       "topStars": 0,
       "topCat": "搜索 / 命令面板"
-    },
-    {
-      "owner": "mrbeandev",
-      "plugins": 4,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 3,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 3,
-      "npm": 4,
-      "covered": 0,
-      "lastPush": "2026-09-26",
-      "firstCreated": "2026-09-20",
-      "delta": 0,
-      "avg": 77.5,
-      "topPlugin": "mrbeandev/dsh-reconnect",
-      "topStars": 0,
-      "topCat": "其它"
     },
     {
       "owner": "jipika",
@@ -19350,6 +19329,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "mrbeandev",
+      "plugins": 4,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 4,
+      "covered": 0,
+      "lastPush": "2026-09-26",
+      "firstCreated": "2026-09-20",
+      "delta": 0,
+      "avg": 75,
+      "topPlugin": "mrbeandev/dsh-reconnect",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
       "owner": "qcsjjjjj",
       "plugins": 4,
       "stars": 0,
@@ -22539,7 +22539,7 @@
       "lastPush": "2026-09-26",
       "firstCreated": "2026-09-26",
       "delta": 0,
-      "avg": 80.5,
+      "avg": 83,
       "topPlugin": "suufon/dsh-turn-speed",
       "topStars": 0,
       "topCat": "会话管理"
@@ -93124,6 +93124,27 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
+      "owner": "AieXile",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-27",
+      "firstCreated": "2026-09-27",
+      "delta": 0,
+      "avg": 86,
+      "topPlugin": "AieXile/dsh-memory-plugin",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
+    },
+    {
       "owner": "SeaOf0",
       "plugins": 2,
       "stars": 543,
@@ -119893,7 +119914,7 @@
       "lastPush": "2026-08-28",
       "firstCreated": "2026-08-24",
       "delta": 0,
-      "avg": 69,
+      "avg": 64,
       "topPlugin": "openllmsh/dsh",
       "topStars": 1,
       "topCat": "其它"
@@ -120964,7 +120985,7 @@
       "lastPush": "2026-08-28",
       "firstCreated": "2026-08-28",
       "delta": 0,
-      "avg": 74,
+      "avg": 69,
       "topPlugin": "Elpsycoogroo/dsh-work-report",
       "topStars": 1,
       "topCat": "文件浏览 / 预览"
@@ -152765,7 +152786,7 @@
     }
   ],
   "authorStats": {
-    "total": 7182,
+    "total": 7183,
     "multi": 1761,
     "top10Share": 3.8
   },
@@ -152774,7 +152795,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 17076,
+    "candidates": 17077,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -152849,11 +152870,11 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 782
+      "2026-09-21": 783
     },
-    "validated": 17140,
-    "candidatesValidated": 27,
-    "authoritative": 12567,
+    "validated": 17141,
+    "candidatesValidated": 28,
+    "authoritative": 12568,
     "invalidUnique": 4573,
     "invalidBuckets": [
       {
@@ -152902,5 +152923,5 @@
       }
     ]
   },
-  "enrichCount": 12567
+  "enrichCount": 12568
 }
