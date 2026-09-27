@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-27T01:52:31.750Z",
+  "generatedAt": "2026-09-27T02:15:14.763Z",
   "totals": {
-    "authoritative": 12470,
-    "active7": 1145,
-    "active7Pct": 9.2,
-    "active30": 6326,
+    "authoritative": 12471,
+    "active7": 1139,
+    "active7Pct": 9.1,
+    "active30": 6327,
     "active30Pct": 50.7,
-    "ageGate1": 12083,
+    "ageGate1": 12086,
     "ageGate1Pct": 96.9,
     "byMonth": {
       "2026-08": 9712,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2673,
+      "2026-09": 2674,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 573
+      "2026-09-21": 574
     },
     "byWeekGrades": {
       "B": {
@@ -89,7 +89,7 @@
         "2026-09-07": 442,
         "2026-03-02": 1,
         "2026-09-14": 383,
-        "2026-09-21": 362
+        "2026-09-21": 363
       },
       "S": {
         "2026-08-03": 2,
@@ -157,20 +157,20 @@
   "distribution": {
     "publish": {
       "published": 5571,
-      "unpublished": 6899,
+      "unpublished": 6900,
       "stale": 3025
     },
     "docs": {
-      "readme": 12439,
+      "readme": 12440,
       "zhFile": 912,
       "zh": 5902,
       "both": 5892,
       "none": 31
     },
     "lib": {
-      "index": 6699,
-      "client": 4388,
-      "both": 3904
+      "index": 6700,
+      "client": 4389,
+      "both": 3905
     },
     "publishPct": 44.7,
     "zhPct": 47.2
@@ -364,7 +364,7 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12113
+      "count": 12114
     },
     {
       "topic": "deepseek-harness",
@@ -479,8 +479,8 @@
     "imsai": 286,
     "covered": 1046,
     "coveredPct": 8.4,
-    "none": 11424,
-    "fetchedAt": "2026-09-27T01:51:45.753Z"
+    "none": 11425,
+    "fetchedAt": "2026-09-27T02:14:30.989Z"
   },
   "suggested": [
     {
@@ -1775,7 +1775,7 @@
   "quality": {
     "grades": {
       "A": 533,
-      "B": 5862,
+      "B": 5863,
       "C": 4091,
       "D": 1851,
       "S": 133
@@ -1807,7 +1807,7 @@
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 781
+      "count": 782
     },
     {
       "category": "搜索 / 命令面板",
@@ -22483,6 +22483,27 @@
       "delta": 0,
       "avg": 87,
       "topPlugin": "ZhangBo-cmd/dsh-pricing-badge",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "ZhaoAndy821",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-26",
+      "firstCreated": "2026-09-25",
+      "delta": 0,
+      "avg": 81,
+      "topPlugin": "ZhaoAndy821/dsh-zcode-connector",
       "topStars": 0,
       "topCat": "模型 / 代理"
     },
@@ -70211,27 +70232,6 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
-      "owner": "ZhaoAndy821",
-      "plugins": 2,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-26",
-      "firstCreated": "2026-09-25",
-      "delta": 0,
-      "avg": 78.5,
-      "topPlugin": "ZhaoAndy821/dsh-zcode-connector",
-      "topStars": 0,
-      "topCat": "模型 / 代理"
-    },
-    {
       "owner": "ccch1mneyyy",
       "plugins": 1,
       "stars": 0,
@@ -92852,7 +92852,7 @@
       "lastPush": "2026-09-26",
       "firstCreated": "2026-09-26",
       "delta": 0,
-      "avg": 81,
+      "avg": 86,
       "topPlugin": "kangtsang/dsh-worktree-space",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
@@ -151086,7 +151086,7 @@
       "lastPush": "2026-09-26",
       "firstCreated": "2026-09-26",
       "delta": 0,
-      "avg": 60,
+      "avg": 65,
       "topPlugin": "sozercaniekosmosa/dsh-plugin-npm-run-shell",
       "topStars": 0,
       "topCat": "其它"
@@ -151657,10 +151657,31 @@
       "topPlugin": "Gaozx1/dsh-web-search-engine",
       "topStars": 0,
       "topCat": "搜索 / 命令面板"
+    },
+    {
+      "owner": "supengpeng",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-27",
+      "firstCreated": "2026-09-27",
+      "delta": 0,
+      "avg": 73,
+      "topPlugin": "supengpeng/dsh-ssh",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
     }
   ],
   "authorStats": {
-    "total": 7129,
+    "total": 7130,
     "multi": 1748,
     "top10Share": 3.8
   },
@@ -151669,7 +151690,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 16963,
+    "candidates": 16965,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -151744,16 +151765,16 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 669
+      "2026-09-21": 671
     },
-    "validated": 17027,
-    "candidatesValidated": 27,
-    "authoritative": 12470,
-    "invalidUnique": 4557,
+    "validated": 17029,
+    "candidatesValidated": 29,
+    "authoritative": 12471,
+    "invalidUnique": 4558,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 2483
+        "count": 2484
       },
       {
         "reason": "no-package.json",
@@ -151797,5 +151818,5 @@
       }
     ]
   },
-  "enrichCount": 12470
+  "enrichCount": 12471
 }
