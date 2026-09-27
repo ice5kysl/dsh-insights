@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-27T11:09:18.232Z",
+  "generatedAt": "2026-09-27T11:15:16.874Z",
   "totals": {
-    "authoritative": 12515,
-    "active7": 931,
-    "active7Pct": 7.4,
-    "active30": 6246,
-    "active30Pct": 49.9,
+    "authoritative": 12517,
+    "active7": 933,
+    "active7Pct": 7.5,
+    "active30": 6232,
+    "active30Pct": 49.8,
     "ageGate1": 12140,
     "ageGate1Pct": 97,
     "byMonth": {
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 14,
-      "2026-09": 2718,
+      "2026-09": 2720,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1
@@ -57,7 +57,7 @@
       "2026-09-07": 789,
       "2026-03-02": 1,
       "2026-09-14": 660,
-      "2026-09-21": 618
+      "2026-09-21": 620
     },
     "byWeekGrades": {
       "B": {
@@ -89,7 +89,7 @@
         "2026-09-07": 442,
         "2026-03-02": 1,
         "2026-09-14": 368,
-        "2026-09-21": 397
+        "2026-09-21": 398
       },
       "S": {
         "2026-08-03": 2,
@@ -123,7 +123,7 @@
         "2026-08-03": 23,
         "2026-03-23": 1,
         "2026-06-15": 4,
-        "2026-08-24": 513,
+        "2026-08-24": 498,
         "2026-08-31": 252,
         "2026-07-20": 2,
         "2026-04-06": 2,
@@ -137,12 +137,12 @@
         "2026-09-07": 265,
         "2026-07-06": 1,
         "2026-09-14": 234,
-        "2026-09-21": 192
+        "2026-09-21": 193
       },
       "D": {
         "2026-08-10": 337,
         "2026-08-17": 1368,
-        "2026-08-24": 111,
+        "2026-08-24": 126,
         "2026-08-31": 26,
         "2026-03-16": 1,
         "2026-05-25": 3,
@@ -156,20 +156,20 @@
   },
   "distribution": {
     "publish": {
-      "published": 5582,
-      "unpublished": 6933,
-      "stale": 3028
+      "published": 5583,
+      "unpublished": 6934,
+      "stale": 3029
     },
     "docs": {
-      "readme": 12484,
+      "readme": 12486,
       "zhFile": 915,
-      "zh": 5924,
-      "both": 5914,
+      "zh": 5925,
+      "both": 5915,
       "none": 31
     },
     "lib": {
       "index": 6719,
-      "client": 4406,
+      "client": 4407,
       "both": 3919
     },
     "publishPct": 44.6,
@@ -364,15 +364,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12158
+      "count": 12160
     },
     {
       "topic": "deepseek-harness",
-      "count": 8175
+      "count": 8176
     },
     {
       "topic": "dsh",
-      "count": 4805
+      "count": 4806
     },
     {
       "topic": "deepseek",
@@ -479,8 +479,8 @@
     "imsai": 288,
     "covered": 1048,
     "coveredPct": 8.4,
-    "none": 11467,
-    "fetchedAt": "2026-09-27T11:08:26.761Z"
+    "none": 11469,
+    "fetchedAt": "2026-09-27T11:14:31.023Z"
   },
   "suggested": [
     {
@@ -1770,9 +1770,9 @@
   "quality": {
     "grades": {
       "A": 526,
-      "B": 5878,
-      "C": 4084,
-      "D": 1897,
+      "B": 5879,
+      "C": 4070,
+      "D": 1912,
       "S": 130
     },
     "avgScore": 73.7,
@@ -1790,7 +1790,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1101
+      "count": 1102
     },
     {
       "category": "会话管理",
@@ -1798,7 +1798,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 872
+      "count": 873
     },
     {
       "category": "侧栏 / 工作区",
@@ -1837,8 +1837,8 @@
       "grades": {
         "A": 0,
         "B": 57,
-        "C": 80,
-        "D": 38
+        "C": 65,
+        "D": 53
       },
       "ab": 57,
       "npm": 0,
@@ -1846,7 +1846,7 @@
       "lastPush": "2026-09-02",
       "firstCreated": "2026-08-28",
       "delta": 0,
-      "avg": 66.1,
+      "avg": 65.7,
       "topPlugin": "xby-skill/xby-search-apple-docs",
       "topStars": 1,
       "topCat": "其它"
@@ -16361,6 +16361,27 @@
       "topPlugin": "athif23/dsh-context-rollover",
       "topStars": 3,
       "topCat": "记忆 / 知识"
+    },
+    {
+      "owner": "OMSociety",
+      "plugins": 2,
+      "stars": 3,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-27",
+      "firstCreated": "2026-09-14",
+      "delta": 0,
+      "avg": 83.5,
+      "topPlugin": "OMSociety/dsh-fishpai",
+      "topStars": 3,
+      "topCat": "其它"
     },
     {
       "owner": "sd1g1",
@@ -44058,27 +44079,6 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
-      "owner": "OMSociety",
-      "plugins": 1,
-      "stars": 3,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-15",
-      "firstCreated": "2026-09-14",
-      "delta": 0,
-      "avg": 83,
-      "topPlugin": "OMSociety/dsh-fishpai",
-      "topStars": 3,
-      "topCat": "其它"
-    },
-    {
       "owner": "piaobo123",
       "plugins": 1,
       "stars": 3,
@@ -52985,7 +52985,7 @@
       "lastPush": "2026-08-29",
       "firstCreated": "2026-08-25",
       "delta": 0,
-      "avg": 78.5,
+      "avg": 76,
       "topPlugin": "Ryu6Zero/dsh-character-studio",
       "topStars": 1,
       "topCat": "搜索 / 命令面板"
@@ -125611,6 +125611,27 @@
       "topCat": "记忆 / 知识"
     },
     {
+      "owner": "upcyan",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-27",
+      "firstCreated": "2026-09-27",
+      "delta": 0,
+      "avg": 64,
+      "topPlugin": "upcyan/dsh-mimo-usage",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
+    },
+    {
       "owner": "haoliangwu",
       "plugins": 1,
       "stars": 0,
@@ -152029,27 +152050,6 @@
       "topCat": "侧栏 / 工作区"
     },
     {
-      "owner": "upcyan",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-27",
-      "firstCreated": "2026-09-27",
-      "delta": 0,
-      "avg": 64,
-      "topPlugin": "upcyan/dsh-mimo-usage",
-      "topStars": 0,
-      "topCat": "状态 / 监控 / 用量"
-    },
-    {
       "owner": "Zessi-C",
       "plugins": 1,
       "stars": 0,
@@ -152346,7 +152346,7 @@
   ],
   "authorStats": {
     "total": 7162,
-    "multi": 1754,
+    "multi": 1756,
     "top10Share": 3.8
   },
   "coverage": {
@@ -152354,7 +152354,7 @@
       "count": 15591,
       "at": "2026-09-21T00:16:44.690Z"
     },
-    "candidates": 17016,
+    "candidates": 17019,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -152429,12 +152429,12 @@
       "2026-09-14": 783,
       "2025-10-20": 1,
       "1969-12-29": 508,
-      "2026-09-21": 722
+      "2026-09-21": 725
     },
-    "validated": 17080,
-    "candidatesValidated": 31,
-    "authoritative": 12515,
-    "invalidUnique": 4565,
+    "validated": 17083,
+    "candidatesValidated": 30,
+    "authoritative": 12517,
+    "invalidUnique": 4566,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -152442,7 +152442,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1645
+        "count": 1646
       },
       {
         "reason": "no-signal",
@@ -152482,5 +152482,5 @@
       }
     ]
   },
-  "enrichCount": 12515
+  "enrichCount": 12517
 }
