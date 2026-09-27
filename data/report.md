@@ -1,23 +1,22 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 12507 个插件 · 生成于 2026-09-27 · 由 DSH Insights 管线生成
+> 权威集 12512 个插件 · 生成于 2026-09-27 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**12507**
-- 近 7 天活跃：991（7.9%）· 近 30 天：6291（50.3%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：12133（97%）
+- 权威集规模：**12512**
+- 近 7 天活跃：953（7.6%）· 近 30 天：6286（50.2%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：12136（97%）
 
 ## 发布与文档
-- npm 已发布 5581 / 未发布 6926 / 已发布但版本滞后 3028
-- 有 README 12476 · 中英双语/中文 5923 · 中文 README 文件 914 · 无 README 31
-- lib/index.js 6717 · lib/client.js 4404 · 双产物 3918
+- npm 已发布 5581 / 未发布 6931 / 已发布但版本滞后 3028
+- 有 README 12481 · 中英双语/中文 5924 · 中文 README 文件 915 · 无 README 31
+- lib/index.js 6719 · lib/client.js 4405 · 双产物 3919
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 765 · imsai 287 · 至少一个渠道 1047（8.4%） · 未收录 11460
+- awesome-dsh-plugin 765 · imsai 287 · 至少一个渠道 1047（8.4%） · 未收录 11465
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A · 周下载 350
-- NyaaCaster/dsh-yuque-kb A · 周下载 131
 - hrhgit/dsh-model-manager A · 周下载 133
 - belowthetree/dsh-mcp-setting A · 周下载 136
 - spacexun2/dsh-worktime-board A · 周下载 120
@@ -31,6 +30,7 @@
 - imtokenxinluo/dsh-contract-check A · 周下载 365
 - stormbuf/dsh-tavily-pool A · 周下载 693
 - webkubor/dsh-env-inspector A · 周下载 594
+- saya-ch/dsh-mobile A · 周下载 2974
 
 ## npm 周下载 Top 10
 - dsh-market/dsh-market：145277
@@ -46,13 +46,13 @@
 
 ## 质量评分（启发式）
 - 平均分 73.7 · S+A 占比 5.3%（值得优先看；A+B 51.2%）
-- S 132 · A 528 · B 5879 · C 4110 · D 1858
+- S 131 · A 526 · B 5878 · C 4118 · D 1859
 
 ## 功能分类（启发式 Top 12）
-- 其它：4530
-- 模型 / 代理：1224
-- 文件浏览 / 预览：1098
-- 会话管理：1067
+- 其它：4531
+- 模型 / 代理：1225
+- 文件浏览 / 预览：1100
+- 会话管理：1068
 - 状态 / 监控 / 用量：872
 - 侧栏 / 工作区：787
 - 搜索 / 命令面板：697
@@ -74,14 +74,14 @@
 - 2026-06：16
 - 2026-07：30
 - 2026-08：9712
-- 2026-09：2710
+- 2026-09：2715
 
 ## Top topics
-- `dsh-plugin` × 12150
-- `deepseek-harness` × 8169
+- `dsh-plugin` × 12155
+- `deepseek-harness` × 8173
 - `dsh` × 4804
 - `deepseek` × 1360
-- `cordis` × 1257
+- `cordis` × 1259
 - `dsh-plugins` × 1250
 - `plugin` × 803
 - `typescript` × 459
