@@ -1,11 +1,13 @@
 # 快照 Diff · 2026-09-27
 
-- 当前权威插件：**12517**（上次 12515）
-- 新增 2 · 消失 0
+- 当前权威插件：**12521**（上次 12517）
+- 新增 4 · 消失 0
 
-## 新增（Top 2）
-- OMSociety/dsh-mineru ★0 (npm ✓)
-- upcyan/dsh-mimo-extension ★0 
+## 新增（Top 4）
+- cnyc6n/dsh-uia-agent ★0 
+- Stolyarovmn/dsh-ui-registry-aggregator ★0 (npm ✓)
+- catsenior507/dsh-command-center ★0 
+- KAsyori/dsh-unicode-guard ★0 
 
 ## 消失（Top 0）
 
