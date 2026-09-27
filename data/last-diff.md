@@ -1,12 +1,14 @@
 # 快照 Diff · 2026-09-27
 
-- 当前权威插件：**12474**（上次 12471）
-- 新增 3 · 消失 0
+- 当前权威插件：**12479**（上次 12474）
+- 新增 5 · 消失 0
 
-## 新增（Top 3）
-- zhengjy01/dsh-mcp-manager ★0 (npm ✓)
-- hu568/dsh-plugin-persona-memory ★0 
-- hu568/dsh-plugin-browser-use ★0 
+## 新增（Top 5）
+- JackZo400/dsh-voice-transcribe ★0 
+- s11phere/dsh-commandcode-quota ★0 
+- jr-create/dsh-prompt-wisp ★0 
+- Weihong-Liu/dsh-html-live-preview ★0 (npm ✓)
+- JackZo400/dsh-memory-search ★0 (npm ✓)
 
 ## 消失（Top 0）
 
