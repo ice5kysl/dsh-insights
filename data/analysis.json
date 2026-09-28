@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-28T18:15:26.730Z",
+  "generatedAt": "2026-09-28T18:30:44.928Z",
   "totals": {
-    "authoritative": 12784,
-    "active7": 2446,
-    "active7Pct": 19.1,
-    "active30": 6335,
+    "authoritative": 12788,
+    "active7": 2450,
+    "active7Pct": 19.2,
+    "active30": 6339,
     "active30Pct": 49.6,
     "ageGate1": 12408,
-    "ageGate1Pct": 97.1,
+    "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9749,
       "2026-02": 4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 2948,
+      "2026-09": 2952,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 68
+      "2026-09-28": 72
     },
     "byWeekGrades": {
       "B": {
@@ -117,7 +117,7 @@
         "2026-09-14": 41,
         "2026-07-27": 1,
         "2026-09-21": 20,
-        "2026-09-28": 2
+        "2026-09-28": 3
       },
       "C": {
         "2026-01-19": 1,
@@ -146,7 +146,7 @@
         "2026-09-21": 215,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 44
+        "2026-09-28": 46
       },
       "D": {
         "2026-08-10": 333,
@@ -157,25 +157,26 @@
         "2026-07-27": 1,
         "2026-09-07": 19,
         "2026-09-14": 15,
-        "2026-09-21": 5
+        "2026-09-21": 5,
+        "2026-09-28": 1
       }
     }
   },
   "distribution": {
     "publish": {
-      "published": 5689,
-      "unpublished": 7095,
-      "stale": 3065
+      "published": 5690,
+      "unpublished": 7098,
+      "stale": 3066
     },
     "docs": {
-      "readme": 12753,
-      "zhFile": 933,
-      "zh": 6031,
-      "both": 6021,
+      "readme": 12757,
+      "zhFile": 934,
+      "zh": 6034,
+      "both": 6024,
       "none": 31
     },
     "lib": {
-      "index": 6837,
+      "index": 6839,
       "client": 4497,
       "both": 3990
     },
@@ -371,11 +372,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12417
+      "count": 12421
     },
     {
       "topic": "deepseek-harness",
-      "count": 8399
+      "count": 8400
     },
     {
       "topic": "dsh",
@@ -391,7 +392,7 @@
     },
     {
       "topic": "dsh-plugins",
-      "count": 1280
+      "count": 1282
     },
     {
       "topic": "plugin",
@@ -415,7 +416,7 @@
     },
     {
       "topic": "ai-agents",
-      "count": 353
+      "count": 354
     }
   ],
   "medianStars": 0,
@@ -486,8 +487,8 @@
     "imsai": 293,
     "covered": 1063,
     "coveredPct": 8.3,
-    "none": 11721,
-    "fetchedAt": "2026-09-28T18:14:49.702Z"
+    "none": 11725,
+    "fetchedAt": "2026-09-28T18:30:14.774Z"
   },
   "suggested": [
     {
@@ -1768,10 +1769,10 @@
   },
   "quality": {
     "grades": {
-      "A": 548,
+      "A": 549,
       "B": 6048,
-      "C": 4085,
-      "D": 1962,
+      "C": 4087,
+      "D": 1963,
       "S": 141
     },
     "avgScore": 73.8,
@@ -1781,7 +1782,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4596
+      "count": 4598
     },
     {
       "category": "模型 / 代理",
@@ -1797,7 +1798,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 900
+      "count": 901
     },
     {
       "category": "侧栏 / 工作区",
@@ -1825,7 +1826,7 @@
     },
     {
       "category": "记忆 / 知识",
-      "count": 346
+      "count": 347
     }
   ],
   "authors": [
@@ -70529,6 +70530,27 @@
       "topCat": "侧栏 / 工作区"
     },
     {
+      "owner": "Grivn",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 1,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 93,
+      "topPlugin": "Grivn/mnemon-memory-agent",
+      "topStars": 1,
+      "topCat": "状态 / 监控 / 用量"
+    },
+    {
       "owner": "fatatalia",
       "plugins": 11,
       "stars": 0,
@@ -128896,6 +128918,27 @@
       "topCat": "开发 / 数据"
     },
     {
+      "owner": "Zam233",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 66,
+      "topPlugin": "Zam233/dsh-google-scholar",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
       "owner": "haoliangwu",
       "plugins": 1,
       "stars": 0,
@@ -155249,11 +155292,32 @@
       "topPlugin": "WalcimarZD/dsh-notify-pt",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "lrqiisrom",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 59,
+      "topPlugin": "lrqiisrom/dsh-jev-memory",
+      "topStars": 0,
+      "topCat": "记忆 / 知识"
     }
   ],
   "authorStats": {
-    "total": 7300,
-    "multi": 1800,
+    "total": 7303,
+    "multi": 1801,
     "top10Share": 4.2
   },
   "coverage": {
@@ -155261,7 +155325,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17187,
+    "candidates": 17192,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -155341,12 +155405,12 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 78
+      "2026-09-28": 83
     },
-    "validated": 17444,
-    "candidatesValidated": 18,
-    "authoritative": 12784,
-    "invalidUnique": 4660,
+    "validated": 17449,
+    "candidatesValidated": 21,
+    "authoritative": 12788,
+    "invalidUnique": 4661,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -155354,7 +155418,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1688
+        "count": 1689
       },
       {
         "reason": "no-signal",
@@ -155394,5 +155458,5 @@
       }
     ]
   },
-  "enrichCount": 12784
+  "enrichCount": 12788
 }
