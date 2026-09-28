@@ -1,4 +1,4 @@
-# 作者触发单插件重检（零后端「申请重检」）：/p/ 页指引作者到此手动触发
+# 有本仓库写入权限的协作者手动触发单插件重检；其他插件作者通过数据纠错 / 重检申请 Issue 请求维护者运行
 # 流程：validateOne 单插件（无视断点）→ snapshot 全链对齐派生产物 → commit（pages 经 workflow_run 接力部署）
 name: recheck
 
