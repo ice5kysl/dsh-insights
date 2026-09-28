@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-28T15:36:09.845Z",
+  "generatedAt": "2026-09-28T15:47:37.137Z",
   "totals": {
-    "authoritative": 12772,
+    "authoritative": 12773,
     "active7": 2447,
     "active7Pct": 19.2,
     "active30": 6340,
     "active30Pct": 49.6,
-    "ageGate1": 12383,
+    "ageGate1": 12384,
     "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9749,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 2936,
+      "2026-09": 2937,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 56
+      "2026-09-28": 57
     },
     "byWeekGrades": {
       "B": {
@@ -95,7 +95,7 @@
         "2026-03-02": 1,
         "2026-09-14": 420,
         "2026-09-21": 437,
-        "2026-09-28": 17
+        "2026-09-28": 18
       },
       "S": {
         "2026-08-03": 2,
@@ -105,7 +105,7 @@
         "2026-08-24": 25,
         "2026-09-07": 16,
         "2026-09-14": 5,
-        "2026-09-21": 7
+        "2026-09-21": 8
       },
       "A": {
         "2026-08-10": 173,
@@ -116,7 +116,7 @@
         "2026-09-07": 47,
         "2026-09-14": 41,
         "2026-07-27": 1,
-        "2026-09-21": 20,
+        "2026-09-21": 19,
         "2026-09-28": 2
       },
       "C": {
@@ -164,20 +164,20 @@
   "distribution": {
     "publish": {
       "published": 5686,
-      "unpublished": 7086,
+      "unpublished": 7087,
       "stale": 3064
     },
     "docs": {
-      "readme": 12741,
+      "readme": 12742,
       "zhFile": 933,
-      "zh": 6027,
-      "both": 6017,
+      "zh": 6028,
+      "both": 6018,
       "none": 31
     },
     "lib": {
-      "index": 6830,
-      "client": 4493,
-      "both": 3986
+      "index": 6831,
+      "client": 4494,
+      "both": 3987
     },
     "publishPct": 44.5,
     "zhPct": 47.1
@@ -371,11 +371,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12405
+      "count": 12406
     },
     {
       "topic": "deepseek-harness",
-      "count": 8392
+      "count": 8393
     },
     {
       "topic": "dsh",
@@ -486,8 +486,8 @@
     "imsai": 293,
     "covered": 1064,
     "coveredPct": 8.3,
-    "none": 11708,
-    "fetchedAt": "2026-09-28T15:35:35.757Z"
+    "none": 11709,
+    "fetchedAt": "2026-09-28T15:47:06.447Z"
   },
   "suggested": [
     {
@@ -1768,11 +1768,11 @@
   },
   "quality": {
     "grades": {
-      "A": 548,
-      "B": 6038,
+      "A": 547,
+      "B": 6039,
       "C": 4087,
       "D": 1959,
-      "S": 140
+      "S": 141
     },
     "avgScore": 73.8,
     "gradePct": 51.6,
@@ -1813,7 +1813,7 @@
     },
     {
       "category": "主题 / 视觉美化",
-      "count": 483
+      "count": 484
     },
     {
       "category": "消息 / 协作集成",
@@ -70238,10 +70238,11 @@
       "plugins": 1,
       "stars": 1,
       "grades": {
-        "A": 1,
+        "A": 0,
         "B": 0,
         "C": 0,
-        "D": 0
+        "D": 0,
+        "S": 1
       },
       "ab": 1,
       "npm": 1,
@@ -70249,7 +70250,7 @@
       "lastPush": "2026-09-27",
       "firstCreated": "2026-09-27",
       "delta": 0,
-      "avg": 91,
+      "avg": 96,
       "topPlugin": "jeffreyren1/dsh-custom-js",
       "topStars": 1,
       "topCat": "其它"
@@ -70774,7 +70775,7 @@
       "lastPush": "2026-08-31",
       "firstCreated": "2026-08-29",
       "delta": 0,
-      "avg": 71.5,
+      "avg": 70.3,
       "topPlugin": "tianhanly/dsh-official-port-nav",
       "topStars": 0,
       "topCat": "其它"
@@ -95377,6 +95378,27 @@
       "topPlugin": "gst20060726/dsh-auto-translate",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "ISimon3",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "ISimon3/dsh-theme-skin",
+      "topStars": 0,
+      "topCat": "主题 / 视觉美化"
     },
     {
       "owner": "SeaOf0",
@@ -155062,7 +155084,7 @@
     }
   ],
   "authorStats": {
-    "total": 7291,
+    "total": 7292,
     "multi": 1798,
     "top10Share": 3.8
   },
@@ -155071,7 +155093,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17174,
+    "candidates": 17175,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -155151,11 +155173,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 65
+      "2026-09-28": 66
     },
-    "validated": 17431,
-    "candidatesValidated": 16,
-    "authoritative": 12772,
+    "validated": 17432,
+    "candidatesValidated": 17,
+    "authoritative": 12773,
     "invalidUnique": 4659,
     "invalidBuckets": [
       {
@@ -155204,5 +155226,5 @@
       }
     ]
   },
-  "enrichCount": 12772
+  "enrichCount": 12773
 }
