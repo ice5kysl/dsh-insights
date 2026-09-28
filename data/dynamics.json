@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-09-28T12:15:04.026Z",
+  "fetchedAt": "2026-09-28T13:15:52.481Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 238414,
-    "forks": 28646,
-    "pushed_at": "2026-09-27T15:55:19Z",
+    "stars": 238467,
+    "forks": 28649,
+    "pushed_at": "2026-09-28T12:35:34Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.2.0-rc.1",
+        "name": "v0.2.0-rc.1",
+        "prerelease": true,
+        "published_at": "2026-09-28T12:36:21Z",
+        "breaking": false,
+        "summary": "优化对话进行中和完成状态的实时动画、用时信息、过程信息间距。 @yixiangihsiang,",
+        "added": 1,
+        "fixed": 15
+      },
       {
         "tag": "dsh-v0.1.7-rc.2",
         "name": "v0.1.7-rc.2",
@@ -76,27 +86,21 @@
         "summary": "优化反馈提交体验：点赞和点踩均通过弹窗确认后提交，提交失败时保留已填写内容并给出提示。",
         "added": 0,
         "fixed": 0
-      },
-      {
-        "tag": "dsh-v0.1.5-rc.1",
-        "name": "v0.1.5-rc.1",
-        "prerelease": true,
-        "published_at": "2026-09-10T03:09:00Z",
-        "breaking": true,
-        "summary": "DeepSeek 模型适配器新增 `DeepSeek-V41-Flash`（`deepseek-flash`）支持文本、图片及会话历史中的系统提示词更新。新会话默认使用该模型，配置文件显式指定模型时以配置值为准。",
-        "added": 7,
-        "fixed": 25
       }
     ],
     "npm": {
       "pkg": "@deepseek-ai/dsh",
       "distTags": {
-        "latest": "0.1.7-rc.2",
         "alpha": "0.1.7-alpha.2",
-        "next": "0.1.7-rc.2"
+        "latest": "0.1.7-rc.2",
+        "next": "0.2.0-rc.1"
       },
-      "modified": "2026-09-27T16:22:34.081Z",
+      "modified": "2026-09-28T12:34:03.368Z",
       "versions": [
+        {
+          "version": "0.2.0-rc.1",
+          "time": "2026-09-28T12:34:03.181Z"
+        },
         {
           "version": "0.1.7-rc.2",
           "time": "2026-09-24T14:18:11.337Z"
@@ -132,10 +136,6 @@
         {
           "version": "0.1.5-rc.1",
           "time": "2026-09-10T03:12:53.293Z"
-        },
-        {
-          "version": "0.1.5-alpha.2",
-          "time": "2026-09-09T14:41:15.754Z"
         }
       ]
     }
@@ -160,7 +160,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-R1",
-      "stars": 91959,
+      "stars": 91958,
       "forks": 11671,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
@@ -177,7 +177,7 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39264,
+      "stars": 39265,
       "forks": 4261,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
@@ -185,7 +185,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-Coder",
-      "stars": 24284,
+      "stars": 24283,
       "forks": 2930,
       "pushed_at": "2025-11-11T06:44:56Z",
       "description": "DeepSeek Coder: Let the Code Write Itself",
@@ -193,7 +193,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 23920,
+      "stars": 23919,
       "forks": 2199,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
@@ -209,7 +209,7 @@
     },
     {
       "repo": "deepseek-ai/FlashMLA",
-      "stars": 12957,
+      "stars": 12956,
       "forks": 1166,
       "pushed_at": "2026-09-15T01:50:44Z",
       "description": "FlashMLA: Efficient Multi-head Latent Attention Kernels",
@@ -217,7 +217,7 @@
     },
     {
       "repo": "deepseek-ai/3FS",
-      "stars": 10248,
+      "stars": 10247,
       "forks": 1101,
       "pushed_at": "2026-05-07T09:31:54Z",
       "description": " A high-performance distributed file system designed to address the challenges of AI training and inference workloads. ",

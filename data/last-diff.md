@@ -1,12 +1,12 @@
 # 快照 Diff · 2026-09-28
 
-- 当前权威插件：**12762**（上次 12759）
+- 当前权威插件：**12765**（上次 12762）
 - 新增 3 · 消失 0
 
 ## 新增（Top 3）
-- hu568/dsh-plugin-cluster-preset ★0 
-- ZnonEn/dsh-mcp-manager ★0 (npm ✓)
-- gosomea/dsh-opencode-go ★0 (npm ✓)
+- zhang66633/dsh-memvault ★1 
+- eghrhegpe/dsh-connect-sensenova-token-plan ★0 (npm ✓)
+- flyhigao/dsh-file-transfer ★0 
 
 ## 消失（Top 0）
 
