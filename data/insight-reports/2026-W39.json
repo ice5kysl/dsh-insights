@@ -1,0 +1,82 @@
+{
+  "week": "2026-W39",
+  "range": "2026/09/21～2026/09/27",
+  "generatedAt": "2026-09-28T01:14:51.070Z",
+  "model": "deepseek-v4-pro",
+  "usage": {
+    "prompt_tokens": 11042,
+    "completion_tokens": 10367,
+    "total_tokens": 21409,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 5672
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 11042
+  },
+  "title": {
+    "zh": "DSH 生态洞察 · 2026-W39",
+    "en": "DSH Ecosystem Insights · 2026-W39"
+  },
+  "signals": [
+    {
+      "kind": "growth-anomaly",
+      "severity": "mid",
+      "fact": "本周新增 891，近 3 周均值 288——突增，可能有批量导入/刷库",
+      "factEn": "891 new this week vs 288 weekly average — a spike; possible batch import/farming",
+      "data": {
+        "added": 891,
+        "mean": 288.3333333333333
+      }
+    },
+    {
+      "kind": "owner-cluster",
+      "severity": "mid",
+      "fact": "账号 uckkk 有 1286 个插件、均分仅 56——疑似批量刷库/模板复制",
+      "factEn": "Account uckkk holds 1286 plugins, avg score only 56 — suspected template farming",
+      "data": {
+        "owner": "uckkk",
+        "count": 1286,
+        "scored": 1286,
+        "avg": 56,
+        "noReadme": 0
+      }
+    },
+    {
+      "kind": "dominant-owner",
+      "severity": "low",
+      "fact": "最大账号 uckkk 独占 1286 个插件（占全生态 10%）、均分 56——模板批量号拉高规模数字，解读增长时需剔除水分",
+      "factEn": "Largest account uckkk alone holds 1286 plugins (10% of the ecosystem), avg score 56 — template batch account inflates scale numbers",
+      "data": {
+        "owner": "uckkk",
+        "count": 1286,
+        "avg": 56
+      }
+    },
+    {
+      "kind": "npm-stale",
+      "severity": "low",
+      "fact": "10 个插件仓库版本领先 npm 发布版本——安装侧拿到的是旧版",
+      "factEn": "10 plugins have repo versions ahead of npm — installs get outdated builds",
+      "data": {
+        "count": 10
+      }
+    },
+    {
+      "kind": "breaking-release",
+      "severity": "high",
+      "fact": "dsh 官方本周发布 4 个版本，其中 3 个含 breaking 变更（dsh-v0.1.7-rc.2, dsh-v0.1.7-rc.1, dsh-v0.1.7-alpha.1）——插件作者需评估适配",
+      "factEn": "dsh shipped 4 releases this week, 3 with breaking changes (dsh-v0.1.7-rc.2, dsh-v0.1.7-rc.1, dsh-v0.1.7-alpha.1) — plugin authors must adapt",
+      "data": {
+        "releases": [
+          "dsh-v0.1.7-rc.2",
+          "dsh-v0.1.7-rc.1",
+          "dsh-v0.1.7-alpha.2",
+          "dsh-v0.1.7-alpha.1"
+        ]
+      }
+    }
+  ]
+}

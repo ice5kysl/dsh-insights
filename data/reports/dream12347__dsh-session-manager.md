@@ -1,22 +1,23 @@
 # 致 dsh-session-manager 的作者：一期一会 · 观测分享
 
-> dream12347/dsh-session-manager · 第 1 期（数据快照 2026-09-21）
+> dream12347/dsh-session-manager · 第 1 期（数据快照 2026-09-28）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-session-manager 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（86/100）** · 在「侧栏 / 工作区」类 714 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（81/100）** · 在「侧栏 / 工作区」类 791 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
-- ★65 · DSH 会话管理插件：删除（回收站恢复/彻底清除）、统计、继续/暂停、打开日志目录、对话顶部抽屉、工作区分组与排序、上下文压缩阈值设置。DSH session manager: delete with trash/restore/purge, stats, continue/pause, log folder, hea
-- npm：`dsh-session-manager@0.5.1`（12 个版本）
-- 周下载：**1988**
+- ★68 · DSH 会话管理插件：删除（回收站恢复/彻底清除）、统计、继续/暂停、打开日志目录、对话顶部抽屉、工作区分组与排序、上下文压缩阈值设置。DSH session manager: delete with trash/restore/purge, stats, continue/pause, log folder, hea
+- npm：`dsh-session-manager@0.5.3`（14 个版本）
+- 周下载：**2314**
 - 最近 push 2026-08-27
 
-以下几项检查未发现问题（仅作记录）：client 导出齐备、产物布局规范、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「会话管理：回收/清除、统计、暂停/继续、日志、顶栏抽屉、分组排序、压缩阈值。」。
+以下几项检查未发现问题（仅作记录）：client 导出齐备、产物布局规范、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期；按 README 解读，主要能力是「会话管理：回收/清除、统计、暂停/继续、日志、顶栏抽屉、分组排序、压缩阈值。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
 1. **npm 版本落后于仓库** —— 商店会展示旧版（也可能是包名被抢注，值得核查）。参考做法：把仓库当前版本发到 npm。
 2. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
+3. **超过 30 天没有提交** —— 会被观望中的用户解读为维护停滞。参考做法：如果仍在维护，一次实质提交即可解除该信号。
 
 **能力标签**：trash、restore、purge、stats、pause、drawer、group、compact；README 宣称：支持回收站恢复与彻底清除；支持继续/暂停会话；支持上下文压缩阈值设置
 
@@ -26,6 +27,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-21
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-28
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 
