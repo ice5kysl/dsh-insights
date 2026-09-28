@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-28T19:15:13.222Z",
+  "generatedAt": "2026-09-28T20:15:23.246Z",
   "totals": {
-    "authoritative": 12788,
-    "active7": 2449,
+    "authoritative": 12791,
+    "active7": 2451,
     "active7Pct": 19.2,
-    "active30": 6338,
+    "active30": 6341,
     "active30Pct": 49.6,
-    "ageGate1": 12411,
+    "ageGate1": 12414,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9749,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 2952,
+      "2026-09": 2955,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 72
+      "2026-09-28": 75
     },
     "byWeekGrades": {
       "B": {
@@ -94,8 +94,8 @@
         "2026-09-07": 468,
         "2026-03-02": 1,
         "2026-09-14": 420,
-        "2026-09-21": 447,
-        "2026-09-28": 22
+        "2026-09-21": 448,
+        "2026-09-28": 24
       },
       "S": {
         "2026-08-03": 2,
@@ -143,10 +143,10 @@
         "2026-09-07": 259,
         "2026-07-06": 1,
         "2026-09-14": 234,
-        "2026-09-21": 214,
+        "2026-09-21": 213,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 46
+        "2026-09-28": 47
       },
       "D": {
         "2026-08-10": 333,
@@ -164,21 +164,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 5690,
-      "unpublished": 7098,
+      "published": 5691,
+      "unpublished": 7100,
       "stale": 3066
     },
     "docs": {
-      "readme": 12757,
+      "readme": 12760,
       "zhFile": 934,
       "zh": 6034,
       "both": 6024,
       "none": 31
     },
     "lib": {
-      "index": 6839,
-      "client": 4497,
-      "both": 3990
+      "index": 6842,
+      "client": 4500,
+      "both": 3993
     },
     "publishPct": 44.5,
     "zhPct": 47.1
@@ -372,15 +372,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12421
+      "count": 12424
     },
     {
       "topic": "deepseek-harness",
-      "count": 8400
+      "count": 8402
     },
     {
       "topic": "dsh",
-      "count": 4968
+      "count": 4970
     },
     {
       "topic": "deepseek",
@@ -487,8 +487,8 @@
     "imsai": 293,
     "covered": 1063,
     "coveredPct": 8.3,
-    "none": 11725,
-    "fetchedAt": "2026-09-28T19:14:47.204Z"
+    "none": 11728,
+    "fetchedAt": "2026-09-28T20:14:51.812Z"
   },
   "suggested": [
     {
@@ -1770,7 +1770,7 @@
   "quality": {
     "grades": {
       "A": 549,
-      "B": 6049,
+      "B": 6052,
       "C": 4086,
       "D": 1963,
       "S": 141
@@ -1782,7 +1782,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4598
+      "count": 4599
     },
     {
       "category": "模型 / 代理",
@@ -1790,11 +1790,11 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1139
+      "count": 1140
     },
     {
       "category": "会话管理",
-      "count": 1102
+      "count": 1103
     },
     {
       "category": "状态 / 监控 / 用量",
@@ -20425,6 +20425,27 @@
       "topPlugin": "joyiok/dsh-memory",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
+    },
+    {
+      "owner": "xianshu-virtuous",
+      "plugins": 3,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-27",
+      "firstCreated": "2026-08-15",
+      "delta": 0,
+      "avg": 77,
+      "topPlugin": "xianshu-virtuous/dsh-whale-companion",
+      "topStars": 0,
+      "topCat": "会话管理"
     },
     {
       "owner": "xiaozhiaixue",
@@ -70824,27 +70845,6 @@
       "topCat": "会话管理"
     },
     {
-      "owner": "xianshu-virtuous",
-      "plugins": 3,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 2,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-27",
-      "firstCreated": "2026-08-15",
-      "delta": 0,
-      "avg": 73.7,
-      "topPlugin": "xianshu-virtuous/dsh-whale-companion",
-      "topStars": 0,
-      "topCat": "会话管理"
-    },
-    {
       "owner": "Yiklek",
       "plugins": 3,
       "stars": 0,
@@ -95379,6 +95379,48 @@
       "topPlugin": "MrCashmere/dsh-model-ultra",
       "topStars": 0,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "trentswd",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 88,
+      "topPlugin": "trentswd/dsh-escalation-review",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "MovieMaker93",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "MovieMaker93/dsh-plugin-safe-upgrade",
+      "topStars": 0,
+      "topCat": "会话管理"
     },
     {
       "owner": "SeaOf0",
@@ -155313,10 +155355,31 @@
       "topPlugin": "lrqiisrom/dsh-jev-memory",
       "topStars": 0,
       "topCat": "记忆 / 知识"
+    },
+    {
+      "owner": "BeyondandSharp",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 68,
+      "topPlugin": "BeyondandSharp/dsh-plugin-scaling",
+      "topStars": 0,
+      "topCat": "其它"
     }
   ],
   "authorStats": {
-    "total": 7303,
+    "total": 7306,
     "multi": 1801,
     "top10Share": 4.2
   },
@@ -155325,7 +155388,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17192,
+    "candidates": 17195,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -155405,11 +155468,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 83
+      "2026-09-28": 86
     },
-    "validated": 17449,
-    "candidatesValidated": 16,
-    "authoritative": 12788,
+    "validated": 17452,
+    "candidatesValidated": 19,
+    "authoritative": 12791,
     "invalidUnique": 4661,
     "invalidBuckets": [
       {
@@ -155458,5 +155521,5 @@
       }
     ]
   },
-  "enrichCount": 12788
+  "enrichCount": 12791
 }
