@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-28T03:53:34.745Z",
+  "generatedAt": "2026-09-28T04:15:04.267Z",
   "totals": {
-    "authoritative": 12726,
-    "active7": 2538,
+    "authoritative": 12727,
+    "active7": 2534,
     "active7Pct": 19.9,
     "active30": 6402,
     "active30Pct": 50.3,
-    "ageGate1": 12329,
+    "ageGate1": 12330,
     "ageGate1Pct": 96.9,
     "byMonth": {
       "2026-08": 9749,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 2890,
+      "2026-09": 2891,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 10
+      "2026-09-28": 11
     },
     "byWeekGrades": {
       "B": {
@@ -95,7 +95,7 @@
         "2026-03-02": 1,
         "2026-09-14": 420,
         "2026-09-21": 441,
-        "2026-09-28": 2
+        "2026-09-28": 3
       },
       "S": {
         "2026-08-03": 2,
@@ -143,7 +143,7 @@
         "2026-09-07": 259,
         "2026-07-06": 1,
         "2026-09-14": 234,
-        "2026-09-21": 223,
+        "2026-09-21": 222,
         "2020-09-28": 1,
         "2026-05-04": 1,
         "2026-09-28": 7
@@ -157,30 +157,30 @@
         "2026-07-27": 1,
         "2026-09-07": 19,
         "2026-09-14": 15,
-        "2026-09-21": 2
+        "2026-09-21": 3
       }
     }
   },
   "distribution": {
     "publish": {
       "published": 5672,
-      "unpublished": 7054,
+      "unpublished": 7055,
       "stale": 3060
     },
     "docs": {
-      "readme": 12695,
+      "readme": 12696,
       "zhFile": 932,
-      "zh": 6010,
-      "both": 6000,
+      "zh": 6011,
+      "both": 6001,
       "none": 31
     },
     "lib": {
-      "index": 6812,
+      "index": 6813,
       "client": 4480,
       "both": 3977
     },
     "publishPct": 44.6,
-    "zhPct": 47.1
+    "zhPct": 47.2
   },
   "npmStaleTop": [
     {
@@ -371,15 +371,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12359
+      "count": 12360
     },
     {
       "topic": "deepseek-harness",
-      "count": 8358
+      "count": 8359
     },
     {
       "topic": "dsh",
-      "count": 4937
+      "count": 4938
     },
     {
       "topic": "deepseek",
@@ -387,7 +387,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1313
+      "count": 1314
     },
     {
       "topic": "dsh-plugins",
@@ -395,7 +395,7 @@
     },
     {
       "topic": "plugin",
-      "count": 816
+      "count": 817
     },
     {
       "topic": "typescript",
@@ -486,8 +486,8 @@
     "imsai": 291,
     "covered": 1062,
     "coveredPct": 8.3,
-    "none": 11664,
-    "fetchedAt": "2026-09-28T03:53:12.332Z"
+    "none": 11665,
+    "fetchedAt": "2026-09-28T04:14:41.533Z"
   },
   "suggested": [
     {
@@ -1769,9 +1769,9 @@
   "quality": {
     "grades": {
       "A": 549,
-      "B": 6039,
-      "C": 4046,
-      "D": 1950,
+      "B": 6040,
+      "C": 4045,
+      "D": 1951,
       "S": 142
     },
     "avgScore": 73.8,
@@ -1797,7 +1797,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 892
+      "count": 893
     },
     {
       "category": "侧栏 / 工作区",
@@ -19602,7 +19602,7 @@
       "lastPush": "2026-08-29",
       "firstCreated": "2026-08-20",
       "delta": 0,
-      "avg": 78,
+      "avg": 75.5,
       "topPlugin": "wang-kaopu/dsh-oauth",
       "topStars": 1,
       "topCat": "模型 / 代理"
@@ -46311,6 +46311,27 @@
       "avg": 73.5,
       "topPlugin": "lhenlihai-hub/dsh-voice-input",
       "topStars": 1,
+      "topCat": "其它"
+    },
+    {
+      "owner": "YV3507",
+      "plugins": 2,
+      "stars": 2,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-08-15",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "YV3507/dsh-webui-launcher",
+      "topStars": 2,
       "topCat": "其它"
     },
     {
@@ -107918,27 +107939,6 @@
       "topCat": "其它"
     },
     {
-      "owner": "YV3507",
-      "plugins": 1,
-      "stars": 2,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-08-20",
-      "firstCreated": "2026-08-15",
-      "delta": 0,
-      "avg": 64,
-      "topPlugin": "YV3507/dsh-webui-launcher",
-      "topStars": 2,
-      "topCat": "其它"
-    },
-    {
       "owner": "Qshuai0213",
       "plugins": 1,
       "stars": 2,
@@ -152339,8 +152339,8 @@
       "grades": {
         "A": 0,
         "B": 0,
-        "C": 1,
-        "D": 0
+        "C": 0,
+        "D": 1
       },
       "ab": 0,
       "npm": 0,
@@ -152348,7 +152348,7 @@
       "lastPush": "2026-09-21",
       "firstCreated": "2026-09-21",
       "delta": 0,
-      "avg": 69,
+      "avg": 59,
       "topPlugin": "shenbimicro233/dsh-reasoning-effort-inject",
       "topStars": 0,
       "topCat": "其它"
@@ -154477,7 +154477,7 @@
   ],
   "authorStats": {
     "total": 7263,
-    "multi": 1787,
+    "multi": 1788,
     "top10Share": 3.8
   },
   "coverage": {
@@ -154485,7 +154485,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17123,
+    "candidates": 17125,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -154565,12 +154565,12 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 14
+      "2026-09-28": 16
     },
-    "validated": 17380,
+    "validated": 17382,
     "candidatesValidated": 18,
-    "authoritative": 12726,
-    "invalidUnique": 4654,
+    "authoritative": 12727,
+    "invalidUnique": 4655,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -154578,7 +154578,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1683
+        "count": 1684
       },
       {
         "reason": "no-signal",
@@ -154618,5 +154618,5 @@
       }
     ]
   },
-  "enrichCount": 12726
+  "enrichCount": 12727
 }
