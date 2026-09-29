@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-29T08:28:45.173Z",
+  "generatedAt": "2026-09-29T08:39:37.780Z",
   "totals": {
-    "authoritative": 12829,
-    "active7": 2404,
+    "authoritative": 12832,
+    "active7": 2405,
     "active7Pct": 18.7,
-    "active30": 6334,
+    "active30": 6337,
     "active30Pct": 49.4,
-    "ageGate1": 12456,
+    "ageGate1": 12458,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9749,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 2993,
+      "2026-09": 2996,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 113
+      "2026-09-28": 116
     },
     "byWeekGrades": {
       "B": {
@@ -95,7 +95,7 @@
         "2026-03-02": 1,
         "2026-09-14": 422,
         "2026-09-21": 443,
-        "2026-09-28": 50
+        "2026-09-28": 53
       },
       "S": {
         "2026-08-03": 2,
@@ -164,21 +164,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 5709,
+      "published": 5712,
       "unpublished": 7120,
       "stale": 3096
     },
     "docs": {
-      "readme": 12798,
+      "readme": 12801,
       "zhFile": 936,
       "zh": 6056,
       "both": 6046,
       "none": 31
     },
     "lib": {
-      "index": 6862,
-      "client": 4515,
-      "both": 4006
+      "index": 6864,
+      "client": 4517,
+      "both": 4008
     },
     "publishPct": 44.5,
     "zhPct": 47.1
@@ -372,11 +372,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12462
+      "count": 12465
     },
     {
       "topic": "deepseek-harness",
-      "count": 8426
+      "count": 8428
     },
     {
       "topic": "dsh",
@@ -388,7 +388,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1332
+      "count": 1334
     },
     {
       "topic": "dsh-plugins",
@@ -400,7 +400,7 @@
     },
     {
       "topic": "typescript",
-      "count": 475
+      "count": 477
     },
     {
       "topic": "deepseek-harness-plugin",
@@ -487,8 +487,8 @@
     "imsai": 293,
     "covered": 1063,
     "coveredPct": 8.3,
-    "none": 11766,
-    "fetchedAt": "2026-09-29T08:28:18.494Z"
+    "none": 11769,
+    "fetchedAt": "2026-09-29T08:39:07.550Z"
   },
   "suggested": [
     {
@@ -1778,7 +1778,7 @@
   "quality": {
     "grades": {
       "A": 545,
-      "B": 6069,
+      "B": 6072,
       "C": 4112,
       "D": 1965,
       "S": 138
@@ -1798,7 +1798,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1144
+      "count": 1146
     },
     {
       "category": "会话管理",
@@ -1822,7 +1822,7 @@
     },
     {
       "category": "主题 / 视觉美化",
-      "count": 487
+      "count": 488
     },
     {
       "category": "消息 / 协作集成",
@@ -3320,6 +3320,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "hoyyang",
+      "plugins": 11,
+      "stars": 12,
+      "grades": {
+        "A": 1,
+        "B": 5,
+        "C": 5,
+        "D": 0
+      },
+      "ab": 6,
+      "npm": 6,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-08-20",
+      "delta": 0,
+      "avg": 78.3,
+      "topPlugin": "hoyyang/dsh-mall",
+      "topStars": 9,
+      "topCat": "消息 / 协作集成"
+    },
+    {
       "owner": "Wanbinyu",
       "plugins": 6,
       "stars": 9,
@@ -3928,27 +3949,6 @@
       "topPlugin": "lemoncat7/dsh-knowledge",
       "topStars": 12,
       "topCat": "其它"
-    },
-    {
-      "owner": "hoyyang",
-      "plugins": 10,
-      "stars": 12,
-      "grades": {
-        "A": 1,
-        "B": 4,
-        "C": 5,
-        "D": 0
-      },
-      "ab": 5,
-      "npm": 5,
-      "covered": 0,
-      "lastPush": "2026-09-24",
-      "firstCreated": "2026-08-20",
-      "delta": 0,
-      "avg": 77.9,
-      "topPlugin": "hoyyang/dsh-mall",
-      "topStars": 9,
-      "topCat": "消息 / 协作集成"
     },
     {
       "owner": "maxmilian",
@@ -18708,6 +18708,27 @@
       "topPlugin": "btsd321/dsh-remote-explorer",
       "topStars": 2,
       "topCat": "开发 / 数据"
+    },
+    {
+      "owner": "railgun52",
+      "plugins": 2,
+      "stars": 2,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 2,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-09-29",
+      "delta": 0,
+      "avg": 79,
+      "topPlugin": "railgun52/dsh-mcp-servers",
+      "topStars": 1,
+      "topCat": "文件浏览 / 预览"
     },
     {
       "owner": "yueyexiayu",
@@ -102352,7 +102373,7 @@
       "lastPush": "2026-09-28",
       "firstCreated": "2026-08-16",
       "delta": 0,
-      "avg": 68,
+      "avg": 70.5,
       "topPlugin": "flyhigao/dsh-sticky-notes",
       "topStars": 2,
       "topCat": "文件浏览 / 预览"
@@ -155951,8 +155972,8 @@
     }
   ],
   "authorStats": {
-    "total": 7333,
-    "multi": 1807,
+    "total": 7334,
+    "multi": 1808,
     "top10Share": 4.1
   },
   "coverage": {
@@ -155960,7 +155981,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17244,
+    "candidates": 17247,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -156040,11 +156061,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 135
+      "2026-09-28": 138
     },
-    "validated": 17500,
-    "candidatesValidated": 16,
-    "authoritative": 12829,
+    "validated": 17503,
+    "candidatesValidated": 19,
+    "authoritative": 12832,
     "invalidUnique": 4671,
     "invalidBuckets": [
       {
@@ -156093,5 +156114,5 @@
       }
     ]
   },
-  "enrichCount": 12829
+  "enrichCount": 12832
 }
