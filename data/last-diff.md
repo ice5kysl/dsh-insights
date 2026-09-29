@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-29
 
-- 当前权威插件：**12808**（上次 12807）
+- 当前权威插件：**12809**（上次 12808）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- wenhongquan/dsh-open-file-viewer ★0 
+- Utmotc/dsh-balance-card ★0 (npm ✓)
 
 ## 消失（Top 0）
 
