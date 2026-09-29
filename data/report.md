@@ -4,7 +4,7 @@
 
 ## 总览
 - 权威集规模：**12873**
-- 近 7 天活跃：2363（18.4%）· 近 30 天：6328（49.2%）
+- 近 7 天活跃：2363（18.4%）· 近 30 天：6325（49.1%）
 - 仓库年龄 ≥ 1 天（可过收录门禁）：12496（97.1%）
 
 ## 发布与文档
@@ -18,7 +18,6 @@
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A · 周下载 336
 - hrhgit/dsh-model-manager A · 周下载 118
-- belowthetree/dsh-mcp-setting A · 周下载 146
 - spacexun2/dsh-worktime-board A · 周下载 106
 - Ultronen/dsh-liquid-glass A · 周下载 170
 - MayBeTheWorld/dsh-inherit A · 周下载 37
@@ -31,6 +30,7 @@
 - stormbuf/dsh-tavily-pool A · 周下载 495
 - webkubor/dsh-env-inspector A · 周下载 878
 - saya-ch/dsh-mobile A · 周下载 3096
+- cocofhu/anime-find A · 周下载 199
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：167342
@@ -46,7 +46,7 @@
 
 ## 质量评分（启发式）
 - 平均分 73.8 · S+A 占比 5.3%（值得优先看；A+B 51.5%）
-- S 136 · A 545 · B 6084 · C 4138 · D 1970
+- S 136 · A 544 · B 6083 · C 4140 · D 1970
 
 ## 功能分类（启发式 Top 12）
 - 其它：4619
