@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-29T02:22:15.279Z",
+  "generatedAt": "2026-09-29T02:46:07.514Z",
   "totals": {
-    "authoritative": 12799,
-    "active7": 2444,
+    "authoritative": 12800,
+    "active7": 2439,
     "active7Pct": 19.1,
-    "active30": 6332,
+    "active30": 6333,
     "active30Pct": 49.5,
-    "ageGate1": 12424,
+    "ageGate1": 12425,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9749,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 2963,
+      "2026-09": 2964,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 83
+      "2026-09-28": 84
     },
     "byWeekGrades": {
       "B": {
@@ -95,7 +95,7 @@
         "2026-03-02": 1,
         "2026-09-14": 422,
         "2026-09-21": 447,
-        "2026-09-28": 35
+        "2026-09-28": 36
       },
       "S": {
         "2026-08-03": 2,
@@ -165,18 +165,18 @@
   "distribution": {
     "publish": {
       "published": 5703,
-      "unpublished": 7096,
+      "unpublished": 7097,
       "stale": 3094
     },
     "docs": {
-      "readme": 12768,
+      "readme": 12769,
       "zhFile": 935,
-      "zh": 6039,
-      "both": 6029,
+      "zh": 6040,
+      "both": 6030,
       "none": 31
     },
     "lib": {
-      "index": 6845,
+      "index": 6846,
       "client": 4503,
       "both": 3996
     },
@@ -372,15 +372,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12432
+      "count": 12433
     },
     {
       "topic": "deepseek-harness",
-      "count": 8407
+      "count": 8408
     },
     {
       "topic": "dsh",
-      "count": 4976
+      "count": 4977
     },
     {
       "topic": "deepseek",
@@ -487,8 +487,8 @@
     "imsai": 293,
     "covered": 1063,
     "coveredPct": 8.3,
-    "none": 11736,
-    "fetchedAt": "2026-09-29T02:21:46.761Z"
+    "none": 11737,
+    "fetchedAt": "2026-09-29T02:45:42.138Z"
   },
   "suggested": [
     {
@@ -1778,7 +1778,7 @@
   "quality": {
     "grades": {
       "A": 547,
-      "B": 6060,
+      "B": 6061,
       "C": 4090,
       "D": 1964,
       "S": 138
@@ -1790,7 +1790,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4600
+      "count": 4601
     },
     {
       "category": "模型 / 代理",
@@ -95428,6 +95428,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "smellgamed3",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 78,
+      "topPlugin": "smellgamed3/dsh-plugin-list-sync",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
       "owner": "SeaOf0",
       "plugins": 2,
       "stars": 639,
@@ -112726,7 +112747,7 @@
       "lastPush": "2026-09-28",
       "firstCreated": "2026-09-23",
       "delta": 0,
-      "avg": 63.5,
+      "avg": 66,
       "topPlugin": "JessenReinhart/dsh-snapcompact",
       "topStars": 1,
       "topCat": "会话管理"
@@ -155489,7 +155510,7 @@
     }
   ],
   "authorStats": {
-    "total": 7311,
+    "total": 7312,
     "multi": 1802,
     "top10Share": 4.1
   },
@@ -155498,7 +155519,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17208,
+    "candidates": 17210,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -155578,12 +155599,12 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 99
+      "2026-09-28": 101
     },
-    "validated": 17465,
-    "candidatesValidated": 16,
-    "authoritative": 12799,
-    "invalidUnique": 4666,
+    "validated": 17467,
+    "candidatesValidated": 18,
+    "authoritative": 12800,
+    "invalidUnique": 4667,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -155591,7 +155612,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1693
+        "count": 1694
       },
       {
         "reason": "no-signal",
@@ -155631,5 +155652,5 @@
       }
     ]
   },
-  "enrichCount": 12799
+  "enrichCount": 12800
 }
