@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-29T19:41:58.599Z",
+  "generatedAt": "2026-09-29T20:14:56.556Z",
   "totals": {
-    "authoritative": 12899,
-    "active7": 2349,
+    "authoritative": 12901,
+    "active7": 2348,
     "active7Pct": 18.2,
-    "active30": 6344,
+    "active30": 6345,
     "active30Pct": 49.2,
     "ageGate1": 12506,
-    "ageGate1Pct": 97,
+    "ageGate1Pct": 96.9,
     "byMonth": {
       "2026-08": 9749,
       "2026-02": 4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 3063,
+      "2026-09": 3065,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 183
+      "2026-09-28": 185
     },
     "byWeekGrades": {
       "B": {
@@ -95,7 +95,7 @@
         "2026-03-02": 1,
         "2026-09-14": 422,
         "2026-09-21": 436,
-        "2026-09-28": 79
+        "2026-09-28": 80
       },
       "S": {
         "2026-08-03": 2,
@@ -146,7 +146,7 @@
         "2026-09-21": 221,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 99
+        "2026-09-28": 100
       },
       "D": {
         "2026-08-10": 333,
@@ -164,20 +164,20 @@
   "distribution": {
     "publish": {
       "published": 5728,
-      "unpublished": 7171,
+      "unpublished": 7173,
       "stale": 3104
     },
     "docs": {
-      "readme": 12868,
+      "readme": 12870,
       "zhFile": 937,
       "zh": 6089,
       "both": 6079,
       "none": 31
     },
     "lib": {
-      "index": 6890,
-      "client": 4535,
-      "both": 4022
+      "index": 6891,
+      "client": 4536,
+      "both": 4023
     },
     "publishPct": 44.4,
     "zhPct": 47.1
@@ -371,15 +371,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12532
+      "count": 12534
     },
     {
       "topic": "deepseek-harness",
-      "count": 8478
+      "count": 8479
     },
     {
       "topic": "dsh",
-      "count": 5023
+      "count": 5024
     },
     {
       "topic": "deepseek",
@@ -486,8 +486,8 @@
     "imsai": 296,
     "covered": 1066,
     "coveredPct": 8.3,
-    "none": 11833,
-    "fetchedAt": "2026-09-29T19:41:28.518Z"
+    "none": 11835,
+    "fetchedAt": "2026-09-29T20:14:22.507Z"
   },
   "suggested": [
     {
@@ -1772,8 +1772,8 @@
   "quality": {
     "grades": {
       "A": 545,
-      "B": 6087,
-      "C": 4160,
+      "B": 6088,
+      "C": 4161,
       "D": 1971,
       "S": 136
     },
@@ -1784,7 +1784,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4626
+      "count": 4627
     },
     {
       "category": "模型 / 代理",
@@ -1800,7 +1800,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 910
+      "count": 911
     },
     {
       "category": "侧栏 / 工作区",
@@ -54650,7 +54650,7 @@
       "lastPush": "2026-09-26",
       "firstCreated": "2026-08-13",
       "delta": 0,
-      "avg": 71.5,
+      "avg": 69,
       "topPlugin": "minatoAI/jina-web-search-dsh-plugin",
       "topStars": 1,
       "topCat": "搜索 / 命令面板"
@@ -95945,6 +95945,27 @@
       "topCat": "记忆 / 知识"
     },
     {
+      "owner": "Hrauroras",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-09-29",
+      "delta": 0,
+      "avg": 75,
+      "topPlugin": "Hrauroras/dsh-plugin-ostan-nanami-san",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
       "owner": "SeaOf0",
       "plugins": 2,
       "stars": 639,
@@ -129923,6 +129944,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "BeyondandSharp",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "BeyondandSharp/dsh-plugin-scaling",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
       "owner": "4869acdsh-a11y",
       "plugins": 2,
       "stars": 0,
@@ -156173,27 +156215,6 @@
       "topCat": "记忆 / 知识"
     },
     {
-      "owner": "BeyondandSharp",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-28",
-      "firstCreated": "2026-09-28",
-      "delta": 0,
-      "avg": 73,
-      "topPlugin": "BeyondandSharp/dsh-plugin-scaling",
-      "topStars": 0,
-      "topCat": "其它"
-    },
-    {
       "owner": "wanetcn",
       "plugins": 1,
       "stars": 0,
@@ -156867,8 +156888,8 @@
     }
   ],
   "authorStats": {
-    "total": 7377,
-    "multi": 1821,
+    "total": 7378,
+    "multi": 1822,
     "top10Share": 4.1
   },
   "coverage": {
@@ -156876,7 +156897,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17330,
+    "candidates": 17332,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -156956,11 +156977,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 221
+      "2026-09-28": 223
     },
-    "validated": 17585,
-    "candidatesValidated": 16,
-    "authoritative": 12899,
+    "validated": 17587,
+    "candidatesValidated": 18,
+    "authoritative": 12901,
     "invalidUnique": 4686,
     "invalidBuckets": [
       {
@@ -157009,5 +157030,5 @@
       }
     ]
   },
-  "enrichCount": 12899
+  "enrichCount": 12901
 }
