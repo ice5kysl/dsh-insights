@@ -1,11 +1,12 @@
 # 快照 Diff · 2026-09-29
 
-- 当前权威插件：**12795**（上次 12793）
-- 新增 2 · 消失 0
+- 当前权威插件：**12798**（上次 12795）
+- 新增 3 · 消失 0
 
-## 新增（Top 2）
-- williamzhangww/dsh-priceflow ★0 (npm ✓)
-- AFunDog/dsh-sidebar-git-graph ★0 
+## 新增（Top 3）
+- Ln1m/dsh-pane-browser ★0 (npm ✓)
+- Ln1m/dsh-pane-viewer ★0 (npm ✓)
+- wanetcn/dsh-advancesearch ★0 
 
 ## 消失（Top 0）
 
