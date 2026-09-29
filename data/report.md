@@ -1,60 +1,60 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 12793 个插件 · 生成于 2026-09-28 · 由 DSH Insights 管线生成
+> 权威集 12795 个插件 · 生成于 2026-09-29 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**12793**
-- 近 7 天活跃：2447（19.1%）· 近 30 天：6340（49.6%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：12418（97.1%）
+- 权威集规模：**12795**
+- 近 7 天活跃：2447（19.1%）· 近 30 天：6335（49.5%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：12422（97.1%）
 
 ## 发布与文档
-- npm 已发布 5693 / 未发布 7100 / 已发布但版本滞后 3068
-- 有 README 12762 · 中英双语/中文 6035 · 中文 README 文件 934 · 无 README 31
-- lib/index.js 6842 · lib/client.js 4500 · 双产物 3993
+- npm 已发布 5700 / 未发布 7095 / 已发布但版本滞后 3091
+- 有 README 12764 · 中英双语/中文 6036 · 中文 README 文件 935 · 无 README 31
+- lib/index.js 6843 · lib/client.js 4501 · 双产物 3994
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 775 · imsai 293 · 至少一个渠道 1063（8.3%） · 未收录 11730
+- awesome-dsh-plugin 775 · imsai 293 · 至少一个渠道 1063（8.3%） · 未收录 11732
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A · 周下载 336
-- hrhgit/dsh-model-manager A · 周下载 123
-- belowthetree/dsh-mcp-setting A · 周下载 144
-- spacexun2/dsh-worktime-board A · 周下载 112
-- Ultronen/dsh-liquid-glass A · 周下载 157
-- MayBeTheWorld/dsh-inherit A · 周下载 42
+- hrhgit/dsh-model-manager A · 周下载 118
+- belowthetree/dsh-mcp-setting A · 周下载 146
+- spacexun2/dsh-worktime-board A · 周下载 106
+- Ultronen/dsh-liquid-glass A · 周下载 170
+- MayBeTheWorld/dsh-inherit A · 周下载 37
 - hotpot-labs/dsh-prompt-history-plugin A · 周下载 113
-- runcat-tommy/dsh-unitverse A · 周下载 80
-- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 143
-- Sxuan-Coder/dsh-user-prompt A · 周下载 46
+- runcat-tommy/dsh-unitverse A · 周下载 101
+- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 172
+- Sxuan-Coder/dsh-user-prompt A · 周下载 43
 - zjuatri/dsh-terminal-plugin A · 周下载 19
-- imtokenxinluo/dsh-contract-check A · 周下载 242
-- stormbuf/dsh-tavily-pool A · 周下载 747
-- webkubor/dsh-env-inspector A · 周下载 658
-- saya-ch/dsh-mobile A · 周下载 3127
+- imtokenxinluo/dsh-contract-check A · 周下载 91
+- stormbuf/dsh-tavily-pool A · 周下载 495
+- webkubor/dsh-env-inspector A · 周下载 878
+- saya-ch/dsh-mobile A · 周下载 3096
 
 ## npm 周下载 Top 10
-- dsh-market/dsh-market：145553
-- ranxianglei/billion-context：136600
-- MichengAI/dsh-codex-ui：135034
-- MichengAI/dsh-archive-manager：125886
-- MichengAI/dsh-agency-agents：105257
-- MichengAI/dsh-im-connect：100758
-- MichengAI/dsh-automation：95150
-- Nicercz007-cloud/schedule：74280
-- MichengAI/dsh-btw：72837
-- MichengAI/dsh-simplify：66390
+- ranxianglei/billion-context：167342
+- dsh-market/dsh-market：140078
+- MichengAI/dsh-codex-ui：125903
+- MichengAI/dsh-archive-manager：118535
+- MichengAI/dsh-agency-agents：96481
+- MichengAI/dsh-im-connect：93042
+- MichengAI/dsh-automation：88253
+- sunyuhuirong/deepseek-account：76375
+- MichengAI/dsh-btw：69531
+- MichengAI/dsh-simplify：62551
 
 ## 质量评分（启发式）
 - 平均分 73.8 · S+A 占比 5.4%（值得优先看；A+B 51.6%）
-- S 141 · A 549 · B 6052 · C 4087 · D 1964
+- S 139 · A 548 · B 6057 · C 4087 · D 1964
 
 ## 功能分类（启发式 Top 12）
-- 其它：4599
+- 其它：4600
 - 模型 / 代理：1256
 - 文件浏览 / 预览：1140
 - 会话管理：1105
 - 状态 / 监控 / 用量：901
-- 侧栏 / 工作区：807
+- 侧栏 / 工作区：808
 - 搜索 / 命令面板：710
 - 工具 / 效率：627
 - 主题 / 视觉美化：486
@@ -75,12 +75,12 @@
 - 2026-06：16
 - 2026-07：30
 - 2026-08：9749
-- 2026-09：2957
+- 2026-09：2959
 
 ## Top topics
-- `dsh-plugin` × 12426
+- `dsh-plugin` × 12428
 - `deepseek-harness` × 8404
-- `dsh` × 4972
+- `dsh` × 4973
 - `deepseek` × 1395
 - `cordis` × 1327
 - `dsh-plugins` × 1282
@@ -94,7 +94,7 @@
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |
 |---|---|---|---|
-| zhu1090093659/dsh-web | 8070 | — | ✅ |
+| zhu1090093659/dsh-web | 8070 | ✅ | ✅ |
 | yjh051108/dsh-routing-suite | 6998 | — | ✅ |
 | dsh-market/dsh-market | 4699 | ✅ | ✅ |
 | liustack/modlens | 4052 | ✅ | ✅ |
@@ -108,16 +108,16 @@
 ## npm 版本滞后榜（仓库新于发布）
 | repo | ★ | 仓库版本 → npm |
 |---|---|---|
-| dsh-market/dsh-market | 4699 | 1.43.0 → 1.66.3 |
+| zhu1090093659/dsh-web | 8070 | 0.1.1 → 0.0.1 |
+| dsh-market/dsh-market | 4699 | 1.43.0 → 1.66.5 |
 | liustack/modlens | 4052 | 3.25.4 → 3.26.5 |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 3268 | 0.2.10 → 0.3.16 |
-| bowenliang123/dsh-context | 1546 | 0.42.0 → 0.58.0 |
-| xmanrui/dsh-im | 1516 | 4.11.0 → 4.29.0 |
+| bowenliang123/dsh-context | 1546 | 0.42.0 → 0.59.2 |
+| xmanrui/dsh-im | 1516 | 4.11.0 → 4.31.0 |
 | shaobeichen/dsh-pocket | 1379 | 2.10.3 → 2.10.6 |
 | GanyuanRan/Aegis | 1288 | 2.9.6 → 0.1.0 |
-| ysr666/dsh-vision-router | 1121 | 2.1.2 → 2.2.5 |
+| ysr666/dsh-vision-router | 1121 | 2.1.2 → 2.2.6 |
 | vshulcz/deja-vu | 1068 | 0.20.5 → 0.21.3 |
-| LiPu-jpg/Openwrite | 763 | 0.2.9 → 0.2.10 |
 
 ## 深检抽样（写面 / 消毒）
 - 抽样 8 个：只读/无写面 1 · 检出写面 7 · 渲染带消毒 5
