@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-29T07:15:20.648Z",
+  "generatedAt": "2026-09-29T07:29:46.954Z",
   "totals": {
-    "authoritative": 12820,
-    "active7": 2415,
+    "authoritative": 12821,
+    "active7": 2406,
     "active7Pct": 18.8,
     "active30": 6335,
     "active30Pct": 49.4,
-    "ageGate1": 12449,
+    "ageGate1": 12450,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9749,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 2984,
+      "2026-09": 2985,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 104
+      "2026-09-28": 105
     },
     "byWeekGrades": {
       "B": {
@@ -94,8 +94,8 @@
         "2026-09-07": 468,
         "2026-03-02": 1,
         "2026-09-14": 422,
-        "2026-09-21": 442,
-        "2026-09-28": 44
+        "2026-09-21": 443,
+        "2026-09-28": 45
       },
       "S": {
         "2026-08-03": 2,
@@ -116,7 +116,7 @@
         "2026-09-07": 47,
         "2026-09-14": 39,
         "2026-07-27": 1,
-        "2026-09-21": 20,
+        "2026-09-21": 19,
         "2026-09-28": 3
       },
       "C": {
@@ -165,11 +165,11 @@
   "distribution": {
     "publish": {
       "published": 5708,
-      "unpublished": 7112,
+      "unpublished": 7113,
       "stale": 3095
     },
     "docs": {
-      "readme": 12789,
+      "readme": 12790,
       "zhFile": 935,
       "zh": 6050,
       "both": 6040,
@@ -372,7 +372,7 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12453
+      "count": 12454
     },
     {
       "topic": "deepseek-harness",
@@ -487,8 +487,8 @@
     "imsai": 293,
     "covered": 1063,
     "coveredPct": 8.3,
-    "none": 11757,
-    "fetchedAt": "2026-09-29T07:14:47.093Z"
+    "none": 11758,
+    "fetchedAt": "2026-09-29T07:29:17.988Z"
   },
   "suggested": [
     {
@@ -1777,15 +1777,15 @@
   },
   "quality": {
     "grades": {
-      "A": 548,
-      "B": 6062,
+      "A": 547,
+      "B": 6064,
       "C": 4108,
       "D": 1964,
       "S": 138
     },
     "avgScore": 73.8,
     "gradePct": 51.6,
-    "gradePctSA": 5.4
+    "gradePctSA": 5.3
   },
   "categories": [
     {
@@ -1798,7 +1798,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1142
+      "count": 1143
     },
     {
       "category": "会话管理",
@@ -91946,8 +91946,8 @@
       "plugins": 1,
       "stars": 0,
       "grades": {
-        "A": 1,
-        "B": 0,
+        "A": 0,
+        "B": 1,
         "C": 0,
         "D": 0
       },
@@ -91957,7 +91957,7 @@
       "lastPush": "2026-09-22",
       "firstCreated": "2026-09-22",
       "delta": 0,
-      "avg": 91,
+      "avg": 81,
       "topPlugin": "chiikin/dsh-glm-quota",
       "topStars": 0,
       "topCat": "其它"
@@ -95130,6 +95130,27 @@
       "delta": 0,
       "avg": 76,
       "topPlugin": "Napstablooky233/dsh-agent-dispatch",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "feihong-li",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 79,
+      "topPlugin": "feihong-li/dsh-abaqus",
       "topStars": 0,
       "topCat": "模型 / 代理"
     },
@@ -126670,7 +126691,7 @@
       "lastPush": "2026-08-30",
       "firstCreated": "2026-08-16",
       "delta": 0,
-      "avg": 68.7,
+      "avg": 67,
       "topPlugin": "MicroWearld/dsh-quick-restart-desktop",
       "topStars": 0,
       "topCat": "其它"
@@ -155215,27 +155236,6 @@
       "topCat": "文件浏览 / 预览"
     },
     {
-      "owner": "feihong-li",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-28",
-      "firstCreated": "2026-09-28",
-      "delta": 0,
-      "avg": 74,
-      "topPlugin": "feihong-li/dsh-abaqus",
-      "topStars": 0,
-      "topCat": "模型 / 代理"
-    },
-    {
       "owner": "laa1991",
       "plugins": 1,
       "stars": 0,
@@ -155780,10 +155780,31 @@
       "topPlugin": "Ezisup/dsh-stop-kills-jobs",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "YunpengDon",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 62,
+      "topPlugin": "YunpengDon/dsh-knowledge-tree",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
     }
   ],
   "authorStats": {
-    "total": 7325,
+    "total": 7326,
     "multi": 1806,
     "top10Share": 4.1
   },
@@ -155792,7 +155813,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17234,
+    "candidates": 17235,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -155872,11 +155893,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 125
+      "2026-09-28": 126
     },
-    "validated": 17490,
-    "candidatesValidated": 25,
-    "authoritative": 12820,
+    "validated": 17491,
+    "candidatesValidated": 17,
+    "authoritative": 12821,
     "invalidUnique": 4670,
     "invalidBuckets": [
       {
@@ -155925,5 +155946,5 @@
       }
     ]
   },
-  "enrichCount": 12820
+  "enrichCount": 12821
 }
