@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-29T05:56:50.783Z",
+  "generatedAt": "2026-09-29T06:15:22.320Z",
   "totals": {
-    "authoritative": 12811,
-    "active7": 2421,
+    "authoritative": 12813,
+    "active7": 2420,
     "active7Pct": 18.9,
     "active30": 6332,
     "active30Pct": 49.4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 2975,
+      "2026-09": 2977,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 95
+      "2026-09-28": 97
     },
     "byWeekGrades": {
       "B": {
@@ -146,7 +146,7 @@
         "2026-09-21": 216,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 50
+        "2026-09-28": 52
       },
       "D": {
         "2026-08-10": 333,
@@ -165,20 +165,20 @@
   "distribution": {
     "publish": {
       "published": 5706,
-      "unpublished": 7105,
+      "unpublished": 7107,
       "stale": 3095
     },
     "docs": {
-      "readme": 12780,
+      "readme": 12782,
       "zhFile": 935,
-      "zh": 6046,
-      "both": 6036,
+      "zh": 6047,
+      "both": 6037,
       "none": 31
     },
     "lib": {
-      "index": 6852,
-      "client": 4508,
-      "both": 4000
+      "index": 6853,
+      "client": 4509,
+      "both": 4001
     },
     "publishPct": 44.5,
     "zhPct": 47.1
@@ -372,19 +372,19 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12444
+      "count": 12446
     },
     {
       "topic": "deepseek-harness",
-      "count": 8414
+      "count": 8415
     },
     {
       "topic": "dsh",
-      "count": 4981
+      "count": 4982
     },
     {
       "topic": "deepseek",
-      "count": 1396
+      "count": 1397
     },
     {
       "topic": "cordis",
@@ -487,8 +487,8 @@
     "imsai": 293,
     "covered": 1063,
     "coveredPct": 8.3,
-    "none": 11748,
-    "fetchedAt": "2026-09-29T05:56:19.578Z"
+    "none": 11750,
+    "fetchedAt": "2026-09-29T06:14:53.311Z"
   },
   "suggested": [
     {
@@ -1779,7 +1779,7 @@
     "grades": {
       "A": 547,
       "B": 6063,
-      "C": 4099,
+      "C": 4101,
       "D": 1964,
       "S": 138
     },
@@ -1794,7 +1794,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1259
+      "count": 1260
     },
     {
       "category": "文件浏览 / 预览",
@@ -1806,7 +1806,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 902
+      "count": 903
     },
     {
       "category": "侧栏 / 工作区",
@@ -54595,7 +54595,7 @@
       "lastPush": "2026-08-30",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 78.5,
+      "avg": 76,
       "topPlugin": "Winter-And-You-Gone/dsh-deep-verbs",
       "topStars": 1,
       "topCat": "会话管理"
@@ -112264,7 +112264,7 @@
       "lastPush": "2026-08-30",
       "firstCreated": "2026-08-16",
       "delta": 0,
-      "avg": 63,
+      "avg": 60.5,
       "topPlugin": "CsBpRd/dsh-workspace-only-plugin",
       "topStars": 1,
       "topCat": "侧栏 / 工作区"
@@ -126128,6 +126128,27 @@
       "topPlugin": "Soulize/dsh-agent-teams-prompt-assemble",
       "topStars": 1,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "jafewff",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-09-29",
+      "delta": 0,
+      "avg": 66,
+      "topPlugin": "jafewff/dsh-vdesktop",
+      "topStars": 1,
+      "topCat": "状态 / 监控 / 用量"
     },
     {
       "owner": "ChenneyZhuang",
@@ -153508,7 +153529,7 @@
       "lastPush": "2026-09-22",
       "firstCreated": "2026-09-22",
       "delta": 0,
-      "avg": 74,
+      "avg": 64,
       "topPlugin": "exynos967/dsh-request-error-dump",
       "topStars": 0,
       "topCat": "模型 / 代理"
@@ -155654,10 +155675,31 @@
       "topPlugin": "4869acdsh-a11y/dsh-deepseek-web",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "6mt",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-09-29",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "6mt/dsh-plugin-loopback-trust",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
     }
   ],
   "authorStats": {
-    "total": 7319,
+    "total": 7321,
     "multi": 1804,
     "top10Share": 4.2
   },
@@ -155666,7 +155708,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17223,
+    "candidates": 17225,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -155746,11 +155788,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 114
+      "2026-09-28": 116
     },
-    "validated": 17479,
+    "validated": 17481,
     "candidatesValidated": 18,
-    "authoritative": 12811,
+    "authoritative": 12813,
     "invalidUnique": 4668,
     "invalidBuckets": [
       {
@@ -155799,5 +155841,5 @@
       }
     ]
   },
-  "enrichCount": 12811
+  "enrichCount": 12813
 }
