@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-29T04:15:11.443Z",
+  "generatedAt": "2026-09-29T04:27:54.462Z",
   "totals": {
-    "authoritative": 12805,
-    "active7": 2425,
+    "authoritative": 12807,
+    "active7": 2426,
     "active7Pct": 18.9,
-    "active30": 6331,
+    "active30": 6333,
     "active30Pct": 49.4,
-    "ageGate1": 12433,
+    "ageGate1": 12434,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9749,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 2969,
+      "2026-09": 2971,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 89
+      "2026-09-28": 91
     },
     "byWeekGrades": {
       "B": {
@@ -95,7 +95,7 @@
         "2026-03-02": 1,
         "2026-09-14": 422,
         "2026-09-21": 445,
-        "2026-09-28": 38
+        "2026-09-28": 40
       },
       "S": {
         "2026-08-03": 2,
@@ -165,18 +165,18 @@
   "distribution": {
     "publish": {
       "published": 5704,
-      "unpublished": 7101,
+      "unpublished": 7103,
       "stale": 3094
     },
     "docs": {
-      "readme": 12774,
+      "readme": 12776,
       "zhFile": 935,
-      "zh": 6043,
-      "both": 6033,
+      "zh": 6044,
+      "both": 6034,
       "none": 31
     },
     "lib": {
-      "index": 6847,
+      "index": 6849,
       "client": 4505,
       "both": 3997
     },
@@ -372,15 +372,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12438
+      "count": 12440
     },
     {
       "topic": "deepseek-harness",
-      "count": 8410
+      "count": 8411
     },
     {
       "topic": "dsh",
-      "count": 4978
+      "count": 4979
     },
     {
       "topic": "deepseek",
@@ -392,7 +392,7 @@
     },
     {
       "topic": "dsh-plugins",
-      "count": 1282
+      "count": 1283
     },
     {
       "topic": "plugin",
@@ -408,7 +408,7 @@
     },
     {
       "topic": "dsh-plugin-market",
-      "count": 430
+      "count": 431
     },
     {
       "topic": "ai-agent",
@@ -487,8 +487,8 @@
     "imsai": 293,
     "covered": 1063,
     "coveredPct": 8.3,
-    "none": 11742,
-    "fetchedAt": "2026-09-29T04:14:43.578Z"
+    "none": 11744,
+    "fetchedAt": "2026-09-29T04:27:26.146Z"
   },
   "suggested": [
     {
@@ -1778,7 +1778,7 @@
   "quality": {
     "grades": {
       "A": 547,
-      "B": 6060,
+      "B": 6062,
       "C": 4096,
       "D": 1964,
       "S": 138
@@ -1790,11 +1790,11 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4601
+      "count": 4602
     },
     {
       "category": "模型 / 代理",
-      "count": 1258
+      "count": 1259
     },
     {
       "category": "文件浏览 / 预览",
@@ -95428,6 +95428,48 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "Asheblog",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-09-29",
+      "delta": 0,
+      "avg": 75,
+      "topPlugin": "Asheblog/dsh-ollama-cloud",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "tangzijie716",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-29",
+      "firstCreated": "2026-09-29",
+      "delta": 0,
+      "avg": 83,
+      "topPlugin": "tangzijie716/dsh-wechat-push",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
       "owner": "SeaOf0",
       "plugins": 2,
       "stars": 639,
@@ -146389,7 +146431,7 @@
       "lastPush": "2026-08-30",
       "firstCreated": "2026-08-30",
       "delta": 0,
-      "avg": 59,
+      "avg": 54,
       "topPlugin": "AlgoVaultLabs/dsh-algovault",
       "topStars": 0,
       "topCat": "工具 / 效率"
@@ -155062,7 +155104,7 @@
       "lastPush": "2026-09-28",
       "firstCreated": "2026-09-28",
       "delta": 0,
-      "avg": 62,
+      "avg": 67,
       "topPlugin": "d0ublecl1ck/dsh-external-link",
       "topStars": 0,
       "topCat": "消息 / 协作集成"
@@ -155552,7 +155594,7 @@
     }
   ],
   "authorStats": {
-    "total": 7314,
+    "total": 7316,
     "multi": 1803,
     "top10Share": 4.2
   },
@@ -155561,7 +155603,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17216,
+    "candidates": 17219,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -155641,12 +155683,12 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 107
+      "2026-09-28": 110
     },
-    "validated": 17472,
-    "candidatesValidated": 17,
-    "authoritative": 12805,
-    "invalidUnique": 4667,
+    "validated": 17475,
+    "candidatesValidated": 19,
+    "authoritative": 12807,
+    "invalidUnique": 4668,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -155654,7 +155696,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1694
+        "count": 1695
       },
       {
         "reason": "no-signal",
@@ -155694,5 +155736,5 @@
       }
     ]
   },
-  "enrichCount": 12805
+  "enrichCount": 12807
 }
