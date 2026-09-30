@@ -1,23 +1,22 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 13001 个插件 · 生成于 2026-09-30 · 由 DSH Insights 管线生成
+> 权威集 13002 个插件 · 生成于 2026-09-30 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**13001**
-- 近 7 天活跃：2315（17.8%）· 近 30 天：6331（48.7%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：12548（96.5%）
+- 权威集规模：**13002**
+- 近 7 天活跃：2313（17.8%）· 近 30 天：6327（48.7%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：12549（96.5%）
 
 ## 发布与文档
-- npm 已发布 5819 / 未发布 7182 / 已发布但版本滞后 3292
-- 有 README 12969 · 中英双语/中文 6133 · 中文 README 文件 941 · 无 README 32
-- lib/index.js 6920 · lib/client.js 4565 · 双产物 4047
+- npm 已发布 5820 / 未发布 7182 / 已发布但版本滞后 3292
+- 有 README 12970 · 中英双语/中文 6133 · 中文 README 文件 941 · 无 README 32
+- lib/index.js 6921 · lib/client.js 4566 · 双产物 4048
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 775 · imsai 298 · 至少一个渠道 1068（8.2%） · 未收录 11933
+- awesome-dsh-plugin 775 · imsai 298 · 至少一个渠道 1068（8.2%） · 未收录 11934
 
 ## 优质未收录 · 建议收录（Top 15）
 - TsFreddie/dsh-compaction-instant A · 周下载 304
-- hrhgit/dsh-model-manager A · 周下载 111
 - Ultronen/dsh-liquid-glass A · 周下载 186
 - MayBeTheWorld/dsh-inherit A · 周下载 33
 - hotpot-labs/dsh-prompt-history-plugin A · 周下载 111
@@ -31,6 +30,7 @@
 - Nwflower/dsh-chat-import A · 周下载 5017
 - PKUfudawei/dsh-capability-menu A · 周下载 319
 - mexiaosqwq/dsh-web-mobile A · 周下载 1894
+- MichengAI/dsh-codex-ui A · 周下载 102341
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：200805
@@ -46,11 +46,11 @@
 
 ## 质量评分（启发式）
 - 平均分 73.7 · S+A 占比 5%（值得优先看；A+B 51.3%）
-- S 126 · A 523 · B 6149 · C 4225 · D 1978
+- S 126 · A 521 · B 6152 · C 4225 · D 1978
 
 ## 功能分类（启发式 Top 12）
 - 其它：4652
-- 模型 / 代理：1279
+- 模型 / 代理：1280
 - 文件浏览 / 预览：1157
 - 会话管理：1133
 - 状态 / 监控 / 用量：924
@@ -75,12 +75,12 @@
 - 2026-06：16
 - 2026-07：30
 - 2026-08：9749
-- 2026-09：3165
+- 2026-09：3166
 
 ## Top topics
-- `dsh-plugin` × 12634
+- `dsh-plugin` × 12635
 - `deepseek-harness` × 8553
-- `dsh` × 5072
+- `dsh` × 5073
 - `deepseek` × 1424
 - `cordis` × 1375
 - `dsh-plugins` × 1301
