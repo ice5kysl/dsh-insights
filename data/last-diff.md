@@ -1,18 +1,15 @@
 # 快照 Diff · 2026-09-30
 
-- 当前权威插件：**12915**（上次 12906）
-- 新增 9 · 消失 0
+- 当前权威插件：**12921**（上次 12915）
+- 新增 6 · 消失 0
 
-## 新增（Top 9）
-- Justin-Mai/dsh-stock-view ★1 
-- windwhiterain/dsh-subagent-templates ★1 
-- WuShichao/dsh-ipynb-preview ★1 (npm ✓)
-- apherchin/dsh-windows-session-notification ★0 (npm ✓)
-- LilJoeIJOYU/dsh-session-delete ★0 (npm ✓)
-- YanKaFei/Lacan-Knowledge-OS ★0 
-- hoyyang/dsh-project-manager ★0 
-- apherchin/dsh-session-delete ★0 (npm ✓)
-- sj244/dsh-qq-bridge ★0 (npm ✓)
+## 新增（Top 6）
+- sevastopol36/dsh-plugin-scihub ★1 
+- sevastopol36/dsh-plugin-ghproxy ★1 
+- lingyingaojue/dsh-dev-mode ★0 
+- temidayoxyz/deep-opencode ★0 
+- sknagato/dsh-plugin-fc-emulator ★0 
+- SZYTree0312/dsh-bailian-gold ★0 
 
 ## 消失（Top 0）
 
