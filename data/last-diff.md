@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-09-30
 
-- 当前权威插件：**13059**（上次 13058）
+- 当前权威插件：**13060**（上次 13059）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- Erbsen16/dsh-client-ui-dracula ★0 
+- moazzamak/dsh-code-review ★0 
 
 ## 消失（Top 0）
 
