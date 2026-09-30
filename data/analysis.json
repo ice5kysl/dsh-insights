@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-30T19:35:10.546Z",
+  "generatedAt": "2026-09-30T19:37:32.736Z",
   "totals": {
-    "authoritative": 13107,
-    "active7": 2283,
+    "authoritative": 13109,
+    "active7": 2285,
     "active7Pct": 17.4,
-    "active30": 6354,
+    "active30": 6356,
     "active30Pct": 48.5,
     "ageGate1": 12633,
     "ageGate1Pct": 96.4,
@@ -17,7 +17,7 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 3271,
+      "2026-09": 3273,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
@@ -61,7 +61,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 391
+      "2026-09-28": 393
     },
     "byWeekGrades": {
       "B": {
@@ -95,7 +95,7 @@
         "2026-03-02": 1,
         "2026-09-14": 432,
         "2026-09-21": 435,
-        "2026-09-28": 189
+        "2026-09-28": 190
       },
       "S": {
         "2026-08-03": 2,
@@ -147,7 +147,7 @@
         "2026-09-21": 225,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 185
+        "2026-09-28": 186
       },
       "D": {
         "2026-08-10": 333,
@@ -166,20 +166,20 @@
   "distribution": {
     "publish": {
       "published": 5854,
-      "unpublished": 7253,
+      "unpublished": 7255,
       "stale": 3315
     },
     "docs": {
-      "readme": 13074,
+      "readme": 13076,
       "zhFile": 942,
       "zh": 6188,
       "both": 6178,
       "none": 33
     },
     "lib": {
-      "index": 6972,
-      "client": 4608,
-      "both": 4085
+      "index": 6974,
+      "client": 4610,
+      "both": 4087
     },
     "publishPct": 44.7,
     "zhPct": 47.1
@@ -373,15 +373,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12740
+      "count": 12742
     },
     {
       "topic": "deepseek-harness",
-      "count": 8633
+      "count": 8635
     },
     {
       "topic": "dsh",
-      "count": 5135
+      "count": 5137
     },
     {
       "topic": "deepseek",
@@ -488,8 +488,8 @@
     "imsai": 298,
     "covered": 1067,
     "coveredPct": 8.1,
-    "none": 12040,
-    "fetchedAt": "2026-09-30T19:34:28.119Z"
+    "none": 12042,
+    "fetchedAt": "2026-09-30T19:36:51.654Z"
   },
   "suggested": [
     {
@@ -1741,8 +1741,8 @@
   "quality": {
     "grades": {
       "A": 519,
-      "B": 6197,
-      "C": 4283,
+      "B": 6198,
+      "C": 4284,
       "D": 1983,
       "S": 125
     },
@@ -1773,7 +1773,7 @@
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 841
+      "count": 842
     },
     {
       "category": "搜索 / 命令面板",
@@ -1797,7 +1797,7 @@
     },
     {
       "category": "记忆 / 知识",
-      "count": 361
+      "count": 362
     }
   ],
   "authors": [
@@ -97144,6 +97144,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "tenyding",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-30",
+      "firstCreated": "2026-09-30",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "tenyding/dsh-aionui-layout",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
+    },
+    {
       "owner": "SeaOf0",
       "plugins": 2,
       "stars": 639,
@@ -159449,10 +159470,31 @@
       "topPlugin": "siqyka/dsh-ssh-workspace",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
+    },
+    {
+      "owner": "lyjsyyds",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-30",
+      "firstCreated": "2026-09-30",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "lyjsyyds/dsh-novel-studio",
+      "topStars": 0,
+      "topCat": "记忆 / 知识"
     }
   ],
   "authorStats": {
-    "total": 7502,
+    "total": 7504,
     "multi": 1865,
     "top10Share": 4.1
   },
@@ -159461,7 +159503,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17561,
+    "candidates": 17563,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -159541,11 +159583,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 452
+      "2026-09-28": 454
     },
-    "validated": 17816,
-    "candidatesValidated": 16,
-    "authoritative": 13107,
+    "validated": 17818,
+    "candidatesValidated": 18,
+    "authoritative": 13109,
     "invalidUnique": 4709,
     "invalidBuckets": [
       {
@@ -159594,5 +159636,5 @@
       }
     ]
   },
-  "enrichCount": 13107
+  "enrichCount": 13109
 }
