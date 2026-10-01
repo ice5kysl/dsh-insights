@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-01T18:56:15.695Z",
+  "generatedAt": "2026-10-01T19:16:01.188Z",
   "totals": {
-    "authoritative": 13264,
-    "active7": 2033,
+    "authoritative": 13266,
+    "active7": 2034,
     "active7Pct": 15.3,
-    "active30": 6361,
+    "active30": 6363,
     "active30Pct": 48,
     "ageGate1": 12835,
     "ageGate1Pct": 96.8,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 120
+      "2026-10": 122
     },
     "byWeek": {
       "2026-08-10": 3949,
@@ -62,7 +62,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 548
+      "2026-09-28": 550
     },
     "byWeekGrades": {
       "B": {
@@ -147,7 +147,7 @@
         "2026-09-21": 226,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 217
+        "2026-09-28": 219
       },
       "D": {
         "2026-08-10": 333,
@@ -166,20 +166,20 @@
   "distribution": {
     "publish": {
       "published": 5928,
-      "unpublished": 7336,
+      "unpublished": 7338,
       "stale": 3391
     },
     "docs": {
-      "readme": 13229,
+      "readme": 13231,
       "zhFile": 952,
       "zh": 6261,
       "both": 6251,
       "none": 35
     },
     "lib": {
-      "index": 7050,
-      "client": 4670,
-      "both": 4139
+      "index": 7052,
+      "client": 4671,
+      "both": 4140
     },
     "publishPct": 44.7,
     "zhPct": 47.1
@@ -373,15 +373,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12897
+      "count": 12899
     },
     {
       "topic": "deepseek-harness",
-      "count": 8761
+      "count": 8763
     },
     {
       "topic": "dsh",
-      "count": 5219
+      "count": 5221
     },
     {
       "topic": "deepseek",
@@ -488,8 +488,8 @@
     "imsai": 300,
     "covered": 1068,
     "coveredPct": 8.1,
-    "none": 12196,
-    "fetchedAt": "2026-10-01T18:55:35.320Z"
+    "none": 12198,
+    "fetchedAt": "2026-10-01T19:15:18.858Z"
   },
   "suggested": [
     {
@@ -1742,12 +1742,12 @@
     "grades": {
       "A": 512,
       "B": 6300,
-      "C": 4343,
+      "C": 4345,
       "D": 1992,
       "S": 117
     },
     "avgScore": 73.7,
-    "gradePct": 51.4,
+    "gradePct": 51.3,
     "gradePctSA": 4.7
   },
   "categories": [
@@ -1757,7 +1757,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1307
+      "count": 1309
     },
     {
       "category": "文件浏览 / 预览",
@@ -161500,10 +161500,52 @@
       "topPlugin": "Ytibu/dsh-agents-md",
       "topStars": 0,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "ashllll",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-01",
+      "firstCreated": "2026-10-01",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "ashllll/dsh-open-code-review",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "xkjxziochu",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-01",
+      "firstCreated": "2026-10-01",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "xkjxziochu/dsh-input-optimizer",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
     }
   ],
   "authorStats": {
-    "total": 7600,
+    "total": 7602,
     "multi": 1892,
     "top10Share": 4
   },
@@ -161512,7 +161554,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17736,
+    "candidates": 17738,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -161592,11 +161634,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 627
+      "2026-09-28": 629
     },
-    "validated": 17989,
-    "candidatesValidated": 16,
-    "authoritative": 13264,
+    "validated": 17991,
+    "candidatesValidated": 18,
+    "authoritative": 13266,
     "invalidUnique": 4725,
     "invalidBuckets": [
       {
@@ -161645,5 +161687,5 @@
       }
     ]
   },
-  "enrichCount": 13264
+  "enrichCount": 13266
 }
