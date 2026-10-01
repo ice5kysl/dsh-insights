@@ -1,12 +1,12 @@
 # 快照 Diff · 2026-10-01
 
-- 当前权威插件：**13230**（上次 13227）
+- 当前权威插件：**13233**（上次 13230）
 - 新增 3 · 消失 0
 
 ## 新增（Top 3）
-- Hwayn-pixel/dsh-prompt-desk ★1 (npm ✓)
-- mikulo/dsh-translator ★0 
-- spidu-lee/dsh-session-delete ★0 (npm ✓)
+- ya123-4/archify-skill-dsh ★0 
+- ZilongYang/dsh-session-titler ★0 
+- aming1029/dsh-sub2api-usage ★0 
 
 ## 消失（Top 0）
 
