@@ -1,12 +1,12 @@
 # 快照 Diff · 2026-10-01
 
-- 当前权威插件：**13227**（上次 13224）
+- 当前权威插件：**13230**（上次 13227）
 - 新增 3 · 消失 0
 
 ## 新增（Top 3）
-- AndreyTepaykin/dsh-sidebar-pins ★0 (npm ✓)
-- ilyskyo/Word-Hover-dsh ★0 
-- molly-ovo/dsh-workbuddy-oauth ★0 
+- Hwayn-pixel/dsh-prompt-desk ★1 (npm ✓)
+- mikulo/dsh-translator ★0 
+- spidu-lee/dsh-session-delete ★0 (npm ✓)
 
 ## 消失（Top 0）
 
