@@ -1,10 +1,12 @@
 # 快照 Diff · 2026-10-01
 
-- 当前权威插件：**13161**（上次 13160）
-- 新增 1 · 消失 0
+- 当前权威插件：**13164**（上次 13161）
+- 新增 3 · 消失 0
 
-## 新增（Top 1）
-- 9931666/dsh-plugin-crossfire ★1 
+## 新增（Top 3）
+- YIYuNCU/DSH-Reasoning-Effort ★0 (npm ✓)
+- dong2007-png/dsh-imagegen ★0 
+- deadbushxw/dsh-task-ask-notify ★0 
 
 ## 消失（Top 0）
 
