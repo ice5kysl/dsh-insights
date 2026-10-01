@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-01T13:11:03.915Z",
+  "generatedAt": "2026-10-01T13:15:45.967Z",
   "totals": {
-    "authoritative": 13217,
+    "authoritative": 13218,
     "active7": 2095,
-    "active7Pct": 15.9,
-    "active30": 6348,
+    "active7Pct": 15.8,
+    "active30": 6349,
     "active30Pct": 48,
-    "ageGate1": 12774,
+    "ageGate1": 12775,
     "ageGate1Pct": 96.6,
     "byMonth": {
       "2026-08": 9749,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 78
+      "2026-10": 79
     },
     "byWeek": {
       "2026-08-10": 3949,
@@ -62,7 +62,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 501
+      "2026-09-28": 502
     },
     "byWeekGrades": {
       "B": {
@@ -147,7 +147,7 @@
         "2026-09-21": 224,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 206
+        "2026-09-28": 207
       },
       "D": {
         "2026-08-10": 333,
@@ -166,14 +166,14 @@
   "distribution": {
     "publish": {
       "published": 5914,
-      "unpublished": 7303,
+      "unpublished": 7304,
       "stale": 3385
     },
     "docs": {
-      "readme": 13182,
+      "readme": 13183,
       "zhFile": 951,
-      "zh": 6232,
-      "both": 6222,
+      "zh": 6233,
+      "both": 6223,
       "none": 35
     },
     "lib": {
@@ -373,15 +373,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12850
+      "count": 12851
     },
     {
       "topic": "deepseek-harness",
-      "count": 8723
+      "count": 8724
     },
     {
       "topic": "dsh",
-      "count": 5193
+      "count": 5194
     },
     {
       "topic": "deepseek",
@@ -488,8 +488,8 @@
     "imsai": 299,
     "covered": 1067,
     "coveredPct": 8.1,
-    "none": 12150,
-    "fetchedAt": "2026-10-01T13:10:12.510Z"
+    "none": 12151,
+    "fetchedAt": "2026-10-01T13:15:01.381Z"
   },
   "suggested": [
     {
@@ -1745,7 +1745,7 @@
     "grades": {
       "A": 512,
       "B": 6270,
-      "C": 4329,
+      "C": 4330,
       "D": 1989,
       "S": 117
     },
@@ -1780,7 +1780,7 @@
     },
     {
       "category": "搜索 / 命令面板",
-      "count": 728
+      "count": 729
     },
     {
       "category": "工具 / 效率",
@@ -97176,7 +97176,7 @@
       "lastPush": "2026-09-30",
       "firstCreated": "2026-09-30",
       "delta": 0,
-      "avg": 76,
+      "avg": 81,
       "topPlugin": "Zm886/dsh-ruankao-essay",
       "topStars": 0,
       "topCat": "其它"
@@ -160810,10 +160810,31 @@
       "topPlugin": "wsm000/dsh-sandbox-temp-guard",
       "topStars": 0,
       "topCat": "会话管理"
+    },
+    {
+      "owner": "jitang-open",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-01",
+      "firstCreated": "2026-10-01",
+      "delta": 0,
+      "avg": 74,
+      "topPlugin": "jitang-open/dsh-web-search-ocgo",
+      "topStars": 0,
+      "topCat": "搜索 / 命令面板"
     }
   ],
   "authorStats": {
-    "total": 7567,
+    "total": 7568,
     "multi": 1886,
     "top10Share": 4
   },
@@ -160822,7 +160843,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17681,
+    "candidates": 17683,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -160902,12 +160923,12 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 572
+      "2026-09-28": 574
     },
-    "validated": 17935,
-    "candidatesValidated": 16,
-    "authoritative": 13217,
-    "invalidUnique": 4718,
+    "validated": 17937,
+    "candidatesValidated": 18,
+    "authoritative": 13218,
+    "invalidUnique": 4719,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -160931,7 +160952,7 @@
       },
       {
         "reason": "empty-repo",
-        "count": 32
+        "count": 33
       },
       {
         "reason": "package-parse",
@@ -160955,5 +160976,5 @@
       }
     ]
   },
-  "enrichCount": 13217
+  "enrichCount": 13218
 }
