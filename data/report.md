@@ -1,57 +1,57 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 13119 个插件 · 生成于 2026-09-30 · 由 DSH Insights 管线生成
+> 权威集 13120 个插件 · 生成于 2026-10-01 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**13119**
-- 近 7 天活跃：2286（17.4%）· 近 30 天：6362（48.5%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：12642（96.4%）
+- 权威集规模：**13120**
+- 近 7 天活跃：2275（17.3%）· 近 30 天：6361（48.5%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：12646（96.4%）
 
 ## 发布与文档
-- npm 已发布 5861 / 未发布 7258 / 已发布但版本滞后 3318
-- 有 README 13086 · 中英双语/中文 6190 · 中文 README 文件 943 · 无 README 33
+- npm 已发布 5888 / 未发布 7232 / 已发布但版本滞后 3372
+- 有 README 13087 · 中英双语/中文 6190 · 中文 README 文件 943 · 无 README 33
 - lib/index.js 6977 · lib/client.js 4612 · 双产物 4089
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 774 · imsai 298 · 至少一个渠道 1067（8.1%） · 未收录 12052
+- awesome-dsh-plugin 774 · imsai 298 · 至少一个渠道 1067（8.1%） · 未收录 12053
 
 ## 优质未收录 · 建议收录（Top 15）
-- TsFreddie/dsh-compaction-instant A · 周下载 304
-- Ultronen/dsh-liquid-glass A · 周下载 186
-- MayBeTheWorld/dsh-inherit A · 周下载 33
-- hotpot-labs/dsh-prompt-history-plugin A · 周下载 111
-- runcat-tommy/dsh-unitverse A · 周下载 116
-- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 192
-- Sxuan-Coder/dsh-user-prompt A · 周下载 36
-- zjuatri/dsh-terminal-plugin A · 周下载 20
-- saya-ch/dsh-mobile A · 周下载 3083
-- cocofhu/anime-find A · 周下载 202
-- NanmiCoder/dsh-auto-mode A · 周下载 754
-- Nwflower/dsh-chat-import A · 周下载 5017
-- PKUfudawei/dsh-capability-menu A · 周下载 319
-- mexiaosqwq/dsh-web-mobile A · 周下载 1894
-- MichengAI/dsh-codex-ui A · 周下载 102341
+- TsFreddie/dsh-compaction-instant A · 周下载 288
+- Ultronen/dsh-liquid-glass A · 周下载 201
+- MayBeTheWorld/dsh-inherit A · 周下载 31
+- hotpot-labs/dsh-prompt-history-plugin A · 周下载 105
+- runcat-tommy/dsh-unitverse A · 周下载 135
+- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 217
+- Sxuan-Coder/dsh-user-prompt A · 周下载 33
+- zjuatri/dsh-terminal-plugin A · 周下载 16
+- saya-ch/dsh-mobile A · 周下载 3621
+- cocofhu/anime-find A · 周下载 203
+- NanmiCoder/dsh-auto-mode A · 周下载 862
+- Nwflower/dsh-chat-import A · 周下载 4550
+- PKUfudawei/dsh-capability-menu A · 周下载 494
+- mexiaosqwq/dsh-web-mobile A · 周下载 1802
+- MichengAI/dsh-codex-ui A · 周下载 78466
 
 ## npm 周下载 Top 10
-- ranxianglei/billion-context：200805
-- sunyuhuirong/deepseek-account：153227
-- dsh-market/dsh-market：143108
-- MichengAI/dsh-codex-ui：102341
-- MichengAI/dsh-archive-manager：96566
+- ranxianglei/billion-context：251169
+- sunyuhuirong/deepseek-account：211312
+- dsh-market/dsh-market：150103
 - MichengAI/dsh-agency-agents：78757
-- MichengAI/dsh-im-connect：76142
+- MichengAI/dsh-codex-ui：78466
 - MichengAI/dsh-skills-manager：75343
-- MichengAI/dsh-automation：71657
-- MichengAI/dsh-btw：70163
+- MichengAI/dsh-archive-manager：75134
+- MichengAI/dsh-im-connect：58666
+- omdsh-dev/DSH-better-sidebar：58033
+- Nicercz007-cloud/schedule：55555
 
 ## 质量评分（启发式）
-- 平均分 73.7 · S+A 占比 4.9%（值得优先看；A+B 51.2%）
-- S 125 · A 519 · B 6203 · C 4288 · D 1984
+- 平均分 73.7 · S+A 占比 4.9%（值得优先看；A+B 51.3%）
+- S 122 · A 517 · B 6217 · C 4280 · D 1984
 
 ## 功能分类（启发式 Top 12）
 - 其它：4694
 - 模型 / 代理：1288
-- 文件浏览 / 预览：1165
+- 文件浏览 / 预览：1166
 - 会话管理：1143
 - 状态 / 监控 / 用量：932
 - 侧栏 / 工作区：842
@@ -75,11 +75,11 @@
 - 2026-06：16
 - 2026-07：30
 - 2026-08：9749
-- 2026-09：3283
+- 2026-09：3284
 
 ## Top topics
-- `dsh-plugin` × 12752
-- `deepseek-harness` × 8643
+- `dsh-plugin` × 12753
+- `deepseek-harness` × 8644
 - `dsh` × 5143
 - `deepseek` × 1432
 - `cordis` × 1394
@@ -88,7 +88,7 @@
 - `typescript` × 481
 - `deepseek-harness-plugin` × 452
 - `dsh-plugin-market` × 444
-- `ai-agent` × 416
+- `ai-agent` × 417
 - `ai-agents` × 358
 
 ## Star 榜前 10
@@ -109,10 +109,10 @@
 | repo | ★ | 仓库版本 → npm |
 |---|---|---|
 | zhu1090093659/dsh-web | 8070 | 0.1.1 → 0.0.1 |
-| dsh-market/dsh-market | 4699 | 1.43.0 → 1.66.6 |
+| dsh-market/dsh-market | 4699 | 1.43.0 → 1.66.7 |
 | liustack/modlens | 4052 | 3.25.4 → 3.26.5 |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 3268 | 0.2.10 → 0.3.17 |
-| bowenliang123/dsh-context | 1546 | 0.42.0 → 0.60.0 |
+| bowenliang123/dsh-context | 1546 | 0.42.0 → 0.62.2 |
 | xmanrui/dsh-im | 1516 | 4.11.0 → 4.32.0 |
 | shaobeichen/dsh-pocket | 1379 | 2.10.3 → 2.10.6 |
 | GanyuanRan/Aegis | 1288 | 2.9.6 → 0.1.0 |
