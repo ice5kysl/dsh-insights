@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-01T09:18:45.927Z",
+  "generatedAt": "2026-10-01T09:28:21.156Z",
   "totals": {
-    "authoritative": 13186,
-    "active7": 2143,
-    "active7Pct": 16.3,
+    "authoritative": 13187,
+    "active7": 2141,
+    "active7Pct": 16.2,
     "active30": 6352,
     "active30Pct": 48.2,
-    "ageGate1": 12744,
-    "ageGate1Pct": 96.6,
+    "ageGate1": 12746,
+    "ageGate1Pct": 96.7,
     "byMonth": {
       "2026-08": 9749,
       "2026-02": 4,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 54
+      "2026-10": 55
     },
     "byWeek": {
       "2026-08-10": 3949,
@@ -62,11 +62,11 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 470
+      "2026-09-28": 471
     },
     "byWeekGrades": {
       "B": {
-        "2026-08-10": 1883,
+        "2026-08-10": 1882,
         "2026-02-16": 3,
         "2026-07-13": 7,
         "2026-04-27": 2,
@@ -125,7 +125,7 @@
         "2026-03-09": 1,
         "2026-01-05": 1,
         "2026-08-17": 1093,
-        "2026-08-10": 1527,
+        "2026-08-10": 1528,
         "2026-07-13": 4,
         "2026-02-02": 1,
         "2026-08-03": 24,
@@ -147,7 +147,7 @@
         "2026-09-21": 224,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 198
+        "2026-09-28": 199
       },
       "D": {
         "2026-08-10": 333,
@@ -166,20 +166,20 @@
   "distribution": {
     "publish": {
       "published": 5905,
-      "unpublished": 7281,
+      "unpublished": 7282,
       "stale": 3381
     },
     "docs": {
-      "readme": 13151,
+      "readme": 13152,
       "zhFile": 945,
       "zh": 6221,
       "both": 6211,
       "none": 35
     },
     "lib": {
-      "index": 7008,
-      "client": 4636,
-      "both": 4109
+      "index": 7009,
+      "client": 4637,
+      "both": 4110
     },
     "publishPct": 44.8,
     "zhPct": 47.1
@@ -373,11 +373,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 12819
+      "count": 12820
     },
     {
       "topic": "deepseek-harness",
-      "count": 8697
+      "count": 8698
     },
     {
       "topic": "dsh",
@@ -488,8 +488,8 @@
     "imsai": 299,
     "covered": 1067,
     "coveredPct": 8.1,
-    "none": 12119,
-    "fetchedAt": "2026-10-01T09:18:08.447Z"
+    "none": 12120,
+    "fetchedAt": "2026-10-01T09:27:42.631Z"
   },
   "suggested": [
     {
@@ -1744,8 +1744,8 @@
   "quality": {
     "grades": {
       "A": 516,
-      "B": 6248,
-      "C": 4316,
+      "B": 6247,
+      "C": 4318,
       "D": 1987,
       "S": 119
     },
@@ -1788,7 +1788,7 @@
     },
     {
       "category": "主题 / 视觉美化",
-      "count": 501
+      "count": 502
     },
     {
       "category": "消息 / 协作集成",
@@ -41794,27 +41794,6 @@
       "topPlugin": "PangYiMing/dsh-mobile-control",
       "topStars": 3,
       "topCat": "开发 / 数据"
-    },
-    {
-      "owner": "AnakinCao",
-      "plugins": 6,
-      "stars": 3,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 3,
-        "D": 2
-      },
-      "ab": 1,
-      "npm": 2,
-      "covered": 0,
-      "lastPush": "2026-09-01",
-      "firstCreated": "2026-08-16",
-      "delta": 0,
-      "avg": 64.8,
-      "topPlugin": "AnakinCao/dsh-session-allow",
-      "topStars": 1,
-      "topCat": "会话管理"
     },
     {
       "owner": "luxueliu",
@@ -104618,6 +104597,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "AnakinCao",
+      "plugins": 6,
+      "stars": 3,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 4,
+        "D": 2
+      },
+      "ab": 0,
+      "npm": 2,
+      "covered": 0,
+      "lastPush": "2026-09-01",
+      "firstCreated": "2026-08-16",
+      "delta": 0,
+      "avg": 64,
+      "topPlugin": "AnakinCao/dsh-session-allow",
+      "topStars": 1,
+      "topCat": "会话管理"
+    },
+    {
       "owner": "hatter123",
       "plugins": 5,
       "stars": 3,
@@ -160413,10 +160413,31 @@
       "topPlugin": "jacksong-sourse/dsh-world-engine",
       "topStars": 0,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "Lenandy",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-01",
+      "firstCreated": "2026-10-01",
+      "delta": 0,
+      "avg": 73,
+      "topPlugin": "Lenandy/dsh-glass-skin",
+      "topStars": 0,
+      "topCat": "主题 / 视觉美化"
     }
   ],
   "authorStats": {
-    "total": 7548,
+    "total": 7549,
     "multi": 1880,
     "top10Share": 4.1
   },
@@ -160425,7 +160446,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17643,
+    "candidates": 17644,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -160505,11 +160526,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 534
+      "2026-09-28": 535
     },
-    "validated": 17898,
-    "candidatesValidated": 16,
-    "authoritative": 13186,
+    "validated": 17899,
+    "candidatesValidated": 17,
+    "authoritative": 13187,
     "invalidUnique": 4712,
     "invalidBuckets": [
       {
@@ -160558,5 +160579,5 @@
       }
     ]
   },
-  "enrichCount": 13186
+  "enrichCount": 13187
 }
