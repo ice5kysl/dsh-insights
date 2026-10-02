@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-02T14:10:58.105Z",
+  "generatedAt": "2026-10-02T14:15:56.503Z",
   "totals": {
-    "authoritative": 13397,
-    "active7": 1850,
+    "authoritative": 13399,
+    "active7": 1848,
     "active7Pct": 13.8,
-    "active30": 6337,
+    "active30": 6339,
     "active30Pct": 47.3,
-    "ageGate1": 12954,
+    "ageGate1": 12956,
     "ageGate1Pct": 96.7,
     "byMonth": {
       "2026-08": 9749,
@@ -17,12 +17,12 @@
       "2026-01": 3,
       "2026-06": 16,
       "2026-05": 15,
-      "2026-09": 3325,
+      "2026-09": 3326,
       "2021-06": 1,
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 236
+      "2026-10": 237
     },
     "byWeek": {
       "2026-08-10": 3949,
@@ -62,7 +62,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 681
+      "2026-09-28": 683
     },
     "byWeekGrades": {
       "B": {
@@ -96,7 +96,7 @@
         "2026-03-02": 1,
         "2026-09-14": 433,
         "2026-09-21": 419,
-        "2026-09-28": 369
+        "2026-09-28": 370
       },
       "S": {
         "2026-08-03": 2,
@@ -147,7 +147,7 @@
         "2026-09-21": 239,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 276
+        "2026-09-28": 277
       },
       "D": {
         "2026-08-10": 333,
@@ -165,15 +165,15 @@
   },
   "distribution": {
     "publish": {
-      "published": 5981,
-      "unpublished": 7416,
-      "stale": 3441
+      "published": 5982,
+      "unpublished": 7417,
+      "stale": 3442
     },
     "docs": {
-      "readme": 13362,
+      "readme": 13364,
       "zhFile": 957,
-      "zh": 6332,
-      "both": 6322,
+      "zh": 6333,
+      "both": 6323,
       "none": 35
     },
     "lib": {
@@ -373,15 +373,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 13030
+      "count": 13032
     },
     {
       "topic": "deepseek-harness",
-      "count": 8858
+      "count": 8859
     },
     {
       "topic": "dsh",
-      "count": 5281
+      "count": 5282
     },
     {
       "topic": "deepseek",
@@ -389,11 +389,11 @@
     },
     {
       "topic": "cordis",
-      "count": 1438
+      "count": 1439
     },
     {
       "topic": "dsh-plugins",
-      "count": 1324
+      "count": 1325
     },
     {
       "topic": "plugin",
@@ -488,8 +488,8 @@
     "imsai": 301,
     "covered": 1069,
     "coveredPct": 8,
-    "none": 12328,
-    "fetchedAt": "2026-10-02T14:10:05.061Z"
+    "none": 12330,
+    "fetchedAt": "2026-10-02T14:15:06.508Z"
   },
   "suggested": [
     {
@@ -1730,8 +1730,8 @@
   "quality": {
     "grades": {
       "A": 517,
-      "B": 6280,
-      "C": 4488,
+      "B": 6281,
+      "C": 4489,
       "D": 1999,
       "S": 113
     },
@@ -1742,7 +1742,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4774
+      "count": 4775
     },
     {
       "category": "模型 / 代理",
@@ -1758,7 +1758,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 953
+      "count": 954
     },
     {
       "category": "侧栏 / 工作区",
@@ -18842,6 +18842,27 @@
       "topPlugin": "stefanohe/dsh-show-balance",
       "topStars": 1,
       "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "Mzy123l",
+      "plugins": 2,
+      "stars": 2,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 2,
+      "covered": 0,
+      "lastPush": "2026-10-02",
+      "firstCreated": "2026-09-30",
+      "delta": 0,
+      "avg": 79.5,
+      "topPlugin": "Mzy123l/dsh-plugin-remote-access",
+      "topStars": 2,
+      "topCat": "其它"
     },
     {
       "owner": "yueyexiayu",
@@ -97669,27 +97690,6 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
-      "owner": "Mzy123l",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-10-01",
-      "firstCreated": "2026-09-30",
-      "delta": 0,
-      "avg": 82,
-      "topPlugin": "Mzy123l/dsh-remote-access-cidr",
-      "topStars": 0,
-      "topCat": "其它"
-    },
-    {
       "owner": "CH2008445",
       "plugins": 1,
       "stars": 0,
@@ -98314,7 +98314,7 @@
       "lastPush": "2026-10-01",
       "firstCreated": "2026-10-01",
       "delta": 0,
-      "avg": 76,
+      "avg": 81,
       "topPlugin": "molly-ovo/dsh-workbuddy-oauth",
       "topStars": 0,
       "topCat": "其它"
@@ -163208,11 +163208,32 @@
       "topPlugin": "xk150424/dsh-agent-ping",
       "topStars": 0,
       "topCat": "会话管理"
+    },
+    {
+      "owner": "Relvato",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-02",
+      "firstCreated": "2026-10-02",
+      "delta": 0,
+      "avg": 64,
+      "topPlugin": "Relvato/dsh-plugin-relvato",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
     }
   ],
   "authorStats": {
-    "total": 7682,
-    "multi": 1912,
+    "total": 7683,
+    "multi": 1913,
     "top10Share": 2.8
   },
   "coverage": {
@@ -163220,7 +163241,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17890,
+    "candidates": 17892,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -163300,11 +163321,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 781
+      "2026-09-28": 783
     },
-    "validated": 18142,
-    "candidatesValidated": 20,
-    "authoritative": 13397,
+    "validated": 18144,
+    "candidatesValidated": 18,
+    "authoritative": 13399,
     "invalidUnique": 4745,
     "invalidBuckets": [
       {
@@ -163353,5 +163374,5 @@
       }
     ]
   },
-  "enrichCount": 13397
+  "enrichCount": 13399
 }
