@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-02T19:16:33.400Z",
+  "generatedAt": "2026-10-02T19:33:53.568Z",
   "totals": {
-    "authoritative": 13434,
-    "active7": 1789,
+    "authoritative": 13435,
+    "active7": 1788,
     "active7Pct": 13.3,
-    "active30": 6355,
+    "active30": 6356,
     "active30Pct": 47.3,
     "ageGate1": 13003,
     "ageGate1Pct": 96.8,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 267
+      "2026-10": 268
     },
     "byWeek": {
       "2026-08-10": 3949,
@@ -62,7 +62,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 718
+      "2026-09-28": 719
     },
     "byWeekGrades": {
       "B": {
@@ -147,7 +147,7 @@
         "2026-09-21": 242,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 282
+        "2026-09-28": 283
       },
       "D": {
         "2026-08-10": 333,
@@ -166,11 +166,11 @@
   "distribution": {
     "publish": {
       "published": 5991,
-      "unpublished": 7443,
+      "unpublished": 7444,
       "stale": 3446
     },
     "docs": {
-      "readme": 13399,
+      "readme": 13400,
       "zhFile": 961,
       "zh": 6351,
       "both": 6341,
@@ -373,11 +373,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 13067
+      "count": 13068
     },
     {
       "topic": "deepseek-harness",
-      "count": 8890
+      "count": 8891
     },
     {
       "topic": "dsh",
@@ -389,7 +389,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1446
+      "count": 1447
     },
     {
       "topic": "dsh-plugins",
@@ -488,8 +488,8 @@
     "imsai": 302,
     "covered": 1070,
     "coveredPct": 8,
-    "none": 12364,
-    "fetchedAt": "2026-10-02T19:15:48.209Z"
+    "none": 12365,
+    "fetchedAt": "2026-10-02T19:33:09.023Z"
   },
   "suggested": [
     {
@@ -1726,7 +1726,7 @@
     "grades": {
       "A": 518,
       "B": 6304,
-      "C": 4496,
+      "C": 4497,
       "D": 2003,
       "S": 113
     },
@@ -1761,7 +1761,7 @@
     },
     {
       "category": "搜索 / 命令面板",
-      "count": 734
+      "count": 735
     },
     {
       "category": "工具 / 效率",
@@ -163833,10 +163833,31 @@
       "topPlugin": "MentonLiu/dsh-any-icon",
       "topStars": 0,
       "topCat": "主题 / 视觉美化"
+    },
+    {
+      "owner": "Frost-rA9",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-02",
+      "firstCreated": "2026-10-02",
+      "delta": 0,
+      "avg": 66,
+      "topPlugin": "Frost-rA9/dsh-theme-everforest",
+      "topStars": 0,
+      "topCat": "搜索 / 命令面板"
     }
   ],
   "authorStats": {
-    "total": 7712,
+    "total": 7713,
     "multi": 1917,
     "top10Share": 2.8
   },
@@ -163845,7 +163866,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17934,
+    "candidates": 17936,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -163925,12 +163946,12 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 825
+      "2026-09-28": 827
     },
-    "validated": 18186,
-    "candidatesValidated": 16,
-    "authoritative": 13434,
-    "invalidUnique": 4752,
+    "validated": 18188,
+    "candidatesValidated": 18,
+    "authoritative": 13435,
+    "invalidUnique": 4753,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -163938,7 +163959,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1733
+        "count": 1734
       },
       {
         "reason": "no-signal",
@@ -163978,5 +163999,5 @@
       }
     ]
   },
-  "enrichCount": 13434
+  "enrichCount": 13435
 }
