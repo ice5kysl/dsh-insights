@@ -1,12 +1,10 @@
 # 快照 Diff · 2026-10-02
 
-- 当前权威插件：**13420**（上次 13417）
-- 新增 3 · 消失 0
+- 当前权威插件：**13421**（上次 13420）
+- 新增 1 · 消失 0
 
-## 新增（Top 3）
-- xypang33-sketch/dsh-save-chat ★0 
-- YOGEMOW/dsh-archive-manager ★0 (npm ✓)
-- ch1bug/dsh-pty-session ★0 
+## 新增（Top 1）
+- louisyeaaah/dsh-reload ★0 
 
 ## 消失（Top 0）
 
