@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-02T13:01:45.622Z",
+  "generatedAt": "2026-10-02T13:08:28.727Z",
   "totals": {
-    "authoritative": 13383,
-    "active7": 1866,
+    "authoritative": 13385,
+    "active7": 1867,
     "active7Pct": 13.9,
-    "active30": 6328,
+    "active30": 6330,
     "active30Pct": 47.3,
-    "ageGate1": 12946,
+    "ageGate1": 12948,
     "ageGate1Pct": 96.7,
     "byMonth": {
       "2026-08": 9749,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 224
+      "2026-10": 226
     },
     "byWeek": {
       "2026-08-10": 3949,
@@ -62,7 +62,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 667
+      "2026-09-28": 669
     },
     "byWeekGrades": {
       "B": {
@@ -96,7 +96,7 @@
         "2026-03-02": 1,
         "2026-09-14": 433,
         "2026-09-21": 421,
-        "2026-09-28": 362
+        "2026-09-28": 363
       },
       "S": {
         "2026-08-03": 2,
@@ -147,7 +147,7 @@
         "2026-09-21": 237,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 270
+        "2026-09-28": 271
       },
       "D": {
         "2026-08-10": 333,
@@ -166,18 +166,18 @@
   "distribution": {
     "publish": {
       "published": 5979,
-      "unpublished": 7404,
+      "unpublished": 7406,
       "stale": 3441
     },
     "docs": {
-      "readme": 13348,
+      "readme": 13350,
       "zhFile": 956,
       "zh": 6324,
       "both": 6314,
       "none": 35
     },
     "lib": {
-      "index": 7111,
+      "index": 7112,
       "client": 4711,
       "both": 4172
     },
@@ -373,11 +373,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 13016
+      "count": 13018
     },
     {
       "topic": "deepseek-harness",
-      "count": 8846
+      "count": 8848
     },
     {
       "topic": "dsh",
@@ -389,7 +389,7 @@
     },
     {
       "topic": "cordis",
-      "count": 1433
+      "count": 1434
     },
     {
       "topic": "dsh-plugins",
@@ -397,7 +397,7 @@
     },
     {
       "topic": "plugin",
-      "count": 855
+      "count": 856
     },
     {
       "topic": "typescript",
@@ -488,8 +488,8 @@
     "imsai": 301,
     "covered": 1069,
     "coveredPct": 8,
-    "none": 12314,
-    "fetchedAt": "2026-10-02T13:00:59.196Z"
+    "none": 12316,
+    "fetchedAt": "2026-10-02T13:07:35.087Z"
   },
   "suggested": [
     {
@@ -1730,8 +1730,8 @@
   "quality": {
     "grades": {
       "A": 516,
-      "B": 6277,
-      "C": 4478,
+      "B": 6278,
+      "C": 4479,
       "D": 1999,
       "S": 113
     },
@@ -1742,11 +1742,11 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4769
+      "count": 4770
     },
     {
       "category": "模型 / 代理",
-      "count": 1320
+      "count": 1321
     },
     {
       "category": "文件浏览 / 预览",
@@ -98236,6 +98236,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "jitang-open",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-01",
+      "firstCreated": "2026-10-01",
+      "delta": 0,
+      "avg": 79,
+      "topPlugin": "jitang-open/dsh-web-search-ocgo",
+      "topStars": 0,
+      "topCat": "搜索 / 命令面板"
+    },
+    {
       "owner": "LiWenzhuo001",
       "plugins": 1,
       "stars": 0,
@@ -130492,6 +130513,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "johnsonpanq-ctrl",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-02",
+      "firstCreated": "2026-10-02",
+      "delta": 0,
+      "avg": 73,
+      "topPlugin": "johnsonpanq-ctrl/dsh-network-config",
+      "topStars": 1,
+      "topCat": "其它"
+    },
+    {
       "owner": "ChenneyZhuang",
       "plugins": 19,
       "stars": 0,
@@ -161887,27 +161929,6 @@
       "topCat": "会话管理"
     },
     {
-      "owner": "jitang-open",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-01",
-      "firstCreated": "2026-10-01",
-      "delta": 0,
-      "avg": 74,
-      "topPlugin": "jitang-open/dsh-web-search-ocgo",
-      "topStars": 0,
-      "topCat": "搜索 / 命令面板"
-    },
-    {
       "owner": "pomelo-ccc",
       "plugins": 1,
       "stars": 0,
@@ -163019,10 +163040,31 @@
       "topPlugin": "pk14742952-AD/dsh-host-rsi",
       "topStars": 0,
       "topCat": "记忆 / 知识"
+    },
+    {
+      "owner": "Ndsanes",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-02",
+      "firstCreated": "2026-10-02",
+      "delta": 0,
+      "avg": 74,
+      "topPlugin": "Ndsanes/dsh-rules",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
     }
   ],
   "authorStats": {
-    "total": 7673,
+    "total": 7675,
     "multi": 1909,
     "top10Share": 2.8
   },
@@ -163031,7 +163073,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 17871,
+    "candidates": 17873,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -163111,11 +163153,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 762
+      "2026-09-28": 764
     },
-    "validated": 18124,
-    "candidatesValidated": 17,
-    "authoritative": 13383,
+    "validated": 18126,
+    "candidatesValidated": 18,
+    "authoritative": 13385,
     "invalidUnique": 4741,
     "invalidBuckets": [
       {
@@ -163164,5 +163206,5 @@
       }
     ]
   },
-  "enrichCount": 13383
+  "enrichCount": 13385
 }

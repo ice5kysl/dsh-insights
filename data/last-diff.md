@@ -1,10 +1,11 @@
 # 快照 Diff · 2026-10-02
 
-- 当前权威插件：**13383**（上次 13382）
-- 新增 1 · 消失 0
+- 当前权威插件：**13385**（上次 13383）
+- 新增 2 · 消失 0
 
-## 新增（Top 1）
-- louisremi/dsh-docker-adapter ★0 
+## 新增（Top 2）
+- johnsonpanq-ctrl/dsh-network-config ★1 
+- Ndsanes/dsh-rules ★0 
 
 ## 消失（Top 0）
 
