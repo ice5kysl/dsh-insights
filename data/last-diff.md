@@ -1,13 +1,10 @@
 # 快照 Diff · 2026-10-02
 
-- 当前权威插件：**13382**（上次 13378）
-- 新增 4 · 消失 0
+- 当前权威插件：**13383**（上次 13382）
+- 新增 1 · 消失 0
 
-## 新增（Top 4）
-- Hnqhj/dsh-library ★1 (npm ✓)
-- Nocteve/dsh-compound ★0 (npm ✓)
-- pk14742952-AD/dsh-host-rsi ★0 
-- LEEKINBUN-dsh-tools/dsh-shredder ★0 
+## 新增（Top 1）
+- louisremi/dsh-docker-adapter ★0 
 
 ## 消失（Top 0）
 
