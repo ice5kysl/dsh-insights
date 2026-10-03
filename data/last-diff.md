@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-10-03
 
-- 当前权威插件：**13547**（上次 13546）
+- 当前权威插件：**13548**（上次 13547）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- bdydgz114514/dsh-free-media ★0 
+- NoProblUm/dsh-noproject-codexlike ★1 (npm ✓)
 
 ## 消失（Top 0）
 
