@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 13488 个插件 · 生成于 2026-10-03 · 由 DSH Insights 管线生成
+> 权威集 13489 个插件 · 生成于 2026-10-03 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**13488**
-- 近 7 天活跃：1657（12.3%）· 近 30 天：6324（46.9%）
+- 权威集规模：**13489**
+- 近 7 天活跃：1657（12.3%）· 近 30 天：6323（46.9%）
 - 仓库年龄 ≥ 1 天（可过收录门禁）：13072（96.9%）
 
 ## 发布与文档
-- npm 已发布 6097 / 未发布 7391 / 已发布但版本滞后 3682
-- 有 README 13453 · 中英双语/中文 6379 · 中文 README 文件 965 · 无 README 35
+- npm 已发布 6098 / 未发布 7391 / 已发布但版本滞后 3682
+- 有 README 13454 · 中英双语/中文 6380 · 中文 README 文件 965 · 无 README 35
 - lib/index.js 7168 · lib/client.js 4750 · 双产物 4209
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 774 · imsai 305 · 至少一个渠道 1073（8%） · 未收录 12415
+- awesome-dsh-plugin 774 · imsai 305 · 至少一个渠道 1073（8%） · 未收录 12416
 
 ## 优质未收录 · 建议收录（Top 15）
 - Ultronen/dsh-liquid-glass A · 周下载 281
@@ -23,6 +23,7 @@
 - Sxuan-Coder/dsh-user-prompt A · 周下载 27
 - zjuatri/dsh-terminal-plugin A · 周下载 15
 - xiangrikuibaize/dsh-tide-badge A
+- huguangyu666/dsh-plugin-ai-super-search A
 - saya-ch/dsh-mobile A · 周下载 4063
 - cocofhu/anime-find A · 周下载 202
 - NanmiCoder/dsh-auto-mode A · 周下载 991
@@ -30,7 +31,6 @@
 - PKUfudawei/dsh-capability-menu A · 周下载 590
 - mexiaosqwq/dsh-web-mobile A · 周下载 1838
 - MichengAI/dsh-codex-ui A · 周下载 31390
-- MichengAI/dsh-agency-agents A · 周下载 25642
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：306250
@@ -46,7 +46,7 @@
 
 ## 质量评分（启发式）
 - 平均分 73.6 · S+A 占比 4.4%（值得优先看；A+B 51%）
-- S 94 · A 500 · B 6379 · C 4509 · D 2006
+- S 94 · A 501 · B 6379 · C 4509 · D 2006
 
 ## 功能分类（启发式 Top 12）
 - 其它：4802
@@ -55,7 +55,7 @@
 - 文件浏览 / 预览：1192
 - 状态 / 监控 / 用量：958
 - 侧栏 / 工作区：872
-- 搜索 / 命令面板：736
+- 搜索 / 命令面板：737
 - 工具 / 效率：667
 - 主题 / 视觉美化：519
 - 消息 / 协作集成：444
@@ -76,10 +76,10 @@
 - 2026-07：30
 - 2026-08：9749
 - 2026-09：3332
-- 2026-10：320
+- 2026-10：321
 
 ## Top topics
-- `dsh-plugin` × 13121
+- `dsh-plugin` × 13122
 - `deepseek-harness` × 8925
 - `dsh` × 5337
 - `deepseek` × 1471
