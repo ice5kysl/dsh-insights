@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-10-03T06:36:54.835Z",
+  "fetchedAt": "2026-10-03T06:53:18.023Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 242511,
-    "forks": 29082,
+    "stars": 242523,
+    "forks": 29081,
     "pushed_at": "2026-10-03T06:02:48Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.2.1-alpha.1",
+        "name": "v0.2.1-alpha.1",
+        "prerelease": true,
+        "published_at": "2026-10-03T06:42:19Z",
+        "breaking": true,
+        "summary": "新增实验性 Claude Code Mods 兼容层。目前阶段的主要目的是验证 Claude Code Mods API 功能大致为 DeepSeek Harness 插件的一个子集，而非为用户提供实际的完整兼容性。",
+        "added": 5,
+        "fixed": 12
+      },
       {
         "tag": "dsh-v0.2.0-rc.2",
         "name": "v0.2.0-rc.2",
@@ -76,16 +86,6 @@
         "summary": "新增插件管理页，支持插件安装和修改配置，支持实时开启禁用插件。 @LegGasai,",
         "added": 4,
         "fixed": 11
-      },
-      {
-        "tag": "dsh-v0.1.6-alpha.1",
-        "name": "v0.1.6-alpha.1",
-        "prerelease": true,
-        "published_at": "2026-09-15T04:57:57Z",
-        "breaking": true,
-        "summary": "Web 侧边栏新增终端，支持多标签、Shell 选择和刷新后恢复。",
-        "added": 10,
-        "fixed": 18
       }
     ],
     "npm": {
@@ -177,7 +177,7 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39294,
+      "stars": 39293,
       "forks": 4267,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
