@@ -1,14 +1,11 @@
 # 快照 Diff · 2026-10-04
 
-- 当前权威插件：**13664**（上次 13659）
-- 新增 5 · 消失 0
+- 当前权威插件：**13666**（上次 13664）
+- 新增 2 · 消失 0
 
-## 新增（Top 5）
-- mubaid/dsh-linkedin-agent ★0 
-- windrover/dsh-plugin-update-checker ★0 
-- huangxp12/dsh-recent-sessions ★0 
-- AnFRuJ/dsh-lark-plus ★0 (npm ✓)
-- doitian/dsh-provider-aliyun ★0 
+## 新增（Top 2）
+- smj-1680/dsh-plugin-liquid-glass ★0 (npm ✓)
+- gnk478/dsh-client-ui-wallpaper ★0 
 
 ## 消失（Top 0）
 
