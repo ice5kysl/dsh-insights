@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-10-04
 
-- 当前权威插件：**13713**（上次 13712）
+- 当前权威插件：**13714**（上次 13713）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- Tim-ReJet/dsh-plugin-doctor ★0 (npm ✓)
+- lihanhong2002/dsh-minimax-multimodal ★0 
 
 ## 消失（Top 0）
 
