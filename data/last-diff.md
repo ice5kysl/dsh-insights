@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-10-04
 
-- 当前权威插件：**13622**（上次 13621）
+- 当前权威插件：**13623**（上次 13622）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- OMSociety/dsh-xiaoai-bridge ★1 (npm ✓)
+- Stmol/dsh-rub-cost ★1 (npm ✓)
 
 ## 消失（Top 0）
 
