@@ -1,14 +1,14 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 13601 个插件 · 生成于 2026-10-03 · 由 DSH Insights 管线生成
+> 权威集 13601 个插件 · 生成于 2026-10-04 · 由 DSH Insights 管线生成
 
 ## 总览
 - 权威集规模：**13601**
-- 近 7 天活跃：1511（11.1%）· 近 30 天：6332（46.6%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：13168（96.8%）
+- 近 7 天活跃：1501（11%）· 近 30 天：6328（46.5%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：13173（96.9%）
 
 ## 发布与文档
-- npm 已发布 6133 / 未发布 7468 / 已发布但版本滞后 3697
+- npm 已发布 6175 / 未发布 7426 / 已发布但版本滞后 3774
 - 有 README 13566 · 中英双语/中文 6435 · 中文 README 文件 974 · 无 README 35
 - lib/index.js 7222 · lib/client.js 4798 · 双产物 4251
 
@@ -22,8 +22,7 @@
 - Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 288
 - Sxuan-Coder/dsh-user-prompt A · 周下载 27
 - zjuatri/dsh-terminal-plugin A · 周下载 15
-- xiangrikuibaize/dsh-tide-badge A
-- huguangyu666/dsh-plugin-ai-super-search A
+- xiangrikuibaize/dsh-tide-badge A · 周下载 0
 - saya-ch/dsh-mobile A · 周下载 4063
 - cocofhu/anime-find A · 周下载 202
 - NanmiCoder/dsh-auto-mode A · 周下载 991
@@ -31,6 +30,7 @@
 - PKUfudawei/dsh-capability-menu A · 周下载 590
 - mexiaosqwq/dsh-web-mobile A · 周下载 1838
 - MichengAI/dsh-codex-ui A · 周下载 31390
+- MichengAI/dsh-agency-agents A · 周下载 25642
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：306250
@@ -45,8 +45,8 @@
 - MichengAI/dsh-codex-ui：31390
 
 ## 质量评分（启发式）
-- 平均分 73.6 · S+A 占比 4.3%（值得优先看；A+B 50.9%）
-- S 97 · A 488 · B 6432 · C 4565 · D 2019
+- 平均分 73.6 · S+A 占比 4.2%（值得优先看；A+B 50.9%）
+- S 95 · A 481 · B 6447 · C 4558 · D 2020
 
 ## 功能分类（启发式 Top 12）
 - 其它：4845
@@ -113,11 +113,11 @@
 | dsh-market/dsh-market | 4699 | 1.43.0 → 1.66.8 |
 | liustack/modlens | 4052 | 3.25.4 → 3.26.5 |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 3268 | 0.2.10 → 0.3.18 |
-| bowenliang123/dsh-context | 1546 | 0.42.0 → 0.62.2 |
+| bowenliang123/dsh-context | 1546 | 0.42.0 → 0.62.3 |
 | xmanrui/dsh-im | 1516 | 4.11.0 → 4.34.2 |
 | shaobeichen/dsh-pocket | 1379 | 2.10.3 → 2.10.6 |
 | GanyuanRan/Aegis | 1288 | 2.9.6 → 0.1.0 |
-| ysr666/dsh-vision-router | 1121 | 2.1.2 → 3.0.0 |
+| ysr666/dsh-vision-router | 1121 | 2.1.2 → 3.0.1 |
 | vshulcz/deja-vu | 1068 | 0.20.5 → 0.21.5 |
 
 ## 深检抽样（写面 / 消毒）
