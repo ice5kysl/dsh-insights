@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-04T02:34:10.240Z",
+  "generatedAt": "2026-10-04T02:50:50.341Z",
   "totals": {
-    "authoritative": 13621,
-    "active7": 1507,
-    "active7Pct": 11.1,
+    "authoritative": 13622,
+    "active7": 1503,
+    "active7Pct": 11,
     "active30": 6333,
     "active30Pct": 46.5,
-    "ageGate1": 13187,
+    "ageGate1": 13189,
     "ageGate1Pct": 96.8,
     "byMonth": {
       "2026-08": 9749,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 447
+      "2026-10": 448
     },
     "byWeek": {
       "2026-08-10": 3949,
@@ -62,7 +62,7 @@
       "2026-09-21": 694,
       "2020-09-28": 1,
       "2026-05-04": 1,
-      "2026-09-28": 905
+      "2026-09-28": 906
     },
     "byWeekGrades": {
       "B": {
@@ -75,7 +75,7 @@
         "2026-08-03": 30,
         "2026-03-09": 3,
         "2026-06-22": 4,
-        "2026-08-17": 1433,
+        "2026-08-17": 1434,
         "2026-06-08": 3,
         "2026-06-15": 1,
         "2026-08-24": 720,
@@ -95,8 +95,8 @@
         "2026-09-07": 481,
         "2026-03-02": 1,
         "2026-09-14": 439,
-        "2026-09-21": 393,
-        "2026-09-28": 546
+        "2026-09-21": 391,
+        "2026-09-28": 548
       },
       "S": {
         "2026-08-03": 2,
@@ -110,7 +110,7 @@
       },
       "A": {
         "2026-08-10": 152,
-        "2026-08-17": 110,
+        "2026-08-17": 109,
         "2026-08-24": 55,
         "2026-08-03": 2,
         "2026-08-31": 38,
@@ -144,10 +144,10 @@
         "2026-09-07": 255,
         "2026-07-06": 1,
         "2026-09-14": 227,
-        "2026-09-21": 258,
+        "2026-09-21": 260,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 317
+        "2026-09-28": 316
       },
       "D": {
         "2026-08-10": 334,
@@ -165,21 +165,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 6188,
+      "published": 6189,
       "unpublished": 7433,
       "stale": 3775
     },
     "docs": {
-      "readme": 13585,
+      "readme": 13586,
       "zhFile": 975,
       "zh": 6450,
       "both": 6440,
       "none": 36
     },
     "lib": {
-      "index": 7237,
-      "client": 4813,
-      "both": 4265
+      "index": 7238,
+      "client": 4814,
+      "both": 4266
     },
     "publishPct": 45.4,
     "zhPct": 47.3
@@ -373,7 +373,7 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 13254
+      "count": 13255
     },
     {
       "topic": "deepseek-harness",
@@ -488,8 +488,8 @@
     "imsai": 306,
     "covered": 1074,
     "coveredPct": 7.9,
-    "none": 12547,
-    "fetchedAt": "2026-10-04T02:33:15.123Z"
+    "none": 12548,
+    "fetchedAt": "2026-10-04T02:50:04.672Z"
   },
   "suggested": [
     {
@@ -1742,9 +1742,9 @@
   },
   "quality": {
     "grades": {
-      "A": 481,
-      "B": 6456,
-      "C": 4567,
+      "A": 480,
+      "B": 6457,
+      "C": 4568,
       "D": 2022,
       "S": 95
     },
@@ -1791,7 +1791,7 @@
     },
     {
       "category": "消息 / 协作集成",
-      "count": 448
+      "count": 449
     },
     {
       "category": "开发 / 数据",
@@ -3914,6 +3914,27 @@
       "topCat": "工具 / 效率"
     },
     {
+      "owner": "OMSociety",
+      "plugins": 5,
+      "stars": 11,
+      "grades": {
+        "A": 0,
+        "B": 5,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 5,
+      "npm": 5,
+      "covered": 0,
+      "lastPush": "2026-10-04",
+      "firstCreated": "2026-09-03",
+      "delta": 0,
+      "avg": 84.6,
+      "topPlugin": "OMSociety/dsh-kimi-ppt",
+      "topStars": 7,
+      "topCat": "其它"
+    },
+    {
       "owner": "zmm863-commits",
       "plugins": 6,
       "stars": 10,
@@ -5132,27 +5153,6 @@
       "topPlugin": "Edge-Echo/dsh-mcp-bridge",
       "topStars": 6,
       "topCat": "文件浏览 / 预览"
-    },
-    {
-      "owner": "OMSociety",
-      "plugins": 4,
-      "stars": 10,
-      "grades": {
-        "A": 0,
-        "B": 4,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 4,
-      "npm": 4,
-      "covered": 0,
-      "lastPush": "2026-09-28",
-      "firstCreated": "2026-09-03",
-      "delta": 0,
-      "avg": 83.5,
-      "topPlugin": "OMSociety/dsh-kimi-ppt",
-      "topStars": 7,
-      "topCat": "其它"
     },
     {
       "owner": "truelove-dreamer",
@@ -10330,27 +10330,6 @@
       "topPlugin": "WONGIII/dsh-effort-dial",
       "topStars": 0,
       "topCat": "其它"
-    },
-    {
-      "owner": "hu568",
-      "plugins": 3,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 3,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 3,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-28",
-      "firstCreated": "2026-09-27",
-      "delta": 0,
-      "avg": 76.7,
-      "topPlugin": "hu568/dsh-plugin-persona-memory",
-      "topStars": 0,
-      "topCat": "记忆 / 知识"
     },
     {
       "owner": "haotian-lu-prog",
@@ -61916,8 +61895,8 @@
       "plugins": 1,
       "stars": 1,
       "grades": {
-        "A": 1,
-        "B": 0,
+        "A": 0,
+        "B": 1,
         "C": 0,
         "D": 0
       },
@@ -61927,7 +61906,7 @@
       "lastPush": "2026-09-04",
       "firstCreated": "2026-08-18",
       "delta": 0,
-      "avg": 93,
+      "avg": 88,
       "topPlugin": "Weilv-D/wallpaper-engine-dsh",
       "topStars": 1,
       "topCat": "文件浏览 / 预览"
@@ -72184,6 +72163,27 @@
       "topPlugin": "liuyun847/dsh-host-restart",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "hu568",
+      "plugins": 3,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-27",
+      "delta": 0,
+      "avg": 70,
+      "topPlugin": "hu568/dsh-plugin-persona-memory",
+      "topStars": 0,
+      "topCat": "记忆 / 知识"
     },
     {
       "owner": "shinelon",
@@ -99954,6 +99954,27 @@
       "topPlugin": "Cyrene-xl/dsh-cyrene-chat",
       "topStars": 0,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "rocketstar666",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-03",
+      "firstCreated": "2026-10-03",
+      "delta": 0,
+      "avg": 78,
+      "topPlugin": "rocketstar666/dsh-approval-comment",
+      "topStars": 0,
+      "topCat": "其它"
     },
     {
       "owner": "EarthPretender",
@@ -165203,27 +165224,6 @@
       "topCat": "其它"
     },
     {
-      "owner": "rocketstar666",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-03",
-      "firstCreated": "2026-10-03",
-      "delta": 0,
-      "avg": 73,
-      "topPlugin": "rocketstar666/dsh-approval-comment",
-      "topStars": 0,
-      "topCat": "其它"
-    },
-    {
       "owner": "artorias-zj",
       "plugins": 1,
       "stars": 0,
@@ -166158,7 +166158,7 @@
       "count": 16392,
       "at": "2026-09-28T00:08:46.006Z"
     },
-    "candidates": 18154,
+    "candidates": 18155,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -166238,11 +166238,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 506,
-      "2026-09-28": 1045
+      "2026-09-28": 1046
     },
-    "validated": 18403,
-    "candidatesValidated": 36,
-    "authoritative": 13621,
+    "validated": 18404,
+    "candidatesValidated": 17,
+    "authoritative": 13622,
     "invalidUnique": 4782,
     "invalidBuckets": [
       {
@@ -166291,5 +166291,5 @@
       }
     ]
   },
-  "enrichCount": 13621
+  "enrichCount": 13622
 }
