@@ -1,13 +1,14 @@
 # 快照 Diff · 2026-10-05
 
-- 当前权威插件：**13969**（上次 13965）
-- 新增 4 · 消失 0
+- 当前权威插件：**13974**（上次 13969）
+- 新增 5 · 消失 0
 
-## 新增（Top 4）
-- Femad-6/deepseek-moonpet ★1 
-- artorias-zj/dsh-opencode-free-model ★0 
-- VibeDev-Si/dsh-ecosystem ★0 
-- MingShi350/kiwix-wiki ★0 
+## 新增（Top 5）
+- Ukashi0/dsh-memory-guardian ★0 (npm ✓)
+- Missher12/Missher-DSH-Computer-Browser ★0 
+- luzonghao/dsh-input-light ★0 
+- m-rui001/dsh-mate-companion ★0 (npm ✓)
+- 439436269-ctrl/dsh-zspace ★0 
 
 ## 消失（Top 0）
 
