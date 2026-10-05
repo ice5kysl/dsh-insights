@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-05T17:58:01.248Z",
+  "generatedAt": "2026-10-05T18:16:04.478Z",
   "totals": {
-    "authoritative": 13997,
-    "active7": 3183,
+    "authoritative": 14000,
+    "active7": 3181,
     "active7Pct": 22.7,
-    "active30": 6676,
+    "active30": 6678,
     "active30Pct": 47.7,
     "ageGate1": 13601,
     "ageGate1Pct": 97.2,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 654,
+      "2026-10": 657,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 73
+      "2026-10-05": 76
     },
     "byWeekGrades": {
       "B": {
@@ -103,7 +103,7 @@
         "2026-09-21": 455,
         "2026-09-28": 668,
         "2025-12-22": 1,
-        "2026-10-05": 30
+        "2026-10-05": 31
       },
       "S": {
         "2026-08-03": 2,
@@ -158,7 +158,7 @@
         "2026-05-04": 1,
         "2026-09-28": 327,
         "2020-06-29": 1,
-        "2026-10-05": 40
+        "2026-10-05": 42
       },
       "D": {
         "2026-08-10": 326,
@@ -178,20 +178,20 @@
   "distribution": {
     "publish": {
       "published": 6333,
-      "unpublished": 7664,
+      "unpublished": 7667,
       "stale": 3845
     },
     "docs": {
-      "readme": 13961,
+      "readme": 13964,
       "zhFile": 1001,
-      "zh": 6629,
-      "both": 6619,
+      "zh": 6631,
+      "both": 6621,
       "none": 36
     },
     "lib": {
-      "index": 7399,
-      "client": 4949,
-      "both": 4382
+      "index": 7401,
+      "client": 4950,
+      "both": 4383
     },
     "publishPct": 45.2,
     "zhPct": 47.3
@@ -385,15 +385,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 13609
+      "count": 13612
     },
     {
       "topic": "deepseek-harness",
-      "count": 9305
+      "count": 9307
     },
     {
       "topic": "dsh",
-      "count": 5645
+      "count": 5646
     },
     {
       "topic": "cordis",
@@ -500,8 +500,8 @@
     "imsai": 309,
     "covered": 1080,
     "coveredPct": 7.7,
-    "none": 12917,
-    "fetchedAt": "2026-10-05T17:57:27.240Z"
+    "none": 12920,
+    "fetchedAt": "2026-10-05T18:15:29.760Z"
   },
   "suggested": [
     {
@@ -1801,8 +1801,8 @@
   "quality": {
     "grades": {
       "A": 508,
-      "B": 6747,
-      "C": 4621,
+      "B": 6748,
+      "C": 4623,
       "D": 2023,
       "S": 98
     },
@@ -1813,7 +1813,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4952
+      "count": 4953
     },
     {
       "category": "模型 / 代理",
@@ -1837,11 +1837,11 @@
     },
     {
       "category": "搜索 / 命令面板",
-      "count": 761
+      "count": 762
     },
     {
       "category": "工具 / 效率",
-      "count": 689
+      "count": 690
     },
     {
       "category": "主题 / 视觉美化",
@@ -78589,6 +78589,27 @@
       "topCat": "侧栏 / 工作区"
     },
     {
+      "owner": "KouzakiUmi",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-05",
+      "firstCreated": "2026-09-30",
+      "delta": 0,
+      "avg": 75.5,
+      "topPlugin": "KouzakiUmi/dsh-subusage",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
+    },
+    {
       "owner": "spidu-lee",
       "plugins": 2,
       "stars": 0,
@@ -100688,27 +100709,6 @@
       "topCat": "主题 / 视觉美化"
     },
     {
-      "owner": "KouzakiUmi",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-10-04",
-      "firstCreated": "2026-09-30",
-      "delta": 0,
-      "avg": 79,
-      "topPlugin": "KouzakiUmi/dsh-subusage",
-      "topStars": 0,
-      "topCat": "状态 / 监控 / 用量"
-    },
-    {
       "owner": "valing1837",
       "plugins": 1,
       "stars": 0,
@@ -104888,6 +104888,27 @@
       "topPlugin": "jamesct/dsh-file-manager",
       "topStars": 0,
       "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "luoshuizhiwei",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-05",
+      "firstCreated": "2026-10-05",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "luoshuizhiwei/dsh-desktop-restart",
+      "topStars": 0,
+      "topCat": "其它"
     },
     {
       "owner": "antibrow",
@@ -157447,7 +157468,7 @@
       "lastPush": "2026-09-05",
       "firstCreated": "2026-08-26",
       "delta": 0,
-      "avg": 71,
+      "avg": 66,
       "topPlugin": "bbboy31/dsh-terminal-tabs",
       "topStars": 0,
       "topCat": "开发 / 数据"
@@ -170870,11 +170891,32 @@
       "topPlugin": "mengjiemy/dsh-dynamic-bg",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "dannndouglas",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-05",
+      "firstCreated": "2026-10-05",
+      "delta": 0,
+      "avg": 73,
+      "topPlugin": "dannndouglas/dsh-antigravity-acp",
+      "topStars": 0,
+      "topCat": "工具 / 效率"
     }
   ],
   "authorStats": {
-    "total": 8044,
-    "multi": 2020,
+    "total": 8046,
+    "multi": 2021,
     "top10Share": 2.7
   },
   "coverage": {
@@ -170882,7 +170924,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 18425,
+    "candidates": 18429,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -170964,16 +171006,16 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 104
+      "2026-10-05": 108
     },
-    "validated": 18930,
+    "validated": 18934,
     "candidatesValidated": 20,
-    "authoritative": 13997,
-    "invalidUnique": 4933,
+    "authoritative": 14000,
+    "invalidUnique": 4934,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 2658
+        "count": 2659
       },
       {
         "reason": "no-package.json",
@@ -171017,5 +171059,5 @@
       }
     ]
   },
-  "enrichCount": 13997
+  "enrichCount": 14000
 }
