@@ -1,14 +1,14 @@
 # 快照 Diff · 2026-10-05
 
-- 当前权威插件：**13987**（上次 13982）
+- 当前权威插件：**13992**（上次 13987）
 - 新增 5 · 消失 0
 
 ## 新增（Top 5）
-- Zian-anson/dsh-prompt-seed ★0 
-- Nwflower/dsh-perf-lens ★0 
-- fufu1437/dsh-model-commands ★0 (npm ✓)
-- Nwflower/dsh-pilot ★0 (npm ✓)
-- hoshino114/dsh-server-box ★0 
+- sdynasty/dsh-ui-progress ★1 (npm ✓)
+- 19north/dsh-shot ★0 
+- miao-ge/dsh-sidebar-context-menu ★0 
+- miao-ge/dsh-project-tabs ★0 
+- tenebris173/dsh-skin-abyssal ★0 
 
 ## 消失（Top 0）
 
