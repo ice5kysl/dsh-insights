@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-10-05
 
-- 当前权威插件：**13955**（上次 13954）
+- 当前权威插件：**13956**（上次 13955）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- JessenReinhart/dsh-poke-todo ★0 
+- Daizhdd/dsh-pet-quota ★0 
 
 ## 消失（Top 0）
 
