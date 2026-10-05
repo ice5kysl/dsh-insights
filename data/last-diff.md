@@ -1,14 +1,17 @@
 # 快照 Diff · 2026-10-05
 
-- 当前权威插件：**13974**（上次 13969）
-- 新增 5 · 消失 0
+- 当前权威插件：**13982**（上次 13974）
+- 新增 8 · 消失 0
 
-## 新增（Top 5）
-- Ukashi0/dsh-memory-guardian ★0 (npm ✓)
-- Missher12/Missher-DSH-Computer-Browser ★0 
-- luzonghao/dsh-input-light ★0 
-- m-rui001/dsh-mate-companion ★0 (npm ✓)
-- 439436269-ctrl/dsh-zspace ★0 
+## 新增（Top 8）
+- luoyukun3-oss/dsh-todo-panel ★0 (npm ✓)
+- yangwenjie1231/dsh-zhuang-fangyi ★0 
+- AprilCrystal/dsh-remote ★0 
+- ahian-lee/dsh-attention-notifier ★0 
+- ara-hwang/dsh-ko-locale ★0 
+- RyabykinIlya/dsh-openrouter-spend ★0 
+- YSwo-fei/dsh-qoder-connect ★0 (npm ✓)
+- 7771sd/dsh-text-guard ★0 
 
 ## 消失（Top 0）
 
