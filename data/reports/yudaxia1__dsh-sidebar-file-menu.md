@@ -1,10 +1,10 @@
 # 致 dsh-sidebar-file-menu 的作者：一期一会 · 观测分享
 
-> yudaxia1/dsh-sidebar-file-menu · 第 1 期（数据快照 2026-09-28）
+> yudaxia1/dsh-sidebar-file-menu · 第 1 期（数据快照 2026-10-05）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-sidebar-file-menu 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：C（61/100）** · 在「侧栏 / 工作区」类 791 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：C（61/100）** · 在「侧栏 / 工作区」类 897 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★0 · 为 DeepSeek Harness Web UI 右侧栏文件树提供 VS Code 风格右键菜单：复制绝对/相对路径与名称、在资源管理器或 Finder 中显示、用默认程序打开。通过 extension 优先级带原地接管内置 files 标签页，不新增 tab，卸载即还原。
 - npm：尚未发布
@@ -24,6 +24,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-28
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-05
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

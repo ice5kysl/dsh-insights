@@ -1,14 +1,14 @@
 # 致 dsh-science-workbench 的作者：一期一会 · 观测分享
 
-> poplarity/dsh-science-workbench · 第 1 期（数据快照 2026-09-28）
+> poplarity/dsh-science-workbench · 第 1 期（数据快照 2026-10-05）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-science-workbench 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（80/100）** · 在「工具 / 效率」类 622 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（80/100）** · 在「工具 / 效率」类 677 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★10 · A reproducible science workbench plugin for the DeepSeek Harness: agent-driven cells, inline figures with feedback/rerun, manifest provenance, and environment s
 - npm：`dsh-science-workbench@0.3.0`（4 个版本）
-- 周下载：**163**
+- 周下载：**375**
 - 最近 push 2026-08-26
 
 以下几项检查未发现问题（仅作记录）：产物布局规范、files 白名单、npm 已发布、npm 版本同步、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期；按 README 解读，主要能力是「可重现科学工作台：agent驱动单元格、内联图反馈重跑、清单溯源、环境快照，含9个生物工具。」。
@@ -27,6 +27,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-28
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-05
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

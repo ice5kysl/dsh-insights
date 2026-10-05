@@ -1,16 +1,16 @@
 # 致 dsh-quota-meter 的作者：一期一会 · 观测分享
 
-> ai-shushu/dsh-quota-meter · 第 1 期（数据快照 2026-09-28）
+> ai-shushu/dsh-quota-meter · 第 1 期（数据快照 2026-10-05）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-quota-meter 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：C（69/100）** · 在「会话管理」类 1074 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：C（64/100）** · 在「会话管理」类 1226 个插件的分布里大致位于前列（同类中位 78）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
-- ★16 · Per-session quota meter for DSH: real-token billing, live progress bar, budget blocking, configurable multi-model pricing. 会话额度监控：真实记账、进度条、额度拦截、价目可配。
+- ★15 · Per-session quota meter for DSH: real-token billing, live progress bar, budget blocking, configurable multi-model pricing. 会话额度监控：真实记账、进度条、额度拦截、价目可配。
 - npm：尚未发布
 - 最近 push 2026-08-29
 
-以下几项检查未发现问题（仅作记录）：files 白名单、npm 版本同步、README 齐备、中文/双语文档、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「会话级额度监控：真实token计费、实时进度条、预算拦截、多模型可配价。」。
+以下几项检查未发现问题（仅作记录）：files 白名单、npm 版本同步、README 齐备、中文/双语文档、dsh-plugin topic、已度过新仓观察期；按 README 解读，主要能力是「会话级额度监控：真实token计费、实时进度条、预算拦截、多模型可配价。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
@@ -18,7 +18,7 @@
 2. **未声明 client 导出** —— GUI 能力无法被 dsh web 加载（TUI/CLI 类插件可忽略）。参考做法：按官方 bundle 规范补 exports["./client"]。
 3. **未声明 LICENSE** —— 没有许可证会让谨慎的用户和企业不敢用。参考做法：加 MIT LICENSE 文件并在 package.json 声明 license。
 
-其余信号：main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
+其余信号：超过 30 天没有提交（会被观望中的用户解读为维护停滞）；main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
 
 **能力标签**：quota、meter、billing、token、budget、progress；README 宣称：real-token billing；live progress bar；budget blocking；configurable multi-model pricing
 
@@ -28,6 +28,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-28
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-05
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

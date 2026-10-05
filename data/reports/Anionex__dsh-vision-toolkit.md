@@ -1,14 +1,14 @@
 # 致 dsh-vision-toolkit 的作者：一期一会 · 观测分享
 
-> Anionex/dsh-vision-toolkit · 第 1 期（数据快照 2026-09-28）
+> Anionex/dsh-vision-toolkit · 第 1 期（数据快照 2026-10-05）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-vision-toolkit 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：A（90/100）** · 在「工具 / 效率」类 622 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：A（90/100）** · 在「工具 / 效率」类 677 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★0 · [dsh]为纯文本模型设计更强大的视觉工具箱：一行安装使用、粘贴图片直接识别、多张图片问答、截图到前端UI 还原等｜DeepSeek Harness-native integration for agent-vision-toolkit: image Q&A, long-screenshot OCR, UI resto
-- npm：`@anionex/dsh-vision-toolkit@0.1.45`（39 个版本）
-- 周下载：**2780**
+- npm：`@anionex/dsh-vision-toolkit@0.1.46`（40 个版本）
+- 周下载：**3697**
 - 最近 push 
 
 以下几项检查未发现问题（仅作记录）：client 导出齐备、产物布局规范、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic；按 README 解读，主要能力是「纯文本模型视觉工具箱：图片问答、长截图OCR、UI还原、像素对比。」。
@@ -26,6 +26,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-28
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-05
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

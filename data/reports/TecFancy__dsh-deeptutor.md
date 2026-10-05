@@ -1,17 +1,17 @@
 # 致 dsh-deeptutor 的作者：一期一会 · 观测分享
 
-> TecFancy/dsh-deeptutor · 第 1 期（数据快照 2026-09-28）
+> TecFancy/dsh-deeptutor · 第 1 期（数据快照 2026-10-05）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-deeptutor 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（83/100）** · 在「搜索 / 命令面板」类 700 个插件的分布里大致位于前列（同类中位 77）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（78/100）** · 在「搜索 / 命令面板」类 747 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
-- ★4 · Learning assistant extension for DeepSeek Harness (dsh): brings DeepTutor tutoring to your agent — deep explanations, self-test questions, learning paths, perso
+- ★5 · Learning assistant extension for DeepSeek Harness (dsh): brings DeepTutor tutoring to your agent — deep explanations, self-test questions, learning paths, perso
 - npm：`dsh-deeptutor@0.1.9`（10 个版本）
-- 周下载：**202**
+- 周下载：**317**
 - 最近 push 2026-08-29
 
-以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、npm 版本同步、README 齐备、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「为dsh接入DeepTutor辅导：深度讲解、自测题、学习路径、个人知识库RAG检索与笔记归档。」。
+以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、npm 版本同步、README 齐备、dsh-plugin topic、已度过新仓观察期；按 README 解读，主要能力是「为dsh接入DeepTutor辅导：深度讲解、自测题、学习路径、个人知识库RAG检索与笔记归档。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
@@ -19,7 +19,7 @@
 2. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
 3. **未声明 LICENSE** —— 没有许可证会让谨慎的用户和企业不敢用。参考做法：加 MIT LICENSE 文件并在 package.json 声明 license。
 
-其余信号：main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
+其余信号：超过 30 天没有提交（会被观望中的用户解读为维护停滞）；main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
 
 **能力标签**：tutor、explain、quiz、paths、rag、notes；README 宣称：Brings DeepTutor tutoring to dsh agents；Supports deep explanations；Provides self-test questions；Creates learning paths
 
@@ -29,6 +29,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-09-28
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-05
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 
