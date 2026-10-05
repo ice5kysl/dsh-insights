@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-05T07:27:49.046Z",
+  "generatedAt": "2026-10-05T07:30:25.522Z",
   "totals": {
-    "authoritative": 13949,
-    "active7": 3279,
+    "authoritative": 13950,
+    "active7": 3280,
     "active7Pct": 23.5,
     "active30": 6698,
     "active30Pct": 48,
     "ageGate1": 13524,
-    "ageGate1Pct": 97,
+    "ageGate1Pct": 96.9,
     "byMonth": {
       "2026-08": 9783,
       "2026-02": 4,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 606,
+      "2026-10": 607,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,11 +67,11 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 25
+      "2026-10-05": 26
     },
     "byWeekGrades": {
       "B": {
-        "2026-08-10": 1911,
+        "2026-08-10": 1910,
         "2026-02-16": 3,
         "2026-07-13": 7,
         "2026-04-27": 2,
@@ -101,9 +101,9 @@
         "2026-03-02": 1,
         "2026-09-14": 463,
         "2026-09-21": 455,
-        "2026-09-28": 658,
+        "2026-09-28": 657,
         "2025-12-22": 1,
-        "2026-10-05": 8
+        "2026-10-05": 9
       },
       "S": {
         "2026-08-03": 2,
@@ -135,7 +135,7 @@
         "2026-01-05": 1,
         "2026-08-17": 1097,
         "2026-07-13": 4,
-        "2026-08-10": 1532,
+        "2026-08-10": 1533,
         "2026-02-02": 1,
         "2026-08-03": 24,
         "2026-03-23": 1,
@@ -156,7 +156,7 @@
         "2026-09-21": 260,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 338,
+        "2026-09-28": 339,
         "2020-06-29": 1,
         "2026-10-05": 16
       },
@@ -176,21 +176,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 6320,
+      "published": 6321,
       "unpublished": 7629,
       "stale": 3839
     },
     "docs": {
-      "readme": 13913,
+      "readme": 13914,
       "zhFile": 998,
-      "zh": 6604,
-      "both": 6594,
+      "zh": 6605,
+      "both": 6595,
       "none": 36
     },
     "lib": {
-      "index": 7372,
-      "client": 4929,
-      "both": 4363
+      "index": 7373,
+      "client": 4930,
+      "both": 4364
     },
     "publishPct": 45.3,
     "zhPct": 47.3
@@ -384,11 +384,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 13561
+      "count": 13562
     },
     {
       "topic": "deepseek-harness",
-      "count": 9268
+      "count": 9269
     },
     {
       "topic": "dsh",
@@ -499,8 +499,8 @@
     "imsai": 309,
     "covered": 1078,
     "coveredPct": 7.7,
-    "none": 12871,
-    "fetchedAt": "2026-10-05T07:27:22.558Z"
+    "none": 12872,
+    "fetchedAt": "2026-10-05T07:29:55.817Z"
   },
   "suggested": [
     {
@@ -1800,13 +1800,13 @@
   "quality": {
     "grades": {
       "A": 510,
-      "B": 6724,
-      "C": 4594,
+      "B": 6723,
+      "C": 4596,
       "D": 2020,
       "S": 101
     },
     "avgScore": 73.8,
-    "gradePct": 51.9,
+    "gradePct": 51.8,
     "gradePctSA": 4.4
   },
   "categories": [
@@ -1832,7 +1832,7 @@
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 914
+      "count": 915
     },
     {
       "category": "搜索 / 命令面板",
@@ -6289,6 +6289,27 @@
       "topCat": "侧栏 / 工作区"
     },
     {
+      "owner": "yfwu2020",
+      "plugins": 4,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 4,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 4,
+      "npm": 4,
+      "covered": 0,
+      "lastPush": "2026-10-05",
+      "firstCreated": "2026-09-23",
+      "delta": 0,
+      "avg": 85.5,
+      "topPlugin": "yfwu2020/dsh-selection-explain",
+      "topStars": 1,
+      "topCat": "其它"
+    },
+    {
       "owner": "Lostforest7",
       "plugins": 4,
       "stars": 1,
@@ -10053,27 +10074,6 @@
       "topPlugin": "Stolyarovmn/dsh-schedule-tab",
       "topStars": 1,
       "topCat": "记忆 / 知识"
-    },
-    {
-      "owner": "yfwu2020",
-      "plugins": 3,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 3,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 3,
-      "npm": 3,
-      "covered": 0,
-      "lastPush": "2026-10-03",
-      "firstCreated": "2026-09-23",
-      "delta": 0,
-      "avg": 85.3,
-      "topPlugin": "yfwu2020/dsh-selection-explain",
-      "topStars": 1,
-      "topCat": "其它"
     },
     {
       "owner": "lovstudio",
@@ -37738,27 +37738,6 @@
       "topPlugin": "117BS/dsh-perlica-ding",
       "topStars": 6,
       "topCat": "主题 / 视觉美化"
-    },
-    {
-      "owner": "13071301808",
-      "plugins": 1,
-      "stars": 6,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 1,
-      "lastPush": "2026-09-05",
-      "firstCreated": "2026-08-15",
-      "delta": 0,
-      "avg": 78,
-      "topPlugin": "13071301808/dsh-composer-expand",
-      "topStars": 6,
-      "topCat": "工具 / 效率"
     },
     {
       "owner": "AbelKeithsun",
@@ -98903,27 +98882,6 @@
       "topCat": "模型 / 代理"
     },
     {
-      "owner": "feihong-li",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-28",
-      "firstCreated": "2026-09-28",
-      "delta": 0,
-      "avg": 79,
-      "topPlugin": "feihong-li/dsh-abaqus",
-      "topStars": 0,
-      "topCat": "模型 / 代理"
-    },
-    {
       "owner": "SanChou0627",
       "plugins": 1,
       "stars": 0,
@@ -108164,6 +108122,27 @@
       "topPlugin": "Kaalia0912/dsh-whale-musume-persona",
       "topStars": 6,
       "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "13071301808",
+      "plugins": 1,
+      "stars": 6,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 1,
+      "covered": 1,
+      "lastPush": "2026-09-05",
+      "firstCreated": "2026-08-15",
+      "delta": 0,
+      "avg": 73,
+      "topPlugin": "13071301808/dsh-composer-expand",
+      "topStars": 6,
+      "topCat": "工具 / 效率"
     },
     {
       "owner": "simon300000",
@@ -167050,6 +167029,27 @@
       "topCat": "文件浏览 / 预览"
     },
     {
+      "owner": "feihong-li",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-28",
+      "firstCreated": "2026-09-28",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "feihong-li/dsh-abaqus",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
+    },
+    {
       "owner": "laa1991",
       "plugins": 1,
       "stars": 0,
@@ -170252,7 +170252,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 18359,
+    "candidates": 18360,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -170334,11 +170334,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 38
+      "2026-10-05": 39
     },
-    "validated": 18864,
-    "candidatesValidated": 18,
-    "authoritative": 13949,
+    "validated": 18865,
+    "candidatesValidated": 17,
+    "authoritative": 13950,
     "invalidUnique": 4915,
     "invalidBuckets": [
       {
@@ -170387,5 +170387,5 @@
       }
     ]
   },
-  "enrichCount": 13949
+  "enrichCount": 13950
 }
