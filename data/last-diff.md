@@ -1,12 +1,13 @@
 # 快照 Diff · 2026-10-06
 
-- 当前权威插件：**14049**（上次 14046）
-- 新增 3 · 消失 0
+- 当前权威插件：**14053**（上次 14049）
+- 新增 4 · 消失 0
 
-## 新增（Top 3）
-- dyf189/dsh-screenshot ★0 
-- CHENKEYI-MAKER/dsh-team-reporter ★0 
-- HuanLinOTO/dsh-plugin-better-sidebar-plugin-audio ★0 (npm ✓)
+## 新增（Top 4）
+- hahavguoqu/dsh-genshin-launch ★1 
+- luoyuejun9/dsh-skin-rotation ★1 (npm ✓)
+- tuibe/dsh-deepseek-theme-studio ★0 
+- MrGnUm/dsh-image-webp-to-png ★0 
 
 ## 消失（Top 0）
 
