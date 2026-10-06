@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-06T12:15:58.400Z",
+  "generatedAt": "2026-10-06T12:50:45.048Z",
   "totals": {
-    "authoritative": 14046,
-    "active7": 2960,
-    "active7Pct": 21.1,
+    "authoritative": 14049,
+    "active7": 2936,
+    "active7Pct": 20.9,
     "active30": 6657,
     "active30Pct": 47.4,
-    "ageGate1": 13662,
+    "ageGate1": 13667,
     "ageGate1Pct": 97.3,
     "byMonth": {
       "2026-08": 9783,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 703,
+      "2026-10": 706,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 122
+      "2026-10-05": 125
     },
     "byWeekGrades": {
       "B": {
@@ -103,7 +103,7 @@
         "2026-09-21": 455,
         "2026-09-28": 669,
         "2025-12-22": 1,
-        "2026-10-05": 63
+        "2026-10-05": 66
       },
       "S": {
         "2026-08-03": 2,
@@ -179,21 +179,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 6355,
-      "unpublished": 7691,
+      "published": 6356,
+      "unpublished": 7693,
       "stale": 3866
     },
     "docs": {
-      "readme": 14010,
+      "readme": 14013,
       "zhFile": 1004,
-      "zh": 6651,
-      "both": 6641,
+      "zh": 6653,
+      "both": 6643,
       "none": 36
     },
     "lib": {
-      "index": 7420,
-      "client": 4965,
-      "both": 4396
+      "index": 7422,
+      "client": 4966,
+      "both": 4397
     },
     "publishPct": 45.2,
     "zhPct": 47.3
@@ -387,7 +387,7 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 13658
+      "count": 13661
     },
     {
       "topic": "deepseek-harness",
@@ -502,8 +502,8 @@
     "imsai": 311,
     "covered": 1082,
     "coveredPct": 7.7,
-    "none": 12964,
-    "fetchedAt": "2026-10-06T12:15:14.609Z"
+    "none": 12967,
+    "fetchedAt": "2026-10-06T12:50:06.453Z"
   },
   "suggested": [
     {
@@ -1812,7 +1812,7 @@
   "quality": {
     "grades": {
       "A": 503,
-      "B": 6775,
+      "B": 6778,
       "C": 4641,
       "D": 2030,
       "S": 97
@@ -1824,7 +1824,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 4965
+      "count": 4966
     },
     {
       "category": "模型 / 代理",
@@ -1840,11 +1840,11 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 1005
+      "count": 1006
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 920
+      "count": 921
     },
     {
       "category": "搜索 / 命令面板",
@@ -1888,7 +1888,7 @@
       "lastPush": "2026-09-30",
       "firstCreated": "2026-08-13",
       "delta": 0,
-      "avg": 80.8,
+      "avg": 80.7,
       "topPlugin": "dongsheng123132/task-passport",
       "topStars": 10,
       "topCat": "其它"
@@ -2022,21 +2022,21 @@
     },
     {
       "owner": "HuanLinOTO",
-      "plugins": 24,
+      "plugins": 25,
       "stars": 163,
       "grades": {
         "A": 0,
-        "B": 21,
+        "B": 22,
         "C": 3,
         "D": 0
       },
-      "ab": 21,
-      "npm": 22,
+      "ab": 22,
+      "npm": 23,
       "covered": 2,
-      "lastPush": "2026-09-30",
+      "lastPush": "2026-10-06",
       "firstCreated": "2026-08-09",
       "delta": 0,
-      "avg": 81.1,
+      "avg": 81.3,
       "topPlugin": "HuanLinOTO/dsh-plugin-better-sidebar-plugin-office",
       "topStars": 53,
       "topCat": "侧栏 / 工作区"
@@ -2865,6 +2865,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "Missher12",
+      "plugins": 10,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 8,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 8,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-05",
+      "firstCreated": "2026-08-23",
+      "delta": 0,
+      "avg": 78.9,
+      "topPlugin": "Missher12/dsh-missher-memory",
+      "topStars": 0,
+      "topCat": "记忆 / 知识"
+    },
+    {
       "owner": "Aik358",
       "plugins": 7,
       "stars": 113,
@@ -3264,27 +3285,6 @@
       "topPlugin": "jwilson411/dsh-compat-probe",
       "topStars": 0,
       "topCat": "工具 / 效率"
-    },
-    {
-      "owner": "Missher12",
-      "plugins": 10,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 7,
-        "C": 3,
-        "D": 0
-      },
-      "ab": 7,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-05",
-      "firstCreated": "2026-08-23",
-      "delta": 0,
-      "avg": 78.4,
-      "topPlugin": "Missher12/dsh-missher-memory",
-      "topStars": 0,
-      "topCat": "记忆 / 知识"
     },
     {
       "owner": "d0ublecl1ck",
@@ -25684,6 +25684,27 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
+      "owner": "luzonghao",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-05",
+      "firstCreated": "2026-10-04",
+      "delta": 0,
+      "avg": 79,
+      "topPlugin": "luzonghao/dsh-workspace-light",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
+    },
+    {
       "owner": "AL1ghtm3ter",
       "plugins": 2,
       "stars": 0,
@@ -46051,7 +46072,7 @@
       "lastPush": "2026-09-06",
       "firstCreated": "2026-08-14",
       "delta": 0,
-      "avg": 83,
+      "avg": 78,
       "topPlugin": "StyxNether/dsh-auto-approval-plugin",
       "topStars": 3,
       "topCat": "侧栏 / 工作区"
@@ -78830,27 +78851,6 @@
       "topCat": "开发 / 数据"
     },
     {
-      "owner": "luzonghao",
-      "plugins": 2,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-05",
-      "firstCreated": "2026-10-04",
-      "delta": 0,
-      "avg": 76.5,
-      "topPlugin": "luzonghao/dsh-workspace-light",
-      "topStars": 0,
-      "topCat": "侧栏 / 工作区"
-    },
-    {
       "owner": "spix18",
       "plugins": 2,
       "stars": 0,
@@ -104978,7 +104978,7 @@
       "lastPush": "2026-10-05",
       "firstCreated": "2026-10-05",
       "delta": 0,
-      "avg": 83,
+      "avg": 88,
       "topPlugin": "439436269-ctrl/dsh-zspace",
       "topStars": 0,
       "topCat": "工具 / 效率"
@@ -105125,7 +105125,7 @@
       "lastPush": "2026-10-06",
       "firstCreated": "2026-10-05",
       "delta": 0,
-      "avg": 78,
+      "avg": 83,
       "topPlugin": "popingalex/dsh-reference-render",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
@@ -161237,7 +161237,7 @@
       "lastPush": "2026-09-06",
       "firstCreated": "2026-09-06",
       "delta": 0,
-      "avg": 71,
+      "avg": 66,
       "topPlugin": "OuYangxin12/dsh-status-bar",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
@@ -171699,10 +171699,52 @@
       "topPlugin": "yee114514/dsh-gandi",
       "topStars": 0,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "dyf189",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-06",
+      "firstCreated": "2026-10-06",
+      "delta": 0,
+      "avg": 62,
+      "topPlugin": "dyf189/dsh-screenshot",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
+      "owner": "CHENKEYI-MAKER",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-06",
+      "firstCreated": "2026-10-06",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "CHENKEYI-MAKER/dsh-team-reporter",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
     }
   ],
   "authorStats": {
-    "total": 8083,
+    "total": 8085,
     "multi": 2028,
     "top10Share": 2.7
   },
@@ -171711,7 +171753,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 18486,
+    "candidates": 18489,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -171793,11 +171835,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 165
+      "2026-10-05": 168
     },
-    "validated": 18991,
-    "candidatesValidated": 24,
-    "authoritative": 14046,
+    "validated": 18994,
+    "candidatesValidated": 19,
+    "authoritative": 14049,
     "invalidUnique": 4945,
     "invalidBuckets": [
       {
@@ -171846,5 +171888,5 @@
       }
     ]
   },
-  "enrichCount": 14046
+  "enrichCount": 14049
 }
