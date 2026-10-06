@@ -1,13 +1,15 @@
 # 快照 Diff · 2026-10-06
 
-- 当前权威插件：**14053**（上次 14049）
-- 新增 4 · 消失 0
+- 当前权威插件：**14059**（上次 14053）
+- 新增 6 · 消失 0
 
-## 新增（Top 4）
-- hahavguoqu/dsh-genshin-launch ★1 
-- luoyuejun9/dsh-skin-rotation ★1 (npm ✓)
-- tuibe/dsh-deepseek-theme-studio ★0 
-- MrGnUm/dsh-image-webp-to-png ★0 
+## 新增（Top 6）
+- kuixiu/dsh-pet ★0 (npm ✓)
+- w32394045-dotcom/dsh-github ★0 
+- 439436269-ctrl/dsh-pinned-sessions ★0 
+- DiaryOfUranus/dsh-second-brain ★0 
+- kkaporn/dsh-session-composer ★0 
+- Ragnoryok1/dsh-plugin-doctor ★0 
 
 ## 消失（Top 0）
 
