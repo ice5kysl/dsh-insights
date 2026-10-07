@@ -1,11 +1,14 @@
 # 快照 Diff · 2026-10-07
 
-- 当前权威插件：**14116**（上次 14114）
-- 新增 2 · 消失 0
+- 当前权威插件：**14121**（上次 14116）
+- 新增 5 · 消失 0
 
-## 新增（Top 2）
-- zhanghao3693/dsh-deepseek-web ★0 (npm ✓)
-- wangyin572/dsh-plugin-reverse ★0 
+## 新增（Top 5）
+- juliankang4/dsh-spark-scope ★0 (npm ✓)
+- neo805/dsh-effort-router ★0 
+- Alex-wangyang/dsh-orca-terminal-status ★0 
+- john-walks-slow/dsh-aivn ★0 (npm ✓)
+- zheyuanlinye7/dsh-web-service ★0 
 
 ## 消失（Top 0）
 
