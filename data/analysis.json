@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-07T02:09:40.349Z",
+  "generatedAt": "2026-10-07T02:15:48.261Z",
   "totals": {
-    "authoritative": 14104,
-    "active7": 2694,
+    "authoritative": 14106,
+    "active7": 2695,
     "active7Pct": 19.1,
-    "active30": 6670,
+    "active30": 6672,
     "active30Pct": 47.3,
     "ageGate1": 13710,
     "ageGate1Pct": 97.2,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 761,
+      "2026-10": 763,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 180
+      "2026-10-05": 182
     },
     "byWeekGrades": {
       "B": {
@@ -103,7 +103,7 @@
         "2026-09-21": 455,
         "2026-09-28": 662,
         "2025-12-22": 1,
-        "2026-10-05": 110
+        "2026-10-05": 111
       },
       "S": {
         "2026-08-03": 2,
@@ -160,7 +160,7 @@
         "2026-05-04": 1,
         "2026-09-28": 328,
         "2020-06-29": 1,
-        "2026-10-05": 63
+        "2026-10-05": 64
       },
       "D": {
         "2026-08-10": 326,
@@ -180,18 +180,18 @@
   "distribution": {
     "publish": {
       "published": 6378,
-      "unpublished": 7726,
+      "unpublished": 7728,
       "stale": 3876
     },
     "docs": {
-      "readme": 14068,
+      "readme": 14070,
       "zhFile": 1013,
-      "zh": 6684,
-      "both": 6674,
+      "zh": 6686,
+      "both": 6676,
       "none": 36
     },
     "lib": {
-      "index": 7450,
+      "index": 7451,
       "client": 4987,
       "both": 4415
     },
@@ -387,15 +387,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 13716
+      "count": 13718
     },
     {
       "topic": "deepseek-harness",
-      "count": 9384
+      "count": 9385
     },
     {
       "topic": "dsh",
-      "count": 5701
+      "count": 5702
     },
     {
       "topic": "cordis",
@@ -407,7 +407,7 @@
     },
     {
       "topic": "dsh-plugins",
-      "count": 1376
+      "count": 1377
     },
     {
       "topic": "plugin",
@@ -502,8 +502,8 @@
     "imsai": 311,
     "covered": 1082,
     "coveredPct": 7.7,
-    "none": 13022,
-    "fetchedAt": "2026-10-07T02:09:01.829Z"
+    "none": 13024,
+    "fetchedAt": "2026-10-07T02:15:11.803Z"
   },
   "suggested": [
     {
@@ -1812,8 +1812,8 @@
   "quality": {
     "grades": {
       "A": 504,
-      "B": 6808,
-      "C": 4662,
+      "B": 6809,
+      "C": 4663,
       "D": 2035,
       "S": 95
     },
@@ -1836,7 +1836,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1227
+      "count": 1228
     },
     {
       "category": "状态 / 监控 / 用量",
@@ -1852,7 +1852,7 @@
     },
     {
       "category": "工具 / 效率",
-      "count": 695
+      "count": 696
     },
     {
       "category": "主题 / 视觉美化",
@@ -10883,6 +10883,27 @@
       "topPlugin": "easerlee/dsh-handoff",
       "topStars": 0,
       "topCat": "会话管理"
+    },
+    {
+      "owner": "gh-gongjin",
+      "plugins": 3,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 3,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 3,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-07",
+      "firstCreated": "2026-10-02",
+      "delta": 0,
+      "avg": 84.3,
+      "topPlugin": "gh-gongjin/dsh-plugin-sysops",
+      "topStars": 0,
+      "topCat": "其它"
     },
     {
       "owner": "Inceptzws",
@@ -25510,27 +25531,6 @@
       "delta": 0,
       "avg": 79.5,
       "topPlugin": "zywnb-2/dsh-donevoice",
-      "topStars": 0,
-      "topCat": "其它"
-    },
-    {
-      "owner": "gh-gongjin",
-      "plugins": 2,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 2,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 2,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-03",
-      "firstCreated": "2026-10-02",
-      "delta": 0,
-      "avg": 86,
-      "topPlugin": "gh-gongjin/dsh-plugin-sysops",
       "topStars": 0,
       "topCat": "其它"
     },
@@ -172474,10 +172474,31 @@
       "topPlugin": "Elysia11451/dsh-auto-model-router",
       "topStars": 0,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "peanutcd2005",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-07",
+      "firstCreated": "2026-10-07",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "peanutcd2005/dsh-plugin-pdf-text",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
     }
   ],
   "authorStats": {
-    "total": 8120,
+    "total": 8121,
     "multi": 2037,
     "top10Share": 2.7
   },
@@ -172486,7 +172507,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 18560,
+    "candidates": 18562,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -172568,11 +172589,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 239
+      "2026-10-05": 241
     },
-    "validated": 19064,
-    "candidatesValidated": 16,
-    "authoritative": 14104,
+    "validated": 19066,
+    "candidatesValidated": 18,
+    "authoritative": 14106,
     "invalidUnique": 4960,
     "invalidBuckets": [
       {
@@ -172621,5 +172642,5 @@
       }
     ]
   },
-  "enrichCount": 14104
+  "enrichCount": 14106
 }
