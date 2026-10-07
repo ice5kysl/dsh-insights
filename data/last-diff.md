@@ -1,11 +1,10 @@
-# 快照 Diff · 2026-10-06
+# 快照 Diff · 2026-10-07
 
-- 当前权威插件：**14097**（上次 14095）
-- 新增 2 · 消失 0
+- 当前权威插件：**14098**（上次 14097）
+- 新增 1 · 消失 0
 
-## 新增（Top 2）
-- realDGD/dsh-macos-notify ★0 (npm ✓)
-- SOH4C4759/dsh-plugin-cicd ★0 
+## 新增（Top 1）
+- adesbusy/dsh-peak-indicator ★0 (npm ✓)
 
 ## 消失（Top 0）
 
