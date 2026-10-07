@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-07T09:00:19.876Z",
+  "generatedAt": "2026-10-07T09:05:08.299Z",
   "totals": {
-    "authoritative": 14142,
-    "active7": 2474,
+    "authoritative": 14145,
+    "active7": 2471,
     "active7Pct": 17.5,
-    "active30": 6668,
-    "active30Pct": 47.2,
+    "active30": 6669,
+    "active30Pct": 47.1,
     "ageGate1": 13735,
     "ageGate1Pct": 97.1,
     "byMonth": {
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 799,
+      "2026-10": 802,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 218
+      "2026-10-05": 221
     },
     "byWeekGrades": {
       "B": {
@@ -160,7 +160,7 @@
         "2026-05-04": 1,
         "2026-09-28": 340,
         "2020-06-29": 1,
-        "2026-10-05": 77
+        "2026-10-05": 80
       },
       "D": {
         "2026-08-10": 326,
@@ -180,20 +180,20 @@
   "distribution": {
     "publish": {
       "published": 6387,
-      "unpublished": 7755,
+      "unpublished": 7758,
       "stale": 3878
     },
     "docs": {
-      "readme": 14105,
+      "readme": 14108,
       "zhFile": 1014,
       "zh": 6704,
       "both": 6693,
       "none": 37
     },
     "lib": {
-      "index": 7472,
-      "client": 5004,
-      "both": 4430
+      "index": 7475,
+      "client": 5007,
+      "both": 4433
     },
     "publishPct": 45.2,
     "zhPct": 47.3
@@ -387,15 +387,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 13754
+      "count": 13757
     },
     {
       "topic": "deepseek-harness",
-      "count": 9413
+      "count": 9416
     },
     {
       "topic": "dsh",
-      "count": 5724
+      "count": 5727
     },
     {
       "topic": "cordis",
@@ -501,9 +501,9 @@
     "awesome": 777,
     "imsai": 311,
     "covered": 1082,
-    "coveredPct": 7.7,
-    "none": 13060,
-    "fetchedAt": "2026-10-07T08:59:32.046Z"
+    "coveredPct": 7.6,
+    "none": 13063,
+    "fetchedAt": "2026-10-07T09:04:24.822Z"
   },
   "suggested": [
     {
@@ -1813,7 +1813,7 @@
     "grades": {
       "A": 503,
       "B": 6801,
-      "C": 4697,
+      "C": 4700,
       "D": 2045,
       "S": 96
     },
@@ -1824,7 +1824,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5003
+      "count": 5004
     },
     {
       "category": "模型 / 代理",
@@ -1840,7 +1840,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 1011
+      "count": 1012
     },
     {
       "category": "侧栏 / 工作区",
@@ -1860,7 +1860,7 @@
     },
     {
       "category": "消息 / 协作集成",
-      "count": 465
+      "count": 466
     },
     {
       "category": "开发 / 数据",
@@ -33200,7 +33200,7 @@
       "lastPush": "2026-09-07",
       "firstCreated": "2026-08-20",
       "delta": 0,
-      "avg": 86,
+      "avg": 81,
       "topPlugin": "xmuwenxiang/dsh-web-chat",
       "topStars": 11,
       "topCat": "状态 / 监控 / 用量"
@@ -113398,7 +113398,7 @@
       "lastPush": "2026-09-15",
       "firstCreated": "2026-08-19",
       "delta": 0,
-      "avg": 68.5,
+      "avg": 66,
       "topPlugin": "MDR-EX1000/dsh-rw",
       "topStars": 2,
       "topCat": "工具 / 效率"
@@ -140051,6 +140051,27 @@
       "topPlugin": "wojiao42/dsh-space-optimizer",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "hello-heyongping",
+      "plugins": 3,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 3,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-07",
+      "firstCreated": "2026-10-07",
+      "delta": 0,
+      "avg": 68,
+      "topPlugin": "hello-heyongping/dsh-helloai-theme",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
     },
     {
       "owner": "LoserFox",
@@ -173024,8 +173045,8 @@
     }
   ],
   "authorStats": {
-    "total": 8146,
-    "multi": 2039,
+    "total": 8147,
+    "multi": 2040,
     "top10Share": 2.7
   },
   "coverage": {
@@ -173033,7 +173054,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 18608,
+    "candidates": 18611,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -173115,11 +173136,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 287
+      "2026-10-05": 290
     },
-    "validated": 19111,
+    "validated": 19114,
     "candidatesValidated": 19,
-    "authoritative": 14142,
+    "authoritative": 14145,
     "invalidUnique": 4969,
     "invalidBuckets": [
       {
@@ -173168,5 +173189,5 @@
       }
     ]
   },
-  "enrichCount": 14142
+  "enrichCount": 14145
 }
