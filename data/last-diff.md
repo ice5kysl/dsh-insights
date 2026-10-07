@@ -1,16 +1,13 @@
 # 快照 Diff · 2026-10-07
 
-- 当前权威插件：**14159**（上次 14152）
-- 新增 7 · 消失 0
+- 当前权威插件：**14163**（上次 14159）
+- 新增 4 · 消失 0
 
-## 新增（Top 7）
-- try-works/dsh-stt ★1 (npm ✓)
-- Uloboros/dsh-design-ledger ★0 
-- PolitaryMonicy/dsh-agent-clean ★0 
-- Lindemellis/dsh-tavern-extras ★0 
-- Lindemellis/dsh-tavern-preset-roles ★0 
-- kongbai9420/dsh-boss-worker ★0 
-- mirror9933/dsh-pixmart ★0 (npm ✓)
+## 新增（Top 4）
+- Ferien-sein/dsh-dajiangjun ★0 
+- 438417623wq/dseepseek-ha-API ★0 
+- weibaohui/dsh-ambient ★0 (npm ✓)
+- Player-MINEPIG/dsh-prompt-assembler ★0 
 
 ## 消失（Top 0）
 
