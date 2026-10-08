@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-08T21:16:19.212Z",
+  "generatedAt": "2026-10-08T22:02:15.582Z",
   "totals": {
-    "authoritative": 14425,
-    "active7": 2040,
+    "authoritative": 14427,
+    "active7": 2037,
     "active7Pct": 14.1,
-    "active30": 6745,
+    "active30": 6747,
     "active30Pct": 46.8,
     "ageGate1": 13978,
     "ageGate1Pct": 96.9,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1082,
+      "2026-10": 1084,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 501
+      "2026-10-05": 503
     },
     "byWeekGrades": {
       "B": {
@@ -103,7 +103,7 @@
         "2026-09-21": 453,
         "2026-09-28": 592,
         "2025-12-22": 1,
-        "2026-10-05": 316
+        "2026-10-05": 317
       },
       "S": {
         "2026-08-03": 2,
@@ -160,7 +160,7 @@
         "2026-05-04": 1,
         "2026-09-28": 384,
         "2020-06-29": 1,
-        "2026-10-05": 161
+        "2026-10-05": 162
       },
       "D": {
         "2026-08-10": 326,
@@ -180,21 +180,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 6435,
-      "unpublished": 7990,
-      "stale": 3906
+      "published": 6436,
+      "unpublished": 7991,
+      "stale": 3907
     },
     "docs": {
-      "readme": 14388,
+      "readme": 14390,
       "zhFile": 1026,
-      "zh": 6871,
-      "both": 6860,
+      "zh": 6872,
+      "both": 6861,
       "none": 37
     },
     "lib": {
-      "index": 7562,
-      "client": 5071,
-      "both": 4487
+      "index": 7564,
+      "client": 5073,
+      "both": 4489
     },
     "publishPct": 44.6,
     "zhPct": 47.6
@@ -388,15 +388,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14037
+      "count": 14039
     },
     {
       "topic": "deepseek-harness",
-      "count": 9635
+      "count": 9637
     },
     {
       "topic": "dsh",
-      "count": 5900
+      "count": 5901
     },
     {
       "topic": "cordis",
@@ -404,11 +404,11 @@
     },
     {
       "topic": "deepseek",
-      "count": 1614
+      "count": 1615
     },
     {
       "topic": "dsh-plugins",
-      "count": 1404
+      "count": 1405
     },
     {
       "topic": "plugin",
@@ -503,8 +503,8 @@
     "imsai": 314,
     "covered": 1084,
     "coveredPct": 7.5,
-    "none": 13341,
-    "fetchedAt": "2026-10-08T21:15:26.447Z"
+    "none": 13343,
+    "fetchedAt": "2026-10-08T22:01:28.765Z"
   },
   "suggested": [
     {
@@ -1813,8 +1813,8 @@
   "quality": {
     "grades": {
       "A": 502,
-      "B": 6906,
-      "C": 4853,
+      "B": 6907,
+      "C": 4854,
       "D": 2069,
       "S": 95
     },
@@ -1829,7 +1829,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1440
+      "count": 1442
     },
     {
       "category": "会话管理",
@@ -77737,6 +77737,27 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
+      "owner": "Xylocarpro",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 1
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-08",
+      "firstCreated": "2026-08-29",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "Xylocarpro/dsh-plugin-recycle-bin",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
       "owner": "changyinliangbaikai",
       "plugins": 2,
       "stars": 0,
@@ -78993,6 +79014,27 @@
       "delta": 0,
       "avg": 73.5,
       "topPlugin": "ruaibeite/dsh-undo",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "Faide-cyber",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-08",
+      "firstCreated": "2026-10-08",
+      "delta": 0,
+      "avg": 72,
+      "topPlugin": "Faide-cyber/dsh-workbuddy",
       "topStars": 0,
       "topCat": "文件浏览 / 预览"
     },
@@ -106577,27 +106619,6 @@
       "topPlugin": "Fyue7/dsh-emotion",
       "topStars": 0,
       "topCat": "模型 / 代理"
-    },
-    {
-      "owner": "Faide-cyber",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-08",
-      "firstCreated": "2026-10-08",
-      "delta": 0,
-      "avg": 78,
-      "topPlugin": "Faide-cyber/dsh-workbuddy",
-      "topStars": 0,
-      "topCat": "文件浏览 / 预览"
     },
     {
       "owner": "lsnnn123",
@@ -161998,27 +162019,6 @@
       "topCat": "主题 / 视觉美化"
     },
     {
-      "owner": "Xylocarpro",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 0,
-        "D": 1
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-08-29",
-      "firstCreated": "2026-08-29",
-      "delta": 0,
-      "avg": 56,
-      "topPlugin": "Xylocarpro/dsh-plugin-recycle-bin",
-      "topStars": 0,
-      "topCat": "其它"
-    },
-    {
       "owner": "imcp-pro",
       "plugins": 1,
       "stars": 0,
@@ -176112,7 +176112,7 @@
   ],
   "authorStats": {
     "total": 8293,
-    "multi": 2082,
+    "multi": 2084,
     "top10Share": 3
   },
   "coverage": {
@@ -176120,7 +176120,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 18914,
+    "candidates": 18916,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -176202,11 +176202,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 593
+      "2026-10-05": 595
     },
-    "validated": 19415,
-    "candidatesValidated": 19,
-    "authoritative": 14425,
+    "validated": 19417,
+    "candidatesValidated": 18,
+    "authoritative": 14427,
     "invalidUnique": 4990,
     "invalidBuckets": [
       {
@@ -176255,5 +176255,5 @@
       }
     ]
   },
-  "enrichCount": 14425
+  "enrichCount": 14427
 }
