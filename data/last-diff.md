@@ -1,10 +1,10 @@
 # 快照 Diff · 2026-10-08
 
-- 当前权威插件：**14407**（上次 14406）
+- 当前权威插件：**14408**（上次 14407）
 - 新增 1 · 消失 0
 
 ## 新增（Top 1）
-- Fyue7/dsh-emotion ★0 
+- WhatCannotBeSaid/dsh-eva-inspired-theme ★0 
 
 ## 消失（Top 0）
 
