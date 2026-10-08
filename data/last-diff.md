@@ -1,17 +1,16 @@
 # 快照 Diff · 2026-10-08
 
-- 当前权威插件：**14298**（上次 14290）
-- 新增 8 · 消失 0
+- 当前权威插件：**14305**（上次 14298）
+- 新增 7 · 消失 0
 
-## 新增（Top 8）
-- residenthiago2011/DSH-Laya-Tool-Router ★1 
-- ChrisLou-bioinfo/dsh-usage-lite ★0 (npm ✓)
-- fanjinduo111/dsh-service-board ★0 
-- StarterMonk/dsh-adhd-session-mode ★0 
-- Hope-Phenom/dsh-plugin-notify ★0 (npm ✓)
-- bitxeno/dsh-git-plus ★0 (npm ✓)
-- Mynaniao/dsh-whale-plus ★0 
-- kmyqchy/dsh-3d-preview ★0 
+## 新增（Top 7）
+- wjvalue/dsh-answer-me-with-html ★0 
+- adamcjm/dsh-window-drag-probe ★0 
+- gygygfg/dsh-winstage-sandbox ★0 
+- solstice621/dsh-openai-auth ★0 
+- PerryLink/dsh-phocinae ★0 (npm ✓)
+- Respawn-ID/dsh-rhine-splash ★0 
+- Mynaniao/dsh-whale-food-expack ★0 
 
 ## 消失（Top 0）
 
