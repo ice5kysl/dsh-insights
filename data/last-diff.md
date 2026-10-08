@@ -1,18 +1,17 @@
 # 快照 Diff · 2026-10-08
 
-- 当前权威插件：**14396**（上次 14387）
-- 新增 9 · 消失 0
+- 当前权威插件：**14404**（上次 14396）
+- 新增 8 · 消失 0
 
-## 新增（Top 9）
-- shutongcao1-design/dsh_web_focus ★1 
-- zizhuang/dsh-file-dedupe ★0 
-- cm860712ch-cloud/dsh-quick-input ★0 
-- eighteentang/dsh-plugin-im-bridge ★0 
-- LastElbow/Scout-dsh ★0 
-- liaoyuqing/model-failover-manager ★0 
-- ckanner/dsh-subagent-codex-pro ★0 (npm ✓)
-- DDDMUC/dsh-url-router ★0 
-- O789Real/dsh-usage-cost ★0 
+## 新增（Top 8）
+- EdisonYang1982/dsh-skill-switch ★0 
+- publicwww-com/dsh-publicwww ★0 
+- realjhen123/dsh-ask-powerful ★0 
+- realjhen123/dsh-simple-bing ★0 
+- Yanshi-Robotics/yanshifu-plugin-cn ★0 
+- OraSkyC/dsh-bundle-screen-view ★0 
+- OraSkyC/dsh-bundle-default-workspace ★0 
+- YE-ZINAN/dsh-wb ★0 
 
 ## 消失（Top 0）
 
