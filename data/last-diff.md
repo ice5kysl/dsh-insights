@@ -1,12 +1,12 @@
 # 快照 Diff · 2026-10-08
 
-- 当前权威插件：**14413**（上次 14410）
+- 当前权威插件：**14416**（上次 14413）
 - 新增 3 · 消失 0
 
 ## 新增（Top 3）
-- huhu23333/dsh-plugin-subagent-model-route ★0 
-- VCPr0j3k7/dsh-workflow-studio ★0 
-- liumorrisclaw/dsh-composer-input-history ★0 
+- letterk/dsh-adhd-mode ★0 
+- azazo1/dsh-open-dir ★0 
+- akash-digitavision/dsh-playwright ★0 (npm ✓)
 
 ## 消失（Top 0）
 
