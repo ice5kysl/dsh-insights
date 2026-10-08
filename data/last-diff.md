@@ -1,17 +1,14 @@
 # 快照 Diff · 2026-10-08
 
-- 当前权威插件：**14323**（上次 14315）
-- 新增 8 · 消失 0
+- 当前权威插件：**14328**（上次 14323）
+- 新增 5 · 消失 0
 
-## 新增（Top 8）
-- seonzzy/dsh-zen-adapter ★0 
-- Tonywqs/dsh-session-folders ★0 (npm ✓)
-- shenjackyuanjie/dsh-openrouter-service-tier ★0 
-- jessicacui99/dsh-plugin-token-cost ★0 
-- qiz42144-web/dsh-ai-curfew ★0 
-- icrefin/dsh-notify-push ★0 
-- kissazi2/dsh-personalization-local ★0 
-- Octen-Team/dsh-octen ★0 
+## 新增（Top 5）
+- dingchenhui0618-arch/dsh-warden ★0 
+- Smallballoons01/echo-notes ★0 
+- miiy/dsh-terminal-keybar ★0 
+- xinyang20/dsh-project-space ★0 
+- dingchenhui0618-arch/dsh-market-sidebar ★0 
 
 ## 消失（Top 0）
 
