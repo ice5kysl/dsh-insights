@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T01:23:55.908Z",
+  "generatedAt": "2026-10-08T01:27:33.393Z",
   "dshVersions": [
     "0.0.1-rc.5",
     "0.2.0-rc.2",
@@ -43,117 +43,35 @@
   },
   "note": "实测兼容 = 静态分析口径：提取插件 npm 最新版 client bundle 中「代码态」require(\"X\") 字面量（注释/字符串/模板/正则里的字样不计；模板串/动态 require 静态不可判定不计；相对/绝对路径 spec 不计——bundle 自带模块表就地服务，不进 loader），逐 shell 版本按官方 loader 真实解析序归类：ok=seed 词表/插件自身/语料库插件包名/immediate 图行/已声明的 lazy 图行；conditional=未声明的 lazy 图行（批次时序多数可解析但无保证，声明 dsh.client.external 可获确定性）；missing=其余（如 dsh-client-runtime/*）。守卫感知：require 为调用时解析，try{...}catch{...} 花括号配对识别——unguarded missing 即 broken、unguarded conditional 即 conditional；try 块缺失看配对 catch（全 ok 含空 catch=兜底可用判 ok，catch 有 conditional 判 conditional，catch 有 missing 判 broken）；try 无配对 catch 视同无守卫。非运行时测试；无 client bundle 的插件不在结果中。results 为 distTag 展示轴（ok/conditional/broken 三态）；verdict 为跨全部已发布 shell 版本的分类（ok/never/conditional/broken-since/supported-since/mixed，conditional 版本单列）。图行清单见 data/shell-rows.json（已对 0.1.2-rc.1 真实 __DSH_BOOT__ 验证一致）。已知盲区：插件 host 侧的 server 端 index/HTML 变换（如 WebServer tapIndex 注入 require 改写前奏）不建模——带 hostTransform 标记的插件其判定仅供参考。Observed compatibility = static analysis: code-state literal require() specifiers of each plugin's latest npm client bundle (comments/strings/templates/regex contents excluded; dynamic/template requires undecidable; relative/absolute specifiers excluded — bundle-local module tables serve them, never the loader), classified per shell version following the official loader's real resolution order: ok = seed word / own package / corpus plugin package / immediate graph row / declared lazy graph row; conditional = undeclared lazy graph row (batch-arrival timing usually resolves but is not guaranteed — declaring dsh.client.external makes it deterministic); missing = everything else. Guard-aware: require resolves at call time, so try{...}catch{...} pairs are brace-matched — an unguarded missing specifier breaks that shell version, unguarded conditional marks it conditional; a try-side miss falls back to its catch (all-ok catch, empty included, stays ok; conditional catch → conditional; missing catch → broken); a try without catch counts as unguarded. Not a runtime test; plugins without a client bundle are absent. results covers the distTag display axis (ok/conditional/broken); verdict classifies across all published shell versions (ok/never/conditional/broken-since/supported-since/mixed, conditional versions listed separately). Graph rows: data/shell-rows.json (validated against the real __DSH_BOOT__ on 0.1.2-rc.1). Known blind spot: server-side index/HTML transforms in a plugin's host half (e.g. WebServer tapIndex preludes rewriting the module surface) are not modeled — verdicts of hostTransform-flagged plugins are indicative only.",
   "stats": {
-    "targets": 5240,
-    "observed": 3610,
-    "cached": 5021,
-    "fetched": 218,
+    "targets": 5265,
+    "observed": 3631,
+    "cached": 5031,
+    "fetched": 233,
     "refetched": 0,
-    "noClient": 1629,
+    "noClient": 1633,
     "failed": 1
   },
   "verdicts": {
-    "ok": 3337,
+    "ok": 3357,
     "never": 15,
     "conditional": 0,
     "broken-since": {
-      "0.1.5-rc.3": 2,
       "0.1.2-alpha.2": 103,
+      "0.1.5-rc.3": 2,
       "0.1.0-rc.8": 4
     },
     "supported-since": {
-      "0.1.2-alpha.2": 138
+      "0.1.2-alpha.2": 139
     },
     "mixed": 11
   },
   "plugins": {
-    "dshmarket": {
-      "repo": "dsh-market/dsh-market",
-      "version": "1.66.9",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime",
-        "react-dom"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "@liustack/modlens": {
       "repo": "liustack/modlens",
       "version": "3.26.6",
       "requires": [
         "react",
         "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-context": {
-      "repo": "bowenliang123/dsh-context",
-      "version": "0.64.0",
-      "requires": [
-        "react",
-        "react/jsx-runtime",
-        "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "@xmanrui/dsh-im": {
-      "repo": "xmanrui/dsh-im",
-      "version": "4.36.1",
-      "requires": [
-        "react",
-        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -200,74 +118,38 @@
         "total": 28
       }
     },
-    "dsh-vision-router": {
-      "repo": "ysr666/dsh-vision-router",
-      "version": "3.0.2",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-attachment"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "conditional",
-          "conditional": [
-            "@deepseek-ai/dsh-client-ui-attachment"
-          ]
-        },
-        "0.2.1-alpha.1": {
-          "status": "conditional",
-          "conditional": [
-            "@deepseek-ai/dsh-client-ui-attachment"
-          ]
-        },
-        "0.1.2-rc.1": {
-          "status": "conditional",
-          "conditional": [
-            "@deepseek-ai/dsh-client-ui-attachment"
-          ]
-        }
-      },
-      "verdict": {
-        "cls": "broken-since",
-        "since": "0.1.5-rc.3",
-        "okUntil": "0.1.0-rc.7",
-        "conditional": [
-          "0.1.0-rc.8",
-          "0.1.1-rc.1",
-          "0.1.1-rc.2",
-          "0.1.2-alpha.2",
-          "0.1.2-alpha.3",
-          "0.1.2-alpha.4",
-          "0.1.2-alpha.5",
-          "0.1.2-rc.1",
-          "0.1.3-alpha.2",
-          "0.1.5-alpha.1",
-          "0.1.5-alpha.2",
-          "0.1.5-rc.1",
-          "0.1.5-rc.2",
-          "0.1.6-alpha.1",
-          "0.1.6-alpha.2",
-          "0.1.7-alpha.1",
-          "0.1.7-alpha.2",
-          "0.1.7-rc.1",
-          "0.1.7-rc.2",
-          "0.2.0-rc.1",
-          "0.2.0-rc.2",
-          "0.2.1-alpha.1"
-        ],
-        "total": 28
-      },
-      "hostTransform": true
-    },
     "@liustack/modsearch": {
       "repo": "liustack/modsearch",
       "version": "5.10.6",
       "requires": [
         "react",
         "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-plugin-wallpaper-engine": {
+      "repo": "elysia395/dsh-wallpaper-engine",
+      "version": "1.3.1",
+      "requires": [
+        "react",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -475,9 +357,37 @@
         "total": 28
       }
     },
+    "dsh-context": {
+      "repo": "bowenliang123/dsh-context",
+      "version": "0.65.0",
+      "requires": [
+        "react",
+        "react/jsx-runtime",
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "dsh-plugin-subscriptions": {
       "repo": "V1ki/dsh-plugin-subscriptions",
-      "version": "0.9.7",
+      "version": "0.9.8",
       "requires": [
         "react",
         "react/jsx-runtime",
@@ -526,11 +436,14 @@
         "total": 28
       }
     },
-    "dsh-mobile": {
-      "repo": "saya-ch/dsh-mobile",
-      "version": "0.5.5",
+    "dshmarket": {
+      "repo": "dsh-market/dsh-market",
+      "version": "1.66.11",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -550,6 +463,68 @@
         "cls": "ok",
         "total": 28
       }
+    },
+    "dsh-vision-router": {
+      "repo": "ysr666/dsh-vision-router",
+      "version": "3.0.3",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-attachment"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "conditional",
+          "conditional": [
+            "@deepseek-ai/dsh-client-ui-attachment"
+          ]
+        },
+        "0.2.1-alpha.1": {
+          "status": "conditional",
+          "conditional": [
+            "@deepseek-ai/dsh-client-ui-attachment"
+          ]
+        },
+        "0.1.2-rc.1": {
+          "status": "conditional",
+          "conditional": [
+            "@deepseek-ai/dsh-client-ui-attachment"
+          ]
+        }
+      },
+      "verdict": {
+        "cls": "broken-since",
+        "since": "0.1.5-rc.3",
+        "okUntil": "0.1.0-rc.7",
+        "conditional": [
+          "0.1.0-rc.8",
+          "0.1.1-rc.1",
+          "0.1.1-rc.2",
+          "0.1.2-alpha.2",
+          "0.1.2-alpha.3",
+          "0.1.2-alpha.4",
+          "0.1.2-alpha.5",
+          "0.1.2-rc.1",
+          "0.1.3-alpha.2",
+          "0.1.5-alpha.1",
+          "0.1.5-alpha.2",
+          "0.1.5-rc.1",
+          "0.1.5-rc.2",
+          "0.1.6-alpha.1",
+          "0.1.6-alpha.2",
+          "0.1.7-alpha.1",
+          "0.1.7-alpha.2",
+          "0.1.7-rc.1",
+          "0.1.7-rc.2",
+          "0.2.0-rc.1",
+          "0.2.0-rc.2",
+          "0.2.1-alpha.1"
+        ],
+        "total": 28
+      },
+      "hostTransform": true
     },
     "whale-girl": {
       "repo": "vlln/whale-girl",
@@ -577,6 +552,32 @@
     "@shengsheng/dsh-taskboard": {
       "repo": "shengsheng90/DSH-taskboard",
       "version": "0.1.7",
+      "requires": [
+        "react",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-free-search": {
+      "repo": "DDDMUC/dsh-free-search",
+      "version": "0.8.1",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -1177,12 +1178,11 @@
         "total": 28
       }
     },
-    "dsh-free-search": {
-      "repo": "DDDMUC/dsh-free-search",
-      "version": "0.8.1",
+    "@yunmiao/studymate": {
+      "repo": "Miaotofu01/Study-Mate",
+      "version": "1.2.0",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -1203,9 +1203,9 @@
         "total": 28
       }
     },
-    "dsh-plugin": {
-      "repo": "dshplugin/dsh-plugin-hub",
-      "version": "1.5.0",
+    "billion-context": {
+      "repo": "ranxianglei/billion-context",
+      "version": "0.1.187",
       "requires": [
         "react"
       ],
@@ -1278,12 +1278,40 @@
         "total": 28
       }
     },
-    "dsh-config-manager": {
-      "repo": "xiajiajun516/dsh-config-manager",
-      "version": "0.1.69",
+    "@zseven-w/dsh-crew": {
+      "repo": "ZSeven-W/dsh-crew",
+      "version": "0.1.0-rc.13",
+      "requires": [
+        "react",
+        "react-dom",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@zseven-w/dsh-android": {
+      "repo": "ZSeven-W/dsh-android",
+      "version": "0.1.0-rc.11",
       "requires": [
         "react",
         "react/jsx-runtime",
+        "react-dom/client",
         "react-dom"
       ],
       "results": {
@@ -1330,11 +1358,12 @@
         "total": 28
       }
     },
-    "meow-memory": {
-      "repo": "Phant0Meow/dsh-meow-memory",
-      "version": "0.29.0",
+    "@xmanrui/dsh-im": {
+      "repo": "xmanrui/dsh-im",
+      "version": "4.37.0",
       "requires": [
-        "react"
+        "react",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -1408,9 +1437,9 @@
         "total": 28
       }
     },
-    "dsh-meme": {
-      "repo": "yyh-001/dsh-meme",
-      "version": "0.1.44",
+    "dsh-plugin": {
+      "repo": "dshplugin/dsh-plugin-hub",
+      "version": "1.5.2",
       "requires": [
         "react"
       ],
@@ -1431,8 +1460,7 @@
       "verdict": {
         "cls": "ok",
         "total": 28
-      },
-      "hostTransform": true
+      }
     },
     "dsh-codex-connect": {
       "repo": "franksong2702/dsh-codex-connect",
@@ -1484,12 +1512,14 @@
         "total": 28
       }
     },
-    "dsh-plugin-wallpaper-engine": {
-      "repo": "elysia395/dsh-wallpaper-engine",
-      "version": "1.3.1",
+    "dsh-codex-subscription": {
+      "repo": "WSL043/dsh-codex-subscription",
+      "version": "2.5.4",
       "requires": [
         "react",
-        "react-dom"
+        "react/jsx-runtime",
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -1510,14 +1540,12 @@
         "total": 28
       }
     },
-    "dsh-codex-subscription": {
-      "repo": "WSL043/dsh-codex-subscription",
-      "version": "2.5.3",
+    "@zseven-w/dsh-noema": {
+      "repo": "ZSeven-W/dsh-noema",
+      "version": "0.1.0-rc.6",
       "requires": [
         "react",
-        "react/jsx-runtime",
-        "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -1716,14 +1744,13 @@
         "total": 28
       }
     },
-    "@zseven-w/dsh-android": {
-      "repo": "ZSeven-W/dsh-android",
-      "version": "0.1.0-rc.9",
+    "@mars-sea/dsh-commandcode-provider": {
+      "repo": "Mars-Sea/dsh-commandcode-provider",
+      "version": "0.12.7",
       "requires": [
         "react",
-        "react/jsx-runtime",
-        "react-dom/client",
-        "react-dom"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -1906,13 +1933,12 @@
         "total": 28
       }
     },
-    "@michengai/dsh-codex-ui": {
-      "repo": "MichengAI/dsh-codex-ui",
-      "version": "1.1.29",
+    "dsh-config-manager": {
+      "repo": "xiajiajun516/dsh-config-manager",
+      "version": "0.1.71",
       "requires": [
         "react",
         "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives",
         "react-dom"
       ],
       "results": {
@@ -1934,13 +1960,11 @@
         "total": 28
       }
     },
-    "@zseven-w/dsh-crew": {
-      "repo": "ZSeven-W/dsh-crew",
-      "version": "0.1.0-rc.13",
+    "dsh-meme": {
+      "repo": "yyh-001/dsh-meme",
+      "version": "0.1.46",
       "requires": [
-        "react",
-        "react-dom",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -1959,7 +1983,8 @@
       "verdict": {
         "cls": "ok",
         "total": 28
-      }
+      },
+      "hostTransform": true
     },
     "dsh-network-settings": {
       "repo": "kanneiren/dsh-network-settings",
@@ -2084,16 +2109,23 @@
         "total": 28
       }
     },
-    "@zseven-w/dsh-noema": {
-      "repo": "ZSeven-W/dsh-noema",
-      "version": "0.1.0-rc.6",
+    "@dickpy/dsh-imagegen": {
+      "repo": "dickpy/dsh-imagegen",
+      "version": "1.6.7",
       "requires": [
+        "react-dom/client",
         "react",
-        "react/jsx-runtime"
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-store"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -2106,41 +2138,18 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
-    "dsh-mattpocock-skills-deck": {
-      "repo": "FeatherHunter/dsh-mattpocock-skills-deck",
-      "version": "1.7.44",
+    "@modusensus/dsh-mneme": {
+      "repo": "modusensus/dsh-mneme",
+      "version": "0.8.14",
       "requires": [
         "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
         "react-dom"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "billion-context": {
-      "repo": "ranxianglei/billion-context",
-      "version": "0.1.186",
-      "requires": [
-        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -2238,9 +2247,37 @@
         "total": 28
       }
     },
+    "@michengai/dsh-codex-ui": {
+      "repo": "MichengAI/dsh-codex-ui",
+      "version": "1.1.31",
+      "requires": [
+        "react",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react-dom"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "@michengai/dsh-archive-manager": {
       "repo": "MichengAI/dsh-archive-manager",
-      "version": "1.0.13",
+      "version": "1.0.15",
       "requires": [
         "react",
         "react/jsx-runtime",
@@ -2293,13 +2330,12 @@
         "total": 28
       }
     },
-    "@mars-sea/dsh-commandcode-provider": {
-      "repo": "Mars-Sea/dsh-commandcode-provider",
-      "version": "0.12.5",
+    "dsh-mattpocock-skills-deck": {
+      "repo": "FeatherHunter/dsh-mattpocock-skills-deck",
+      "version": "1.7.46",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -2352,10 +2388,14 @@
         "total": 28
       }
     },
-    "@michengai/dsh-agency-agents": {
-      "repo": "MichengAI/dsh-agency-agents",
-      "version": "1.0.9",
-      "requires": [],
+    "dsh-claude-style": {
+      "repo": "Nwflower/dsh-claude-style",
+      "version": "0.12.0",
+      "requires": [
+        "react",
+        "react-dom/client",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -2430,14 +2470,10 @@
         "total": 28
       }
     },
-    "@modusensus/dsh-mneme": {
-      "repo": "modusensus/dsh-mneme",
-      "version": "0.8.14",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react-dom"
-      ],
+    "@michengai/dsh-agency-agents": {
+      "repo": "MichengAI/dsh-agency-agents",
+      "version": "1.0.11",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -2482,13 +2518,11 @@
         "total": 28
       }
     },
-    "@michengai/dsh-skills-manager": {
-      "repo": "MichengAI/dsh-skills-manager",
-      "version": "1.1.10",
+    "meow-memory": {
+      "repo": "Phant0Meow/dsh-meow-memory",
+      "version": "0.30.0",
       "requires": [
-        "react",
-        "react-dom/client",
-        "react-dom"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -2661,9 +2695,9 @@
         "total": 28
       }
     },
-    "dsh-web-search-pro": {
-      "repo": "anweat/dsh-web-search-pro",
-      "version": "0.2.0",
+    "dsh-auto-memory": {
+      "repo": "AskTheWay/dsh-auto-memory",
+      "version": "0.6.1",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -2739,12 +2773,11 @@
         "total": 28
       }
     },
-    "dsh-auto-memory": {
-      "repo": "AskTheWay/dsh-auto-memory",
-      "version": "0.6.0",
+    "local-shell-mcp-dsh": {
+      "repo": "fwerkor/local-shell-mcp",
+      "version": "5.1.1",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -2978,9 +3011,9 @@
         "total": 28
       }
     },
-    "dsh-connect-workbuddy": {
-      "repo": "dingminhua/dsh-connect-workbuddy",
-      "version": "3.6.0",
+    "dsh-web-search-pro": {
+      "repo": "anweat/dsh-web-search-pro",
+      "version": "0.2.1",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -3250,12 +3283,13 @@
         "total": 28
       }
     },
-    "@nonamelego/dsh-catppuccin": {
-      "repo": "NoNameLeGo/dsh-catppuccin-theme",
-      "version": "0.6.0",
+    "dsh-connect-workbuddy": {
+      "repo": "dingminhua/dsh-connect-workbuddy",
+      "version": "4.0.0",
       "requires": [
         "react",
-        "react/jsx-runtime"
+        "react/jsx-runtime",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -3670,12 +3704,10 @@
       },
       "hostTransform": true
     },
-    "local-shell-mcp-dsh": {
-      "repo": "fwerkor/local-shell-mcp",
-      "version": "5.0.1",
-      "requires": [
-        "react"
-      ],
+    "@kenz1117/dsh-ui-usage-billing": {
+      "repo": "kenz1117/dsh-ui-usage-billing",
+      "version": "1.4.24",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -3695,12 +3727,11 @@
         "total": 28
       }
     },
-    "dsh-knit": {
-      "repo": "PolinniZhong/dsh-knit",
-      "version": "0.18.0",
+    "dsh-mobile": {
+      "repo": "saya-ch/dsh-mobile",
+      "version": "0.6.0",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -3968,10 +3999,13 @@
         "total": 28
       }
     },
-    "@kenz1117/dsh-ui-usage-billing": {
-      "repo": "kenz1117/dsh-ui-usage-billing",
-      "version": "1.4.21",
-      "requires": [],
+    "dsh-knit": {
+      "repo": "PolinniZhong/dsh-knit",
+      "version": "0.19.1",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -3991,9 +4025,9 @@
         "total": 28
       }
     },
-    "dsh-connect-trae": {
-      "repo": "dingminhua/dsh-connect-trae",
-      "version": "2.8.0",
+    "@nonamelego/dsh-catppuccin": {
+      "repo": "NoNameLeGo/dsh-catppuccin-theme",
+      "version": "0.6.1",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -4014,6 +4048,66 @@
       },
       "verdict": {
         "cls": "ok",
+        "total": 28
+      }
+    },
+    "@wowyuarm/dsh-agent-team": {
+      "repo": "wowyuarm/dsh-agent-team",
+      "version": "0.2.1",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-api-gateway/client"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "mixed",
+        "okOn": [
+          "0.0.1-rc.5",
+          "0.1.0-rc.2",
+          "0.1.0-rc.3",
+          "0.1.0-rc.6",
+          "0.1.0-rc.7",
+          "0.1.0-rc.8",
+          "0.1.1-rc.1",
+          "0.1.1-rc.2",
+          "0.1.2-alpha.2",
+          "0.1.2-alpha.3",
+          "0.1.2-alpha.4",
+          "0.1.2-alpha.5",
+          "0.1.2-rc.1",
+          "0.1.3-alpha.2",
+          "0.1.5-alpha.1",
+          "0.1.5-alpha.2",
+          "0.1.5-rc.1",
+          "0.1.5-rc.2",
+          "0.1.6-alpha.1",
+          "0.1.6-alpha.2",
+          "0.1.7-alpha.1",
+          "0.1.7-alpha.2",
+          "0.1.7-rc.1",
+          "0.1.7-rc.2",
+          "0.2.0-rc.1",
+          "0.2.0-rc.2",
+          "0.2.1-alpha.1"
+        ],
+        "brokenOn": [
+          "0.1.5-rc.3"
+        ],
         "total": 28
       }
     },
@@ -4101,12 +4195,13 @@
         "total": 28
       }
     },
-    "@eddyskywalker/dsh-chatgpt-subscription": {
-      "repo": "Aa728848/dsh-chatgpt-subscription",
-      "version": "0.13.0",
+    "dsh-mcp-connector": {
+      "repo": "duhu2000/dsh-mcp-connector",
+      "version": "0.2.68",
       "requires": [
+        "react/jsx-runtime",
         "react",
-        "react/jsx-runtime"
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -4127,15 +4222,10 @@
         "total": 28
       }
     },
-    "@wowyuarm/dsh-agent-team": {
-      "repo": "wowyuarm/dsh-agent-team",
-      "version": "0.2.1",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-api-gateway/client"
-      ],
+    "dsh-kimino-theme": {
+      "repo": "niiang/dsh-kimino-theme",
+      "version": "68.1.0",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -4151,39 +4241,7 @@
         }
       },
       "verdict": {
-        "cls": "mixed",
-        "okOn": [
-          "0.0.1-rc.5",
-          "0.1.0-rc.2",
-          "0.1.0-rc.3",
-          "0.1.0-rc.6",
-          "0.1.0-rc.7",
-          "0.1.0-rc.8",
-          "0.1.1-rc.1",
-          "0.1.1-rc.2",
-          "0.1.2-alpha.2",
-          "0.1.2-alpha.3",
-          "0.1.2-alpha.4",
-          "0.1.2-alpha.5",
-          "0.1.2-rc.1",
-          "0.1.3-alpha.2",
-          "0.1.5-alpha.1",
-          "0.1.5-alpha.2",
-          "0.1.5-rc.1",
-          "0.1.5-rc.2",
-          "0.1.6-alpha.1",
-          "0.1.6-alpha.2",
-          "0.1.7-alpha.1",
-          "0.1.7-alpha.2",
-          "0.1.7-rc.1",
-          "0.1.7-rc.2",
-          "0.2.0-rc.1",
-          "0.2.0-rc.2",
-          "0.2.1-alpha.1"
-        ],
-        "brokenOn": [
-          "0.1.5-rc.3"
-        ],
+        "cls": "ok",
         "total": 28
       }
     },
@@ -4193,32 +4251,6 @@
       "requires": [
         "react",
         "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "@hytime/dsh-thinking-effort": {
-      "repo": "hytime/dsh-thinking-effort",
-      "version": "0.3.7",
-      "requires": [
-        "react",
         "react/jsx-runtime"
       ],
       "results": {
@@ -4269,10 +4301,14 @@
         "total": 28
       }
     },
-    "dsh-plugin-beyond-simulator": {
-      "repo": "1475505/miliastra-beyond-simulator",
-      "version": "2.0.10",
-      "requires": [],
+    "dsh-connect-trae": {
+      "repo": "dingminhua/dsh-connect-trae",
+      "version": "3.0.0",
+      "requires": [
+        "react",
+        "react/jsx-runtime",
+        "react-dom"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -4389,11 +4425,12 @@
         "total": 28
       }
     },
-    "meow-cachebilling": {
-      "repo": "Phant0Meow/dsh-meow-cachebilling",
-      "version": "0.7.4",
+    "@eddyskywalker/dsh-chatgpt-subscription": {
+      "repo": "Aa728848/dsh-chatgpt-subscription",
+      "version": "0.13.2",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -4414,9 +4451,9 @@
         "total": 28
       }
     },
-    "dsh-tavern": {
-      "repo": "chen731215-dev/dsh-tavern-v2",
-      "version": "2.5.5",
+    "meow-cachebilling": {
+      "repo": "Phant0Meow/dsh-meow-cachebilling",
+      "version": "0.8.0",
       "requires": [
         "react"
       ],
@@ -4583,9 +4620,9 @@
         "total": 28
       }
     },
-    "dsh-recall-plugin": {
-      "repo": "limbo947/dsh-recall-plugin",
-      "version": "2.4.9",
+    "dsh-plugin-beyond-simulator": {
+      "repo": "1475505/miliastra-beyond-simulator",
+      "version": "2.0.11",
       "requires": [],
       "results": {
         "0.0.1-rc.5": {
@@ -4763,11 +4800,12 @@
         "total": 28
       }
     },
-    "dsh-model-context-catalog": {
-      "repo": "HOWILLMAKEIT/dsh-model-context-catalog",
-      "version": "0.2.1",
+    "@hytime/dsh-thinking-effort": {
+      "repo": "hytime/dsh-thinking-effort",
+      "version": "0.3.8",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -4889,12 +4927,11 @@
         "total": 28
       }
     },
-    "dsh-wallpaper_share": {
-      "repo": "YRN-playmaker/dsh-wallpaper_share",
-      "version": "26.10.3",
+    "dsh-tavern": {
+      "repo": "chen731215-dev/dsh-tavern-v2",
+      "version": "2.7.2",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -4940,12 +4977,12 @@
         "total": 28
       }
     },
-    "dsh-mcp-connector": {
-      "repo": "duhu2000/dsh-mcp-connector",
-      "version": "0.2.68",
+    "dsh-better-input": {
+      "repo": "DIAG5/dsh-better-input",
+      "version": "0.2.5",
       "requires": [
-        "react/jsx-runtime",
         "react",
+        "react/jsx-runtime",
         "react-dom"
       ],
       "results": {
@@ -5016,13 +5053,13 @@
         "total": 28
       }
     },
-    "dsh-claude-style": {
-      "repo": "Nwflower/dsh-claude-style",
-      "version": "0.11.1",
+    "@michengai/dsh-skills-manager": {
+      "repo": "MichengAI/dsh-skills-manager",
+      "version": "1.1.13",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react-dom/client"
+        "react-dom/client",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -5595,14 +5632,13 @@
       },
       "hostTransform": true
     },
-    "@michengai/dsh-im-connect": {
-      "repo": "MichengAI/dsh-im-connect",
-      "version": "0.1.64",
+    "@zseven-w/dsh-harbor": {
+      "repo": "ZSeven-W/dsh-harbor",
+      "version": "0.1.0-rc.4",
       "requires": [
         "react",
-        "react-dom/client",
         "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -5649,14 +5685,10 @@
         "total": 28
       }
     },
-    "dsh-file-upload": {
-      "repo": "HongMing-Huang/dsh-file-upload",
-      "version": "0.4.3",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
-      ],
+    "dsh-recall-plugin": {
+      "repo": "limbo947/dsh-recall-plugin",
+      "version": "2.4.10",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -5988,13 +6020,11 @@
         "total": 28
       }
     },
-    "@zseven-w/dsh-harbor": {
-      "repo": "ZSeven-W/dsh-harbor",
-      "version": "0.1.0-rc.4",
+    "dsh-model-context-catalog": {
+      "repo": "HOWILLMAKEIT/dsh-model-context-catalog",
+      "version": "0.3.0",
       "requires": [
-        "react",
-        "react-dom",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -6015,14 +6045,12 @@
         "total": 28
       }
     },
-    "@weibaohui/skills-management": {
-      "repo": "weibaohui/skills-management",
-      "version": "0.9.0",
+    "dsh-wallpaper_share": {
+      "repo": "YRN-playmaker/dsh-wallpaper_share",
+      "version": "26.10.6-D",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react-dom",
-        "react-dom/client"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -6154,13 +6182,13 @@
         "total": 28
       }
     },
-    "dsh-better-input": {
-      "repo": "DIAG5/dsh-better-input",
-      "version": "0.2.5",
+    "dsh-file-upload": {
+      "repo": "HongMing-Huang/dsh-file-upload",
+      "version": "0.5.4",
       "requires": [
         "react",
-        "react/jsx-runtime",
-        "react-dom"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -6257,11 +6285,12 @@
         "total": 28
       }
     },
-    "dsh-ssh-ops": {
-      "repo": "caoyiwei850/dsh-ssh-ops",
-      "version": "0.3.18",
+    "dsh-prompt": {
+      "repo": "FeatherHunter/dsh-prompt",
+      "version": "0.4.9",
       "requires": [
-        "react"
+        "react",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -6457,15 +6486,11 @@
         "total": 28
       }
     },
-    "@michengai/dsh-automation": {
-      "repo": "MichengAI/dsh-automation",
-      "version": "0.1.55",
+    "dsh-ssh-ops": {
+      "repo": "caoyiwei850/dsh-ssh-ops",
+      "version": "0.3.19",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime",
-        "react-dom/client",
-        "react-dom"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -6594,21 +6619,13 @@
         "total": 28
       }
     },
-    "dsh-ui-appearance": {
-      "repo": "TQSY114514/dsh-ui-appearance",
-      "version": "0.1.17",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-store"
-      ],
+    "stratagate-dsh": {
+      "repo": "diqierjia/StrataGate-AgentMemory",
+      "version": "0.3.4",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
+          "status": "ok"
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -6621,8 +6638,7 @@
         }
       },
       "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
+        "cls": "ok",
         "total": 28
       }
     },
@@ -6652,13 +6668,10 @@
         "total": 28
       }
     },
-    "dsh-prompt": {
-      "repo": "FeatherHunter/dsh-prompt",
-      "version": "0.4.9",
-      "requires": [
-        "react",
-        "react-dom"
-      ],
+    "dsh-agent-studio": {
+      "repo": "thissensen/dsh-agent-studio",
+      "version": "0.1.5",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -6806,13 +6819,14 @@
         "total": 28
       }
     },
-    "dsh-reminder": {
-      "repo": "Aisland-SJL/dsh-reminder",
-      "version": "0.1.4",
+    "@michengai/dsh-im-connect": {
+      "repo": "MichengAI/dsh-im-connect",
+      "version": "0.1.66",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "react-dom/client",
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -6937,6 +6951,34 @@
         "total": 28
       }
     },
+    "@weibaohui/skills-management": {
+      "repo": "weibaohui/skills-management",
+      "version": "0.9.1",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react-dom",
+        "react-dom/client"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "@awiki/dsh-plugin": {
       "repo": "AgentConnect/dsh-awiki",
       "version": "0.3.12",
@@ -7016,10 +7058,13 @@
         "total": 28
       }
     },
-    "dsh-agent-studio": {
-      "repo": "thissensen/dsh-agent-studio",
-      "version": "0.1.5",
-      "requires": [],
+    "@wenaixi/dsh-superpower": {
+      "repo": "Wenaixi/dsh-superpower",
+      "version": "7.5.8",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -7195,11 +7240,13 @@
         "total": 28
       }
     },
-    "@zaofan/dsh-qqbot": {
-      "repo": "gcry13067381632-jpg/dsh-qqbot",
-      "version": "1.7.4",
+    "dsh-novel-writer": {
+      "repo": "siweina/dsh-novel-writer",
+      "version": "6.3.0",
       "requires": [
-        "react"
+        "react",
+        "react-dom/client",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -7431,13 +7478,10 @@
         "total": 28
       }
     },
-    "@wenaixi/dsh-superpower": {
-      "repo": "Wenaixi/dsh-superpower",
-      "version": "7.5.8",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
+    "dsh-ui-tweaks": {
+      "repo": "wlj521/dsh-ui-tweaks",
+      "version": "0.20.1",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -7698,10 +7742,14 @@
         "total": 28
       }
     },
-    "dsh-ui-tweaks": {
-      "repo": "wlj521/dsh-ui-tweaks",
-      "version": "0.20.1",
-      "requires": [],
+    "@yolk_vat-y/dsh-project-memory": {
+      "repo": "00080000/dsh-project-memory",
+      "version": "0.5.15",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -7721,17 +7769,21 @@
         "total": 28
       }
     },
-    "dsh-whale-girl-pet": {
-      "repo": "yanzwzz/dsh-whale-girl-pet",
-      "version": "0.3.8",
+    "dsh-ui-appearance": {
+      "repo": "TQSY114514/dsh-ui-appearance",
+      "version": "0.1.21",
       "requires": [
         "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime",
-        "react-dom"
+        "@deepseek-ai/dsh-client-store"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -7744,7 +7796,8 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
@@ -7832,20 +7885,15 @@
         "total": 28
       }
     },
-    "dsh-visual-plugin": {
-      "repo": "jyh20030112/dsh-visual-plugin",
-      "version": "0.4.0",
+    "@zaofan/dsh-qqbot": {
+      "repo": "gcry13067381632-jpg/dsh-qqbot",
+      "version": "1.7.5",
       "requires": [
-        "react",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-store"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
+          "status": "ok"
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -7858,8 +7906,7 @@
         }
       },
       "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
+        "cls": "ok",
         "total": 28
       }
     },
@@ -8106,6 +8153,33 @@
       "repo": "xohmai/dsh-session-delete",
       "version": "0.1.0",
       "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-reminder": {
+      "repo": "Aisland-SJL/dsh-reminder",
+      "version": "0.3.1",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -8442,14 +8516,37 @@
         "total": 28
       }
     },
-    "@dickpy/dsh-imagegen": {
-      "repo": "dickpy/dsh-imagegen",
-      "version": "1.6.7",
+    "dsh-plugin-lookatstudy": {
+      "repo": "Kaiji-Z/dsh-plugin-lookatstudy",
+      "version": "0.26.3",
       "requires": [
-        "react-dom/client",
         "react",
-        "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives",
+        "react-dom/client"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-visual-plugin": {
+      "repo": "jyh20030112/dsh-visual-plugin",
+      "version": "0.4.1",
+      "requires": [
+        "react",
         "react/jsx-runtime",
         "@deepseek-ai/dsh-client-store"
       ],
@@ -8473,33 +8570,6 @@
       "verdict": {
         "cls": "supported-since",
         "since": "0.1.2-alpha.2",
-        "total": 28
-      }
-    },
-    "@yolk_vat-y/dsh-project-memory": {
-      "repo": "00080000/dsh-project-memory",
-      "version": "0.5.15",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
         "total": 28
       }
     },
@@ -9005,38 +9075,12 @@
         "total": 28
       }
     },
-    "dsh-chat-manager": {
-      "repo": "WSL043/dsh-chat-manager",
-      "version": "1.5.8",
+    "@wenaixi/dsh-ponytail": {
+      "repo": "Wenaixi/dsh-ponytail",
+      "version": "5.3.2",
       "requires": [
         "react",
         "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-plugin-lookatstudy": {
-      "repo": "Kaiji-Z/dsh-plugin-lookatstudy",
-      "version": "0.26.3",
-      "requires": [
-        "react",
-        "react-dom/client"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -9084,15 +9128,21 @@
       },
       "hostTransform": true
     },
-    "dsh-web-search-free": {
-      "repo": "MochiNek0/dsh-web-search-free",
-      "version": "1.7.0",
+    "dsh-reference-anything": {
+      "repo": "Chael-Chael/dsh-reference-anything",
+      "version": "0.4.3",
       "requires": [
-        "react"
+        "@deepseek-ai/dsh-client-store",
+        "react",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -9105,7 +9155,8 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
@@ -10116,10 +10167,12 @@
         "total": 28
       }
     },
-    "dsh-piggy": {
-      "repo": "CLICGGER-TYPES/dsh-piggy",
-      "version": "0.31.0",
-      "requires": [],
+    "dsh-web-search-free": {
+      "repo": "MochiNek0/dsh-web-search-free",
+      "version": "1.7.1",
+      "requires": [
+        "react"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -10477,11 +10530,12 @@
         "total": 28
       }
     },
-    "dsh-web-remote": {
-      "repo": "godchen520/dsh-web-remote",
-      "version": "0.8.0",
+    "dsh-chat-manager": {
+      "repo": "WSL043/dsh-chat-manager",
+      "version": "1.5.9",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -10684,9 +10738,9 @@
         "total": 28
       }
     },
-    "@wenaixi/dsh-ponytail": {
-      "repo": "Wenaixi/dsh-ponytail",
-      "version": "5.3.2",
+    "@islibaodong/dsh-login": {
+      "repo": "islibaodong/dsh-login",
+      "version": "0.3.1",
       "requires": [
         "react",
         "@deepseek-ai/dsh-client-ui-primitives"
@@ -11364,7 +11418,7 @@
     },
     "@a9i5k4/dsh-auto-memory": {
       "repo": "Aik358/dsh-auto-memory",
-      "version": "3.2.10",
+      "version": "3.2.11",
       "requires": [
         "react",
         "react-dom"
@@ -12133,58 +12187,9 @@
         "total": 28
       }
     },
-    "dsh-plugin-manager-pro": {
-      "repo": "nonentity303/dsh-plugin-manager",
-      "version": "0.9.0",
-      "requires": [
-        "react",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-all-usage": {
-      "repo": "ParticleLight/dsh-all-usage",
-      "version": "1.1.17",
-      "requires": [],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-wechat": {
-      "repo": "pan17/dsh-wechat",
-      "version": "0.9.7",
+    "@mengyuly/dsh-ponytail": {
+      "repo": "MengYuil/dsh-ponytail",
+      "version": "0.4.1",
       "requires": [
         "react"
       ],
@@ -12207,12 +12212,67 @@
         "total": 28
       }
     },
-    "@islibaodong/dsh-login": {
-      "repo": "islibaodong/dsh-login",
-      "version": "0.3.1",
+    "dsh-web-remote": {
+      "repo": "godchen520/dsh-web-remote",
+      "version": "0.8.1",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@huanlin/dsh-plugin-interpreters": {
+      "repo": "HuanLinOTO/dsh-plugin-interpreters",
+      "version": "0.5.2",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "@deepseek-ai/dsh-client-store",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
+        "total": 28
+      }
+    },
+    "dsh-soul-md": {
+      "repo": "Scorp1o117/dsh-soul-md",
+      "version": "0.10.0",
+      "requires": [
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -12258,12 +12318,10 @@
         "total": 28
       }
     },
-    "dsh-soul-md": {
-      "repo": "Scorp1o117/dsh-soul-md",
-      "version": "0.10.0",
-      "requires": [
-        "react"
-      ],
+    "dsh-piggy": {
+      "repo": "CLICGGER-TYPES/dsh-piggy",
+      "version": "0.33.0",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -12412,14 +12470,11 @@
         "total": 28
       }
     },
-    "dsh-diff-approval": {
-      "repo": "9087/dsh-diff-approval",
-      "version": "0.30.1",
+    "dsh-wechat": {
+      "repo": "pan17/dsh-wechat",
+      "version": "0.9.11",
       "requires": [
-        "react",
-        "react/jsx-runtime",
-        "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -12592,12 +12647,36 @@
         "total": 28
       }
     },
-    "dsh-streamfold": {
-      "repo": "rezon-aki/dsh-streamfold",
-      "version": "0.7.2",
+    "dsh-plugin-manager-pro": {
+      "repo": "nonentity303/dsh-plugin-manager",
+      "version": "0.9.1",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime"
       ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-all-usage": {
+      "repo": "ParticleLight/dsh-all-usage",
+      "version": "1.1.18",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -13492,20 +13571,15 @@
         "total": 28
       }
     },
-    "@huanlin/dsh-plugin-interpreters": {
-      "repo": "HuanLinOTO/dsh-plugin-interpreters",
-      "version": "0.5.2",
+    "sage-mem": {
+      "repo": "gezi-wen/sage-mem",
+      "version": "0.7.2",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-store",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
+          "status": "ok"
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -13518,8 +13592,7 @@
         }
       },
       "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
+        "cls": "ok",
         "total": 28
       }
     },
@@ -14127,31 +14200,6 @@
         "total": 28
       }
     },
-    "dsh-plugin-tool-management": {
-      "repo": "ouli-1242/dsh-plugin-tool-management",
-      "version": "0.18.5",
-      "requires": [
-        "react"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "dsh-browser-scope": {
       "repo": "HakureiMonika/dsh-browser-scope",
       "version": "1.0.0-rc4",
@@ -14382,11 +14430,12 @@
         "total": 28
       }
     },
-    "sage-mem": {
-      "repo": "gezi-wen/sage-mem",
-      "version": "0.7.2",
+    "@banana-peeljj12/dsh-trellis": {
+      "repo": "1264459640/dsh-trellis",
+      "version": "0.3.6",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -14532,10 +14581,12 @@
         "total": 28
       }
     },
-    "stratagate-dsh": {
-      "repo": "diqierjia/StrataGate-AgentMemory",
-      "version": "0.3.1",
-      "requires": [],
+    "@machine-126/dsh-alert-sound": {
+      "repo": "Machine-126/dsh-alert-sound",
+      "version": "0.3.16",
+      "requires": [
+        "react"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -15163,21 +15214,17 @@
         "total": 28
       }
     },
-    "dsh-reference-anything": {
-      "repo": "Chael-Chael/dsh-reference-anything",
-      "version": "0.4.3",
+    "@michengai/dsh-btw": {
+      "repo": "MichengAI/dsh-btw",
+      "version": "0.1.17",
       "requires": [
-        "@deepseek-ai/dsh-client-store",
         "react",
         "react/jsx-runtime",
         "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
+          "status": "ok"
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -15190,8 +15237,7 @@
         }
       },
       "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
+        "cls": "ok",
         "total": 28
       }
     },
@@ -15299,12 +15345,11 @@
         "total": 28
       }
     },
-    "@michengai/dsh-btw": {
-      "repo": "MichengAI/dsh-btw",
-      "version": "0.1.16",
+    "dsh-streamfold": {
+      "repo": "rezon-aki/dsh-streamfold",
+      "version": "0.7.4",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -15531,12 +15576,15 @@
         "total": 28
       }
     },
-    "@banana-peeljj12/dsh-trellis": {
-      "repo": "1264459640/dsh-trellis",
-      "version": "0.3.6",
+    "@xiaoso/dsh-tool-plus": {
+      "repo": "xiaoso456/dsh-tool-plus",
+      "version": "0.1.13",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "@deepseek-ai/dsh-client-connection/client",
+        "react/jsx-runtime",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -15553,7 +15601,39 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "mixed",
+        "okOn": [
+          "0.0.1-rc.5",
+          "0.1.0-rc.2",
+          "0.1.0-rc.3",
+          "0.1.0-rc.6",
+          "0.1.0-rc.7",
+          "0.1.0-rc.8",
+          "0.1.1-rc.1",
+          "0.1.1-rc.2",
+          "0.1.2-alpha.2",
+          "0.1.2-alpha.3",
+          "0.1.2-alpha.4",
+          "0.1.2-alpha.5",
+          "0.1.2-rc.1",
+          "0.1.3-alpha.2",
+          "0.1.5-alpha.1",
+          "0.1.5-alpha.2",
+          "0.1.5-rc.1",
+          "0.1.5-rc.2",
+          "0.1.6-alpha.1",
+          "0.1.6-alpha.2",
+          "0.1.7-alpha.1",
+          "0.1.7-alpha.2",
+          "0.1.7-rc.1",
+          "0.1.7-rc.2",
+          "0.2.0-rc.1",
+          "0.2.0-rc.2",
+          "0.2.1-alpha.1"
+        ],
+        "brokenOn": [
+          "0.1.5-rc.3"
+        ],
         "total": 28
       }
     },
@@ -15607,13 +15687,11 @@
         "total": 28
       }
     },
-    "@weibaohui/dsh-sync": {
-      "repo": "weibaohui/dsh-sync",
-      "version": "0.4.2",
+    "dsh-plugin-tool-management": {
+      "repo": "ouli-1242/dsh-plugin-tool-management",
+      "version": "0.19.0",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react-dom/client"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -15634,9 +15712,9 @@
         "total": 28
       }
     },
-    "@machine-126/dsh-alert-sound": {
-      "repo": "Machine-126/dsh-alert-sound",
-      "version": "0.3.16",
+    "@weibaohui/hermes-loop": {
+      "repo": "weibaohui/hermes-loop",
+      "version": "0.1.17",
       "requires": [
         "react"
       ],
@@ -15712,9 +15790,9 @@
         "total": 28
       }
     },
-    "dsh-noname-kit": {
-      "repo": "qtaik/dsh-noname-kit",
-      "version": "1.8.1",
+    "dsh-wallpaper-bg": {
+      "repo": "nishuoyang/dsh-wallpaper-bg",
+      "version": "0.5.12",
       "requires": [
         "react"
       ],
@@ -15924,9 +16002,9 @@
         "total": 28
       }
     },
-    "dsh-wallpaper-bg": {
-      "repo": "nishuoyang/dsh-wallpaper-bg",
-      "version": "0.5.11",
+    "dsh-model-pro": {
+      "repo": "wqy8593521/dsh-model-pro",
+      "version": "2.0.1",
       "requires": [
         "react"
       ],
@@ -16257,9 +16335,9 @@
         "total": 28
       }
     },
-    "dsh-office": {
-      "repo": "Fayelin12/dsh-office",
-      "version": "0.4.5",
+    "dsh-noname-kit": {
+      "repo": "qtaik/dsh-noname-kit",
+      "version": "1.9.0",
       "requires": [
         "react"
       ],
@@ -17359,6 +17437,31 @@
         "total": 28
       }
     },
+    "dsh-cosplay": {
+      "repo": "ZelinW1/dsh-cosplay",
+      "version": "0.5.1",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "dsh-ui-tools": {
       "repo": "xing-shuyin/dsh-ui-tools",
       "version": "0.2.6",
@@ -17610,9 +17713,9 @@
         "total": 28
       }
     },
-    "dsh-cosplay": {
-      "repo": "ZelinW1/dsh-cosplay",
-      "version": "0.5.1",
+    "@yannzhou/dsh-about": {
+      "repo": "YannZhou/dsh-about",
+      "version": "1.8.0",
       "requires": [
         "react"
       ],
@@ -17875,11 +17978,13 @@
         "total": 28
       }
     },
-    "@weibaohui/hermes-loop": {
-      "repo": "weibaohui/hermes-loop",
-      "version": "0.1.17",
+    "@goodandready/dsh-cron": {
+      "repo": "GooDAnDReaDY/dsh-cron",
+      "version": "0.2.49",
       "requires": [
-        "react"
+        "react",
+        "react-dom/client",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -17927,15 +18032,12 @@
         "total": 28
       }
     },
-    "@xiaoso/dsh-tool-plus": {
-      "repo": "xiaoso456/dsh-tool-plus",
-      "version": "0.1.13",
+    "@goodandready/dsh-clinebot": {
+      "repo": "GooDAnDReaDY/dsh-clinebot",
+      "version": "0.5.19",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "@deepseek-ai/dsh-client-connection/client",
-        "react/jsx-runtime",
-        "react-dom"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -17952,39 +18054,7 @@
         }
       },
       "verdict": {
-        "cls": "mixed",
-        "okOn": [
-          "0.0.1-rc.5",
-          "0.1.0-rc.2",
-          "0.1.0-rc.3",
-          "0.1.0-rc.6",
-          "0.1.0-rc.7",
-          "0.1.0-rc.8",
-          "0.1.1-rc.1",
-          "0.1.1-rc.2",
-          "0.1.2-alpha.2",
-          "0.1.2-alpha.3",
-          "0.1.2-alpha.4",
-          "0.1.2-alpha.5",
-          "0.1.2-rc.1",
-          "0.1.3-alpha.2",
-          "0.1.5-alpha.1",
-          "0.1.5-alpha.2",
-          "0.1.5-rc.1",
-          "0.1.5-rc.2",
-          "0.1.6-alpha.1",
-          "0.1.6-alpha.2",
-          "0.1.7-alpha.1",
-          "0.1.7-alpha.2",
-          "0.1.7-rc.1",
-          "0.1.7-rc.2",
-          "0.2.0-rc.1",
-          "0.2.0-rc.2",
-          "0.2.1-alpha.1"
-        ],
-        "brokenOn": [
-          "0.1.5-rc.3"
-        ],
+        "cls": "ok",
         "total": 28
       }
     },
@@ -18152,12 +18222,13 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-clinebot": {
-      "repo": "GooDAnDReaDY/dsh-clinebot",
-      "version": "0.5.19",
+    "@weibaohui/dsh-sync": {
+      "repo": "weibaohui/dsh-sync",
+      "version": "0.4.8",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react-dom/client"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -18203,9 +18274,9 @@
         "total": 28
       }
     },
-    "@yannzhou/dsh-about": {
-      "repo": "YannZhou/dsh-about",
-      "version": "1.8.0",
+    "dsh-connect": {
+      "repo": "yembors64632/dsh-connect",
+      "version": "1.0.5",
       "requires": [
         "react"
       ],
@@ -18369,13 +18440,13 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-cron": {
-      "repo": "GooDAnDReaDY/dsh-cron",
-      "version": "0.2.49",
+    "dsh-widgets": {
+      "repo": "Physicolor/dsh-widgets",
+      "version": "1.8.4",
       "requires": [
         "react",
-        "react-dom/client",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -20542,13 +20613,11 @@
         "total": 28
       }
     },
-    "dsh-novel-writer": {
-      "repo": "siweina/dsh-novel-writer",
-      "version": "6.3.0",
+    "dsh-office": {
+      "repo": "Fayelin12/dsh-office",
+      "version": "0.4.6",
       "requires": [
-        "react",
-        "react-dom/client",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -20568,35 +20637,6 @@
         "cls": "ok",
         "total": 28
       }
-    },
-    "dsh-whale-girl": {
-      "repo": "nickkkkkk123123/dsh-whale-girl",
-      "version": "0.4.4",
-      "requires": [
-        "react",
-        "react-dom",
-        "react-dom/client",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      },
-      "hostTransform": true
     },
     "dsh-loom-chat": {
       "repo": "onenameneo/dsh-plugin-loom-chat",
@@ -20682,9 +20722,9 @@
         "total": 28
       }
     },
-    "dsh-model-pro": {
-      "repo": "wqy8593521/dsh-model-pro",
-      "version": "2.0.1",
+    "dsh-perlica-ding": {
+      "repo": "117BS/dsh-perlica-ding",
+      "version": "0.2.1",
       "requires": [
         "react"
       ],
@@ -20755,11 +20795,12 @@
         "total": 28
       }
     },
-    "dsh-connect": {
-      "repo": "yembors64632/dsh-connect",
-      "version": "1.0.5",
+    "dsh-livechat": {
+      "repo": "huashenglian/dsh-livechat",
+      "version": "0.6.9",
       "requires": [
-        "react"
+        "react",
+        "react-dom/client"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -20885,11 +20926,12 @@
         "total": 28
       }
     },
-    "@kanadego/dsh-heartbeat": {
-      "repo": "Kanadego/dsh-heartbeat",
-      "version": "1.9.0",
+    "dsh-cyberwhale": {
+      "repo": "CyberWei922/dsh-cyberwhale",
+      "version": "1.0.1",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -21543,12 +21585,11 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-moa": {
-      "repo": "GooDAnDReaDY/dsh-moa",
-      "version": "0.2.49",
+    "dsh-llm-opencode-go": {
+      "repo": "NOirBRight/dsh-llm-opencode-go",
+      "version": "0.2.2",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -21858,6 +21899,31 @@
       "requires": [
         "react",
         "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@kanadego/dsh-heartbeat": {
+      "repo": "Kanadego/dsh-heartbeat",
+      "version": "1.9.1",
+      "requires": [
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -22326,29 +22392,6 @@
         "react",
         "react/jsx-runtime"
       ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-delete-session": {
-      "repo": "DDDMUC/dsh-delete-session",
-      "version": "0.1.8",
-      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -24064,11 +24107,14 @@
         "total": 28
       }
     },
-    "dsh-buddy-checkin": {
-      "repo": "corrinehu/dsh-buddy-checkin",
-      "version": "0.2.1",
+    "dsh-whale-girl": {
+      "repo": "nickkkkkk123123/dsh-whale-girl",
+      "version": "0.4.5",
       "requires": [
-        "react"
+        "react",
+        "react-dom",
+        "react-dom/client",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -24087,7 +24133,8 @@
       "verdict": {
         "cls": "ok",
         "total": 28
-      }
+      },
+      "hostTransform": true
     },
     "dsh-improve-prompt": {
       "repo": "hoyyang/dsh-improve-prompt",
@@ -24423,13 +24470,12 @@
         "total": 28
       }
     },
-    "dsh-input-traffic": {
-      "repo": "drscrewdriver/dsh-input-traffic",
-      "version": "0.7.0",
+    "dsh-delete-session": {
+      "repo": "DDDMUC/dsh-delete-session",
+      "version": "0.1.10",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -24902,11 +24948,12 @@
         "total": 28
       }
     },
-    "dsh-llm-opencode-go": {
-      "repo": "NOirBRight/dsh-llm-opencode-go",
-      "version": "0.2.2",
+    "@goodandready/dsh-moa": {
+      "repo": "GooDAnDReaDY/dsh-moa",
+      "version": "0.2.50",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -25119,13 +25166,11 @@
         "total": 28
       }
     },
-    "dsh-widgets": {
-      "repo": "Physicolor/dsh-widgets",
-      "version": "1.8.4",
+    "dsh-ths-holdings": {
+      "repo": "PM25000/dsh-ths-holdings",
+      "version": "0.2.1",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react-dom"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -27039,11 +27084,14 @@
         "total": 28
       }
     },
-    "dsh-auto-paste": {
-      "repo": "sakuraqqq/dsh-auto-paste",
-      "version": "0.2.1",
+    "dsh-diff-approval": {
+      "repo": "9087/dsh-diff-approval",
+      "version": "0.32.0",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime",
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -28849,12 +28897,12 @@
         "total": 28
       }
     },
-    "dsh-livechat": {
-      "repo": "huashenglian/dsh-livechat",
-      "version": "0.6.9",
+    "dsh-token-usage-stats": {
+      "repo": "jkStars/dsh-token-usage-stats",
+      "version": "0.3.15",
       "requires": [
         "react",
-        "react-dom/client"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -29463,10 +29511,14 @@
         "total": 28
       }
     },
-    "dsh-whale-pet-plugin": {
-      "repo": "dleaf6211-hash/dsh-whale-pet",
-      "version": "1.0.4-new",
-      "requires": [],
+    "dsh-input-traffic": {
+      "repo": "drscrewdriver/dsh-input-traffic",
+      "version": "0.7.3",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -29890,14 +29942,12 @@
         "total": 28
       }
     },
-    "@weibaohui/experts-management": {
-      "repo": "weibaohui/experts-management",
-      "version": "0.5.9",
+    "dsh-live-voice": {
+      "repo": "victorwads/dsh-live-voice",
+      "version": "0.4.0",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react-dom",
-        "react-dom/client"
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -30155,9 +30205,9 @@
         "total": 28
       }
     },
-    "dsh-odoo-sdd": {
-      "repo": "fhidalgodev/dsh-odoo-sdd",
-      "version": "0.11.2",
+    "dsh-buddy-checkin": {
+      "repo": "corrinehu/dsh-buddy-checkin",
+      "version": "0.3.0",
       "requires": [
         "react"
       ],
@@ -30331,9 +30381,41 @@
         "total": 28
       }
     },
-    "dsh-ide-git": {
-      "repo": "KannaKuron/dsh-ide-git",
-      "version": "0.12.1",
+    "dsh-composer-ux": {
+      "repo": "fangwen9527/dsh-composer-ux",
+      "version": "0.17.2",
+      "requires": [
+        "@deepseek-ai/dsh-client-store",
+        "react",
+        "react/jsx-runtime",
+        "react-dom"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
+        "total": 28
+      }
+    },
+    "dsh-auto-paste": {
+      "repo": "sakuraqqq/dsh-auto-paste",
+      "version": "0.2.2",
       "requires": [
         "react"
       ],
@@ -30569,12 +30651,40 @@
         "total": 28
       }
     },
-    "dsh-live-voice": {
-      "repo": "victorwads/dsh-live-voice",
-      "version": "0.3.2",
+    "dsh-whale-girl-pet": {
+      "repo": "yanzwzz/dsh-whale-girl-pet",
+      "version": "0.3.9",
       "requires": [
         "react",
+        "react/jsx-runtime",
         "react-dom"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-edit-turn": {
+      "repo": "DDDMUC/dsh-edit-turn",
+      "version": "0.2.20",
+      "requires": [
+        "react",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -30823,12 +30933,10 @@
         "total": 28
       }
     },
-    "dsh-ths-holdings": {
-      "repo": "PM25000/dsh-ths-holdings",
-      "version": "0.2.1",
-      "requires": [
-        "react"
-      ],
+    "dsh-whale-pet-plugin": {
+      "repo": "dleaf6211-hash/dsh-whale-pet",
+      "version": "1.0.6",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -30848,11 +30956,12 @@
         "total": 28
       }
     },
-    "@pioneer_zmc/dsh-workbench": {
-      "repo": "pioneer666-user/specdev-workbench",
-      "version": "0.2.1",
+    "dsh-ide-git": {
+      "repo": "KannaKuron/dsh-ide-git",
+      "version": "0.13.5",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -31750,12 +31859,15 @@
         "total": 28
       }
     },
-    "dsh-fish-tts": {
-      "repo": "MaRi23333/dsh-fish-tts",
-      "version": "0.2.12",
+    "@michengai/dsh-automation": {
+      "repo": "MichengAI/dsh-automation",
+      "version": "0.1.58",
       "requires": [
         "react",
-        "react/jsx-runtime"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime",
+        "react-dom/client",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -31862,31 +31974,6 @@
         "react",
         "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-openrouter-providers": {
-      "repo": "MoRanYue/dsh-openrouter-providers",
-      "version": "1.4.1",
-      "requires": [
-        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -32097,32 +32184,6 @@
         "cls": "broken-since",
         "since": "0.1.2-alpha.2",
         "okUntil": "0.1.1-rc.2",
-        "total": 28
-      }
-    },
-    "dsh-token-usage-stats": {
-      "repo": "jkStars/dsh-token-usage-stats",
-      "version": "0.3.15",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
         "total": 28
       }
     },
@@ -32780,14 +32841,13 @@
         "total": 28
       }
     },
-    "dsh-composer-ux": {
-      "repo": "fangwen9527/dsh-composer-ux",
-      "version": "0.17.2",
+    "dsh-shift-router": {
+      "repo": "green-dalii/dsh-shift-router",
+      "version": "0.7.4",
       "requires": [
         "@deepseek-ai/dsh-client-store",
-        "react",
         "react/jsx-runtime",
-        "react-dom"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -33411,13 +33471,11 @@
         "total": 28
       }
     },
-    "dsh-edit-turn": {
-      "repo": "DDDMUC/dsh-edit-turn",
-      "version": "0.2.20",
+    "iterate-plugin": {
+      "repo": "jingzhao-l/iterate-plugin",
+      "version": "3.6.0",
       "requires": [
-        "react",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -34928,20 +34986,18 @@
         "total": 28
       }
     },
-    "dsh-shift-router": {
-      "repo": "green-dalii/dsh-shift-router",
-      "version": "0.7.4",
+    "@weibaohui/experts-management": {
+      "repo": "weibaohui/experts-management",
+      "version": "0.5.10",
       "requires": [
-        "@deepseek-ai/dsh-client-store",
-        "react/jsx-runtime",
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react-dom",
+        "react-dom/client"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
+          "status": "ok"
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -34954,8 +35010,7 @@
         }
       },
       "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
+        "cls": "ok",
         "total": 28
       }
     },
@@ -35053,6 +35108,31 @@
       "requires": [
         "react",
         "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-odoo-sdd": {
+      "repo": "fhidalgodev/dsh-odoo-sdd",
+      "version": "0.14.0",
+      "requires": [
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -36066,15 +36146,20 @@
         "total": 28
       }
     },
-    "iterate-plugin": {
-      "repo": "jingzhao-l/iterate-plugin",
-      "version": "3.6.0",
+    "dsh-llm-local-token": {
+      "repo": "tianxia--/dsh-llm-local-token",
+      "version": "1.7.0",
       "requires": [
-        "react"
+        "react/jsx-runtime",
+        "react",
+        "@deepseek-ai/dsh-client-store"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -36087,7 +36172,8 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
@@ -37328,12 +37414,15 @@
         "total": 28
       }
     },
-    "dsh-cyberwhale": {
-      "repo": "CyberWei922/dsh-cyberwhale",
-      "version": "1.0.1",
+    "dsh-pet": {
+      "repo": "levi52/dsh-pet",
+      "version": "0.3.6",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react-dom/client",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -38155,6 +38244,33 @@
         "total": 28
       }
     },
+    "dsh-labnana": {
+      "repo": "exoticknight/dsh-labnana",
+      "version": "0.3.5",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "dsh-unified-market": {
       "repo": "jing-hy/dsh-unified-market",
       "version": "0.4.1",
@@ -38180,9 +38296,9 @@
         "total": 28
       }
     },
-    "dsh-skills-nexus": {
-      "repo": "xiaxi626/dsh-skills-nexus",
-      "version": "0.5.0",
+    "dsh-fish-tts": {
+      "repo": "MaRi23333/dsh-fish-tts",
+      "version": "0.2.13",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -38627,20 +38743,17 @@
         "total": 28
       }
     },
-    "dsh-llm-local-token": {
-      "repo": "tianxia--/dsh-llm-local-token",
-      "version": "1.7.0",
+    "dsh-session-kit": {
+      "repo": "ltxlong/dsh-session-kit",
+      "version": "5.1.0",
       "requires": [
-        "react/jsx-runtime",
         "react",
-        "@deepseek-ai/dsh-client-store"
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
+          "status": "ok"
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -38653,8 +38766,7 @@
         }
       },
       "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
+        "cls": "ok",
         "total": 28
       }
     },
@@ -39947,6 +40059,31 @@
         "total": 28
       }
     },
+    "dsh-openrouter-providers": {
+      "repo": "MoRanYue/dsh-openrouter-providers",
+      "version": "1.5.0",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "@anionex/dsh-smarter-edit": {
       "repo": "Anionex/dsh-smarter-edit",
       "version": "0.1.9",
@@ -40378,13 +40515,12 @@
         "total": 28
       }
     },
-    "dsh-labnana": {
-      "repo": "exoticknight/dsh-labnana",
-      "version": "0.3.5",
+    "dsh-mobile-upgrade": {
+      "repo": "langyo/dsh-mobile-upgrade",
+      "version": "0.8.3",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -41177,13 +41313,11 @@
         "total": 28
       }
     },
-    "dsh-session-kit": {
-      "repo": "ltxlong/dsh-session-kit",
-      "version": "5.1.0",
+    "dsh-vps-manager": {
+      "repo": "AIcivilization/dsh-vps-manager",
+      "version": "0.6.5",
       "requires": [
-        "react",
-        "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -41202,7 +41336,8 @@
       "verdict": {
         "cls": "ok",
         "total": 28
-      }
+      },
+      "hostTransform": true
     },
     "dsh-bigfish": {
       "repo": "gosomea/dsh-bigfish",
@@ -41278,13 +41413,13 @@
         "total": 28
       }
     },
-    "dsh-delete-turn": {
-      "repo": "DDDMUC/dsh-delete-turn",
-      "version": "0.1.8",
+    "dsh-skills-nexus": {
+      "repo": "xiaxi626/dsh-skills-nexus",
+      "version": "0.6.0",
       "requires": [
         "react",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -41595,6 +41730,31 @@
         "total": 28
       }
     },
+    "@pioneer_zmc/dsh-workbench": {
+      "repo": "pioneer666-user/specdev-workbench",
+      "version": "0.2.2",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "dsh-tree-view": {
       "repo": "Rice00/dsh-tree-view",
       "version": "1.2.2",
@@ -41702,32 +41862,6 @@
       "repo": "popu2do/dsh-call-session",
       "version": "0.1.6",
       "requires": [],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "@xyavid/dsh-prompt-polish": {
-      "repo": "xyavid/dsh-prompt-polish",
-      "version": "0.3.0",
-      "requires": [
-        "react",
-        "react/jsx-runtime"
-      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -41861,11 +41995,13 @@
         "total": 28
       }
     },
-    "@skylerfee/dsh-llm-opencode-go-live": {
-      "repo": "SkylerFee/dsh-llm-opencode-go-live",
-      "version": "0.2.1",
+    "dsh-delete-turn": {
+      "repo": "DDDMUC/dsh-delete-turn",
+      "version": "0.1.10",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -41912,12 +42048,14 @@
         "total": 28
       }
     },
-    "dsh-mobile-upgrade": {
-      "repo": "langyo/dsh-mobile-upgrade",
-      "version": "0.8.3",
+    "dsh-myskin": {
+      "repo": "WTStarMark/dsh-myskin",
+      "version": "0.4.1",
       "requires": [
         "react",
-        "react-dom"
+        "react-dom/client",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -42193,32 +42331,6 @@
         "total": 28
       }
     },
-    "dsh-vps-manager": {
-      "repo": "AIcivilization/dsh-vps-manager",
-      "version": "0.6.5",
-      "requires": [
-        "react"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      },
-      "hostTransform": true
-    },
     "dsh-switchman": {
       "repo": "mrzturn/dsh-switchman",
       "version": "1.6.0",
@@ -42321,10 +42433,12 @@
         "total": 28
       }
     },
-    "dsh-cost-meter": {
-      "repo": "Creakono/dsh-cost-meter",
-      "version": "1.8.12",
-      "requires": [],
+    "dsh-lan-guard": {
+      "repo": "idoall/dsh-lan-guard",
+      "version": "0.7.1",
+      "requires": [
+        "react"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -42342,7 +42456,8 @@
       "verdict": {
         "cls": "ok",
         "total": 28
-      }
+      },
+      "hostTransform": true
     },
     "dsh-auto-review": {
       "repo": "AtropinolTT/dsh-auto-review",
@@ -43940,11 +44055,12 @@
         "total": 28
       }
     },
-    "dsh-lan-guard": {
-      "repo": "idoall/dsh-lan-guard",
-      "version": "0.6.0",
+    "dsh-themes": {
+      "repo": "MangMax/dsh-themes",
+      "version": "0.2.1",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -43963,14 +44079,39 @@
       "verdict": {
         "cls": "ok",
         "total": 28
-      },
-      "hostTransform": true
+      }
     },
     "@max-null/dsh-plugin-center": {
       "repo": "Max-Null/dsh-plugin-center",
       "version": "0.4.6",
       "requires": [
         "react-dom",
+        "react",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@max-null/dsh-skill-mcp-center": {
+      "repo": "Max-Null/dsh-skill-mcp-center",
+      "version": "0.6.0",
+      "requires": [
         "react",
         "react/jsx-runtime"
       ],
@@ -45976,32 +46117,6 @@
         "total": 28
       }
     },
-    "dsh-themes": {
-      "repo": "MangMax/dsh-themes",
-      "version": "0.2.1",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "@luoyu_xingu/dsh-multi-root": {
       "repo": "luoyu-xingu/dsh-multi-root",
       "version": "0.1.1",
@@ -46029,13 +46144,10 @@
         "total": 28
       }
     },
-    "dsh-mcp-center": {
-      "repo": "drfccv/dsh-mcp-center",
-      "version": "0.1.0",
-      "requires": [
-        "react",
-        "react/jsx-runtime"
-      ],
+    "dsh-cost-meter": {
+      "repo": "Creakono/dsh-cost-meter",
+      "version": "1.8.15",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -47344,33 +47456,6 @@
         "total": 28
       }
     },
-    "dsh-remote-plugin": {
-      "repo": "Blank-not-black/dsh-remote-plugin",
-      "version": "0.7.1",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-store",
-        "@deepseek-ai/dsh-client-runtime/client"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "dsh-pluginmgmt": {
       "repo": "zebbkira/dsh-pluginmgmt",
       "version": "0.1.10",
@@ -48172,6 +48257,32 @@
       "verdict": {
         "cls": "supported-since",
         "since": "0.1.2-alpha.2",
+        "total": 28
+      }
+    },
+    "@xyavid/dsh-prompt-polish": {
+      "repo": "xyavid/dsh-prompt-polish",
+      "version": "0.3.1",
+      "requires": [
+        "react",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
         "total": 28
       }
     },
@@ -49075,11 +49186,13 @@
         "total": 28
       }
     },
-    "@dsh-bio/dsh-bio-genie": {
-      "repo": "moonbowterfly/dsh-bio-genie",
-      "version": "0.6.44",
+    "@fonlan/dsh-task-kanban": {
+      "repo": "fonlan/dsh-task-kanban",
+      "version": "0.2.9",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -50126,6 +50239,32 @@
         "total": 28
       }
     },
+    "@anarkhgatsby/deepseek-harness-insights": {
+      "repo": "mapan0424/deepseek-harness-insights",
+      "version": "0.1.15",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "dsh-hub-oauth-gateway": {
       "repo": "lninghaha/dsh-hub-oauth-gateway",
       "version": "1.13.4",
@@ -50483,11 +50622,12 @@
         "total": 28
       }
     },
-    "dsh-agent-shell": {
-      "repo": "Mrtime-gege/dsh-agent-shell",
-      "version": "0.3.4",
+    "dsh-mcp-center": {
+      "repo": "drfccv/dsh-mcp-center",
+      "version": "0.1.2",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -51026,34 +51166,6 @@
       "requires": [
         "react",
         "react-dom",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-myskin": {
-      "repo": "WTStarMark/dsh-myskin",
-      "version": "0.4.1",
-      "requires": [
-        "react",
-        "react-dom/client",
-        "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime"
       ],
       "results": {
@@ -52120,13 +52232,11 @@
         "total": 28
       }
     },
-    "dsh-hashline-edittool": {
-      "repo": "hyperion2144/dsh-hashline-edittool",
-      "version": "0.9.5",
+    "@skylerfee/dsh-llm-opencode-go-live": {
+      "repo": "SkylerFee/dsh-llm-opencode-go-live",
+      "version": "0.2.2",
       "requires": [
-        "react",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -53173,9 +53283,9 @@
         "total": 28
       }
     },
-    "@ddtcorex/dsh-maestro-memory": {
-      "repo": "ddtcorex/dsh-maestro-memory",
-      "version": "2.2.0",
+    "dsh-agent-shell": {
+      "repo": "Mrtime-gege/dsh-agent-shell",
+      "version": "0.4.0",
       "requires": [
         "react"
       ],
@@ -53346,13 +53456,11 @@
         "total": 28
       }
     },
-    "@kolmopdf/dsh-zpdf": {
-      "repo": "komoai2026/dsh-zpdf",
-      "version": "1.0.4",
+    "dsh-agent-board": {
+      "repo": "meisam2236/agent-board",
+      "version": "1.7.5",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -53760,13 +53868,13 @@
         "total": 28
       }
     },
-    "@ddtcorex/dsh-maestro-mobile": {
-      "repo": "ddtcorex/dsh-maestro-mobile",
-      "version": "1.7.0",
+    "dsh-hashline-edittool": {
+      "repo": "hyperion2144/dsh-hashline-edittool",
+      "version": "0.10.0",
       "requires": [
-        "@deepseek-ai/dsh-client-ui-primitives",
+        "react",
         "react/jsx-runtime",
-        "react"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -54069,12 +54177,11 @@
         "total": 28
       }
     },
-    "@max-null/dsh-skill-mcp-center": {
-      "repo": "Max-Null/dsh-skill-mcp-center",
-      "version": "0.6.0",
+    "@objectivex666/dsh-settings-search": {
+      "repo": "objectivex666/dsh-settings-search",
+      "version": "1.13.1",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -54095,9 +54202,9 @@
         "total": 28
       }
     },
-    "dsh-agent-board": {
-      "repo": "meisam2236/agent-board",
-      "version": "1.7.4",
+    "@ddtcorex/dsh-maestro-memory": {
+      "repo": "ddtcorex/dsh-maestro-memory",
+      "version": "2.2.1",
       "requires": [
         "react"
       ],
@@ -54325,33 +54432,6 @@
         "total": 28
       }
     },
-    "@fonlan/dsh-task-kanban": {
-      "repo": "fonlan/dsh-task-kanban",
-      "version": "0.2.9",
-      "requires": [
-        "react",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "@sharewiner/dsh-model-management": {
       "repo": "sharewiner/dsh-model-management",
       "version": "0.2.3",
@@ -54450,11 +54530,13 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-messenger-gateway": {
-      "repo": "GooDAnDReaDY/dsh-messenger-gateway",
-      "version": "0.4.9",
+    "@kolmopdf/dsh-zpdf": {
+      "repo": "komoai2026/dsh-zpdf",
+      "version": "1.0.5",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -54475,12 +54557,11 @@
         "total": 28
       }
     },
-    "@anarkhgatsby/deepseek-harness-insights": {
-      "repo": "mapan0424/deepseek-harness-insights",
-      "version": "0.1.15",
+    "@ddtcorex/dsh-maestro-review": {
+      "repo": "ddtcorex/dsh-maestro-review",
+      "version": "0.11.2",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -54628,10 +54709,12 @@
         "total": 28
       }
     },
-    "@alintever/dsh-plugin-autoqueue": {
-      "repo": "alin-ever/dsh-plugin-autoqueue",
-      "version": "0.4.10",
-      "requires": [],
+    "@dsh-bio/dsh-bio-genie": {
+      "repo": "moonbowterfly/dsh-bio-genie",
+      "version": "0.6.47",
+      "requires": [
+        "react"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -55400,11 +55483,13 @@
         "total": 28
       }
     },
-    "@objectivex666/dsh-settings-search": {
-      "repo": "objectivex666/dsh-settings-search",
-      "version": "1.13.1",
+    "dsh-remote-plugin": {
+      "repo": "Blank-not-black/dsh-remote-plugin",
+      "version": "0.7.2",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-store",
+        "@deepseek-ai/dsh-client-runtime/client"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -55503,10 +55588,12 @@
         "total": 28
       }
     },
-    "@ddtcorex/dsh-maestro-notifier": {
-      "repo": "ddtcorex/dsh-maestro-notifier",
-      "version": "0.2.2",
+    "@ddtcorex/dsh-maestro-mobile": {
+      "repo": "ddtcorex/dsh-maestro-mobile",
+      "version": "1.7.1",
       "requires": [
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime",
         "react"
       ],
       "results": {
@@ -55531,31 +55618,6 @@
     "dsh-token-ledger-pro": {
       "repo": "bjzkhy/dsh-token-ledger-pro",
       "version": "0.2.2",
-      "requires": [
-        "react"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-skill-trace": {
-      "repo": "PolinniZhong/dsh-skill-intelligence",
-      "version": "1.1.0",
       "requires": [
         "react"
       ],
@@ -56102,13 +56164,12 @@
         "total": 28
       }
     },
-    "@ddtcorex/dsh-maestro-remote": {
-      "repo": "ddtcorex/dsh-maestro-remote",
-      "version": "0.5.2",
+    "@goodandready/dsh-time-machine": {
+      "repo": "GooDAnDReaDY/dsh-time-machine",
+      "version": "0.1.27",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-settings-models/src/client/welcome-store.js",
-        "@deepseek-ai/dsh-client-ui-settings-models/src/onboarding-copy.js"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -56356,10 +56417,14 @@
         "total": 28
       }
     },
-    "dsh-kimino-theme": {
-      "repo": "niiang/dsh-kimino-theme",
-      "version": "68.1.0",
-      "requires": [],
+    "@ddtcorex/dsh-maestro-remote": {
+      "repo": "ddtcorex/dsh-maestro-remote",
+      "version": "0.5.3",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-settings-models/src/client/welcome-store.js",
+        "@deepseek-ai/dsh-client-ui-settings-models/src/onboarding-copy.js"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -56789,13 +56854,11 @@
         "total": 28
       }
     },
-    "bgjobs": {
-      "repo": "bitsmug/dsh-bgjobs",
-      "version": "0.1.90",
+    "@goodandready/dsh-messenger-gateway": {
+      "repo": "GooDAnDReaDY/dsh-messenger-gateway",
+      "version": "0.4.13",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react-dom"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -56945,12 +57008,11 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-dsml-artifact-guard": {
-      "repo": "GooDAnDReaDY/dsh-dsml-artifact-guard",
-      "version": "0.2.8",
+    "@ddtcorex/dsh-maestro-notifier": {
+      "repo": "ddtcorex/dsh-maestro-notifier",
+      "version": "0.2.3",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -57580,6 +57642,33 @@
         "react",
         "react-dom",
         "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@goodandready/dsh-kanban": {
+      "repo": "GooDAnDReaDY/dsh-kanban",
+      "version": "0.2.23",
+      "requires": [
+        "react",
+        "react-dom/client",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -58443,22 +58532,13 @@
         "total": 28
       }
     },
-    "@jaxzhou/dsh-file-explorer": {
-      "repo": "jaxzhou/dsh-file-explorer",
-      "version": "0.1.9",
-      "requires": [
-        "util",
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-store"
-      ],
+    "@alintever/dsh-plugin-autoqueue": {
+      "repo": "alin-ever/dsh-plugin-autoqueue",
+      "version": "0.5.0",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
+          "status": "ok"
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -58471,14 +58551,13 @@
         }
       },
       "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
+        "cls": "ok",
         "total": 28
       }
     },
-    "@ddtcorex/dsh-maestro-review": {
-      "repo": "ddtcorex/dsh-maestro-review",
-      "version": "0.11.2",
+    "dsh-composer-glass": {
+      "repo": "Lbunc/dsh-composer-glass",
+      "version": "1.0.0",
       "requires": [
         "react"
       ],
@@ -58506,32 +58585,6 @@
       "version": "0.6.11",
       "requires": [
         "react"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-literature-search": {
-      "repo": "Ln1m/dsh-literature-search",
-      "version": "0.2.4",
-      "requires": [
-        "react",
-        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -58788,12 +58841,11 @@
         "total": 28
       }
     },
-    "dsh-s-m-c-center": {
-      "repo": "YpipaQ/dsh-s-m-c-center",
-      "version": "0.2.4",
+    "dsh-skill-trace": {
+      "repo": "PolinniZhong/dsh-skill-intelligence",
+      "version": "1.2.0",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -58896,12 +58948,13 @@
         "total": 28
       }
     },
-    "dsh-kinich-theme": {
-      "repo": "Xian-JL/dsh-Kinich-theme",
-      "version": "1.7.2",
+    "bgjobs": {
+      "repo": "bitsmug/dsh-bgjobs",
+      "version": "0.1.93",
       "requires": [
-        "react/jsx-runtime",
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -59209,12 +59262,11 @@
         "total": 28
       }
     },
-    "dsh-observational-memory": {
-      "repo": "EPCN-fla/dsh-observational-memory",
-      "version": "0.2.0",
+    "@goodandready/dsh-gitea": {
+      "repo": "GooDAnDReaDY/dsh-gitea",
+      "version": "0.7.26",
       "requires": [
         "react",
-        "react/jsx-runtime",
         "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
@@ -59284,10 +59336,11 @@
         "total": 28
       }
     },
-    "dsh-drawai": {
-      "repo": "fourzkw/dsh-drawai",
-      "version": "0.1.1",
+    "dsh-update-status": {
+      "repo": "idoall/dsh-update-status",
+      "version": "0.3.2",
       "requires": [
+        "react/jsx-runtime",
         "react"
       ],
       "results": {
@@ -59413,12 +59466,12 @@
         "total": 28
       }
     },
-    "dsh-qol": {
-      "repo": "john-walks-slow/dsh-qol",
-      "version": "1.0.5",
+    "@goodandready/dsh-dsml-artifact-guard": {
+      "repo": "GooDAnDReaDY/dsh-dsml-artifact-guard",
+      "version": "0.2.10",
       "requires": [
         "react",
-        "react-dom"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -59439,12 +59492,12 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-time-machine": {
-      "repo": "GooDAnDReaDY/dsh-time-machine",
-      "version": "0.1.27",
+    "dsh-clear-mind": {
+      "repo": "john-walks-slow/dsh-clear-mind",
+      "version": "0.1.5",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -59757,15 +59810,13 @@
         "total": 28
       }
     },
-    "@roaming-ai/dsh-group-chat": {
-      "repo": "localSummer/dsh-group-chat",
-      "version": "0.5.2",
+    "dsh-observational-memory": {
+      "repo": "EPCN-fla/dsh-observational-memory",
+      "version": "0.3.0",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime",
-        "react-dom",
-        "react-dom/client"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -60031,13 +60082,11 @@
         "total": 28
       }
     },
-    "dsh-context-compression-improved": {
-      "repo": "drscrewdriver/dsh-context-compression-improved",
-      "version": "0.8.0",
+    "dsh-drawai": {
+      "repo": "fourzkw/dsh-drawai",
+      "version": "0.2.0",
       "requires": [
-        "react/jsx-runtime",
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -60086,11 +60135,12 @@
         "total": 28
       }
     },
-    "dsh-expert-orchestrator": {
-      "repo": "mario841859784/dsh-expert-orchestrator",
-      "version": "2.5.4",
+    "dsh-qol": {
+      "repo": "john-walks-slow/dsh-qol",
+      "version": "1.0.6",
       "requires": [
-        "react"
+        "react",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -60649,21 +60699,16 @@
         "total": 28
       }
     },
-    "@guowenzhang/dsh-ui-beautify": {
-      "repo": "zhang-guo-wen/dsh-ui-beautify",
-      "version": "1.1.0",
+    "dsh-s-m-c-center": {
+      "repo": "YpipaQ/dsh-s-m-c-center",
+      "version": "0.2.5",
       "requires": [
         "react",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "@deepseek-ai/dsh-client-store"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
+          "status": "ok"
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -60676,8 +60721,7 @@
         }
       },
       "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
+        "cls": "ok",
         "total": 28
       }
     },
@@ -60796,6 +60840,33 @@
         "total": 28
       }
     },
+    "dsh-context-compression-improved": {
+      "repo": "drscrewdriver/dsh-context-compression-improved",
+      "version": "0.9.0",
+      "requires": [
+        "react",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "dsh-bloomglass": {
       "repo": "CosmoSail/dsh-bloomglass",
       "version": "0.1.0",
@@ -60847,12 +60918,11 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-gitea": {
-      "repo": "GooDAnDReaDY/dsh-gitea",
-      "version": "0.7.23",
+    "dsh-expert-orchestrator": {
+      "repo": "mario841859784/dsh-expert-orchestrator",
+      "version": "2.6.0",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -60873,11 +60943,10 @@
         "total": 28
       }
     },
-    "dsh-update-status": {
-      "repo": "idoall/dsh-update-status",
-      "version": "0.2.1",
+    "@yfwu2020/dsh-selection-explain": {
+      "repo": "yfwu2020/dsh-selection-explain",
+      "version": "0.9.1",
       "requires": [
-        "react/jsx-runtime",
         "react"
       ],
       "results": {
@@ -61262,39 +61331,15 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-kanban": {
-      "repo": "GooDAnDReaDY/dsh-kanban",
-      "version": "0.2.22",
+    "@roaming-ai/dsh-group-chat": {
+      "repo": "localSummer/dsh-group-chat",
+      "version": "0.6.0",
       "requires": [
         "react",
-        "react-dom/client",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-home-hosted": {
-      "repo": "NamesMT/dsh-home-hosted",
-      "version": "0.7.4",
-      "requires": [
-        "react",
-        "react/jsx-runtime"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime",
+        "react-dom",
+        "react-dom/client"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -61500,16 +61545,22 @@
         "total": 28
       }
     },
-    "dsh-tree-task-flow": {
-      "repo": "viyiviyi/dsh-tree-task-flow",
-      "version": "0.3.9",
+    "@guowenzhang/dsh-ui-beautify": {
+      "repo": "zhang-guo-wen/dsh-ui-beautify",
+      "version": "1.2.0",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "@deepseek-ai/dsh-client-store",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -61522,7 +61573,8 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
@@ -61577,10 +61629,13 @@
         "total": 28
       }
     },
-    "dsh-harden": {
-      "repo": "thissensen/dsh-harden",
-      "version": "0.0.1-preview.4",
-      "requires": [],
+    "dsh-kinich-theme": {
+      "repo": "Xian-JL/dsh-Kinich-theme",
+      "version": "1.8.1",
+      "requires": [
+        "react/jsx-runtime",
+        "react"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -61663,6 +61718,32 @@
       "repo": "memorax-ai/the-binding-of-dsh",
       "version": "0.1.9",
       "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-home-hosted": {
+      "repo": "NamesMT/dsh-home-hosted",
+      "version": "0.7.6",
+      "requires": [
+        "react",
+        "react/jsx-runtime"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -61916,13 +61997,10 @@
         "total": 28
       }
     },
-    "dsh-clear-mind": {
-      "repo": "john-walks-slow/dsh-clear-mind",
-      "version": "0.1.5",
-      "requires": [
-        "react",
-        "react/jsx-runtime"
-      ],
+    "dsh-wisp": {
+      "repo": "969246694/dsh-wisp",
+      "version": "1.49.4",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -62278,11 +62356,12 @@
         "total": 28
       }
     },
-    "@lovedolove/veyra": {
-      "repo": "LoveDoLove/Veyra",
-      "version": "0.1.47",
+    "dsh-tree-task-flow": {
+      "repo": "viyiviyi/dsh-tree-task-flow",
+      "version": "0.3.11",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -62326,10 +62405,12 @@
         "total": 28
       }
     },
-    "dsh-happy-reader": {
-      "repo": "Richardwongyk/dsh-happy-reader",
-      "version": "0.2.6",
-      "requires": [],
+    "@copylee/dsh-proxy": {
+      "repo": "copylee711/dsh-proxy",
+      "version": "0.4.5",
+      "requires": [
+        "react"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -62375,16 +62456,22 @@
         "total": 28
       }
     },
-    "dsh-tinyfish": {
-      "repo": "viztor/dsh-tinyfish",
-      "version": "0.11.1",
+    "@jaxzhou/dsh-file-explorer": {
+      "repo": "jaxzhou/dsh-file-explorer",
+      "version": "0.1.10",
       "requires": [
+        "util",
+        "react",
         "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-store"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -62397,16 +62484,15 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
-    "dsh-mobile-drawer": {
-      "repo": "better-er/dsh-mobile-drawer",
-      "version": "0.2.0",
-      "requires": [
-        "react"
-      ],
+    "dsh-harden": {
+      "repo": "thissensen/dsh-harden",
+      "version": "0.0.1-preview.5",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -62580,13 +62666,11 @@
         "total": 28
       }
     },
-    "dsh-as-aistudio": {
-      "repo": "DDDMUC/dsh-as-aistudio",
-      "version": "0.2.8",
+    "dsh-mobile-drawer": {
+      "repo": "better-er/dsh-mobile-drawer",
+      "version": "0.2.1",
       "requires": [
-        "react",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -62735,12 +62819,10 @@
         "total": 28
       }
     },
-    "dsh-theone": {
-      "repo": "YunongDai2005/dsh-theone",
-      "version": "0.3.22",
-      "requires": [
-        "react"
-      ],
+    "dsh-happy-reader": {
+      "repo": "Richardwongyk/dsh-happy-reader",
+      "version": "0.2.7",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -62812,11 +62894,11 @@
         "total": 28
       }
     },
-    "dsh-nexus": {
-      "repo": "yuqiguang/dsh-nexus",
-      "version": "0.2.58",
+    "dsh-tinyfish": {
+      "repo": "viztor/dsh-tinyfish",
+      "version": "0.11.4",
       "requires": [
-        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime"
       ],
       "results": {
@@ -62916,9 +62998,9 @@
         "total": 28
       }
     },
-    "@copylee/dsh-proxy": {
-      "repo": "copylee711/dsh-proxy",
-      "version": "0.4.4",
+    "@lovedolove/veyra": {
+      "repo": "LoveDoLove/Veyra",
+      "version": "0.1.50",
       "requires": [
         "react"
       ],
@@ -62941,9 +63023,9 @@
         "total": 28
       }
     },
-    "dsh-composer-glass": {
-      "repo": "Lbunc/dsh-composer-glass",
-      "version": "1.0.0",
+    "dsh-github-flow": {
+      "repo": "ItQianChen/dsh-github-flow",
+      "version": "0.1.5",
       "requires": [
         "react"
       ],
@@ -63015,11 +63097,12 @@
         "total": 28
       }
     },
-    "@yfwu2020/dsh-selection-explain": {
-      "repo": "yfwu2020/dsh-selection-explain",
-      "version": "0.9.1",
+    "dsh-glass-weather": {
+      "repo": "w-j-y-wjy/dsh-glass-weather",
+      "version": "0.3.0",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -63143,12 +63226,13 @@
         "total": 28
       }
     },
-    "dsh-tool-todo-plus": {
-      "repo": "shuxidemosheng/dsh-tool-todo-plus",
-      "version": "0.6.1",
+    "dsh-workbuddy-connect-functy": {
+      "repo": "functy23/dsh-workbuddy-connect-functy",
+      "version": "0.13.11",
       "requires": [
         "react",
         "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime"
       ],
       "results": {
@@ -63195,13 +63279,11 @@
         "total": 28
       }
     },
-    "dsh-cpa-switch": {
-      "repo": "cslkkl/dsh-cpa-switch",
-      "version": "0.5.1",
+    "dsh-theone": {
+      "repo": "YunongDai2005/dsh-theone",
+      "version": "0.3.23",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -63300,11 +63382,13 @@
         "total": 28
       }
     },
-    "dsh-github-flow": {
-      "repo": "ItQianChen/dsh-github-flow",
-      "version": "0.1.5",
+    "dsh-as-aistudio": {
+      "repo": "DDDMUC/dsh-as-aistudio",
+      "version": "0.2.11",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -63325,16 +63409,22 @@
         "total": 28
       }
     },
-    "dsh-glass-weather": {
-      "repo": "w-j-y-wjy/dsh-glass-weather",
-      "version": "0.3.0",
+    "dsh-project-groups": {
+      "repo": "ThinkofRain1213/dsh-project-groups",
+      "version": "0.2.0",
       "requires": [
+        "@deepseek-ai/dsh-client-store",
+        "@deepseek-ai/cordis",
         "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -63347,7 +63437,8 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
@@ -63479,9 +63570,89 @@
         "total": 28
       }
     },
+    "dsh-skin-rotation": {
+      "repo": "luoyuejun9/dsh-skin-rotation",
+      "version": "1.0.2",
+      "requires": [
+        "react",
+        "react-dom/client"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-tool-todo-plus": {
+      "repo": "shuxidemosheng/dsh-tool-todo-plus",
+      "version": "0.7.2",
+      "requires": [
+        "react",
+        "react-dom",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-cpa-switch": {
+      "repo": "cslkkl/dsh-cpa-switch",
+      "version": "0.9.0",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "dsh-vps": {
       "repo": "AIcivilization/dsh-vps",
-      "version": "1.14.0",
+      "version": "1.15.0",
       "requires": [
         "react"
       ],
@@ -63504,14 +63675,11 @@
         "total": 28
       }
     },
-    "dsh-workbuddy-connect-functy": {
-      "repo": "functy23/dsh-workbuddy-connect-functy",
-      "version": "0.13.11",
+    "dsh-jev-verify": {
+      "repo": "xienda/dsh-jev-verify",
+      "version": "0.8.6",
       "requires": [
-        "react",
-        "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -63541,6 +63709,32 @@
         "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime",
         "react-dom"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-nexus": {
+      "repo": "yuqiguang/dsh-nexus",
+      "version": "0.2.60",
+      "requires": [
+        "react",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -63615,43 +63809,15 @@
         "total": 28
       }
     },
-    "dsh-project-groups": {
-      "repo": "ThinkofRain1213/dsh-project-groups",
-      "version": "0.2.0",
+    "@zseven-w/dsh-openpencil": {
+      "repo": "ZSeven-W/dsh-openpencil",
+      "version": "0.1.0-rc.13",
       "requires": [
-        "@deepseek-ai/dsh-client-store",
-        "@deepseek-ai/cordis",
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "react/jsx-runtime",
+        "react-dom/client",
+        "react-dom"
       ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
-        "total": 28
-      }
-    },
-    "dsh-dream-skin": {
-      "repo": "RevolutionLA/dsh-dream-skin",
-      "version": "10.6.0",
-      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -63671,12 +63837,38 @@
         "total": 28
       }
     },
-    "dsh-chat-import": {
-      "repo": "Nwflower/dsh-chat-import",
-      "version": "0.25.1",
+    "dsh-persona-dafeiyu": {
+      "repo": "huaizhuanghub/dsh-persona-dafeiyu",
+      "version": "0.3.0",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-persona-switcher": {
+      "repo": "yupaoa/dsh-persona-switcher",
+      "version": "0.1.7",
+      "requires": [
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -63865,12 +64057,11 @@
       },
       "hostTransform": true
     },
-    "dsh-skin-rotation": {
-      "repo": "luoyuejun9/dsh-skin-rotation",
-      "version": "1.0.2",
+    "@try-works/dsh-stt": {
+      "repo": "try-works/dsh-stt",
+      "version": "0.2.4",
       "requires": [
-        "react",
-        "react-dom/client"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -64137,11 +64328,10 @@
         "total": 28
       }
     },
-    "dsh-archived-chats": {
-      "repo": "Ultronen/dsh-archived-chats",
-      "version": "1.4.6",
+    "@gavinc-cn/touchstone-dsh": {
+      "repo": "gavinc-cn/touchstone-dsh",
+      "version": "0.1.1",
       "requires": [
-        "react/jsx-runtime",
         "react"
       ],
       "results": {
@@ -64190,13 +64380,10 @@
         "total": 28
       }
     },
-    "dsh-continual-evolve": {
-      "repo": "ZK-Andy/dsh-continual-evolve",
-      "version": "0.15.2",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
+    "dsh-dream-skin": {
+      "repo": "RevolutionLA/dsh-dream-skin",
+      "version": "10.6.1",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -64242,10 +64429,13 @@
         "total": 28
       }
     },
-    "dsh-lsp-actions": {
-      "repo": "PerryLink/dsh-lsp-actions",
-      "version": "0.5.10",
-      "requires": [],
+    "dsh-continual-evolve": {
+      "repo": "ZK-Andy/dsh-continual-evolve",
+      "version": "0.15.3",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -65639,10 +65829,11 @@
         "total": 28
       }
     },
-    "dsh-dafeiyu": {
-      "repo": "QCYTSN/dsh-dafeiyu",
-      "version": "0.1.15",
+    "dsh-gacha-calendar": {
+      "repo": "EastMG/dsh-gacha-calendar",
+      "version": "0.11.3",
       "requires": [
+        "react/jsx-runtime",
         "react"
       ],
       "results": {
@@ -65764,59 +65955,6 @@
         "total": 28
       }
     },
-    "dsh-client-auto-continue": {
-      "repo": "HsiangNianian/dsh-auto-continue",
-      "version": "0.14.1",
-      "requires": [
-        "react",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-gacha-calendar": {
-      "repo": "EastMG/dsh-gacha-calendar",
-      "version": "0.11.3",
-      "requires": [
-        "react/jsx-runtime",
-        "react"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "@goodandready/dsh-image-gen": {
       "repo": "GooDAnDReaDY/dsh-image-gen",
       "version": "0.11.38",
@@ -65871,11 +66009,13 @@
         "total": 28
       }
     },
-    "dsh-jev-verify": {
-      "repo": "xienda/dsh-jev-verify",
-      "version": "0.8.2",
+    "dsh-client-auto-continue": {
+      "repo": "HsiangNianian/dsh-auto-continue",
+      "version": "0.14.2",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -65895,30 +66035,6 @@
         "cls": "ok",
         "total": 28
       }
-    },
-    "@goodandready/dsh-lanmode": {
-      "repo": "GooDAnDReaDY/dsh-lanmode",
-      "version": "0.8.39",
-      "requires": [],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      },
-      "hostTransform": true
     },
     "@goodandready/dsh-live-canvas": {
       "repo": "GooDAnDReaDY/dsh-live-canvas",
@@ -65949,6 +66065,107 @@
     "@goodandready/dsh-russian-lang": {
       "repo": "GooDAnDReaDY/dsh-russian-lang",
       "version": "0.3.38",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-chat-import": {
+      "repo": "Nwflower/dsh-chat-import",
+      "version": "0.25.2",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-lsp-actions": {
+      "repo": "PerryLink/dsh-lsp-actions",
+      "version": "0.5.11",
+      "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-archived-chats": {
+      "repo": "Ultronen/dsh-archived-chats",
+      "version": "1.5.0",
+      "requires": [
+        "react/jsx-runtime",
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@goodandready/dsh-voice": {
+      "repo": "GooDAnDReaDY/dsh-voice",
+      "version": "0.9.30",
       "requires": [
         "react",
         "@deepseek-ai/dsh-client-ui-primitives"
@@ -66930,9 +67147,9 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-subscriptions": {
-      "repo": "GooDAnDReaDY/dsh-subscriptions",
-      "version": "0.6.59",
+    "@goodandready/dsh-model-sync": {
+      "repo": "GooDAnDReaDY/dsh-model-sync",
+      "version": "0.5.8",
       "requires": [
         "react",
         "@deepseek-ai/dsh-client-ui-primitives"
@@ -67142,12 +67359,10 @@
       },
       "hostTransform": true
     },
-    "dsh-better-ux": {
-      "repo": "MitsukiJoe/dsh-better-ux",
-      "version": "0.2.1",
-      "requires": [
-        "react"
-      ],
+    "@goodandready/dsh-lanmode": {
+      "repo": "GooDAnDReaDY/dsh-lanmode",
+      "version": "0.8.40",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -67165,7 +67380,8 @@
       "verdict": {
         "cls": "ok",
         "total": 28
-      }
+      },
+      "hostTransform": true
     },
     "dsh-vision-router-inline": {
       "repo": "MitsukiJoe/dsh-vision-router-inline",
@@ -67447,32 +67663,6 @@
       "version": "1.0.0",
       "requires": [
         "react"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "@goodandready/dsh-tts": {
-      "repo": "GooDAnDReaDY/dsh-tts",
-      "version": "0.4.30",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -68082,12 +68272,11 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-vision-bridge": {
-      "repo": "GooDAnDReaDY/dsh-vision-bridge",
-      "version": "0.6.13",
+    "@goodandready/dsh-subscriptions": {
+      "repo": "GooDAnDReaDY/dsh-subscriptions",
+      "version": "0.6.60",
       "requires": [
         "react",
-        "react/jsx-runtime",
         "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
@@ -69538,11 +69727,13 @@
         "total": 28
       }
     },
-    "dsh-messaging": {
-      "repo": "EvenLRs/dsh-messaging",
-      "version": "0.2.1",
+    "dsh-better-ux": {
+      "repo": "MitsukiJoe/dsh-better-ux",
+      "version": "0.3.0",
       "requires": [
-        "react"
+        "react",
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -69587,6 +69778,33 @@
         "cls": "ok",
         "total": 28
       }
+    },
+    "@fonlan/dsh-web-auth": {
+      "repo": "fonlan/dsh-web-auth",
+      "version": "0.1.10",
+      "requires": [
+        "react",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      },
+      "hostTransform": true
     },
     "dsh-iris": {
       "repo": "RangeKing/dsh-iris",
@@ -69666,12 +69884,12 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-voice": {
-      "repo": "GooDAnDReaDY/dsh-voice",
-      "version": "0.9.30",
+    "@fonlan/dsh-gitmemo": {
+      "repo": "fonlan/dsh-gitmemo",
+      "version": "0.5.2",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -71150,6 +71368,29 @@
         "total": 28
       }
     },
+    "dsh-input-history": {
+      "repo": "sunshaobei/dsh-input-history",
+      "version": "0.3.2",
+      "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "dsh-remote-access": {
       "repo": "RedreamR/dsh-remote-access",
       "version": "0.4.11",
@@ -71214,14 +71455,13 @@
         "total": 28
       }
     },
-    "@zseven-w/dsh-openpencil": {
-      "repo": "ZSeven-W/dsh-openpencil",
-      "version": "0.1.0-rc.13",
+    "@fonlan/dsh-model-router": {
+      "repo": "fonlan/dsh-model-router",
+      "version": "0.3.9",
       "requires": [
         "react",
         "react/jsx-runtime",
-        "react-dom/client",
-        "react-dom"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -71834,6 +72074,32 @@
         "total": 28
       }
     },
+    "@goodandready/dsh-tts": {
+      "repo": "GooDAnDReaDY/dsh-tts",
+      "version": "0.4.31",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "dsh-chat-image": {
       "repo": "Niobium-41-nb/dsh-chat-image",
       "version": "0.1.1",
@@ -71912,12 +72178,13 @@
         "total": 28
       }
     },
-    "dsh-image-preview": {
-      "repo": "ReiRui/dsh-image-preview",
-      "version": "0.2.0",
+    "@goodandready/dsh-vision-bridge": {
+      "repo": "GooDAnDReaDY/dsh-vision-bridge",
+      "version": "0.6.18",
       "requires": [
         "react",
-        "react/jsx-runtime"
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -72793,10 +73060,14 @@
         "total": 28
       }
     },
-    "dsh-input-history": {
-      "repo": "sunshaobei/dsh-input-history",
-      "version": "0.3.2",
-      "requires": [],
+    "dsh-long-plugins": {
+      "repo": "jackylong1987/dsh-long-plugins",
+      "version": "6.3.1",
+      "requires": [
+        "react",
+        "react/jsx-runtime",
+        "react-dom"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -73744,12 +74015,12 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-model-sync": {
-      "repo": "GooDAnDReaDY/dsh-model-sync",
-      "version": "0.5.8",
+    "@fonlan/dsh-apply-patch": {
+      "repo": "fonlan/dsh-apply-patch",
+      "version": "0.1.6",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -73770,11 +74041,11 @@
         "total": 28
       }
     },
-    "@fonlan/dsh-gitmemo": {
-      "repo": "fonlan/dsh-gitmemo",
-      "version": "0.5.2",
+    "@fonlan/dsh-model-parameters": {
+      "repo": "fonlan/dsh-model-parameters",
+      "version": "0.1.7",
       "requires": [
-        "@deepseek-ai/dsh-client-ui-primitives",
+        "react",
         "react/jsx-runtime"
       ],
       "results": {
@@ -74181,33 +74452,6 @@
       "version": "0.2.6",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "@fonlan/dsh-model-router": {
-      "repo": "fonlan/dsh-model-router",
-      "version": "0.3.9",
-      "requires": [
-        "react",
-        "react/jsx-runtime",
         "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
@@ -76239,13 +76483,13 @@
         "total": 28
       }
     },
-    "dsh-long-plugins": {
-      "repo": "jackylong1987/dsh-long-plugins",
-      "version": "6.3.1",
+    "dsh-system-monitor-plugin": {
+      "repo": "JularDepick/dsh-system-monitor-plugin",
+      "version": "0.2.1",
       "requires": [
         "react",
-        "react/jsx-runtime",
-        "react-dom"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -77212,11 +77456,12 @@
         "total": 28
       }
     },
-    "dsh-system-monitor-plugin": {
-      "repo": "JularDepick/dsh-system-monitor-plugin",
-      "version": "0.2.1",
+    "@fonlan/dsh-quick-commands": {
+      "repo": "fonlan/dsh-quick-commands",
+      "version": "0.1.10",
       "requires": [
         "react",
+        "react-dom",
         "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime"
       ],
@@ -77342,12 +77587,12 @@
         "total": 28
       }
     },
-    "dsh-serverchan-watchdog": {
-      "repo": "MaRi23333/dsh-serverchan-watchdog",
-      "version": "0.1.6",
+    "dsh-messaging": {
+      "repo": "EvenLRs/dsh-messaging",
+      "version": "0.3.1",
       "requires": [
         "react",
-        "react/jsx-runtime"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -79549,12 +79794,11 @@
         "total": 28
       }
     },
-    "@fonlan/dsh-web-auth": {
-      "repo": "fonlan/dsh-web-auth",
-      "version": "0.1.10",
+    "@kagurazakayashi/dsh-startup-command": {
+      "repo": "kagurazakayashi/dsh-startup-command",
+      "version": "1.1.2",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -79573,8 +79817,7 @@
       "verdict": {
         "cls": "ok",
         "total": 28
-      },
-      "hostTransform": true
+      }
     },
     "dsh-host-router": {
       "repo": "Yidien/dsh-host-router",
@@ -81208,12 +81451,11 @@
         "total": 28
       }
     },
-    "@fonlan/dsh-apply-patch": {
-      "repo": "fonlan/dsh-apply-patch",
-      "version": "0.1.6",
+    "dsh-local-models": {
+      "repo": "Vmarcelo49/dsh-local-models",
+      "version": "0.4.0",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -82169,12 +82411,11 @@
         "total": 28
       }
     },
-    "@fonlan/dsh-model-parameters": {
-      "repo": "fonlan/dsh-model-parameters",
-      "version": "0.1.7",
+    "@michengai/dsh-simplify": {
+      "repo": "MichengAI/dsh-simplify",
+      "version": "0.1.14",
       "requires": [
-        "react",
-        "react/jsx-runtime"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -82275,14 +82516,12 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-session-control": {
-      "repo": "GooDAnDReaDY/dsh-session-control",
-      "version": "0.2.7",
+    "dsh-image-preview": {
+      "repo": "ReiRui/dsh-image-preview",
+      "version": "0.2.1",
       "requires": [
-        "@deepseek-ai/cordis",
-        "@deepseek-ai/dsh-client-store",
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -82893,11 +83132,13 @@
         "total": 28
       }
     },
-    "dsh-paste-code-block": {
-      "repo": "cjm-m/dsh-paste-code-block",
-      "version": "0.2.5",
+    "dsh-lumina-tarot": {
+      "repo": "shetengteng/dsh-lumina-tarot",
+      "version": "0.1.3",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -84969,6 +85210,33 @@
         "total": 28
       }
     },
+    "dsh-serverchan-watchdog": {
+      "repo": "MaRi23333/dsh-serverchan-watchdog",
+      "version": "0.2.0",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "@climber47/dsh-step-clock": {
       "repo": "WsTe47/dsh-step-clock",
       "version": "0.1.1",
@@ -85118,32 +85386,6 @@
         "total": 28
       }
     },
-    "dsh-round-rightclick": {
-      "repo": "hmr-BH/dsh-round-rightclick",
-      "version": "0.1.1",
-      "requires": [
-        "react",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "@kasenri/dsh-orbit": {
       "repo": "KasenRi/dsh-orbit",
       "version": "0.6.7",
@@ -85204,9 +85446,35 @@
         "total": 28
       }
     },
-    "dsh-local-models": {
-      "repo": "Vmarcelo49/dsh-local-models",
-      "version": "0.4.0",
+    "dsh-literature-search": {
+      "repo": "Astervolans/dsh-literature-search",
+      "version": "0.2.4",
+      "requires": [
+        "react",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-paste-code-block": {
+      "repo": "cjm-m/dsh-paste-code-block",
+      "version": "0.2.6",
       "requires": [
         "react"
       ],
@@ -85383,34 +85651,6 @@
         "total": 28
       }
     },
-    "@fonlan/dsh-quick-commands": {
-      "repo": "fonlan/dsh-quick-commands",
-      "version": "0.1.10",
-      "requires": [
-        "react",
-        "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "dsh-wide-conversation": {
       "repo": "yunxiyang/dsh-wide-conversation",
       "version": "0.2.0",
@@ -85536,11 +85776,13 @@
         "total": 28
       }
     },
-    "@kagurazakayashi/dsh-startup-command": {
-      "repo": "kagurazakayashi/dsh-startup-command",
-      "version": "1.1.2",
+    "dsh-just-chat": {
+      "repo": "exoticknight/dsh-just-chat",
+      "version": "0.1.6",
       "requires": [
-        "react"
+        "react",
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -85586,12 +85828,11 @@
         "total": 28
       }
     },
-    "dsh-just-chat": {
-      "repo": "exoticknight/dsh-just-chat",
-      "version": "0.1.6",
+    "@goodandready/dsh-issue-reporter": {
+      "repo": "GooDAnDReaDY/dsh-issue-reporter",
+      "version": "0.1.13",
       "requires": [
         "react",
-        "react-dom",
         "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
@@ -85870,13 +86111,14 @@
         "total": 28
       }
     },
-    "dsh-custom-headers": {
-      "repo": "EPCN-fla/dsh-custom-headers",
-      "version": "0.2.0",
+    "@goodandready/dsh-session-control": {
+      "repo": "GooDAnDReaDY/dsh-session-control",
+      "version": "0.2.9",
       "requires": [
+        "@deepseek-ai/cordis",
+        "@deepseek-ai/dsh-client-store",
         "react",
-        "react-dom/client",
-        "react/jsx-runtime"
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -86222,11 +86464,12 @@
         "total": 28
       }
     },
-    "@michengai/dsh-simplify": {
-      "repo": "MichengAI/dsh-simplify",
-      "version": "0.1.14",
+    "dsh-round-rightclick": {
+      "repo": "hmr-BH/dsh-round-rightclick",
+      "version": "0.2.0",
       "requires": [
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -86409,11 +86652,12 @@
         "total": 28
       }
     },
-    "dsh-msg9-kit": {
-      "repo": "ice5kysl/dsh-msg9-kit",
-      "version": "0.5.0",
+    "dsh-custom-headers": {
+      "repo": "EPCN-fla/dsh-custom-headers",
+      "version": "0.3.0",
       "requires": [
         "react",
+        "react-dom/client",
         "react/jsx-runtime"
       ],
       "results": {
@@ -86726,6 +86970,33 @@
         "react",
         "@deepseek-ai/dsh-client-ui-primitives",
         "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@michengai/dsh-pua": {
+      "repo": "MichengAI/dsh-pua",
+      "version": "0.3.24",
+      "requires": [
+        "react",
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -87369,13 +87640,12 @@
         "total": 28
       }
     },
-    "dock-flash": {
-      "repo": "tcgbp/dock-flash",
-      "version": "2.1.0",
+    "dsh-msg9-kit": {
+      "repo": "ice5kysl/dsh-msg9-kit",
+      "version": "0.6.0",
       "requires": [
         "react",
-        "react-dom/client",
-        "react-dom"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -87699,12 +87969,14 @@
         "total": 28
       }
     },
-    "@michengai/dsh-pua": {
-      "repo": "MichengAI/dsh-pua",
-      "version": "0.3.23",
+    "@goodandready/dsh-key-limits": {
+      "repo": "GooDAnDReaDY/dsh-key-limits",
+      "version": "0.2.24",
       "requires": [
         "react",
+        "react-dom/client",
         "react-dom",
+        "react/jsx-runtime",
         "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
@@ -87930,12 +88202,13 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-issue-reporter": {
-      "repo": "GooDAnDReaDY/dsh-issue-reporter",
-      "version": "0.1.13",
+    "dock-flash": {
+      "repo": "tcgbp/dock-flash",
+      "version": "2.2.0",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react-dom/client",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -87956,11 +88229,12 @@
         "total": 28
       }
     },
-    "@michengai/dsh-code-review": {
-      "repo": "MichengAI/dsh-code-review",
-      "version": "0.1.11",
+    "git-for-dsh": {
+      "repo": "theRMM714/git-for-dsh",
+      "version": "0.0.9",
       "requires": [
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react",
+        "@deepseek-ai/dsh-client-ui-settings"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -88556,15 +88830,12 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-key-limits": {
-      "repo": "GooDAnDReaDY/dsh-key-limits",
-      "version": "0.2.23",
+    "dsh-vitals": {
+      "repo": "JoblessJoe/dsh-vitals",
+      "version": "0.1.12",
       "requires": [
         "react",
-        "react-dom/client",
-        "react-dom",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -88814,21 +89085,16 @@
         "total": 28
       }
     },
-    "@guowenzhang/dsh-memory": {
-      "repo": "zhang-guo-wen/dsh-memory",
-      "version": "1.0.0",
+    "dsh-session-steward": {
+      "repo": "drscrewdriver/dsh-session-steward",
+      "version": "0.5.2",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-store"
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
+          "status": "ok"
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -88841,40 +89107,7 @@
         }
       },
       "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
-        "total": 28
-      }
-    },
-    "@guowenzhang/dsh-worktree": {
-      "repo": "zhang-guo-wen/dsh-worktree",
-      "version": "1.1.0",
-      "requires": [
-        "@deepseek-ai/dsh-client-store",
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
+        "cls": "ok",
         "total": 28
       }
     },
@@ -88928,12 +89161,11 @@
         "total": 28
       }
     },
-    "dsh-session-steward": {
-      "repo": "drscrewdriver/dsh-session-steward",
-      "version": "0.5.0-beta.13",
+    "dsh-deepseek-cost": {
+      "repo": "wuenna/dsh-deepseek-cost",
+      "version": "0.3.1",
       "requires": [
-        "react",
-        "react-dom"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -89030,39 +89262,6 @@
       },
       "verdict": {
         "cls": "ok",
-        "total": 28
-      }
-    },
-    "@guowenzhang/dsh-web-design": {
-      "repo": "zhang-guo-wen/dsh-web-design",
-      "version": "1.0.1",
-      "requires": [
-        "react",
-        "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "@deepseek-ai/dsh-client-store",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "broken",
-          "missing": [
-            "@deepseek-ai/dsh-client-store"
-          ]
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "supported-since",
-        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
@@ -89763,11 +89962,12 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-github-ops": {
-      "repo": "GooDAnDReaDY/dsh-github-ops",
-      "version": "0.2.12",
+    "@nianchu/dsh-rollback": {
+      "repo": "ZhaoZeW/dsh-rollback",
+      "version": "0.4.3",
       "requires": [
         "react",
+        "react-dom",
         "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
@@ -89814,12 +90014,13 @@
         "total": 28
       }
     },
-    "dsh-vitals": {
-      "repo": "JoblessJoe/dsh-vitals",
-      "version": "0.1.12",
+    "dsh-worktree-space": {
+      "repo": "kangtsang/dsh-worktree-space",
+      "version": "1.2.1",
       "requires": [
         "react",
-        "react/jsx-runtime"
+        "react/jsx-runtime",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -89928,11 +90129,12 @@
         "total": 28
       }
     },
-    "@goodandready/dsh-smart-restart": {
-      "repo": "GooDAnDReaDY/dsh-smart-restart",
-      "version": "0.1.5",
+    "@goodandready/dsh-github-ops": {
+      "repo": "GooDAnDReaDY/dsh-github-ops",
+      "version": "0.6.0",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -89953,11 +90155,12 @@
         "total": 28
       }
     },
-    "dsh-deepseek-cost": {
-      "repo": "wuenna/dsh-deepseek-cost",
-      "version": "0.3.1",
+    "@stolyarovmn/dsh-ui-registry-aggregator": {
+      "repo": "Stolyarovmn/dsh-client-ui-plugin-market",
+      "version": "0.5.2",
       "requires": [
-        "react"
+        "react",
+        "react-dom/client"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -90054,12 +90257,11 @@
         "total": 28
       }
     },
-    "git-for-dsh": {
-      "repo": "theRMM714/git-for-dsh",
-      "version": "0.0.9",
+    "sh-volume-shuff": {
+      "repo": "underworld-oddball/sh-volume-shuff",
+      "version": "0.1.2",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-settings"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -90156,7 +90358,7 @@
     },
     "dsh-decision-layer": {
       "repo": "xbzbing/dsh-decision-layer",
-      "version": "0.5.5",
+      "version": "0.6.1",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -90614,15 +90816,21 @@
         "total": 28
       }
     },
-    "dsh-project-mcp": {
-      "repo": "borgez/dsh-project-mcp",
-      "version": "0.3.1",
+    "@guowenzhang/dsh-memory": {
+      "repo": "zhang-guo-wen/dsh-memory",
+      "version": "1.0.1",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime",
+        "@deepseek-ai/dsh-client-store"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -90635,7 +90843,8 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
@@ -90665,13 +90874,13 @@
         "total": 28
       }
     },
-    "dsh-worktree-space": {
-      "repo": "kangtsang/dsh-worktree-space",
-      "version": "1.2.1",
+    "dsh-usage-state": {
+      "repo": "takboo/dsh-usage-state",
+      "version": "0.4.4",
       "requires": [
         "react",
-        "react/jsx-runtime",
-        "react-dom"
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -91145,15 +91354,11 @@
         "total": 28
       }
     },
-    "dsh-pet": {
-      "repo": "levi52/dsh-pet",
-      "version": "0.3.6",
+    "@xmwengxing/dsh-client-ui-sidebar-perfmon": {
+      "repo": "xmwengxing/dsh-client-ui-sidebar-perfmon",
+      "version": "0.3.2",
       "requires": [
-        "react",
-        "react/jsx-runtime",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react-dom/client",
-        "react-dom"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -91252,16 +91457,22 @@
       },
       "hostTransform": true
     },
-    "memory-eternal": {
-      "repo": "07vvvv/memory-eternal-ui-restyle",
-      "version": "0.10.3",
+    "@guowenzhang/dsh-web-design": {
+      "repo": "zhang-guo-wen/dsh-web-design",
+      "version": "1.0.2",
       "requires": [
         "react",
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "@deepseek-ai/dsh-client-store",
         "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -91274,19 +91485,26 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
-    "sh-volume-shuff": {
-      "repo": "underworld-oddball/sh-volume-shuff",
-      "version": "0.1.2",
+    "@guowenzhang/dsh-worktree": {
+      "repo": "zhang-guo-wen/dsh-worktree",
+      "version": "2.0.0",
       "requires": [
-        "react"
+        "@deepseek-ai/dsh-client-store",
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
-          "status": "ok"
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
         },
         "0.2.0-rc.2": {
           "status": "ok"
@@ -91299,7 +91517,8 @@
         }
       },
       "verdict": {
-        "cls": "ok",
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
         "total": 28
       }
     },
@@ -91333,6 +91552,31 @@
         "react",
         "react/jsx-runtime",
         "react-dom"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@michengai/dsh-code-review": {
+      "repo": "MichengAI/dsh-code-review",
+      "version": "0.1.12",
+      "requires": [
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -91537,13 +91781,13 @@
         "total": 28
       }
     },
-    "dsh-usage-state": {
-      "repo": "takboo/dsh-usage-state",
-      "version": "0.4.4",
+    "@michengai/dsh-codex-pet": {
+      "repo": "MichengAI/dsh-codex-pet",
+      "version": "0.1.15",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives",
-        "react/jsx-runtime"
+        "react/jsx-runtime",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -92120,9 +92364,9 @@
         "total": 28
       }
     },
-    "dsh-subusage": {
-      "repo": "KouzakiUmi/dsh-subusage",
-      "version": "0.7.0",
+    "dsh-project-mcp": {
+      "repo": "borgez/dsh-project-mcp",
+      "version": "0.4.0",
       "requires": [
         "react"
       ],
@@ -92170,9 +92414,9 @@
         "total": 28
       }
     },
-    "dsh-workbuddy-console": {
-      "repo": "dhdbvcg/dsh-workbuddy-console",
-      "version": "2.0.38",
+    "memory-eternal": {
+      "repo": "07vvvv/memory-eternal-ui-restyle",
+      "version": "0.10.6",
       "requires": [
         "react",
         "react/jsx-runtime"
@@ -92275,12 +92519,11 @@
         "total": 28
       }
     },
-    "dsh-simple-usage-info": {
-      "repo": "MarJose123/dsh-simple-usage-info",
-      "version": "0.2.0",
+    "@goodandready/dsh-smart-restart": {
+      "repo": "GooDAnDReaDY/dsh-smart-restart",
+      "version": "0.1.8",
       "requires": [
         "react",
-        "react-dom",
         "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
@@ -92584,33 +92827,6 @@
         "total": 28
       }
     },
-    "@nianchu/dsh-rollback": {
-      "repo": "ZhaoZeW/dsh-rollback",
-      "version": "0.4.3",
-      "requires": [
-        "react",
-        "react-dom",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "@wjj-8283/dsh-web-fetch-fakeip": {
       "repo": "wjj-8283/dsh-web-fetch-fakeip-plugin",
       "version": "0.2.1",
@@ -92888,9 +93104,9 @@
         "total": 28
       }
     },
-    "@stolyarovmn/dsh-ui-registry-aggregator": {
-      "repo": "Stolyarovmn/dsh-client-ui-plugin-market",
-      "version": "0.5.2",
+    "dsh-session-purge": {
+      "repo": "lxchapu/dsh-session-purge",
+      "version": "0.4.5",
       "requires": [
         "react",
         "react-dom/client"
@@ -93020,11 +93236,12 @@
         "total": 28
       }
     },
-    "@xmwengxing/dsh-client-ui-sidebar-perfmon": {
-      "repo": "xmwengxing/dsh-client-ui-sidebar-perfmon",
-      "version": "0.3.2",
+    "dsh-rerun-turn": {
+      "repo": "DDDMUC/dsh-rerun-turn",
+      "version": "0.1.27",
       "requires": [
-        "react"
+        "react",
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -93102,55 +93319,6 @@
       "requires": [
         "react"
       ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-rerun-turn": {
-      "repo": "DDDMUC/dsh-rerun-turn",
-      "version": "0.1.26",
-      "requires": [
-        "react",
-        "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-csdn-theme": {
-      "repo": "d0ublecl1ck/dsh-csdn-theme",
-      "version": "0.2.1",
-      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -93272,9 +93440,9 @@
         "total": 28
       }
     },
-    "dsh-turn-price": {
-      "repo": "littlefish04/dsh-turn-price",
-      "version": "0.1.1",
+    "dsh-skill-center": {
+      "repo": "mwk719/dsh-skill-center",
+      "version": "0.2.2",
       "requires": [
         "react"
       ],
@@ -93417,9 +93585,9 @@
         "total": 28
       }
     },
-    "dsh-skill-center": {
-      "repo": "mwk719/dsh-skill-center",
-      "version": "0.2.1",
+    "dsh-subusage": {
+      "repo": "KouzakiUmi/dsh-subusage",
+      "version": "0.8.1",
       "requires": [
         "react"
       ],
@@ -93442,10 +93610,39 @@
         "total": 28
       }
     },
-    "@copylee/dsh-better-display": {
-      "repo": "copylee711/dsh-better-display",
-      "version": "0.4.0",
-      "requires": [],
+    "dsh-simple-usage-info": {
+      "repo": "MarJose123/dsh-simple-usage-info",
+      "version": "0.2.1",
+      "requires": [
+        "react",
+        "react-dom",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-turn-price": {
+      "repo": "littlefish04/dsh-turn-price",
+      "version": "0.2.3",
+      "requires": [
+        "react"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -93490,12 +93687,37 @@
         "total": 28
       }
     },
-    "dsh-session-purge": {
-      "repo": "lxchapu/dsh-session-purge",
-      "version": "0.4.5",
+    "@liuyu-f/dsh-plugin-session-cascade-delete": {
+      "repo": "liuyu-f/dsh-plugin-session-cascade-delete",
+      "version": "1.0.4",
       "requires": [
         "react",
-        "react-dom/client"
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-remote-sessions": {
+      "repo": "atlas5301/dsh-remote-sessions",
+      "version": "0.8.11",
+      "requires": [
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -93926,12 +94148,12 @@
         "total": 28
       }
     },
-    "dsh-arabic": {
-      "repo": "SMSMy/dsh-arabic",
-      "version": "0.3.1",
+    "dsh-workbuddy-console": {
+      "repo": "dhdbvcg/dsh-workbuddy-console",
+      "version": "2.0.48",
       "requires": [
         "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react/jsx-runtime"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -93980,7 +94202,7 @@
     },
     "@copylee/dsh-image-gen": {
       "repo": "copylee711/dsh-image-gen",
-      "version": "0.1.11",
+      "version": "0.2.0",
       "requires": [
         "react/jsx-runtime",
         "react",
@@ -94107,59 +94329,60 @@
         "total": 28
       }
     },
+    "dsh-ui-scale": {
+      "repo": "juliankang4/dsh-ui-scale",
+      "version": "0.1.3",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-arabic": {
+      "repo": "SMSMy/dsh-arabic",
+      "version": "0.3.2",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
     "@copylee/dsh-computer-use": {
       "repo": "copylee711/dsh-computer-use",
-      "version": "0.7.5",
-      "requires": [
-        "react"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-ghidra": {
-      "repo": "spix18/dsh-ghidra",
-      "version": "0.10.1",
-      "requires": [
-        "react"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-remote-sessions": {
-      "repo": "atlas5301/dsh-remote-sessions",
-      "version": "0.8.11",
+      "version": "0.7.6",
       "requires": [
         "react"
       ],
@@ -94208,12 +94431,11 @@
         "total": 28
       }
     },
-    "@liuyu-f/dsh-plugin-session-cascade-delete": {
-      "repo": "liuyu-f/dsh-plugin-session-cascade-delete",
-      "version": "1.0.4",
+    "dsh-ghidra": {
+      "repo": "spix18/dsh-ghidra",
+      "version": "0.11.1",
       "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
+        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -94393,31 +94615,6 @@
         "react",
         "react-dom",
         "react/jsx-runtime"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "dsh-ui-scale": {
-      "repo": "juliankang4/dsh-ui-scale",
-      "version": "0.1.3",
-      "requires": [
-        "react"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -94846,9 +95043,9 @@
         "total": 28
       }
     },
-    "@copylee/dsh-office": {
-      "repo": "copylee711/dsh-office",
-      "version": "1.1.2",
+    "dsh-todo-panel": {
+      "repo": "luoyukun3-oss/dsh-todo-panel",
+      "version": "0.3.1",
       "requires": [
         "react"
       ],
@@ -94873,6 +95070,31 @@
     },
     "@fufu1437/dsh-model-commands": {
       "repo": "fufu1437/dsh-model-commands",
+      "version": "0.3.0",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@xinvxueyuan/cordis-plugin-secret": {
+      "repo": "xinvxueyuan/cordis-plugin-secret",
       "version": "0.3.0",
       "requires": [
         "react"
@@ -94921,11 +95143,12 @@
         "total": 28
       }
     },
-    "dsh-todo-panel": {
-      "repo": "luoyukun3-oss/dsh-todo-panel",
-      "version": "0.3.1",
+    "dsh-expert": {
+      "repo": "jiuaiwo/dsh-expert",
+      "version": "0.5.7",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -94972,64 +95195,10 @@
         "total": 28
       }
     },
-    "dsh-plugin-updater": {
-      "repo": "Fivezy2005/dsh-plugin-updater",
-      "version": "0.2.0",
-      "requires": [
-        "react"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "@michengai/dsh-codex-pet": {
-      "repo": "MichengAI/dsh-codex-pet",
-      "version": "0.1.13",
-      "requires": [
-        "react",
-        "react/jsx-runtime",
-        "react-dom"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
-    "@xinvxueyuan/cordis-plugin-secret": {
-      "repo": "xinvxueyuan/cordis-plugin-secret",
-      "version": "0.3.0",
-      "requires": [
-        "react"
-      ],
+    "dsh-csdn-theme": {
+      "repo": "d0ublecl1ck/dsh-csdn-theme",
+      "version": "0.2.3",
+      "requires": [],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -95052,6 +95221,31 @@
     "dsh-gh-pages-artifacts": {
       "repo": "opdsh/dsh-gh-pages-artifacts",
       "version": "0.1.0",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@copylee/dsh-office": {
+      "repo": "copylee711/dsh-office",
+      "version": "1.1.3",
       "requires": [
         "react"
       ],
@@ -95100,32 +95294,6 @@
         "total": 28
       }
     },
-    "dsh-fullscreen-input": {
-      "repo": "AL-Yichen/dsh-fullscreen-input",
-      "version": "1.2.1",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "@huanlin/dsh-plugin-better-sidebar-plugin-audio": {
       "repo": "HuanLinOTO/dsh-plugin-better-sidebar-plugin-audio",
       "version": "0.1.0",
@@ -95152,9 +95320,9 @@
         "total": 28
       }
     },
-    "dsh-flash-proxy": {
-      "repo": "tcgbp/dsh-flash-proxy",
-      "version": "0.1.4",
+    "@kuixiu/dsh-pet": {
+      "repo": "kuixiu/dsh-pet",
+      "version": "1.0.0",
       "requires": [
         "react"
       ],
@@ -95177,9 +95345,9 @@
         "total": 28
       }
     },
-    "@kuixiu/dsh-pet": {
-      "repo": "kuixiu/dsh-pet",
-      "version": "1.0.0",
+    "dsh-flash-proxy": {
+      "repo": "tcgbp/dsh-flash-proxy",
+      "version": "0.1.4",
       "requires": [
         "react"
       ],
@@ -95254,10 +95422,12 @@
         "total": 28
       }
     },
-    "dsh-entry-transition": {
-      "repo": "hbgdjb/dsh-entry-transition",
-      "version": "1.0.0",
-      "requires": [],
+    "dsh-plugin-updater": {
+      "repo": "Fivezy2005/dsh-plugin-updater",
+      "version": "0.2.8",
+      "requires": [
+        "react"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
@@ -95304,11 +95474,13 @@
         "total": 28
       }
     },
-    "dsh-import-newapi": {
-      "repo": "Deanyu148/dsh-import-newapi",
-      "version": "0.1.1",
+    "dsh-fullscreen-input": {
+      "repo": "AL-Yichen/dsh-fullscreen-input",
+      "version": "1.2.4",
       "requires": [
-        "react"
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react-dom"
       ],
       "results": {
         "0.0.1-rc.5": {
@@ -95356,32 +95528,6 @@
         "total": 28
       }
     },
-    "dsh-expert": {
-      "repo": "jiuaiwo/dsh-expert",
-      "version": "0.5.7",
-      "requires": [
-        "react",
-        "@deepseek-ai/dsh-client-ui-primitives"
-      ],
-      "results": {
-        "0.0.1-rc.5": {
-          "status": "ok"
-        },
-        "0.2.0-rc.2": {
-          "status": "ok"
-        },
-        "0.2.1-alpha.1": {
-          "status": "ok"
-        },
-        "0.1.2-rc.1": {
-          "status": "ok"
-        }
-      },
-      "verdict": {
-        "cls": "ok",
-        "total": 28
-      }
-    },
     "@ragnoryok1/dsh-locale-bridge": {
       "repo": "Ragnoryok1/dsh-locale-bridge",
       "version": "0.1.0",
@@ -95405,9 +95551,32 @@
         "total": 28
       }
     },
-    "@copylee/dsh-remote-control": {
-      "repo": "copylee711/dsh-remote-control",
-      "version": "0.2.6",
+    "dsh-entry-transition": {
+      "repo": "hbgdjb/dsh-entry-transition",
+      "version": "1.0.1",
+      "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-import-newapi": {
+      "repo": "Deanyu148/dsh-import-newapi",
+      "version": "0.1.2",
       "requires": [
         "react"
       ],
@@ -95430,10 +95599,392 @@
         "total": 28
       }
     },
-    "dsh-wisp": {
-      "repo": "969246694/dsh-wisp",
-      "version": "1.49.4",
+    "dsh-locale-fr": {
+      "repo": "BlackAngel242/dsh-locale-fr",
+      "version": "1.0.1",
       "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-sidebar-hover": {
+      "repo": "ingeb0rga/dsh-sidebar-hover",
+      "version": "0.1.22",
+      "requires": [
+        "@deepseek-ai/dsh-client-store",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime",
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "broken",
+          "missing": [
+            "@deepseek-ai/dsh-client-store"
+          ]
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "supported-since",
+        "since": "0.1.2-alpha.2",
+        "total": 28
+      }
+    },
+    "dsh-spark-scope": {
+      "repo": "juliankang4/dsh-spark-scope",
+      "version": "0.0.1",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-aivn": {
+      "repo": "john-walks-slow/dsh-aivn",
+      "version": "0.2.0",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-session-eva-status": {
+      "repo": "WhatCannotBeSaid/dsh-session-eva-status",
+      "version": "0.1.0",
+      "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-web-git-sidebar": {
+      "repo": "RaditPasya/dsh-web-git-sidebar",
+      "version": "0.5.0",
+      "requires": [
+        "react",
+        "react/jsx-runtime"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-session-url": {
+      "repo": "DDDMUC/dsh-session-url",
+      "version": "0.2.0",
+      "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@copylee/dsh-better-display": {
+      "repo": "copylee711/dsh-better-display",
+      "version": "0.4.1",
+      "requires": [],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-pixmart": {
+      "repo": "mirror9933/dsh-pixmart",
+      "version": "0.1.2",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-desktop-auto-restart": {
+      "repo": "comer2031/dsh-desktop-auto-restart",
+      "version": "0.1.0",
+      "requires": [
+        "react",
+        "react-dom"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-local-plugins": {
+      "repo": "ishanshmalviya5/dsh-local-plugins",
+      "version": "0.2.1",
+      "requires": [
+        "react",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@weibaohui/dsh-ambient": {
+      "repo": "weibaohui/dsh-ambient",
+      "version": "0.1.1",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@lone-wolf-akela/dsh-sandboxie-redirect": {
+      "repo": "lone-wolf-akela/dsh-sandboxie-redirect",
+      "version": "0.3.0",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@copylee/dsh-remote-control": {
+      "repo": "copylee711/dsh-remote-control",
+      "version": "0.2.7",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "dsh-dafeiyu": {
+      "repo": "QCYTSN/dsh-dafeiyu",
+      "version": "0.1.16",
+      "requires": [
+        "react"
+      ],
+      "results": {
+        "0.0.1-rc.5": {
+          "status": "ok"
+        },
+        "0.2.0-rc.2": {
+          "status": "ok"
+        },
+        "0.2.1-alpha.1": {
+          "status": "ok"
+        },
+        "0.1.2-rc.1": {
+          "status": "ok"
+        }
+      },
+      "verdict": {
+        "cls": "ok",
+        "total": 28
+      }
+    },
+    "@max-null/dsh-jubensha": {
+      "repo": "Max-Null/dsh-jubensha",
+      "version": "0.1.0",
+      "requires": [
+        "react",
+        "react/jsx-runtime"
+      ],
       "results": {
         "0.0.1-rc.5": {
           "status": "ok"
