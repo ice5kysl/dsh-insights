@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-09T06:04:29.960Z",
+  "generatedAt": "2026-10-09T06:15:24.727Z",
   "totals": {
-    "authoritative": 14465,
-    "active7": 1981,
+    "authoritative": 14466,
+    "active7": 1980,
     "active7Pct": 13.7,
-    "active30": 6758,
+    "active30": 6759,
     "active30Pct": 46.7,
-    "ageGate1": 14023,
-    "ageGate1Pct": 96.9,
+    "ageGate1": 14027,
+    "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9783,
       "2026-02": 4,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1122,
+      "2026-10": 1123,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 541
+      "2026-10-05": 542
     },
     "byWeekGrades": {
       "B": {
@@ -103,7 +103,7 @@
         "2026-09-21": 453,
         "2026-09-28": 584,
         "2025-12-22": 1,
-        "2026-10-05": 346
+        "2026-10-05": 347
       },
       "S": {
         "2026-08-03": 2,
@@ -181,14 +181,14 @@
   "distribution": {
     "publish": {
       "published": 6450,
-      "unpublished": 8015,
+      "unpublished": 8016,
       "stale": 3915
     },
     "docs": {
-      "readme": 14428,
+      "readme": 14429,
       "zhFile": 1027,
-      "zh": 6888,
-      "both": 6877,
+      "zh": 6889,
+      "both": 6878,
       "none": 37
     },
     "lib": {
@@ -388,11 +388,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14077
+      "count": 14078
     },
     {
       "topic": "deepseek-harness",
-      "count": 9660
+      "count": 9661
     },
     {
       "topic": "dsh",
@@ -503,8 +503,8 @@
     "imsai": 314,
     "covered": 1084,
     "coveredPct": 7.5,
-    "none": 13381,
-    "fetchedAt": "2026-10-09T06:03:31.562Z"
+    "none": 13382,
+    "fetchedAt": "2026-10-09T06:14:35.603Z"
   },
   "suggested": [
     {
@@ -1808,7 +1808,7 @@
   "quality": {
     "grades": {
       "A": 499,
-      "B": 6924,
+      "B": 6925,
       "C": 4878,
       "D": 2069,
       "S": 95
@@ -1840,7 +1840,7 @@
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 968
+      "count": 969
     },
     {
       "category": "搜索 / 命令面板",
@@ -106238,7 +106238,7 @@
       "topCat": "侧栏 / 工作区"
     },
     {
-      "owner": "qiz42144-web",
+      "owner": "jessicacui99",
       "plugins": 1,
       "stars": 0,
       "grades": {
@@ -106254,6 +106254,27 @@
       "firstCreated": "2026-10-08",
       "delta": 0,
       "avg": 76,
+      "topPlugin": "jessicacui99/dsh-plugin-token-cost",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "qiz42144-web",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-08",
+      "firstCreated": "2026-10-08",
+      "delta": 0,
+      "avg": 81,
       "topPlugin": "qiz42144-web/dsh-ai-curfew",
       "topStars": 0,
       "topCat": "其它"
@@ -175706,27 +175727,6 @@
       "topCat": "模型 / 代理"
     },
     {
-      "owner": "jessicacui99",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-08",
-      "firstCreated": "2026-10-08",
-      "delta": 0,
-      "avg": 71,
-      "topPlugin": "jessicacui99/dsh-plugin-token-cost",
-      "topStars": 0,
-      "topCat": "文件浏览 / 预览"
-    },
-    {
       "owner": "miiy",
       "plugins": 1,
       "stars": 0,
@@ -175742,7 +175742,7 @@
       "lastPush": "2026-10-08",
       "firstCreated": "2026-10-08",
       "delta": 0,
-      "avg": 62,
+      "avg": 67,
       "topPlugin": "miiy/dsh-terminal-keybar",
       "topStars": 0,
       "topCat": "开发 / 数据"
@@ -176712,10 +176712,31 @@
       "topPlugin": "QR-0W/dsh-independent-auto-review",
       "topStars": 0,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "guomi6450",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-09",
+      "firstCreated": "2026-10-09",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "guomi6450/dsh-folder-timemachine",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
     }
   ],
   "authorStats": {
-    "total": 8322,
+    "total": 8323,
     "multi": 2091,
     "top10Share": 3
   },
@@ -176724,7 +176745,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 18961,
+    "candidates": 18962,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -176806,11 +176827,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 640
+      "2026-10-05": 641
     },
-    "validated": 19462,
-    "candidatesValidated": 24,
-    "authoritative": 14465,
+    "validated": 19463,
+    "candidatesValidated": 17,
+    "authoritative": 14466,
     "invalidUnique": 4997,
     "invalidBuckets": [
       {
@@ -176859,5 +176880,5 @@
       }
     ]
   },
-  "enrichCount": 14465
+  "enrichCount": 14466
 }
