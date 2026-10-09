@@ -1,16 +1,16 @@
 # 快照 Diff · 2026-10-09
 
-- 当前权威插件：**14458**（上次 14451）
+- 当前权威插件：**14465**（上次 14458）
 - 新增 7 · 消失 0
 
 ## 新增（Top 7）
-- frankshi2024/dsh-compact-manager ★1 
-- frankshi2024/dsh-web-app ★1 
-- Fyue7/dsh-memory-optin ★0 
-- Fyue7/dsh-restart-button ★0 (npm ✓)
-- HunterXing/jev-judge ★0 
-- 571242/dsh-armor-switch ★0 
-- MingShi350/dsh-ikuai-mcp ★0 (npm ✓)
+- ai-tool-labs/dsh-plugin-square ★2 (npm ✓)
+- LFY-bot/dsh-api-probe ★1 
+- czk200518-hash/dsh-tlogs ★0 
+- qusaykhadour/dsh-notify-ar ★0 (npm ✓)
+- bauerelizabeth07139/dsh-math-rigor ★0 
+- xwamt/at-terminal-dsh ★0 
+- QR-0W/dsh-independent-auto-review ★0 
 
 ## 消失（Top 0）
 
