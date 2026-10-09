@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-10-09T10:15:47.790Z",
+  "fetchedAt": "2026-10-09T11:16:28.455Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 246071,
-    "forks": 29524,
+    "stars": 246097,
+    "forks": 29526,
     "pushed_at": "2026-10-09T10:04:06Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.2.1-alpha.2",
+        "name": "v0.2.1-alpha.2",
+        "prerelease": true,
+        "published_at": "2026-10-09T11:09:26Z",
+        "breaking": true,
+        "summary": "新增思考过程机器翻译实验插件，可在插件页启用，选择 Bing、Google 或付费 DeepSeek Flash。",
+        "added": 16,
+        "fixed": 39
+      },
       {
         "tag": "dsh-v0.2.1-alpha.1",
         "name": "v0.2.1-alpha.1",
@@ -76,16 +86,6 @@
         "summary": "侧边栏会话支持置顶、归档管理、筛选、撤销归档及从搜索结果恢复。",
         "added": 6,
         "fixed": 35
-      },
-      {
-        "tag": "dsh-v0.1.6-alpha.2",
-        "name": "v0.1.6-alpha.2",
-        "prerelease": true,
-        "published_at": "2026-09-17T13:30:16Z",
-        "breaking": true,
-        "summary": "新增插件管理页，支持插件安装和修改配置，支持实时开启禁用插件。 @LegGasai,",
-        "added": 4,
-        "fixed": 11
       }
     ],
     "npm": {
@@ -143,8 +143,8 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104510,
-      "forks": 16715,
+      "stars": 104508,
+      "forks": 16714,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
       "latestRelease": {
@@ -185,7 +185,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-Coder",
-      "stars": 24295,
+      "stars": 24293,
       "forks": 2928,
       "pushed_at": "2025-11-11T06:44:56Z",
       "description": "DeepSeek Coder: Let the Code Write Itself",
@@ -193,7 +193,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 23927,
+      "stars": 23926,
       "forks": 2199,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
