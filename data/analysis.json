@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-09T22:22:01.744Z",
+  "generatedAt": "2026-10-09T23:15:30.614Z",
   "totals": {
-    "authoritative": 14577,
-    "active7": 1786,
+    "authoritative": 14579,
+    "active7": 1787,
     "active7Pct": 12.3,
-    "active30": 6782,
+    "active30": 6783,
     "active30Pct": 46.5,
     "ageGate1": 14148,
-    "ageGate1Pct": 97.1,
+    "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9783,
       "2026-02": 4,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1234,
+      "2026-10": 1236,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 653
+      "2026-10-05": 655
     },
     "byWeekGrades": {
       "B": {
@@ -103,7 +103,7 @@
         "2026-09-21": 453,
         "2026-09-28": 561,
         "2025-12-22": 1,
-        "2026-10-05": 425
+        "2026-10-05": 426
       },
       "S": {
         "2026-08-03": 2,
@@ -160,7 +160,7 @@
         "2026-05-04": 1,
         "2026-09-28": 414,
         "2020-06-29": 1,
-        "2026-10-05": 194
+        "2026-10-05": 195
       },
       "D": {
         "2026-08-10": 328,
@@ -181,20 +181,20 @@
   "distribution": {
     "publish": {
       "published": 6483,
-      "unpublished": 8094,
+      "unpublished": 8096,
       "stale": 3927
     },
     "docs": {
-      "readme": 14540,
+      "readme": 14542,
       "zhFile": 1038,
-      "zh": 6945,
-      "both": 6934,
+      "zh": 6947,
+      "both": 6936,
       "none": 37
     },
     "lib": {
-      "index": 7637,
-      "client": 5126,
-      "both": 4537
+      "index": 7639,
+      "client": 5128,
+      "both": 4539
     },
     "publishPct": 44.5,
     "zhPct": 47.6
@@ -388,15 +388,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14189
+      "count": 14191
     },
     {
       "topic": "deepseek-harness",
-      "count": 9742
+      "count": 9744
     },
     {
       "topic": "dsh",
-      "count": 5971
+      "count": 5972
     },
     {
       "topic": "cordis",
@@ -412,7 +412,7 @@
     },
     {
       "topic": "plugin",
-      "count": 947
+      "count": 948
     },
     {
       "topic": "typescript",
@@ -502,9 +502,9 @@
     "awesome": 776,
     "imsai": 316,
     "covered": 1086,
-    "coveredPct": 7.5,
-    "none": 13491,
-    "fetchedAt": "2026-10-09T22:21:04.555Z"
+    "coveredPct": 7.4,
+    "none": 13493,
+    "fetchedAt": "2026-10-09T23:14:29.355Z"
   },
   "suggested": [
     {
@@ -1808,8 +1808,8 @@
   "quality": {
     "grades": {
       "A": 498,
-      "B": 6979,
-      "C": 4922,
+      "B": 6980,
+      "C": 4923,
       "D": 2082,
       "S": 96
     },
@@ -1820,7 +1820,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5153
+      "count": 5154
     },
     {
       "category": "模型 / 代理",
@@ -1840,7 +1840,7 @@
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 981
+      "count": 982
     },
     {
       "category": "搜索 / 命令面板",
@@ -7175,7 +7175,7 @@
       "lastPush": "2026-10-02",
       "firstCreated": "2026-08-29",
       "delta": 0,
-      "avg": 83.3,
+      "avg": 81.7,
       "topPlugin": "Witherwithwinter/DeepSeek-Balance-Whale-Widget-Bowl",
       "topStars": 21,
       "topCat": "状态 / 监控 / 用量"
@@ -107646,6 +107646,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "bihong2026",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-09",
+      "firstCreated": "2026-10-09",
+      "delta": 0,
+      "avg": 78,
+      "topPlugin": "bihong2026/dsh-arcade",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
+    },
+    {
       "owner": "antibrow",
       "plugins": 1,
       "stars": 688,
@@ -178309,10 +178330,31 @@
       "topPlugin": "DenAbr/dsh-compact-selected-model",
       "topStars": 0,
       "topCat": "会话管理"
+    },
+    {
+      "owner": "lakerian",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-09",
+      "firstCreated": "2026-10-09",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "lakerian/dsh-plugin-term-dictionary",
+      "topStars": 0,
+      "topCat": "其它"
     }
   ],
   "authorStats": {
-    "total": 8398,
+    "total": 8400,
     "multi": 2110,
     "top10Share": 3
   },
@@ -178321,7 +178363,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 19086,
+    "candidates": 19088,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -178403,11 +178445,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 765
+      "2026-10-05": 767
     },
-    "validated": 19587,
-    "candidatesValidated": 17,
-    "authoritative": 14577,
+    "validated": 19589,
+    "candidatesValidated": 18,
+    "authoritative": 14579,
     "invalidUnique": 5010,
     "invalidBuckets": [
       {
@@ -178456,5 +178498,5 @@
       }
     ]
   },
-  "enrichCount": 14577
+  "enrichCount": 14579
 }
