@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-09T13:55:34.105Z",
+  "generatedAt": "2026-10-09T14:16:37.416Z",
   "totals": {
-    "authoritative": 14541,
-    "active7": 1900,
-    "active7Pct": 13.1,
-    "active30": 6778,
+    "authoritative": 14543,
+    "active7": 1877,
+    "active7Pct": 12.9,
+    "active30": 6779,
     "active30Pct": 46.6,
-    "ageGate1": 14100,
+    "ageGate1": 14102,
     "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9783,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1198,
+      "2026-10": 1200,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,11 +67,11 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 617
+      "2026-10-05": 619
     },
     "byWeekGrades": {
       "B": {
-        "2026-08-10": 1901,
+        "2026-08-10": 1900,
         "2026-02-16": 3,
         "2026-07-13": 7,
         "2026-04-27": 1,
@@ -103,7 +103,7 @@
         "2026-09-21": 453,
         "2026-09-28": 565,
         "2025-12-22": 1,
-        "2026-10-05": 399
+        "2026-10-05": 402
       },
       "S": {
         "2026-08-03": 2,
@@ -136,7 +136,7 @@
         "2026-01-05": 1,
         "2026-08-17": 1113,
         "2026-07-13": 4,
-        "2026-08-10": 1547,
+        "2026-08-10": 1548,
         "2026-02-02": 1,
         "2026-08-03": 24,
         "2026-03-23": 1,
@@ -160,7 +160,7 @@
         "2026-05-04": 1,
         "2026-09-28": 410,
         "2020-06-29": 1,
-        "2026-10-05": 186
+        "2026-10-05": 185
       },
       "D": {
         "2026-08-10": 328,
@@ -181,14 +181,14 @@
   "distribution": {
     "publish": {
       "published": 6475,
-      "unpublished": 8066,
+      "unpublished": 8068,
       "stale": 3925
     },
     "docs": {
-      "readme": 14504,
+      "readme": 14506,
       "zhFile": 1035,
-      "zh": 6929,
-      "both": 6918,
+      "zh": 6931,
+      "both": 6920,
       "none": 37
     },
     "lib": {
@@ -388,15 +388,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14153
+      "count": 14155
     },
     {
       "topic": "deepseek-harness",
-      "count": 9713
+      "count": 9714
     },
     {
       "topic": "dsh",
-      "count": 5951
+      "count": 5952
     },
     {
       "topic": "cordis",
@@ -503,8 +503,8 @@
     "imsai": 316,
     "covered": 1086,
     "coveredPct": 7.5,
-    "none": 13455,
-    "fetchedAt": "2026-10-09T13:54:29.382Z"
+    "none": 13457,
+    "fetchedAt": "2026-10-09T14:15:38.584Z"
   },
   "suggested": [
     {
@@ -1808,7 +1808,7 @@
   "quality": {
     "grades": {
       "A": 500,
-      "B": 6958,
+      "B": 6960,
       "C": 4909,
       "D": 2080,
       "S": 94
@@ -1820,7 +1820,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5140
+      "count": 5141
     },
     {
       "category": "模型 / 代理",
@@ -1828,7 +1828,7 @@
     },
     {
       "category": "会话管理",
-      "count": 1305
+      "count": 1306
     },
     {
       "category": "文件浏览 / 预览",
@@ -21330,6 +21330,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "ruiyukirin",
+      "plugins": 2,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-09",
+      "firstCreated": "2026-08-28",
+      "delta": 0,
+      "avg": 76.5,
+      "topPlugin": "ruiyukirin/dsh-douyin-oem-touliu-report",
+      "topStars": 1,
+      "topCat": "状态 / 监控 / 用量"
+    },
+    {
       "owner": "bjzkhy",
       "plugins": 2,
       "stars": 1,
@@ -34460,27 +34481,6 @@
       "delta": 0,
       "avg": 86,
       "topPlugin": "linenxi-ctrl/dsh-vision",
-      "topStars": 9,
-      "topCat": "其它"
-    },
-    {
-      "owner": "lilwhich",
-      "plugins": 1,
-      "stars": 9,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-09",
-      "firstCreated": "2026-08-16",
-      "delta": 0,
-      "avg": 78,
-      "topPlugin": "lilwhich/dsh-plugin-gather",
       "topStars": 9,
       "topCat": "其它"
     },
@@ -69031,27 +69031,6 @@
       "topPlugin": "hehetoshang/dsh-talebook-plugin",
       "topStars": 1,
       "topCat": "其它"
-    },
-    {
-      "owner": "ruiyukirin",
-      "plugins": 1,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-08-29",
-      "firstCreated": "2026-08-28",
-      "delta": 0,
-      "avg": 77,
-      "topPlugin": "ruiyukirin/dsh-douyin-oem-touliu-report",
-      "topStars": 1,
-      "topCat": "状态 / 监控 / 用量"
     },
     {
       "owner": "dusbin",
@@ -106763,6 +106742,48 @@
       "topCat": "工具 / 效率"
     },
     {
+      "owner": "zizhuang",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-08",
+      "firstCreated": "2026-10-08",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "zizhuang/dsh-file-dedupe",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "O789Real",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-08",
+      "firstCreated": "2026-10-08",
+      "delta": 0,
+      "avg": 78,
+      "topPlugin": "O789Real/dsh-usage-cost",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
+    },
+    {
       "owner": "LilianDOF4",
       "plugins": 1,
       "stars": 0,
@@ -109701,6 +109722,27 @@
       "topPlugin": "0nt-one/dsh-voice-input",
       "topStars": 5,
       "topCat": "搜索 / 命令面板"
+    },
+    {
+      "owner": "lilwhich",
+      "plugins": 1,
+      "stars": 9,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-09",
+      "firstCreated": "2026-08-16",
+      "delta": 0,
+      "avg": 73,
+      "topPlugin": "lilwhich/dsh-plugin-gather",
+      "topStars": 9,
+      "topCat": "其它"
     },
     {
       "owner": "peiqi10086",
@@ -174293,7 +174335,7 @@
       "lastPush": "2026-10-02",
       "firstCreated": "2026-10-02",
       "delta": 0,
-      "avg": 74,
+      "avg": 64,
       "topPlugin": "zf-666888/dsh-session-id-for-desktop",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
@@ -176714,27 +176756,6 @@
       "topCat": "侧栏 / 工作区"
     },
     {
-      "owner": "zizhuang",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-08",
-      "firstCreated": "2026-10-08",
-      "delta": 0,
-      "avg": 71,
-      "topPlugin": "zizhuang/dsh-file-dedupe",
-      "topStars": 0,
-      "topCat": "文件浏览 / 预览"
-    },
-    {
       "owner": "cm860712ch-cloud",
       "plugins": 1,
       "stars": 0,
@@ -176775,27 +176796,6 @@
       "topPlugin": "LastElbow/Scout-dsh",
       "topStars": 0,
       "topCat": "其它"
-    },
-    {
-      "owner": "O789Real",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-08",
-      "firstCreated": "2026-10-08",
-      "delta": 0,
-      "avg": 73,
-      "topPlugin": "O789Real/dsh-usage-cost",
-      "topStars": 0,
-      "topCat": "状态 / 监控 / 用量"
     },
     {
       "owner": "EdisonYang1982",
@@ -177846,11 +177846,32 @@
       "topPlugin": "135ty/dsh-git-commit-panel",
       "topStars": 0,
       "topCat": "消息 / 协作集成"
+    },
+    {
+      "owner": "EiyoV",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-09",
+      "firstCreated": "2026-10-09",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "EiyoV/dsh-free-tier-router",
+      "topStars": 0,
+      "topCat": "其它"
     }
   ],
   "authorStats": {
-    "total": 8376,
-    "multi": 2103,
+    "total": 8377,
+    "multi": 2104,
     "top10Share": 3
   },
   "coverage": {
@@ -177858,7 +177879,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 19045,
+    "candidates": 19047,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -177940,11 +177961,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 724
+      "2026-10-05": 726
     },
-    "validated": 19546,
-    "candidatesValidated": 25,
-    "authoritative": 14541,
+    "validated": 19548,
+    "candidatesValidated": 18,
+    "authoritative": 14543,
     "invalidUnique": 5005,
     "invalidBuckets": [
       {
@@ -177993,5 +178014,5 @@
       }
     ]
   },
-  "enrichCount": 14541
+  "enrichCount": 14543
 }
