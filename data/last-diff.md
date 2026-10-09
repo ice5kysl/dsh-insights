@@ -1,12 +1,10 @@
 # 快照 Diff · 2026-10-09
 
-- 当前权威插件：**14575**（上次 14572）
-- 新增 3 · 消失 0
+- 当前权威插件：**14576**（上次 14575）
+- 新增 1 · 消失 0
 
-## 新增（Top 3）
-- Eqarx/dsh-peak-guard ★1 
-- Naskete/dsh-agnes-image ★0 
-- FiVE0016/dsh-fold-polish ★0 (npm ✓)
+## 新增（Top 1）
+- serra006/dsh-connect-opencode ★0 
 
 ## 消失（Top 0）
 
