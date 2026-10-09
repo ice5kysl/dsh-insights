@@ -1,17 +1,17 @@
 # 快照 Diff · 2026-10-09
 
-- 当前权威插件：**14515**（上次 14507）
+- 当前权威插件：**14523**（上次 14515）
 - 新增 8 · 消失 0
 
 ## 新增（Top 8）
-- berhbro/dsh-cyrene-theme ★1 
-- vowdemon/dsh-openspec-dashboard ★0 
-- icyaaaww/dsh-time-machine ★0 (npm ✓)
-- wobenshiwomu/dsh-bite ★0 
-- xuliji/bark-notify ★0 (npm ✓)
-- chaunye/dsh-effort-slider-chaunye ★0 
-- Gnatnaituy/dsh-sidebar-git ★0 
-- zhishengplus/dsh-image-annotate ★0 
+- zzy-fxxxexxxyxxx/dsh-openclaw-memory ★1 (npm ✓)
+- 4399Accelerator/dsh-study-planner ★0 
+- HEArtattaCK2332/dsh-text-explain ★0 
+- youhuangqing/dsh-pet-plus ★0 
+- krodon998/dsh-get-memory ★0 
+- megablue/dsh-feature-map ★0 
+- Arun1016/dsh-cost ★0 (npm ✓)
+- lion231226/dsh-peak-hours ★0 
 
 ## 消失（Top 0）
 
