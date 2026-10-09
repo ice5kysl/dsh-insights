@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-09T17:22:39.060Z",
+  "generatedAt": "2026-10-09T18:15:42.216Z",
   "totals": {
-    "authoritative": 14570,
-    "active7": 1827,
-    "active7Pct": 12.5,
+    "authoritative": 14572,
+    "active7": 1806,
+    "active7Pct": 12.4,
     "active30": 6783,
-    "active30Pct": 46.6,
-    "ageGate1": 14131,
+    "active30Pct": 46.5,
+    "ageGate1": 14136,
     "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9783,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1227,
+      "2026-10": 1229,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 646
+      "2026-10-05": 648
     },
     "byWeekGrades": {
       "B": {
@@ -89,7 +89,7 @@
         "2026-07-27": 7,
         "2026-07-20": 3,
         "2026-01-26": 1,
-        "2026-08-31": 457,
+        "2026-08-31": 456,
         "2021-06-14": 1,
         "2025-08-11": 1,
         "2025-11-03": 1,
@@ -103,7 +103,7 @@
         "2026-09-21": 453,
         "2026-09-28": 563,
         "2025-12-22": 1,
-        "2026-10-05": 420
+        "2026-10-05": 422
       },
       "S": {
         "2026-08-03": 2,
@@ -140,7 +140,7 @@
         "2026-02-02": 1,
         "2026-08-03": 24,
         "2026-03-23": 1,
-        "2026-08-31": 290,
+        "2026-08-31": 291,
         "2026-08-24": 561,
         "2026-07-20": 2,
         "2026-04-06": 2,
@@ -180,21 +180,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 6481,
-      "unpublished": 8089,
-      "stale": 3926
+      "published": 6482,
+      "unpublished": 8090,
+      "stale": 3927
     },
     "docs": {
-      "readme": 14533,
+      "readme": 14535,
       "zhFile": 1038,
       "zh": 6942,
       "both": 6931,
       "none": 37
     },
     "lib": {
-      "index": 7632,
-      "client": 5123,
-      "both": 4534
+      "index": 7634,
+      "client": 5125,
+      "both": 4536
     },
     "publishPct": 44.5,
     "zhPct": 47.6
@@ -388,15 +388,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14182
+      "count": 14184
     },
     {
       "topic": "deepseek-harness",
-      "count": 9736
+      "count": 9738
     },
     {
       "topic": "dsh",
-      "count": 5966
+      "count": 5968
     },
     {
       "topic": "cordis",
@@ -503,8 +503,8 @@
     "imsai": 316,
     "covered": 1086,
     "coveredPct": 7.5,
-    "none": 13484,
-    "fetchedAt": "2026-10-09T17:21:42.715Z"
+    "none": 13486,
+    "fetchedAt": "2026-10-09T18:14:40.082Z"
   },
   "suggested": [
     {
@@ -1808,8 +1808,8 @@
   "quality": {
     "grades": {
       "A": 499,
-      "B": 6978,
-      "C": 4916,
+      "B": 6979,
+      "C": 4917,
       "D": 2081,
       "S": 96
     },
@@ -1820,7 +1820,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5150
+      "count": 5151
     },
     {
       "category": "模型 / 代理",
@@ -1836,7 +1836,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 1042
+      "count": 1043
     },
     {
       "category": "侧栏 / 工作区",
@@ -2285,7 +2285,7 @@
       "lastPush": "2026-10-08",
       "firstCreated": "2026-09-07",
       "delta": 0,
-      "avg": 83.4,
+      "avg": 83.7,
       "topPlugin": "azazo1/dsh-write-protect",
       "topStars": 3,
       "topCat": "其它"
@@ -48881,7 +48881,7 @@
       "lastPush": "2026-09-09",
       "firstCreated": "2026-09-06",
       "delta": 0,
-      "avg": 81,
+      "avg": 76,
       "topPlugin": "jixishi/dsh-adapter-qq",
       "topStars": 3,
       "topCat": "侧栏 / 工作区"
@@ -70210,27 +70210,6 @@
       "topCat": "其它"
     },
     {
-      "owner": "xiaono1",
-      "plugins": 1,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-09",
-      "firstCreated": "2026-09-06",
-      "delta": 0,
-      "avg": 76,
-      "topPlugin": "xiaono1/dsh-ov-memory",
-      "topStars": 1,
-      "topCat": "记忆 / 知识"
-    },
-    {
       "owner": "bai111111",
       "plugins": 1,
       "stars": 1,
@@ -76934,6 +76913,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "akash-digitavision",
+      "plugins": 3,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-08",
+      "firstCreated": "2026-10-08",
+      "delta": 0,
+      "avg": 71.7,
+      "topPlugin": "akash-digitavision/dsh-playwright",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
+    },
+    {
       "owner": "JunNanLYS",
       "plugins": 2,
       "stars": 0,
@@ -79431,6 +79431,27 @@
       "topPlugin": "Faide-cyber/dsh-workbuddy",
       "topStars": 0,
       "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "Paprikas",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-08",
+      "firstCreated": "2026-10-08",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "Paprikas/dsh-openrouter-voice",
+      "topStars": 0,
+      "topCat": "其它"
     },
     {
       "owner": "ccch1mneyyy",
@@ -138852,6 +138873,27 @@
       "topCat": "搜索 / 命令面板"
     },
     {
+      "owner": "xiaono1",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-09",
+      "firstCreated": "2026-09-06",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "xiaono1/dsh-ov-memory",
+      "topStars": 1,
+      "topCat": "记忆 / 知识"
+    },
+    {
       "owner": "345420242",
       "plugins": 1,
       "stars": 1,
@@ -142861,27 +142903,6 @@
       "topPlugin": "OraSkyC/dsh-bundle-screen-view",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
-    },
-    {
-      "owner": "akash-digitavision",
-      "plugins": 3,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 3,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-10-08",
-      "firstCreated": "2026-10-08",
-      "delta": 0,
-      "avg": 66.7,
-      "topPlugin": "akash-digitavision/dsh-playwright",
-      "topStars": 0,
-      "topCat": "文件浏览 / 预览"
     },
     {
       "owner": "LoserFox",
@@ -174693,7 +174714,7 @@
       "lastPush": "2026-10-02",
       "firstCreated": "2026-10-02",
       "delta": 0,
-      "avg": 73,
+      "avg": 63,
       "topPlugin": "MentonLiu/dsh-any-icon",
       "topStars": 0,
       "topCat": "主题 / 视觉美化"
@@ -178207,8 +178228,8 @@
     }
   ],
   "authorStats": {
-    "total": 8393,
-    "multi": 2109,
+    "total": 8394,
+    "multi": 2110,
     "top10Share": 3
   },
   "coverage": {
@@ -178216,7 +178237,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 19079,
+    "candidates": 19081,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -178298,11 +178319,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 758
+      "2026-10-05": 760
     },
-    "validated": 19580,
-    "candidatesValidated": 16,
-    "authoritative": 14570,
+    "validated": 19582,
+    "candidatesValidated": 18,
+    "authoritative": 14572,
     "invalidUnique": 5010,
     "invalidBuckets": [
       {
@@ -178351,5 +178372,5 @@
       }
     ]
   },
-  "enrichCount": 14570
+  "enrichCount": 14572
 }
