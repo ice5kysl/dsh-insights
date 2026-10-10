@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-10T18:16:20.455Z",
+  "generatedAt": "2026-10-10T18:37:21.035Z",
   "totals": {
-    "authoritative": 14736,
-    "active7": 1577,
+    "authoritative": 14738,
+    "active7": 1575,
     "active7Pct": 10.7,
     "active30": 6744,
     "active30Pct": 45.8,
-    "ageGate1": 14299,
+    "ageGate1": 14301,
     "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9783,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1393,
+      "2026-10": 1395,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 812
+      "2026-10-05": 814
     },
     "byWeekGrades": {
       "B": {
@@ -103,7 +103,7 @@
         "2026-09-21": 453,
         "2026-09-28": 530,
         "2025-12-22": 1,
-        "2026-10-05": 534
+        "2026-10-05": 535
       },
       "S": {
         "2026-08-03": 2,
@@ -160,7 +160,7 @@
         "2026-05-04": 1,
         "2026-09-28": 437,
         "2020-06-29": 1,
-        "2026-10-05": 234
+        "2026-10-05": 235
       },
       "D": {
         "2026-08-10": 328,
@@ -181,14 +181,14 @@
   "distribution": {
     "publish": {
       "published": 6535,
-      "unpublished": 8201,
+      "unpublished": 8203,
       "stale": 3946
     },
     "docs": {
-      "readme": 14697,
+      "readme": 14699,
       "zhFile": 1050,
-      "zh": 7042,
-      "both": 7031,
+      "zh": 7043,
+      "both": 7032,
       "none": 39
     },
     "lib": {
@@ -388,15 +388,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14348
+      "count": 14350
     },
     {
       "topic": "deepseek-harness",
-      "count": 9847
+      "count": 9849
     },
     {
       "topic": "dsh",
-      "count": 6051
+      "count": 6053
     },
     {
       "topic": "cordis",
@@ -404,7 +404,7 @@
     },
     {
       "topic": "deepseek",
-      "count": 1644
+      "count": 1645
     },
     {
       "topic": "dsh-plugins",
@@ -420,7 +420,7 @@
     },
     {
       "topic": "deepseek-harness-plugin",
-      "count": 498
+      "count": 499
     },
     {
       "topic": "dsh-plugin-market",
@@ -503,8 +503,8 @@
     "imsai": 317,
     "covered": 1087,
     "coveredPct": 7.4,
-    "none": 13649,
-    "fetchedAt": "2026-10-10T18:15:28.657Z"
+    "none": 13651,
+    "fetchedAt": "2026-10-10T18:36:26.011Z"
   },
   "suggested": [
     {
@@ -1783,8 +1783,8 @@
   "quality": {
     "grades": {
       "A": 499,
-      "B": 7005,
-      "C": 5043,
+      "B": 7006,
+      "C": 5044,
       "D": 2093,
       "S": 96
     },
@@ -1795,7 +1795,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5205
+      "count": 5206
     },
     {
       "category": "模型 / 代理",
@@ -1807,7 +1807,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1275
+      "count": 1276
     },
     {
       "category": "状态 / 监控 / 用量",
@@ -3380,7 +3380,7 @@
       "lastPush": "2026-09-11",
       "firstCreated": "2026-08-16",
       "delta": 0,
-      "avg": 80.7,
+      "avg": 80,
       "topPlugin": "gongyijie85/dsh-ponytail",
       "topStars": 16,
       "topCat": "模型 / 代理"
@@ -78350,7 +78350,7 @@
       "lastPush": "2026-09-17",
       "firstCreated": "2026-09-10",
       "delta": 0,
-      "avg": 75,
+      "avg": 72.5,
       "topPlugin": "Geighlord007/dsh-web-search-exa-dynamic",
       "topStars": 0,
       "topCat": "搜索 / 命令面板"
@@ -107719,10 +107719,31 @@
       "lastPush": "2026-10-09",
       "firstCreated": "2026-10-09",
       "delta": 0,
-      "avg": 78,
+      "avg": 83,
       "topPlugin": "Naskete/dsh-agnes-image",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "serra006",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-09",
+      "firstCreated": "2026-10-09",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "serra006/dsh-connect-opencode",
+      "topStars": 0,
+      "topCat": "开发 / 数据"
     },
     {
       "owner": "bihong2026",
@@ -179651,27 +179672,6 @@
       "topCat": "其它"
     },
     {
-      "owner": "serra006",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-09",
-      "firstCreated": "2026-10-09",
-      "delta": 0,
-      "avg": 71,
-      "topPlugin": "serra006/dsh-connect-opencode",
-      "topStars": 0,
-      "topCat": "开发 / 数据"
-    },
-    {
       "owner": "DenAbr",
       "plugins": 1,
       "stars": 0,
@@ -180678,10 +180678,52 @@
       "topPlugin": "zhaochengggg/dsh-machine-apps",
       "topStars": 0,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "Siloet-phy",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-10",
+      "firstCreated": "2026-10-10",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "Siloet-phy/dsh-skill-labels",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
+      "owner": "Aurora-Lucas",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-10",
+      "firstCreated": "2026-10-10",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "Aurora-Lucas/dsh-chrome-browser",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
     }
   ],
   "authorStats": {
-    "total": 8512,
+    "total": 8514,
     "multi": 2139,
     "top10Share": 3
   },
@@ -180690,7 +180732,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 19272,
+    "candidates": 19274,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -180772,11 +180814,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 951
+      "2026-10-05": 953
     },
-    "validated": 19772,
-    "candidatesValidated": 16,
-    "authoritative": 14736,
+    "validated": 19774,
+    "candidatesValidated": 18,
+    "authoritative": 14738,
     "invalidUnique": 5036,
     "invalidBuckets": [
       {
@@ -180825,5 +180867,5 @@
       }
     ]
   },
-  "enrichCount": 14736
+  "enrichCount": 14738
 }
