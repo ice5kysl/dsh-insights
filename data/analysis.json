@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-10T14:16:21.246Z",
+  "generatedAt": "2026-10-10T14:39:06.767Z",
   "totals": {
-    "authoritative": 14701,
-    "active7": 1623,
+    "authoritative": 14703,
+    "active7": 1618,
     "active7Pct": 11,
-    "active30": 6765,
+    "active30": 6763,
     "active30Pct": 46,
-    "ageGate1": 14282,
-    "ageGate1Pct": 97.1,
+    "ageGate1": 14286,
+    "ageGate1Pct": 97.2,
     "byMonth": {
       "2026-08": 9783,
       "2026-02": 4,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1358,
+      "2026-10": 1360,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,7 +67,7 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 777
+      "2026-10-05": 779
     },
     "byWeekGrades": {
       "B": {
@@ -103,7 +103,7 @@
         "2026-09-21": 453,
         "2026-09-28": 536,
         "2025-12-22": 1,
-        "2026-10-05": 514
+        "2026-10-05": 516
       },
       "S": {
         "2026-08-03": 2,
@@ -180,21 +180,21 @@
   },
   "distribution": {
     "publish": {
-      "published": 6524,
-      "unpublished": 8177,
+      "published": 6525,
+      "unpublished": 8178,
       "stale": 3943
     },
     "docs": {
-      "readme": 14662,
+      "readme": 14664,
       "zhFile": 1046,
-      "zh": 7018,
-      "both": 7007,
+      "zh": 7019,
+      "both": 7008,
       "none": 39
     },
     "lib": {
-      "index": 7700,
-      "client": 5177,
-      "both": 4580
+      "index": 7701,
+      "client": 5178,
+      "both": 4581
     },
     "publishPct": 44.4,
     "zhPct": 47.7
@@ -388,15 +388,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14313
+      "count": 14315
     },
     {
       "topic": "deepseek-harness",
-      "count": 9820
+      "count": 9821
     },
     {
       "topic": "dsh",
-      "count": 6031
+      "count": 6032
     },
     {
       "topic": "cordis",
@@ -503,8 +503,8 @@
     "imsai": 317,
     "covered": 1088,
     "coveredPct": 7.4,
-    "none": 13613,
-    "fetchedAt": "2026-10-10T14:15:26.494Z"
+    "none": 13615,
+    "fetchedAt": "2026-10-10T14:38:05.609Z"
   },
   "suggested": [
     {
@@ -1778,7 +1778,7 @@
   "quality": {
     "grades": {
       "A": 498,
-      "B": 7008,
+      "B": 7010,
       "C": 5007,
       "D": 2092,
       "S": 96
@@ -1790,7 +1790,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5192
+      "count": 5193
     },
     {
       "category": "模型 / 代理",
@@ -1818,7 +1818,7 @@
     },
     {
       "category": "工具 / 效率",
-      "count": 718
+      "count": 719
     },
     {
       "category": "主题 / 视觉美化",
@@ -2931,7 +2931,7 @@
       "lastPush": "2026-09-30",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 79.7,
+      "avg": 79,
       "topPlugin": "baisama-cloud/dsh-galgame-generator",
       "topStars": 13,
       "topCat": "其它"
@@ -19843,7 +19843,7 @@
       "lastPush": "2026-10-04",
       "firstCreated": "2026-08-28",
       "delta": 0,
-      "avg": 81,
+      "avg": 78.5,
       "topPlugin": "yakoylp/dsh-md-convert",
       "topStars": 2,
       "topCat": "文件浏览 / 预览"
@@ -24742,6 +24742,27 @@
       "topPlugin": "1622352030/ansys-agent-bridge",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "senyayume",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-09",
+      "firstCreated": "2026-09-19",
+      "delta": 0,
+      "avg": 82,
+      "topPlugin": "senyayume/dsh-edit-diff",
+      "topStars": 0,
+      "topCat": "开发 / 数据"
     },
     {
       "owner": "Ryuu-64",
@@ -76161,7 +76182,7 @@
       "lastPush": "2026-10-09",
       "firstCreated": "2026-10-09",
       "delta": 0,
-      "avg": 75,
+      "avg": 80,
       "topPlugin": "Ronniealgo/dsh-route-balance",
       "topStars": 1,
       "topCat": "模型 / 代理"
@@ -78666,27 +78687,6 @@
       "topCat": "侧栏 / 工作区"
     },
     {
-      "owner": "senyayume",
-      "plugins": 2,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-10-09",
-      "firstCreated": "2026-09-19",
-      "delta": 0,
-      "avg": 79.5,
-      "topPlugin": "senyayume/dsh-edit-diff",
-      "topStars": 0,
-      "topCat": "开发 / 数据"
-    },
-    {
       "owner": "mpetruc",
       "plugins": 2,
       "stars": 0,
@@ -79527,6 +79527,27 @@
       "topCat": "文件浏览 / 预览"
     },
     {
+      "owner": "lzqzm",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-10",
+      "firstCreated": "2026-10-07",
+      "delta": 0,
+      "avg": 77.5,
+      "topPlugin": "lzqzm/dsh-magical-lowcode-project",
+      "topStars": 0,
+      "topCat": "开发 / 数据"
+    },
+    {
       "owner": "Faide-cyber",
       "plugins": 2,
       "stars": 0,
@@ -80236,7 +80257,7 @@
       "lastPush": "2026-09-10",
       "firstCreated": "2026-08-24",
       "delta": 0,
-      "avg": 81,
+      "avg": 76,
       "topPlugin": "svcomplex-dev/dsh-svw-waveform",
       "topStars": 0,
       "topCat": "其它"
@@ -105346,27 +105367,6 @@
       "topCat": "工具 / 效率"
     },
     {
-      "owner": "lzqzm",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-07",
-      "firstCreated": "2026-10-07",
-      "delta": 0,
-      "avg": 81,
-      "topPlugin": "lzqzm/dsh-magical-lowcode-project",
-      "topStars": 0,
-      "topCat": "开发 / 数据"
-    },
-    {
       "owner": "stushansusu",
       "plugins": 1,
       "stars": 0,
@@ -108475,6 +108475,27 @@
       "topPlugin": "alexisvaleev/dsh-plugin-devin",
       "topStars": 0,
       "topCat": "搜索 / 命令面板"
+    },
+    {
+      "owner": "hairyf",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-10",
+      "firstCreated": "2026-10-10",
+      "delta": 0,
+      "avg": 83,
+      "topPlugin": "hairyf/dsh-tool-activator",
+      "topStars": 0,
+      "topCat": "工具 / 效率"
     },
     {
       "owner": "antibrow",
@@ -112356,7 +112377,7 @@
       "lastPush": "2026-09-10",
       "firstCreated": "2026-08-13",
       "delta": 0,
-      "avg": 74,
+      "avg": 69,
       "topPlugin": "simon300000/dsh-auto",
       "topStars": 6,
       "topCat": "模型 / 代理"
@@ -180130,8 +180151,8 @@
     }
   ],
   "authorStats": {
-    "total": 8486,
-    "multi": 2132,
+    "total": 8487,
+    "multi": 2133,
     "top10Share": 3
   },
   "coverage": {
@@ -180139,7 +180160,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 19232,
+    "candidates": 19235,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -180221,11 +180242,11 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 911
+      "2026-10-05": 914
     },
-    "validated": 19733,
-    "candidatesValidated": 17,
-    "authoritative": 14701,
+    "validated": 19735,
+    "candidatesValidated": 18,
+    "authoritative": 14703,
     "invalidUnique": 5032,
     "invalidBuckets": [
       {
@@ -180274,5 +180295,5 @@
       }
     ]
   },
-  "enrichCount": 14701
+  "enrichCount": 14703
 }
