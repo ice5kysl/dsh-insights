@@ -1,17 +1,14 @@
 # 快照 Diff · 2026-10-10
 
-- 当前权威插件：**14616**（上次 14608）
-- 新增 8 · 消失 0
+- 当前权威插件：**14621**（上次 14616）
+- 新增 5 · 消失 0
 
-## 新增（Top 8）
-- EJDRONE/dsh-multi-acp ★1 
-- miku05231/dsh-provider-quote ★0 
-- dsh-remote/plugin ★0 (npm ✓)
-- john-walks-slow/dsh-cd ★0 (npm ✓)
-- YiQiuAcc/dsh-font-settings ★0 
-- Jia-HuaWu/dsh-ujn-image ★0 
-- liaosiliangCodeLife/harness-mate-dsh ★0 
-- KILLEDx/dsh-token-stats ★0 (npm ✓)
+## 新增（Top 5）
+- dushaobindoudou/dsh-plugin-security ★1 (npm ✓)
+- LingYingNX/dsh-codex-parity ★0 
+- Ok541151/cwk ★0 (npm ✓)
+- BlackThunder2191026/dsh-deepseek-usage ★0 (npm ✓)
+- freeqin123/dsh-commandcode-plans-provider ★0 
 
 ## 消失（Top 0）
 
