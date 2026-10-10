@@ -1,14 +1,14 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 14579 个插件 · 生成于 2026-10-09 · 由 DSH Insights 管线生成
+> 权威集 14579 个插件 · 生成于 2026-10-10 · 由 DSH Insights 管线生成
 
 ## 总览
 - 权威集规模：**14579**
-- 近 7 天活跃：1785（12.2%）· 近 30 天：6781（46.5%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：14148（97%）
+- 近 7 天活跃：1774（12.2%）· 近 30 天：6776（46.5%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：14151（97.1%）
 
 ## 发布与文档
-- npm 已发布 6483 / 未发布 8096 / 已发布但版本滞后 3927
+- npm 已发布 6487 / 未发布 8092 / 已发布但版本滞后 3932
 - 有 README 14542 · 中英双语/中文 6947 · 中文 README 文件 1038 · 无 README 37
 - lib/index.js 7639 · lib/client.js 5128 · 双产物 4539
 
@@ -16,37 +16,37 @@
 - awesome-dsh-plugin 776 · imsai 316 · 至少一个渠道 1086（7.4%） · 未收录 13493
 
 ## 优质未收录 · 建议收录（Top 15）
-- belowthetree/dsh-mcp-setting A · 周下载 306
-- MayBeTheWorld/dsh-inherit A · 周下载 27
-- runcat-tommy/dsh-unitverse A · 周下载 237
-- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 384
-- Sxuan-Coder/dsh-user-prompt A · 周下载 19
+- belowthetree/dsh-mcp-setting A · 周下载 318
+- MayBeTheWorld/dsh-inherit A · 周下载 23
+- runcat-tommy/dsh-unitverse A · 周下载 248
+- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 389
+- Sxuan-Coder/dsh-user-prompt A · 周下载 16
 - zjuatri/dsh-terminal-plugin A · 周下载 10
-- d0ublecl1ck/dsh-session-watch A · 周下载 268
-- ai-tool-labs/dsh-plugin-square A
-- saya-ch/dsh-mobile A · 周下载 3819
-- cocofhu/anime-find A · 周下载 171
-- NanmiCoder/dsh-auto-mode A · 周下载 562
-- Nwflower/dsh-chat-import A · 周下载 4456
-- PKUfudawei/dsh-capability-menu A · 周下载 497
-- mexiaosqwq/dsh-web-mobile A · 周下载 2039
-- MichengAI/dsh-codex-ui A · 周下载 85942
+- d0ublecl1ck/dsh-session-watch A · 周下载 270
+- ai-tool-labs/dsh-plugin-square A · 周下载 254
+- saya-ch/dsh-mobile A · 周下载 3963
+- cocofhu/anime-find A · 周下载 166
+- NanmiCoder/dsh-auto-mode A · 周下载 561
+- Nwflower/dsh-chat-import A · 周下载 4143
+- PKUfudawei/dsh-capability-menu A · 周下载 507
+- mexiaosqwq/dsh-web-mobile A · 周下载 2212
+- MichengAI/dsh-codex-ui A · 周下载 87442
 
 ## npm 周下载 Top 10
-- ranxianglei/billion-context：386806
-- sunyuhuirong/deepseek-account：181304
-- dsh-market/dsh-market：95496
-- MichengAI/dsh-codex-ui：85942
+- ranxianglei/billion-context：423389
+- sunyuhuirong/deepseek-account：198323
+- dsh-market/dsh-market：105466
+- MichengAI/dsh-codex-ui：87442
 - MichengAI/dsh-pua：55495
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：43936
-- Nicercz007-cloud/schedule：41674
-- omdsh-dev/DSH-better-sidebar：33353
-- bowenliang123/dsh-context：27264
-- Creakono/dsh-cost-meter：23212
+- MeteorNOX/DeepSeek-Balance-Whale-Widget：45790
+- Nicercz007-cloud/schedule：41820
+- omdsh-dev/DSH-better-sidebar：35227
+- bowenliang123/dsh-context：29382
+- Creakono/dsh-cost-meter：22354
 
 ## 质量评分（启发式）
 - 平均分 73.7 · S+A 占比 4.1%（值得优先看；A+B 51.3%）
-- S 96 · A 497 · B 6981 · C 4923 · D 2082
+- S 96 · A 498 · B 6978 · C 4924 · D 2083
 
 ## 功能分类（启发式 Top 12）
 - 其它：5154
@@ -115,11 +115,11 @@
 | dsh-market/dsh-market | 5513 | 1.43.0 → 1.66.14 |
 | liustack/modlens | 4120 | 3.25.4 → 3.26.6 |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 3996 | 0.2.10 → 0.3.18 |
-| bowenliang123/dsh-context | 1846 | 0.42.0 → 0.66.0 |
+| bowenliang123/dsh-context | 1846 | 0.42.0 → 0.66.1 |
 | xmanrui/dsh-im | 1596 | 4.11.0 → 4.38.0 |
 | shaobeichen/dsh-pocket | 1518 | 2.10.3 → 2.10.6 |
 | GanyuanRan/Aegis | 1319 | 2.9.6 → 0.1.0 |
-| vshulcz/deja-vu | 1130 | 0.20.5 → 0.21.7 |
+| vshulcz/deja-vu | 1130 | 0.20.5 → 0.22.0 |
 | ysr666/dsh-vision-router | 1126 | 2.1.2 → 3.0.3 |
 
 ## 深检抽样（写面 / 消毒）
