@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-10T14:02:04.681Z",
+  "generatedAt": "2026-10-10T14:16:21.246Z",
   "totals": {
     "authoritative": 14701,
-    "active7": 1633,
-    "active7Pct": 11.1,
-    "active30": 6767,
+    "active7": 1623,
+    "active7Pct": 11,
+    "active30": 6765,
     "active30Pct": 46,
-    "ageGate1": 14280,
+    "ageGate1": 14282,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9783,
@@ -103,7 +103,7 @@
         "2026-09-21": 453,
         "2026-09-28": 536,
         "2025-12-22": 1,
-        "2026-10-05": 513
+        "2026-10-05": 514
       },
       "S": {
         "2026-08-03": 2,
@@ -160,7 +160,7 @@
         "2026-05-04": 1,
         "2026-09-28": 432,
         "2020-06-29": 1,
-        "2026-10-05": 224
+        "2026-10-05": 223
       },
       "D": {
         "2026-08-10": 328,
@@ -504,7 +504,7 @@
     "covered": 1088,
     "coveredPct": 7.4,
     "none": 13613,
-    "fetchedAt": "2026-10-10T14:01:15.406Z"
+    "fetchedAt": "2026-10-10T14:15:26.494Z"
   },
   "suggested": [
     {
@@ -1778,8 +1778,8 @@
   "quality": {
     "grades": {
       "A": 498,
-      "B": 7007,
-      "C": 5008,
+      "B": 7008,
+      "C": 5007,
       "D": 2092,
       "S": 96
     },
@@ -25475,6 +25475,27 @@
       "delta": 0,
       "avg": 79,
       "topPlugin": "wjvalue/dsh-mac-keep-awake",
+      "topStars": 0,
+      "topCat": "会话管理"
+    },
+    {
+      "owner": "LEEKINBUN-dsh-tools",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 2,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 2,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-09",
+      "firstCreated": "2026-09-29",
+      "delta": 0,
+      "avg": 81,
+      "topPlugin": "LEEKINBUN-dsh-tools/dsh-shredder",
       "topStars": 0,
       "topCat": "会话管理"
     },
@@ -77883,7 +77904,7 @@
       "lastPush": "2026-09-13",
       "firstCreated": "2026-08-21",
       "delta": 0,
-      "avg": 73.5,
+      "avg": 71,
       "topPlugin": "MST19711/dsh-balance-panel",
       "topStars": 0,
       "topCat": "开发 / 数据"
@@ -79315,27 +79336,6 @@
       "topPlugin": "zywnb-2/dsh-donevoice",
       "topStars": 0,
       "topCat": "其它"
-    },
-    {
-      "owner": "LEEKINBUN-dsh-tools",
-      "plugins": 2,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-09",
-      "firstCreated": "2026-09-29",
-      "delta": 0,
-      "avg": 78.5,
-      "topPlugin": "LEEKINBUN-dsh-tools/dsh-shredder",
-      "topStars": 0,
-      "topCat": "会话管理"
     },
     {
       "owner": "yunliya-cuter",
@@ -110802,7 +110802,7 @@
       "lastPush": "2026-09-10",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 69.7,
+      "avg": 69.2,
       "topPlugin": "NattoCB/dsh-plugin-memory",
       "topStars": 4,
       "topCat": "会话管理"
@@ -179955,7 +179955,7 @@
       "lastPush": "2026-10-10",
       "firstCreated": "2026-10-09",
       "delta": 0,
-      "avg": 64,
+      "avg": 69,
       "topPlugin": "czpGhost/dsh-glm-web-search",
       "topStars": 0,
       "topCat": "搜索 / 命令面板"
@@ -180139,7 +180139,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 19231,
+    "candidates": 19232,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -180221,12 +180221,12 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 910
+      "2026-10-05": 911
     },
-    "validated": 19732,
-    "candidatesValidated": 16,
+    "validated": 19733,
+    "candidatesValidated": 17,
     "authoritative": 14701,
-    "invalidUnique": 5031,
+    "invalidUnique": 5032,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -180234,7 +180234,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1850
+        "count": 1851
       },
       {
         "reason": "no-signal",
