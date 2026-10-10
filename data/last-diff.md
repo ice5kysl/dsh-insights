@@ -1,11 +1,10 @@
 # 快照 Diff · 2026-10-10
 
-- 当前权威插件：**14721**（上次 14719）
-- 新增 2 · 消失 0
+- 当前权威插件：**14722**（上次 14721）
+- 新增 1 · 消失 0
 
-## 新增（Top 2）
-- CaiBai-Fish/dsh-continuechat ★0 
-- HuanLinOTO/dsh-plugin-prts-neuron ★0 
+## 新增（Top 1）
+- TianYa-DAO/dsh-opencode-go-pool ★0 
 
 ## 消失（Top 0）
 
