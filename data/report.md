@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 14717 个插件 · 生成于 2026-10-10 · 由 DSH Insights 管线生成
+> 权威集 14719 个插件 · 生成于 2026-10-10 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**14717**
-- 近 7 天活跃：1616（11%）· 近 30 天：6766（46%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：14289（97.1%）
+- 权威集规模：**14719**
+- 近 7 天活跃：1616（11%）· 近 30 天：6763（45.9%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：14291（97.1%）
 
 ## 发布与文档
-- npm 已发布 6528 / 未发布 8189 / 已发布但版本滞后 3943
-- 有 README 14678 · 中英双语/中文 7030 · 中文 README 文件 1048 · 无 README 39
-- lib/index.js 7710 · lib/client.js 5186 · 双产物 4589
+- npm 已发布 6529 / 未发布 8190 / 已发布但版本滞后 3943
+- 有 README 14680 · 中英双语/中文 7031 · 中文 README 文件 1048 · 无 README 39
+- lib/index.js 7712 · lib/client.js 5187 · 双产物 4590
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 777 · imsai 317 · 至少一个渠道 1088（7.4%） · 未收录 13629
+- awesome-dsh-plugin 777 · imsai 317 · 至少一个渠道 1088（7.4%） · 未收录 13631
 
 ## 优质未收录 · 建议收录（Top 15）
 - belowthetree/dsh-mcp-setting A · 周下载 318
@@ -24,13 +24,13 @@
 - zjuatri/dsh-terminal-plugin A · 周下载 10
 - d0ublecl1ck/dsh-session-watch A · 周下载 270
 - ai-tool-labs/dsh-plugin-square A · 周下载 254
+- BillCx330/dsh-plugin-notify-sounds A
 - saya-ch/dsh-mobile A · 周下载 3963
 - cocofhu/anime-find A · 周下载 166
 - NanmiCoder/dsh-auto-mode A · 周下载 561
 - Nwflower/dsh-chat-import A · 周下载 4143
 - PKUfudawei/dsh-capability-menu A · 周下载 507
 - mexiaosqwq/dsh-web-mobile A · 周下载 2212
-- MichengAI/dsh-codex-ui A · 周下载 87442
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：423389
@@ -46,12 +46,12 @@
 
 ## 质量评分（启发式）
 - 平均分 73.7 · S+A 占比 4%（值得优先看；A+B 51%）
-- S 96 · A 499 · B 7009 · C 5021 · D 2092
+- S 96 · A 500 · B 7006 · C 5025 · D 2092
 
 ## 功能分类（启发式 Top 12）
-- 其它：5197
+- 其它：5198
 - 模型 / 代理：1469
-- 会话管理：1329
+- 会话管理：1330
 - 文件浏览 / 预览：1275
 - 状态 / 监控 / 用量：1051
 - 侧栏 / 工作区：994
@@ -78,11 +78,11 @@
 - 2026-07：32
 - 2026-08：9783
 - 2026-09：3468
-- 2026-10：1374
+- 2026-10：1376
 
 ## Top topics
-- `dsh-plugin` × 14329
-- `deepseek-harness` × 9833
+- `dsh-plugin` × 14331
+- `deepseek-harness` × 9834
 - `dsh` × 6041
 - `cordis` × 1713
 - `deepseek` × 1641
