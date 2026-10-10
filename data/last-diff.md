@@ -1,13 +1,14 @@
 # 快照 Diff · 2026-10-10
 
-- 当前权威插件：**14726**（上次 14722）
-- 新增 4 · 消失 0
+- 当前权威插件：**14731**（上次 14726）
+- 新增 5 · 消失 0
 
-## 新增（Top 4）
-- ilun886/dsh-harmonyos-devkit ★1 
-- bitsmug/dsh-sandbox-mxc ★1 (npm ✓)
-- devil233-ui/dsh-auto-review-default ★0 
-- secondlgn/dsh-mail ★0 (npm ✓)
+## 新增（Top 5）
+- prgrmrwy/dsh-sidebar-session-provider-icon ★0 
+- Canye-zdm/dsh-serial ★0 (npm ✓)
+- qwq1999/dsh-panellist ★0 
+- Oskarosan/dsh-locale-es ★0 (npm ✓)
+- erlingmijiang/dsh-lorebooklike-prompt-tool ★0 (npm ✓)
 
 ## 消失（Top 0）
 
