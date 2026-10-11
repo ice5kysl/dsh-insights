@@ -1,60 +1,60 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 14744 个插件 · 生成于 2026-10-10 · 由 DSH Insights 管线生成
+> 权威集 14746 个插件 · 生成于 2026-10-11 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**14744**
-- 近 7 天活跃：1547（10.5%）· 近 30 天：6734（45.7%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：14304（97%）
+- 权威集规模：**14746**
+- 近 7 天活跃：1534（10.4%）· 近 30 天：6725（45.6%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：14313（97.1%）
 
 ## 发布与文档
-- npm 已发布 6536 / 未发布 8208 / 已发布但版本滞后 3947
-- 有 README 14705 · 中英双语/中文 7047 · 中文 README 文件 1050 · 无 README 39
-- lib/index.js 7728 · lib/client.js 5196 · 双产物 4599
+- npm 已发布 6538 / 未发布 8208 / 已发布但版本滞后 3949
+- 有 README 14707 · 中英双语/中文 7047 · 中文 README 文件 1050 · 无 README 39
+- lib/index.js 7729 · lib/client.js 5197 · 双产物 4600
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 776 · imsai 317 · 至少一个渠道 1087（7.4%） · 未收录 13657
+- awesome-dsh-plugin 776 · imsai 317 · 至少一个渠道 1087（7.4%） · 未收录 13659
 
 ## 优质未收录 · 建议收录（Top 15）
-- belowthetree/dsh-mcp-setting A · 周下载 318
+- belowthetree/dsh-mcp-setting A · 周下载 338
 - MayBeTheWorld/dsh-inherit A · 周下载 23
-- runcat-tommy/dsh-unitverse A · 周下载 248
-- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 389
+- runcat-tommy/dsh-unitverse A · 周下载 256
+- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 392
 - Sxuan-Coder/dsh-user-prompt A · 周下载 16
-- zjuatri/dsh-terminal-plugin A · 周下载 10
-- d0ublecl1ck/dsh-session-watch A · 周下载 270
-- ai-tool-labs/dsh-plugin-square A · 周下载 254
+- zjuatri/dsh-terminal-plugin A · 周下载 7
+- d0ublecl1ck/dsh-session-watch A · 周下载 271
+- ai-tool-labs/dsh-plugin-square A · 周下载 394
 - BillCx330/dsh-plugin-notify-sounds A
-- saya-ch/dsh-mobile A · 周下载 3963
-- cocofhu/anime-find A · 周下载 166
-- NanmiCoder/dsh-auto-mode A · 周下载 561
-- Nwflower/dsh-chat-import A · 周下载 4143
-- PKUfudawei/dsh-capability-menu A · 周下载 507
-- mexiaosqwq/dsh-web-mobile A · 周下载 2212
+- saya-ch/dsh-mobile A · 周下载 4097
+- cocofhu/anime-find A · 周下载 156
+- NanmiCoder/dsh-auto-mode A · 周下载 528
+- Nwflower/dsh-chat-import A · 周下载 4094
+- PKUfudawei/dsh-capability-menu A · 周下载 501
+- mexiaosqwq/dsh-web-mobile A · 周下载 2295
 
 ## npm 周下载 Top 10
-- ranxianglei/billion-context：423389
-- sunyuhuirong/deepseek-account：198323
-- dsh-market/dsh-market：105466
-- MichengAI/dsh-codex-ui：87442
-- MichengAI/dsh-pua：55495
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：45790
-- Nicercz007-cloud/schedule：41820
-- omdsh-dev/DSH-better-sidebar：35227
-- bowenliang123/dsh-context：29382
-- Creakono/dsh-cost-meter：22354
+- ranxianglei/billion-context：465905
+- sunyuhuirong/deepseek-account：232088
+- dsh-market/dsh-market：112438
+- MichengAI/dsh-codex-ui：57170
+- MichengAI/dsh-pua：55951
+- MeteorNOX/DeepSeek-Balance-Whale-Widget：46935
+- Nicercz007-cloud/schedule：43342
+- omdsh-dev/DSH-better-sidebar：38068
+- bowenliang123/dsh-context：34385
+- Creakono/dsh-cost-meter：23002
 
 ## 质量评分（启发式）
 - 平均分 73.6 · S+A 占比 4%（值得优先看；A+B 50.9%）
-- S 96 · A 498 · B 7000 · C 5057 · D 2093
+- S 96 · A 498 · B 7001 · C 5057 · D 2094
 
 ## 功能分类（启发式 Top 12）
 - 其它：5207
-- 模型 / 代理：1472
+- 模型 / 代理：1473
 - 会话管理：1333
 - 文件浏览 / 预览：1276
 - 状态 / 监控 / 用量：1052
-- 侧栏 / 工作区：997
+- 侧栏 / 工作区：998
 - 搜索 / 命令面板：799
 - 工具 / 效率：721
 - 主题 / 视觉美化：566
@@ -78,21 +78,21 @@
 - 2026-07：32
 - 2026-08：9783
 - 2026-09：3468
-- 2026-10：1401
+- 2026-10：1403
 
 ## Top topics
-- `dsh-plugin` × 14356
-- `deepseek-harness` × 9853
-- `dsh` × 6056
+- `dsh-plugin` × 14358
+- `deepseek-harness` × 9855
+- `dsh` × 6057
 - `cordis` × 1713
 - `deepseek` × 1646
 - `dsh-plugins` × 1434
 - `plugin` × 960
 - `typescript` × 534
-- `deepseek-harness-plugin` × 500
+- `deepseek-harness-plugin` × 501
 - `dsh-plugin-market` × 488
 - `ai-agent` × 470
-- `ai-agents` × 398
+- `ai-agents` × 399
 
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |
@@ -112,10 +112,10 @@
 | repo | ★ | 仓库版本 → npm |
 |---|---|---|
 | zhu1090093659/dsh-web | 8367 | 0.1.1 → 0.0.1 |
-| dsh-market/dsh-market | 5513 | 1.43.0 → 1.66.14 |
+| dsh-market/dsh-market | 5513 | 1.43.0 → 1.66.15 |
 | liustack/modlens | 4120 | 3.25.4 → 3.26.6 |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 3996 | 0.2.10 → 0.3.18 |
-| bowenliang123/dsh-context | 1846 | 0.42.0 → 0.66.1 |
+| bowenliang123/dsh-context | 1846 | 0.42.0 → 0.67.0 |
 | xmanrui/dsh-im | 1596 | 4.11.0 → 4.38.0 |
 | shaobeichen/dsh-pocket | 1518 | 2.10.3 → 2.10.6 |
 | GanyuanRan/Aegis | 1319 | 2.9.6 → 0.1.0 |
