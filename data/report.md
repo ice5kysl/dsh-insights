@@ -1,26 +1,24 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 14824 个插件 · 生成于 2026-10-11 · 由 DSH Insights 管线生成
+> 权威集 14827 个插件 · 生成于 2026-10-11 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**14824**
-- 近 7 天活跃：1275（8.6%）· 近 30 天：6647（44.8%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：14413（97.2%）
+- 权威集规模：**14827**
+- 近 7 天活跃：1254（8.5%）· 近 30 天：6644（44.8%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：14418（97.2%）
 
 ## 发布与文档
-- npm 已发布 6562 / 未发布 8262 / 已发布但版本滞后 3957
-- 有 README 14785 · 中英双语/中文 7091 · 中文 README 文件 1055 · 无 README 39
-- lib/index.js 7765 · lib/client.js 5228 · 双产物 4627
+- npm 已发布 6564 / 未发布 8263 / 已发布但版本滞后 3957
+- 有 README 14788 · 中英双语/中文 7093 · 中文 README 文件 1056 · 无 README 39
+- lib/index.js 7766 · lib/client.js 5229 · 双产物 4627
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 776 · imsai 317 · 至少一个渠道 1087（7.3%） · 未收录 13737
+- awesome-dsh-plugin 776 · imsai 317 · 至少一个渠道 1087（7.3%） · 未收录 13740
 
 ## 优质未收录 · 建议收录（Top 15）
 - belowthetree/dsh-mcp-setting A · 周下载 338
 - MayBeTheWorld/dsh-inherit A · 周下载 23
 - runcat-tommy/dsh-unitverse A · 周下载 256
-- Rabbit-bot-No-002/dsh-chat-avatar A · 周下载 392
-- Sxuan-Coder/dsh-user-prompt A · 周下载 16
 - zjuatri/dsh-terminal-plugin A · 周下载 7
 - d0ublecl1ck/dsh-session-watch A · 周下载 271
 - ai-tool-labs/dsh-plugin-square A · 周下载 394
@@ -31,6 +29,8 @@
 - NanmiCoder/dsh-auto-mode A · 周下载 528
 - Nwflower/dsh-chat-import A · 周下载 4094
 - PKUfudawei/dsh-capability-menu A · 周下载 501
+- mexiaosqwq/dsh-web-mobile A · 周下载 2295
+- MichengAI/dsh-codex-ui A · 周下载 57170
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：465905
@@ -45,16 +45,16 @@
 - Creakono/dsh-cost-meter：23002
 
 ## 质量评分（启发式）
-- 平均分 73.6 · S+A 占比 3.9%（值得优先看；A+B 50.8%）
-- S 96 · A 485 · B 7041 · C 5097 · D 2105
+- 平均分 73.6 · S+A 占比 3.9%（值得优先看；A+B 50.7%）
+- S 96 · A 484 · B 7035 · C 5106 · D 2106
 
 ## 功能分类（启发式 Top 12）
-- 其它：5228
+- 其它：5230
 - 模型 / 代理：1486
 - 会话管理：1339
 - 文件浏览 / 预览：1282
 - 状态 / 监控 / 用量：1057
-- 侧栏 / 工作区：1003
+- 侧栏 / 工作区：1004
 - 搜索 / 命令面板：804
 - 工具 / 效率：723
 - 主题 / 视觉美化：573
@@ -78,16 +78,16 @@
 - 2026-07：32
 - 2026-08：9783
 - 2026-09：3468
-- 2026-10：1481
+- 2026-10：1484
 
 ## Top topics
-- `dsh-plugin` × 14436
-- `deepseek-harness` × 9917
-- `dsh` × 6097
+- `dsh-plugin` × 14439
+- `deepseek-harness` × 9919
+- `dsh` × 6098
 - `cordis` × 1717
 - `deepseek` × 1652
 - `dsh-plugins` × 1442
-- `plugin` × 967
+- `plugin` × 968
 - `typescript` × 539
 - `deepseek-harness-plugin` × 502
 - `dsh-plugin-market` × 491
