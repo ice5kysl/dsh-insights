@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-11T12:16:16.021Z",
+  "generatedAt": "2026-10-11T12:41:09.063Z",
   "totals": {
-    "authoritative": 14816,
-    "active7": 1295,
+    "authoritative": 14819,
+    "active7": 1289,
     "active7Pct": 8.7,
     "active30": 6645,
-    "active30Pct": 44.9,
-    "ageGate1": 14406,
+    "active30Pct": 44.8,
+    "ageGate1": 14408,
     "ageGate1Pct": 97.2,
     "byMonth": {
       "2026-08": 9783,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1473,
+      "2026-10": 1476,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -67,11 +67,11 @@
       "2026-09-28": 1050,
       "2020-06-29": 1,
       "2025-12-22": 1,
-      "2026-10-05": 892
+      "2026-10-05": 895
     },
     "byWeekGrades": {
       "B": {
-        "2026-08-10": 1882,
+        "2026-08-10": 1883,
         "2026-02-16": 3,
         "2026-07-13": 7,
         "2026-04-27": 1,
@@ -101,13 +101,13 @@
         "2026-03-02": 1,
         "2026-09-14": 464,
         "2026-09-21": 453,
-        "2026-09-28": 518,
+        "2026-09-28": 517,
         "2025-12-22": 1,
-        "2026-10-05": 590
+        "2026-10-05": 592
       },
       "S": {
         "2026-08-03": 2,
-        "2026-08-10": 33,
+        "2026-08-10": 32,
         "2026-08-17": 16,
         "2026-08-24": 11,
         "2026-08-31": 5,
@@ -158,9 +158,9 @@
         "2026-09-21": 262,
         "2020-09-28": 1,
         "2026-05-04": 1,
-        "2026-09-28": 445,
+        "2026-09-28": 446,
         "2020-06-29": 1,
-        "2026-10-05": 250
+        "2026-10-05": 251
       },
       "D": {
         "2026-08-10": 329,
@@ -181,20 +181,20 @@
   "distribution": {
     "publish": {
       "published": 6562,
-      "unpublished": 8254,
+      "unpublished": 8257,
       "stale": 3957
     },
     "docs": {
-      "readme": 14777,
+      "readme": 14780,
       "zhFile": 1055,
-      "zh": 7088,
-      "both": 7077,
+      "zh": 7090,
+      "both": 7079,
       "none": 39
     },
     "lib": {
-      "index": 7760,
-      "client": 5226,
-      "both": 4625
+      "index": 7763,
+      "client": 5228,
+      "both": 4627
     },
     "publishPct": 44.3,
     "zhPct": 47.8
@@ -388,15 +388,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14428
+      "count": 14431
     },
     {
       "topic": "deepseek-harness",
-      "count": 9912
+      "count": 9915
     },
     {
       "topic": "dsh",
-      "count": 6094
+      "count": 6096
     },
     {
       "topic": "cordis",
@@ -420,7 +420,7 @@
     },
     {
       "topic": "deepseek-harness-plugin",
-      "count": 501
+      "count": 502
     },
     {
       "topic": "dsh-plugin-market",
@@ -503,8 +503,8 @@
     "imsai": 317,
     "covered": 1087,
     "coveredPct": 7.3,
-    "none": 13729,
-    "fetchedAt": "2026-10-11T12:15:09.815Z"
+    "none": 13732,
+    "fetchedAt": "2026-10-11T12:40:13.307Z"
   },
   "suggested": [
     {
@@ -1788,10 +1788,10 @@
   "quality": {
     "grades": {
       "A": 486,
-      "B": 7038,
-      "C": 5090,
+      "B": 7040,
+      "C": 5092,
       "D": 2105,
-      "S": 97
+      "S": 96
     },
     "avgScore": 73.6,
     "gradePct": 50.8,
@@ -1800,7 +1800,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5226
+      "count": 5227
     },
     {
       "category": "模型 / 代理",
@@ -1808,7 +1808,7 @@
     },
     {
       "category": "会话管理",
-      "count": 1337
+      "count": 1338
     },
     {
       "category": "文件浏览 / 预览",
@@ -1840,7 +1840,7 @@
     },
     {
       "category": "开发 / 数据",
-      "count": 429
+      "count": 430
     },
     {
       "category": "记忆 / 知识",
@@ -2729,7 +2729,7 @@
       "lastPush": "2026-09-11",
       "firstCreated": "2026-08-14",
       "delta": 0,
-      "avg": 77.5,
+      "avg": 76.9,
       "topPlugin": "Pasumao/dsh-plugin-workbench",
       "topStars": 7,
       "topCat": "其它"
@@ -15676,11 +15676,10 @@
       "plugins": 2,
       "stars": 6,
       "grades": {
-        "A": 0,
+        "A": 1,
         "B": 1,
         "C": 0,
-        "D": 0,
-        "S": 1
+        "D": 0
       },
       "ab": 2,
       "npm": 2,
@@ -15688,7 +15687,7 @@
       "lastPush": "2026-09-11",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 89,
+      "avg": 86.5,
       "topPlugin": "cofy-x/dsh-cron",
       "topStars": 6,
       "topCat": "开发 / 数据"
@@ -34447,8 +34446,8 @@
       "plugins": 1,
       "stars": 9,
       "grades": {
-        "A": 1,
-        "B": 0,
+        "A": 0,
+        "B": 1,
         "C": 0,
         "D": 0
       },
@@ -34458,7 +34457,7 @@
       "lastPush": "2026-09-11",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 90,
+      "avg": 85,
       "topPlugin": "siegfly/dsh-deepseek-vision",
       "topStars": 9,
       "topCat": "工具 / 效率"
@@ -50819,6 +50818,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "bakasbk",
+      "plugins": 2,
+      "stars": 2,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-11",
+      "firstCreated": "2026-09-24",
+      "delta": 0,
+      "avg": 73.5,
+      "topPlugin": "bakasbk/dsh-connect-comate",
+      "topStars": 2,
+      "topCat": "主题 / 视觉美化"
+    },
+    {
       "owner": "mengqi1436",
       "plugins": 2,
       "stars": 2,
@@ -57415,27 +57435,6 @@
       "topPlugin": "XGUIMAX/dsh-wrongbook",
       "topStars": 2,
       "topCat": "其它"
-    },
-    {
-      "owner": "bakasbk",
-      "plugins": 1,
-      "stars": 2,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-25",
-      "firstCreated": "2026-09-24",
-      "delta": 0,
-      "avg": 81,
-      "topPlugin": "bakasbk/dsh-connect-comate",
-      "topStars": 2,
-      "topCat": "主题 / 视觉美化"
     },
     {
       "owner": "VoodooB0Ys",
@@ -78649,7 +78648,7 @@
       "lastPush": "2026-10-10",
       "firstCreated": "2026-09-22",
       "delta": 0,
-      "avg": 75.5,
+      "avg": 78,
       "topPlugin": "lsl1931/dsh-resource-bar",
       "topStars": 0,
       "topCat": "其它"
@@ -101701,27 +101700,6 @@
       "topCat": "记忆 / 知识"
     },
     {
-      "owner": "Microqian2th",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-04",
-      "firstCreated": "2026-10-04",
-      "delta": 0,
-      "avg": 79,
-      "topPlugin": "Microqian2th/dsh-codex-effort-slider",
-      "topStars": 0,
-      "topCat": "模型 / 代理"
-    },
-    {
       "owner": "markelayan",
       "plugins": 1,
       "stars": 0,
@@ -108109,6 +108087,27 @@
       "topCat": "会话管理"
     },
     {
+      "owner": "zhaofeng130",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-10",
+      "firstCreated": "2026-10-10",
+      "delta": 0,
+      "avg": 76,
+      "topPlugin": "zhaofeng130/dsh-rea",
+      "topStars": 0,
+      "topCat": "会话管理"
+    },
+    {
       "owner": "W0rry628",
       "plugins": 1,
       "stars": 0,
@@ -108801,6 +108800,27 @@
       "topPlugin": "bjcdeshu/dsh-selection-assistant",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "AnAcretiondisk9986",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-11",
+      "firstCreated": "2026-10-11",
+      "delta": 0,
+      "avg": 78,
+      "topPlugin": "AnAcretiondisk9986/dsh-font-master",
+      "topStars": 0,
+      "topCat": "开发 / 数据"
     },
     {
       "owner": "antibrow",
@@ -178271,6 +178291,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "Microqian2th",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-04",
+      "firstCreated": "2026-10-04",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "Microqian2th/dsh-codex-effort-slider",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
+    },
+    {
       "owner": "SnowNight777",
       "plugins": 1,
       "stars": 0,
@@ -181148,27 +181189,6 @@
       "topCat": "会话管理"
     },
     {
-      "owner": "zhaofeng130",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-10",
-      "firstCreated": "2026-10-10",
-      "delta": 0,
-      "avg": 71,
-      "topPlugin": "zhaofeng130/dsh-rea",
-      "topStars": 0,
-      "topCat": "会话管理"
-    },
-    {
       "owner": "ChordXD",
       "plugins": 1,
       "stars": 0,
@@ -181776,11 +181796,32 @@
       "topPlugin": "jabingu/dsh-selection-group",
       "topStars": 0,
       "topCat": "工具 / 效率"
+    },
+    {
+      "owner": "284022719",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-11",
+      "firstCreated": "2026-10-11",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "284022719/dsh-kb-sync",
+      "topStars": 0,
+      "topCat": "会话管理"
     }
   ],
   "authorStats": {
-    "total": 8564,
-    "multi": 2151,
+    "total": 8566,
+    "multi": 2152,
     "top10Share": 3
   },
   "coverage": {
@@ -181788,7 +181829,7 @@
       "count": 17603,
       "at": "2026-10-05T00:23:58.809Z"
     },
-    "candidates": 19369,
+    "candidates": 19373,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -181870,12 +181911,12 @@
       "2022-07-18": 1,
       "2025-10-20": 1,
       "1969-12-29": 515,
-      "2026-10-05": 1048
+      "2026-10-05": 1052
     },
-    "validated": 19865,
+    "validated": 19869,
     "candidatesValidated": 20,
-    "authoritative": 14816,
-    "invalidUnique": 5049,
+    "authoritative": 14819,
+    "invalidUnique": 5050,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -181883,7 +181924,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1860
+        "count": 1861
       },
       {
         "reason": "no-signal",
@@ -181923,5 +181964,5 @@
       }
     ]
   },
-  "enrichCount": 14816
+  "enrichCount": 14819
 }
