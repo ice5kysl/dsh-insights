@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 14782 个插件 · 生成于 2026-10-11 · 由 DSH Insights 管线生成
+> 权威集 14790 个插件 · 生成于 2026-10-11 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**14782**
-- 近 7 天活跃：1390（9.4%）· 近 30 天：6660（45.1%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：14367（97.2%）
+- 权威集规模：**14790**
+- 近 7 天活跃：1381（9.3%）· 近 30 天：6653（45%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：14372（97.2%）
 
 ## 发布与文档
-- npm 已发布 6552 / 未发布 8230 / 已发布但版本滞后 3956
-- 有 README 14743 · 中英双语/中文 7065 · 中文 README 文件 1051 · 无 README 39
-- lib/index.js 7746 · lib/client.js 5214 · 双产物 4615
+- npm 已发布 6553 / 未发布 8237 / 已发布但版本滞后 3956
+- 有 README 14751 · 中英双语/中文 7071 · 中文 README 文件 1055 · 无 README 39
+- lib/index.js 7749 · lib/client.js 5216 · 双产物 4617
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 776 · imsai 317 · 至少一个渠道 1087（7.4%） · 未收录 13695
+- awesome-dsh-plugin 776 · imsai 317 · 至少一个渠道 1087（7.3%） · 未收录 13703
 
 ## 优质未收录 · 建议收录（Top 15）
 - belowthetree/dsh-mcp-setting A · 周下载 338
@@ -24,13 +24,13 @@
 - zjuatri/dsh-terminal-plugin A · 周下载 7
 - d0ublecl1ck/dsh-session-watch A · 周下载 271
 - ai-tool-labs/dsh-plugin-square A · 周下载 394
+- BangBang-03/dsh-memory A · 周下载 461
 - BillCx330/dsh-plugin-notify-sounds A
 - saya-ch/dsh-mobile A · 周下载 4097
 - cocofhu/anime-find A · 周下载 156
 - NanmiCoder/dsh-auto-mode A · 周下载 528
 - Nwflower/dsh-chat-import A · 周下载 4094
 - PKUfudawei/dsh-capability-menu A · 周下载 501
-- mexiaosqwq/dsh-web-mobile A · 周下载 2295
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：465905
@@ -46,18 +46,18 @@
 
 ## 质量评分（启发式）
 - 平均分 73.6 · S+A 占比 3.9%（值得优先看；A+B 50.8%）
-- S 96 · A 486 · B 7021 · C 5077 · D 2102
+- S 96 · A 487 · B 7026 · C 5077 · D 2104
 
 ## 功能分类（启发式 Top 12）
-- 其它：5217
-- 模型 / 代理：1479
+- 其它：5218
+- 模型 / 代理：1482
 - 会话管理：1336
 - 文件浏览 / 预览：1279
-- 状态 / 监控 / 用量：1053
-- 侧栏 / 工作区：1001
+- 状态 / 监控 / 用量：1054
+- 侧栏 / 工作区：1002
 - 搜索 / 命令面板：802
 - 工具 / 效率：722
-- 主题 / 视觉美化：569
+- 主题 / 视觉美化：571
 - 消息 / 协作集成：490
 - 开发 / 数据：427
 - 记忆 / 知识：407
@@ -78,17 +78,17 @@
 - 2026-07：32
 - 2026-08：9783
 - 2026-09：3468
-- 2026-10：1439
+- 2026-10：1447
 
 ## Top topics
-- `dsh-plugin` × 14394
-- `deepseek-harness` × 9884
-- `dsh` × 6072
-- `cordis` × 1715
+- `dsh-plugin` × 14402
+- `deepseek-harness` × 9891
+- `dsh` × 6078
+- `cordis` × 1716
 - `deepseek` × 1648
 - `dsh-plugins` × 1436
 - `plugin` × 963
-- `typescript` × 534
+- `typescript` × 538
 - `deepseek-harness-plugin` × 501
 - `dsh-plugin-market` × 488
 - `ai-agent` × 471
