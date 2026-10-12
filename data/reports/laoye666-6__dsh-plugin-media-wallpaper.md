@@ -1,15 +1,15 @@
 # 致 dsh-plugin-media-wallpaper 的作者：一期一会 · 观测分享
 
-> laoye666-6/dsh-plugin-media-wallpaper · 第 1 期（数据快照 2026-10-05）
+> laoye666-6/dsh-plugin-media-wallpaper · 第 1 期（数据快照 2026-10-12）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-plugin-media-wallpaper 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：C（74/100）** · 在「其它」类 4886 个插件的分布里大致位于前列（同类中位 71）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：C（74/100）** · 在「其它」类 5242 个插件的分布里大致位于前列（同类中位 72）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★1 · DeepSeek Harness 壁纸插件：图片/视频背景（GIF/APNG/动图WebP/PNG/JPEG/MP4/WebM），格式自动识别，压暗/亮度/模糊，界面色调跟随，逐组件透明化。纯客户端，一条指令安装。
 - npm：`dsh-plugin-media-wallpaper@0.2.7`（20 个版本）
-- 周下载：**1213**
-- 最近 push 2026-10-04
+- 周下载：**2681**
+- 最近 push 2026-10-05
 
 以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、README 齐备、中文/双语文档、dsh-plugin topic、已度过新仓观察期、近期活跃。
 
@@ -27,6 +27,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-05
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-12
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

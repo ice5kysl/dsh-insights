@@ -1,23 +1,25 @@
 # 致 dsh-plugin-education 的作者：一期一会 · 观测分享
 
-> 863683348/dsh-plugin-education · 第 1 期（数据快照 2026-10-05）
+> 863683348/dsh-plugin-education · 第 1 期（数据快照 2026-10-12）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-plugin-education 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（81/100）** · 在「文件浏览 / 预览」类 1207 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（76/100）** · 在「文件浏览 / 预览」类 1284 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★0 · Education toolkit for DeepSeek Harness agents: lesson-plan skeletons by grade band, quiz scaffolding and answer-key validation, analytic rubrics, Anki/markdown 
 - npm：`dsh-plugin-education@0.3.2`（5 个版本）
-- 周下载：**271**
+- 周下载：**337**
 - 最近 push 2026-09-11
 
-以下几项检查未发现问题（仅作记录）：产物布局规范、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「DeepSeek Harness智能体教育工具包：提供按年级的教案骨架、测验脚手架、量规与闪卡。」。
+以下几项检查未发现问题（仅作记录）：产物布局规范、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期；按 README 解读，主要能力是「DeepSeek Harness智能体教育工具包：提供按年级的教案骨架、测验脚手架、量规与闪卡。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
 1. **未声明 client 导出** —— GUI 能力无法被 dsh web 加载（TUI/CLI 类插件可忽略）。参考做法：按官方 bundle 规范补 exports["./client"]。
 2. **npm 版本落后于仓库** —— 商店会展示旧版（也可能是包名被抢注，值得核查）。参考做法：把仓库当前版本发到 npm。
 3. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
+
+其余信号：超过 30 天没有提交（会被观望中的用户解读为维护停滞）。
 
 **能力标签**：lesson-plans、quizzes、rubrics、flashcards、readability；README 宣称：lesson-plan skeletons by grade band；quiz scaffolding and answer-key validation；analytic rubrics；Anki/markdown flashcards
 
@@ -27,6 +29,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-05
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-12
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

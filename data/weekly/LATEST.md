@@ -1,77 +1,76 @@
-# DSH 插件生态周报 · 2026-W40（2026/09/28～2026/10/04）
+# DSH 插件生态周报 · 2026-W41（2026/10/05～2026/10/11）
 
-> 数据快照 2026-10-05 · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
+> 数据快照 2026-10-12 · 由 DSH Insights（DeepSeek Harness 全景观察站 · dsh-insights.com）自动整理 · 开源：[dsh-insights](https://github.com/ice5kysl/dsh-insights)
 
 ## 编者按
 
-- **新作者带量入场**：Miaotofu01/Study-Mate 以 596 stars 位列新增榜第一且 npm 为 true，说明新作者若同步打通分发，首发周即可获得可见度。
-- **榜单增量强于存量**：superdesigndev/treg 从 1739 升至 4134、zouyuxuan122/dsh-our-free-model 从 1 升至 1166、dsh-market/dsh-market 从 4262 升至 5513，增量信号集中在具体场景而非存量头部。
-- **兼容层进入验证期**：dsh-v0.2.1-alpha.1 以 breaking 标记新增实验性 Claude Code Mods 兼容层，dsh-v0.2.0-rc.2 同样为 breaking，意味着跨插件协议兼容开始试探但 alpha 阶段不宜生产依赖。
-- **高分零星值得挖**：SenmuuuuW/dsh-whale-report 评分 100、NanmiCoder/dsh-agent-teams 与 Han-1413141/dsh-cost-meter 等评分 95 但 stars 为 0，说明质量分与社区曝光存在时差。
-- **崩溃面窄但集中**：crashTop 三条均为 module-missing，涉及 dsh-workspace-kit、@wishp3/dsh-cite、dsh-token-usage，最高 count 为 1，提示模块依赖缺失仍是插件运行前的共性风险。
-本周基调：兼容层试验与高质量零星插件浮出水面并行，生态在扩展中暴露依赖安装短板。
+- **安全与运维插件领跑新增** kenryu42/cc-safety-net 以 1591 stars 和 npm 可用进入新增头部，T-Auto/dsh-ops 也有 371 stars，说明新作者用安全/运维切口更容易被看见。
+- **头部增长由市场与清理驱动** dsh-market 从 4699 涨到 6169、dsh-purge 从 2448 涨到 4584、treg 从 3585 涨到 4986，非模型型核心工具正在承接生态流量。
+- **桌面端与兼容层是版本主线** dsh-v0.2.0-rc.2 把命令安装与插件管理搬到菜单栏，dsh-v0.2.1-alpha.1 试水 Claude Code Mods 兼容层，dsh-v0.2.1-alpha.2 又加思考翻译，平台边界继续外扩。
+- **高评分新插件仍缺曝光** SenmuuuuW/dsh-whale-report 与 NanmiCoder/dsh-agent-teams 等 gems 拿到 95–100 分却仍是 0 stars，质量信号与社区发现明显脱节。
+本周基调：新增供给与头部增长同时活跃，但 breaking 版本、npm 缺位与模块缺失正把兼容和依赖完整性推成隐性门槛。
 
 ## 本周洞察
 
-- dsh-v0.2.1-alpha.1（2026-10-03）以 breaking 标记引入实验性 Claude Code Mods 兼容层，dsh-v0.2.0-rc.2（2026-09-29）也为 breaking；近两周主版本迭代同时影响插件兼容与桌面端安装路径，插件作者需要按 RC/alpha 分流验证。
-- risers 中 zouyuxuan122/dsh-our-free-model 从 1 涨到 1166、superdesigndev/treg 从 1739 涨到 4134、dsh-market/dsh-market 从 4262 涨到 5513；增量热度分布在模型接入、市场入口等具体场景，而非只由存量头部吸收。
-- gems 中 SenmuuuuW/dsh-whale-report 评分 100、NanmiCoder/dsh-agent-teams 等四项评分 95 但 stars 都是 0；质量评分已能识别尚未被社区发现的插件，曝光与评分之间存在窗口。
-- crashTop 三条均为 module-missing，指向 dsh-workspace-kit、@wishp3/dsh-cite、dsh-token-usage，最高 count 为 1；数量虽低，但类型一致，说明模块依赖缺失是插件运行前的共性风险。
+- 新作者榜里 npm 就绪的项目更容易放大早期势能：kenryu42/cc-safety-net（1591 stars、npm true）和 T-Auto/dsh-ops（371 stars、npm true）都进入新增头部，而 sixtysevenlf/dsh-blender-plugin（212 stars）与 luobosibing2/dsh-jev-plugin（204 stars）尚未发 npm，后者会卡在安装体验上。
+- 本周上升榜集中在基础设施而非单点功能：dsh-market 增加 1470 stars、dsh-purge 增加 2136 stars、treg 增加 1401 stars，说明市场、清理与路由类工具正在成为插件生态的入口层。
+- breaking 信号指向平台兼容与桌面入口：dsh-v0.2.1-alpha.2 引入思考翻译插件，dsh-v0.2.1-alpha.1 加 Claude Code Mods 兼容层，dsh-v0.2.0-rc.2 支持菜单栏管理命令和插件，生态开始从功能扩张转向宿主能力建设，但 alpha/rc 阶段升级风险同步上升。
+- 高分 gems 与崩溃榜形成质量对照：SenmuuuuW/dsh-whale-report（score 100）、Han-1413141/dsh-cost-meter（score 95）等仍是 0 stars，而 crashTop 的 module-missing 命中 dsh-workspace-kit（count 1）及 @wishp3/dsh-cite、dsh-token-usage，说明低曝光高质量插件有机会，但依赖完整性会直接拖累体验。
 
 ## 行动建议
 
-- **给插件用户**：若准备升级 dsh-v0.2.1-alpha.1 或 dsh-v0.2.0-rc.2，先确认当前插件是否依赖 Claude Code Mods 兼容层或桌面端 dsh 命令管理；两者均为 breaking，建议在非生产环境验证后再全面切换。
-- **给插件用户**：安装或排查插件时优先关注 crashTop 中的 module-missing：dsh-workspace-kit、@wishp3/dsh-cite、dsh-token-usage；加载失败时先检查依赖模块是否齐全。
-- **给插件作者**：未发 npm 的高星项目如 yjh051108/dsh-routing-suite（7000 stars）和 superdesigndev/treg（4134 stars）应优先补齐发布链路，避免用户只能从源码安装；新增榜中 joeseesun/qiaomu-rss-dsh、yinhong-zhou/jevdo 也未发 npm。
-- **给插件作者**：针对 crashTop 集中出现的 module-missing，插件作者应自检 dsh-workspace-kit、@wishp3/dsh-cite、dsh-token-usage 等项目的依赖声明与打包产物。
+- **给插件用户**：升级 dsh-v0.2.1-alpha.2 前，先检查当前插件是否涉及 crashTop 的 module-missing：dsh-workspace-kit、@wishp3/dsh-cite、dsh-token-usage 的依赖完整性会决定升级后能否正常加载。
+- **给插件用户**：想补监控、成本与侧栏能力时，优先试用本周 gems：SenmuuuuW/dsh-whale-report（score 100）、Han-1413141/dsh-cost-meter（score 95）、omdsh-dev/DSH-better-sidebar（score 95），它们分数高但仍 0 stars，替代空间大。
+- **给插件作者**：新作者应把 npm 发布作为冷启动优先级：kenryu42/cc-safety-net、T-Auto/dsh-ops 已 npm true 并获新增头部，而 sixtysevenlf/dsh-blender-plugin（212 stars）、luobosibing2/dsh-jev-plugin（204 stars）仍 npm false，安装门槛会压制转化。
+- **给插件作者**：可对标 gems 做差异化补位：SenmuuuuW/dsh-whale-report（状态/监控/用量，score 100）、NanmiCoder/dsh-agent-teams（模型/代理，score 95）、Han-1413141/dsh-cost-meter（会话管理，score 95）；同时优先排查 dsh-workspace-kit 的 module-missing 崩溃。
 
 > 深度分析见《DSH 生态洞察》长报告：https://dsh-insights.com/insights/?utm_source=weekly&utm_medium=site
 
 ## 本期速览
 
-- 权威插件 **13748** 个（通过 dsh.bundle manifest 校验；另有 4801 个被拒/噪声分桶）
-- 近 7 天活跃 23.1%（30 天 47.6%）· 可过收录门禁（仓库≥1天）97%
-- npm 发布率 45.4%（已发布 6236 / 版本滞后 3815）
-- 中英/双语文档率 47.4% · 平均质量分 73.8（S+A 4.3%）
-- curated 收录覆盖 7.8%（1075 个已进 awesome/imsai）
-- npm 周下载样本 Top 15 合计 3208457
-- LLM 能力标注进度：1823/13748
+- 权威插件 **14866** 个（通过 dsh.bundle manifest 校验；另有 5056 个被拒/噪声分桶）
+- 近 7 天活跃 18%（30 天 45.9%）· 可过收录门禁（仓库≥1天）97.3%
+- npm 发布率 44.3%（已发布 6582 / 版本滞后 3969）
+- 中英/双语文档率 47.8% · 平均质量分 73.7（S+A 4%）
+- curated 收录覆盖 7.3%（1088 个已进 awesome/imsai）
+- npm 周下载样本 Top 15 合计 3251566
+- LLM 能力标注进度：1823/14866
 
 ## 官方动态（dsh × DeepSeek 平台）
 
-- dsh 官方仓库 ★243,404 · 最近 push 2026-10-03
-- npm dist-tags：alpha=0.2.1-alpha.1 · next=0.2.0-rc.2 · latest=0.2.0-rc.2
-- 最新 release：dsh-v0.2.1-alpha.1（pre-release · 2026-10-03 · 含 breaking 说明）
+- dsh 官方仓库 ★247,518 · 最近 push 2026-10-09
+- npm dist-tags：latest=0.2.0-rc.2 · next=0.2.0-rc.2 · alpha=0.2.1-alpha.2
+- 最新 release：dsh-v0.2.1-alpha.2（pre-release · 2026-10-09 · 含 breaking 说明）
 - 最近 8 个 release 中 6 个含 breaking/迁移关键词——升级前请核对 releases 说明
-- rc 兼容信号：latest=0.2.0-rc.2；已探测 5090 个 npm 插件，仅 340 个声明 engines.dsh（声明率过低，雷达走 v1 API 符号路线）
-- DeepSeek 平台：DeepSeek-V3 ★104,515 · v1.0.0；DeepSeek-R1 ★91,935 · v1.0.0；awesome-deepseek-integration ★39,307；DeepSeek-Coder ★24,290；DeepSeek-OCR ★23,931；Janus ★17,760；FlashMLA ★13,035；3FS ★10,261
+- rc 兼容信号：latest=0.2.0-rc.2；已探测 5357 个 npm 插件，仅 385 个声明 engines.dsh（声明率过低，雷达走 v1 API 符号路线）
+- DeepSeek 平台：DeepSeek-V3 ★104,499 · v1.0.0；DeepSeek-R1 ★91,905 · v1.0.0；awesome-deepseek-integration ★39,348；DeepSeek-Coder ★24,295；DeepSeek-OCR ★23,962；Janus ★17,755；FlashMLA ★13,063；3FS ★10,277
 - 详见站点「动态」页：https://dsh-insights.com/dynamics/
 
 ## 增长与榜单
 
 | 仓库 | ★ | npm | 中/双语 |
 |---|---|---|---|
-| zhu1090093659/dsh-web | 8367 | ✓ | ✓ |
-| yjh051108/dsh-routing-suite | 7000 | — | ✓ |
-| dsh-market/dsh-market | 5513 | ✓ | ✓ |
-| superdesigndev/treg | 4134 | — | — |
-| liustack/modlens | 4120 | ✓ | ✓ |
-| MeteorNOX/DeepSeek-Balance-Whale-Widget | 3996 | ✓ | ✓ |
-| YuJunZhiXue/dsh-purge | 3293 | — | ✓ |
+| zhu1090093659/dsh-web | 8635 | ✓ | ✓ |
+| yjh051108/dsh-routing-suite | 7020 | — | ✓ |
+| dsh-market/dsh-market | 6169 | ✓ | ✓ |
+| superdesigndev/treg | 4986 | — | — |
+| YuJunZhiXue/dsh-purge | 4584 | — | ✓ |
+| MeteorNOX/DeepSeek-Balance-Whale-Widget | 4495 | ✓ | ✓ |
+| liustack/modlens | 4209 | ✓ | ✓ |
 | Minglink/dsh-infinite-gen-4 | 2303 | — | ✓ |
 
 ### 周下载 Top 10（已发布样本）
 
-- ranxianglei/billion-context：**330230**/周
-- sunyuhuirong/deepseek-account：**277630**/周
-- dsh-market/dsh-market：**161693**/周
-- MichengAI/dsh-codex-ui：**62644**/周
-- omdsh-dev/DSH-better-sidebar：**59739**/周
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：**55316**/周
-- Nicercz007-cloud/schedule：**51711**/周
-- bowenliang123/dsh-context：**38839**/周
-- Creakono/dsh-cost-meter：**33233**/周
-- liustack/modlens：**23270**/周
+- ranxianglei/billion-context：**547791**/周
+- sunyuhuirong/deepseek-account：**257231**/周
+- dsh-market/dsh-market：**124710**/周
+- MichengAI/dsh-skills-manager：**63575**/周
+- MichengAI/dsh-pua：**56640**/周
+- MeteorNOX/DeepSeek-Balance-Whale-Widget：**47879**/周
+- omdsh-dev/DSH-better-sidebar：**45990**/周
+- Nicercz007-cloud/schedule：**45453**/周
+- bowenliang123/dsh-context：**38580**/周
+- MichengAI/dsh-codex-ui：**34298**/周
 
 ### 仓库领先、尚未发布 Top 5（作者已改版本号，npm 上还没有）
 
@@ -83,30 +82,30 @@
 
 ### npm 领先仓库 Top 5（发布版比默认分支 package.json 新）
 
-- dsh-market/dsh-market：仓库 1.43.0 → npm 1.66.8
+- dsh-market/dsh-market：仓库 1.43.0 → npm 1.66.17
+- MeteorNOX/DeepSeek-Balance-Whale-Widget：仓库 0.2.10 → npm 0.4.2
 - liustack/modlens：仓库 3.25.4 → npm 3.26.6
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：仓库 0.2.10 → npm 0.3.18
-- bowenliang123/dsh-context：仓库 0.42.0 → npm 0.63.0
-- xmanrui/dsh-im：仓库 4.11.0 → npm 4.35.1
+- bowenliang123/dsh-context：仓库 0.42.0 → npm 0.69.0
+- xmanrui/dsh-im：仓库 4.11.0 → npm 4.38.1
 
 ## 信号与观察（启发式）
 
-- 质量两级分化仍在：A 级 498 个 vs D 级 2016 个（C 级是主体 4534），生态"能跑但文档/发布不齐"的中段插件占比最高。
-- 功能分类上「其它」最拥挤（4886 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
-- 36 个插件没有 README、7512 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
-- curated 收录仍集中于少数头部（1075/13748），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
-- 本周新增 1281 / 消失 0，见文末「本周快照 Diff」。
+- 质量两级分化仍在：A 级 497 个 vs D 级 2094 个（C 级是主体 5053），生态"能跑但文档/发布不齐"的中段插件占比最高。
+- 功能分类上「其它」最拥挤（5242 个），「文件浏览/预览」紧随其后——新插件建议差异化而非堆同质功能。
+- 39 个插件没有 README、8284 个未发布 npm：这是最容易的"入门级改进"，也最影响被收录。
+- curated 收录仍集中于少数头部（1088/14866），未收录中不少质量 A/B —— 详见站内「优质未收录」榜。
+- 本周新增 1265 / 消失 0，见文末「本周快照 Diff」。
 
 ## 优质未收录 · 建议收录（Top 8，供作者与目录维护者）
 
-- belowthetree/dsh-mcp-setting（A，★0，周下载 86）
-- MayBeTheWorld/dsh-inherit（A，★1，周下载 24）
-- runcat-tommy/dsh-unitverse（A，★0，周下载 205）
-- Rabbit-bot-No-002/dsh-chat-avatar（A，★1，周下载 357）
-- Sxuan-Coder/dsh-user-prompt（A，★0，周下载 23）
-- zjuatri/dsh-terminal-plugin（A，★1，周下载 12）
-- xiangrikuibaize/dsh-tide-badge（A，★2，周下载 28）
-- d0ublecl1ck/dsh-session-watch（A，★0，周下载 165）
+- belowthetree/dsh-mcp-setting（A，★0，周下载 362）
+- MayBeTheWorld/dsh-inherit（A，★1，周下载 23）
+- runcat-tommy/dsh-unitverse（A，★0，周下载 260）
+- zjuatri/dsh-terminal-plugin（A，★1，周下载 7）
+- d0ublecl1ck/dsh-session-watch（A，★0，周下载 109）
+- ai-tool-labs/dsh-plugin-square（A，★0，周下载 394）
+- BangBang-03/dsh-memory（A，★1，周下载 483）
+- BillCx330/dsh-plugin-notify-sounds（A，★2，周下载 304）
 
 ## 本期动作 & 社区行动
 
@@ -116,39 +115,39 @@
 
 ---
 
-## 本周快照 Diff（基线 2026-09-27）
+## 本周快照 Diff（基线 2026-10-04）
 
-- 当前权威插件：**13748**（基线 12467 · 2026-09-27）
-- 新增 1281 · 消失 0
+- 当前权威插件：**14866**（基线 13601 · 2026-10-04）
+- 新增 1265 · 消失 0
 
 ### 新增（Top 15，按 ★）
-- Miaotofu01/Study-Mate ★596 (npm ✓)
-- VDERR/dsh-echocat-skill-panel ★196 (npm ✓)
-- yannicksong0106/dsh-550c-boot ★76 (npm ✓)
-- XDTrees/dsh-workbuddy-xdpool ★43 (npm ✓)
-- joeseesun/qiaomu-rss-dsh ★39
-- universe-st/dsh-game-material-master ★33 (npm ✓)
-- yinhong-zhou/jevdo ★23
-- datit309/supergraph ★22 (npm ✓)
-- webkubor/dsh-mirror ★15 (npm ✓)
-- memorax-ai/dsh-turn-fold ★13 (npm ✓)
-- JRJRJPRO/dsh-chat-tree ★13 (npm ✓)
-- Yiheng-guo/dsh-boot-animation-pro ★13
-- pk14742952-AD/dsh-host-rsi ★13
-- c3cvld7aag/fujiang-dsh ★13
-- YangShen-SWE/dsh-plugin-simple-pet ★12
+- kenryu42/cc-safety-net ★1591 (npm ✓)
+- T-Auto/dsh-ops ★371 (npm ✓)
+- sixtysevenlf/dsh-blender-plugin ★212
+- luobosibing2/dsh-jev-plugin ★204
+- xcisxc29/dsh-wechat ★111
+- Microqian2th/dsh-codex-effort-slider ★84
+- dsh-wsl-workspace-maintainers/dsh-wsl-workspace ★80 (npm ✓)
+- aa2246740/dsh-model-fusion ★60 (npm ✓)
+- yi-yezhiqiu/dsh-prompt-market ★39
+- jingyi0605/Codingns4DSH ★31 (npm ✓)
+- huaizhuanghub/dsh-persona-dafeiyu ★25 (npm ✓)
+- Lzcdebear/better-dsh-session-deletetool ★23
+- DSH-EAC/EAC-skin-loader ★18
+- zhu1090093659/dsh-skins ★16 (npm ✓)
+- Yoshino-JF/dsh-deepseek-pet ★14
 
 ### star 涨幅榜（同基线）
-- superdesigndev/treg：1739 → 4134（+2395）
-- YuJunZhiXue/dsh-purge：1630 → 3293（+1663）
-- dsh-market/dsh-market：4262 → 5513（+1251）
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：2809 → 3996（+1187）
-- zouyuxuan122/dsh-our-free-model：1 → 1166（+1165）
-- zhu1090093659/dsh-web：7861 → 8367（+506）
-- Minglink/dsh-infinite-gen-4：1823 → 2303（+480）
-- bowenliang123/dsh-context：1453 → 1846（+393）
-- ranxianglei/billion-context：213 → 532（+319）
-- elysia395/dsh-wallpaper-engine：317 → 586（+269）
+- YuJunZhiXue/dsh-purge：2448 → 4584（+2136）
+- dsh-market/dsh-market：4699 → 6169（+1470）
+- superdesigndev/treg：3585 → 4986（+1401）
+- MeteorNOX/DeepSeek-Balance-Whale-Widget：3268 → 4495（+1227）
+- zouyuxuan122/dsh-our-free-model：300 → 1166（+866）
+- elysia395/dsh-wallpaper-engine：374 → 1020（+646）
+- ranxianglei/billion-context：329 → 901（+572）
+- zhu1090093659/dsh-web：8070 → 8635（+565）
+- Miaotofu01/Study-Mate：353 → 859（+506）
+- bowenliang123/dsh-context：1546 → 1995（+449）
 
 ---
 

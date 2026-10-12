@@ -1,0 +1,82 @@
+{
+  "week": "2026-W41",
+  "range": "2026/10/05～2026/10/11",
+  "generatedAt": "2026-10-12T01:23:24.868Z",
+  "model": "deepseek-v4-pro",
+  "usage": {
+    "prompt_tokens": 11185,
+    "completion_tokens": 12145,
+    "total_tokens": 23330,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 6410
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 11185
+  },
+  "title": {
+    "zh": "DSH 生态洞察 · 2026-W41",
+    "en": "DSH Ecosystem Insights · 2026-W41"
+  },
+  "signals": [
+    {
+      "kind": "owner-cluster",
+      "severity": "mid",
+      "fact": "账号 uckkk 有 1286 个插件、均分仅 56——疑似批量刷库/模板复制",
+      "factEn": "Account uckkk holds 1286 plugins, avg score only 56 — suspected template farming",
+      "data": {
+        "owner": "uckkk",
+        "count": 1286,
+        "scored": 1286,
+        "avg": 56,
+        "noReadme": 0
+      }
+    },
+    {
+      "kind": "owner-cluster",
+      "severity": "mid",
+      "fact": "账号 CAI-MH 有 9 个插件、均分仅 57、1 个无 README——疑似批量刷库/模板复制",
+      "factEn": "Account CAI-MH holds 9 plugins, avg score only 57, 1 without README — suspected template farming",
+      "data": {
+        "owner": "CAI-MH",
+        "count": 9,
+        "scored": 9,
+        "avg": 57,
+        "noReadme": 1
+      }
+    },
+    {
+      "kind": "dominant-owner",
+      "severity": "low",
+      "fact": "最大账号 uckkk 独占 1286 个插件（占全生态 9%）、均分 56——模板批量号拉高规模数字，解读增长时需剔除水分",
+      "factEn": "Largest account uckkk alone holds 1286 plugins (9% of the ecosystem), avg score 56 — template batch account inflates scale numbers",
+      "data": {
+        "owner": "uckkk",
+        "count": 1286,
+        "avg": 56
+      }
+    },
+    {
+      "kind": "npm-stale",
+      "severity": "low",
+      "fact": "10 个插件仓库版本领先 npm 发布版本——安装侧拿到的是旧版",
+      "factEn": "10 plugins have repo versions ahead of npm — installs get outdated builds",
+      "data": {
+        "count": 10
+      }
+    },
+    {
+      "kind": "breaking-release",
+      "severity": "high",
+      "fact": "dsh 官方本周发布 1 个版本，其中 1 个含 breaking 变更（dsh-v0.2.1-alpha.2）——插件作者需评估适配",
+      "factEn": "dsh shipped 1 releases this week, 1 with breaking changes (dsh-v0.2.1-alpha.2) — plugin authors must adapt",
+      "data": {
+        "releases": [
+          "dsh-v0.2.1-alpha.2"
+        ]
+      }
+    }
+  ]
+}
