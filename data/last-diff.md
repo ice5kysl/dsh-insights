@@ -1,10 +1,11 @@
 # 快照 Diff · 2026-10-12
 
-- 当前权威插件：**15185**（上次 15184）
-- 新增 1 · 消失 0
+- 当前权威插件：**15187**（上次 15185）
+- 新增 2 · 消失 0
 
-## 新增（Top 1）
-- zmr234234-jpg/dsh-deepseek-splash ★0 
+## 新增（Top 2）
+- dsh-plugin-lab/dsh-plugin-debugging ★0 
+- qingzhijie05/dsh-user-memory ★0 
 
 ## 消失（Top 0）
 
