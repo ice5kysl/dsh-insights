@@ -1,11 +1,10 @@
 # 快照 Diff · 2026-10-12
 
-- 当前权威插件：**15187**（上次 15185）
-- 新增 2 · 消失 0
+- 当前权威插件：**15188**（上次 15187）
+- 新增 1 · 消失 0
 
-## 新增（Top 2）
-- dsh-plugin-lab/dsh-plugin-debugging ★0 
-- qingzhijie05/dsh-user-memory ★0 
+## 新增（Top 1）
+- dusktin71-lang/dsh-lessons ★0 
 
 ## 消失（Top 0）
 
