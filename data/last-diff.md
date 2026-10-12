@@ -1,17 +1,11 @@
 # 快照 Diff · 2026-10-12
 
-- 当前权威插件：**15135**（上次 15127）
-- 新增 8 · 消失 0
+- 当前权威插件：**15137**（上次 15135）
+- 新增 2 · 消失 0
 
-## 新增（Top 8）
-- MoYu-CN/dsh-theme-pack ★0 (npm ✓)
-- MoYu-CN/dsh-agent-profiles ★0 
-- 2861292267/dsh-prompt-enhancer ★0 
-- 2026heshao/dsh-obsidian-board ★0 
-- MoYu-CN/dsh-knowledge ★0 (npm ✓)
-- VICqiufeeng/dsh-minimax-connect ★0 
-- ymck-x/dsh-skill-starter ★0 
-- MoYu-CN/dsh-team-chat ★0 
+## 新增（Top 2）
+- Yiklek/dsh-slots-manager ★0 
+- zyfgood/dsh-a2a ★0 (npm ✓)
 
 ## 消失（Top 0）
 
