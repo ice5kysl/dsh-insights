@@ -1,12 +1,10 @@
 # 快照 Diff · 2026-10-13
 
-- 当前权威插件：**15361**（上次 15358）
-- 新增 3 · 消失 0
+- 当前权威插件：**15362**（上次 15361）
+- 新增 1 · 消失 0
 
-## 新增（Top 3）
-- zero360-TYN/dsh-sage-mode ★0 
-- PerryLink/dsh-phone-inbox ★0 
-- hope4b/dsh-onto-space-panel ★0 
+## 新增（Top 1）
+- higekibaka/dsh-vertex-argon ★0 (npm ✓)
 
 ## 消失（Top 0）
 
