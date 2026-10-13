@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-13T07:44:53.975Z",
+  "generatedAt": "2026-10-13T07:50:03.114Z",
   "totals": {
-    "authoritative": 15281,
-    "active7": 2771,
+    "authoritative": 15282,
+    "active7": 2770,
     "active7Pct": 18.1,
     "active30": 7082,
     "active30Pct": 46.3,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1795,
+      "2026-10": 1796,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -68,7 +68,7 @@
       "2020-06-29": 1,
       "2025-12-22": 1,
       "2026-10-05": 959,
-      "2026-10-12": 192
+      "2026-10-12": 193
     },
     "byWeekGrades": {
       "B": {
@@ -84,7 +84,7 @@
         "2026-08-17": 1446,
         "2026-06-08": 3,
         "2026-06-15": 2,
-        "2026-08-24": 719,
+        "2026-08-24": 720,
         "2026-06-01": 1,
         "2026-05-25": 4,
         "2026-07-27": 6,
@@ -125,7 +125,7 @@
         "2026-08-17": 100,
         "2026-08-31": 30,
         "2026-08-03": 1,
-        "2026-08-24": 49,
+        "2026-08-24": 48,
         "2026-09-07": 33,
         "2026-09-14": 33,
         "2026-07-27": 1,
@@ -180,14 +180,14 @@
         "2026-09-21": 24,
         "2026-09-28": 39,
         "2026-10-05": 7,
-        "2026-10-12": 3
+        "2026-10-12": 4
       }
     }
   },
   "distribution": {
     "publish": {
       "published": 6769,
-      "unpublished": 8512,
+      "unpublished": 8513,
       "stale": 4080
     },
     "docs": {
@@ -195,10 +195,10 @@
       "zhFile": 1084,
       "zh": 7336,
       "both": 7325,
-      "none": 39
+      "none": 40
     },
     "lib": {
-      "index": 7989,
+      "index": 7990,
       "client": 5385,
       "both": 4765
     },
@@ -394,7 +394,7 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14872
+      "count": 14873
     },
     {
       "topic": "deepseek-harness",
@@ -509,8 +509,8 @@
     "imsai": 321,
     "covered": 1089,
     "coveredPct": 7.1,
-    "none": 14192,
-    "fetchedAt": "2026-10-13T07:43:57.902Z"
+    "none": 14193,
+    "fetchedAt": "2026-10-13T07:49:08.140Z"
   },
   "suggested": [
     {
@@ -1778,20 +1778,20 @@
   },
   "quality": {
     "grades": {
-      "A": 530,
-      "B": 7319,
+      "A": 529,
+      "B": 7320,
       "C": 5221,
-      "D": 2106,
+      "D": 2107,
       "S": 105
     },
     "avgScore": 73.8,
     "gradePct": 51.4,
-    "gradePctSA": 4.2
+    "gradePctSA": 4.1
   },
   "categories": [
     {
       "category": "其它",
-      "count": 5345
+      "count": 5346
     },
     {
       "category": "模型 / 代理",
@@ -11300,8 +11300,8 @@
       "plugins": 3,
       "stars": 0,
       "grades": {
-        "A": 1,
-        "B": 2,
+        "A": 0,
+        "B": 3,
         "C": 0,
         "D": 0
       },
@@ -11311,7 +11311,7 @@
       "lastPush": "2026-09-13",
       "firstCreated": "2026-08-24",
       "delta": 0,
-      "avg": 86.3,
+      "avg": 84.7,
       "topPlugin": "Tieboyh/dsh-usage-center",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
@@ -133035,6 +133035,27 @@
       "topCat": "其它"
     },
     {
+      "owner": "Wlaeg",
+      "plugins": 2,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 1
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-13",
+      "firstCreated": "2026-10-13",
+      "delta": 0,
+      "avg": 59,
+      "topPlugin": "Wlaeg/dsh-notify-linux",
+      "topStars": 1,
+      "topCat": "其它"
+    },
+    {
       "owner": "shoxiy-danny",
       "plugins": 1,
       "stars": 1,
@@ -149098,27 +149119,6 @@
       "topPlugin": "27painter/dsh-moli",
       "topStars": 1,
       "topCat": "文件浏览 / 预览"
-    },
-    {
-      "owner": "Wlaeg",
-      "plugins": 1,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-13",
-      "firstCreated": "2026-10-13",
-      "delta": 0,
-      "avg": 69,
-      "topPlugin": "Wlaeg/dsh-notify-linux",
-      "topStars": 1,
-      "topCat": "其它"
     },
     {
       "owner": "ChenneyZhuang",
@@ -186650,7 +186650,7 @@
   ],
   "authorStats": {
     "total": 8796,
-    "multi": 2225,
+    "multi": 2226,
     "top10Share": 2.9
   },
   "coverage": {
@@ -186658,7 +186658,7 @@
       "count": 18760,
       "at": "2026-10-12T00:09:50.328Z"
     },
-    "candidates": 19745,
+    "candidates": 19746,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -186743,11 +186743,11 @@
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 530,
-      "2026-10-12": 215
+      "2026-10-12": 216
     },
-    "validated": 20430,
-    "candidatesValidated": 23,
-    "authoritative": 15281,
+    "validated": 20431,
+    "candidatesValidated": 17,
+    "authoritative": 15282,
     "invalidUnique": 5149,
     "invalidBuckets": [
       {
@@ -186796,5 +186796,5 @@
       }
     ]
   },
-  "enrichCount": 15281
+  "enrichCount": 15282
 }
