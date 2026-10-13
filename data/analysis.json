@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-13T02:02:04.284Z",
+  "generatedAt": "2026-10-13T02:11:26.895Z",
   "totals": {
-    "authoritative": 15219,
-    "active7": 2765,
-    "active7Pct": 18.2,
-    "active30": 7050,
+    "authoritative": 15220,
+    "active7": 2761,
+    "active7Pct": 18.1,
+    "active30": 7051,
     "active30Pct": 46.3,
     "ageGate1": 14780,
     "ageGate1Pct": 97.1,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1733,
+      "2026-10": 1734,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -68,7 +68,7 @@
       "2020-06-29": 1,
       "2025-12-22": 1,
       "2026-10-05": 959,
-      "2026-10-12": 130
+      "2026-10-12": 131
     },
     "byWeekGrades": {
       "B": {
@@ -165,7 +165,7 @@
         "2026-09-28": 453,
         "2020-06-29": 1,
         "2026-10-05": 266,
-        "2026-10-12": 70
+        "2026-10-12": 71
       },
       "D": {
         "2026-08-10": 327,
@@ -187,11 +187,11 @@
   "distribution": {
     "publish": {
       "published": 6745,
-      "unpublished": 8474,
+      "unpublished": 8475,
       "stale": 4075
     },
     "docs": {
-      "readme": 15180,
+      "readme": 15181,
       "zhFile": 1079,
       "zh": 7294,
       "both": 7283,
@@ -394,15 +394,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14810
+      "count": 14811
     },
     {
       "topic": "deepseek-harness",
-      "count": 10218
+      "count": 10219
     },
     {
       "topic": "dsh",
-      "count": 6320
+      "count": 6321
     },
     {
       "topic": "cordis",
@@ -509,8 +509,8 @@
     "imsai": 319,
     "covered": 1089,
     "coveredPct": 7.2,
-    "none": 14130,
-    "fetchedAt": "2026-10-13T02:01:07.812Z"
+    "none": 14131,
+    "fetchedAt": "2026-10-13T02:10:35.986Z"
   },
   "suggested": [
     {
@@ -1777,7 +1777,7 @@
     "grades": {
       "A": 529,
       "B": 7284,
-      "C": 5195,
+      "C": 5196,
       "D": 2105,
       "S": 106
     },
@@ -1788,7 +1788,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5324
+      "count": 5325
     },
     {
       "category": "模型 / 代理",
@@ -152857,6 +152857,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "sheilacraig",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-13",
+      "firstCreated": "2026-10-12",
+      "delta": 0,
+      "avg": 66.5,
+      "topPlugin": "sheilacraig/dsh-windows-mcp-lite",
+      "topStars": 0,
+      "topCat": "工具 / 效率"
+    },
+    {
       "owner": "lilinhua0413",
       "plugins": 2,
       "stars": 0,
@@ -185554,27 +185575,6 @@
       "topCat": "侧栏 / 工作区"
     },
     {
-      "owner": "sheilacraig",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-12",
-      "firstCreated": "2026-10-12",
-      "delta": 0,
-      "avg": 69,
-      "topPlugin": "sheilacraig/dsh-windows-mcp-lite",
-      "topStars": 0,
-      "topCat": "工具 / 效率"
-    },
-    {
       "owner": "FantastyQAQ",
       "plugins": 1,
       "stars": 0,
@@ -186144,7 +186144,7 @@
   ],
   "authorStats": {
     "total": 8772,
-    "multi": 2213,
+    "multi": 2214,
     "top10Share": 2.9
   },
   "coverage": {
@@ -186152,7 +186152,7 @@
       "count": 18760,
       "at": "2026-10-12T00:09:50.328Z"
     },
-    "candidates": 19679,
+    "candidates": 19681,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -186237,16 +186237,16 @@
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 530,
-      "2026-10-12": 149
+      "2026-10-12": 151
     },
-    "validated": 20364,
-    "candidatesValidated": 21,
-    "authoritative": 15219,
-    "invalidUnique": 5145,
+    "validated": 20366,
+    "candidatesValidated": 18,
+    "authoritative": 15220,
+    "invalidUnique": 5146,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 2756
+        "count": 2757
       },
       {
         "reason": "no-package.json",
@@ -186290,5 +186290,5 @@
       }
     ]
   },
-  "enrichCount": 15219
+  "enrichCount": 15220
 }
