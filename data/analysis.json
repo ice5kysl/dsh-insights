@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-13T02:11:26.895Z",
+  "generatedAt": "2026-10-13T02:16:13.403Z",
   "totals": {
-    "authoritative": 15220,
-    "active7": 2761,
-    "active7Pct": 18.1,
-    "active30": 7051,
+    "authoritative": 15223,
+    "active7": 2764,
+    "active7Pct": 18.2,
+    "active30": 7053,
     "active30Pct": 46.3,
     "ageGate1": 14780,
     "ageGate1Pct": 97.1,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 1734,
+      "2026-10": 1737,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -68,7 +68,7 @@
       "2020-06-29": 1,
       "2025-12-22": 1,
       "2026-10-05": 959,
-      "2026-10-12": 131
+      "2026-10-12": 134
     },
     "byWeekGrades": {
       "B": {
@@ -98,14 +98,14 @@
         "2026-04-20": 1,
         "2026-05-18": 1,
         "2026-06-29": 3,
-        "2026-09-07": 457,
+        "2026-09-07": 456,
         "2026-03-02": 1,
         "2026-09-14": 478,
         "2026-09-21": 487,
         "2026-09-28": 582,
         "2025-12-22": 1,
         "2026-10-05": 636,
-        "2026-10-12": 49
+        "2026-10-12": 52
       },
       "S": {
         "2026-08-03": 2,
@@ -156,7 +156,7 @@
         "2026-06-01": 1,
         "2026-06-29": 3,
         "2026-04-27": 2,
-        "2026-09-07": 277,
+        "2026-09-07": 278,
         "2026-07-06": 2,
         "2026-09-14": 231,
         "2026-09-21": 257,
@@ -186,19 +186,19 @@
   },
   "distribution": {
     "publish": {
-      "published": 6745,
+      "published": 6748,
       "unpublished": 8475,
       "stale": 4075
     },
     "docs": {
-      "readme": 15181,
+      "readme": 15184,
       "zhFile": 1079,
-      "zh": 7294,
-      "both": 7283,
+      "zh": 7297,
+      "both": 7286,
       "none": 39
     },
     "lib": {
-      "index": 7947,
+      "index": 7950,
       "client": 5367,
       "both": 4748
     },
@@ -394,15 +394,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 14811
+      "count": 14814
     },
     {
       "topic": "deepseek-harness",
-      "count": 10219
+      "count": 10222
     },
     {
       "topic": "dsh",
-      "count": 6321
+      "count": 6324
     },
     {
       "topic": "cordis",
@@ -418,7 +418,7 @@
     },
     {
       "topic": "plugin",
-      "count": 999
+      "count": 1002
     },
     {
       "topic": "typescript",
@@ -509,8 +509,8 @@
     "imsai": 319,
     "covered": 1089,
     "coveredPct": 7.2,
-    "none": 14131,
-    "fetchedAt": "2026-10-13T02:10:35.986Z"
+    "none": 14134,
+    "fetchedAt": "2026-10-13T02:15:23.572Z"
   },
   "suggested": [
     {
@@ -1776,8 +1776,8 @@
   "quality": {
     "grades": {
       "A": 529,
-      "B": 7284,
-      "C": 5196,
+      "B": 7286,
+      "C": 5197,
       "D": 2105,
       "S": 106
     },
@@ -1788,7 +1788,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5325
+      "count": 5326
     },
     {
       "category": "模型 / 代理",
@@ -1824,11 +1824,11 @@
     },
     {
       "category": "消息 / 协作集成",
-      "count": 506
+      "count": 507
     },
     {
       "category": "开发 / 数据",
-      "count": 443
+      "count": 444
     },
     {
       "category": "记忆 / 知识",
@@ -3818,6 +3818,27 @@
       "delta": 0,
       "avg": 82.5,
       "topPlugin": "hrhgit/dsh-oauth-openai",
+      "topStars": 1,
+      "topCat": "其它"
+    },
+    {
+      "owner": "feely0208",
+      "plugins": 6,
+      "stars": 1,
+      "grades": {
+        "A": 1,
+        "B": 5,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 6,
+      "npm": 6,
+      "covered": 0,
+      "lastPush": "2026-10-13",
+      "firstCreated": "2026-09-27",
+      "delta": 0,
+      "avg": 86.2,
+      "topPlugin": "feely0208/dsh-cn-skills",
       "topStars": 1,
       "topCat": "其它"
     },
@@ -10766,27 +10787,6 @@
       "topPlugin": "Shuffle-1992/zcode-dispatch",
       "topStars": 1,
       "topCat": "模型 / 代理"
-    },
-    {
-      "owner": "feely0208",
-      "plugins": 3,
-      "stars": 1,
-      "grades": {
-        "A": 1,
-        "B": 2,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 3,
-      "npm": 3,
-      "covered": 0,
-      "lastPush": "2026-10-11",
-      "firstCreated": "2026-09-27",
-      "delta": 0,
-      "avg": 86.3,
-      "topPlugin": "feely0208/dsh-cn-skills",
-      "topStars": 1,
-      "topCat": "其它"
     },
     {
       "owner": "feverZHONG",
@@ -73564,27 +73564,6 @@
       "delta": 0,
       "avg": 79,
       "topPlugin": "X1A0BAN/dsh-survival-mode",
-      "topStars": 1,
-      "topCat": "其它"
-    },
-    {
-      "owner": "duoduoqian708",
-      "plugins": 1,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-09-13",
-      "firstCreated": "2026-09-08",
-      "delta": 0,
-      "avg": 78,
-      "topPlugin": "duoduoqian708/dsh-voice-talk",
       "topStars": 1,
       "topCat": "其它"
     },
@@ -145591,6 +145570,27 @@
       "topCat": "搜索 / 命令面板"
     },
     {
+      "owner": "duoduoqian708",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-09-13",
+      "firstCreated": "2026-09-08",
+      "delta": 0,
+      "avg": 73,
+      "topPlugin": "duoduoqian708/dsh-voice-talk",
+      "topStars": 1,
+      "topCat": "其它"
+    },
+    {
       "owner": "huanlanmie",
       "plugins": 1,
       "stars": 1,
@@ -186152,7 +186152,7 @@
       "count": 18760,
       "at": "2026-10-12T00:09:50.328Z"
     },
-    "candidates": 19681,
+    "candidates": 19684,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -186237,11 +186237,11 @@
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 530,
-      "2026-10-12": 151
+      "2026-10-12": 154
     },
-    "validated": 20366,
-    "candidatesValidated": 18,
-    "authoritative": 15220,
+    "validated": 20369,
+    "candidatesValidated": 19,
+    "authoritative": 15223,
     "invalidUnique": 5146,
     "invalidBuckets": [
       {
@@ -186290,5 +186290,5 @@
       }
     ]
   },
-  "enrichCount": 15220
+  "enrichCount": 15223
 }
