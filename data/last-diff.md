@@ -1,18 +1,15 @@
 # 快照 Diff · 2026-10-14
 
-- 当前权威插件：**15496**（上次 15487）
-- 新增 9 · 消失 0
+- 当前权威插件：**15502**（上次 15496）
+- 新增 6 · 消失 0
 
-## 新增（Top 9）
-- yeee-eh/dsh-unreal-engine ★1 
-- Shiro-Design-16/dsh-daily-chat-config ★0 
-- ADkun/dsh-anysearch-fallback ★0 
-- Astepluver/dsh-sci-viz ★0 
-- YIYuNCU/dsh-rewind ★0 (npm ✓)
-- LionNatsu/dsh-vision-reasoner ★0 (npm ✓)
-- fegnze/sub2api-monitor ★0 (npm ✓)
-- iJetLi/dsh-providers-hub ★0 
-- Shiro-Design-16/dsh-minimax-tts ★0 
+## 新增（Top 6）
+- liushuchang-2012/dsh-skin-liquid-glass ★1 
+- sskkde/dsh-goal-guard ★0 
+- fegnze/dsh-sub2api-monitor ★0 
+- 9087/dsh-shell-progress ★0 (npm ✓)
+- yhfgyyf/dsh-side-chat ★0 (npm ✓)
+- LUgABeEEE/dsh-global-todo ★0 
 
 ## 消失（Top 0）
 
