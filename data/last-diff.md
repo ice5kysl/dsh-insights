@@ -1,17 +1,18 @@
 # 快照 Diff · 2026-10-14
 
-- 当前权威插件：**15487**（上次 15479）
-- 新增 8 · 消失 0
+- 当前权威插件：**15496**（上次 15487）
+- 新增 9 · 消失 0
 
-## 新增（Top 8）
-- po-et/dsh-sheet-diff ★0 
-- EnhydraLutristus/dsh-math-tex ★0 
-- Elefseus/dsh-pet-progress ★0 
-- chilianxiao/dsh-qoder-connect ★0 (npm ✓)
-- jiaruihuang/dsh-pi-ai-sync ★0 
-- vianvio/dsh-plugin-status-bar ★0 (npm ✓)
-- promise0320/dsh-persona-studio ★0 
-- quberi/dsh-quberi ★0 
+## 新增（Top 9）
+- yeee-eh/dsh-unreal-engine ★1 
+- Shiro-Design-16/dsh-daily-chat-config ★0 
+- ADkun/dsh-anysearch-fallback ★0 
+- Astepluver/dsh-sci-viz ★0 
+- YIYuNCU/dsh-rewind ★0 (npm ✓)
+- LionNatsu/dsh-vision-reasoner ★0 (npm ✓)
+- fegnze/sub2api-monitor ★0 (npm ✓)
+- iJetLi/dsh-providers-hub ★0 
+- Shiro-Design-16/dsh-minimax-tts ★0 
 
 ## 消失（Top 0）
 
