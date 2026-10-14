@@ -4,8 +4,8 @@
 
 ## 总览
 - 权威集规模：**15384**
-- 近 7 天活跃：2680（17.4%）· 近 30 天：7092（46.1%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：14926（97%）
+- 近 7 天活跃：2680（17.4%）· 近 30 天：7090（46.1%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：14927（97%）
 
 ## 发布与文档
 - npm 已发布 6805 / 未发布 8579 / 已发布但版本滞后 4099
@@ -18,7 +18,6 @@
 ## 优质未收录 · 建议收录（Top 15）
 - belowthetree/dsh-mcp-setting A · 周下载 154
 - MayBeTheWorld/dsh-inherit A · 周下载 24
-- runcat-tommy/dsh-unitverse A · 周下载 321
 - d0ublecl1ck/dsh-session-watch A · 周下载 9
 - ai-tool-labs/dsh-plugin-square A · 周下载 394
 - BangBang-03/dsh-memory A · 周下载 545
@@ -31,6 +30,7 @@
 - Nwflower/dsh-chat-import A · 周下载 3031
 - PKUfudawei/dsh-capability-menu A · 周下载 527
 - mexiaosqwq/dsh-web-mobile A · 周下载 1929
+- MichengAI/dsh-codex-ui A · 周下载 12171
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：619804
@@ -46,7 +46,7 @@
 
 ## 质量评分（启发式）
 - 平均分 73.8 · S+A 占比 4.1%（值得优先看；A+B 51.3%）
-- S 105 · A 530 · B 7365 · C 5267 · D 2117
+- S 105 · A 529 · B 7365 · C 5268 · D 2117
 
 ## 功能分类（启发式 Top 12）
 - 其它：5379

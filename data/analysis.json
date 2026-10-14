@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-14T02:13:48.377Z",
+  "generatedAt": "2026-10-14T02:17:53.906Z",
   "totals": {
     "authoritative": 15384,
     "active7": 2680,
     "active7Pct": 17.4,
-    "active30": 7092,
+    "active30": 7090,
     "active30Pct": 46.1,
-    "ageGate1": 14926,
+    "ageGate1": 14927,
     "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9824,
@@ -126,7 +126,7 @@
         "2026-08-31": 29,
         "2026-08-03": 1,
         "2026-08-24": 48,
-        "2026-09-07": 31,
+        "2026-09-07": 30,
         "2026-09-14": 33,
         "2026-07-27": 1,
         "2026-09-21": 26,
@@ -156,7 +156,7 @@
         "2026-06-01": 1,
         "2026-06-29": 3,
         "2026-04-27": 2,
-        "2026-09-07": 285,
+        "2026-09-07": 286,
         "2026-07-06": 2,
         "2026-09-14": 231,
         "2026-09-21": 257,
@@ -510,7 +510,7 @@
     "covered": 1090,
     "coveredPct": 7.1,
     "none": 14294,
-    "fetchedAt": "2026-10-14T02:12:48.780Z"
+    "fetchedAt": "2026-10-14T02:17:02.111Z"
   },
   "suggested": [
     {
@@ -584,42 +584,6 @@
       "covered": false,
       "weekly": 24,
       "pkgName": "dsh-inherit"
-    },
-    {
-      "full_name": "runcat-tommy/dsh-unitverse",
-      "stars": 0,
-      "score": 94,
-      "grade": "A",
-      "dimScores": {
-        "eng": 96,
-        "docs": 98,
-        "discover": 100,
-        "maint": 100
-      },
-      "drops": [
-        {
-          "code": "manifest.not-lib-main",
-          "sev": "minor",
-          "label": "main 不是 lib/index.js（产物布局非常规）"
-        },
-        {
-          "code": "eng.no-ci",
-          "sev": "minor",
-          "label": "无 CI workflow（.github/workflows）"
-        },
-        {
-          "code": "docs.no-docs-dir",
-          "sev": "minor",
-          "label": "无 docs/ 目录（文档深度不足）"
-        }
-      ],
-      "missing": [],
-      "category": "工具 / 效率",
-      "inAwesome": false,
-      "inImsai": false,
-      "covered": false,
-      "weekly": 321,
-      "pkgName": "dsh-unitverse"
     },
     {
       "full_name": "d0ublecl1ck/dsh-session-watch",
@@ -1179,6 +1143,39 @@
       "covered": false,
       "weekly": 1169,
       "pkgName": "dsh-llm-fallbacks"
+    },
+    {
+      "full_name": "PerryLink/dsh-composer-history",
+      "stars": 0,
+      "score": 93,
+      "grade": "A",
+      "dimScores": {
+        "eng": 93,
+        "docs": 100,
+        "discover": 100,
+        "maint": 100
+      },
+      "drops": [
+        {
+          "code": "manifest.not-lib-main",
+          "sev": "minor",
+          "label": "main 不是 lib/index.js（产物布局非常规）"
+        },
+        {
+          "code": "npm.version-drift",
+          "sev": "warn",
+          "label": "npm latest 与仓库版本不一致（含抢注/错配可能）"
+        }
+      ],
+      "missing": [
+        "metrics"
+      ],
+      "category": "侧栏 / 工作区",
+      "inAwesome": false,
+      "inImsai": false,
+      "covered": false,
+      "weekly": 994,
+      "pkgName": "dsh-composer-history"
     }
   ],
   "downloads": {
@@ -1783,9 +1780,9 @@
   },
   "quality": {
     "grades": {
-      "A": 530,
+      "A": 529,
       "B": 7365,
-      "C": 5267,
+      "C": 5268,
       "D": 2117,
       "S": 105
     },
@@ -2714,8 +2711,8 @@
       "plugins": 9,
       "stars": 3,
       "grades": {
-        "A": 5,
-        "B": 4,
+        "A": 4,
+        "B": 5,
         "C": 0,
         "D": 0
       },
@@ -2725,7 +2722,7 @@
       "lastPush": "2026-10-13",
       "firstCreated": "2026-08-26",
       "delta": 0,
-      "avg": 87.8,
+      "avg": 87.2,
       "topPlugin": "runcat-tommy/dsh-chinese-poetry",
       "topStars": 1,
       "topCat": "其它"
@@ -16867,27 +16864,6 @@
       "topPlugin": "Leeminjing/dsh-messages-sanitizer",
       "topStars": 4,
       "topCat": "工具 / 效率"
-    },
-    {
-      "owner": "UnknowCao",
-      "plugins": 2,
-      "stars": 5,
-      "grades": {
-        "A": 0,
-        "B": 2,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 2,
-      "npm": 2,
-      "covered": 0,
-      "lastPush": "2026-09-14",
-      "firstCreated": "2025-11-09",
-      "delta": 0,
-      "avg": 79,
-      "topPlugin": "UnknowCao/dsh-dock",
-      "topStars": 3,
-      "topCat": "侧栏 / 工作区"
     },
     {
       "owner": "Spirtxiaoqi7",
@@ -41676,6 +41652,27 @@
       "topPlugin": "imMamdouhaboammar/get-fable",
       "topStars": 4,
       "topCat": "模型 / 代理"
+    },
+    {
+      "owner": "UnknowCao",
+      "plugins": 2,
+      "stars": 5,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 2,
+      "covered": 0,
+      "lastPush": "2026-09-14",
+      "firstCreated": "2025-11-09",
+      "delta": 0,
+      "avg": 76.5,
+      "topPlugin": "UnknowCao/dsh-dock",
+      "topStars": 3,
+      "topCat": "侧栏 / 工作区"
     },
     {
       "owner": "libinyam",
@@ -188221,7 +188218,7 @@
       "2026-10-12": 336
     },
     "validated": 20550,
-    "candidatesValidated": 17,
+    "candidatesValidated": 16,
     "authoritative": 15384,
     "invalidUnique": 5166,
     "invalidBuckets": [
