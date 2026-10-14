@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-10-14T13:18:35.861Z",
+  "fetchedAt": "2026-10-14T13:39:49.991Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 249474,
-    "forks": 30014,
-    "pushed_at": "2026-10-09T10:04:06Z",
+    "stars": 249483,
+    "forks": 30019,
+    "pushed_at": "2026-10-14T13:30:42Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.2.1-alpha.3",
+        "name": "v0.2.1-alpha.3",
+        "prerelease": true,
+        "published_at": "2026-10-14T13:32:15Z",
+        "breaking": true,
+        "summary": "Web 版支持在本机 HTTP 访问时登录 DeepSeek 账号。",
+        "added": 3,
+        "fixed": 18
+      },
       {
         "tag": "dsh-v0.2.1-alpha.2",
         "name": "v0.2.1-alpha.2",
@@ -76,16 +86,6 @@
         "summary": "稳定会话与工作过程组的滚动跟随；改善历史分页与轮次跳转，并减少发送消息的瞬间跳动或重复显示。",
         "added": 0,
         "fixed": 15
-      },
-      {
-        "tag": "dsh-v0.1.7-alpha.1",
-        "name": "v0.1.7-alpha.1",
-        "prerelease": true,
-        "published_at": "2026-09-22T06:16:27Z",
-        "breaking": true,
-        "summary": "侧边栏会话支持置顶、归档管理、筛选、撤销归档及从搜索结果恢复。",
-        "added": 6,
-        "fixed": 35
       }
     ],
     "npm": {
@@ -160,7 +160,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-R1",
-      "stars": 91891,
+      "stars": 91890,
       "forks": 11655,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
