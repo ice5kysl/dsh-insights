@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-14T18:17:39.601Z",
+  "generatedAt": "2026-10-14T18:34:06.813Z",
   "totals": {
-    "authoritative": 15508,
+    "authoritative": 15509,
     "active7": 2568,
     "active7Pct": 16.6,
     "active30": 7106,
     "active30Pct": 45.8,
-    "ageGate1": 15066,
-    "ageGate1Pct": 97.1,
+    "ageGate1": 15068,
+    "ageGate1Pct": 97.2,
     "byMonth": {
       "2026-08": 9824,
       "2026-02": 4,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 2022,
+      "2026-10": 2023,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -68,7 +68,7 @@
       "2020-06-29": 1,
       "2025-12-22": 1,
       "2026-10-05": 959,
-      "2026-10-12": 419
+      "2026-10-12": 420
     },
     "byWeekGrades": {
       "B": {
@@ -98,14 +98,14 @@
         "2026-04-20": 1,
         "2026-05-18": 1,
         "2026-06-29": 3,
-        "2026-09-07": 442,
+        "2026-09-07": 441,
         "2026-03-02": 1,
         "2026-09-14": 473,
         "2026-09-21": 487,
         "2026-09-28": 583,
         "2025-12-22": 1,
         "2026-10-05": 589,
-        "2026-10-12": 231
+        "2026-10-12": 232
       },
       "S": {
         "2026-08-03": 2,
@@ -156,7 +156,7 @@
         "2026-06-01": 1,
         "2026-06-29": 3,
         "2026-04-27": 2,
-        "2026-09-07": 290,
+        "2026-09-07": 291,
         "2026-07-06": 2,
         "2026-09-14": 232,
         "2026-09-21": 257,
@@ -186,15 +186,15 @@
   },
   "distribution": {
     "publish": {
-      "published": 6843,
+      "published": 6844,
       "unpublished": 8665,
-      "stale": 4114
+      "stale": 4115
     },
     "docs": {
-      "readme": 15468,
+      "readme": 15469,
       "zhFile": 1105,
-      "zh": 7471,
-      "both": 7460,
+      "zh": 7472,
+      "both": 7461,
       "none": 40
     },
     "lib": {
@@ -394,11 +394,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 15099
+      "count": 15100
     },
     {
       "topic": "deepseek-harness",
-      "count": 10444
+      "count": 10445
     },
     {
       "topic": "dsh",
@@ -509,8 +509,8 @@
     "imsai": 326,
     "covered": 1092,
     "coveredPct": 7,
-    "none": 14416,
-    "fetchedAt": "2026-10-14T18:16:26.219Z"
+    "none": 14417,
+    "fetchedAt": "2026-10-14T18:32:51.729Z"
   },
   "suggested": [
     {
@@ -1782,7 +1782,7 @@
     "grades": {
       "A": 538,
       "B": 7385,
-      "C": 5352,
+      "C": 5353,
       "D": 2130,
       "S": 103
     },
@@ -1829,7 +1829,7 @@
     },
     {
       "category": "消息 / 协作集成",
-      "count": 514
+      "count": 515
     },
     {
       "category": "开发 / 数据",
@@ -62816,27 +62816,6 @@
       "topCat": "工具 / 效率"
     },
     {
-      "owner": "PRTS168",
-      "plugins": 2,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-09-14",
-      "firstCreated": "2026-09-07",
-      "delta": 0,
-      "avg": 73.5,
-      "topPlugin": "PRTS168/dsh-wechat-suite",
-      "topStars": 1,
-      "topCat": "文件浏览 / 预览"
-    },
-    {
       "owner": "huangyuheng",
       "plugins": 2,
       "stars": 1,
@@ -112960,6 +112939,27 @@
       "topCat": "状态 / 监控 / 用量"
     },
     {
+      "owner": "liufangrui1105",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-14",
+      "firstCreated": "2026-10-14",
+      "delta": 0,
+      "avg": 77,
+      "topPlugin": "liufangrui1105/dsh-plugin-github",
+      "topStars": 0,
+      "topCat": "消息 / 协作集成"
+    },
+    {
       "owner": "SeaOf0",
       "plugins": 2,
       "stars": 684,
@@ -133622,6 +133622,27 @@
       "topPlugin": "WiseXin/dsh-antigravity",
       "topStars": 1,
       "topCat": "其它"
+    },
+    {
+      "owner": "PRTS168",
+      "plugins": 2,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-09-14",
+      "firstCreated": "2026-09-07",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "PRTS168/dsh-wechat-suite",
+      "topStars": 1,
+      "topCat": "文件浏览 / 预览"
     },
     {
       "owner": "suomir1995",
@@ -154471,7 +154492,7 @@
       "lastPush": "2026-10-14",
       "firstCreated": "2026-10-13",
       "delta": 0,
-      "avg": 65,
+      "avg": 67.5,
       "topPlugin": "Bainianzzz/dsh-bg-switcher",
       "topStars": 0,
       "topCat": "模型 / 代理"
@@ -188743,7 +188764,7 @@
       "lastPush": "2026-10-13",
       "firstCreated": "2026-10-13",
       "delta": 0,
-      "avg": 62,
+      "avg": 67,
       "topPlugin": "xuan25/dsh-imagegen",
       "topStars": 0,
       "topCat": "工具 / 效率"
@@ -189716,7 +189737,7 @@
     }
   ],
   "authorStats": {
-    "total": 8942,
+    "total": 8943,
     "multi": 2250,
     "top10Share": 2.9
   },
@@ -189725,7 +189746,7 @@
       "count": 18760,
       "at": "2026-10-12T00:09:50.328Z"
     },
-    "candidates": 20035,
+    "candidates": 20036,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -189810,11 +189831,11 @@
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 530,
-      "2026-10-12": 505
+      "2026-10-12": 506
     },
-    "validated": 20719,
-    "candidatesValidated": 22,
-    "authoritative": 15508,
+    "validated": 20720,
+    "candidatesValidated": 17,
+    "authoritative": 15509,
     "invalidUnique": 5211,
     "invalidBuckets": [
       {
@@ -189863,5 +189884,5 @@
       }
     ]
   },
-  "enrichCount": 15508
+  "enrichCount": 15509
 }
