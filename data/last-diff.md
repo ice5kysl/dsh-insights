@@ -1,11 +1,10 @@
 # 快照 Diff · 2026-10-14
 
-- 当前权威插件：**15513**（上次 15511）
-- 新增 2 · 消失 0
+- 当前权威插件：**15514**（上次 15513）
+- 新增 1 · 消失 0
 
-## 新增（Top 2）
-- so16tm/dsh-locale-ja ★0 
-- so16tm/dsh-media-gen ★0 (npm ✓)
+## 新增（Top 1）
+- Xiao-wuwu/dsh-deep-search ★0 
 
 ## 消失（Top 0）
 
