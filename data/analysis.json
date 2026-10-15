@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-15T20:41:38.693Z",
+  "generatedAt": "2026-10-15T21:17:30.561Z",
   "totals": {
-    "authoritative": 15677,
-    "active7": 2339,
+    "authoritative": 15680,
+    "active7": 2341,
     "active7Pct": 14.9,
-    "active30": 7136,
+    "active30": 7139,
     "active30Pct": 45.5,
     "ageGate1": 15217,
-    "ageGate1Pct": 97.1,
+    "ageGate1Pct": 97,
     "byMonth": {
       "2026-08": 9824,
       "2026-02": 4,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 2191,
+      "2026-10": 2194,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -68,7 +68,7 @@
       "2020-06-29": 1,
       "2025-12-22": 1,
       "2026-10-05": 959,
-      "2026-10-12": 588
+      "2026-10-12": 591
     },
     "byWeekGrades": {
       "B": {
@@ -105,7 +105,7 @@
         "2026-09-28": 583,
         "2025-12-22": 1,
         "2026-10-05": 567,
-        "2026-10-12": 338
+        "2026-10-12": 340
       },
       "S": {
         "2026-08-03": 2,
@@ -165,7 +165,7 @@
         "2026-09-28": 452,
         "2020-06-29": 1,
         "2026-10-05": 310,
-        "2026-10-12": 207
+        "2026-10-12": 208
       },
       "D": {
         "2026-08-10": 329,
@@ -186,23 +186,23 @@
   },
   "distribution": {
     "publish": {
-      "published": 6890,
-      "unpublished": 8787,
-      "stale": 4141
+      "published": 6892,
+      "unpublished": 8788,
+      "stale": 4143
     },
     "docs": {
-      "readme": 15637,
+      "readme": 15640,
       "zhFile": 1111,
-      "zh": 7555,
-      "both": 7544,
+      "zh": 7556,
+      "both": 7545,
       "none": 40
     },
     "lib": {
-      "index": 8159,
-      "client": 5506,
-      "both": 4861
+      "index": 8161,
+      "client": 5508,
+      "both": 4863
     },
-    "publishPct": 43.9,
+    "publishPct": 44,
     "zhPct": 48.1
   },
   "npmStaleTop": [
@@ -394,15 +394,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 15268
+      "count": 15271
     },
     {
       "topic": "deepseek-harness",
-      "count": 10566
+      "count": 10568
     },
     {
       "topic": "dsh",
-      "count": 6590
+      "count": 6593
     },
     {
       "topic": "cordis",
@@ -410,15 +410,15 @@
     },
     {
       "topic": "deepseek",
-      "count": 1756
+      "count": 1757
     },
     {
       "topic": "dsh-plugins",
-      "count": 1507
+      "count": 1508
     },
     {
       "topic": "plugin",
-      "count": 1059
+      "count": 1060
     },
     {
       "topic": "typescript",
@@ -509,8 +509,8 @@
     "imsai": 329,
     "covered": 1098,
     "coveredPct": 7,
-    "none": 14579,
-    "fetchedAt": "2026-10-15T20:40:31.747Z"
+    "none": 14582,
+    "fetchedAt": "2026-10-15T21:16:25.532Z"
   },
   "suggested": [
     {
@@ -1781,8 +1781,8 @@
   "quality": {
     "grades": {
       "A": 538,
-      "B": 7440,
-      "C": 5445,
+      "B": 7442,
+      "C": 5446,
       "D": 2151,
       "S": 103
     },
@@ -1797,7 +1797,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1622
+      "count": 1623
     },
     {
       "category": "会话管理",
@@ -1805,7 +1805,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1336
+      "count": 1337
     },
     {
       "category": "状态 / 监控 / 用量",
@@ -1813,7 +1813,7 @@
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 1075
+      "count": 1076
     },
     {
       "category": "搜索 / 命令面板",
@@ -53902,6 +53902,27 @@
       "topPlugin": "SkanderBog/dsh-context-manager",
       "topStars": 1,
       "topCat": "其它"
+    },
+    {
+      "owner": "stansz",
+      "plugins": 2,
+      "stars": 2,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 2,
+      "covered": 0,
+      "lastPush": "2026-10-15",
+      "firstCreated": "2026-10-04",
+      "delta": 0,
+      "avg": 71.5,
+      "topPlugin": "stansz/dsh-session-delete",
+      "topStars": 1,
+      "topCat": "会话管理"
     },
     {
       "owner": "cilis",
@@ -113989,6 +114010,27 @@
       "topCat": "工具 / 效率"
     },
     {
+      "owner": "racheren",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-15",
+      "firstCreated": "2026-10-15",
+      "delta": 0,
+      "avg": 81,
+      "topPlugin": "racheren/dsh-plugin-restart",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
+    },
+    {
       "owner": "SeaOf0",
       "plugins": 2,
       "stars": 684,
@@ -151537,27 +151579,6 @@
       "topCat": "模型 / 代理"
     },
     {
-      "owner": "stansz",
-      "plugins": 1,
-      "stars": 1,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-10-04",
-      "firstCreated": "2026-10-04",
-      "delta": 0,
-      "avg": 67,
-      "topPlugin": "stansz/dsh-session-delete",
-      "topStars": 1,
-      "topCat": "会话管理"
-    },
-    {
       "owner": "zyutsu",
       "plugins": 1,
       "stars": 1,
@@ -155042,6 +155063,27 @@
       "topPlugin": "upcyan/dsh-mimo-usage",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "643048695",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 1,
+      "lastPush": "2026-10-15",
+      "firstCreated": "2026-09-27",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "643048695/dsh-compaction-route",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
     },
     {
       "owner": "pomelotea-yuzu",
@@ -181987,27 +182029,6 @@
       "topCat": "工具 / 效率"
     },
     {
-      "owner": "643048695",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 1,
-      "lastPush": "2026-09-27",
-      "firstCreated": "2026-09-27",
-      "delta": 0,
-      "avg": 69,
-      "topPlugin": "643048695/dsh-compaction-route",
-      "topStars": 0,
-      "topCat": "模型 / 代理"
-    },
-    {
       "owner": "NeoWangKing",
       "plugins": 1,
       "stars": 0,
@@ -192110,8 +192131,8 @@
     }
   ],
   "authorStats": {
-    "total": 9056,
-    "multi": 2268,
+    "total": 9057,
+    "multi": 2270,
     "top10Share": 2.9
   },
   "coverage": {
@@ -192119,7 +192140,7 @@
       "count": 18760,
       "at": "2026-10-12T00:09:50.328Z"
     },
-    "candidates": 20250,
+    "candidates": 20254,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -192204,12 +192225,12 @@
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 530,
-      "2026-10-12": 720
+      "2026-10-12": 724
     },
-    "validated": 20935,
-    "candidatesValidated": 16,
-    "authoritative": 15677,
-    "invalidUnique": 5258,
+    "validated": 20939,
+    "candidatesValidated": 20,
+    "authoritative": 15680,
+    "invalidUnique": 5259,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -192217,7 +192238,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1948
+        "count": 1949
       },
       {
         "reason": "no-signal",
@@ -192257,5 +192278,5 @@
       }
     ]
   },
-  "enrichCount": 15677
+  "enrichCount": 15680
 }
