@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-15T13:23:23.452Z",
+  "generatedAt": "2026-10-15T13:38:07.733Z",
   "totals": {
-    "authoritative": 15629,
-    "active7": 2394,
+    "authoritative": 15630,
+    "active7": 2390,
     "active7Pct": 15.3,
     "active30": 7137,
     "active30Pct": 45.7,
-    "ageGate1": 15172,
+    "ageGate1": 15173,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9824,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 2143,
+      "2026-10": 2144,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -68,7 +68,7 @@
       "2020-06-29": 1,
       "2025-12-22": 1,
       "2026-10-05": 959,
-      "2026-10-12": 540
+      "2026-10-12": 541
     },
     "byWeekGrades": {
       "B": {
@@ -165,7 +165,7 @@
         "2026-09-28": 452,
         "2020-06-29": 1,
         "2026-10-05": 305,
-        "2026-10-12": 192
+        "2026-10-12": 193
       },
       "D": {
         "2026-08-10": 329,
@@ -187,11 +187,11 @@
   "distribution": {
     "publish": {
       "published": 6875,
-      "unpublished": 8754,
+      "unpublished": 8755,
       "stale": 4134
     },
     "docs": {
-      "readme": 15589,
+      "readme": 15590,
       "zhFile": 1109,
       "zh": 7527,
       "both": 7516,
@@ -199,7 +199,7 @@
     },
     "lib": {
       "index": 8140,
-      "client": 5495,
+      "client": 5496,
       "both": 4855
     },
     "publishPct": 44,
@@ -394,11 +394,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 15220
+      "count": 15221
     },
     {
       "topic": "deepseek-harness",
-      "count": 10540
+      "count": 10541
     },
     {
       "topic": "dsh",
@@ -509,8 +509,8 @@
     "imsai": 328,
     "covered": 1096,
     "coveredPct": 7,
-    "none": 14533,
-    "fetchedAt": "2026-10-15T13:22:12.153Z"
+    "none": 14534,
+    "fetchedAt": "2026-10-15T13:37:07.137Z"
   },
   "suggested": [
     {
@@ -1782,7 +1782,7 @@
     "grades": {
       "A": 539,
       "B": 7430,
-      "C": 5411,
+      "C": 5412,
       "D": 2146,
       "S": 103
     },
@@ -1793,7 +1793,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5452
+      "count": 5453
     },
     {
       "category": "模型 / 代理",
@@ -112933,7 +112933,7 @@
       "lastPush": "2026-10-14",
       "firstCreated": "2026-10-14",
       "delta": 0,
-      "avg": 75,
+      "avg": 80,
       "topPlugin": "jidekaixin2dian/dsh-team-flow",
       "topStars": 0,
       "topCat": "模型 / 代理"
@@ -178474,7 +178474,7 @@
       "lastPush": "2026-09-15",
       "firstCreated": "2026-09-15",
       "delta": 0,
-      "avg": 68,
+      "avg": 63,
       "topPlugin": "kevin9327/dsh-hwp",
       "topStars": 0,
       "topCat": "文件浏览 / 预览"
@@ -191414,10 +191414,31 @@
       "topPlugin": "Makk9609/dsh-find-viewer",
       "topStars": 0,
       "topCat": "侧栏 / 工作区"
+    },
+    {
+      "owner": "var-lin",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-15",
+      "firstCreated": "2026-10-15",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "var-lin/dsh-plugin-layout-organizer",
+      "topStars": 0,
+      "topCat": "其它"
     }
   ],
   "authorStats": {
-    "total": 9023,
+    "total": 9024,
     "multi": 2261,
     "top10Share": 2.9
   },
@@ -191426,7 +191447,7 @@
       "count": 18760,
       "at": "2026-10-12T00:09:50.328Z"
     },
-    "candidates": 20168,
+    "candidates": 20170,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -191511,12 +191532,12 @@
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 530,
-      "2026-10-12": 638
+      "2026-10-12": 640
     },
-    "validated": 20853,
+    "validated": 20855,
     "candidatesValidated": 18,
-    "authoritative": 15629,
-    "invalidUnique": 5224,
+    "authoritative": 15630,
+    "invalidUnique": 5225,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -191524,7 +191545,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1938
+        "count": 1939
       },
       {
         "reason": "no-signal",
@@ -191564,5 +191585,5 @@
       }
     ]
   },
-  "enrichCount": 15629
+  "enrichCount": 15630
 }
