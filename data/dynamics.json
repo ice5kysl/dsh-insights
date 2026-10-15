@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-10-15T13:38:06.711Z",
+  "fetchedAt": "2026-10-15T13:42:50.442Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 250220,
+    "stars": 250225,
     "forks": 30087,
-    "pushed_at": "2026-10-15T12:51:13Z",
+    "pushed_at": "2026-10-15T13:39:04Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.2.1-alpha.4",
+        "name": "v0.2.1-alpha.4",
+        "prerelease": true,
+        "published_at": "2026-10-15T13:40:02Z",
+        "breaking": false,
+        "summary": "自定义模型 API 支持通过UI中配置各模型的推理等级，无需手动修改配置文件。 by",
+        "added": 2,
+        "fixed": 8
+      },
       {
         "tag": "dsh-v0.2.1-alpha.3",
         "name": "v0.2.1-alpha.3",
@@ -76,16 +86,6 @@
         "summary": "Web 侧边栏新增终端，支持多标签、Shell 选择和刷新后恢复。",
         "added": 8,
         "fixed": 28
-      },
-      {
-        "tag": "dsh-v0.1.7-alpha.2",
-        "name": "v0.1.7-alpha.2",
-        "prerelease": true,
-        "published_at": "2026-09-22T15:49:49Z",
-        "breaking": false,
-        "summary": "稳定会话与工作过程组的滚动跟随；改善历史分页与轮次跳转，并减少发送消息的瞬间跳动或重复显示。",
-        "added": 0,
-        "fixed": 15
       }
     ],
     "npm": {
