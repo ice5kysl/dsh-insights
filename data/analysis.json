@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-15T01:56:15.458Z",
+  "generatedAt": "2026-10-15T02:16:53.377Z",
   "totals": {
-    "authoritative": 15521,
+    "authoritative": 15524,
     "active7": 2547,
     "active7Pct": 16.4,
-    "active30": 7108,
+    "active30": 7111,
     "active30Pct": 45.8,
-    "ageGate1": 15083,
+    "ageGate1": 15086,
     "ageGate1Pct": 97.2,
     "byMonth": {
       "2026-08": 9824,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 2035,
+      "2026-10": 2038,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -68,7 +68,7 @@
       "2020-06-29": 1,
       "2025-12-22": 1,
       "2026-10-05": 959,
-      "2026-10-12": 432
+      "2026-10-12": 435
     },
     "byWeekGrades": {
       "B": {
@@ -165,7 +165,7 @@
         "2026-09-28": 452,
         "2020-06-29": 1,
         "2026-10-05": 303,
-        "2026-10-12": 159
+        "2026-10-12": 162
       },
       "D": {
         "2026-08-10": 329,
@@ -187,19 +187,19 @@
   "distribution": {
     "publish": {
       "published": 6852,
-      "unpublished": 8669,
+      "unpublished": 8672,
       "stale": 4125
     },
     "docs": {
-      "readme": 15481,
-      "zhFile": 1105,
-      "zh": 7476,
-      "both": 7465,
+      "readme": 15484,
+      "zhFile": 1106,
+      "zh": 7477,
+      "both": 7466,
       "none": 40
     },
     "lib": {
       "index": 8098,
-      "client": 5462,
+      "client": 5463,
       "both": 4825
     },
     "publishPct": 44.1,
@@ -394,11 +394,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 15112
+      "count": 15115
     },
     {
       "topic": "deepseek-harness",
-      "count": 10455
+      "count": 10457
     },
     {
       "topic": "dsh",
@@ -509,8 +509,8 @@
     "imsai": 326,
     "covered": 1092,
     "coveredPct": 7,
-    "none": 14429,
-    "fetchedAt": "2026-10-15T01:55:14.030Z"
+    "none": 14432,
+    "fetchedAt": "2026-10-15T02:15:50.936Z"
   },
   "suggested": [
     {
@@ -1782,7 +1782,7 @@
     "grades": {
       "A": 536,
       "B": 7393,
-      "C": 5358,
+      "C": 5361,
       "D": 2131,
       "S": 103
     },
@@ -1793,7 +1793,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5425
+      "count": 5427
     },
     {
       "category": "模型 / 代理",
@@ -1809,7 +1809,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 1110
+      "count": 1111
     },
     {
       "category": "侧栏 / 工作区",
@@ -61129,7 +61129,7 @@
       "lastPush": "2026-10-08",
       "firstCreated": "2026-10-08",
       "delta": 0,
-      "avg": 88,
+      "avg": 78,
       "topPlugin": "Amo-aibiancheng/dsh-balance-meter",
       "topStars": 2,
       "topCat": "状态 / 监控 / 用量"
@@ -189923,10 +189923,73 @@
       "topPlugin": "lb290/dsh-db-connections",
       "topStars": 0,
       "topCat": "开发 / 数据"
+    },
+    {
+      "owner": "The-Data-Galaxy",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-15",
+      "firstCreated": "2026-10-15",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "The-Data-Galaxy/dsh-dpia-workbench",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "wct-lab",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-15",
+      "firstCreated": "2026-10-12",
+      "delta": 0,
+      "avg": 72,
+      "topPlugin": "wct-lab/dsh-docchain",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
+      "owner": "cander0815",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-15",
+      "firstCreated": "2026-10-15",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "cander0815/dsh-computer-mcp",
+      "topStars": 0,
+      "topCat": "其它"
     }
   ],
   "authorStats": {
-    "total": 8952,
+    "total": 8955,
     "multi": 2252,
     "top10Share": 2.9
   },
@@ -189935,7 +189998,7 @@
       "count": 18760,
       "at": "2026-10-12T00:09:50.328Z"
     },
-    "candidates": 20048,
+    "candidates": 20051,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -190020,11 +190083,11 @@
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 530,
-      "2026-10-12": 518
+      "2026-10-12": 521
     },
-    "validated": 20732,
-    "candidatesValidated": 20,
-    "authoritative": 15521,
+    "validated": 20735,
+    "candidatesValidated": 19,
+    "authoritative": 15524,
     "invalidUnique": 5211,
     "invalidBuckets": [
       {
@@ -190073,5 +190136,5 @@
       }
     ]
   },
-  "enrichCount": 15521
+  "enrichCount": 15524
 }
