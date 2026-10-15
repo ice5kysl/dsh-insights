@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-15T15:09:32.235Z",
+  "generatedAt": "2026-10-15T15:17:41.187Z",
   "totals": {
-    "authoritative": 15644,
-    "active7": 2376,
+    "authoritative": 15645,
+    "active7": 2374,
     "active7Pct": 15.2,
     "active30": 7143,
     "active30Pct": 45.7,
-    "ageGate1": 15186,
+    "ageGate1": 15187,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9824,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 2158,
+      "2026-10": 2159,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -68,7 +68,7 @@
       "2020-06-29": 1,
       "2025-12-22": 1,
       "2026-10-05": 959,
-      "2026-10-12": 555
+      "2026-10-12": 556
     },
     "byWeekGrades": {
       "B": {
@@ -164,8 +164,8 @@
         "2026-05-04": 1,
         "2026-09-28": 452,
         "2020-06-29": 1,
-        "2026-10-05": 310,
-        "2026-10-12": 199
+        "2026-10-05": 309,
+        "2026-10-12": 200
       },
       "D": {
         "2026-08-10": 329,
@@ -179,7 +179,7 @@
         "2026-09-14": 23,
         "2026-09-21": 24,
         "2026-09-28": 39,
-        "2026-10-05": 27,
+        "2026-10-05": 28,
         "2026-10-12": 3
       }
     }
@@ -187,18 +187,18 @@
   "distribution": {
     "publish": {
       "published": 6879,
-      "unpublished": 8765,
+      "unpublished": 8766,
       "stale": 4136
     },
     "docs": {
-      "readme": 15604,
+      "readme": 15605,
       "zhFile": 1109,
       "zh": 7535,
       "both": 7524,
       "none": 40
     },
     "lib": {
-      "index": 8144,
+      "index": 8145,
       "client": 5500,
       "both": 4856
     },
@@ -394,19 +394,19 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 15235
+      "count": 15236
     },
     {
       "topic": "deepseek-harness",
-      "count": 10546
+      "count": 10547
     },
     {
       "topic": "dsh",
-      "count": 6569
+      "count": 6570
     },
     {
       "topic": "cordis",
-      "count": 1854
+      "count": 1855
     },
     {
       "topic": "deepseek",
@@ -414,7 +414,7 @@
     },
     {
       "topic": "dsh-plugins",
-      "count": 1502
+      "count": 1503
     },
     {
       "topic": "plugin",
@@ -430,7 +430,7 @@
     },
     {
       "topic": "dsh-plugin-market",
-      "count": 512
+      "count": 513
     },
     {
       "topic": "ai-agent",
@@ -509,8 +509,8 @@
     "imsai": 329,
     "covered": 1097,
     "coveredPct": 7,
-    "none": 14547,
-    "fetchedAt": "2026-10-15T15:08:16.669Z"
+    "none": 14548,
+    "fetchedAt": "2026-10-15T15:16:31.703Z"
   },
   "suggested": [
     {
@@ -1783,7 +1783,7 @@
       "A": 538,
       "B": 7430,
       "C": 5427,
-      "D": 2146,
+      "D": 2147,
       "S": 103
     },
     "avgScore": 73.8,
@@ -1797,7 +1797,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1614
+      "count": 1615
     },
     {
       "category": "会话管理",
@@ -73921,7 +73921,7 @@
       "lastPush": "2026-09-15",
       "firstCreated": "2026-09-13",
       "delta": 0,
-      "avg": 81,
+      "avg": 76,
       "topPlugin": "RINGOLINK/dsh-desktop-shell",
       "topStars": 1,
       "topCat": "会话管理"
@@ -81056,8 +81056,8 @@
       "grades": {
         "A": 0,
         "B": 1,
-        "C": 2,
-        "D": 0
+        "C": 1,
+        "D": 1
       },
       "ab": 1,
       "npm": 0,
@@ -81065,7 +81065,7 @@
       "lastPush": "2026-10-08",
       "firstCreated": "2026-10-03",
       "delta": 0,
-      "avg": 69.7,
+      "avg": 66.3,
       "topPlugin": "realjhen123/dsh-totp-proxy",
       "topStars": 0,
       "topCat": "其它"
@@ -191561,10 +191561,31 @@
       "topPlugin": "yutao8/dsh-custom-style",
       "topStars": 0,
       "topCat": "主题 / 视觉美化"
+    },
+    {
+      "owner": "shuang-ying",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-15",
+      "firstCreated": "2026-10-15",
+      "delta": 0,
+      "avg": 73,
+      "topPlugin": "shuang-ying/dsh-ThirdApi-ThinkingMode",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
     }
   ],
   "authorStats": {
-    "total": 9030,
+    "total": 9031,
     "multi": 2262,
     "top10Share": 2.9
   },
@@ -191573,7 +191594,7 @@
       "count": 18760,
       "at": "2026-10-12T00:09:50.328Z"
     },
-    "candidates": 20198,
+    "candidates": 20200,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -191658,12 +191679,12 @@
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 530,
-      "2026-10-12": 668
+      "2026-10-12": 670
     },
-    "validated": 20883,
-    "candidatesValidated": 16,
-    "authoritative": 15644,
-    "invalidUnique": 5239,
+    "validated": 20885,
+    "candidatesValidated": 18,
+    "authoritative": 15645,
+    "invalidUnique": 5240,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -191671,7 +191692,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 1939
+        "count": 1940
       },
       {
         "reason": "no-signal",
@@ -191711,5 +191732,5 @@
       }
     ]
   },
-  "enrichCount": 15644
+  "enrichCount": 15645
 }
