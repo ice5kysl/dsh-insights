@@ -28,7 +28,7 @@
 
 | file | 说明 |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**权威集 15,374** + 分桶 5,164（0 重复 · 硬门禁 · 2026-10-14 快照，校验滚动扩大中）<!-- stats:end --> |
+| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**权威集 15,517** + 分桶 5,211（0 重复 · 硬门禁 · 2026-10-15 快照，校验滚动扩大中）<!-- stats:end --> |
 | `data/insights.json` + `insights.schema.json` | agent 契约（稳定 URL，schema 只增不改） |
 | `data/analysis.json` · `enrich.json` · `plugins.csv` | 聚合 / 每插件评分+渠道 / 表格 |
 | `data/dynamics.json` · `metrics.jsonl` | 官方动态快照 · 产品自测量指标 |
