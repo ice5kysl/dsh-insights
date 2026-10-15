@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-15T06:25:38.252Z",
+  "generatedAt": "2026-10-15T06:31:09.644Z",
   "totals": {
-    "authoritative": 15565,
-    "active7": 2508,
+    "authoritative": 15566,
+    "active7": 2507,
     "active7Pct": 16.1,
-    "active30": 7131,
+    "active30": 7132,
     "active30Pct": 45.8,
     "ageGate1": 15110,
     "ageGate1Pct": 97.1,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 2079,
+      "2026-10": 2080,
       "2020-06": 1,
       "2025-12": 1
     },
@@ -68,7 +68,7 @@
       "2020-06-29": 1,
       "2025-12-22": 1,
       "2026-10-05": 959,
-      "2026-10-12": 476
+      "2026-10-12": 477
     },
     "byWeekGrades": {
       "B": {
@@ -165,7 +165,7 @@
         "2026-09-28": 452,
         "2020-06-29": 1,
         "2026-10-05": 302,
-        "2026-10-12": 184
+        "2026-10-12": 185
       },
       "D": {
         "2026-08-10": 329,
@@ -187,11 +187,11 @@
   "distribution": {
     "publish": {
       "published": 6860,
-      "unpublished": 8705,
+      "unpublished": 8706,
       "stale": 4128
     },
     "docs": {
-      "readme": 15525,
+      "readme": 15526,
       "zhFile": 1109,
       "zh": 7493,
       "both": 7482,
@@ -394,11 +394,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 15156
+      "count": 15157
     },
     {
       "topic": "deepseek-harness",
-      "count": 10492
+      "count": 10493
     },
     {
       "topic": "dsh",
@@ -509,8 +509,8 @@
     "imsai": 326,
     "covered": 1092,
     "coveredPct": 7,
-    "none": 14473,
-    "fetchedAt": "2026-10-15T06:24:42.723Z"
+    "none": 14474,
+    "fetchedAt": "2026-10-15T06:30:09.364Z"
   },
   "suggested": [
     {
@@ -1782,7 +1782,7 @@
     "grades": {
       "A": 537,
       "B": 7401,
-      "C": 5386,
+      "C": 5387,
       "D": 2138,
       "S": 103
     },
@@ -1797,7 +1797,7 @@
     },
     {
       "category": "模型 / 代理",
-      "count": 1601
+      "count": 1602
     },
     {
       "category": "会话管理",
@@ -150613,6 +150613,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "chimneyQ",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-15",
+      "firstCreated": "2026-10-15",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "chimneyQ/dsh-model-rotator",
+      "topStars": 1,
+      "topCat": "模型 / 代理"
+    },
+    {
       "owner": "ChenneyZhuang",
       "plugins": 19,
       "stars": 0,
@@ -190430,7 +190451,7 @@
     }
   ],
   "authorStats": {
-    "total": 8976,
+    "total": 8977,
     "multi": 2256,
     "top10Share": 2.9
   },
@@ -190439,7 +190460,7 @@
       "count": 18760,
       "at": "2026-10-12T00:09:50.328Z"
     },
-    "candidates": 20095,
+    "candidates": 20097,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -190524,12 +190545,12 @@
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 530,
-      "2026-10-12": 565
+      "2026-10-12": 567
     },
-    "validated": 20780,
-    "candidatesValidated": 16,
-    "authoritative": 15565,
-    "invalidUnique": 5215,
+    "validated": 20782,
+    "candidatesValidated": 18,
+    "authoritative": 15566,
+    "invalidUnique": 5216,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -190553,7 +190574,7 @@
       },
       {
         "reason": "empty-repo",
-        "count": 47
+        "count": 48
       },
       {
         "reason": "package-parse",
@@ -190577,5 +190598,5 @@
       }
     ]
   },
-  "enrichCount": 15565
+  "enrichCount": 15566
 }
