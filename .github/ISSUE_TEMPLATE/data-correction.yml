@@ -1,13 +1,14 @@
-name: 数据纠错
-description: 页面数据有误（npm 版本/收录状态/语言检测/实测兼容判定/链接失效/仓库已改名等）
+name: 数据纠错 / 重检申请
+description: 数据过期或新版发布后申请重检，或报告 npm 版本/收录状态/语言检测/实测兼容等数据错误
 title: "[数据] "
 labels: [data]
 body:
   - type: markdown
     attributes:
       value: |
-        如果只是数据过期（仓库刚更新、页面没跟上），最快的路径是 [自助重检](https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml)（Run workflow → 输入 owner/repo，约 30 分钟生效），不用提 issue。
-        提 issue 适用于：数据本身判错了（比如「实测兼容」把你的插件标成无法加载，但实际能跑）。
+        数据过期、刚发布新版或页面数据有误，都可以通过此表单申请重检或纠错。请提供 owner/repo、页面链接及当前版本或提交的证据，由维护者处理。
+        只有拥有本仓库写入权限的协作者，才能在 [recheck workflow](https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml) 点击 Run workflow 并输入 owner/repo。没有写入权限的插件作者请提交此表单。
+        请求需等待维护者处理；站点更新时间取决于重检和部署工作流完成时间。
   - type: input
     id: repo
     attributes:
@@ -18,8 +19,9 @@ body:
   - type: dropdown
     id: area
     attributes:
-      label: 出错的位置
+      label: 重检或纠错范围
       options:
+        - 数据过期 / 新版发布（申请重检）
         - 详情页（/p/ 评分或元数据）
         - 实测兼容区块（加载判定有误）
         - 榜单 / 首页
@@ -32,7 +34,7 @@ body:
     id: detail
     attributes:
       label: 实际情况与证据
-      description: 页面显示什么、实际是什么；附证据链接（npm 页/仓库链接/复现步骤）
+      description: 提供页面链接、页面显示内容和当前实际情况；重检申请请附版本或提交证据，纠错请附复现步骤等证据
       placeholder: 如：/p/ 页「实测兼容」标无法加载，但我的 require 在 try/catch 里且 try 分支在当前 shell 可用
     validations:
       required: true
