@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-19T21:18:14.470Z",
+  "generatedAt": "2026-10-19T21:49:26.182Z",
   "totals": {
-    "authoritative": 17004,
-    "active7": 3801,
+    "authoritative": 17006,
+    "active7": 3803,
     "active7Pct": 22.4,
-    "active30": 8158,
+    "active30": 8160,
     "active30Pct": 48,
-    "ageGate1": 16393,
+    "ageGate1": 16394,
     "ageGate1Pct": 96.4,
     "byMonth": {
       "2026-08": 9847,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 3418,
+      "2026-10": 3420,
       "2020-06": 1,
       "2025-12": 1,
       "2024-08": 1
@@ -72,7 +72,7 @@
       "2026-10-12": 1422,
       "2024-08-12": 1,
       "2026-05-11": 1,
-      "2026-10-19": 279
+      "2026-10-19": 281
     },
     "byWeekGrades": {
       "B": {
@@ -111,7 +111,7 @@
         "2026-10-12": 900,
         "2024-08-12": 1,
         "2026-05-11": 1,
-        "2026-10-19": 97
+        "2026-10-19": 98
       },
       "S": {
         "2026-08-03": 1,
@@ -175,7 +175,7 @@
         "2020-06-29": 1,
         "2026-10-05": 353,
         "2026-10-12": 397,
-        "2026-10-19": 164
+        "2026-10-19": 165
       },
       "D": {
         "2026-08-10": 325,
@@ -198,20 +198,20 @@
   "distribution": {
     "publish": {
       "published": 7408,
-      "unpublished": 9596,
+      "unpublished": 9598,
       "stale": 4325
     },
     "docs": {
-      "readme": 16959,
+      "readme": 16961,
       "zhFile": 1209,
-      "zh": 8227,
-      "both": 8216,
+      "zh": 8228,
+      "both": 8217,
       "none": 45
     },
     "lib": {
-      "index": 8738,
-      "client": 5937,
-      "both": 5229
+      "index": 8739,
+      "client": 5938,
+      "both": 5230
     },
     "publishPct": 43.6,
     "zhPct": 48.3
@@ -405,15 +405,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 16558
+      "count": 16560
     },
     {
       "topic": "deepseek-harness",
-      "count": 11543
+      "count": 11545
     },
     {
       "topic": "dsh",
-      "count": 7273
+      "count": 7275
     },
     {
       "topic": "cordis",
@@ -429,7 +429,7 @@
     },
     {
       "topic": "plugin",
-      "count": 1145
+      "count": 1146
     },
     {
       "topic": "typescript",
@@ -520,8 +520,8 @@
     "imsai": 343,
     "covered": 1135,
     "coveredPct": 6.7,
-    "none": 15869,
-    "fetchedAt": "2026-10-19T21:17:02.927Z"
+    "none": 15871,
+    "fetchedAt": "2026-10-19T21:48:12.311Z"
   },
   "suggested": [
     {
@@ -1828,8 +1828,8 @@
   "quality": {
     "grades": {
       "A": 626,
-      "B": 8144,
-      "C": 5906,
+      "B": 8145,
+      "C": 5907,
       "D": 2193,
       "S": 135
     },
@@ -1840,7 +1840,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 5836
+      "count": 5837
     },
     {
       "category": "模型 / 代理",
@@ -1860,7 +1860,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 1216
+      "count": 1217
     },
     {
       "category": "搜索 / 命令面板",
@@ -87770,6 +87770,27 @@
       "topCat": "模型 / 代理"
     },
     {
+      "owner": "Mizumic",
+      "plugins": 1,
+      "stars": 1,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-19",
+      "firstCreated": "2026-10-19",
+      "delta": 0,
+      "avg": 80,
+      "topPlugin": "Mizumic/dsh-system-fingerprint",
+      "topStars": 1,
+      "topCat": "其它"
+    },
+    {
       "owner": "fatatalia",
       "plugins": 11,
       "stars": 0,
@@ -120623,7 +120644,7 @@
       "lastPush": "2026-10-18",
       "firstCreated": "2026-10-18",
       "delta": 0,
-      "avg": 76,
+      "avg": 81,
       "topPlugin": "FYTXY/dsh-hindsight-daemon",
       "topStars": 0,
       "topCat": "开发 / 数据"
@@ -209357,10 +209378,31 @@
       "topPlugin": "CHYMZXS/dsh-archive-workbench",
       "topStars": 0,
       "topCat": "会话管理"
+    },
+    {
+      "owner": "zengpu987-ctrl",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-19",
+      "firstCreated": "2026-10-19",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "zengpu987-ctrl/dsh-wechat-daily",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
     }
   ],
   "authorStats": {
-    "total": 9874,
+    "total": 9876,
     "multi": 2478,
     "top10Share": 2.8
   },
@@ -209369,7 +209411,7 @@
       "count": 20676,
       "at": "2026-10-19T00:47:25.780Z"
     },
-    "candidates": 21829,
+    "candidates": 21834,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -209453,24 +209495,24 @@
       "2026-09-28": 1271,
       "2026-10-05": 1169,
       "2026-10-12": 1830,
-      "2026-10-19": 373,
+      "2026-10-19": 378,
       "2022-07-18": 1,
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 544
     },
-    "validated": 22774,
-    "candidatesValidated": 20,
-    "authoritative": 17004,
-    "invalidUnique": 5770,
+    "validated": 22779,
+    "candidatesValidated": 21,
+    "authoritative": 17006,
+    "invalidUnique": 5773,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 3078
+        "count": 3080
       },
       {
         "reason": "no-package.json",
-        "count": 2162
+        "count": 2163
       },
       {
         "reason": "no-signal",
@@ -209510,5 +209552,5 @@
       }
     ]
   },
-  "enrichCount": 17004
+  "enrichCount": 17006
 }
