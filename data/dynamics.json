@@ -1,12 +1,42 @@
 {
-  "fetchedAt": "2026-10-15T23:28:29.383Z",
+  "fetchedAt": "2026-10-19T01:42:20.553Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 250426,
-    "forks": 30105,
-    "pushed_at": "2026-10-15T13:39:04Z",
+    "stars": 253154,
+    "forks": 30464,
+    "pushed_at": "2026-10-17T08:16:09Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.2.1-rc.2",
+        "name": "v0.2.1-rc.2",
+        "prerelease": true,
+        "published_at": "2026-10-17T08:16:33Z",
+        "breaking": false,
+        "summary": "适配 DeepSeek-V4.1-Flash-1017 上线",
+        "added": 2,
+        "fixed": 0
+      },
+      {
+        "tag": "dsh-v0.2.1-rc.1",
+        "name": "v0.2.1-rc.1",
+        "prerelease": true,
+        "published_at": "2026-10-17T05:22:10Z",
+        "breaking": true,
+        "summary": "允许用户从“自定义插件索引源”中发现和安装插件。",
+        "added": 15,
+        "fixed": 61
+      },
+      {
+        "tag": "dsh-v0.2.1-alpha.5",
+        "name": "v0.2.1-alpha.5",
+        "prerelease": true,
+        "published_at": "2026-10-16T12:23:28Z",
+        "breaking": false,
+        "summary": "修复在插件页启用或停用插件后，已打开会话的 `/` 菜单未更新技能列表的问题。",
+        "added": 1,
+        "fixed": 6
+      },
       {
         "tag": "dsh-v0.2.1-alpha.4",
         "name": "v0.2.1-alpha.4",
@@ -56,47 +86,29 @@
         "summary": "macOS／Windows 桌面端可在菜单栏中管理和安装 dsh 命令，支持管理插件，无需另装 Node 或 pnpm。",
         "added": 2,
         "fixed": 13
-      },
-      {
-        "tag": "dsh-v0.2.0-rc.1",
-        "name": "v0.2.0-rc.1",
-        "prerelease": true,
-        "published_at": "2026-09-28T12:36:21Z",
-        "breaking": false,
-        "summary": "优化对话进行中和完成状态的实时动画、用时信息、过程信息间距。 @yixiangihsiang,",
-        "added": 1,
-        "fixed": 15
-      },
-      {
-        "tag": "dsh-v0.1.7-rc.2",
-        "name": "v0.1.7-rc.2",
-        "prerelease": true,
-        "published_at": "2026-09-24T14:10:21Z",
-        "breaking": true,
-        "summary": "启用定时任务后，可创建和管理提醒、查看运行记录；重启后任务仍会保留，并支持最短每分钟重复一次。 @Chinesezjc,",
-        "added": 5,
-        "fixed": 13
-      },
-      {
-        "tag": "dsh-v0.1.7-rc.1",
-        "name": "v0.1.7-rc.1",
-        "prerelease": true,
-        "published_at": "2026-09-23T13:30:24Z",
-        "breaking": true,
-        "summary": "Web 侧边栏新增终端，支持多标签、Shell 选择和刷新后恢复。",
-        "added": 8,
-        "fixed": 28
       }
     ],
     "npm": {
       "pkg": "@deepseek-ai/dsh",
       "distTags": {
         "latest": "0.2.0-rc.2",
-        "next": "0.2.0-rc.2",
-        "alpha": "0.2.1-alpha.4"
+        "alpha": "0.2.1-alpha.5",
+        "next": "0.2.1-rc.2"
       },
-      "modified": "2026-10-15T13:08:08.954Z",
+      "modified": "2026-10-17T08:36:31.816Z",
       "versions": [
+        {
+          "version": "0.2.1-rc.2",
+          "time": "2026-10-17T08:36:31.655Z"
+        },
+        {
+          "version": "0.2.1-rc.1",
+          "time": "2026-10-17T03:17:24.154Z"
+        },
+        {
+          "version": "0.2.1-alpha.5",
+          "time": "2026-10-16T12:31:49.659Z"
+        },
         {
           "version": "0.2.1-alpha.4",
           "time": "2026-10-15T13:08:08.555Z"
@@ -124,18 +136,6 @@
         {
           "version": "0.1.7-rc.2",
           "time": "2026-09-24T14:18:11.337Z"
-        },
-        {
-          "version": "0.1.7-rc.1",
-          "time": "2026-09-23T13:44:12.289Z"
-        },
-        {
-          "version": "0.1.7-alpha.2",
-          "time": "2026-09-22T16:08:55.647Z"
-        },
-        {
-          "version": "0.1.7-alpha.1",
-          "time": "2026-09-22T06:23:31.522Z"
         }
       ]
     }
@@ -143,8 +143,8 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104502,
-      "forks": 16706,
+      "stars": 104508,
+      "forks": 16703,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
       "latestRelease": {
@@ -160,8 +160,8 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-R1",
-      "stars": 91890,
-      "forks": 11655,
+      "stars": 91894,
+      "forks": 11650,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
       "latestRelease": {
@@ -177,51 +177,60 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39377,
-      "forks": 4271,
+      "stars": 39417,
+      "forks": 4280,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepSeek-Coder",
-      "stars": 24292,
-      "forks": 2925,
+      "stars": 24294,
+      "forks": 2928,
       "pushed_at": "2025-11-11T06:44:56Z",
       "description": "DeepSeek Coder: Let the Code Write Itself",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 24013,
-      "forks": 2205,
+      "stars": 24024,
+      "forks": 2204,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/Janus",
-      "stars": 17759,
-      "forks": 2233,
+      "stars": 17756,
+      "forks": 2232,
       "pushed_at": "2025-02-01T07:58:29Z",
       "description": "Janus-Series: Unified Multimodal Understanding and Generation Models",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/FlashMLA",
-      "stars": 13078,
-      "forks": 1193,
+      "stars": 13087,
+      "forks": 1195,
       "pushed_at": "2026-10-15T13:47:29Z",
       "description": "FlashMLA: Efficient Multi-head Latent Attention Kernels",
       "latestRelease": null
     },
     {
-      "repo": "deepseek-ai/3FS",
-      "stars": 10284,
-      "forks": 1113,
-      "pushed_at": "2026-05-07T09:31:54Z",
-      "description": " A high-performance distributed file system designed to address the challenges of AI training and inference workloads. ",
-      "latestRelease": null
+      "repo": "deepseek-ai/DeepEP",
+      "stars": 10289,
+      "forks": 1479,
+      "pushed_at": "2026-10-16T08:14:47Z",
+      "description": "DeepEP: an efficient expert-parallel communication library",
+      "latestRelease": {
+        "tag": "v1.2.1",
+        "name": "Stable release v1.2.1",
+        "prerelease": false,
+        "published_at": "2025-09-16T01:48:40Z",
+        "breaking": false,
+        "summary": null,
+        "added": 0,
+        "fixed": 0
+      }
     }
   ],
   "models": [

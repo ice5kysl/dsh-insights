@@ -1,14 +1,15 @@
 # 致 dsh-session-artifacts 的作者：一期一会 · 观测分享
 
-> feely0208/dsh-session-artifacts · 第 1 期（数据快照 2026-10-12）
+> feely0208/dsh-session-artifacts · 第 1 期（数据快照 2026-10-19）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-session-artifacts 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（84/100）** · 在「会话管理」类 1342 个插件的分布里大致位于前列（同类中位 77）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（84/100）** · 在「会话管理」类 1436 个插件的分布里大致位于前列（同类中位 77）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★0 · 会话产物归拢与命名：每个会话一个专属文件夹，收尾按实际内容改名并刷新索引 —— 解决「产物散落」和「过后记不清」。附三个不依赖 DSH 的纯 bash 脚本。
 - npm：`@deepwhale-cn/dsh-session-artifacts@0.1.0`（2 个版本）
-- 最近 push 2026-10-11
+- 周下载：**385**
+- 最近 push 2026-10-13
 
 以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、npm 版本同步、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃。
 
@@ -23,6 +24,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-12
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-19
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

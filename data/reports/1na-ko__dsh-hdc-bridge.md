@@ -1,25 +1,23 @@
 # 致 dsh-hdc-bridge 的作者：一期一会 · 观测分享
 
-> 1na-ko/dsh-hdc-bridge · 第 1 期（数据快照 2026-10-12）
+> 1na-ko/dsh-hdc-bridge · 第 1 期（数据快照 2026-10-19）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-hdc-bridge 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（78/100）** · 在「记忆 / 知识」类 412 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（83/100）** · 在「记忆 / 知识」类 430 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★19 · DSH 原生鸿蒙开发助手：hdc 设备闭环调试 + 设备面板（官方 client 插件形态）+ 离线官方知识层（Tier-1 随包）+ DevEco CLI 构建/签名/模拟器控制 / DSH-native HarmonyOS dev assistant: hdc device loop, live device pa
-- npm：`dsh-hdc-bridge@0.9.1`（17 个版本）
-- 周下载：**375**
-- 最近 push 2026-09-08
+- npm：`dsh-hdc-bridge@0.10.2`（20 个版本）
+- 周下载：**702**
+- 最近 push 2026-10-12
 
-以下几项检查未发现问题（仅作记录）：client 导出齐备、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期；按 README 解读，主要能力是「原生鸿蒙开发助手：hdc闭环调试、设备面板、离线官方知识层、DevEco CLI构建/签名/模拟器控制。」。
+以下几项检查未发现问题（仅作记录）：client 导出齐备、files 白名单、npm 已发布、README 齐备、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃；按 README 解读，主要能力是「原生鸿蒙开发助手：hdc闭环调试、设备面板、离线官方知识层、DevEco CLI构建/签名/模拟器控制。」。
 
 **如果只看几点，这些可能值得留意**（按模型权重排序，均为建议，是否采纳完全由你）：
 
 1. **npm 版本落后于仓库** —— 商店会展示旧版（也可能是包名被抢注，值得核查）。参考做法：把仓库当前版本发到 npm。
 2. **文档只有单语言** —— 中文用户占生态大头，双语能覆盖更多用户。参考做法：加 README.zh-CN.md 并与英文版互链。
-3. **超过 30 天没有提交** —— 会被观望中的用户解读为维护停滞。参考做法：如果仍在维护，一次实质提交即可解除该信号。
-
-其余信号：main 未对齐 lib/index.js（与官方 bundle 惯例不一致，部分装载路径可能认不出）。
+3. **main 未对齐 lib/index.js** —— 与官方 bundle 惯例不一致，部分装载路径可能认不出。参考做法：调整 package.json main 或产物目录。
 
 **能力标签**：hdc、debug、panel、offline、deveco、build、sign、emulator；README 宣称：hdc device closed-loop debugging；live device panel；offline official knowledge layer (Tier-1 bundled)；DevEco CLI build/sign/emulator control
 
@@ -29,6 +27,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-12
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-19
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

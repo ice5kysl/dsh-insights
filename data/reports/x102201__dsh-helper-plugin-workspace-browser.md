@@ -1,10 +1,10 @@
 # 致 dsh-helper-plugin-workspace-browser 的作者：一期一会 · 观测分享
 
-> x102201/dsh-helper-plugin-workspace-browser · 第 1 期（数据快照 2026-10-12）
+> x102201/dsh-helper-plugin-workspace-browser · 第 1 期（数据快照 2026-10-19）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-helper-plugin-workspace-browser 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（79/100）** · 在「侧栏 / 工作区」类 1006 个插件的分布里大致位于前列（同类中位 77）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（79/100）** · 在「侧栏 / 工作区」类 1076 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★0 · DSH 插件：为当前工作区单独启动一个 Chrome，在右侧栏看画面，并用 workspace_browser_* 让模型阅读和操作页面。
 - npm：尚未发布
@@ -24,6 +24,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-12
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-10-19
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 
