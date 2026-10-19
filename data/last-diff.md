@@ -1,25 +1,23 @@
 # 快照 Diff · 2026-10-19
 
-- 当前权威插件：**16909**（上次 16893）
-- 新增 16 · 消失 0
+- 当前权威插件：**16923**（上次 16909）
+- 新增 14 · 消失 0
 
-## 新增（Top 16）
-- shinji00222/dsh-windows-computer-use ★1 
-- hollowfyh/dsh-plugin-doctor ★1 (npm ✓)
-- iStarryDust/dsh-browser ★0 (npm ✓)
-- Shad0wwa1ker/dsh-browser-mode ★0 
-- iStarryDust/dsh-scheduled-tasks ★0 (npm ✓)
-- zhz-viads/dsh-local-bridge ★0 
-- iStarryDust/dsh-prompt-enhance ★0 (npm ✓)
-- ChendarCe/dsh-thinking-language ★0 
-- Xin-kon/dsh-lang-guard ★0 
-- MLMLZJ/dsh-install-profiler ★0 
-- PonyDevAI/dsh-model-usage ★0 
-- Lancang-hzau/dsh-live-terminal ★0 (npm ✓)
-- Z4DFL/va-11-skin ★0 
-- llklkl/dsh-workspace-groups ★0 
-- iStarryDust/dsh-skill-suite ★0 (npm ✓)
-- FlyFish1997/dsh-project-fee ★0 
+## 新增（Top 14）
+- QZyme/dsh-besson-tools ★1 
+- MLMLZJ/dsh-reverse-skill ★0 
+- Sumcam-L/dsh-civhash ★0 
+- qizhuxu/dsh-taste ★0 (npm ✓)
+- Link-h1j/dsh-image-canvas ★0 
+- lzxvic/dsh-ui-opacity ★0 
+- keyboard-leo/dsh-reading-workbench ★0 
+- Memory175/blender-mentor ★0 
+- ShiMarin233/dsh-session-hud ★0 
+- shisuiqingqian/dsh-video-kit ★0 
+- nanfangtown/file-checker ★0 
+- bluemika111/dsh-degeneration-guard ★0 (npm ✓)
+- Link-h1j/dsh-comfy ★0 
+- szsall/dsh-preview-studio ★0 
 
 ## 消失（Top 0）
 
