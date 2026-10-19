@@ -1,21 +1,29 @@
 # 快照 Diff · 2026-10-19
 
-- 当前权威插件：**16963**（上次 16951）
-- 新增 12 · 消失 0
+- 当前权威插件：**16984**（上次 16963）
+- 新增 21 · 消失 0
 
-## 新增（Top 12）
-- DaozeTang/dsh-connect-hub ★1 
-- baizhizzl/dsh-network-proxy ★1 
-- sbVAN/dsh-latex ★0 (npm ✓)
-- kanoonak/dsh-whale-catcher ★0 (npm ✓)
-- wjf1/dsh-prompt-enhance ★0 (npm ✓)
-- new-233/easyeda-agent ★0 
-- ddy-007/dsh-client-resume-button ★0 
-- jingmei2/dsh-session-trash ★0 
-- ChengMioa/dsh-deepseek-web-panel ★0 
-- xingzoudefengye/dsh-sidebar-cdp ★0 
-- S-anZZz/dsh-pink-bow-kitty ★0 
-- snowfoxHQ/dsh-vecrecall ★0 
+## 新增（Top 20）
+- sadgsk/dsh-review-panel ★1 
+- xiciyang/inference-diagnose ★1 
+- cedricxie366-stack/BOSSmode ★1 
+- callaumyan-design/dshx-project ★0 
+- Wuqiu-Ying/dsh-wtskin-project ★0 
+- knxi/dsh-grsai-canvas ★0 (npm ✓)
+- xiciyang/inference-tuning ★0 
+- xl0223/dsh-open-any ★0 
+- callaumyan-design/dshx-loop-guard ★0 
+- vagur1689/dsh-conversation-find ★0 
+- callaumyan-design/dshx-message-edit ★0 
+- callaumyan-design/dshx-ai-approval ★0 
+- callaumyan-design/dshx-image-clamp ★0 
+- callaumyan-design/dshx-token-cost ★0 
+- callaumyan-design/dshx-language-mirror ★0 
+- y2187218823/dsh-code-ctx ★0 
+- vastplan/dsh-model-team ★0 
+- callaumyan-design/dshx-skill-manager ★0 
+- kanzakivnw/answer-me-with-html-in-Shimo-Style ★0 
+- callaumyan-design/dshx-session-delete ★0 
 
 ## 消失（Top 0）
 

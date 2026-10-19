@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 16963 个插件 · 生成于 2026-10-19 · 由 DSH Insights 管线生成
+> 权威集 16984 个插件 · 生成于 2026-10-19 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**16963**
-- 近 7 天活跃：3790（22.3%）· 近 30 天：8131（47.9%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：16363（96.5%）
+- 权威集规模：**16984**
+- 近 7 天活跃：3797（22.4%）· 近 30 天：8148（48%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：16380（96.4%）
 
 ## 发布与文档
-- npm 已发布 7398 / 未发布 9565 / 已发布但版本滞后 4321
-- 有 README 16918 · 中英双语/中文 8207 · 中文 README 文件 1207 · 无 README 45
-- lib/index.js 8726 · lib/client.js 5926 · 双产物 5219
+- npm 已发布 7399 / 未发布 9585 / 已发布但版本滞后 4322
+- 有 README 16939 · 中英双语/中文 8216 · 中文 README 文件 1208 · 无 README 45
+- lib/index.js 8730 · lib/client.js 5929 · 双产物 5222
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 800 · imsai 343 · 至少一个渠道 1137（6.7%） · 未收录 15826
+- awesome-dsh-plugin 799 · imsai 343 · 至少一个渠道 1136（6.7%） · 未收录 15848
 
 ## 优质未收录 · 建议收录（Top 15）
 - belowthetree/dsh-mcp-setting A · 周下载 109
@@ -25,12 +25,12 @@
 - ai-tool-labs/dsh-squares A · 周下载 361
 - zhz8888/dsh-android-emulator-helper A
 - zhz8888/dsh-ios-simulator-helper A
-- GallenShao/dsh-faster-compress A
 - HildebrandYu/dsh-open-with A · 周下载 188
 - saya-ch/dsh-mobile A · 周下载 2762
 - cocofhu/anime-find A · 周下载 101
 - NanmiCoder/dsh-auto-mode A · 周下载 343
 - Nwflower/dsh-chat-import A · 周下载 1576
+- PKUfudawei/dsh-capability-menu A · 周下载 511
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：450525
@@ -46,18 +46,18 @@
 
 ## 质量评分（启发式）
 - 平均分 74 · S+A 占比 4.5%（值得优先看；A+B 51.6%）
-- S 135 · A 626 · B 8124 · C 5890 · D 2188
+- S 135 · A 626 · B 8133 · C 5898 · D 2192
 
 ## 功能分类（启发式 Top 12）
-- 其它：5827
-- 模型 / 代理：1774
-- 会话管理：1558
-- 文件浏览 / 预览：1449
-- 侧栏 / 工作区：1216
-- 状态 / 监控 / 用量：1213
-- 搜索 / 命令面板：911
-- 工具 / 效率：838
-- 主题 / 视觉美化：667
+- 其它：5831
+- 模型 / 代理：1779
+- 会话管理：1560
+- 文件浏览 / 预览：1450
+- 侧栏 / 工作区：1217
+- 状态 / 监控 / 用量：1215
+- 搜索 / 命令面板：912
+- 工具 / 效率：840
+- 主题 / 视觉美化：670
 - 消息 / 协作集成：553
 - 开发 / 数据：494
 - 记忆 / 知识：463
@@ -79,13 +79,13 @@
 - 2026-07：32
 - 2026-08：9847
 - 2026-09：3643
-- 2026-10：3377
+- 2026-10：3398
 
 ## Top topics
-- `dsh-plugin` × 16517
-- `deepseek-harness` × 11508
-- `dsh` × 7249
-- `cordis` × 2011
+- `dsh-plugin` × 16538
+- `deepseek-harness` × 11526
+- `dsh` × 7264
+- `cordis` × 2013
 - `deepseek` × 1896
 - `dsh-plugins` × 1605
 - `plugin` × 1145
@@ -93,7 +93,7 @@
 - `deepseek-harness-plugin` × 550
 - `dsh-plugin-market` × 550
 - `ai-agent` × 549
-- `mcp` × 466
+- `mcp` × 467
 
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |
