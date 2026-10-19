@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-19T05:17:56.045Z",
+  "generatedAt": "2026-10-19T05:22:39.844Z",
   "totals": {
-    "authoritative": 16777,
-    "active7": 3755,
+    "authoritative": 16778,
+    "active7": 3754,
     "active7Pct": 22.4,
-    "active30": 8008,
+    "active30": 8009,
     "active30Pct": 47.7,
     "ageGate1": 16185,
     "ageGate1Pct": 96.5,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 3191,
+      "2026-10": 3192,
       "2020-06": 1,
       "2025-12": 1,
       "2024-08": 1
@@ -72,7 +72,7 @@
       "2026-10-12": 1422,
       "2024-08-12": 1,
       "2026-05-11": 1,
-      "2026-10-19": 52
+      "2026-10-19": 53
     },
     "byWeekGrades": {
       "B": {
@@ -175,7 +175,7 @@
         "2020-06-29": 1,
         "2026-10-05": 353,
         "2026-10-12": 437,
-        "2026-10-19": 28
+        "2026-10-19": 29
       },
       "D": {
         "2026-08-10": 325,
@@ -197,11 +197,11 @@
   "distribution": {
     "publish": {
       "published": 7350,
-      "unpublished": 9427,
+      "unpublished": 9428,
       "stale": 4300
     },
     "docs": {
-      "readme": 16733,
+      "readme": 16734,
       "zhFile": 1200,
       "zh": 8117,
       "both": 8106,
@@ -404,15 +404,15 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 16331
+      "count": 16332
     },
     {
       "topic": "deepseek-harness",
-      "count": 11368
+      "count": 11369
     },
     {
       "topic": "dsh",
-      "count": 7151
+      "count": 7152
     },
     {
       "topic": "cordis",
@@ -519,8 +519,8 @@
     "imsai": 342,
     "covered": 1136,
     "coveredPct": 6.8,
-    "none": 15641,
-    "fetchedAt": "2026-10-19T05:17:03.324Z"
+    "none": 15642,
+    "fetchedAt": "2026-10-19T05:21:53.114Z"
   },
   "suggested": [
     {
@@ -1833,7 +1833,7 @@
     "grades": {
       "A": 622,
       "B": 8042,
-      "C": 5802,
+      "C": 5803,
       "D": 2177,
       "S": 134
     },
@@ -1860,7 +1860,7 @@
     },
     {
       "category": "状态 / 监控 / 用量",
-      "count": 1192
+      "count": 1193
     },
     {
       "category": "侧栏 / 工作区",
@@ -206043,10 +206043,31 @@
       "topPlugin": "RUI-debug769/dsh-dotclaude",
       "topStars": 0,
       "topCat": "搜索 / 命令面板"
+    },
+    {
+      "owner": "TuDouPn",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-19",
+      "firstCreated": "2026-10-19",
+      "delta": 0,
+      "avg": 68,
+      "topPlugin": "TuDouPn/dsh-grok-xai",
+      "topStars": 0,
+      "topCat": "状态 / 监控 / 用量"
     }
   ],
   "authorStats": {
-    "total": 9716,
+    "total": 9717,
     "multi": 2449,
     "top10Share": 2.8
   },
@@ -206055,7 +206076,7 @@
       "count": 20676,
       "at": "2026-10-19T00:47:25.780Z"
     },
-    "candidates": 21513,
+    "candidates": 21515,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -206139,16 +206160,16 @@
       "2026-09-28": 1271,
       "2026-10-05": 1169,
       "2026-10-12": 1830,
-      "2026-10-19": 57,
+      "2026-10-19": 59,
       "2022-07-18": 1,
       "2025-10-20": 1,
       "2024-01-22": 1,
       "1969-12-29": 544
     },
-    "validated": 22462,
-    "candidatesValidated": 17,
-    "authoritative": 16777,
-    "invalidUnique": 5685,
+    "validated": 22464,
+    "candidatesValidated": 18,
+    "authoritative": 16778,
+    "invalidUnique": 5686,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -206156,7 +206177,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 2122
+        "count": 2123
       },
       {
         "reason": "no-signal",
@@ -206196,5 +206217,5 @@
       }
     ]
   },
-  "enrichCount": 16777
+  "enrichCount": 16778
 }
