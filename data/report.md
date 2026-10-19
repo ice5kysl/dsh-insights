@@ -1,19 +1,19 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 15681 个插件 · 生成于 2026-10-19 · 由 DSH Insights 管线生成
+> 权威集 16746 个插件 · 生成于 2026-10-19 · 由 DSH Insights 管线生成
 
 ## 总览
-- 权威集规模：**15681**
-- 近 7 天活跃：2756（17.6%）· 近 30 天：6933（44.2%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：15355（97.9%）
+- 权威集规模：**16746**
+- 近 7 天活跃：3762（22.5%）· 近 30 天：7988（47.7%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：16140（96.4%）
 
 ## 发布与文档
-- npm 已发布 6901 / 未发布 8780 / 已发布但版本滞后 4160
-- 有 README 15641 · 中英双语/中文 7557 · 中文 README 文件 1111 · 无 README 40
-- lib/index.js 8161 · lib/client.js 5508 · 双产物 4863
+- npm 已发布 7342 / 未发布 9404 / 已发布但版本滞后 4295
+- 有 README 16702 · 中英双语/中文 8108 · 中文 README 文件 1199 · 无 README 44
+- lib/index.js 8625 · lib/client.js 5851 · 双产物 5152
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 738 · imsai 330 · 至少一个渠道 1062（6.8%） · 未收录 14619
+- awesome-dsh-plugin 800 · imsai 342 · 至少一个渠道 1136（6.8%） · 未收录 15610
 
 ## 优质未收录 · 建议收录（Top 15）
 - belowthetree/dsh-mcp-setting A · 周下载 109
@@ -23,14 +23,14 @@
 - d0ublecl1ck/dsh-session-watch A · 周下载 4
 - ai-tool-labs/dsh-plugin-square A · 周下载 0
 - ai-tool-labs/dsh-squares A · 周下载 361
+- zhz8888/dsh-android-emulator-helper A
+- zhz8888/dsh-ios-simulator-helper A
+- GallenShao/dsh-faster-compress A
+- HildebrandYu/dsh-open-with A · 周下载 188
 - saya-ch/dsh-mobile A · 周下载 2762
 - cocofhu/anime-find A · 周下载 101
 - NanmiCoder/dsh-auto-mode A · 周下载 343
 - Nwflower/dsh-chat-import A · 周下载 1576
-- PKUfudawei/dsh-capability-menu A · 周下载 511
-- mexiaosqwq/dsh-web-mobile A · 周下载 1237
-- MichengAI/dsh-codex-ui A · 周下载 8473
-- MichengAI/dsh-agency-agents A · 周下载 11181
 
 ## npm 周下载 Top 10
 - ranxianglei/billion-context：450525
@@ -45,54 +45,55 @@
 - Creakono/dsh-cost-meter：21462
 
 ## 质量评分（启发式）
-- 平均分 73.7 · S+A 占比 4.1%（值得优先看；A+B 50.6%）
-- S 108 · A 540 · B 7402 · C 5462 · D 2169
+- 平均分 74 · S+A 占比 4.5%（值得优先看；A+B 51.6%）
+- S 134 · A 620 · B 8025 · C 5791 · D 2176
 
 ## 功能分类（启发式 Top 12）
-- 其它：5464
-- 模型 / 代理：1623
-- 会话管理：1436
-- 文件浏览 / 预览：1337
-- 状态 / 监控 / 用量：1122
-- 侧栏 / 工作区：1076
-- 搜索 / 命令面板：851
-- 工具 / 效率：756
-- 主题 / 视觉美化：609
-- 消息 / 协作集成：518
-- 开发 / 数据：459
-- 记忆 / 知识：430
+- 其它：5776
+- 模型 / 代理：1750
+- 会话管理：1543
+- 文件浏览 / 预览：1428
+- 状态 / 监控 / 用量：1191
+- 侧栏 / 工作区：1182
+- 搜索 / 命令面板：897
+- 工具 / 效率：827
+- 主题 / 视觉美化：659
+- 消息 / 协作集成：546
+- 开发 / 数据：489
+- 记忆 / 知识：458
 
 ## 月度新增（按仓库创建）
 - 2020-06：1
 - 2020-09：1
 - 2021-06：1
+- 2024-08：1
 - 2025-08：1
 - 2025-11：1
 - 2025-12：1
 - 2026-01：3
 - 2026-02：4
 - 2026-03：9
-- 2026-04：6
-- 2026-05：16
+- 2026-04：7
+- 2026-05：17
 - 2026-06：17
 - 2026-07：32
-- 2026-08：9824
-- 2026-09：3569
-- 2026-10：2195
+- 2026-08：9847
+- 2026-09：3643
+- 2026-10：3160
 
 ## Top topics
-- `dsh-plugin` × 15263
-- `deepseek-harness` × 10571
-- `dsh` × 6597
-- `cordis` × 1857
-- `deepseek` × 1767
-- `dsh-plugins` × 1515
-- `plugin` × 1064
-- `typescript` × 573
-- `deepseek-harness-plugin` × 523
-- `dsh-plugin-market` × 517
-- `ai-agent` × 513
-- `llm` × 418
+- `dsh-plugin` × 16300
+- `deepseek-harness` × 11342
+- `dsh` × 7139
+- `cordis` × 1987
+- `deepseek` × 1873
+- `dsh-plugins` × 1595
+- `plugin` × 1135
+- `typescript` × 602
+- `dsh-plugin-market` × 549
+- `deepseek-harness-plugin` × 548
+- `ai-agent` × 544
+- `mcp` × 458
 
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |
@@ -105,8 +106,8 @@
 | superdesigndev/treg | 5753 | — | — |
 | MeteorNOX/DeepSeek-Balance-Whale-Widget | 5270 | ✅ | ✅ |
 | liustack/modlens | 4311 | ✅ | ✅ |
+| QingYunA/answer-me-with-html | 3696 | — | ✅ |
 | T-Auto/dsh-ops | 3066 | ✅ | — |
-| Minglink/dsh-infinite-gen-5 | 3049 | — | ✅ |
 
 ## npm 版本滞后榜（仓库新于发布）
 | repo | ★ | 仓库版本 → npm |
