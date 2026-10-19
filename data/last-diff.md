@@ -1,25 +1,20 @@
 # 快照 Diff · 2026-10-19
 
-- 当前权威插件：**16858**（上次 16842）
-- 新增 16 · 消失 0
+- 当前权威插件：**16869**（上次 16858）
+- 新增 11 · 消失 0
 
-## 新增（Top 16）
-- Chuzhj/dsh-edge-search ★1 
-- hugoyee75-cmyk/dsh-token-metrics ★1 
-- neutron42-jp/dsh-btw-live ★0 
-- wilsonchengassistant/dsh-quick-workspace ★0 (npm ✓)
-- starash07/dsh-link-open ★0 
-- Toximiner/dsh-tokmeter ★0 
-- JiuChenTian/dsh-handoff-memory ★0 
-- hualuo520-h/dsh-magpie-lite ★0 
-- Zeppeli777/idea-git ★0 
-- Chenfan2/dsh-bilibili-subtitles ★0 
-- xiaoanran0602-pixel/narracore-format ★0 
-- zzt0818/dsh-task-details ★0 
-- nekojackie/dsh-mcp-manager ★0 (npm ✓)
-- richardhxwang/dsh-workbuddy-multi ★0 
-- home-i/dsh-window-size ★0 
-- yueyexiayu/dsh-session-continuation ★0 
+## 新增（Top 11）
+- Zhiyi-Zhao/dsh-schedule-send ★1 
+- TinyBOOOOM/dsh-cliproxyapi-pro ★1 
+- xxiiiixx/dsh-session-trash ★0 (npm ✓)
+- FLL123-Arch/game-crash-doctor ★0 
+- w-j-y-wjy/dsh-ink-whale ★0 (npm ✓)
+- chencujinlin/dsh-whale-startup ★0 
+- GT-610/dsh-workspace-organize ★0 
+- atzx/dsh-plugin-pomodoro ★0 
+- liujuntao123/dsh-clinepass-pin ★0 
+- yurashet/dsh-locale-be ★0 
+- evilevil/dsh-purge-021rc2 ★0 
 
 ## 消失（Top 0）
 
