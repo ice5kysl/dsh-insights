@@ -32,7 +32,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 - 插件页/信件：`https://dsh-insights.com/p/<owner>/<repo>/`（分数证据 + 扣分明细 + 相似推荐）
 - 自查：`npx dsh-insights-kit selfcheck <dir>`（与线上 health-v6 同规则书，fail 档 exit 1 可挂 CI 门禁）
 - 徽章：`[![DSH Insights health](https://dsh-insights.com/badge/<owner>/<repo>.svg)](https://dsh-insights.com/p/<owner>/<repo>/)`（/badge/ 页有一键复制）
-- 重检：push 修复后到 Actions → recheck 手动触发（单插件分钟级生效，站点自动接力部署）
+- 重检：push 修复后[提交数据纠错 / 重检申请](https://github.com/ice5kysl/dsh-insights/issues/new?template=data-correction.yml)，附仓库、页面和版本证据，由维护者处理；拥有本仓库写入权限的协作者可在 Actions → recheck 手动运行，站点更新需等待重检和部署工作流完成。
 - 修复路径：发布 npm / 补 `exports["./client"]` / 中英 README / LICENSE / `dsh-plugin` topic / tests/ + CI / 声明 `engines.dsh`
 
 ### 3. 策展人与平台（采纳层）
@@ -74,7 +74,7 @@ L1 子口径（面向目录/市场提案时用）：「我们不抢收录权，�
 - [x] ~~**提案 #4399 预热带数**：暂不回复，等 W37 帖链接出来一起跟（避免刷屏）。~~ **已取消（2026-09-17）**：12 天 0 回复，判渠道无效。
 
 ### D1（周三 09-09）
-- [ ] 检查官宣帖回复，逐条回应（数据问题引 /about/ 口径，误判引导 issue 申诉 + recheck 自助）。
+- [ ] 检查官宣帖回复，逐条回应（数据问题引 /about/ 口径，误判或数据过期引导提交数据纠错 / 重检申请 Issue）。
 - [ ] 作者信第 2 批 10 封（队列 11–20）。回复积极的 → 引导挂徽章（/badge/ 一键复制段）。
 - [ ] 记录 D0 数据基线：帖子阅读/回复、repo ★、kit npm 日下载（`npm view dsh-insights-kit` + downloads.json 下轮刷新）。
 
