@@ -13,7 +13,7 @@
 - lib/index.js 9687 · lib/client.js 6675 · 双产物 5847
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 799 · imsai 379 · 至少一个渠道 1172（6%） · 未收录 18322
+- awesome-dsh-plugin 800 · imsai 379 · 至少一个渠道 1173（6%） · 未收录 18321
 
 ## 优质未收录 · 建议收录（Top 15）
 - belowthetree/dsh-mcp-setting A · 周下载 158
