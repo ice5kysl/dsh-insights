@@ -1,0 +1,71 @@
+{
+  "week": "2026-W43",
+  "range": "2026/10/19～2026/10/25",
+  "generatedAt": "2026-10-26T02:57:35.423Z",
+  "model": "deepseek-v4-pro",
+  "usage": {
+    "prompt_tokens": 11789,
+    "completion_tokens": 13404,
+    "total_tokens": 25193,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8717
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 11789
+  },
+  "title": {
+    "zh": "DSH 生态洞察 · 2026-W43",
+    "en": "DSH Ecosystem Insights · 2026-W43"
+  },
+  "signals": [
+    {
+      "kind": "owner-cluster",
+      "severity": "mid",
+      "fact": "账号 uckkk 有 1286 个插件、均分仅 56——疑似批量刷库/模板复制",
+      "factEn": "Account uckkk holds 1286 plugins, avg score only 56 — suspected template farming",
+      "data": {
+        "owner": "uckkk",
+        "count": 1286,
+        "scored": 1286,
+        "avg": 56,
+        "noReadme": 0
+      }
+    },
+    {
+      "kind": "owner-cluster",
+      "severity": "mid",
+      "fact": "账号 CAI-MH 有 9 个插件、均分仅 57、1 个无 README——疑似批量刷库/模板复制",
+      "factEn": "Account CAI-MH holds 9 plugins, avg score only 57, 1 without README — suspected template farming",
+      "data": {
+        "owner": "CAI-MH",
+        "count": 9,
+        "scored": 9,
+        "avg": 57,
+        "noReadme": 1
+      }
+    },
+    {
+      "kind": "dominant-owner",
+      "severity": "low",
+      "fact": "最大账号 uckkk 独占 1286 个插件（占全生态 8%）、均分 56——模板批量号拉高规模数字，解读增长时需剔除水分",
+      "factEn": "Largest account uckkk alone holds 1286 plugins (8% of the ecosystem), avg score 56 — template batch account inflates scale numbers",
+      "data": {
+        "owner": "uckkk",
+        "count": 1286,
+        "avg": 56
+      }
+    },
+    {
+      "kind": "npm-stale",
+      "severity": "low",
+      "fact": "10 个插件仓库版本领先 npm 发布版本——安装侧拿到的是旧版",
+      "factEn": "10 plugins have repo versions ahead of npm — installs get outdated builds",
+      "data": {
+        "count": 10
+      }
+    }
+  ]
+}

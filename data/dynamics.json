@@ -1,12 +1,22 @@
 {
-  "fetchedAt": "2026-10-20T00:00:37.771Z",
+  "fetchedAt": "2026-10-26T02:34:16.304Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 254443,
-    "forks": 30749,
-    "pushed_at": "2026-10-17T08:16:09Z",
+    "stars": 261476,
+    "forks": 31592,
+    "pushed_at": "2026-10-23T15:25:40Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.2.1-rc.3",
+        "name": "v0.2.1-rc.3",
+        "prerelease": true,
+        "published_at": "2026-10-23T15:26:39Z",
+        "breaking": false,
+        "summary": "新增左侧栏、会话视图和右侧栏的「更多」菜单，方便浏览和创建插件。 @Yifffan,",
+        "added": 1,
+        "fixed": 2
+      },
       {
         "tag": "dsh-v0.2.1-rc.2",
         "name": "v0.2.1-rc.2",
@@ -76,27 +86,21 @@
         "summary": "新增实验性 Claude Code Mods 兼容层。目前阶段的主要目的是验证 Claude Code Mods API 功能大致为 DeepSeek Harness 插件的一个子集，而非为用户提供实际的完整兼容性。",
         "added": 5,
         "fixed": 12
-      },
-      {
-        "tag": "dsh-v0.2.0-rc.2",
-        "name": "v0.2.0-rc.2",
-        "prerelease": true,
-        "published_at": "2026-09-29T09:42:36Z",
-        "breaking": true,
-        "summary": "macOS／Windows 桌面端可在菜单栏中管理和安装 dsh 命令，支持管理插件，无需另装 Node 或 pnpm。",
-        "added": 2,
-        "fixed": 13
       }
     ],
     "npm": {
       "pkg": "@deepseek-ai/dsh",
       "distTags": {
-        "latest": "0.2.1-rc.2",
         "alpha": "0.2.1-alpha.5",
-        "next": "0.2.1-rc.2"
+        "next": "0.2.1-rc.3",
+        "latest": "0.2.1-rc.2"
       },
-      "modified": "2026-10-19T06:29:58.393Z",
+      "modified": "2026-10-23T07:54:30.556Z",
       "versions": [
+        {
+          "version": "0.2.1-rc.3",
+          "time": "2026-10-23T07:54:30.267Z"
+        },
         {
           "version": "0.2.1-rc.2",
           "time": "2026-10-17T08:36:31.655Z"
@@ -132,10 +136,6 @@
         {
           "version": "0.2.0-rc.1",
           "time": "2026-09-28T12:34:03.181Z"
-        },
-        {
-          "version": "0.1.7-rc.2",
-          "time": "2026-09-24T14:18:11.337Z"
         }
       ]
     }
@@ -143,8 +143,8 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104522,
-      "forks": 16703,
+      "stars": 104598,
+      "forks": 16718,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
       "latestRelease": {
@@ -160,8 +160,8 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-R1",
-      "stars": 91898,
-      "forks": 11651,
+      "stars": 91956,
+      "forks": 11658,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
       "latestRelease": {
@@ -177,60 +177,51 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39434,
-      "forks": 4282,
+      "stars": 39534,
+      "forks": 4295,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepSeek-Coder",
-      "stars": 24297,
-      "forks": 2931,
+      "stars": 24311,
+      "forks": 2938,
       "pushed_at": "2025-11-11T06:44:56Z",
       "description": "DeepSeek Coder: Let the Code Write Itself",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 24031,
-      "forks": 2205,
+      "stars": 24064,
+      "forks": 2204,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
       "latestRelease": null
     },
     {
+      "repo": "deepseek-ai/DeepInfer",
+      "stars": 22481,
+      "forks": 2597,
+      "pushed_at": "2026-10-25T11:59:27Z",
+      "description": "DeepInfer: High-performance, large-scale inference framework for DeepSeek models",
+      "latestRelease": null
+    },
+    {
       "repo": "deepseek-ai/Janus",
-      "stars": 17755,
-      "forks": 2231,
+      "stars": 17764,
+      "forks": 2232,
       "pushed_at": "2025-02-01T07:58:29Z",
       "description": "Janus-Series: Unified Multimodal Understanding and Generation Models",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/FlashMLA",
-      "stars": 13094,
-      "forks": 1197,
+      "stars": 13189,
+      "forks": 1234,
       "pushed_at": "2026-10-15T13:47:29Z",
       "description": "FlashMLA: Efficient Multi-head Latent Attention Kernels",
       "latestRelease": null
-    },
-    {
-      "repo": "deepseek-ai/DeepEP",
-      "stars": 10292,
-      "forks": 1479,
-      "pushed_at": "2026-10-16T08:14:47Z",
-      "description": "DeepEP: an efficient expert-parallel communication library",
-      "latestRelease": {
-        "tag": "v1.2.1",
-        "name": "Stable release v1.2.1",
-        "prerelease": false,
-        "published_at": "2025-09-16T01:48:40Z",
-        "breaking": false,
-        "summary": null,
-        "added": 0,
-        "fixed": 0
-      }
     }
   ],
   "models": [
@@ -258,7 +249,8 @@
       },
       "api_capabilities": {
         "anthropic_messages": {
-          "system_prompt_update": "in-history"
+          "system_prompt_update": "in-history",
+          "tool_update": "addition-only"
         }
       },
       "firstSeen": "2026-09-10",
@@ -287,7 +279,8 @@
       },
       "api_capabilities": {
         "anthropic_messages": {
-          "system_prompt_update": "leading-only"
+          "system_prompt_update": "leading-only",
+          "tool_update": "leading-only"
         }
       },
       "firstSeen": null,
