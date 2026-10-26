@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-26T23:17:12.376Z",
+  "generatedAt": "2026-10-26T23:49:10.781Z",
   "totals": {
-    "authoritative": 19501,
+    "authoritative": 19503,
     "active7": 4720,
     "active7Pct": 24.2,
-    "active30": 10060,
+    "active30": 10061,
     "active30Pct": 51.6,
-    "ageGate1": 18877,
+    "ageGate1": 18878,
     "ageGate1Pct": 96.8,
     "byMonth": {
       "2026-08": 9892,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 5807,
+      "2026-10": 5809,
       "2020-06": 1,
       "2025-12": 1,
       "2024-08": 1,
@@ -75,7 +75,7 @@
       "2026-05-11": 1,
       "2026-10-19": 2218,
       "2019-09-16": 1,
-      "2026-10-26": 272
+      "2026-10-26": 274
     },
     "byWeekGrades": {
       "B": {
@@ -116,7 +116,7 @@
         "2024-08-12": 1,
         "2026-05-11": 1,
         "2026-10-19": 1298,
-        "2026-10-26": 93
+        "2026-10-26": 94
       },
       "S": {
         "2026-08-03": 1,
@@ -183,7 +183,7 @@
         "2026-10-12": 508,
         "2026-10-19": 660,
         "2019-09-16": 1,
-        "2026-10-26": 165
+        "2026-10-26": 166
       },
       "D": {
         "2026-08-10": 321,
@@ -207,15 +207,15 @@
   },
   "distribution": {
     "publish": {
-      "published": 8506,
+      "published": 8508,
       "unpublished": 10995,
-      "stale": 4661
+      "stale": 4662
     },
     "docs": {
-      "readme": 19449,
+      "readme": 19451,
       "zhFile": 1343,
-      "zh": 9424,
-      "both": 9413,
+      "zh": 9425,
+      "both": 9414,
       "none": 52
     },
     "lib": {
@@ -415,7 +415,7 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 19011
+      "count": 19013
     },
     {
       "topic": "deepseek-harness",
@@ -423,11 +423,11 @@
     },
     {
       "topic": "dsh",
-      "count": 8656
+      "count": 8657
     },
     {
       "topic": "cordis",
-      "count": 2334
+      "count": 2335
     },
     {
       "topic": "deepseek",
@@ -530,8 +530,8 @@
     "imsai": 379,
     "covered": 1176,
     "coveredPct": 6,
-    "none": 18325,
-    "fetchedAt": "2026-10-26T23:15:49.123Z"
+    "none": 18327,
+    "fetchedAt": "2026-10-26T23:47:54.040Z"
   },
   "suggested": [
     {
@@ -1808,8 +1808,8 @@
   "quality": {
     "grades": {
       "A": 852,
-      "B": 9355,
-      "C": 6790,
+      "B": 9356,
+      "C": 6791,
       "D": 2320,
       "S": 184
     },
@@ -1820,7 +1820,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 6612
+      "count": 6613
     },
     {
       "category": "模型 / 代理",
@@ -1832,7 +1832,7 @@
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1645
+      "count": 1646
     },
     {
       "category": "侧栏 / 工作区",
@@ -101624,7 +101624,7 @@
       "lastPush": "2026-10-02",
       "firstCreated": "2026-09-26",
       "delta": 0,
-      "avg": 69.3,
+      "avg": 67.7,
       "topPlugin": "rickwindman/dsh-destinywind-mcp",
       "topStars": 0,
       "topCat": "主题 / 视觉美化"
@@ -146802,6 +146802,27 @@
       "delta": 0,
       "avg": 78,
       "topPlugin": "xevil3301/dsh-chatlock",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
+      "owner": "youchen-yc",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-26",
+      "firstCreated": "2026-10-26",
+      "delta": 0,
+      "avg": 87,
+      "topPlugin": "youchen-yc/dsh-heartprint",
       "topStars": 0,
       "topCat": "其它"
     },
@@ -243404,10 +243425,31 @@
       "topPlugin": "sailina-afk/cyrene-balance-widget",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "Reyzhiai",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-26",
+      "firstCreated": "2026-10-26",
+      "delta": 0,
+      "avg": 74,
+      "topPlugin": "Reyzhiai/dsh-memory-console",
+      "topStars": 0,
+      "topCat": "文件浏览 / 预览"
     }
   ],
   "authorStats": {
-    "total": 11494,
+    "total": 11496,
     "multi": 2884,
     "top10Share": 2.6
   },
@@ -243416,7 +243458,7 @@
       "count": 22931,
       "at": "2026-10-26T01:33:54.681Z"
     },
-    "candidates": 24083,
+    "candidates": 24085,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -243504,16 +243546,16 @@
       "2026-10-05": 1190,
       "2026-10-12": 1648,
       "2026-10-19": 2429,
-      "2026-10-26": 302,
+      "2026-10-26": 304,
       "2022-07-18": 1,
       "2025-10-20": 1,
       "2020-06-01": 1,
       "2024-01-22": 1,
       "1969-12-29": 579
     },
-    "validated": 25614,
+    "validated": 25616,
     "candidatesValidated": 18,
-    "authoritative": 19501,
+    "authoritative": 19503,
     "invalidUnique": 6113,
     "invalidBuckets": [
       {
@@ -243562,5 +243604,5 @@
       }
     ]
   },
-  "enrichCount": 19501
+  "enrichCount": 19503
 }
