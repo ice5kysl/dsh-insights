@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-26T19:15:02.252Z",
+  "generatedAt": "2026-10-26T19:19:21.191Z",
   "totals": {
-    "authoritative": 19491,
-    "active7": 4726,
-    "active7Pct": 24.2,
-    "active30": 10057,
+    "authoritative": 19492,
+    "active7": 4727,
+    "active7Pct": 24.3,
+    "active30": 10058,
     "active30Pct": 51.6,
     "ageGate1": 18869,
     "ageGate1Pct": 96.8,
@@ -22,7 +22,7 @@
       "2025-08": 1,
       "2025-11": 1,
       "2020-09": 1,
-      "2026-10": 5797,
+      "2026-10": 5798,
       "2020-06": 1,
       "2025-12": 1,
       "2024-08": 1,
@@ -75,7 +75,7 @@
       "2026-05-11": 1,
       "2026-10-19": 2218,
       "2019-09-16": 1,
-      "2026-10-26": 262
+      "2026-10-26": 263
     },
     "byWeekGrades": {
       "B": {
@@ -183,7 +183,7 @@
         "2026-10-12": 508,
         "2026-10-19": 659,
         "2019-09-16": 1,
-        "2026-10-26": 158
+        "2026-10-26": 159
       },
       "D": {
         "2026-08-10": 321,
@@ -207,12 +207,12 @@
   },
   "distribution": {
     "publish": {
-      "published": 8504,
+      "published": 8505,
       "unpublished": 10987,
-      "stale": 4659
+      "stale": 4660
     },
     "docs": {
-      "readme": 19440,
+      "readme": 19441,
       "zhFile": 1341,
       "zh": 9421,
       "both": 9410,
@@ -415,11 +415,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 19001
+      "count": 19002
     },
     {
       "topic": "deepseek-harness",
-      "count": 13418
+      "count": 13419
     },
     {
       "topic": "dsh",
@@ -427,7 +427,7 @@
     },
     {
       "topic": "cordis",
-      "count": 2330
+      "count": 2331
     },
     {
       "topic": "deepseek",
@@ -439,7 +439,7 @@
     },
     {
       "topic": "plugin",
-      "count": 1270
+      "count": 1271
     },
     {
       "topic": "typescript",
@@ -530,8 +530,8 @@
     "imsai": 379,
     "covered": 1172,
     "coveredPct": 6,
-    "none": 18319,
-    "fetchedAt": "2026-10-26T19:13:32.859Z"
+    "none": 18320,
+    "fetchedAt": "2026-10-26T19:18:06.097Z"
   },
   "suggested": [
     {
@@ -1809,7 +1809,7 @@
     "grades": {
       "A": 853,
       "B": 9353,
-      "C": 6782,
+      "C": 6783,
       "D": 2319,
       "S": 184
     },
@@ -1844,7 +1844,7 @@
     },
     {
       "category": "搜索 / 命令面板",
-      "count": 1023
+      "count": 1024
     },
     {
       "category": "工具 / 效率",
@@ -243257,10 +243257,31 @@
       "topPlugin": "DoFishCry/dsh-disk-cleaner",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "umerkhalid204",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-26",
+      "firstCreated": "2026-10-26",
+      "delta": 0,
+      "avg": 72,
+      "topPlugin": "umerkhalid204/dsh-career-ops",
+      "topStars": 0,
+      "topCat": "搜索 / 命令面板"
     }
   ],
   "authorStats": {
-    "total": 11487,
+    "total": 11488,
     "multi": 2883,
     "top10Share": 2.6
   },
@@ -243269,7 +243290,7 @@
       "count": 22931,
       "at": "2026-10-26T01:33:54.681Z"
     },
-    "candidates": 24070,
+    "candidates": 24072,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -243357,21 +243378,21 @@
       "2026-10-05": 1190,
       "2026-10-12": 1648,
       "2026-10-19": 2429,
-      "2026-10-26": 289,
+      "2026-10-26": 291,
       "2022-07-18": 1,
       "2025-10-20": 1,
       "2020-06-01": 1,
       "2024-01-22": 1,
       "1969-12-29": 579
     },
-    "validated": 25601,
-    "candidatesValidated": 21,
-    "authoritative": 19491,
-    "invalidUnique": 6110,
+    "validated": 25603,
+    "candidatesValidated": 18,
+    "authoritative": 19492,
+    "invalidUnique": 6111,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 3219
+        "count": 3220
       },
       {
         "reason": "no-package.json",
@@ -243415,5 +243436,5 @@
       }
     ]
   },
-  "enrichCount": 19491
+  "enrichCount": 19492
 }
