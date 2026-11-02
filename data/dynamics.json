@@ -1,9 +1,9 @@
 {
-  "fetchedAt": "2026-11-02T01:49:22.778Z",
+  "fetchedAt": "2026-11-02T02:52:15.119Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 268416,
-    "forks": 32569,
+    "stars": 268506,
+    "forks": 32579,
     "pushed_at": "2026-10-30T06:54:11Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
@@ -143,7 +143,7 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104709,
+      "stars": 104710,
       "forks": 16746,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
@@ -160,7 +160,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-R1",
-      "stars": 91993,
+      "stars": 91994,
       "forks": 11669,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
@@ -177,7 +177,7 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39672,
+      "stars": 39673,
       "forks": 4309,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
@@ -185,8 +185,8 @@
     },
     {
       "repo": "deepseek-ai/DeepInfer",
-      "stars": 24821,
-      "forks": 3013,
+      "stars": 24840,
+      "forks": 3017,
       "pushed_at": "2026-10-26T05:30:52Z",
       "description": "DeepInfer: High-performance, large-scale inference framework for DeepSeek models",
       "latestRelease": null
@@ -201,7 +201,7 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 24108,
+      "stars": 24109,
       "forks": 2214,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
@@ -289,13 +289,13 @@
   ],
   "compatSignal": {
     "distTags": {
-      "alpha": "0.2.1-alpha.5",
-      "next": "0.2.1-rc.3",
-      "latest": "0.2.1-rc.2"
+      "latest": "0.2.1-rc.5",
+      "alpha": "0.2.2-alpha.2",
+      "next": "0.2.1-rc.5"
     },
-    "pluginsProbed": 6039,
-    "declaringEngines": 780,
-    "declaringPeers": 3989
+    "pluginsProbed": 6948,
+    "declaringEngines": 1262,
+    "declaringPeers": 4383
   },
   "note": "只含可观测公开信号（releases / dist-tags / repo 活动 / API 模型清单），不含新闻舆情；DeepSeek 模型发布可能先在官网/HuggingFace（GitHub 仓库动态自动纳入，API 模型经 /models 端点探测）。rc 兼容雷达 v0 依赖契约字段声明率，见 /about。"
 }
