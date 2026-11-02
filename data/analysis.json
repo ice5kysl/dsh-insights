@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-02T07:54:41.948Z",
+  "generatedAt": "2026-11-02T08:01:11.773Z",
   "totals": {
-    "authoritative": 21808,
-    "active7": 5169,
+    "authoritative": 21809,
+    "active7": 5166,
     "active7Pct": 23.7,
-    "active30": 11278,
+    "active30": 11277,
     "active30Pct": 51.7,
     "ageGate1": 21216,
     "ageGate1Pct": 97.3,
@@ -27,7 +27,7 @@
       "2025-12": 1,
       "2024-08": 1,
       "2019-09": 1,
-      "2026-11": 294
+      "2026-11": 295
     },
     "byWeek": {
       "2026-08-10": 4001,
@@ -77,7 +77,7 @@
       "2026-10-19": 2381,
       "2019-09-16": 1,
       "2026-10-26": 2236,
-      "2026-11-02": 77,
+      "2026-11-02": 78,
       "2026-04-13": 1
     },
     "byWeekGrades": {
@@ -210,27 +210,28 @@
         "2026-10-05": 41,
         "2026-10-12": 71,
         "2026-10-19": 85,
-        "2026-10-26": 11
+        "2026-10-26": 11,
+        "2026-11-02": 1
       }
     }
   },
   "distribution": {
     "publish": {
       "published": 9605,
-      "unpublished": 12203,
+      "unpublished": 12204,
       "stale": 5076
     },
     "docs": {
-      "readme": 21752,
+      "readme": 21753,
       "zhFile": 1470,
       "zh": 10596,
       "both": 10585,
       "none": 56
     },
     "lib": {
-      "index": 10542,
-      "client": 7303,
-      "both": 6387
+      "index": 10543,
+      "client": 7304,
+      "both": 6388
     },
     "publishPct": 44,
     "zhPct": 48.5
@@ -424,7 +425,7 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 21263
+      "count": 21264
     },
     {
       "topic": "deepseek-harness",
@@ -539,8 +540,8 @@
     "imsai": 403,
     "covered": 1219,
     "coveredPct": 5.6,
-    "none": 20589,
-    "fetchedAt": "2026-11-02T07:53:07.969Z"
+    "none": 20590,
+    "fetchedAt": "2026-11-02T07:59:39.171Z"
   },
   "suggested": [
     {
@@ -1824,7 +1825,7 @@
       "A": 974,
       "B": 10520,
       "C": 7640,
-      "D": 2444,
+      "D": 2445,
       "S": 230
     },
     "avgScore": 74.6,
@@ -1850,7 +1851,7 @@
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 1724
+      "count": 1725
     },
     {
       "category": "状态 / 监控 / 用量",
@@ -11770,7 +11771,7 @@
       "lastPush": "2026-11-02",
       "firstCreated": "2026-08-16",
       "delta": 0,
-      "avg": 80.3,
+      "avg": 79,
       "topPlugin": "alanzhao0128/dsh-image-plugins",
       "topStars": 2,
       "topCat": "其它"
@@ -173651,7 +173652,7 @@
       "lastPush": "2026-10-03",
       "firstCreated": "2026-08-15",
       "delta": 0,
-      "avg": 74,
+      "avg": 69,
       "topPlugin": "alex04130/dsh-forge",
       "topStars": 5,
       "topCat": "其它"
@@ -274329,10 +274330,31 @@
       "topPlugin": "wodaimnd/dsh-offload",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "Sunday530",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-11-02",
+      "firstCreated": "2026-11-02",
+      "delta": 0,
+      "avg": 59,
+      "topPlugin": "Sunday530/dsh-sidebar-panel-collapse",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
     }
   ],
   "authorStats": {
-    "total": 12964,
+    "total": 12965,
     "multi": 3251,
     "top10Share": 2.6
   },
@@ -274341,7 +274363,7 @@
       "count": 25555,
       "at": "2026-11-02T00:41:14.585Z"
     },
-    "candidates": 26539,
+    "candidates": 26540,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -274431,7 +274453,7 @@
       "2026-10-12": 1683,
       "2026-10-19": 2566,
       "2026-10-26": 2474,
-      "2026-11-02": 87,
+      "2026-11-02": 88,
       "2025-08-04": 1,
       "2022-07-18": 1,
       "2025-10-20": 1,
@@ -274440,9 +274462,9 @@
       "2024-01-22": 1,
       "1969-12-29": 599
     },
-    "validated": 28254,
-    "candidatesValidated": 30,
-    "authoritative": 21808,
+    "validated": 28255,
+    "candidatesValidated": 18,
+    "authoritative": 21809,
     "invalidUnique": 6446,
     "invalidBuckets": [
       {
@@ -274491,5 +274513,5 @@
       }
     ]
   },
-  "enrichCount": 21808
+  "enrichCount": 21809
 }
