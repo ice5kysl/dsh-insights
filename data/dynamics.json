@@ -1,12 +1,42 @@
 {
-  "fetchedAt": "2026-10-26T23:58:39.253Z",
+  "fetchedAt": "2026-11-02T01:49:22.778Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 262555,
-    "forks": 31740,
-    "pushed_at": "2026-10-23T15:25:40Z",
+    "stars": 268416,
+    "forks": 32569,
+    "pushed_at": "2026-10-30T06:54:11Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.2.1-rc.5",
+        "name": "v0.2.1-rc.5",
+        "prerelease": true,
+        "published_at": "2026-10-30T02:12:26Z",
+        "breaking": false,
+        "summary": "优化对话中思考内容的展示效果。",
+        "added": 0,
+        "fixed": 0
+      },
+      {
+        "tag": "dsh-v0.2.2-alpha.2",
+        "name": "v0.2.2-alpha.2",
+        "prerelease": true,
+        "published_at": "2026-10-28T02:50:54Z",
+        "breaking": true,
+        "summary": "插件管理页支持展示富文本详情，并改善页面布局和导航行为。 @turtle1999,",
+        "added": 12,
+        "fixed": 36
+      },
+      {
+        "tag": "dsh-v0.2.1-rc.4",
+        "name": "v0.2.1-rc.4",
+        "prerelease": true,
+        "published_at": "2026-10-28T02:49:58Z",
+        "breaking": false,
+        "summary": "修复 ACP 模式下诊断输出混入 stdout 的问题。 @LegGasai,",
+        "added": 0,
+        "fixed": 4
+      },
       {
         "tag": "dsh-v0.2.1-rc.3",
         "name": "v0.2.1-rc.3",
@@ -56,47 +86,25 @@
         "summary": "自定义模型 API 支持通过UI中配置各模型的推理等级，无需手动修改配置文件。 by",
         "added": 2,
         "fixed": 8
-      },
-      {
-        "tag": "dsh-v0.2.1-alpha.3",
-        "name": "v0.2.1-alpha.3",
-        "prerelease": true,
-        "published_at": "2026-10-14T13:32:15Z",
-        "breaking": true,
-        "summary": "Web 版支持在本机 HTTP 访问时登录 DeepSeek 账号。",
-        "added": 3,
-        "fixed": 18
-      },
-      {
-        "tag": "dsh-v0.2.1-alpha.2",
-        "name": "v0.2.1-alpha.2",
-        "prerelease": true,
-        "published_at": "2026-10-09T11:09:26Z",
-        "breaking": true,
-        "summary": "新增实验性思考过程机器翻译插件，可在插件页启用，选择 Bing、Google 或付费 DeepSeek Flash。 @tianyicui, @ZiyaZhang,",
-        "added": 13,
-        "fixed": 39
-      },
-      {
-        "tag": "dsh-v0.2.1-alpha.1",
-        "name": "v0.2.1-alpha.1",
-        "prerelease": true,
-        "published_at": "2026-10-03T06:42:19Z",
-        "breaking": true,
-        "summary": "新增实验性 Claude Code Mods 兼容层。目前阶段的主要目的是验证 Claude Code Mods API 功能大致为 DeepSeek Harness 插件的一个子集，而非为用户提供实际的完整兼容性。",
-        "added": 5,
-        "fixed": 12
       }
     ],
     "npm": {
       "pkg": "@deepseek-ai/dsh",
       "distTags": {
-        "alpha": "0.2.1-alpha.5",
-        "latest": "0.2.1-rc.2",
-        "next": "0.2.1-rc.4"
+        "latest": "0.2.1-rc.5",
+        "alpha": "0.2.2-alpha.2",
+        "next": "0.2.1-rc.5"
       },
-      "modified": "2026-10-26T15:28:14.165Z",
+      "modified": "2026-10-29T16:01:29.872Z",
       "versions": [
+        {
+          "version": "0.2.1-rc.5",
+          "time": "2026-10-29T14:15:23.355Z"
+        },
+        {
+          "version": "0.2.2-alpha.2",
+          "time": "2026-10-27T19:10:28.529Z"
+        },
         {
           "version": "0.2.1-rc.4",
           "time": "2026-10-26T15:28:13.431Z"
@@ -128,14 +136,6 @@
         {
           "version": "0.2.1-alpha.2",
           "time": "2026-10-09T08:18:00.501Z"
-        },
-        {
-          "version": "0.2.1-alpha.1",
-          "time": "2026-10-03T04:53:22.343Z"
-        },
-        {
-          "version": "0.2.0-rc.2",
-          "time": "2026-09-29T09:56:27.792Z"
         }
       ]
     }
@@ -143,8 +143,8 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104618,
-      "forks": 16724,
+      "stars": 104709,
+      "forks": 16746,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
       "latestRelease": {
@@ -160,8 +160,8 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-R1",
-      "stars": 91964,
-      "forks": 11657,
+      "stars": 91993,
+      "forks": 11669,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
       "latestRelease": {
@@ -177,49 +177,49 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39554,
-      "forks": 4298,
+      "stars": 39672,
+      "forks": 4309,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
       "latestRelease": null
     },
     {
+      "repo": "deepseek-ai/DeepInfer",
+      "stars": 24821,
+      "forks": 3013,
+      "pushed_at": "2026-10-26T05:30:52Z",
+      "description": "DeepInfer: High-performance, large-scale inference framework for DeepSeek models",
+      "latestRelease": null
+    },
+    {
       "repo": "deepseek-ai/DeepSeek-Coder",
-      "stars": 24323,
-      "forks": 2939,
+      "stars": 24336,
+      "forks": 2948,
       "pushed_at": "2025-11-11T06:44:56Z",
       "description": "DeepSeek Coder: Let the Code Write Itself",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 24070,
-      "forks": 2206,
+      "stars": 24108,
+      "forks": 2214,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
       "latestRelease": null
     },
     {
-      "repo": "deepseek-ai/DeepInfer",
-      "stars": 23014,
-      "forks": 2677,
-      "pushed_at": "2026-10-26T05:30:52Z",
-      "description": "DeepInfer: High-performance, large-scale inference framework for DeepSeek models",
-      "latestRelease": null
-    },
-    {
       "repo": "deepseek-ai/Janus",
-      "stars": 17763,
-      "forks": 2234,
+      "stars": 17767,
+      "forks": 2230,
       "pushed_at": "2025-02-01T07:58:29Z",
       "description": "Janus-Series: Unified Multimodal Understanding and Generation Models",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/FlashMLA",
-      "stars": 13195,
-      "forks": 1239,
-      "pushed_at": "2026-10-15T13:47:29Z",
+      "stars": 13231,
+      "forks": 1255,
+      "pushed_at": "2026-10-27T02:50:40Z",
       "description": "FlashMLA: Efficient Multi-head Latent Attention Kernels",
       "latestRelease": null
     }
