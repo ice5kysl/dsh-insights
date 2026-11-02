@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-02T20:16:53.477Z",
+  "generatedAt": "2026-11-02T21:18:06.003Z",
   "totals": {
-    "authoritative": 21974,
-    "active7": 5024,
+    "authoritative": 21980,
+    "active7": 5025,
     "active7Pct": 22.9,
-    "active30": 11334,
+    "active30": 11340,
     "active30Pct": 51.6,
-    "ageGate1": 21333,
+    "ageGate1": 21334,
     "ageGate1Pct": 97.1,
     "byMonth": {
       "2026-08": 9911,
@@ -27,7 +27,7 @@
       "2025-12": 1,
       "2024-08": 1,
       "2019-09": 1,
-      "2026-11": 460
+      "2026-11": 466
     },
     "byWeek": {
       "2026-08-10": 4001,
@@ -77,7 +77,7 @@
       "2026-10-19": 2381,
       "2019-09-16": 1,
       "2026-10-26": 2236,
-      "2026-11-02": 243,
+      "2026-11-02": 249,
       "2026-04-13": 1
     },
     "byWeekGrades": {
@@ -191,7 +191,7 @@
         "2026-10-19": 842,
         "2019-09-16": 1,
         "2026-10-26": 627,
-        "2026-11-02": 146
+        "2026-11-02": 152
       },
       "D": {
         "2026-08-10": 321,
@@ -218,14 +218,14 @@
   "distribution": {
     "publish": {
       "published": 9654,
-      "unpublished": 12320,
+      "unpublished": 12326,
       "stale": 5099
     },
     "docs": {
-      "readme": 21918,
+      "readme": 21924,
       "zhFile": 1475,
-      "zh": 10674,
-      "both": 10663,
+      "zh": 10677,
+      "both": 10666,
       "none": 56
     },
     "lib": {
@@ -425,23 +425,23 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 21429
+      "count": 21435
     },
     {
       "topic": "deepseek-harness",
-      "count": 15233
+      "count": 15236
     },
     {
       "topic": "dsh",
-      "count": 9954
+      "count": 9957
     },
     {
       "topic": "cordis",
-      "count": 2584
+      "count": 2586
     },
     {
       "topic": "deepseek",
-      "count": 2340
+      "count": 2341
     },
     {
       "topic": "dsh-plugins",
@@ -540,8 +540,8 @@
     "imsai": 406,
     "covered": 1212,
     "coveredPct": 5.5,
-    "none": 20762,
-    "fetchedAt": "2026-11-02T20:15:03.614Z"
+    "none": 20768,
+    "fetchedAt": "2026-11-02T21:16:15.622Z"
   },
   "suggested": [
     {
@@ -1824,7 +1824,7 @@
     "grades": {
       "A": 979,
       "B": 10546,
-      "C": 7756,
+      "C": 7762,
       "D": 2461,
       "S": 232
     },
@@ -1835,7 +1835,7 @@
   "categories": [
     {
       "category": "其它",
-      "count": 7439
+      "count": 7442
     },
     {
       "category": "模型 / 代理",
@@ -1843,15 +1843,15 @@
     },
     {
       "category": "会话管理",
-      "count": 2083
+      "count": 2084
     },
     {
       "category": "文件浏览 / 预览",
-      "count": 1844
+      "count": 1845
     },
     {
       "category": "侧栏 / 工作区",
-      "count": 1747
+      "count": 1748
     },
     {
       "category": "状态 / 监控 / 用量",
@@ -34762,7 +34762,7 @@
       },
       "ab": 2,
       "npm": 2,
-      "covered": 1,
+      "covered": 2,
       "lastPush": "2026-11-01",
       "firstCreated": "2026-09-12",
       "delta": 0,
@@ -120295,7 +120295,7 @@
       },
       "ab": 1,
       "npm": 1,
-      "covered": 1,
+      "covered": 0,
       "lastPush": "",
       "firstCreated": "2026-08-22",
       "delta": 0,
@@ -163964,7 +163964,7 @@
       },
       "ab": 1,
       "npm": 1,
-      "covered": 0,
+      "covered": 1,
       "lastPush": "2026-11-01",
       "firstCreated": "2026-11-01",
       "delta": 0,
@@ -184843,7 +184843,7 @@
       },
       "ab": 0,
       "npm": 1,
-      "covered": 1,
+      "covered": 0,
       "lastPush": "2026-08-27",
       "firstCreated": "2026-08-21",
       "delta": 0,
@@ -218191,14 +218191,35 @@
       },
       "ab": 0,
       "npm": 0,
-      "covered": 1,
+      "covered": 0,
       "lastPush": "2026-10-26",
       "firstCreated": "2026-10-26",
       "delta": 0,
-      "avg": 71,
+      "avg": 61,
       "topPlugin": "Dobo233/dsh-claude-pilot",
       "topStars": 0,
       "topCat": "会话管理"
+    },
+    {
+      "owner": "Lumos-789",
+      "plugins": 3,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 3,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-11-02",
+      "firstCreated": "2026-06-02",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "Lumos-789/VoiceTranser",
+      "topStars": 0,
+      "topCat": "工具 / 效率"
     },
     {
       "owner": "Kagurazaka135",
@@ -222674,27 +222695,6 @@
       "topCat": "文件浏览 / 预览"
     },
     {
-      "owner": "Lumos-789",
-      "plugins": 2,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 0,
-        "C": 2,
-        "D": 0
-      },
-      "ab": 0,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-11-01",
-      "firstCreated": "2026-06-02",
-      "delta": 0,
-      "avg": 71.5,
-      "topPlugin": "Lumos-789/VoiceTranser",
-      "topStars": 0,
-      "topCat": "工具 / 效率"
-    },
-    {
       "owner": "ZyxQl-Ala",
       "plugins": 2,
       "stars": 0,
@@ -223008,6 +223008,27 @@
       "topPlugin": "qsheeeeen/dsh-orchestrator-preset",
       "topStars": 0,
       "topCat": "文件浏览 / 预览"
+    },
+    {
+      "owner": "fuyu-technology",
+      "plugins": 2,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-11-02",
+      "firstCreated": "2026-11-02",
+      "delta": 0,
+      "avg": 64,
+      "topPlugin": "fuyu-technology/dsh-auto-repair-ui",
+      "topStars": 0,
+      "topCat": "其它"
     },
     {
       "owner": "haoliangwu",
@@ -273110,7 +273131,7 @@
       "lastPush": "2026-11-01",
       "firstCreated": "2026-11-01",
       "delta": 0,
-      "avg": 64,
+      "avg": 69,
       "topPlugin": "Yslehui/dsh-rag-memory",
       "topStars": 0,
       "topCat": "记忆 / 知识"
@@ -274471,7 +274492,7 @@
       },
       "ab": 0,
       "npm": 0,
-      "covered": 0,
+      "covered": 1,
       "lastPush": "2026-11-01",
       "firstCreated": "2026-11-01",
       "delta": 0,
@@ -276621,11 +276642,74 @@
       "topPlugin": "star-kz/dsh-vision-control",
       "topStars": 0,
       "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "shiliuyu316",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-11-02",
+      "firstCreated": "2026-11-02",
+      "delta": 0,
+      "avg": 74,
+      "topPlugin": "shiliuyu316/dsh-optimization-2027",
+      "topStars": 0,
+      "topCat": "其它"
+    },
+    {
+      "owner": "LeLiu",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-11-02",
+      "firstCreated": "2026-11-02",
+      "delta": 0,
+      "avg": 69,
+      "topPlugin": "LeLiu/dsh-codeisland-bridge",
+      "topStars": 0,
+      "topCat": "会话管理"
+    },
+    {
+      "owner": "tespio",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-11-02",
+      "firstCreated": "2026-11-02",
+      "delta": 0,
+      "avg": 64,
+      "topPlugin": "tespio/dsh-balance-whale",
+      "topStars": 0,
+      "topCat": "侧栏 / 工作区"
     }
   ],
   "authorStats": {
-    "total": 13073,
-    "multi": 3280,
+    "total": 13077,
+    "multi": 3281,
     "top10Share": 2.6
   },
   "coverage": {
@@ -276633,7 +276717,7 @@
       "count": 25555,
       "at": "2026-11-02T00:41:14.585Z"
     },
-    "candidates": 26729,
+    "candidates": 26736,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -276723,7 +276807,7 @@
       "2026-10-12": 1683,
       "2026-10-19": 2566,
       "2026-10-26": 2474,
-      "2026-11-02": 277,
+      "2026-11-02": 284,
       "2025-08-04": 1,
       "2022-07-18": 1,
       "2025-10-20": 1,
@@ -276732,14 +276816,14 @@
       "2024-01-22": 1,
       "1969-12-29": 599
     },
-    "validated": 28443,
-    "candidatesValidated": 19,
-    "authoritative": 21974,
-    "invalidUnique": 6469,
+    "validated": 28450,
+    "candidatesValidated": 24,
+    "authoritative": 21980,
+    "invalidUnique": 6470,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
-        "count": 3355
+        "count": 3356
       },
       {
         "reason": "no-package.json",
@@ -276783,5 +276867,5 @@
       }
     ]
   },
-  "enrichCount": 21974
+  "enrichCount": 21980
 }
