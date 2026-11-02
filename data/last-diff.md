@@ -1,23 +1,27 @@
 # 快照 Diff · 2026-11-02
 
-- 当前权威插件：**21879**（上次 21865）
-- 新增 14 · 消失 0
+- 当前权威插件：**21897**（上次 21879）
+- 新增 18 · 消失 0
 
-## 新增（Top 14）
-- bychance6600/dsh-fish-river ★1 
-- qyy2005/dsh-session-trash ★1 (npm ✓)
-- HaoQian-vary/dsh-wallpaper-skin ★1 (npm ✓)
-- zemyao7/dsh-academic-skills ★0 (npm ✓)
-- 5ysy/dsh-jingle-notch ★0 
-- Lanlan-gys/dsh-network-proxy-plus ★0 
-- staryu5463/dsh-starter-packs ★0 (npm ✓)
-- pelucoola/dsh-plugin-remote-ssh ★0 
-- flyeasy/dsh-session-overview ★0 
-- xiaozqi/dsh-phone-mirror ★0 (npm ✓)
-- ChencLi819/dsh-otherbot-radar ★0 (npm ✓)
-- ice-ai-lab/dsh-system-view ★0 
-- Root-7-KHX/ai-voice ★0 
-- LittleLemonJam/dsh-chat-background ★0 
+## 新增（Top 18）
+- Lumivox-wiz/memory-lattice ★1 
+- bingomu/readable-diagrams ★1 
+- shiliman/better-plugin-combine-dsh-society ★0 
+- qiaozheng9/dsh-side-chat ★0 (npm ✓)
+- jiuwu02/dsh-token-ledger ★0 
+- shendao325/dsh-freebridge ★0 
+- 0changandui0/dsh-browser-tabs ★0 
+- alexkwok213/dsh-computer-use ★0 (npm ✓)
+- ggxx001/dsh-video-panel ★0 
+- ggxx001/dsh-bili-whale ★0 
+- kkkkk-tubu/dsh-longpress-shot ★0 
+- ggxx001/dsh-pet ★0 (npm ✓)
+- hengyun721/dsh-finalize ★0 (npm ✓)
+- Sillykjs/dsh-agents-md ★0 
+- dongchiluo/dsh-compat-optimize ★0 
+- Adingo001/dsh-agy-staff ★0 
+- xiaozqi/dsh-dfy-mirror ★0 
+- zhezhi33/dsh-session-recycle ★0 (npm ✓)
 
 ## 消失（Top 0）
 
