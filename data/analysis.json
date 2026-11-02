@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-02T05:54:11.147Z",
+  "generatedAt": "2026-11-02T05:58:35.065Z",
   "totals": {
     "authoritative": 21781,
-    "active7": 5189,
+    "active7": 5188,
     "active7Pct": 23.8,
-    "active30": 11274,
+    "active30": 11272,
     "active30Pct": 51.8,
-    "ageGate1": 21187,
+    "ageGate1": 21188,
     "ageGate1Pct": 97.3,
     "byMonth": {
       "2026-08": 9911,
@@ -90,7 +90,7 @@
         "2026-07-06": 4,
         "2026-08-03": 23,
         "2026-06-22": 4,
-        "2026-08-17": 1446,
+        "2026-08-17": 1445,
         "2026-06-08": 3,
         "2026-06-15": 2,
         "2026-08-24": 699,
@@ -161,7 +161,7 @@
         "2026-03-09": 2,
         "2026-01-19": 1,
         "2026-01-05": 1,
-        "2026-08-17": 1175,
+        "2026-08-17": 1176,
         "2026-08-10": 1633,
         "2026-07-13": 3,
         "2026-02-02": 1,
@@ -540,7 +540,7 @@
     "covered": 1219,
     "coveredPct": 5.6,
     "none": 20562,
-    "fetchedAt": "2026-11-02T05:52:49.535Z"
+    "fetchedAt": "2026-11-02T05:57:07.113Z"
   },
   "suggested": [
     {
@@ -1822,8 +1822,8 @@
   "quality": {
     "grades": {
       "A": 975,
-      "B": 10514,
-      "C": 7618,
+      "B": 10513,
+      "C": 7619,
       "D": 2444,
       "S": 230
     },
@@ -11538,7 +11538,7 @@
       "lastPush": "2026-10-03",
       "firstCreated": "2026-09-09",
       "delta": 0,
-      "avg": 76,
+      "avg": 75.2,
       "topPlugin": "vitas/dsh-model-pricing",
       "topStars": 2,
       "topCat": "状态 / 监控 / 用量"
@@ -25550,27 +25550,6 @@
       "avg": 75.7,
       "topPlugin": "supergameboy/mermaid2aichat-dsh",
       "topStars": 2,
-      "topCat": "其它"
-    },
-    {
-      "owner": "clarkzhao",
-      "plugins": 3,
-      "stars": 3,
-      "grades": {
-        "A": 0,
-        "B": 2,
-        "C": 1,
-        "D": 0
-      },
-      "ab": 2,
-      "npm": 1,
-      "covered": 0,
-      "lastPush": "2026-10-20",
-      "firstCreated": "2026-08-17",
-      "delta": 0,
-      "avg": 75.3,
-      "topPlugin": "clarkzhao/dsh-llm-grok",
-      "topStars": 1,
       "topCat": "其它"
     },
     {
@@ -64689,6 +64668,27 @@
       "topPlugin": "u9521/dsh-session-settings",
       "topStars": 3,
       "topCat": "状态 / 监控 / 用量"
+    },
+    {
+      "owner": "clarkzhao",
+      "plugins": 3,
+      "stars": 3,
+      "grades": {
+        "A": 0,
+        "B": 1,
+        "C": 2,
+        "D": 0
+      },
+      "ab": 1,
+      "npm": 1,
+      "covered": 0,
+      "lastPush": "2026-10-20",
+      "firstCreated": "2026-08-17",
+      "delta": 0,
+      "avg": 73.7,
+      "topPlugin": "clarkzhao/dsh-llm-grok",
+      "topStars": 1,
+      "topCat": "其它"
     },
     {
       "owner": "wyzh0117",
@@ -217058,7 +217058,7 @@
       "lastPush": "2026-11-01",
       "firstCreated": "2026-11-01",
       "delta": 0,
-      "avg": 63.3,
+      "avg": 65,
       "topPlugin": "taoziliyouchong/dsh-plc-decode",
       "topStars": 0,
       "topCat": "开发 / 数据"
@@ -274047,7 +274047,7 @@
       "count": 25555,
       "at": "2026-11-02T00:41:14.585Z"
     },
-    "candidates": 26505,
+    "candidates": 26506,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -274137,7 +274137,7 @@
       "2026-10-12": 1683,
       "2026-10-19": 2566,
       "2026-10-26": 2474,
-      "2026-11-02": 53,
+      "2026-11-02": 54,
       "2025-08-04": 1,
       "2022-07-18": 1,
       "2025-10-20": 1,
@@ -274146,10 +274146,10 @@
       "2024-01-22": 1,
       "1969-12-29": 599
     },
-    "validated": 28220,
-    "candidatesValidated": 24,
+    "validated": 28221,
+    "candidatesValidated": 18,
     "authoritative": 21781,
-    "invalidUnique": 6439,
+    "invalidUnique": 6440,
     "invalidBuckets": [
       {
         "reason": "no-dsh-bundle",
@@ -274157,7 +274157,7 @@
       },
       {
         "reason": "no-package.json",
-        "count": 2489
+        "count": 2490
       },
       {
         "reason": "no-signal",
