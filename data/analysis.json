@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-02T08:21:20.511Z",
+  "generatedAt": "2026-11-02T08:26:33.928Z",
   "totals": {
-    "authoritative": 21812,
-    "active7": 5162,
+    "authoritative": 21816,
+    "active7": 5160,
     "active7Pct": 23.7,
-    "active30": 11273,
+    "active30": 11275,
     "active30Pct": 51.7,
     "ageGate1": 21216,
-    "ageGate1Pct": 97.3,
+    "ageGate1Pct": 97.2,
     "byMonth": {
       "2026-08": 9911,
       "2026-02": 4,
@@ -27,7 +27,7 @@
       "2025-12": 1,
       "2024-08": 1,
       "2019-09": 1,
-      "2026-11": 298
+      "2026-11": 302
     },
     "byWeek": {
       "2026-08-10": 4001,
@@ -77,7 +77,7 @@
       "2026-10-19": 2381,
       "2019-09-16": 1,
       "2026-10-26": 2236,
-      "2026-11-02": 81,
+      "2026-11-02": 85,
       "2026-04-13": 1
     },
     "byWeekGrades": {
@@ -112,17 +112,17 @@
         "2026-09-14": 411,
         "2026-09-21": 428,
         "2026-05-04": 1,
-        "2026-09-28": 608,
+        "2026-09-28": 607,
         "2025-12-22": 1,
         "2026-10-05": 631,
         "2026-10-12": 869,
         "2024-08-12": 1,
         "2026-05-11": 1,
         "2026-10-19": 1188,
-        "2026-10-26": 1426,
+        "2026-10-26": 1425,
         "2026-03-16": 1,
         "2026-04-13": 1,
-        "2026-11-02": 27
+        "2026-11-02": 30
       },
       "S": {
         "2026-08-03": 1,
@@ -185,13 +185,13 @@
         "2026-09-14": 306,
         "2026-09-21": 313,
         "2020-09-28": 1,
-        "2026-09-28": 438,
+        "2026-09-28": 439,
         "2026-10-05": 354,
         "2026-10-12": 505,
         "2026-10-19": 842,
         "2019-09-16": 1,
         "2026-10-26": 630,
-        "2026-11-02": 49
+        "2026-11-02": 50
       },
       "D": {
         "2026-08-10": 321,
@@ -210,19 +210,19 @@
         "2026-10-05": 41,
         "2026-10-12": 71,
         "2026-10-19": 85,
-        "2026-10-26": 11,
+        "2026-10-26": 12,
         "2026-11-02": 1
       }
     }
   },
   "distribution": {
     "publish": {
-      "published": 9605,
-      "unpublished": 12207,
+      "published": 9608,
+      "unpublished": 12208,
       "stale": 5076
     },
     "docs": {
-      "readme": 21756,
+      "readme": 21760,
       "zhFile": 1470,
       "zh": 10596,
       "both": 10585,
@@ -425,11 +425,11 @@
   "topTopics": [
     {
       "topic": "dsh-plugin",
-      "count": 21267
+      "count": 21271
     },
     {
       "topic": "deepseek-harness",
-      "count": 15118
+      "count": 15122
     },
     {
       "topic": "dsh",
@@ -540,8 +540,8 @@
     "imsai": 403,
     "covered": 1219,
     "coveredPct": 5.6,
-    "none": 20593,
-    "fetchedAt": "2026-11-02T08:19:52.285Z"
+    "none": 20597,
+    "fetchedAt": "2026-11-02T08:25:09.537Z"
   },
   "suggested": [
     {
@@ -1823,9 +1823,9 @@
   "quality": {
     "grades": {
       "A": 974,
-      "B": 10517,
-      "C": 7645,
-      "D": 2446,
+      "B": 10518,
+      "C": 7647,
+      "D": 2447,
       "S": 230
     },
     "avgScore": 74.6,
@@ -1835,11 +1835,11 @@
   "categories": [
     {
       "category": "其它",
-      "count": 7389
+      "count": 7391
     },
     {
       "category": "模型 / 代理",
-      "count": 2264
+      "count": 2265
     },
     {
       "category": "会话管理",
@@ -1875,7 +1875,7 @@
     },
     {
       "category": "开发 / 数据",
-      "count": 626
+      "count": 627
     },
     {
       "category": "记忆 / 知识",
@@ -5175,7 +5175,7 @@
       "lastPush": "2026-10-30",
       "firstCreated": "2026-08-16",
       "delta": 0,
-      "avg": 80.5,
+      "avg": 79.7,
       "topPlugin": "lovezi0/dsh-memory-palace",
       "topStars": 11,
       "topCat": "文件浏览 / 预览"
@@ -16149,6 +16149,27 @@
       "topPlugin": "longyi-0x0/dsh-plugin-template",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "jerentpan-lab",
+      "plugins": 3,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 3,
+        "C": 0,
+        "D": 0
+      },
+      "ab": 3,
+      "npm": 3,
+      "covered": 0,
+      "lastPush": "2026-11-02",
+      "firstCreated": "2026-11-02",
+      "delta": 0,
+      "avg": 84,
+      "topPlugin": "jerentpan-lab/dsh-attention-router",
+      "topStars": 0,
+      "topCat": "模型 / 代理"
     },
     {
       "owner": "Minglink",
@@ -63323,27 +63344,6 @@
       "topPlugin": "jiuge613/dsh-amd-free-model",
       "topStars": 4,
       "topCat": "文件浏览 / 预览"
-    },
-    {
-      "owner": "Lzhimie",
-      "plugins": 1,
-      "stars": 4,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-03",
-      "firstCreated": "2026-09-30",
-      "delta": 0,
-      "avg": 76,
-      "topPlugin": "Lzhimie/dsh-skin-master",
-      "topStars": 4,
-      "topCat": "主题 / 视觉美化"
     },
     {
       "owner": "Longxiangjunlin",
@@ -152476,27 +152476,6 @@
       "topCat": "其它"
     },
     {
-      "owner": "msciu",
-      "plugins": 1,
-      "stars": 0,
-      "grades": {
-        "A": 0,
-        "B": 1,
-        "C": 0,
-        "D": 0
-      },
-      "ab": 1,
-      "npm": 0,
-      "covered": 0,
-      "lastPush": "2026-10-26",
-      "firstCreated": "2026-10-26",
-      "delta": 0,
-      "avg": 76,
-      "topPlugin": "msciu/dsh-prompt-enricher",
-      "topStars": 0,
-      "topCat": "会话管理"
-    },
-    {
       "owner": "sunzhiyueaa",
       "plugins": 1,
       "stars": 0,
@@ -177142,6 +177121,27 @@
       "topPlugin": "b8yg7vjstj-ctrl/dsh-llamacpp-bridge",
       "topStars": 4,
       "topCat": "侧栏 / 工作区"
+    },
+    {
+      "owner": "Lzhimie",
+      "plugins": 1,
+      "stars": 4,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-03",
+      "firstCreated": "2026-09-30",
+      "delta": 0,
+      "avg": 71,
+      "topPlugin": "Lzhimie/dsh-skin-master",
+      "topStars": 4,
+      "topCat": "主题 / 视觉美化"
     },
     {
       "owner": "ayst-z",
@@ -267339,6 +267339,27 @@
       "topCat": "工具 / 效率"
     },
     {
+      "owner": "msciu",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-10-26",
+      "firstCreated": "2026-10-26",
+      "delta": 0,
+      "avg": 66,
+      "topPlugin": "msciu/dsh-prompt-enricher",
+      "topStars": 0,
+      "topCat": "会话管理"
+    },
+    {
       "owner": "Ernesto-yuan",
       "plugins": 1,
       "stars": 0,
@@ -267366,8 +267387,8 @@
       "grades": {
         "A": 0,
         "B": 0,
-        "C": 1,
-        "D": 0
+        "C": 0,
+        "D": 1
       },
       "ab": 0,
       "npm": 0,
@@ -267375,7 +267396,7 @@
       "lastPush": "2026-10-26",
       "firstCreated": "2026-10-26",
       "delta": 0,
-      "avg": 67,
+      "avg": 57,
       "topPlugin": "zzyyun/dsh-prompt-enhance",
       "topStars": 0,
       "topCat": "模型 / 代理"
@@ -274414,11 +274435,32 @@
       "topPlugin": "lyy-hast/dsh-coros-plugin",
       "topStars": 0,
       "topCat": "其它"
+    },
+    {
+      "owner": "hangdingding",
+      "plugins": 1,
+      "stars": 0,
+      "grades": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0
+      },
+      "ab": 0,
+      "npm": 0,
+      "covered": 0,
+      "lastPush": "2026-11-02",
+      "firstCreated": "2026-11-02",
+      "delta": 0,
+      "avg": 64,
+      "topPlugin": "hangdingding/breezetts-dsh",
+      "topStars": 0,
+      "topCat": "其它"
     }
   ],
   "authorStats": {
-    "total": 12968,
-    "multi": 3251,
+    "total": 12970,
+    "multi": 3252,
     "top10Share": 2.6
   },
   "coverage": {
@@ -274426,7 +274468,7 @@
       "count": 25555,
       "at": "2026-11-02T00:41:14.585Z"
     },
-    "candidates": 26543,
+    "candidates": 26547,
     "candidatesByWeek": {
       "2020-03-23": 1,
       "2017-12-11": 1,
@@ -274516,7 +274558,7 @@
       "2026-10-12": 1683,
       "2026-10-19": 2566,
       "2026-10-26": 2474,
-      "2026-11-02": 91,
+      "2026-11-02": 95,
       "2025-08-04": 1,
       "2022-07-18": 1,
       "2025-10-20": 1,
@@ -274525,9 +274567,9 @@
       "2024-01-22": 1,
       "1969-12-29": 599
     },
-    "validated": 28258,
-    "candidatesValidated": 17,
-    "authoritative": 21812,
+    "validated": 28262,
+    "candidatesValidated": 21,
+    "authoritative": 21816,
     "invalidUnique": 6446,
     "invalidBuckets": [
       {
@@ -274576,5 +274618,5 @@
       }
     ]
   },
-  "enrichCount": 21812
+  "enrichCount": 21816
 }
