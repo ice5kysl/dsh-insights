@@ -69,7 +69,7 @@ node bin/backfill-events.mjs                                 # 一次性：db9 e
 node bin/backfill-plugin-events.mjs                          # 一次性：插件级事件回填（plugin_created / npm_first_publish）
 ```
 
-CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周一在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供作者在 Actions 手动触发本插件重检。`site/` **不入 git**（生成物，已 gitignore）——`pages.yml` 部署时现场生成（`pipeline --only site,badges,pages`），再叠 `site-static/`（CNAME/图标/og，仅有的手工维护 Web 资产）。db9 有开发分支 `dsh-data-dev`（生产的 schema+快照克隆）：本地手跑管线可用 `DB9_SQL_URL=https://api.db9.ai/customer/databases/42r75opjazyn/sql` 指向它（端点不是秘密，token 用各自的 scoped token，CI secret 保持只连生产）。
+CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周一在 job 内切 profile，concurrency 组排队；`workflow_run` 接力部署。`recheck.yml` 供拥有本仓库写入权限的协作者在 Actions 手动触发重检。没有写入权限的插件作者可[提交重检申请](https://github.com/ice5kysl/dsh-insights/issues/new?template=data-correction.yml)，附上仓库、页面链接和当前版本或提交证据，由维护者处理；站点更新取决于重检和部署工作流完成时间。`site/` **不入 git**（生成物，已 gitignore）——`pages.yml` 部署时现场生成（`pipeline --only site,badges,pages`），再叠 `site-static/`（CNAME/图标/og，仅有的手工维护 Web 资产）。db9 有开发分支 `dsh-data-dev`（生产的 schema+快照克隆）：本地手跑管线可用 `DB9_SQL_URL=https://api.db9.ai/customer/databases/42r75opjazyn/sql` 指向它（端点不是秘密，token 用各自的 scoped token，CI secret 保持只连生产）。
 
 ## 评分口径（一段话）
 
@@ -86,6 +86,6 @@ CI（`.github/workflows/refresh.yml`）：单 cron 03:07 UTC，周一在 job 内
 
 ## 参与贡献
 
-- **插件作者**：看 `/p/<owner>/<repo>/` 页、挂徽章、[申请重检](https://github.com/ice5kysl/dsh-insights/actions/workflows/recheck.yml)、提 issue 申诉/纠错（中英皆可）。
+- **插件作者**：看 `/p/<owner>/<repo>/` 页、挂徽章、[申请重检](https://github.com/ice5kysl/dsh-insights/issues/new?template=data-correction.yml)并附仓库与版本证据，交由维护者处理、提 issue 申诉/纠错（中英皆可）。
 - **策展人/agent**：消费 `/data/insights.json`（join key `owner/repo`，schema 只增不改，CC BY 4.0）。
 - 一切由开源管线生成——clone 即可复现任意数字。
