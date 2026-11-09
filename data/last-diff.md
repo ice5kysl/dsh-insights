@@ -1,29 +1,27 @@
 # 快照 Diff · 2026-11-09
 
-- 当前权威插件：**24777**（上次 24721）
-- 新增 56 · 消失 0
+- 当前权威插件：**24795**（上次 24777）
+- 新增 18 · 消失 0
 
-## 新增（Top 20）
-- taxueseek/dsh-lexicon ★0 (npm ✓)
-- HaoGengfa/dsbot-monitoring ★1 
-- sibetlyf/dsh-work-desk ★0 
-- user-Mrz/dsh-system-prompt-studio ★0 (npm ✓)
-- caidows/dsh-codex-model-picker ★0 
-- wanghao815/dsh-rtl-flow ★0 
-- BXCQ/dsh-skin-switcher ★0 
-- liuzx012/dsh-speakhumantalk ★0 
-- Xuanminggod/Xuanminggod-s-repository ★0 
-- glk1220/dsh-session-git ★0 
-- clistna/offwork-countdown ★0 
-- ChenMuDX/dsh-subagent-model-policy ★0 
-- duobaobox/sdh-ssh-ops ★0 
-- osman3n/dsh-spell-suggestions ★0 
-- user654name/dsh-deepseek-usage ★0 
-- ififi2017/dsh-plugin-maomao ★0 (npm ✓)
-- skystart233-code/dsh-plugin-market ★0 
-- Tree005/dsh-terminal-keepalive ★0 
-- FlamesCN/dsh-ancient-echoes ★0 
-- a961282799-crypto/dsh-talent-tree ★0 (npm ✓)
+## 新增（Top 18）
+- WekyJay/Dsh-Microsoft-ToDo ★0 
+- JasonChenccc/dsh-relaydeck ★0 
+- zoeyzhang233666/dsh-weread-bilingual ★0 (npm ✓)
+- amyaxy/dsh-prompt-boost-model ★0 
+- xiaoyaoguhuaxian/dsh-highlight-plugin ★0 
+- dongsheng123132/dsh-move-up ★0 (npm ✓)
+- 90le/dsh-channel-octo ★0 
+- jokerkenny00137/dsh-plugin-wallpaper-cleanup ★0 
+- Fanch-hui/dsh-workbuddy-manager ★0 (npm ✓)
+- HuiHuanYe/dsh-archived-session-delete ★0 (npm ✓)
+- lindingkao/dsh-image-import ★0 
+- Arunat-25/dsh-browser-sidepanel ★0 
+- mei0769/dsh-appearance ★0 (npm ✓)
+- PopCorey/dsh-replay-reset ★0 
+- Q-hao516/dsh-qqmail ★0 
+- ChrisZqaq/dsh-cpamc-pill ★0 
+- neillee235/dsh-simplify-panel ★0 
+- Oreo2408/dsh-workspace-plugin-manager ★0 
 
 ## 消失（Top 0）
 
