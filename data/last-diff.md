@@ -1,25 +1,30 @@
 # 快照 Diff · 2026-11-09
 
-- 当前权威插件：**21986**（上次 21986）
-- 新增 0 · 消失 0
+- 当前权威插件：**23326**（上次 21986）
+- 新增 1340 · 消失 0
 
-## 新增（Top 0）
+## 新增（Top 20）
+- kedeshuai/dsh-plugin ★0 
+- alchaincyf/nuwa-skill ★37816 
+- alchaincyf/huashu-design ★28982 
+- whitequeen306/dsh-logistics ★15 (npm ✓)
+- MoYan1638/love-companion ★6 
+- hong1413/dsh-memory ★1 (npm ✓)
+- Chih-Kai-Wang/dsh-plugin-verified-search ★2 
+- Fishsb/dsh-voice-prompt-enhancer ★126 (npm ✓)
+- Chih-Kai-Wang/dsh-deepseek-girl-pet ★5 
+- YaoleWu/dsh-session-search-pro ★5 
+- YaoleWu/dsh-ops-kit ★3 
+- YaoleWu/review-workflow ★3 
+- YaoleWu/dsh-task-relay ★2 
+- muvuula/DeepSeek-Harness-Core ★2 
+- YaoleWu/dsh-fleet-audit ★1 
+- YaoleWu/agent-loop-workflow ★1 
+- YaoleWu/dsh-md-preview ★1 
+- winterhuan/dsh-antfarm ★0 
+- K-W7/dsh-memory-layer ★7 (npm ✓)
+- AlyceStocking/dsh-cgss-idol-theme ★0 (npm ✓)
 
 ## 消失（Top 0）
 
 ## star 涨幅榜
-- Ebony-Vinyl/dsh-our-free-model：55755 → 66195（+10440）
-- ranxianglei/billion-context：3579 → 5170（+1591）
-- elysia395/dsh-wallpaper-engine：4480 → 5992（+1512）
-- kingcharleslzy-ai/dsh-purge：4026 → 5488（+1462）
-- dsh-market/dsh-market：10113 → 11502（+1389）
-- liguobao/ds-harness-remote：1204 → 2292（+1088）
-- QingYunA/answer-me-with-html：5023 → 6063（+1040）
-- superdesigndev/treg：6954 → 7657（+703）
-- bowenliang123/dsh-context：3968 → 4657（+689）
-- mmparko/dsh-purge：2906 → 3593（+687）
-- Ebony-Vinyl/EAC-design-world：399 → 1029（+630）
-- T-Auto/dsh-ops：5002 → 5591（+589）
-- Ebony-Vinyl/EAC-Pack：184 → 705（+521）
-- woniuniuniu/dsh-media-desk：0 → 500（+500）
-- SAOS-3624/dsh-see-now：21 → 494（+473）
