@@ -1,29 +1,26 @@
 # 快照 Diff · 2026-11-09
 
-- 当前权威插件：**24893**（上次 24868）
-- 新增 25 · 消失 0
+- 当前权威插件：**24910**（上次 24893）
+- 新增 17 · 消失 0
 
-## 新增（Top 20）
-- exile412/dsh-startup-screen-exile ★0 
-- juliiiiiiiu/julies-session-stickies ★0 
-- ienugr/dsh-salah ★0 
-- fleekelon/dsh-fintax ★0 
-- ckilwork/dsh-plugin-llama-manager ★0 
-- JAKE1266/dsh-kimi-ui ★0 
-- Thomas-zz/dsh-workbench ★0 (npm ✓)
-- shengsheng778/dsh-ark-lore ★0 
-- Ruacha00/dsh-popnotify ★0 (npm ✓)
-- dashi666666-zxp/dsh-arch ★0 
-- lee-nihao2333/dsh-auto-update ★0 (npm ✓)
-- kyoukas/dsh-gm-toolkit ★0 
-- dichi123456/dsh-molingTex ★0 
-- chenyidong/dsh-plugin-scroll-memory ★0 
-- wv-y/dsh-file-editor ★0 (npm ✓)
-- Hakuzoukyuu/dsh-commandcode-go ★0 
-- janehk416-alt/dsh-FocusCapture ★0 
-- dashi666666-zxp/dsh-court ★0 
-- stevenjj33/dsh-lark-cli-skills ★0 (npm ✓)
-- pandaman0759/dsh-msg-queue ★0 
+## 新增（Top 17）
+- craigary/dsh-notion-plugin ★1 
+- lee-nihao2333/dsh-cat-loop ★0 (npm ✓)
+- cccc11f3/dsh-install-radar ★0 
+- zhouatie/dsh-device-deck ★0 
+- Llldmiao/dsh-brave-search ★0 (npm ✓)
+- cinewave0/dsh-quick-panel-mac ★0 
+- yu-bobo/dsh-commit-journal ★0 
+- NyxJae/dsh-skill-gated-tools ★0 
+- gyxsza/approval-alert ★0 
+- Horizonepn/dsh-energy-patent ★0 
+- yhy854/zhong-wen-thinks ★0 
+- locqueliu/lianben-workbench ★0 
+- Summer77177/dsh-douyin-agent ★0 (npm ✓)
+- yhy854/dsh-calc-tool ★0 
+- zztdandan/dsh-deepseek-exa-hybrid-search ★0 
+- guicaiyue/dsh-context-domains ★0 (npm ✓)
+- beings-labs/dsh-domain-manager ★0 (npm ✓)
 
 ## 消失（Top 0）
 
