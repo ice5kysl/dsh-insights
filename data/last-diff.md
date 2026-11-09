@@ -1,25 +1,28 @@
 # 快照 Diff · 2026-11-09
 
-- 当前权威插件：**24939**（上次 24923）
-- 新增 16 · 消失 0
+- 当前权威插件：**24958**（上次 24939）
+- 新增 19 · 消失 0
 
-## 新增（Top 16）
-- RoketrP/dsh-bot-workbench ★0 
-- che0911/dsh-market-groups ★0 
-- haroon0x/dsh-message-edit ★0 
-- kelaocai/dsh-token-spend ★0 
-- lkuliuying/dsh-mutipleagent ★0 
-- fxdfx/dsh-skill-quickpick ★0 
-- drliuhuan/dsh-plugin-antigravity-bg ★0 
-- yezisorft/dsh-paper-mode ★0 
-- Vncntvx/dsh-typst ★0 
-- PerryLink/dsh-locator ★0 (npm ✓)
-- dongsheng123132/dsh-import-once ★0 (npm ✓)
-- lizongze/dsh-plugin-turn-index ★0 
-- 1578361862-art/dsh-plugin-readlater ★0 
-- Teyvat0/dsh-sidebar-compact ★0 
-- sgeerwang-hub/dsh-workspace-lock ★0 (npm ✓)
-- Shiningstar521/dsh-chat-mode ★0 
+## 新增（Top 19）
+- GuYou9799/dsh-auth-cookie-sweep ★1 (npm ✓)
+- Nounoumm/course-handout-studio ★1 
+- Bennie96/dsh-quark ★1 
+- Mhk0416/control-plot-lab-github ★0 
+- D00023/dsh-plugin-desktop-hud ★0 
+- wawaTuna/dsh-free-pi ★0 (npm ✓)
+- GUANUI/dsh-campus-net ★0 
+- ZileiC/dsh-skiller ★0 
+- liuhange789/dsh-session-recovery ★0 (npm ✓)
+- CoraxEldridge/dsh-managed-workspaces ★0 (npm ✓)
+- ZSY060116/PL-PRISM ★0 (npm ✓)
+- ame-code/dsh-workspace-move ★0 (npm ✓)
+- helloworldtang/dsh-exomind ★0 
+- JIUYUE-SEP/neural-mind ★0 (npm ✓)
+- buhayi/dsh-suspended ★0 
+- Wazy-XD/dsh-iar-cspy ★0 (npm ✓)
+- Sanshui258/dsh-hwp-translate ★0 
+- suifei/dsh-ai-team ★0 (npm ✓)
+- EnderDAG/dsh-quote-archive ★0 
 
 ## 消失（Top 0）
 
