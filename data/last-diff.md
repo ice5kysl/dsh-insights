@@ -1,29 +1,26 @@
 # 快照 Diff · 2026-11-09
 
-- 当前权威插件：**24990**（上次 24958）
-- 新增 32 · 消失 0
+- 当前权威插件：**25007**（上次 24990）
+- 新增 17 · 消失 0
 
-## 新增（Top 20）
-- 423324324/dsh-complete-chime ★1 
-- oicty/dsh-zh-think ★0 (npm ✓)
-- ColdRainLab/dsh-session-delete ★0 (npm ✓)
-- QiNFPV/dsh-voice-dialog ★0 
-- ColdRainLab/dsh-workspace-plus ★0 (npm ✓)
-- CoraxEldridge/dsh-message-cite ★0 (npm ✓)
-- ColdRainLab/dsh-feature-check ★0 
-- XinpengWei/dsh-session-sounds ★0 
-- metallica360qq-web/dsh-work-memory ★0 
-- ColdRainLab/dsh-workspace-sync ★0 
-- Grawl/dsh-screen-switcher ★0 (npm ✓)
-- Roambus/dsh-display-manager ★0 
-- laughinbytes/dsh-host-ops ★0 
-- a348579184/dsh-game-workshop ★0 
-- qsheeeeen/dsh-stigmergy ★0 
-- PIDust/dsh-novel-proofread ★0 (npm ✓)
-- Franklinyung/dsh-web-search-minimax ★0 
-- ColdRainLab/dsh-workspace-vault ★0 
-- redkiller79/dsh-disk-space ★0 (npm ✓)
-- nacivageer/dsh-price-period ★0 
+## 新增（Top 17）
+- Teyvat0/dsh-notify ★0 
+- dude1wudv/dsh-next-turn ★0 
+- juliiiiiiiu/session-stickies-manage-your-attention ★0 
+- AnkoCD/dsh-time-router ★0 
+- xkzdwb/DSH-PeakHoursHint-WhenSendingMessage ★0 
+- REALOIYO/dsh-deepai-connector ★0 (npm ✓)
+- 392138239-pixel/dsh-qr-link ★0 
+- drliuhuan/dsh-plugin-agy-bg ★0 (npm ✓)
+- Erfan817/prompt-spark ★0 
+- yhPrime/dsh-Engram ★0 (npm ✓)
+- JAYcodr/dsh-opencode ★0 (npm ✓)
+- OrdinaryTu/dsh-emotion-engine ★0 
+- TYOPXN360/dsh-mobile-shell ★0 (npm ✓)
+- lixian292/dsh-plugcraft ★0 
+- LXD-8/dsh-macos-widget ★0 
+- vi0let-dev/dsh-auth-cookie-guard ★0 (npm ✓)
+- zilta-amaze/dsh-recovery-memory ★0 
 
 ## 消失（Top 0）
 
