@@ -1,12 +1,32 @@
 {
-  "fetchedAt": "2026-11-02T23:41:24.406Z",
+  "fetchedAt": "2026-11-09T02:44:55.835Z",
   "dsh": {
     "repo": "deepseek-ai/DeepSeek-Harness",
-    "stars": 269567,
-    "forks": 32739,
-    "pushed_at": "2026-10-30T06:54:11Z",
+    "stars": 276599,
+    "forks": 33875,
+    "pushed_at": "2026-11-04T13:06:39Z",
     "description": "DeepSeek Harness: Everything is a Plugin.",
     "releases": [
+      {
+        "tag": "dsh-v0.2.2-rc.1",
+        "name": "v0.2.2-rc.1",
+        "prerelease": true,
+        "published_at": "2026-11-04T13:07:14Z",
+        "breaking": true,
+        "summary": "完善手机和平板适配，优化软键盘交互、导航与窄屏布局，保持菜单和操作入口可用。 @Stevring, @turtle2099, @LegGasai, @EricMoin,",
+        "added": 13,
+        "fixed": 38
+      },
+      {
+        "tag": "dsh-v0.2.2-alpha.3",
+        "name": "v0.2.2-alpha.3",
+        "prerelease": true,
+        "published_at": "2026-11-03T07:56:48Z",
+        "breaking": true,
+        "summary": "支持统一右键与键盘菜单，覆盖会话、工作区和侧边栏，并支持开发者扩展",
+        "added": 5,
+        "fixed": 12
+      },
       {
         "tag": "dsh-v0.2.1-rc.5",
         "name": "v0.2.1-rc.5",
@@ -66,37 +86,25 @@
         "summary": "允许用户从“自定义插件索引源”中发现和安装插件。",
         "added": 15,
         "fixed": 61
-      },
-      {
-        "tag": "dsh-v0.2.1-alpha.5",
-        "name": "v0.2.1-alpha.5",
-        "prerelease": true,
-        "published_at": "2026-10-16T12:23:28Z",
-        "breaking": false,
-        "summary": "修复在插件页启用或停用插件后，已打开会话的 `/` 菜单未更新技能列表的问题。",
-        "added": 1,
-        "fixed": 6
-      },
-      {
-        "tag": "dsh-v0.2.1-alpha.4",
-        "name": "v0.2.1-alpha.4",
-        "prerelease": true,
-        "published_at": "2026-10-15T13:40:02Z",
-        "breaking": false,
-        "summary": "自定义模型 API 支持通过UI中配置各模型的推理等级，无需手动修改配置文件。 by",
-        "added": 2,
-        "fixed": 8
       }
     ],
     "npm": {
       "pkg": "@deepseek-ai/dsh",
       "distTags": {
-        "latest": "0.2.1-rc.5",
-        "alpha": "0.2.2-alpha.2",
-        "next": "0.2.1-rc.5"
+        "latest": "0.2.2-rc.1",
+        "alpha": "0.2.2-alpha.3",
+        "next": "0.2.2-rc.1"
       },
-      "modified": "2026-10-29T16:01:29.872Z",
+      "modified": "2026-11-05T13:21:52.829Z",
       "versions": [
+        {
+          "version": "0.2.2-rc.1",
+          "time": "2026-11-04T09:20:32.310Z"
+        },
+        {
+          "version": "0.2.2-alpha.3",
+          "time": "2026-11-03T07:48:26.202Z"
+        },
         {
           "version": "0.2.1-rc.5",
           "time": "2026-10-29T14:15:23.355Z"
@@ -128,14 +136,6 @@
         {
           "version": "0.2.1-alpha.4",
           "time": "2026-10-15T13:08:08.555Z"
-        },
-        {
-          "version": "0.2.1-alpha.3",
-          "time": "2026-10-14T12:35:33.988Z"
-        },
-        {
-          "version": "0.2.1-alpha.2",
-          "time": "2026-10-09T08:18:00.501Z"
         }
       ]
     }
@@ -143,8 +143,8 @@
   "platform": [
     {
       "repo": "deepseek-ai/DeepSeek-V3",
-      "stars": 104718,
-      "forks": 16746,
+      "stars": 104771,
+      "forks": 16748,
       "pushed_at": "2025-08-28T03:24:37Z",
       "description": "",
       "latestRelease": {
@@ -160,8 +160,8 @@
     },
     {
       "repo": "deepseek-ai/DeepSeek-R1",
-      "stars": 91995,
-      "forks": 11669,
+      "stars": 92003,
+      "forks": 11693,
       "pushed_at": "2025-06-27T08:35:54Z",
       "description": "",
       "latestRelease": {
@@ -177,50 +177,50 @@
     },
     {
       "repo": "deepseek-ai/awesome-deepseek-integration",
-      "stars": 39683,
-      "forks": 4309,
+      "stars": 39760,
+      "forks": 4320,
       "pushed_at": "2026-02-23T16:27:47Z",
       "description": "Integrate the DeepSeek API into popular software",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepInfer",
-      "stars": 25025,
-      "forks": 3038,
-      "pushed_at": "2026-10-26T05:30:52Z",
+      "stars": 25680,
+      "forks": 3150,
+      "pushed_at": "2026-11-03T07:31:59Z",
       "description": "DeepInfer: High-performance, large-scale inference framework for DeepSeek models",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepSeek-Coder",
-      "stars": 24338,
-      "forks": 2950,
+      "stars": 24360,
+      "forks": 2958,
       "pushed_at": "2025-11-11T06:44:56Z",
       "description": "DeepSeek Coder: Let the Code Write Itself",
       "latestRelease": null
     },
     {
       "repo": "deepseek-ai/DeepSeek-OCR",
-      "stars": 24113,
-      "forks": 2215,
+      "stars": 24141,
+      "forks": 2219,
       "pushed_at": "2026-01-27T03:45:14Z",
       "description": "Contexts Optical Compression",
       "latestRelease": null
     },
     {
-      "repo": "deepseek-ai/Janus",
-      "stars": 17767,
-      "forks": 2230,
-      "pushed_at": "2025-02-01T07:58:29Z",
-      "description": "Janus-Series: Unified Multimodal Understanding and Generation Models",
+      "repo": "deepseek-ai/dsh-superagent-prototype",
+      "stars": 21256,
+      "forks": 2549,
+      "pushed_at": "2026-11-03T09:29:14Z",
+      "description": "Towards a More Autonomous Agent System",
       "latestRelease": null
     },
     {
-      "repo": "deepseek-ai/FlashMLA",
-      "stars": 13240,
-      "forks": 1257,
-      "pushed_at": "2026-10-27T02:50:40Z",
-      "description": "FlashMLA: Efficient Multi-head Latent Attention Kernels",
+      "repo": "deepseek-ai/Janus",
+      "stars": 17763,
+      "forks": 2227,
+      "pushed_at": "2025-02-01T07:58:29Z",
+      "description": "Janus-Series: Unified Multimodal Understanding and Generation Models",
       "latestRelease": null
     }
   ],

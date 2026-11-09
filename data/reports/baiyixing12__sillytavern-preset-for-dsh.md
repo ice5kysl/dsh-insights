@@ -1,10 +1,10 @@
 # 致 sillytavern-preset-for-dsh 的作者：一期一会 · 观测分享
 
-> baiyixing12/sillytavern-preset-for-dsh · 第 1 期（数据快照 2026-11-02）
+> baiyixing12/sillytavern-preset-for-dsh · 第 1 期（数据快照 2026-11-09）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 sillytavern-preset-for-dsh 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：D（49/100）** · 在「模型 / 代理」类 2049 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：D（49/100）** · 在「模型 / 代理」类 2283 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★0 · 把 SillyTavern 的聊天补全预设原样搬进 DeepSeek Harness（DSH）：读 ST 预设 JSON，按 📌 分区列出条目、🔀 多选一互斥、逐条开关与正文就地编辑；导入/删除/改名都在面板里完成，状态按会话（窗口）隔离；注入发生在系统提示词组装期，工具调用轮同样带着预设。无需 install_b
 - npm：尚未发布
@@ -26,6 +26,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-11-02
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-11-09
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 

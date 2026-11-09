@@ -1,14 +1,14 @@
 # 致 dsh-plugin-file-cleanup 的作者：一期一会 · 观测分享
 
-> DEVVE-1/dsh-plugin-file-cleanup · 第 1 期（数据快照 2026-11-02）
+> DEVVE-1/dsh-plugin-file-cleanup · 第 1 期（数据快照 2026-11-09）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-plugin-file-cleanup 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（84/100）** · 在「侧栏 / 工作区」类 1478 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（84/100）** · 在「侧栏 / 工作区」类 1748 个插件的分布里大致位于前列（同类中位 76）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★2 · DSH 插件：左上角「文件清理」按钮，扫一遍白名单垃圾（临时文件 / 系统噪声 / 可再生缓存），确认后按清单删除，删除范围严格限定在所选工作区或 DSH_HOME 内。 | DSH (DeepSeek Harness) plugin: whitelist-only disk cleanup, strictly sco
 - npm：`file-cleanup@1.0.0`（1 个版本）
-- 周下载：**49**
+- 周下载：**82**
 - 最近 push 2026-10-24
 
 以下几项检查未发现问题（仅作记录）：client 导出齐备、产物布局规范、files 白名单、npm 已发布、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃。
@@ -23,6 +23,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-11-02
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-11-09
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 
