@@ -5,7 +5,8 @@
  * Builds the raw material for the plugin ↔ dsh-version compatibility matrix
  * WITHOUT touching the running validator (registry-only reads, no GitHub
  * budget): for every npm-published plugin in the authoritative set, read its
- * published `engines.dsh` (and dsh-related peers) from the npm registry, and
+ * published `dsh.engines.dsh` (legacy `engines.dsh` fallback and dsh-related
+ * peers) from the npm registry, and
  * list official @deepseek-ai/dsh releases as the host axis.
  *
  * Outputs: data/compat.json
@@ -96,7 +97,7 @@ async function run() {
       repo: t.full_name ?? null,
       stars: t.stars ?? 0,
       npmLatest: latest ?? null,
-      enginesDsh: v.engines?.dsh ?? null,
+      enginesDsh: v.dsh?.engines?.dsh ?? v.engines?.dsh ?? null,
       engines: v.engines ? Object.entries(v.engines).filter(([k]) => /dsh|deepseek/i.test(k)).map(([k, v2]) => ({ name: k, range: String(v2) })) : [],
       dshPeers,
     })
@@ -107,14 +108,14 @@ async function run() {
     generatedAt: new Date().toISOString(),
     sourceRows: rows.length,
     probed: targets.length,
-    note: 'engines.dsh/dsh peers from npm registry latest publish — heuristic compat signal, not a runtime test; repo-only (unpublished) plugins excluded.',
+    note: 'dsh.engines.dsh (legacy engines.dsh fallback) / dsh peers from npm registry latest publish — heuristic compat signal, not a runtime test; repo-only (unpublished) plugins excluded.',
     officialDsh,
     plugins,
   }
   writeJson(OUT, doc, true)
   const withEngines = plugins.filter((p) => p.enginesDsh || p.dshPeers.length).length
   if (failed) console.error(`[compat] npm 请求失败 ${failed}/${targets.length}（重试一次后仍失败，已从结果中剔除）`)
-  console.log(`[compat] ${plugins.length} plugins probed, ${withEngines} declare engines.dsh or dsh peers · official dsh versions ${officialDsh.versions.length} → data/compat.json`)
+  console.log(`[compat] ${plugins.length} plugins probed, ${withEngines} declare dsh.engines.dsh (or legacy engines.dsh) or dsh peers · official dsh versions ${officialDsh.versions.length} → data/compat.json`)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
