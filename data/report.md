@@ -1,52 +1,52 @@
 # dsh 插件生态快照分析报告
 
-> 权威集 25046 个插件 · 生成于 2026-11-09 · 由 DSH Insights 管线生成
+> 权威集 25046 个插件 · 生成于 2026-11-16 · 由 DSH Insights 管线生成
 
 ## 总览
 - 权威集规模：**25046**
-- 近 7 天活跃：6176（24.7%）· 近 30 天：13561（54.1%）
-- 仓库年龄 ≥ 1 天（可过收录门禁）：24283（97%）
+- 近 7 天活跃：3780（15.1%）· 近 30 天：12830（51.2%）
+- 仓库年龄 ≥ 1 天（可过收录门禁）：24586（98.2%）
 
 ## 发布与文档
-- npm 已发布 11013 / 未发布 14033 / 已发布但版本滞后 5581
+- npm 已发布 11042 / 未发布 14004 / 已发布但版本滞后 5680
 - 有 README 24986 · 中英双语/中文 12112 · 中文 README 文件 1651 · 无 README 60
 - lib/index.js 11534 · lib/client.js 8029 · 双产物 7002
 
 ## 收录渠道（curated 覆盖）
-- awesome-dsh-plugin 825 · imsai 433 · 至少一个渠道 1249（5%） · 未收录 23797
+- awesome-dsh-plugin 758 · imsai 401 · 至少一个渠道 1150（4.6%） · 未收录 23896
 
 ## 优质未收录 · 建议收录（Top 15）
-- belowthetree/dsh-mcp-setting A · 周下载 239
-- runcat-tommy/dsh-unitverse A · 周下载 296
-- skyyyyyk/dsh-szg-hint A · 周下载 103
-- ai-tool-labs/dsh-squares A · 周下载 78
+- belowthetree/dsh-mcp-setting A · 周下载 163
+- runcat-tommy/dsh-unitverse A · 周下载 320
+- skyyyyyk/dsh-szg-hint A · 周下载 93
 - zhz8888/dsh-android-emulator-helper A · 周下载 625
-- zhz8888/dsh-ios-simulator-helper A · 周下载 336
-- GallenShao/dsh-faster-compress A · 周下载 384
-- HildebrandYu/dsh-open-with A · 周下载 173
-- Ultroncn/dsh-liquid-glass A · 周下载 220
-- zhuweiyou/dsh-holdem A · 周下载 287
-- REALOIYO/dsh-qwenwork-connector A
-- railgun20001/dsh-session-row-actions A
-- xymy666/dsh-cache-probe A
-- xiaoxin3309/dsh-backup-rescue A
-- liuhange789/dsh-toolgate-plus A
+- zhz8888/dsh-ios-simulator-helper A · 周下载 301
+- GallenShao/dsh-faster-compress A · 周下载 331
+- HildebrandYu/dsh-open-with A · 周下载 472
+- zhuweiyou/dsh-holdem A · 周下载 164
+- REALOIYO/dsh-qwenwork-connector A · 周下载 266
+- railgun20001/dsh-session-row-actions A · 周下载 276
+- xymy666/dsh-cache-probe A · 周下载 290
+- xiaoxin3309/dsh-backup-rescue A · 周下载 502
+- liuhange789/dsh-toolgate-plus A · 周下载 505
+- REALOIYO/dsh-deepai-connector A · 周下载 736
+- csyangwen/dsh-memory-evolve A · 周下载 1146
 
 ## npm 周下载 Top 10
-- ranxianglei/billion-context：848207
-- helloHub1212/dsh-windows-mcp：714813
-- sunyuhuirong/deepseek-account：559082
-- dsh-market/dsh-market：321443
-- yhm0619/dsh-pet-read：150638
-- bowenliang123/dsh-context：146733
-- JHboy203/dsh-plugin-catalog：105488
-- MYCF711/dsh-session-superagent：95782
-- MeteorNOX/DeepSeek-Balance-Whale-Widget：95521
-- omdsh-dev/DSH-better-sidebar：83586
+- ranxianglei/billion-context：848080
+- sunyuhuirong/deepseek-account：510593
+- dsh-market/dsh-market：293468
+- bowenliang123/dsh-context：133085
+- JHboy203/dsh-plugin-catalog：103410
+- yhm0619/dsh-pet-read：95892
+- omdsh-dev/DSH-better-sidebar：95414
+- lijiaqi-AI-Product-Manager/dsh-agent-compare：92759
+- flymysql/dsh-remote：79516
+- T-Auto/dsh-ops：73476
 
 ## 质量评分（启发式）
-- 平均分 74.8 · S+A 占比 5.7%（值得优先看；A+B 52.8%）
-- S 265 · A 1171 · B 12044 · C 8927 · D 2639
+- 平均分 74.2 · S+A 占比 5.3%（值得优先看；A+B 50.4%）
+- S 238 · A 1088 · B 11546 · C 9311 · D 2863
 
 ## 功能分类（启发式 Top 12）
 - 其它：8356
@@ -85,46 +85,46 @@
 - 2026-11：3239
 
 ## Top topics
-- `dsh-plugin` × 24433
-- `deepseek-harness` × 17396
-- `dsh` × 11524
+- `dsh-plugin` × 24414
+- `deepseek-harness` × 17391
+- `dsh` × 11527
 - `cordis` × 2866
-- `deepseek` × 2610
-- `dsh-plugins` × 2025
-- `plugin` × 1599
-- `ai-agent` × 824
-- `typescript` × 772
-- `deepseek-harness-plugin` × 739
-- `dsh-plugin-market` × 695
+- `deepseek` × 2622
+- `dsh-plugins` × 2027
+- `plugin` × 1602
+- `ai-agent` × 840
+- `typescript` × 777
+- `deepseek-harness-plugin` × 741
 - `mcp` × 694
+- `dsh-plugin-market` × 694
 
 ## Star 榜前 10
 | repo | ★ | npm | 中文/双语 |
 |---|---|---|---|
-| Ebony-Vinyl/dsh-our-free-model | 66195 | ✅ | ✅ |
-| alchaincyf/nuwa-skill | 37816 | — | ✅ |
-| alchaincyf/huashu-design | 28982 | — | ✅ |
+| Ebony-Vinyl/dsh-our-free-model | 75756 | ✅ | ✅ |
+| alchaincyf/nuwa-skill | 38349 | — | ✅ |
+| alchaincyf/huashu-design | 29576 | — | ✅ |
 | YuJunZhiXue/dsh-purge | 15339 | ✅ | ✅ |
-| dsh-market/dsh-market | 11502 | ✅ | ✅ |
-| zhu1090093659/dsh-web | 10241 | ✅ | ✅ |
-| superdesigndev/treg | 7657 | — | — |
-| MeteorNOX/DeepSeek-Balance-Whale-Widget | 7040 | ✅ | ✅ |
-| yjh051108/dsh-routing-suite | 7011 | — | ✅ |
-| QingYunA/answer-me-with-html | 6063 | — | ✅ |
+| dsh-market/dsh-market | 12524 | ✅ | ✅ |
+| zhu1090093659/dsh-web | 10431 | ✅ | ✅ |
+| kingcharleslzy-ai/dsh-purge | 8732 | — | ✅ |
+| superdesigndev/treg | 8089 | — | — |
+| MeteorNOX/DeepSeek-Balance-Whale-Widget | 7246 | ✅ | ✅ |
+| elysia395/dsh-wallpaper-engine | 7076 | ✅ | — |
 
 ## npm 版本滞后榜（仓库新于发布）
 | repo | ★ | 仓库版本 → npm |
 |---|---|---|
 | YuJunZhiXue/dsh-purge | 15339 | 1.3.3 → 0.0.0-stage |
-| dsh-market/dsh-market | 11502 | 1.43.0 → 1.73.16 |
-| zhu1090093659/dsh-web | 10241 | 0.1.1 → 0.0.1 |
-| MeteorNOX/DeepSeek-Balance-Whale-Widget | 7040 | 0.2.10 → 0.4.2 |
-| elysia395/dsh-wallpaper-engine | 5992 | 0.7.0 → 1.4.2 |
+| dsh-market/dsh-market | 12524 | 1.43.0 → 1.73.20 |
+| zhu1090093659/dsh-web | 10431 | 0.1.1 → 0.0.1 |
+| MeteorNOX/DeepSeek-Balance-Whale-Widget | 7246 | 0.2.10 → 0.4.2 |
+| elysia395/dsh-wallpaper-engine | 7076 | 0.7.0 → 1.4.2 |
 | ranxianglei/billion-context | 5170 | 0.1.131 → 0.1.184 |
-| liustack/modlens | 4859 | 3.25.4 → 3.27.3 |
-| bowenliang123/dsh-context | 4657 | 0.42.0 → 0.83.0 |
-| xmanrui/dsh-im | 3370 | 4.11.0 → 5.10.0 |
-| shaobeichen/dsh-pocket | 2846 | 2.10.3 → 2.12.0 |
+| bowenliang123/dsh-context | 5143 | 0.42.0 → 0.85.1 |
+| liustack/modlens | 4985 | 3.25.4 → 3.27.5 |
+| xmanrui/dsh-im | 3622 | 4.11.0 → 5.10.0 |
+| shaobeichen/dsh-pocket | 2982 | 2.10.3 → 2.13.1 |
 
 ## 深检抽样（写面 / 消毒）
 - 抽样 8 个：只读/无写面 1 · 检出写面 7 · 渲染带消毒 5
