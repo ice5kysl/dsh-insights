@@ -29,7 +29,7 @@ Home (search + KPI + latest arrivals + scenario shortcuts) · [Dashboard](https:
 
 | File | What |
 |---|---|
-| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**Authoritative set 25,046** + 6,871 noise buckets (0 duplicates · hard gate · 2026-11-16 snapshot, validation still rolling)<!-- stats:end --> |
+| `data/plugins.jsonl` · `invalid.jsonl` | <!-- stats:begin -->**Authoritative set 27,651** + 7,241 noise buckets (0 duplicates · hard gate · 2026-11-23 snapshot, validation still rolling)<!-- stats:end --> |
 | `data/insights.json` + `insights.schema.json` | Agent contract (stable URL, additive-only schema) |
 | `data/analysis.json` · `enrich.json` · `plugins.csv` | Aggregates / per-plugin scores+channels / spreadsheet |
 | `data/dynamics.json` · `metrics.jsonl` | Official-dynamics snapshot · product self-metrics |

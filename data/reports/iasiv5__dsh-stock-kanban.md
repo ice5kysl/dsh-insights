@@ -1,15 +1,15 @@
 # 致 dsh-stock-kanban 的作者：一期一会 · 观测分享
 
-> iasiv5/dsh-stock-kanban · 第 1 期（数据快照 2026-11-16）
+> iasiv5/dsh-stock-kanban · 第 1 期（数据快照 2026-11-23）
 
 你好！我们是 **DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com）**——一个对 dsh 插件生态做公开观测的小项目。这封信把我们采集到的关于 dsh-stock-kanban 的公开数据和一些不成熟的想法分享给你，**仅供参考，不构成任何要求**；说得不对的地方欢迎直接指出（评分规则公开在 [About](https://dsh-insights.com/about/?utm_source=letter&utm_medium=markdown)，可复核可反驳）。
 
-**我们的启发式模型给当前状态的读数：B（86/100）** · 在「其它」类 8356 个插件的分布里大致位于前列（同类中位 74）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
+**我们的启发式模型给当前状态的读数：B（86/100）** · 在「其它」类 9178 个插件的分布里大致位于前列（同类中位 73）。模型只看公开信号（文档/发布/维护节奏等），读不出插件的真实质量——它更适合用来发现「可能被忽略的细节」，而不是下结论。
 
 - ★1 · DSH插件：轻量多市场盯盘与持仓查看插件：悬浮胶囊 + A股/港股/美股/加密货币分组自选 + 持仓盈亏 + 目标价 + 分时/日周月K。数据存 DSH 实例（跨浏览器共享）。https://www.npmjs.com/package/dsh-stock-kanban
 - npm：`dsh-stock-kanban@0.0.1`（2 个版本）
-- 周下载：**2240**
-- 最近 push 2026-11-16
+- 周下载：**2430**
+- 最近 push 2026-11-19
 
 以下几项检查未发现问题（仅作记录）：files 白名单、npm 已发布、README 齐备、中文/双语文档、LICENSE、dsh-plugin topic、已度过新仓观察期、近期活跃。
 
@@ -25,6 +25,6 @@
 
 ---
 
-> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-11-16
+> 由 DSH Insights · DeepSeek Harness 全景观察站（dsh-insights.com） 自动生成 · 数据快照 2026-11-23
 > 注：本报告为启发式数据初稿，非安全审计；打分 100 起扣四档（fail −20 / 较重 −10 / 中 −5 / 轻 −2），阈值 S≥95 · A≥90 · B≥75 · C≥60。
 
